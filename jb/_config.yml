@@ -10,7 +10,8 @@ execute:
   execute_notebooks: 'off'
 
 repository:
-  url: https://github.com/AllenDowney/ThinkPython/tree/v3
+  url: https://github.com/y-rosenthal/yrThinkPython
+  branch: v3
 html:
   use_repository_button: true
 

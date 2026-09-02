@@ -1,0 +1,45 @@
+# Build the Jupyter Book version of the notebooks and publish it to GitHub Pages.
+# Runs on every push to the v3 branch, or manually from the Actions tab.
+name: deploy-book
+
+on:
+  push:
+    branches: [v3]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy-book
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Jupyter Book
+        run: pip install "jupyter-book<2" ghp-import
+
+      - name: Copy notebooks into the book folder
+        run: cp chapters/chap[01][0-9].ipynb jb/
+
+      - name: Strip %%expect magics and add section labels
+        working-directory: jb
+        run: python prep_notebooks.py
+
+      - name: Build the HTML book
+        working-directory: jb
+        run: jb build .
+
+      - name: Publish to the gh-pages branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          ghp-import -n -p -f -m "Deploy book from ${GITHUB_SHA::7}" jb/_build/html

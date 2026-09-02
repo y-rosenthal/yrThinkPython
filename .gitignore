@@ -25,3 +25,7 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+# Jupyter Book build artifacts (notebooks are copied into jb/ at build time)
+jb/_build/
+jb/chap*.ipynb
