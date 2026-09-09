@@ -1,0 +1,1696 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>11. Tuples &#8212; Think Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap11';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="12. Text Analysis and Generation" href="chap12.html" />
+    <link rel="prev" title="10. Dictionaries" href="chap10.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Think Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Preface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">1. Welcome</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">2. Variables and Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">3. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">4. Functions and Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">5. Conditionals and Recursion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">6. Return Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">7. Iteration and Search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">8. Strings and Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">9. Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">10. Dictionaries</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">11. Tuples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">12. Text Analysis and Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">13. Files and Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap14.html">14. Classes and Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap15.html">15. Classes and Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap16.html">16. Classes and Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap17.html">17. Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap18.html">18. Python Extras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap19.html">19. Final thoughts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="blank.html">Blank Notebooks</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/y-rosenthal/yrThinkPython" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap11.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Tuples</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuples-are-like-lists">11.1. Tuples are like lists</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#but-tuples-are-immutable">11.2. But tuples are immutable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuple-assignment">11.3. Tuple assignment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuples-as-return-values">11.4. Tuples as return values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#argument-packing">11.5. Argument packing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zip">11.6. Zip</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-and-sorting">11.7. Comparing and Sorting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverting-a-dictionary">11.8. Inverting a dictionary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging">11.9. Debugging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">11.10. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">11.11. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ask-a-virtual-assistant">11.11.1. Ask a virtual assistant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">11.11.2. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">11.11.3. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">11.11.4. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">11.11.5. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">11.11.6. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">11.11.7. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">11.11.8. Exercise</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p>You can order print and ebook versions of <em>Think Python 3e</em> from
+<a class="reference external" href="https://bookshop.org/a/98697/9781098155438">Bookshop.org</a> and
+<a class="reference external" href="https://www.amazon.com/_/dp/1098155432?smid=ATVPDKIKX0DER&amp;amp;_encoding=UTF8&amp;amp;tag=oreilly20-20&amp;amp;_encoding=UTF8&amp;amp;tag=greenteapre01-20&amp;amp;linkCode=ur2&amp;amp;linkId=e2a529f94920295d27ec8a06e757dc7c&amp;amp;camp=1789&amp;amp;creative=9325">Amazon</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlretrieve</span>
+
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Downloaded "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">local</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">filename</span>
+
+<span class="n">download</span><span class="p">(</span><span class="s1">'https://github.com/AllenDowney/ThinkPython/raw/v3/thinkpython.py'</span><span class="p">);</span>
+<span class="n">download</span><span class="p">(</span><span class="s1">'https://github.com/AllenDowney/ThinkPython/raw/v3/diagram.py'</span><span class="p">);</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">thinkpython</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="tuples">
+<h1><span class="section-number">11. </span>Tuples<a class="headerlink" href="#tuples" title="Link to this heading">#</a></h1>
+<p>This chapter introduces one more built-in type, the tuple, and then shows how lists, dictionaries, and tuples work together.
+It also presents tuple assignment and a useful feature for functions with variable-length argument lists: the packing and unpacking operators.</p>
+<p>In the exercises, we’ll use tuples, along with lists and dictionaries, to solve more word puzzles and implement efficient algorithms.</p>
+<p>One note: There are two ways to pronounce “tuple”.
+Some people say “tuh-ple”, which rhymes with “supple”.
+But in the context of programming, most people say “too-ple”, which rhymes with “quadruple”.</p>
+<section id="tuples-are-like-lists">
+<h2><span class="section-number">11.1. </span>Tuples are like lists<a class="headerlink" href="#tuples-are-like-lists" title="Link to this heading">#</a></h2>
+<p>A tuple is a sequence of values. The values can be any type, and they are indexed by integers, so tuples are a lot like lists.
+The important difference is that tuples are immutable.</p>
+<p>To create a tuple, you can write a comma-separated list of values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="s1">'l'</span><span class="p">,</span> <span class="s1">'u'</span><span class="p">,</span> <span class="s1">'p'</span><span class="p">,</span> <span class="s1">'i'</span><span class="p">,</span> <span class="s1">'n'</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Although it is not necessary, it is common to enclose tuples in parentheses.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'l'</span><span class="p">,</span> <span class="s1">'u'</span><span class="p">,</span> <span class="s1">'p'</span><span class="p">,</span> <span class="s1">'i'</span><span class="p">,</span> <span class="s1">'n'</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To create a tuple with a single element, you have to include a final comma.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t1</span> <span class="o">=</span> <span class="s1">'p'</span><span class="p">,</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A single value in parentheses is not a tuple.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t2</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'p'</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">t2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Another way to create a tuple is the built-in function <code class="docutils literal notranslate"><span class="pre">tuple</span></code>. With no
+argument, it creates an empty tuple.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">()</span>
+<span class="n">t</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If the argument is a sequence (string, list or tuple), the result is a
+tuple with the elements of the sequence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="s1">'lupin'</span><span class="p">)</span>
+<span class="n">t</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Because <code class="docutils literal notranslate"><span class="pre">tuple</span></code> is the name of a built-in function, you should avoid using it as a variable name.</p>
+<p>Most list operators also work with tuples.
+For example, the bracket operator indexes an element.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And the slice operator selects a range of elements.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">+</span></code> operator concatenates tuples.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">tuple</span><span class="p">(</span><span class="s1">'lup'</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="s1">'i'</span><span class="p">,</span> <span class="s1">'n'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And the <code class="docutils literal notranslate"><span class="pre">*</span></code> operator duplicates a tuple a given number of times.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">tuple</span><span class="p">(</span><span class="s1">'spam'</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">sorted</span></code> function works with tuples – but the result is a list, not a tuple.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">reversed</span></code> function also works with tuples.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">reversed</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result is a <code class="docutils literal notranslate"><span class="pre">reversed</span></code> object, which we can convert to a list or tuple.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">tuple</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Based on the examples so far, it might seem like tuples are the same as lists.</p>
+</section>
+<section id="but-tuples-are-immutable">
+<h2><span class="section-number">11.2. </span>But tuples are immutable<a class="headerlink" href="#but-tuples-are-immutable" title="Link to this heading">#</a></h2>
+<p>If you try to modify a tuple with the bracket operator, you get a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'L'</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And tuples don’t have any of the methods that modify lists, like <code class="docutils literal notranslate"><span class="pre">append</span></code> and <code class="docutils literal notranslate"><span class="pre">remove</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">'l'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Recall that an “attribute” is a variable or method associated with an object – this error message means that tuples don’t have a method named <code class="docutils literal notranslate"><span class="pre">remove</span></code>.</p>
+<p>Because tuples are immutable, they are hashable, which means they can be used as keys in a dictionary.
+For example, the following dictionary contains two tuples as keys that map to integers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">d</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mi">7</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can look up a tuple in a dictionary like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or if we have a variable that refers to a tuple, we can use it as a key.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">d</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tuples can also appear as values in a dictionary.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="s1">'abc'</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'key'</span><span class="p">:</span> <span class="n">t</span><span class="p">}</span>
+<span class="n">d</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="tuple-assignment">
+<h2><span class="section-number">11.3. </span>Tuple assignment<a class="headerlink" href="#tuple-assignment" title="Link to this heading">#</a></h2>
+<p>You can put a tuple of variables on the left side of an assignment, and a tuple of values on the right.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The values are assigned to the variables from left to right – in this example, <code class="docutils literal notranslate"><span class="pre">a</span></code> gets the value <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> gets the value <code class="docutils literal notranslate"><span class="pre">2</span></code>.
+We can display the results like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>More generally, if the left side of an assignment is a tuple, the right side can be any kind of sequence – string, list or tuple.
+For example, to split an email address into a user name and a domain, you could write:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">email</span> <span class="o">=</span> <span class="s1">'monty@python.org'</span>
+<span class="n">username</span><span class="p">,</span> <span class="n">domain</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'@'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The return value from <code class="docutils literal notranslate"><span class="pre">split</span></code> is a list with two elements – the first element is assigned to <code class="docutils literal notranslate"><span class="pre">username</span></code>, the second to <code class="docutils literal notranslate"><span class="pre">domain</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">username</span><span class="p">,</span> <span class="n">domain</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The number of variables on the left and the number of values on the
+right have to be the same – otherwise you get a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tuple assignment is useful if you want to swap the values of two variables.
+With conventional assignments, you have to use a temporary variable, like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp</span> <span class="o">=</span> <span class="n">a</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">b</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">temp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>That works, but with tuple assignment we can do the same thing without a temporary variable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This works because all of the expressions on the right side are evaluated before any of the assignments.</p>
+<p>We can also use tuple assignment in a <code class="docutils literal notranslate"><span class="pre">for</span></code> statement.
+For example, to loop through the items in a dictionary, we can use the <code class="docutils literal notranslate"><span class="pre">items</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'one'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'two'</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">item</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s1">'-&gt;'</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Each time through the loop, <code class="docutils literal notranslate"><span class="pre">item</span></code> is assigned a tuple that contains a key and the corresponding value.</p>
+<p>We can write this loop more concisely, like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s1">'-&gt;'</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Each time through the loop, a key and the corresponding value are assigned directly to <code class="docutils literal notranslate"><span class="pre">key</span></code> and <code class="docutils literal notranslate"><span class="pre">value</span></code>.</p>
+</section>
+<section id="tuples-as-return-values">
+<h2><span class="section-number">11.4. </span>Tuples as return values<a class="headerlink" href="#tuples-as-return-values" title="Link to this heading">#</a></h2>
+<p>Strictly speaking, a function can only return one value, but if the
+value is a tuple, the effect is the same as returning multiple values.
+For example, if you want to divide two integers and compute the quotient
+and remainder, it is inefficient to compute <code class="docutils literal notranslate"><span class="pre">x//y</span></code> and then <code class="docutils literal notranslate"><span class="pre">x%y</span></code>. It is
+better to compute them both at the same time.</p>
+<p>The built-in function <code class="docutils literal notranslate"><span class="pre">divmod</span></code> takes two arguments and returns a tuple
+of two values, the quotient and remainder.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">divmod</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use tuple assignment to store the elements of the tuple in two variables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">quotient</span><span class="p">,</span> <span class="n">remainder</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">quotient</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">remainder</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is an example of a function that returns a tuple.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">min_max</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">max</span></code> and <code class="docutils literal notranslate"><span class="pre">min</span></code> are built-in functions that find the largest and smallest elements of a sequence.
+<code class="docutils literal notranslate"><span class="pre">min_max</span></code> computes both and returns a tuple of two values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_max</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can assign the results to variables like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">min_max</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">low</span><span class="p">,</span> <span class="n">high</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="argument-packing">
+<h2><span class="section-number">11.5. </span>Argument packing<a class="headerlink" href="#argument-packing" title="Link to this heading">#</a></h2>
+<p>Functions can take a variable number of arguments.
+A parameter name that begins with the <code class="docutils literal notranslate"><span class="pre">*</span></code> operator <strong>packs</strong> arguments into a tuple.
+For example, the following function takes any number of arguments and computes their arithmetic mean – that is, their sum divided by the number of arguments.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The parameter can have any name you like, but <code class="docutils literal notranslate"><span class="pre">args</span></code> is conventional.
+We can call the function like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you have a sequence of values and you want to pass them to a function as multiple arguments, you can use the <code class="docutils literal notranslate"><span class="pre">*</span></code> operator to <strong>unpack</strong> the tuple.
+For example, <code class="docutils literal notranslate"><span class="pre">divmod</span></code> takes exactly two arguments – if you pass a tuple as a parameter, you get an error.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">divmod</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Even though the tuple contains two elements, it counts as a single argument.
+But if you unpack the tuple, it is treated as two arguments.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">divmod</span><span class="p">(</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Packing and unpacking can be useful if you want to adapt the behavior of an existing function.
+For example, this function takes any number of arguments, removes the lowest and highest, and computes the mean of the rest.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">trimmed_mean</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">min_max</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">trimmed</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">trimmed</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">low</span><span class="p">)</span>
+    <span class="n">trimmed</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">high</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mean</span><span class="p">(</span><span class="o">*</span><span class="n">trimmed</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>First it uses <code class="docutils literal notranslate"><span class="pre">min_max</span></code> to find the lowest and highest elements.
+Then it converts <code class="docutils literal notranslate"><span class="pre">args</span></code> to a list so it can use the <code class="docutils literal notranslate"><span class="pre">remove</span></code> method.
+Finally it unpacks the list so the elements are passed to <code class="docutils literal notranslate"><span class="pre">mean</span></code> as separate arguments, rather than as a single list.</p>
+<p>Here’s an example that shows the effect.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trimmed_mean</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This kind of “trimmed” mean is used in some sports with subjective judging – like diving and gymnastics – to reduce the effect of a judge whose score deviates from the others.</p>
+</section>
+<section id="zip">
+<h2><span class="section-number">11.6. </span>Zip<a class="headerlink" href="#zip" title="Link to this heading">#</a></h2>
+<p>Tuples are useful for looping through the elements of two sequences and performing operations on corresponding elements.
+For example, suppose two teams play a series of seven games, and we record their scores in two lists, one for each team.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scores1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">scores2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s see how many games each team won.
+We’ll use <code class="docutils literal notranslate"><span class="pre">zip</span></code>, which is a built-in function that takes two or more sequences and returns a <strong>zip object</strong>, so-called because it pairs up the elements of the sequences like the teeth of a zipper.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">zip</span><span class="p">(</span><span class="n">scores1</span><span class="p">,</span> <span class="n">scores2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use the zip object to loop through the values in the sequences pairwise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">scores1</span><span class="p">,</span> <span class="n">scores2</span><span class="p">):</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Each time through the loop, <code class="docutils literal notranslate"><span class="pre">pair</span></code> gets assigned a tuple of scores.
+So we can assign the scores to variables, and count the victories for the first team, like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wins</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">team1</span><span class="p">,</span> <span class="n">team2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">scores1</span><span class="p">,</span> <span class="n">scores2</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">team1</span> <span class="o">&gt;</span> <span class="n">team2</span><span class="p">:</span>
+        <span class="n">wins</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+<span class="n">wins</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Sadly, the first team won only three games and lost the series.</p>
+<p>If you have two lists and you want a list of pairs, you can use <code class="docutils literal notranslate"><span class="pre">zip</span></code> and <code class="docutils literal notranslate"><span class="pre">list</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">scores1</span><span class="p">,</span> <span class="n">scores2</span><span class="p">))</span>
+<span class="n">t</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result is a list of tuples, so we can get the result of the last game like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you have a list of keys and a list of values, you can use <code class="docutils literal notranslate"><span class="pre">zip</span></code> and <code class="docutils literal notranslate"><span class="pre">dict</span></code> to make a dictionary.
+For example, here’s how we can make a dictionary that maps from each letter to its position in the alphabet.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">letters</span> <span class="o">=</span> <span class="s1">'abcdefghijklmnopqrstuvwxyz'</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">letters</span><span class="p">))</span>
+<span class="n">letter_map</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">numbers</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can look up a letter and get its index in the alphabet.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">letter_map</span><span class="p">[</span><span class="s1">'a'</span><span class="p">],</span> <span class="n">letter_map</span><span class="p">[</span><span class="s1">'z'</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this mapping, the index of <code class="docutils literal notranslate"><span class="pre">'a'</span></code> is <code class="docutils literal notranslate"><span class="pre">0</span></code> and the index of <code class="docutils literal notranslate"><span class="pre">'z'</span></code> is <code class="docutils literal notranslate"><span class="pre">25</span></code>.</p>
+<p>If you need to loop through the elements of a sequence and their indices, you can use the built-in function <code class="docutils literal notranslate"><span class="pre">enumerate</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">enumerate</span><span class="p">(</span><span class="s1">'abc'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result is an <strong>enumerate object</strong> that loops through a sequence of pairs, where each pair contains an index (starting from 0) and an element from the given sequence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="s1">'abc'</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">element</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="comparing-and-sorting">
+<h2><span class="section-number">11.7. </span>Comparing and Sorting<a class="headerlink" href="#comparing-and-sorting" title="Link to this heading">#</a></h2>
+<p>The relational operators work with tuples and other sequences.
+For example, if you use the <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> operator with tuples, it starts by comparing the first element from each sequence.
+If they are equal, it goes on to the next pair of elements, and so on, until it finds a pair that differ.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Subsequent elements are not considered – even if they are really big.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2000000</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This way of comparing tuples is useful for sorting a list of tuples, or finding the minimum or maximum.
+As an example, let’s find the most common letter in a word.
+In the previous chapter, we wrote <code class="docutils literal notranslate"><span class="pre">value_counts</span></code>, which takes a string and returns a dictionary that maps from each letter to the number of times it appears.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">value_counts</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">string</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">letter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">counter</span><span class="p">:</span>
+            <span class="n">counter</span><span class="p">[</span><span class="n">letter</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">counter</span><span class="p">[</span><span class="n">letter</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">counter</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is the result for the string <code class="docutils literal notranslate"><span class="pre">'banana'</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">counter</span> <span class="o">=</span> <span class="n">value_counts</span><span class="p">(</span><span class="s1">'banana'</span><span class="p">)</span>
+<span class="n">counter</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With only three items, we can easily see that the most frequent letter is <code class="docutils literal notranslate"><span class="pre">'a'</span></code>, which appears three times.
+But if there were more items, it would be useful to sort them automatically.</p>
+<p>We can get the items from <code class="docutils literal notranslate"><span class="pre">counter</span></code> like this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">items</span> <span class="o">=</span> <span class="n">counter</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<span class="n">items</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result is a <code class="docutils literal notranslate"><span class="pre">dict_items</span></code> object that behaves like a list of tuples, so we can sort it like this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The default behavior is to use the first element from each tuple to sort the list, and use the second element to break ties.</p>
+<p>However, to find the items with the highest counts, we want to use the second element to sort the list.
+We can do that by writing a function that takes a tuple and returns the second element.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">second_element</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we can pass that function to <code class="docutils literal notranslate"><span class="pre">sorted</span></code> as an optional argument called <code class="docutils literal notranslate"><span class="pre">key</span></code>, which indicates that this function should be used to compute the <strong>sort key</strong> for each item.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sorted_items</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">second_element</span><span class="p">)</span>
+<span class="n">sorted_items</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The sort key determines the order of the items in the list.
+The letter with the lowest count appears first, and the letter with the highest count appears last.
+So we can find the most common letter like this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sorted_items</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we only want the maximum, we don’t have to sort the list.
+We can use <code class="docutils literal notranslate"><span class="pre">max</span></code>, which also takes <code class="docutils literal notranslate"><span class="pre">key</span></code> as an optional argument.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">max</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">second_element</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To find the letter with the lowest count, we could use <code class="docutils literal notranslate"><span class="pre">min</span></code> the same way.</p>
+</section>
+<section id="inverting-a-dictionary">
+<h2><span class="section-number">11.8. </span>Inverting a dictionary<a class="headerlink" href="#inverting-a-dictionary" title="Link to this heading">#</a></h2>
+<p>Suppose you want to invert a dictionary so you can look up a value and get the corresponding key.
+For example, if you have a word counter that maps from each word to the number of times it appears, you could make a dictionary that maps from integers to the words that appear that number of times.</p>
+<p>But there’s a problem – the keys in a dictionary have to be unique, but the values don’t. For example, in a word counter, there could be many words with the same count.</p>
+<p>So one way to invert a dictionary is to create a new dictionary where the values are lists of keys from the original.
+As an example, let’s count the letters in <code class="docutils literal notranslate"><span class="pre">parrot</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span>  <span class="n">value_counts</span><span class="p">(</span><span class="s1">'parrot'</span><span class="p">)</span>
+<span class="n">d</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we invert this dictionary, the result should be <code class="docutils literal notranslate"><span class="pre">{1:</span> <span class="pre">['p',</span> <span class="pre">'a',</span> <span class="pre">'o',</span> <span class="pre">'t'],</span> <span class="pre">2:</span> <span class="pre">['r']}</span></code>, which indicates that the letters that appear once are <code class="docutils literal notranslate"><span class="pre">'p'</span></code>, <code class="docutils literal notranslate"><span class="pre">'a'</span></code>, <code class="docutils literal notranslate"><span class="pre">'o'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'t'</span></code>, and the letter than appears twice is <code class="docutils literal notranslate"><span class="pre">'r'</span></code>.</p>
+<p>The following function takes a dictionary and returns its inverse as a new dictionary.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">invert_dict</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="n">new</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">new</span><span class="p">:</span>
+            <span class="n">new</span><span class="p">[</span><span class="n">value</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new</span><span class="p">[</span><span class="n">value</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">for</span></code> statement loops through the keys and values in <code class="docutils literal notranslate"><span class="pre">d</span></code>.
+If the value is not already in the new dictionary, it is added and associated with a list that contains a single element.
+Otherwise it is appended to the existing list.</p>
+<p>We can test it like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">invert_dict</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And we get the result we expected.</p>
+<p>This is the first example we’ve seen where the values in the dictionary are lists.
+We will see more!</p>
+</section>
+<section id="debugging">
+<h2><span class="section-number">11.9. </span>Debugging<a class="headerlink" href="#debugging" title="Link to this heading">#</a></h2>
+<p>Lists, dictionaries and tuples are <strong>data structures</strong>.
+In this chapter we are starting to see compound data structures, like lists of tuples, or dictionaries that contain tuples as keys and lists as values.
+Compound data structures are useful, but they are prone to errors caused when a data structure has the wrong type, size, or structure.
+For example, if a function expects a list of integers and you give it a plain old integer
+(not in a list), it probably won’t work.</p>
+<p>To help debug these kinds of errors, I wrote a module called <code class="docutils literal notranslate"><span class="pre">structshape</span></code> that provides a function, also called <code class="docutils literal notranslate"><span class="pre">structshape</span></code>, that takes any kind of data structure as an argument and returns a string that summarizes its structure.
+You can download it from
+<a class="reference external" href="https://raw.githubusercontent.com/AllenDowney/ThinkPython/v3/structshape.py">https://raw.githubusercontent.com/AllenDowney/ThinkPython/v3/structshape.py</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s1">'https://raw.githubusercontent.com/AllenDowney/ThinkPython/v3/structshape.py'</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can import it like this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">structshape</span><span class="w"> </span><span class="kn">import</span> <span class="n">structshape</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s an example with a simple list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">structshape</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s a list of lists.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t2</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]]</span>
+<span class="n">structshape</span><span class="p">(</span><span class="n">t2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If the elements of the list are not the same type, <code class="docutils literal notranslate"><span class="pre">structshape</span></code> groups
+them by type.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="s1">'5'</span><span class="p">,</span> <span class="s1">'6'</span><span class="p">,</span> <span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="mi">9</span><span class="p">]</span>
+<span class="n">structshape</span><span class="p">(</span><span class="n">t3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s a list of tuples.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s1">'abc'</span>
+<span class="n">lt</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">))</span>
+<span class="n">structshape</span><span class="p">(</span><span class="n">lt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here’s a dictionary with three items that map integers to strings.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">lt</span><span class="p">)</span> 
+<span class="n">structshape</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you are having trouble keeping track of your data structures,
+<code class="docutils literal notranslate"><span class="pre">structshape</span></code> can help.</p>
+</section>
+<section id="glossary">
+<h2><span class="section-number">11.10. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">#</a></h2>
+<p><strong>pack:</strong>
+Collect multiple arguments into a tuple.</p>
+<p><strong>unpack:</strong>
+Treat a tuple (or other sequence) as multiple arguments.</p>
+<p><strong>zip object:</strong>
+The result of calling the built-in function <code class="docutils literal notranslate"><span class="pre">zip</span></code>, can be used to loop through a sequence of tuples.</p>
+<p><strong>enumerate object:</strong>
+The result of calling the built-in function <code class="docutils literal notranslate"><span class="pre">enumerate</span></code>, can be used to loop through a sequence of tuples.</p>
+<p><strong>sort key:</strong>
+A value, or function that computes a value, used to sort the elements of a collection.</p>
+<p><strong>data structure:</strong>
+A collection of values, organized to perform certain operations efficiently.</p>
+</section>
+<section id="exercises">
+<h2><span class="section-number">11.11. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This cell tells Jupyter to provide detailed debugging information</span>
+<span class="c1"># when a runtime error occurs. Run it before working on the exercises.</span>
+
+<span class="o">%</span><span class="k">xmode</span> Verbose
+</pre></div>
+</div>
+</div>
+</div>
+<section id="ask-a-virtual-assistant">
+<h3><span class="section-number">11.11.1. </span>Ask a virtual assistant<a class="headerlink" href="#ask-a-virtual-assistant" title="Link to this heading">#</a></h3>
+<p>The exercises in this chapter might be more difficult than exercises in previous chapters, so I encourage you to get help from a virtual assistant.
+When you pose more difficult questions, you might find that the answers are not correct on the first attempt, so this is a chance to practice crafting good prompts and following up with good refinements.</p>
+<p>One strategy you might consider is to break a big problems into pieces that can be solved with simple functions.
+Ask the virtual assistant to write the functions and test them.
+Then, once they are working, ask for a solution to the original problem.</p>
+<p>For some of the exercises below, I make suggestions about which data structures and algorithms to use.
+You might find these suggestions useful when you work on the problems, but they are also good prompts to pass along to a virtual assistant.</p>
+</section>
+<section id="exercise">
+<h3><span class="section-number">11.11.2. </span>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
+<p>In this chapter I said that tuples can be used as keys in dictionaries because they are hashable, and they are hashable because they are immutable.
+But that is not always true.</p>
+<p>If a tuple contains a mutable value, like a list or a dictionary, the tuple is no longer hashable because it contains elements that are not hashable. As an example, here’s a tuple that contains two lists of integers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="n">list0</span><span class="p">,</span> <span class="n">list1</span><span class="p">)</span>
+<span class="n">t</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Write a line of code that appends the value <code class="docutils literal notranslate"><span class="pre">6</span></code> to the end of the second list in <code class="docutils literal notranslate"><span class="pre">t</span></code>. If you display <code class="docutils literal notranslate"><span class="pre">t</span></code>, the result should be <code class="docutils literal notranslate"><span class="pre">([1,</span> <span class="pre">2,</span> <span class="pre">3],</span> <span class="pre">[4,</span> <span class="pre">5,</span> <span class="pre">6])</span></code>.</p>
+<p>Try to create a dictionary that maps from <code class="docutils literal notranslate"><span class="pre">t</span></code> to a string, and confirm that you get a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+<p>For more on this topic, ask a virtual assistant, “Are Python tuples always hashable?”</p>
+</section>
+<section id="id1">
+<h3><span class="section-number">11.11.3. </span>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>In this chapter we made a dictionary that maps from each letter to its index in the alphabet.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">letters</span> <span class="o">=</span> <span class="s1">'abcdefghijklmnopqrstuvwxyz'</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">letters</span><span class="p">))</span>
+<span class="n">letter_map</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">numbers</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For example, the index of <code class="docutils literal notranslate"><span class="pre">'a'</span></code> is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">letter_map</span><span class="p">[</span><span class="s1">'a'</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To go in the other direction, we can use list indexing.
+For example, the letter at index <code class="docutils literal notranslate"><span class="pre">1</span></code> is <code class="docutils literal notranslate"><span class="pre">'b'</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">letters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">letter_map</span></code> and <code class="docutils literal notranslate"><span class="pre">letters</span></code> to encode and decode words using a Caesar cipher.</p>
+<p>A Caesar cipher is a weak form of encryption that involves shifting each letter
+by a fixed number of places in the alphabet, wrapping around to the beginning if necessary. For example, <code class="docutils literal notranslate"><span class="pre">'a'</span></code> shifted by 2 is <code class="docutils literal notranslate"><span class="pre">'c'</span></code> and <code class="docutils literal notranslate"><span class="pre">'z'</span></code> shifted by 1 is <code class="docutils literal notranslate"><span class="pre">'a'</span></code>.</p>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">shift_word</span></code> that takes as parameters a string and an integer, and returns a new string that contains the letters from the string shifted by the given number of places.</p>
+<p>To test your function, confirm that “cheer” shifted by 7 is “jolly” and “melon” shifted by 16 is “cubed”.</p>
+<p>Hints: Use the modulus operator to wrap around from <code class="docutils literal notranslate"><span class="pre">'z'</span></code> back to <code class="docutils literal notranslate"><span class="pre">'a'</span></code>.
+Loop through the letters of the word, shift each one, and append the result to a list of letters.
+Then use <code class="docutils literal notranslate"><span class="pre">join</span></code> to concatenate the letters into a string.</p>
+<p>You can use this outline to get started.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shift_word</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Shift the letters of `word` by `n` places.</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; shift_word('cheer', 7)</span>
+<span class="sd">    'jolly'</span>
+<span class="sd">    &gt;&gt;&gt; shift_word('melon', 16)</span>
+<span class="sd">    'cubed'</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shift_word</span><span class="p">(</span><span class="s1">'cheer'</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shift_word</span><span class="p">(</span><span class="s1">'melon'</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">doctest</span></code> to test your function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">doctest</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_docstring_examples</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_doctests</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="n">run_docstring_examples</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="nb">globals</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">run_doctests</span><span class="p">(</span><span class="n">shift_word</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h3><span class="section-number">11.11.4. </span>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">most_frequent_letters</span></code> that takes a string and prints the letters in decreasing order of frequency.</p>
+<p>To get the items in decreasing order, you can use <code class="docutils literal notranslate"><span class="pre">reversed</span></code> along with <code class="docutils literal notranslate"><span class="pre">sorted</span></code> or you can pass <code class="docutils literal notranslate"><span class="pre">reverse=True</span></code> as a keyword parameter to <code class="docutils literal notranslate"><span class="pre">sorted</span></code>.</p>
+<p>You can use this outline of the function to get started.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">most_frequent_letters</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+    <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And this example to test your function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">most_frequent_letters</span><span class="p">(</span><span class="s1">'brontosaurus'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once your function is working, you can use the following code to print the most common letters in <em>Dracula</em>, which we can download from Project Gutenberg.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s1">'https://www.gutenberg.org/cache/epub/345/pg345.txt'</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">string</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'pg345.txt'</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">most_frequent_letters</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>According to Zim’s “Codes and Secret Writing”, the sequence of letters in decreasing order of frequency in English starts with “ETAONRISH”.
+How does this sequence compare with the results from <em>Dracula</em>?</p>
+</section>
+<section id="id3">
+<h3><span class="section-number">11.11.5. </span>Exercise<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>In a previous exercise, we tested whether two strings are anagrams by sorting the letters in both words and checking whether the sorted letters are the same.
+Now let’s make the problem a little more challenging.</p>
+<p>We’ll write a program that takes a list of words and prints all the sets of words that are anagrams.
+Here is an example of what the output might look like:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>['deltas', 'desalt', 'lasted', 'salted', 'slated', 'staled']
+['retainers', 'ternaries']
+['generating', 'greatening']
+['resmelts', 'smelters', 'termless']
+</pre></div>
+</div>
+<p>Hint: For each word in the word list, sort the letters and join them back into a string. Make a dictionary that maps from this sorted string to a list of words that are anagrams of it.</p>
+<p>The following cells download <code class="docutils literal notranslate"><span class="pre">words.txt</span></code> and read the words into a list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s1">'https://raw.githubusercontent.com/AllenDowney/ThinkPython/v3/words.txt'</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">word_list</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'words.txt'</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s the <code class="docutils literal notranslate"><span class="pre">sort_word</span></code> function we’ve used before.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sort_word</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To find the longest list of anagrams, you can use the following function, which takes a key-value pair where the key is a string and the value is a list of words.
+It returns the length of the list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">value_length</span><span class="p">(</span><span class="n">pair</span><span class="p">):</span>
+    <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">pair</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use this function as a sort key to find the longest lists of anagrams.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anagram_items</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">anagram_dict</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">value_length</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">anagram_items</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you want to know the longest words that have anagrams, you can use the following loop to print some of them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">longest</span> <span class="o">=</span> <span class="mi">7</span>
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">anagram_items</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">word_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">word_len</span> <span class="o">&gt;</span> <span class="n">longest</span><span class="p">:</span>
+            <span class="n">longest</span> <span class="o">=</span> <span class="n">word_len</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id4">
+<h3><span class="section-number">11.11.6. </span>Exercise<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">word_distance</span></code> that takes two words with the same length and returns the number of places where the two words differ.</p>
+<p>Hint: Use <code class="docutils literal notranslate"><span class="pre">zip</span></code> to loop through the corresponding letters of the words.</p>
+<p>Here’s an outline of the function with doctests you can use to check your function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">word_distance</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Computes the number of places where two word differ.</span>
+
+<span class="sd">    &gt;&gt;&gt; word_distance("hello", "hxllo")</span>
+<span class="sd">    1</span>
+<span class="sd">    &gt;&gt;&gt; word_distance("ample", "apply")</span>
+<span class="sd">    2</span>
+<span class="sd">    &gt;&gt;&gt; word_distance("kitten", "mutton")</span>
+<span class="sd">    3</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">doctest</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_docstring_examples</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_doctests</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="n">run_docstring_examples</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="nb">globals</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+    
+<span class="n">run_doctests</span><span class="p">(</span><span class="n">word_distance</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h3><span class="section-number">11.11.7. </span>Exercise<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>“Metathesis” is the transposition of letters in a word.
+Two words form a “metathesis pair” if you can transform one into the other by swapping two letters, like <code class="docutils literal notranslate"><span class="pre">converse</span></code> and <code class="docutils literal notranslate"><span class="pre">conserve</span></code>.
+Write a program that finds all of the metathesis pairs in the word list.</p>
+<p>Hint: The words in a metathesis pair must be anagrams of each other.</p>
+<p>Credit: This exercise is inspired by an example at <a class="reference external" href="http://puzzlers.org">http://puzzlers.org</a>.</p>
+</section>
+<section id="id6">
+<h3><span class="section-number">11.11.8. </span>Exercise<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>This is a bonus exercise that is not in the book.
+It is more challenging than the other exercises in this chapter, so you might want to ask a virtual assistant for help, or come back to it after you’ve read a few more chapters.</p>
+<p>Here’s another Car Talk Puzzler
+(<a class="reference external" href="http://www.cartalk.com/content/puzzlers">http://www.cartalk.com/content/puzzlers</a>):</p>
+<blockquote>
+<div><p>What is the longest English word, that remains a valid English word,
+as you remove its letters one at a time?</p>
+<p>Now, letters can be removed from either end, or the middle, but you
+can’t rearrange any of the letters. Every time you drop a letter, you
+wind up with another English word. If you do that, you’re eventually
+going to wind up with one letter and that too is going to be an
+English word—one that’s found in the dictionary. I want to know
+what’s the longest word and how many letters does it have?</p>
+<p>I’m going to give you a little modest example: Sprite. Ok? You start
+off with sprite, you take a letter off, one from the interior of the
+word, take the r away, and we’re left with the word spite, then we
+take the e off the end, we’re left with spit, we take the s off, we’re
+left with pit, it, and I.</p>
+</div></blockquote>
+<p>Write a program to find all words that can be reduced in this way, and
+then find the longest one.</p>
+<p>This exercise is a little more challenging than most, so here are some
+suggestions:</p>
+<ol class="arabic simple">
+<li><p>You might want to write a function that takes a word and computes a
+list of all the words that can be formed by removing one letter.
+These are the “children” of the word.</p></li>
+<li><p>Recursively, a word is reducible if any of its children are
+reducible. As a base case, you can consider the empty string
+reducible.</p></li>
+<li><p>The word list we’ve been using doesn’t contain single letter
+words. So you might have to add “I” and “a”.</p></li>
+<li><p>To improve the performance of your program, you might want to
+memoize the words that are known to be reducible.</p></li>
+</ol>
+<p><a class="reference external" href="https://allendowney.github.io/ThinkPython/index.html">Think Python: 3rd Edition</a></p>
+<p>Copyright 2024 <a class="reference external" href="https://allendowney.com">Allen B. Downey</a></p>
+<p>Code license: <a class="reference external" href="https://mit-license.org/">MIT License</a></p>
+<p>Text license: <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap10.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Dictionaries</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap12.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Text Analysis and Generation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuples-are-like-lists">11.1. Tuples are like lists</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#but-tuples-are-immutable">11.2. But tuples are immutable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuple-assignment">11.3. Tuple assignment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuples-as-return-values">11.4. Tuples as return values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#argument-packing">11.5. Argument packing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zip">11.6. Zip</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-and-sorting">11.7. Comparing and Sorting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverting-a-dictionary">11.8. Inverting a dictionary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging">11.9. Debugging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary">11.10. Glossary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">11.11. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ask-a-virtual-assistant">11.11.1. Ask a virtual assistant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">11.11.2. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">11.11.3. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">11.11.4. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">11.11.5. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">11.11.6. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">11.11.7. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">11.11.8. Exercise</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
