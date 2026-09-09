@@ -82,8 +82,8 @@ They live in `solutions/chapNN.ipynb`, a copy of the chapter notebook in which t
 time `jb/prep_notebooks.py` matches those cells by id and shows each one on the website inside
 a collapsed "Suggested solution" dropdown (readers click to reveal it); consecutive solution
 cells become one dropdown, and a note is inserted after the `## Exercises` heading. Chapters
-without a solutions notebook keep the old behaviour (blank cells). As of 2026-09-09 only
-chapter 4 has one; it is the pilot for the approach.
+without a solutions notebook keep the old behaviour (blank cells). Chapters 4 and 5 have
+one (added 2026-09-09); add more chapter by chapter as the user asks.
 
 Rules: only fill in placeholder cells, do not add or edit other cells there (the checker flags
 it, and the site ignores it). Leave a placeholder as `# Solution goes here` to keep it blank.

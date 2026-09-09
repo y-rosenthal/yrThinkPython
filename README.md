@@ -19,7 +19,7 @@ Like the original, this work is licensed under a
 
 - `chapters/` – the chapter notebooks (`chap00.ipynb` … `chap19.ipynb`). Edit these.
 - `blank/` – "fill in the blanks" versions of each chapter with most code removed.
-- `solutions/` – suggested solutions to the exercises (currently chapter 4 only). Each file is
+- `solutions/` – suggested solutions to the exercises (chapters 4 and 5 so far). Each file is
   a copy of the chapter notebook with the `# Solution goes here` cells filled in. The website
   shows these behind a collapsed "Suggested solution" dropdown under each exercise; the
   notebooks that Colab opens are unchanged.
