@@ -20,6 +20,7 @@ git diff --stat HEAD...upstream/v3             # files they touched
 git diff --stat upstream/v3...HEAD             # files the fork changed (potential conflicts)
 ```
 
+For a cell-level view of what the fork has changed, use the `upstream-diff` skill.
 Summarise this for the user before merging: which chapters upstream changed, and whether any
 of them were also edited in the fork. Upstream commit messages are usually just "Updating the
 notebooks", so look at the diff stat, not the messages.

@@ -63,6 +63,19 @@ stay out of the committed file.
   To fix one, add the tag (e.g. `section_memos`) to the `tags` list of the heading cell it
   should point to; do not remove the reference text.
 
+## Course material vs corrections: the `course` tag
+
+Every cell you **add** for the course (new exercises, notes, examples) and every upstream cell
+you **change for course reasons** (not to fix an error) gets the tag `course` in its metadata:
+`"metadata": {"tags": ["course"]}`. Leave corrections to the original text untagged. This is
+what lets `upstream-diff` separate your material from fixes worth sending upstream, and what
+`contribute-upstream` uses to leave course cells out of issue drafts. The tag has no effect on
+the built site. For a new exercise, tag the `### Exercise` markdown cell and its
+`# Solution goes here` cell(s).
+
+Solutions to course exercises cannot live in `chapters/`: Colab opens the raw notebook, so
+students would see them. Keep them in a separate folder or notebook outside `chapters/`.
+
 ## After editing
 
 1. `python3 ${CLAUDE_PROJECT_DIR}/.claude/skills/check-notebooks/check_notebooks.py` (fast, stdlib only).

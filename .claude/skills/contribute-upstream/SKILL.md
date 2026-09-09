@@ -28,8 +28,8 @@ argument-hint: [chapters/chapNN.ipynb] [--cell N]
    ```bash
    python3 ${CLAUDE_SKILL_DIR}/issue_body.py $ARGUMENTS
    ```
-   Keep one issue per distinct problem. Trim the output to the cells that are corrections
-   (leave out course-specific edits that upstream should not adopt).
+   Cells tagged `course` are skipped automatically (see `notebook-conventions`); run
+   `upstream-diff` first if unsure what is tagged. Keep one issue per distinct problem.
 3. Write a one-line title in the style he responds to: `chap18: "is" should be "it" in
    Packing keyword arguments`, or `chap15: time_to_int is called as a function but defined
    as a method`. Say what is wrong and why in a sentence; the script output supplies the rest.

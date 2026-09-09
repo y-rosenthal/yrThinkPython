@@ -21,7 +21,8 @@ SITE = "https://allendowney.github.io/ThinkPython"
 
 def load(path_text):
     nb = json.loads(path_text)
-    return [(c["cell_type"], "".join(c["source"]), c.get("id")) for c in nb["cells"]]
+    return [(c["cell_type"], "".join(c["source"]), c.get("id"), c.get("metadata", {}).get("tags", []))
+            for c in nb["cells"]]
 
 
 def anchor(heading):
@@ -32,7 +33,7 @@ def anchor(heading):
 
 def section_for(cells, i):
     for j in range(i, -1, -1):
-        kind, src, _ = cells[j]
+        kind, src, _, _ = cells[j]
         if kind == "markdown" and src.lstrip().startswith("#"):
             line = src.lstrip().split("\n", 1)[0]
             return line.lstrip("#").strip()
@@ -53,11 +54,15 @@ def main(argv):
     except subprocess.CalledProcessError:
         print("could not read upstream/v3 version; run `git fetch upstream` first"); return 1
     theirs = load(theirs_text)
-    by_id = {cid: (k, s) for k, s, cid in theirs if cid}
+    by_id = {cid: (k, s) for k, s, cid, _ in theirs if cid}
 
     changed = []
-    for i, (kind, src, cid) in enumerate(ours):
+    skipped = 0
+    for i, (kind, src, cid, tags) in enumerate(ours):
         if only is not None and i != only:
+            continue
+        if "course" in tags:
+            skipped += 1
             continue
         up = by_id.get(cid)
         if up is None:
@@ -65,12 +70,17 @@ def main(argv):
         elif up[1] != src:
             changed.append((i, kind, up[1], src))
     if not changed:
-        print(f"{rel}: no cells differ from upstream/v3" + (f" (cell {only})" if only is not None else ""))
+        print(f"{rel}: no cells differ from upstream/v3" + (f" (cell {only})" if only is not None else "")
+              + (f"; {skipped} course-tagged cell(s) ignored" if skipped else ""))
         return 0
+    if skipped:
+        print(f"(ignored {skipped} cell(s) tagged 'course')\n", file=sys.stderr)
 
+    their_index = {cid: j for j, (_, _, cid, _) in enumerate(theirs) if cid}
     print(f"Notebook: `{rel}` (fork), compared with `upstream/v3`\n")
     for i, kind, up, src in changed:
-        heading = section_for(ours, i)
+        cid = ours[i][2]
+        heading = section_for(theirs, their_index[cid]) if cid in their_index else section_for(ours, i)
         link = f"{SITE}/{chap}.html#{anchor(heading)}" if heading else f"{SITE}/{chap}.html"
         print(f"### Cell {i} ({kind}) in section “{heading}”\n")
         print(f"Location: {link}\n")

@@ -20,12 +20,12 @@ source "$VENV/bin/activate"
 need_install=0
 python - <<'PY' || need_install=1
 import importlib
-for m in ("jupyter_book", "nbformat", "nbconvert", "ipykernel", "matplotlib", "yaml"):
+for m in ("jupyter_book", "nbformat", "nbconvert", "ipykernel", "matplotlib", "yaml", "nbdime"):
     importlib.import_module(m)
 PY
 if [ "$need_install" = 1 ]; then
-  echo ">> installing jupyter-book<2, nbconvert, ipykernel, nbmake, matplotlib, pyyaml into $VENV"
+  echo ">> installing jupyter-book<2, nbconvert, ipykernel, nbmake, matplotlib, pyyaml, nbdime into $VENV"
   # matplotlib is needed by diagram.py; pyyaml by chapter 13.
-  pip install --quiet "jupyter-book<2" ghp-import nbconvert ipykernel nbmake pytest matplotlib pyyaml
+  pip install --quiet "jupyter-book<2" ghp-import nbconvert ipykernel nbmake pytest matplotlib pyyaml nbdime
 fi
 echo ">> venv: $VENV  ($(python --version), jupyter-book $(python -c 'import jupyter_book;print(jupyter_book.__version__)'))"
