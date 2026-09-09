@@ -2,7 +2,8 @@
 """Static checks for the Think Python notebooks. Stdlib only, no nbformat needed.
 
 Usage: check_notebooks.py [notebook.ipynb ...]
-Default: every chap*.ipynb in chapters/ and blank/, plus TOC / Colab-link / workflow consistency.
+Default: every chap*.ipynb in chapters/, blank/ and solutions/, plus TOC / Colab-link / workflow
+consistency and a check that each solutions/chapNN.ipynb matches its chapter.
 (chapters/jupyter_intro.ipynb is skipped by default: it is an older nbformat 4.4 file that
 keeps its outputs on purpose and is only shipped in the zip, not in the book.)
 Exit status 1 if any problem is found.
@@ -107,15 +108,57 @@ def check_toc_and_links():
                 problems.append(f"deploy-book.yml: '{src}' is in the TOC but not matched by the copy glob {pattern!r}")
 
 
+def check_solutions():
+    """solutions/chapNN.ipynb must be a copy of chapters/chapNN.ipynb whose '# Solution goes here'
+    cells contain the solution code. prep_notebooks.py matches them by cell id, so a solution
+    cell whose id is not a placeholder in the chapter would silently never appear on the site."""
+    for soln_path in sorted((ROOT / "solutions").glob("chap*.ipynb")):
+        chap_path = ROOT / "chapters" / soln_path.name
+        if not chap_path.exists():
+            problems.append(f"{soln_path}: no matching chapters/{soln_path.name}")
+            continue
+        try:
+            chap = json.loads(chap_path.read_text(encoding="utf-8"))
+            soln = json.loads(soln_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            continue  # reported by check_notebook
+        def src(c):
+            s = c.get("source", "")
+            return "".join(s) if isinstance(s, list) else s
+        placeholders = {c.get("id") for c in chap["cells"]
+                        if c.get("cell_type") == "code" and src(c).startswith("# Solution")}
+        chap_by_id = {c.get("id"): c for c in chap["cells"]}
+        filled = set()
+        for i, c in enumerate(soln["cells"]):
+            cid = c.get("id")
+            if c.get("cell_type") != "code" or cid in placeholders:
+                if cid in placeholders and src(c).strip() and not src(c).startswith("# Solution"):
+                    filled.add(cid)
+                continue
+            other = chap_by_id.get(cid)
+            if other is None:
+                problem(soln_path, i, "code cell id not found in the chapter (only '# Solution goes "
+                                      "here' cells may be filled in; do not add cells here)")
+            elif src(other) != src(c):
+                problem(soln_path, i, "code cell differs from the chapter but is not a solution "
+                                      "placeholder; the site ignores it, so edit chapters/ instead")
+        missing = placeholders - filled
+        if missing:
+            print(f"note: {soln_path.relative_to(ROOT)}: {len(missing)} placeholder cell(s) left "
+                  f"empty (rendered as blank cells on the site): {', '.join(sorted(missing))}")
+
+
 def main(argv):
     paths = [Path(a) for a in argv] or sorted(
         [*map(Path, glob(str(ROOT / "chapters" / "chap*.ipynb"))),
-         *map(Path, glob(str(ROOT / "blank" / "chap*.ipynb")))]
+         *map(Path, glob(str(ROOT / "blank" / "chap*.ipynb"))),
+         *map(Path, glob(str(ROOT / "solutions" / "chap*.ipynb")))]
     )
     for p in paths:
         check_notebook(p)
     if not argv:
         check_toc_and_links()
+        check_solutions()
     if problems:
         print(f"{len(problems)} problem(s):")
         for p in problems:

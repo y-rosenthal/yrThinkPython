@@ -39,7 +39,8 @@ stay out of the committed file.
   and several `### Exercise` subsections.
 - **Exercises**: a `### Exercise` markdown cell, then one or more code cells whose entire
   source is `# Solution goes here`. `jb/prep_notebooks.py` blanks any code cell that
-  *starts with* `# Solution`, so never put real code under that comment.
+  *starts with* `# Solution`, so never put real code under that comment. Suggested solutions
+  go in `solutions/chapNN.ipynb` instead (see below).
 - **Expected errors**: cells that deliberately raise use the cell magic on line 1,
   a blank line, then the code:
   ```
@@ -73,8 +74,24 @@ what lets `upstream-diff` separate your material from fixes worth sending upstre
 the built site. For a new exercise, tag the `### Exercise` markdown cell and its
 `# Solution goes here` cell(s).
 
-Solutions to course exercises cannot live in `chapters/`: Colab opens the raw notebook, so
-students would see them. Keep them in a separate folder or notebook outside `chapters/`.
+## Suggested solutions: `solutions/chapNN.ipynb`
+
+Solutions never go in `chapters/` (Colab opens the raw notebook, so students would see them).
+They live in `solutions/chapNN.ipynb`, a copy of the chapter notebook in which the
+`# Solution goes here` cells contain the solution code, **with the same cell ids**. At build
+time `jb/prep_notebooks.py` matches those cells by id and shows each one on the website inside
+a collapsed "Suggested solution" dropdown (readers click to reveal it); consecutive solution
+cells become one dropdown, and a note is inserted after the `## Exercises` heading. Chapters
+without a solutions notebook keep the old behaviour (blank cells). As of 2026-09-09 only
+chapter 4 has one; it is the pilot for the approach.
+
+Rules: only fill in placeholder cells, do not add or edit other cells there (the checker flags
+it, and the site ignores it). Leave a placeholder as `# Solution goes here` to keep it blank.
+When a chapter changes, its solutions notebook does not need to change unless placeholder cells
+were added or removed; the checker lists placeholders that have no solution. To create one for
+another chapter: copy `chapters/chapNN.ipynb` to `solutions/`, fill in the placeholders with a
+`json` script (keep ids), then run it with `run_notebooks.sh solutions/chapNN.ipynb` (it must
+execute with no errors at all, including the exercise test cells) and build the book.
 
 ## After editing
 

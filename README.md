@@ -19,9 +19,13 @@ Like the original, this work is licensed under a
 
 - `chapters/` – the chapter notebooks (`chap00.ipynb` … `chap19.ipynb`). Edit these.
 - `blank/` – "fill in the blanks" versions of each chapter with most code removed.
+- `solutions/` – suggested solutions to the exercises (currently chapter 4 only). Each file is
+  a copy of the chapter notebook with the `# Solution goes here` cells filled in. The website
+  shows these behind a collapsed "Suggested solution" dropdown under each exercise; the
+  notebooks that Colab opens are unchanged.
 - `jb/` – Jupyter Book configuration (`_config.yml`, `_toc.yml`), the landing pages
-  (`index.md`, `blank.md`) and `prep_notebooks.py`, which strips `%%expect` magics and
-  adds section labels before the HTML build.
+  (`index.md`, `blank.md`) and `prep_notebooks.py`, which strips `%%expect` magics,
+  adds section labels and merges in the solutions before the HTML build.
 - `thinkpython.py`, `diagram.py`, `structshape.py`, `words.txt`, `photos.zip` – helper
   modules and data files used by the notebooks.
 

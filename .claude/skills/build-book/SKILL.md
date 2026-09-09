@@ -17,7 +17,9 @@ What it does, mirroring `.github/workflows/deploy-book.yml` exactly:
    `jupyter-book<2`). The linuxbrew default `python3` is 3.14 and is not used. Override with
    `THINKPYTHON_VENV` / `THINKPYTHON_PYTHON` if needed.
 2. `cp chapters/chap[01][0-9].ipynb jb/` (these copies are gitignored).
-3. `python jb/prep_notebooks.py`: strips `%%expect` lines, blanks `# Solution…` cells, adds section labels.
+3. `python jb/prep_notebooks.py`: strips `%%expect` lines, adds section labels, and turns
+   `# Solution…` cells into collapsed "Suggested solution" dropdowns when `solutions/chapNN.ipynb`
+   has a matching cell id (see the notebook-conventions skill), otherwise blanks them.
 4. `jb build .` inside `jb/`. Output: `jb/_build/html/index.html`, one `chapNN.html` per chapter.
 
 Flags: `--clean` runs `jb clean` first (use after changing `_toc.yml` or `_config.yml`, since
