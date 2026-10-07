@@ -135,7 +135,7 @@ def cmd_renumber(path):
 
 
 SKELETON = [
-    ('md', '''# {NN}b. Prof. Rosenthal's Review
+    ('md', '''# {N}b. Prof. Rosenthal's Review
 
 A review of [Chapter {N}: {TITLE}](https://y-rosenthal.github.io/yrThinkPython/chap{NN}.html),
 for students who have already studied the chapter.

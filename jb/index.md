@@ -29,11 +29,13 @@ For the third edition, the biggest changes are:
 **Chapter 2: Variables and Statements**
 
 * [Click here to run Chapter 2 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap02.ipynb)
+* [Click here to run 2b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap02_review.ipynb)
 
 
 **Chapter 3: Functions**
 
 * [Click here to run Chapter 3 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap03.ipynb)
+* [Click here to run 3b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap03_review.ipynb)
 
 
 **Chapter 4: Functions and Interfaces**
@@ -45,14 +47,17 @@ For the third edition, the biggest changes are:
 **Chapter 5: Conditionals and Recursion**
 
 * [Click here to run Chapter 5 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap05.ipynb)
+* [Click here to run 5b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap05_review.ipynb)
 
 **Chapter 6: Return Values**
 
 * [Click here to run Chapter 6 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap06.ipynb)
+* [Click here to run 6b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap06_review.ipynb)
 
 **Chapter 7: Iteration and Search**
 
 * [Click here to run Chapter 7 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap07.ipynb)
+* [Click here to run 7b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_review.ipynb)
 
 **Chapter 8: Strings and Regular Expressions**
 
