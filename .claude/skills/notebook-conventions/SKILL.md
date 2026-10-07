@@ -57,12 +57,15 @@ stay out of the committed file.
   *upstream* repo, so changes to the fork's helper modules do not reach Colab users unless
   the URLs are changed to `y-rosenthal/yrThinkPython`. The `%xmode Verbose` cell sits at
   the start of the Exercises section.
-- Section labels for cross references come from cell tags starting with `section`/`chapter`
-  (prep_notebooks.py turns them into MyST `(label)=` targets). The current notebooks have
-  **no** such tags, yet about 26 markdown cells still contain links like
-  `[Chapter 10](section_memos)`, which render as broken cross references (known build warnings).
-  To fix one, add the tag (e.g. `section_memos`) to the `tags` list of the heading cell it
-  should point to; do not remove the reference text.
+- **Display tags and section labels are not in these notebooks.** Downey builds his site from
+  his ThinkPythonSolutions notebooks, which carry outputs and tags (`remove-input`, `remove-cell`,
+  `section_*` labels) that are stripped from `chapters/`. This fork keeps his tags, matched by
+  cell id, in `jb/soln_overlay.json` (regenerate with `python jb/update_overlay.py` after syncing
+  upstream); `prep_notebooks.py` applies them at build time, and `execute_notebooks.py`
+  produces the outputs. So do not add such tags to `chapters/`. A new cell you add for the
+  course has no overlay entry: it is shown with its output, which is usually what you want; to
+  hide its code or the whole cell on the site, give it a `remove-input` / `remove-cell` tag (and
+  the `course` tag).
 
 ## Course material vs corrections: the `course` tag
 
@@ -73,6 +76,16 @@ what lets `upstream-diff` separate your material from fixes worth sending upstre
 `contribute-upstream` uses to leave course cells out of issue drafts. The tag has no effect on
 the built site. For a new exercise, tag the `### Exercise` markdown cell and its
 `# Solution goes here` cell(s).
+
+## Course additions go in `yr/`
+
+New course material (chapter summaries, extra questions) goes in `yr/`, not in `chapters/`:
+one review notebook per chapter, `yr/chapNN_review.ipynb`, shown on the site as
+"NNb. Prof. Rosenthal's Review" right after the chapter. Read `yr/README.md` before creating or
+editing one: it has the page layout (concepts checklist, then easy → hard questions), the
+`<details>` answer format, the `# Your code here` and `raises-exception` conventions, and the
+TOC / index.md steps. The `yr-review-page` and `yr-review-questions` skills cover creating
+pages and adding questions, with tools in `yr/tools/` that draw turtle pictures and verify answers.
 
 ## Suggested solutions: `solutions/chapNN.ipynb`
 

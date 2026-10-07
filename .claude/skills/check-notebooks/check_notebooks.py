@@ -2,7 +2,7 @@
 """Static checks for the Think Python notebooks. Stdlib only, no nbformat needed.
 
 Usage: check_notebooks.py [notebook.ipynb ...]
-Default: every chap*.ipynb in chapters/, blank/ and solutions/, plus TOC / Colab-link / workflow
+Default: every chap*.ipynb in chapters/, blank/ and solutions/ and every yr/*.ipynb, plus TOC / Colab-link / workflow
 consistency and a check that each solutions/chapNN.ipynb matches its chapter.
 (chapters/jupyter_intro.ipynb is skipped by default: it is an older nbformat 4.4 file that
 keeps its outputs on purpose and is only shipped in the zip, not in the book.)
@@ -85,6 +85,10 @@ def check_toc_and_links():
     for f in sorted(toc_files):
         if f in ("index", "blank"):
             continue
+        if f.startswith("yr/"):
+            if not (ROOT / f"{f}.ipynb").exists():
+                problems.append(f"jb/_toc.yml: entry '{f}' has no {f}.ipynb")
+            continue
         if not (ROOT / "chapters" / f"{f}.ipynb").exists() and not (ROOT / "jb" / f"{f}.md").exists():
             problems.append(f"jb/_toc.yml: entry '{f}' has no chapters/{f}.ipynb or jb/{f}.md")
 
@@ -97,7 +101,13 @@ def check_toc_and_links():
             if not (ROOT / rel).exists():
                 problems.append(f"jb/{page}: Colab link target does not exist: {rel}")
 
+    for p in sorted((ROOT / "yr").glob("*.ipynb")):
+        if f"yr/{p.stem}" not in toc_files:
+            problems.append(f"jb/_toc.yml: yr/{p.name} is not listed in the TOC")
+
     wf = (ROOT / ".github" / "workflows" / "deploy-book.yml").read_text()
+    if "cp yr/*.ipynb jb/yr/" not in wf:
+        problems.append("deploy-book.yml: does not copy yr/*.ipynb into jb/yr/")
     m = re.search(r"cp\s+(\S+)\s+jb/", wf)
     if m:
         import fnmatch
@@ -152,7 +162,8 @@ def main(argv):
     paths = [Path(a) for a in argv] or sorted(
         [*map(Path, glob(str(ROOT / "chapters" / "chap*.ipynb"))),
          *map(Path, glob(str(ROOT / "blank" / "chap*.ipynb"))),
-         *map(Path, glob(str(ROOT / "solutions" / "chap*.ipynb")))]
+         *map(Path, glob(str(ROOT / "solutions" / "chap*.ipynb"))),
+         *map(Path, glob(str(ROOT / "yr" / "*.ipynb")))]
     )
     for p in paths:
         check_notebook(p)

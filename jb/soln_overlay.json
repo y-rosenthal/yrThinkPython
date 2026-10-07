@@ -1,0 +1,1606 @@
+{
+ "chap00": {
+  "solutions": {},
+  "tags": {}
+ },
+ "chap01": {
+  "solutions": {
+   "2e0fc7a9": "# Solution\n# seconds part of pace\n412.48 % 60",
+   "523d9b0f": "# Solution\n# miles per hour\n6.21118 / 0.711666",
+   "5eceb4fb": "# Solution\n# number of miles\n10 / 1.61",
+   "8fb50f30": "# Solution\n# total seconds\n42 * 60 + 42",
+   "a998258c": "# Solution\n# minute part of pace\n412.48 // 60",
+   "d25268d8": "# Solution\n# hours\n2562 / 60 / 60",
+   "fee97d8d": "# Solution\n# seconds per mile\n2562 / 6.21118"
+  },
+  "tags": {
+   "1cf21da4": [
+    "raises-exception"
+   ],
+   "213f9d96": [
+    "remove-cell"
+   ],
+   "333a6fc9": [
+    "chapter_programming"
+   ],
+   "3b4a1f57": [
+    "remove-cell"
+   ],
+   "4674b7ca": [
+    "raises-exception"
+   ],
+   "5a73bfd5": [
+    "remove-cell"
+   ],
+   "a14edb7e": [
+    "remove-cell"
+   ],
+   "a705b980": [
+    "raises-exception",
+    "remove-cell"
+   ],
+   "e3f65f19": [
+    "raises-exception"
+   ]
+  }
+ },
+ "chap02": {
+  "solutions": {
+   "18de7d96": "# Solution\n\nradius = 5                            # in cm\nvolume = 4 / 3 * math.pi * radius**3  # in cubic cm\nvolume",
+   "4424940f": "# Solution\n\nmath.pow(math.e, 2)",
+   "50e8393a": "# Solution\n\nmath.exp(2)",
+   "b4ada618": "# Solution\n\nmath.e ** 2",
+   "de812cff": "# Solution\n\nx = 42\nmath.cos(x)**2 + math.sin(x)**2"
+  },
+  "tags": {
+   "1a0a6ff4": [
+    "remove-cell"
+   ],
+   "1a8b8382": [
+    "raises-exception"
+   ],
+   "2c25e84e": [
+    "remove-cell"
+   ],
+   "4a8f4b3e": [
+    "remove-cell"
+   ],
+   "5b27a635": [
+    "remove-input"
+   ],
+   "682395ea": [
+    "raises-exception"
+   ],
+   "69295e52": [
+    "raises-exception"
+   ],
+   "86f07f6e": [
+    "raises-exception"
+   ],
+   "ac2620ef": [
+    "raises-exception"
+   ],
+   "b6938851": [
+    "raises-exception"
+   ],
+   "edec7064": [
+    "raises-exception"
+   ],
+   "f86b2896": [
+    "raises-exception"
+   ]
+  }
+ },
+ "chap03": {
+  "solutions": {
+   "53424b43": "# Solution\n\ndef bottle_line(n, suffix):\n    \"\"\"Display a line from 99 Bottles of Beer.\n    \n    n: integer\n    suffix: string\n    \"\"\"\n    print(n, 'bottles of beer', suffix)",
+   "61010ffb": "# Solution\n\ndef bottle_verse(n):\n    \"\"\"Display a verse from 99 Bottles of Beer.\n    \n    n: integer\n    \"\"\"\n    bottle_line(n, 'on the wall')\n    bottle_line(n, '')\n    print('Take one down, pass it around')\n    bottle_line(n-1, 'on the wall')",
+   "7aa95014": "# Solution\n\ndef triangle(string, height):\n    \"\"\"Make a triangle shape by printing a string repeatedly.\n    \n    string: characters to be repeated\n    height: number of lines in the triangle\n    \"\"\"\n    for i in range(1, height+1):\n        print(string * i)",
+   "a6004271": "# Solution\n\ndef print_right(text):\n    \"\"\"Print the text so the last letter is in column 40. \n    \n    text: string\n    \"\"\"\n    columns = 40\n    space = ' '\n    num_spaces = columns - len(text)\n    print(space * num_spaces + text)",
+   "bcedab79": "# Solution\n\ndef rectangle(string, width, height):\n    \"\"\"Make a rectangle by printing a string repeatedly.\n    \n    string: characters to be repeated\n    width: number of repetitions on each line\n    height: number of lines\n    \"\"\"\n    for i in range(height):\n        print(string * width)"
+  },
+  "tags": {
+   "103cbe3c": [
+    "remove-cell"
+   ],
+   "336cdfa2": [
+    "remove-output"
+   ],
+   "73f03eea": [
+    "raises-exception"
+   ],
+   "83df4e32": [
+    "remove-cell"
+   ],
+   "bcd5e1df": [
+    "remove-input"
+   ],
+   "d9082f88": [
+    "raises-exception"
+   ]
+  }
+ },
+ "chap04": {
+  "solutions": {
+   "0f0e7498": "# Solution\n\ndef petal(radius,  angle):\n    \"\"\"Draws a petal using two arcs.\n\n    radius: radius of the arcs\n    angle: angle (degrees) that subtends the arcs\n    \"\"\"\n    for i in range(2):\n        arc(radius,  angle)\n        left(180-angle)",
+   "186c7fbc": "# Solution\n\n# With the additional prompt: \n# make that a circular spiral, and don't change the name of the module\n\nimport math\n\ndef circular_spiral(radius, angle):\n    turtle = make_turtle(delay=0, width=500, height=500)\n    rotations = 5\n    distance = 2 * math.pi * radius / 360  # Calculate the distance for each degree of rotation\n    for _ in range(rotations * 360):\n        forward(distance)\n        left(angle)\n        radius += 0.1  # Increase the radius for each segment\n        distance = 2 * math.pi * radius / 360  # Recalculate the distance for the updated radius\n\ncircular_spiral(50, 1)",
+   "3db6f106": "# Solution\n\ndef rhombus(length, angle):\n    for i in range(2):\n        forward(length)\n        left(angle)\n        forward(length)\n        left(180-angle)",
+   "46d3151c": "# Solution\n\ndef spiral(length, angle):\n    turtle = make_turtle(delay=0)\n    for _ in range(100):\n        forward(length)\n        right(angle)\n        length += 1  # Increase the length for each segment\n\nspiral(5, 90)",
+   "481396f9": "# Solution\n\ndef rhombus(length, angle):\n    parallelogram(length, length, angle)",
+   "4cfea3b0": "with open(\"jupyturtle_flower.svg\", \"w\") as svg_file:\n    svg_content = turtle.get_SVG()\n    svg_file.write(svg_content)",
+   "6c0d0bff": "# Solution\n\ndef flower(n, radius, angle):\n    \"\"\"Draws a flower with n petals.\n\n    n: number of petals\n    radius: radius of the arcs\n    angle: angle (degrees) that subtends the arcs\n    \"\"\"\n    for i in range(n):\n        petal(radius,  angle)\n        left(360.0/n)",
+   "7e7d34b0": "# Solution\n\ndef rectangle(length1, length2):\n    \"\"\"Draw a rectangle with the given lengths.\n    \n    length1: length of the first side\n    length2: length of the second side\n    \"\"\"\n    parallelogram(length1, length2, 90)",
+   "895005cb": "# Solution\n\ndef parallelogram(length1, length2, angle):\n    for i in range(2):\n        forward(length1)\n        left(angle)\n        forward(length2)\n        left(180-angle)",
+   "89ce198a": "with open(\"jupyturtle_pie.svg\", \"w\") as svg_file:\n    svg_content = turtle.get_SVG()\n    svg_file.write(svg_content)",
+   "8be6442e": "# Solution\n\ndef triangle(radius,  angle):\n    \"\"\"Draws an icosceles triangle.\n\n    The turtle starts and ends at the peak, facing the middle of the base.\n\n    radius: length of the equal legs\n    angle: half peak angle in degrees\n    \"\"\"\n    y = radius * math.sin(angle * math.pi / 180)\n\n    right(angle)\n    forward(radius)\n    left(90+angle)\n    forward(2*y)\n    left(90+angle)\n    forward(radius)\n    left(180-angle)",
+   "be1b7ed8": "# Solution\n\ndef draw_pie(n, radius):\n    \"\"\"Draws a pie divided into radial segments.\n\n    n: number of segments\n    radius: length of the radial spokes\n    \"\"\"\n    angle = 360.0 / n\n    for i in range(n):\n        triangle(radius,  angle/2)\n        left(angle)",
+   "c54ba660": "# Solution\n\ndef rectangle(length1, length2):\n    \"\"\"Draw a rectangle with the given lengths.\n    \n    length1: length of the first side\n    length2: length of the second side\n    \"\"\"\n    for i in range(2):\n        forward(length1)\n        left(90)\n        forward(length2)\n        left(90)"
+  },
+  "tags": {
+   "04193da5": [
+    "remove-cell"
+   ],
+   "0b0efa00": [
+    "section_turtle_module"
+   ],
+   "1311ee08": [
+    "remove-input"
+   ],
+   "1571ee71": [
+    "remove-cell"
+   ],
+   "1d845de9": [
+    "remove-input"
+   ],
+   "320fc8bc": [
+    "remove-cell"
+   ],
+   "3e3bae20": [
+    "section_docstring"
+   ],
+   "4b05078c": [
+    "remove-cell"
+   ],
+   "4cfea3b0": [
+    "remove-cell"
+   ],
+   "7917956b": [
+    "remove-cell"
+   ],
+   "8702c0ad": [
+    "remove-cell"
+   ],
+   "89ce198a": [
+    "remove-cell"
+   ],
+   "8fe06dea": [
+    "remove-cell"
+   ],
+   "8ff2a5f4": [
+    "remove-output"
+   ],
+   "c03bd4a2": [
+    "remove-cell"
+   ],
+   "c072ea41": [
+    "section_encapsulation"
+   ],
+   "c519ca39": [
+    "remove-cell"
+   ],
+   "c8dfebc9": [
+    "remove-input"
+   ],
+   "df64b7da": [
+    "remove-cell"
+   ],
+   "f4e37360": [
+    "remove-input"
+   ]
+  }
+ },
+ "chap05": {
+  "solutions": {
+   "0184d21a": "# Solution\n\nseconds = remainder % 60\nseconds",
+   "06381639": "# Solution\n\ndef is_triangle(a, b, c):\n    if a > b + c:\n        print('No')\n    elif b > a + c:\n        print('No')\n    elif c > a + b:\n        print('No')\n    else:\n        print('Yes')",
+   "2e3f56c7": "# Solution\n\nfrom diagram import make_frame, Stack\nfrom diagram import diagram, adjust\n\nframes = []\nfor n in [3,2,1,0]:\n    d = dict(n=n, s=6-sum(range(n+1)))\n    frame = make_frame(d, name='recurse', dx=1.0, loc='left')\n    frames.append(frame)\n\nstack = Stack(frames, dy=-0.5)\n\nwidth, height, x, y = [2.49, 2.04, 0.81, 1.77]\nax = diagram(width, height)\nbbox = stack.draw(ax, x, y)\n# adjust(x, y, bbox)",
+   "322ddd0a": "# Solution\n\nremainder = now % seconds_per_day\n\nhours = remainder // 3600\nhours",
+   "590983cd": "# Solution\n\n# This cell replaces the input function so the notebook runs without pausing\ndef input(prompt):\n    print(prompt, end='')\n    reply = 'What do you mean: an African or European swallow?'\n    print(reply)\n    return reply    ",
+   "68439acf": "# Solution\n\n# Here's the code I got from ChatGPT in June 2023, with just a few corrections\n\ndef draw_sierpinski(length, depth):\n    if depth == 0:\n        for _ in range(3):\n            forward(length)\n            left(120)\n    else:\n        draw_sierpinski(length / 2, depth - 1)\n        forward(length / 2)\n        draw_sierpinski(length / 2, depth - 1)\n        back(length / 2)\n        left(60)\n        forward(length / 2)\n        right(60)\n        draw_sierpinski(length / 2, depth - 1)\n        left(60)\n        back(length / 2)\n        right(60)",
+   "a438cec5": "# Solution\n\n\"\"\"Adds up the numbers from 1 to `n`\n\nn: integer\ns: the sum of the numbers so far\n\"\"\"",
+   "ac0fb4a6": "# Solution\n\n# This cell replaces the input function so the notebook runs without pausing\ndef input():\n     return",
+   "c1acc853": "# Solution\n\ndef koch(x):\n    \"\"\"Draws a koch curve with length n.\"\"\"\n    if x < 5:\n        forward(x)\n    else:\n        koch(x / 3)\n        left(60)\n        koch(x / 3)\n        right(120)\n        koch(x / 3)\n        left(60)\n        koch(x / 3)",
+   "c5fa57b2": "# Solution\n\nseconds_per_day = 24 * 60 * 60\ndays = now // seconds_per_day\ndays",
+   "e0600e5e": "# Solution\n\n# This cell replaces the input function so the notebook runs without pausing\ndef input(prompt):\n    print(prompt, end='')\n    reply = 'It is Arthur, King of the Britons'\n    print(reply)\n    return reply    ",
+   "ef0256ee": "# Solution\n\nfrom jupyturtle import make_turtle\n\nmake_turtle(delay=0)\ndraw(50)",
+   "fc43df7d": "# Solution\n\nremainder = remainder % 3600\n\nminutes = remainder // 60\nminutes"
+  },
+  "tags": {
+   "06381639": [
+    "remove-cell"
+   ],
+   "156273af": [
+    "remove-cell"
+   ],
+   "22454b51": [
+    "raises-exception"
+   ],
+   "2842401c": [
+    "remove-cell"
+   ],
+   "2b05586e": [
+    "remove-cell"
+   ],
+   "2e3f56c7": [
+    "remove-cell"
+   ],
+   "2f4b6082": [
+    "raises-exception"
+   ],
+   "583ef53c": [
+    "remove-cell"
+   ],
+   "590983cd": [
+    "remove-cell",
+    "raises-exception"
+   ],
+   "643148da": [
+    "remove-input"
+   ],
+   "8119ba50": [
+    "remove-cell"
+   ],
+   "86d3123b": [
+    "remove-cell"
+   ],
+   "8d3d6049": [
+    "remove-cell"
+   ],
+   "a04e3016": [
+    "raises-exception"
+   ],
+   "a2a376b3": [
+    "remove-cell"
+   ],
+   "a8510119": [
+    "remove-input"
+   ],
+   "ac0fb4a6": [
+    "remove-cell"
+   ],
+   "ade1ecb4": [
+    "remove-cell"
+   ],
+   "b1c58420": [
+    "remove-cell"
+   ],
+   "b82642f6": [
+    "raises-exception"
+   ],
+   "d2911c71": [
+    "remove-cell"
+   ],
+   "e00793f4": [
+    "remove-cell"
+   ],
+   "e0600e5e": [
+    "remove-cell"
+   ],
+   "e5d6c732": [
+    "remove-cell"
+   ]
+  }
+ },
+ "chap06": {
+  "solutions": {
+   "030179b6": "# Solution\n\nhypot(3, 4)",
+   "0521d267": "# Solution\n\ndef hypot(a, b):\n    d2 = a**2 + b**2\n    result = math.sqrt(d2)\n    return result",
+   "0a4ee482": "# Solution\n\ndef is_between(x, y, z):\n    if x < y < z:\n        return True\n    else:\n        return z < y < x",
+   "0bcba5fe": "# Solution\n\ndef is_power(a, b):\n    \"\"\"Check whether a is a power of b\n    \"\"\"\n    if a == 1:\n        return True\n    \n    if is_divisible(a, b):\n        return is_power(a/b, b)\n    else:\n        return False",
+   "3d129b03": "# Solution\n\ndef hypot(a, b):\n    d2 = a**2 + b**2\n    print(d2)\n    return 0",
+   "468a31e9": "# Solution\n\nhypot(3, 4)",
+   "4e067bfb": "# Solution\n\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a%b)",
+   "5f8fa829": "# Solution\n\nhypot(3, 4)",
+   "62267fa3": "# Solution\n\ndef hypot(a, b):\n    return 0",
+   "651295e4": "# Solution\n\nhypot(3, 4)",
+   "77a74879": "# Solution\n\nhypot(3, 4)",
+   "7eb85c5c": "# Solution\n\ndef ackermann(m, n):\n    \"\"\"Computes the Ackermann function A(m, n)\n\n    See http://en.wikipedia.org/wiki/Ackermann_function\n\n    n, m: non-negative integers\n    \"\"\"\n    if m == 0:\n        return n+1\n    if n == 0:\n        return ackermann(m-1, 1)\n    return ackermann(m-1, ackermann(m, n-1))",
+   "abbe3ebf": "# Solution\n\ndef hypotenuse(a, b):\n    return math.sqrt(a**2 + b**2)",
+   "d737b468": "# Solution\n\ndef hypot(a, b):\n    d2 = a**2 + b**2\n    result = math.sqrt(d2)\n    print(result)\n    return 0"
+  },
+  "tags": {
+   "05208c8b": [
+    "remove-cell"
+   ],
+   "1d944b42": [
+    "remove-cell"
+   ],
+   "2a7c1c21": [
+    "remove-cell"
+   ],
+   "36d9e92a": [
+    "remove-cell"
+   ],
+   "4318028d": [
+    "remove-cell"
+   ],
+   "455f0457": [
+    "remove-cell"
+   ],
+   "4994ceae": [
+    "remove-cell"
+   ],
+   "4b6656e6": [
+    "remove-cell"
+   ],
+   "56b1c184": [
+    "remove-cell"
+   ],
+   "5df00229": [
+    "remove-cell"
+   ],
+   "5e4b5f1d": [
+    "raises-exception"
+   ],
+   "63ec57c9": [
+    "remove-cell"
+   ],
+   "687a3e5a": [
+    "remove-cell"
+   ],
+   "68a6ae39": [
+    "section_incremental"
+   ],
+   "76be4d15": [
+    "raises-exception",
+    "remove-cell"
+   ],
+   "77613df9": [
+    "raises-exception"
+   ],
+   "7c2ac0a4": [
+    "remove-cell"
+   ],
+   "8497dec4": [
+    "remove-cell"
+   ],
+   "85f7f614": [
+    "remove-cell"
+   ],
+   "956ed6d7": [
+    "remove-cell"
+   ],
+   "a75ccd9b": [
+    "remove-input"
+   ],
+   "a994eaa6": [
+    "remove-cell"
+   ],
+   "b8af1586": [
+    "remove-cell"
+   ],
+   "c12f318d": [
+    "remove-cell"
+   ],
+   "c49e9749": [
+    "remove-cell"
+   ],
+   "ca2a2d76": [
+    "section_fibonacci"
+   ],
+   "e93a0715": [
+    "remove-cell"
+   ],
+   "eb8a85a7": [
+    "section_debugging_factorial"
+   ],
+   "efbebde9": [
+    "remove-cell"
+   ]
+  }
+ },
+ "chap07": {
+  "solutions": {
+   "31de091e": "# Solution\n\ndef uses_only(word, available):\n    \"\"\"Checks whether a word uses only the available letters.\n    \n    >>> uses_only('banana', 'ban')\n    True\n    >>> uses_only('ratatat', 'rate')\n    True\n    >>> uses_only('apple', 'apl')\n    False\n    \"\"\"\n    for letter in word.lower(): \n        if letter not in available.lower():\n            return False\n    return True",
+   "5c8be876": "# Solution\n\ndef uses_all(word, required):\n    \"\"\"Checks whether a word uses all required letters.\n    \n    >>> uses_all('banana', 'ban')\n    True\n    >>> uses_all('ratatat', 'rat')\n    True\n    >>> uses_all('apple', 'api')\n    False\n    \"\"\"\n    for letter in required.lower(): \n        if letter not in word.lower():\n            return False\n    return True",
+   "6980de57": "# Solution\n\nrun_doctests(uses_all)",
+   "83c9d33c": "# Solution\n\n# If A uses all of the letters in B, then B uses only the letters in A.\n\ndef uses_all(word, required):\n    \"\"\"Checks whether a word uses all required letters.\n    \n    >>> uses_all('banana', 'ban')\n    True\n    >>> uses_all('ratatat', 'rat')\n    True\n    >>> uses_all('apple', 'api')\n    False\n    \"\"\"\n    return uses_only(required, word)",
+   "86a6c2c8": "# Solution\n\ndef uses_none(word, forbidden):\n    \"\"\"Checks whether a word avoid forbidden letters.\n    \n    >>> uses_none('banana', 'xyz')\n    True\n    >>> uses_none('apple', 'efg')\n    False\n    >>> uses_none('', 'abc')\n    True\n    \"\"\"\n    for letter in word.lower():\n        if letter in forbidden.lower():\n            return False\n    return True",
+   "a4d623b7": "# Solution\n\ndef check_word(word, available, required):\n    \"\"\"Check whether a word is acceptable.\n    \n    >>> check_word('color', 'ACDLORT', 'R')\n    True\n    >>> check_word('ratatat', 'ACDLORT', 'R')\n    True\n    >>> check_word('rat', 'ACDLORT', 'R')\n    False\n    >>> check_word('told', 'ACDLORT', 'R')\n    False\n    >>> check_word('bee', 'ACDLORT', 'R')\n    False\n    \"\"\"\n    if len(word) < 4:\n        return False\n    \n    if not uses_all(word, required):\n        return False\n    \n    return uses_only(word, available)",
+   "bfd6070c": "# Solution\n\n# Here's what I got from ChatGPT May 24 version\n# https://help.openai.com/en/articles/6825453-chatgpt-release-notes\n\n# It is not correct\n\ndef uses_all(word, letters):\n    \"\"\"Checks whether a word uses all required letters.\n    \n    >>> uses_all('banana', 'ban')\n    True\n    >>> uses_all('ratatat', 'rat')\n    True\n    >>> uses_all('apple', 'api')\n    False\n    \"\"\"\n    return not uses_any(letters, word)",
+   "eff4ac37": "# Solution\n\ndef word_score(word, available):\n    \"\"\"Compute the score for an acceptable word.\n    \n    >>> word_score('card', 'ACDLORT')\n    1\n    >>> word_score('color', 'ACDLORT')\n    5\n    >>> word_score('cartload', 'ACDLORT')\n    15\n    \"\"\"\n    n = len(word)\n    if n == 4:\n        return 1\n    \n    if uses_all(word, available):\n        return n + 7\n    else:\n        return n"
+  },
+  "tags": {
+   "0e3d1c79-5436-42ac-9e29-82fc59936263": [
+    "remove-cell"
+   ],
+   "23ed7f79": [
+    "remove-cell"
+   ],
+   "2bed91e7": [
+    "remove-cell"
+   ],
+   "307c07e6": [
+    "remove-cell"
+   ],
+   "36a45674-7f41-4850-98f1-2548574ce958": [
+    "remove-input"
+   ],
+   "4a0c46b9": [
+    "raises-exception"
+   ],
+   "6965f673": [
+    "remove-output",
+    "remove-cell"
+   ],
+   "82e5283b": [
+    "remove-cell"
+   ],
+   "8a09bc24": [
+    "remove-cell"
+   ],
+   "8c5133d4": [
+    "remove-cell"
+   ],
+   "a7b7ac52-64a6-4dd9-98f5-b772a5e0f161": [
+    "remove-cell"
+   ],
+   "a81d9ad2-9a47-4872-bf65-5a8dfb09c32f": [
+    "chapter_search"
+   ],
+   "ab66c777": [
+    "remove-cell"
+   ],
+   "ad1fd6b9": [
+    "remove-cell"
+   ],
+   "ba2ab90b": [
+    "remove-cell"
+   ],
+   "cf3b8b7e-5fc7-4bb1-b628-09277bdc5a0d": [
+    "remove-output"
+   ],
+   "dcc7d983": [
+    "remove-cell"
+   ],
+   "eb8e8745": [
+    "remove-cell"
+   ],
+   "f0c8eb18": [
+    "remove-cell"
+   ]
+  }
+ },
+ "chap08": {
+  "solutions": {
+   "08294921": "# Solution\n\ndef count_matches(pattern):\n    count = 0\n    for line in open('pg1184_cleaned.txt'):\n        result = re.search(pattern, line)\n        if result != None:\n            count += 1\n    return count",
+   "2a37092e": "# Solution\n\ndef check_word(word):\n    if 'e' not in word:\n        return False\n    \n    if word[2] == 'e' or word[4] == 'e':\n        return False\n    \n    if uses_any(word, 'spadclrk'):\n        return False\n    \n    return True",
+   "3eb8f83f": "# Solution\n\n# This solution uses only features we've seen in the chapter,\n# but it also matches words that contain these string, like \"impale\".\n\npattern = '(pale|pales|paled|paleness|pallor)'\ncount_matches(pattern)",
+   "3f658f3a": "# Solution\n\nfor line in open('words.txt'):\n    word = line.strip()\n    if len(word) == 5 and check_word2(word):\n        print(word)",
+   "75b12538": "# Solution\n\ndef head(input_file, num_lines=10, output_file=None):\n    reader = open(input_file, 'r')\n\n    if output_file is not None:\n        writer = open(output_file, 'w')\n        \n    for i in range(num_lines):\n        line = reader.readline()\n        \n        if output_file is not None:\n            writer.write(line)\n        else:\n            print(line, end='')\n            \n    reader.close()\n    if output_file is not None:\n        writer.close()",
+   "925c7aa9": "# Solution\n\ndef check_word2(word):\n    if not check_word(word):\n        return False\n    \n    if word[3] == 'e':\n        return False\n    \n    if word[4] != 'm':\n        return False\n    \n    return True",
+   "b6bffe8a": "# Solution\n\n# This solution uses the special sequence \\b to match a word boundary,\n# which can be any kind of white space or punctuation.\n# The `r` before the quotation mark indicates that the pattern is\n# a raw string, which is needed because the pattern contains a\n# special sequence.\n\npattern = r'\\b(pale|pales|paled|paleness|pallor)\\b'\ncount_matches(pattern)"
+  },
+  "tags": {
+   "05f9743d": [
+    "remove-cell"
+   ],
+   "19de7df0": [
+    "remove-cell"
+   ],
+   "242f7ba6": [
+    "remove-cell"
+   ],
+   "24f6aac3": [
+    "remove-cell"
+   ],
+   "2a13d4ef": [
+    "section_writing_files"
+   ],
+   "361d390a": [
+    "remove-cell"
+   ],
+   "3ccb4a64": [
+    "raises-exception"
+   ],
+   "3d8b2a9f": [
+    "remove-cell"
+   ],
+   "63593f1b": [
+    "remove-cell"
+   ],
+   "69ccd380": [
+    "raises-exception"
+   ],
+   "742efd98": [
+    "remove-cell"
+   ],
+   "772f5c14": [
+    "remove-cell"
+   ],
+   "7db56337": [
+    "remove-cell"
+   ],
+   "8650dec2": [
+    "remove-cell"
+   ],
+   "881c2f99": [
+    "remove-cell"
+   ],
+   "8d19b6ce": [
+    "remove-cell"
+   ],
+   "946c63d2": [
+    "remove-cell"
+   ],
+   "9a74be13": [
+    "remove-cell"
+   ],
+   "9bbf0b1c": [
+    "remove-cell"
+   ],
+   "9cbc19cd": [
+    "remove-cell"
+   ],
+   "a57b64c6": [
+    "remove-cell"
+   ],
+   "aec20975": [
+    "raises-exception"
+   ],
+   "b09d8356": [
+    "remove-input"
+   ],
+   "b5c5ce3e": [
+    "remove-cell"
+   ],
+   "bc3741e1": [
+    "remove-output"
+   ],
+   "cc39942c": [
+    "remove-output"
+   ],
+   "d2e309a2": [
+    "remove-cell"
+   ],
+   "e3f1dc18": [
+    "remove-cell"
+   ]
+  }
+ },
+ "chap09": {
+  "solutions": {
+   "16d493ad": "# Solution\n\ndef is_palindrome(word):\n    \"\"\"Check if a word is a palindrome.\n    \n    >>> is_palindrome('bob')\n    True\n    >>> is_palindrome('alice')\n    False\n    >>> is_palindrome('a')\n    True\n    >>> is_palindrome('')\n    True\n    \"\"\"\n    return reverse_word(word) == word",
+   "1fba5377": "# Solution\n\ndef total_length(string_list):\n    total = 0\n    for string in string_list:\n        total += len(string)\n    return total",
+   "21f4cf1c": "# Solution\n\ntotal_length(word_list)",
+   "5885cbd3": "# Solution\n\ndef is_anagram(word1, word2):\n    \"\"\"Checks whether two words are anagrams.\n    \n    >>> is_anagram('tops', 'stop')\n    True\n    >>> is_anagram('skate', 'takes')\n    True\n    >>> is_anagram('tops', 'takes')\n    False\n    >>> is_anagram('skate', 'stop')\n    False\n    \"\"\"\n    return sorted(word1) == sorted(word2)",
+   "75e17c7b": "# Solution\n\nfor word in word_list:\n    if is_anagram(word, 'takes'):\n        print(word)",
+   "a2cb1451": "# Solution\n\ndef reverse_sentence(input_string):\n    '''Reverse the words in a string and capitalize the first.\n    \n    >>> reverse_sentence('Reverse this sentence')\n    'Sentence this reverse'\n\n    >>> reverse_sentence('Python')\n    'Python'\n\n    >>> reverse_sentence('')\n    ''\n\n    >>> reverse_sentence('One for all and all for one')\n    'One for all and all for one'\n    '''\n    words = input_string.split()\n    reversed_words = ' '.join(reversed(words))\n    return reversed_words.capitalize()"
+  },
+  "tags": {
+   "13882893": [
+    "remove-cell"
+   ],
+   "1a06dae9": [
+    "remove-input"
+   ],
+   "25582cad": [
+    "remove-cell"
+   ],
+   "33c9b4ec": [
+    "remove-cell"
+   ],
+   "3748b4e0": [
+    "remove-cell"
+   ],
+   "3d75a28c": [
+    "remove-input"
+   ],
+   "552e1e1e": [
+    "remove-input"
+   ],
+   "58727d35": [
+    "remove-cell"
+   ],
+   "6550f0b8": [
+    "remove-cell"
+   ],
+   "769d1c7a": [
+    "remove-cell"
+   ],
+   "7e66ee69": [
+    "remove-input"
+   ],
+   "861f8e7e": [
+    "raises-exception"
+   ],
+   "88c07ec9": [
+    "section_word_list"
+   ],
+   "9179d51c": [
+    "remove-cell"
+   ],
+   "925c7d67": [
+    "remove-input"
+   ],
+   "95a2aded": [
+    "remove-cell"
+   ],
+   "97cf0c61": [
+    "raises-exception"
+   ],
+   "9c5916ed": [
+    "remove-cell"
+   ],
+   "a13e72c7": [
+    "remove-cell"
+   ],
+   "a86e7403": [
+    "remove-cell"
+   ],
+   "a882bfeb": [
+    "remove-cell"
+   ],
+   "bde1c3f9": [
+    "remove-cell"
+   ],
+   "ce7a96ec": [
+    "remove-cell"
+   ],
+   "d9b5b362": [
+    "remove-cell"
+   ],
+   "dd406791": [
+    "remove-cell"
+   ],
+   "dea08b82": [
+    "remove-cell"
+   ],
+   "fea01394": [
+    "remove-output"
+   ]
+  }
+ },
+ "chap10": {
+  "solutions": {
+   "061e2903": "# Solution\n\ndef has_duplicates(t):\n    \"\"\"Check whether any element in a sequence appears more than once.\n    \n    >>> has_duplicates('banana')\n    True\n    >>> has_duplicates('ambidextrously')\n    False\n    >>> has_duplicates([1, 2, 2])\n    True\n    >>> has_duplicates([1, 2, 3])\n    False\n    \"\"\"\n    d = {}\n    for x in t:\n        d[x] = True\n    return len(d) < len(t)",
+   "6a729a14": "# Solution\n\nadd_counters(counter1, counter2)",
+   "6cf70355": "# Solution\n\ndef add_counters(counter1, counter2):\n    result = dict(counter1)\n    for letter, count in counter2.items():\n        result[letter] = result.get(letter, 0) + count\n    return result",
+   "bbd6d241": "# Solution\n\ndef find_repeats(counter):\n    \"\"\"Makes a list of keys with values greater than 1.\n    \n    counter: dictionary that maps from keys to counts\n    \n    returns: list of keys\n    \"\"\"\n    repeats = []\n    for key, count in counter.items():\n        if count > 1:\n            repeats.append(key)\n    return repeats",
+   "e5e1030c": "# Solution\n\ndef is_interlocking(word):\n    first = word[0::2]\n    second = word[1::2]\n    return first in word_dict and second in word_dict"
+  },
+  "tags": {
+   "10e9d54a": [
+    "remove-cell"
+   ],
+   "12098be7": [
+    "remove-input"
+   ],
+   "1744d3e9": [
+    "remove-cell"
+   ],
+   "214345d8": [
+    "remove-cell"
+   ],
+   "2787f786": [
+    "remove-cell"
+   ],
+   "2a948f62": [
+    "section_dictionary_in_operator"
+   ],
+   "30c37eef": [
+    "raises-exception"
+   ],
+   "33bcddf8": [
+    "remove-cell"
+   ],
+   "3aa62942": [
+    "remove-cell"
+   ],
+   "3eaf77f8": [
+    "remove-cell"
+   ],
+   "4849b563": [
+    "remove-cell"
+   ],
+   "62dcdf4d": [
+    "remove-cell"
+   ],
+   "7316d721": [
+    "remove-cell"
+   ],
+   "7ed6137a": [
+    "remove-cell"
+   ],
+   "82b36568": [
+    "remove-cell"
+   ],
+   "8ed50837": [
+    "section_memos"
+   ],
+   "9016bf4b": [
+    "remove-input"
+   ],
+   "9879d9e7": [
+    "remove-cell"
+   ],
+   "a1143193": [
+    "remove-cell"
+   ],
+   "a9374c39": [
+    "remove-cell"
+   ],
+   "ac983c6f": [
+    "remove-cell"
+   ],
+   "acfd2720": [
+    "section_palindrome_list"
+   ],
+   "af818c11": [
+    "remove-cell"
+   ],
+   "b9b0cbec": [
+    "remove-cell"
+   ],
+   "ca9ff511": [
+    "raises-exception"
+   ],
+   "ce4df190": [
+    "remove-cell"
+   ],
+   "d8c85906": [
+    "remove-cell"
+   ],
+   "e04a5c73": [
+    "remove-output"
+   ],
+   "e55de5cd": [
+    "remove-cell"
+   ],
+   "eba36a24": [
+    "remove-cell"
+   ],
+   "fac41347": [
+    "remove-cell"
+   ]
+  }
+ },
+ "chap11": {
+  "solutions": {
+   "013819a5": "# Solution\n\nanagram_dict = {}\nfor word in word_list:\n    key = sort_word(word)\n    if key not in anagram_dict:\n        anagram_dict[key] = [word]\n    else:\n        anagram_dict[key].append(word)",
+   "27d311dd": "# Solution\n\ndef all_reducible():\n    \"\"\"Checks all words in the word_dict; returns a list of reducible ones.\n    \"\"\"\n    res = []\n    for word in word_dict:\n        t = reduce_word(word)\n        if len(t) > 0:\n            res.append(word)\n    return res",
+   "2d9764d6": "# Solution\n\n\"\"\"memo is a dictionary that maps from each word that is known\nto be reducible to a list of its reducible children. \nIt starts with the empty string.\"\"\"\n\nmemo = {}\nmemo[''] = ['']\n\n\ndef reduce_word(word):\n    \"\"\"If word is reducible, returns a list of its reducible children.\n\n    Also adds an entry to the memo dictionary.\n\n    A string is reducible if it has at least one child that is \n    reducible.  The empty string is also reducible.\n\n    word: string\n    \"\"\"\n     # if have already checked this word, return the answer\n    if word in memo:\n        return memo[word]\n\n    # check each of the children and make a list of the reducible ones\n    res = []\n    for child in children(word):\n        if reduce_word(child):\n            res.append(child)\n\n    # memoize and return the result\n    memo[word] = res\n    return res",
+   "4fae1acc": "%%expect TypeError\n\nd = {t: 'this tuple contains two lists'}",
+   "52228828": "# Solution\n\ndef most_frequent_letters(string):\n    counter = value_counts(string)\n    pairs = sorted(counter.items(), key=second_element, reverse=True)\n    for key, value in pairs:\n        print(key, value)",
+   "57649075": "# Solution\n\nfor anagrams in anagram_dict.values():\n    for word1 in anagrams:\n        for word2 in anagrams:\n            if len(word1) >= 10 and word1 < word2 and word_distance(word1, word2) == 2:\n                print(word1, word2)",
+   "5e4f5d8e": "# Solution\n\ndef print_trail(word):\n    \"\"\"Prints the sequence of words that reduces this word to the empty string.\n\n    If there is more than one choice, it chooses the first.\n\n    word: string\n    \"\"\"\n    if len(word) == 0:\n        return\n    print(word, end=' ')\n    t = reduce_word(word)\n    print_trail(t[0])",
+   "68c27c7e": "# Solution\n\nword_dict = {}\nfor word in word_list:\n    word_dict[word] = 1\n\n# have to add single letter words to the word list;\n# also, the empty string is considered a word.\nfor word in ['a', 'i', '']:\n    word_dict[word] = 1\n\n# find the reducible words and sort by length\nwords = all_reducible()\nsorted_words = sorted(words, key=len)\n\n# print the longest words\nfor word in sorted_words[-10:]:\n    print_trail(word)\n    print('')",
+   "96560a0e": "# Solution\n\ndef shift_word(word, n):\n    \"\"\"Shift the letters of `word` by `n` places.\n    \n    >>> shift_word('cheer', 7)\n    'jolly'\n    >>> shift_word('melon', 16)\n    'cubed'\n    \"\"\"\n    t = []\n    for letter in word:\n        index = (letter_map[letter] + n) % 26\n        t.append(letters[index])\n    return ''.join(t)",
+   "a9816dde": "# Solution\n\ndef word_distance(word1, word2):\n    \"\"\"Computes the number of places where two word differ.\n\n    >>> word_distance(\"hello\", \"hxllo\")\n    1\n    >>> word_distance(\"ample\", \"apply\")\n    2\n    >>> word_distance(\"kitten\", \"mutton\")\n    3\n    \"\"\"\n    assert len(word1) == len(word2)\n\n    count = 0\n    for c1, c2 in zip(word1, word2):\n        if c1 != c2:\n            count += 1\n\n    return count",
+   "c19bf833": "# Solution\n\ndef children(word):\n    \"\"\"Returns a list of all words that can be formed by removing one letter.\n\n    word: string\n\n    Returns: list of strings\n    \"\"\"\n    res = []\n    for i in range(len(word)):\n        child = word[:i] + word[i+1:]\n        if child in word_dict:\n            res.append(child)\n    return res",
+   "e6eda0e4": "t[1].append(6)\nt"
+  },
+  "tags": {
+   "0b6d5add": [
+    "remove-cell"
+   ],
+   "112b5aa2": [
+    "section_argument_pack"
+   ],
+   "1cc07036": [
+    "remove-cell"
+   ],
+   "211c09c9": [
+    "remove-cell"
+   ],
+   "295ac6d7": [
+    "remove-cell"
+   ],
+   "2ca1e337": [
+    "remove-cell"
+   ],
+   "39a67af9": [
+    "remove-cell"
+   ],
+   "3bf2aa0d": [
+    "remove-cell"
+   ],
+   "3d5a75f8": [
+    "remove-cell"
+   ],
+   "4309d0b5": [
+    "remove-cell"
+   ],
+   "4b9ed2a8": [
+    "remove-cell"
+   ],
+   "4fae1acc": [
+    "raises-exception"
+   ],
+   "55435050": [
+    "remove-cell"
+   ],
+   "5705b2a6": [
+    "chapter_tuples"
+   ],
+   "5814999d": [
+    "remove-cell"
+   ],
+   "6a028806": [
+    "remove-cell"
+   ],
+   "6a9320c2": [
+    "remove-cell"
+   ],
+   "6d138cd7": [
+    "section_debugging_11"
+   ],
+   "70faa9f5": [
+    "remove-cell"
+   ],
+   "753a23c1": [
+    "remove-cell"
+   ],
+   "772738cc": [
+    "raises-exception"
+   ],
+   "7ae29f73": [
+    "remove-cell"
+   ],
+   "817ec689": [
+    "remove-output",
+    "remove-cell"
+   ],
+   "8b48dbdc": [
+    "remove-cell"
+   ],
+   "8e5b4a14": [
+    "raises-exception"
+   ],
+   "941719c1": [
+    "remove-cell"
+   ],
+   "9464d140": [
+    "remove-cell"
+   ],
+   "991810bc": [
+    "raises-exception"
+   ],
+   "b4970fe0": [
+    "raises-exception"
+   ],
+   "bdfc8c27": [
+    "section_exercise_11"
+   ],
+   "c026c6d1": [
+    "remove-cell"
+   ],
+   "c6354c44": [
+    "remove-cell"
+   ],
+   "d2ec641b": [
+    "remove-cell"
+   ],
+   "d71923e6": [
+    "remove-cell"
+   ],
+   "dcda6e28": [
+    "remove-cell"
+   ],
+   "e4cc2c8c": [
+    "remove-cell"
+   ],
+   "e4fbf5d9": [
+    "remove-cell"
+   ],
+   "e7478b18": [
+    "remove-cell"
+   ],
+   "e9f03e91": [
+    "remove-cell"
+   ],
+   "fbf9ede3": [
+    "remove-cell"
+   ]
+  }
+ },
+ "chap12": {
+  "solutions": {
+   "22210a5c": "# Solution\n\nfor i in range(50):\n    successors = successor_map[bigram]\n    word = random.choice(successors)    \n    print(word, end=' ')\n    \n    first, second = bigram\n    bigram = second, word",
+   "3fcf85f4": "# Solution\n\ndef add_trigram(trigram):\n    first, second, third = trigram\n    key = first, second\n    \n    if key not in successor_map:\n        successor_map[key] = [third]\n    else:\n        successor_map[key].append(third)",
+   "d047e546": "# Solution\n\ndef process_word_trigram(word):\n    window.append(word)\n    \n    if len(window) == 3:\n        count_trigram(window)\n        window.pop(0)",
+   "f38a61ff": "# Solution\n\ndef count_trigram(trigram):\n    key = tuple(trigram)\n    \n    if key not in trigram_counter:\n        trigram_counter[key] = 1\n    else:\n        trigram_counter[key] += 1"
+  },
+  "tags": {
+   "2bfa31ae": [
+    "remove-cell"
+   ],
+   "35d37fa1": [
+    "remove-cell"
+   ],
+   "3e86102c": [
+    "remove-cell"
+   ],
+   "3f450df2": [
+    "section_dictionary_subtraction"
+   ],
+   "44c3f0d8": [
+    "remove-cell"
+   ],
+   "49cfc352": [
+    "remove-cell"
+   ],
+   "4cd1c980": [
+    "remove-cell"
+   ],
+   "4fc47ecd": [
+    "raises-exception"
+   ],
+   "50d1fafa": [
+    "remove-cell"
+   ],
+   "52ebfe94": [
+    "remove-cell"
+   ],
+   "5465ab1d": [
+    "remove-cell"
+   ],
+   "64e11f26": [
+    "remove-cell"
+   ],
+   "6567e1bf": [
+    "remove-cell"
+   ],
+   "6b8932ee": [
+    "remove-cell"
+   ],
+   "6c6265de": [
+    "remove-cell"
+   ],
+   "747a41be": [
+    "remove-cell"
+   ],
+   "82eeed41": [
+    "remove-cell"
+   ],
+   "8829d4c2": [
+    "remove-cell"
+   ],
+   "8c2ee21c": [
+    "remove-cell"
+   ],
+   "a3804d82": [
+    "remove-cell"
+   ],
+   "b13384e3": [
+    "remove-cell"
+   ],
+   "c046117b": [
+    "remove-cell",
+    "raises-exception"
+   ],
+   "c59dff45": [
+    "section_debugging_12"
+   ],
+   "ca1f8a79": [
+    "remove-cell"
+   ],
+   "e03fd803": [
+    "remove-cell"
+   ],
+   "edd8ff1c": [
+    "remove-cell"
+   ]
+  }
+ },
+ "chap13": {
+  "solutions": {
+   "03b6acf9": "# Solution\n\ndef is_image(path, extensions):\n    \"\"\"Checks whether the path ends with one of the extensions.\n    \n    path: string file path\n    extensions: list of extensions\n    \n    >>> is_image('photo.jpg', ['jpg', 'jpeg'])\n    True\n    >>> is_image('PHOTO.JPG', ['jpg', 'jpeg'])\n    True\n    >>> is_image('notes.txt', ['jpg', 'jpeg'])\n    False\n    \"\"\"\n    _, extension = os.path.splitext(path)\n    return extension.strip('.').lower() in extensions",
+   "1c2fff95": "# Solution\n\ndef add_word(word, db):\n    key = sort_word(word)\n\n    if key not in db:\n        db[key] = [word]\n    else:\n        anagrams = db[key]\n        anagrams.append(word)\n        db[key] = anagrams",
+   "31c056a9": "# Solution\n\ndef add_path(path, db):\n    digest = md5_digest(path)\n    \n    if digest not in db:\n        paths = [path]\n    else:\n        paths = db[digest]\n        paths.append(path)\n        \n    db[digest] = paths",
+   "d3774d1a": "# Solution\n\ndef replace_all(old, new, source_path, dest_path):\n    reader = open(source_path)\n    contents = reader.read()\n    reader.close()\n    \n    contents = contents.replace(old, new)\n    \n    writer = open(dest_path, 'w')\n    writer.write(contents)\n    writer.close()",
+   "d7c7e679": "# Solution\n\npath1, path2 = ['photos/mar-2023/photo2.jpg', 'photos/jan-2023/photo1.jpg']\nsame_contents(path1, path2)",
+   "e54d6993": "# Solution\n\ndef walk_images(dirname):\n    for name in os.listdir(dirname):\n        path = os.path.join(dirname, name)\n\n        if os.path.isfile(path):\n            if is_image(path, config['extensions']):\n                add_path(path, db)\n        else:\n            walk_images(path)    "
+  },
+  "tags": {
+   "0033e4f5": [
+    "section_storing_data_structure"
+   ],
+   "0090a29f": [
+    "remove-cell"
+   ],
+   "07cb454f": [
+    "remove-cell"
+   ],
+   "129475df": [
+    "section_walking_directories"
+   ],
+   "1d990225": [
+    "remove-cell"
+   ],
+   "21c33092": [
+    "remove-cell"
+   ],
+   "23792899": [
+    "remove-cell"
+   ],
+   "26ca3d1b": [
+    "remove-cell",
+    "raises-exception"
+   ],
+   "31b6f97a": [
+    "remove-cell"
+   ],
+   "3b80dfd8": [
+    "remove-cell"
+   ],
+   "40342366": [
+    "remove-cell"
+   ],
+   "47685eb7": [
+    "remove-cell"
+   ],
+   "4806720c": [
+    "remove-cell"
+   ],
+   "4b67579f": [
+    "remove-cell"
+   ],
+   "4fdb528a": [
+    "remove-cell"
+   ],
+   "5395780f": [
+    "remove-cell"
+   ],
+   "713dfeb0": [
+    "remove-cell"
+   ],
+   "7eb54fbc": [
+    "remove-cell"
+   ],
+   "8008cde6": [
+    "remove-cell"
+   ],
+   "838ef132": [
+    "remove-cell"
+   ],
+   "9b246dc6": [
+    "remove-cell"
+   ],
+   "a6b5e51a": [
+    "remove-cell"
+   ],
+   "ac784df7": [
+    "remove-cell"
+   ],
+   "b1336e56": [
+    "section_md5_digest"
+   ],
+   "c31ba5b6": [
+    "remove-output"
+   ],
+   "c3ee5c27": [
+    "remove-cell"
+   ],
+   "dde4b5c8": [
+    "remove-cell"
+   ],
+   "ffefe13e": [
+    "remove-cell"
+   ]
+  }
+ },
+ "chap14": {
+  "solutions": {
+   "0b8f63df": "# Solution\n\ndef print_date(date):\n    s = f'{date.year}-{date.month:02d}-{date.day:02d}'\n    print(s)",
+   "12b4ad17": "# Solution\n\ndef is_after(t1, t2):\n    \"\"\"Checks whether `t1` is after `t2`.\n    \n    >>> is_after(make_time(3, 2, 1), make_time(3, 2, 0))\n    True\n    >>> is_after(make_time(3, 2, 1), make_time(3, 2, 1))\n    False\n    >>> is_after(make_time(11, 12, 0), make_time(9, 40, 0))\n    True\n    \"\"\"\n    return time_to_int(t1) > time_to_int(t2)",
+   "5fab04bd": "# Solution\n\ndef is_after(date1, date2):\n    t1 = date_to_tuple(date1)\n    t2 = date_to_tuple(date2)\n    return t1 > t2",
+   "b244a057": "# Solution\n\ndef date_to_tuple(date):\n    return date.year, date.month, date.day",
+   "f1b54959": "# Solution\n\ndef subtract_time(t1, t2):\n    \"\"\"Compute the difference between two times in seconds.\n    \n    >>> subtract_time(make_time(3, 2, 1), make_time(3, 2, 0))\n    1\n    >>> subtract_time(make_time(3, 2, 1), make_time(3, 0, 0))\n    121\n    >>> subtract_time(make_time(11, 12, 0), make_time(9, 40, 0))\n    5520\n    \"\"\"\n    return time_to_int(t1) - time_to_int(t2)",
+   "ff95300b": "# Solution\n\ndef make_date(year, month, day):\n    date = Date()\n    date.year = year\n    date.month = month\n    date.day = day\n    return date"
+  },
+  "tags": {
+   "16ff5bef": [
+    "remove-cell"
+   ],
+   "17565b1e": [
+    "remove-cell"
+   ],
+   "20c5edf8": [
+    "remove-cell"
+   ],
+   "2cc0653e": [
+    "remove-cell"
+   ],
+   "2d0a026d": [
+    "remove-cell"
+   ],
+   "2d70104e": [
+    "remove-cell"
+   ],
+   "3eb47826": [
+    "remove-cell"
+   ],
+   "4e580404": [
+    "remove-cell"
+   ],
+   "5033ee5f": [
+    "remove-cell"
+   ],
+   "59166d30": [
+    "remove-cell"
+   ],
+   "5a25a3de": [
+    "remove-cell"
+   ],
+   "62180007": [
+    "remove-cell"
+   ],
+   "6702a353": [
+    "remove-input"
+   ],
+   "6f90c060": [
+    "remove-cell"
+   ],
+   "70413f48": [
+    "remove-cell"
+   ],
+   "73334265": [
+    "remove-cell"
+   ],
+   "7d898f43": [
+    "remove-cell"
+   ],
+   "90b10ca5": [
+    "remove-cell"
+   ],
+   "93a1db71": [
+    "remove-input"
+   ],
+   "9e16bcde": [
+    "remove-cell"
+   ],
+   "a0d23d08": [
+    "section_debugging_14"
+   ],
+   "ae5a86f8": [
+    "remove-cell"
+   ],
+   "b71f46d8": [
+    "remove-cell"
+   ],
+   "c33706ee": [
+    "remove-cell"
+   ],
+   "c36c432e": [
+    "remove-cell"
+   ],
+   "d9b5dd67": [
+    "remove-cell"
+   ],
+   "f9da8ede": [
+    "remove-cell"
+   ],
+   "fd4ac340": [
+    "remove-cell"
+   ]
+  }
+ },
+ "chap15": {
+  "solutions": {
+   "3c9f3777-4869-481e-9f4e-4223d6028913": "# Solution\n\nclass Date:\n    \n    def __init__(self, year, month, day):\n        self.year = year\n        self.month = month\n        self.day = day\n\n    def __str__(date):\n        s = f'{date.year}-{date.month:02d}-{date.day:02d}'\n        return s\n\n    def to_tuple(self):\n        return self.year, self.month, self.day\n\n    def is_after(self, other):\n        t1 = self.to_tuple()\n        t2 = other.to_tuple()\n        return t1 > t2"
+  },
+  "tags": {
+   "1122620d-f3f6-4746-8675-13ce0b7f3ee9": [
+    "remove-cell"
+   ],
+   "3161b50b": [
+    "remove-cell"
+   ],
+   "56680d97": [
+    "raises-exception"
+   ],
+   "7e7cb5e1-631f-4b1e-874f-eb16d4792625": [
+    "remove-cell"
+   ],
+   "ac093f7b-83cf-4488-8842-5c71bcfa35ec": [
+    "remove-cell"
+   ],
+   "ee3f1294-cad1-406b-a574-045ad2b84294": [
+    "remove-cell"
+   ],
+   "fd4b2521-aa71-45da-97eb-ce62ce2714ad": [
+    "remove-cell"
+   ]
+  }
+ },
+ "chap16": {
+  "solutions": {
+   "189c30d4": "# Solution\n\nclass Circle:\n    def __init__(self, center, radius):\n        self.center = center\n        self.radius = radius\n\n    def __str__(self):\n        return f'Circle({self.center}, {self.radius})'\n\n    def draw(self):\n        start = self.center.translated(self.radius, 0)\n        jumpto(start.x, start.y)\n        left(90)\n        draw_circle(self.radius)\n        right(90)",
+   "6cdde16e": "%%add_method_to Rectangle\n\n    def make_cross(self):\n        midpoints = []\n\n        for line in self.make_lines():\n            midpoints.append(line.midpoint())\n\n        p1, p2, p3, p4 = midpoints\n        return Line(p1, p3), Line(p2, p4)",
+   "96d81b90": "%%add_method_to Line\n\n    def midpoint(self):\n        mid_x = (self.p1.x + self.p2.x) / 2\n        mid_y = (self.p1.y + self.p2.y) / 2\n        return Point(mid_x, mid_y)",
+   "a99446c4": "%%add_method_to Line\n\ndef __eq__(self, other):\n    if (self.p1 == other.p1) and (self.p2 == other.p2):\n        return True\n    if (self.p1 == other.p2) and (self.p2 == other.p1):\n        return True\n    return False",
+   "de6756da": "%%add_method_to Rectangle\n\n    def midpoint(self):\n        mid_x = self.corner.x + self.width / 2\n        mid_y = self.corner.y + self.height / 2\n        return Point(mid_x, mid_y)"
+  },
+  "tags": {
+   "1e7e4a72": [
+    "remove-input"
+   ],
+   "3eb47826": [
+    "remove-cell"
+   ],
+   "43682c57": [
+    "remove-input"
+   ],
+   "637042fb": [
+    "remove-input"
+   ],
+   "6702a353": [
+    "remove-input"
+   ],
+   "6b414d4a": [
+    "section_create_point"
+   ],
+   "6d883459": [
+    "remove-cell"
+   ],
+   "6e47d99a": [
+    "remove-cell"
+   ],
+   "ae5a86f8": [
+    "remove-cell"
+   ],
+   "c3d8fb2b": [
+    "remove-cell"
+   ],
+   "dee93202": [
+    "remove-cell"
+   ]
+  }
+ },
+ "chap17": {
+  "solutions": {
+   "20b65d89": "%%add_method_to PokerHand\n\n    def has_pair(self):\n        return self.check_sets(2)",
+   "420ca0fd": "%%add_method_to PokerHand\n\n    def has_full_house(self):\n        return self.check_sets(3, 2)",
+   "5e602773": "%%add_method_to PokerHand\n\n    def partition(self):\n        \"\"\"Make a list of four hands, each containing only one suit.\"\"\"\n        hands = []\n        for i in range(4):\n            hands.append(PokerHand())\n            \n        for card in self.cards:\n            hands[card.suit].put_card(card)\n            \n        return hands",
+   "72c769d5": "%%add_method_to PokerHand\n\n    def has_flush(self):\n        \"\"\"Checks whether this hand has a flush.\"\"\"\n        counter = self.get_suit_counts()\n        for count in counter.values():\n            if count >= 5:\n                return True\n        return False",
+   "8a220d67": "%%add_method_to PokerHand\n\n    def has_straight(self, n=5):\n        \"\"\"Checks whether this hand has a straight.\"\"\"\n        counter = self.get_rank_counts()\n        aces = counter.get(1, 0) + counter.get(14, 0)\n        counter[1] = aces\n        counter[14] = aces\n\n        in_a_row = 0\n        for i in range(1, 15):\n            if counter.get(i, 0):\n                in_a_row += 1\n                if in_a_row == n:\n                    return True\n            else:\n                in_a_row = 0\n        return False",
+   "997b120d": "%%add_method_to PokerHand\n\n    def has_straightflush(self):\n        \"\"\"Check whether this hand has a straight flush.\"\"\"\n        for hand in self.partition():\n            if hand.has_straight():\n                return True\n        return False",
+   "b09cceb1": "%%add_method_to Trick\n\n    def find_winner(self):\n        lead = self.cards[0]\n        \n        top_index = 0\n        top_rank = lead.rank\n        \n        for i, card in enumerate(self.cards):\n            if card.suit == lead.suit and card.rank > top_rank:\n                top_index = i\n                top_rank = card.rank\n                \n        return top_index",
+   "bc7ca211": "%%add_method_to PokerHand\n\n    def check_sets(self, *need_list):\n        \"\"\"Checks whether this hand contains sets of cards with the same rank.\n\n        Each argument is the size of a set we need, largest first.\n        So check_sets(2) checks for a pair, check_sets(2, 2) checks for\n        two pairs, and check_sets(3, 2) checks for a full house.\n\n        need_list: sizes of the sets we need, in decreasing order\n        \"\"\"\n        counts = self.get_rank_counts()\n        set_list = sorted(counts.values(), reverse=True)\n        \n        for need, have in zip(need_list, set_list):\n            if need > have:\n                return False\n        return True"
+  },
+  "tags": {
+   "00464353": [
+    "remove-cell"
+   ],
+   "009a20dd": [
+    "remove-cell"
+   ],
+   "07878cb3": [
+    "remove-cell"
+   ],
+   "15a81a40": [
+    "remove-cell"
+   ],
+   "1d79b2b6": [
+    "remove-cell"
+   ],
+   "1e4957cb": [
+    "remove-cell"
+   ],
+   "1f95601d": [
+    "remove-cell"
+   ],
+   "20b65d89": [
+    "remove-cell"
+   ],
+   "217fc9bf": [
+    "remove-cell"
+   ],
+   "227bef61": [
+    "remove-cell"
+   ],
+   "23704ab4": [
+    "remove-cell"
+   ],
+   "24483b99": [
+    "remove-cell"
+   ],
+   "420ca0fd": [
+    "remove-cell"
+   ],
+   "4a1e17b1": [
+    "remove-cell"
+   ],
+   "4c5727d9": [
+    "remove-cell"
+   ],
+   "4dc8b899": [
+    "remove-cell"
+   ],
+   "5518455f": [
+    "remove-input"
+   ],
+   "5a422cae": [
+    "remove-cell"
+   ],
+   "5aa80ee6": [
+    "remove-cell"
+   ],
+   "5e602773": [
+    "remove-cell"
+   ],
+   "5ff4e160": [
+    "remove-cell"
+   ],
+   "60c43389": [
+    "remove-cell"
+   ],
+   "6513ef14": [
+    "remove-cell"
+   ],
+   "6911a0f6": [
+    "remove-cell"
+   ],
+   "69f7cea9": [
+    "remove-cell"
+   ],
+   "72a410d7": [
+    "remove-cell"
+   ],
+   "72c769d5": [
+    "remove-cell"
+   ],
+   "758fc922": [
+    "remove-cell"
+   ],
+   "7aa25f29": [
+    "remove-cell"
+   ],
+   "7d8d2fdb": [
+    "remove-cell"
+   ],
+   "7e65e951": [
+    "remove-cell"
+   ],
+   "7f1b3664": [
+    "remove-cell"
+   ],
+   "83698207": [
+    "remove-cell"
+   ],
+   "8611610f": [
+    "remove-cell"
+   ],
+   "86229763": [
+    "remove-cell"
+   ],
+   "88bd35fb": [
+    "remove-cell"
+   ],
+   "8a220d67": [
+    "remove-cell"
+   ],
+   "9127ceb1": [
+    "remove-cell"
+   ],
+   "940928ba": [
+    "remove-cell"
+   ],
+   "94570008": [
+    "remove-cell"
+   ],
+   "997b120d": [
+    "remove-cell"
+   ],
+   "a60e233d": [
+    "remove-cell"
+   ],
+   "aa63fe2a": [
+    "raises-exception"
+   ],
+   "ae5063e2": [
+    "remove-cell"
+   ],
+   "b09cceb1": [
+    "remove-cell"
+   ],
+   "b630cbb8": [
+    "remove-cell"
+   ],
+   "ba10e1ba": [
+    "remove-cell"
+   ],
+   "bbd04e50": [
+    "remove-cell"
+   ],
+   "bc7ca211": [
+    "remove-cell"
+   ],
+   "c2ec7f01": [
+    "section_print_deck"
+   ],
+   "c4ed18e4": [
+    "remove-cell"
+   ],
+   "c91e3bdb": [
+    "remove-cell"
+   ],
+   "ced31782": [
+    "chapter_inheritance"
+   ],
+   "d2e576bf": [
+    "remove-cell"
+   ],
+   "d589ed70": [
+    "remove-cell"
+   ],
+   "d7e3b94c": [
+    "remove-cell"
+   ],
+   "e185c2f7": [
+    "remove-cell"
+   ],
+   "e1c4f474": [
+    "remove-cell"
+   ],
+   "f020cf9e": [
+    "remove-cell"
+   ],
+   "fdec7276": [
+    "remove-cell"
+   ]
+  }
+ },
+ "chap18": {
+  "solutions": {
+   "07226bce": "# Solution\n\ndef binomial_coeff(n, k, cache={}):\n    \"\"\"Compute the binomial coefficient \"n choose k\".\n\n    n: number of trials\n    k: number of successes\n\n    returns: int\n    \"\"\"\n    if (n, k) in cache:\n        return cache[n, k]\n    \n    res = 1 if k == 0 else (0 if n == 0 else \n                            binomial_coeff(n-1, k) + \n                            binomial_coeff(n-1, k-1))\n    cache[n, k] = res\n    return res",
+   "2aa7da71": "%%add_method_to Deck\n\n    def __str__(self):            \n        return '\\n'.join(str(card) for card in self.cards)",
+   "33f15964": "# Solution\n\nclass PokerHand(Hand):\n    def partition(self):\n        d = defaultdict(PokerHand)\n\n        for card in self.cards:\n            d[card.suit].add_card(card)\n\n        return d",
+   "46a13618": "# Solution\n\ndef uses_none(word, forbidden):\n    \"\"\"Checks whether a word avoid forbidden letters.\n    \n    >>> uses_none('banana', 'xyz')\n    True\n    >>> uses_none('apple', 'efg')\n    False\n    >>> uses_none('', 'abc')\n    True\n    \"\"\"\n    word_set = set(word.lower())\n    forbidden_set = set(forbidden.lower())\n    return len(word_set & forbidden_set) == 0",
+   "4efa9382": "# Solution\n\ndef fibonacci(n):\n    return 0 if n == 0 else (1 if n == 1 else fibonacci(n-1) + fibonacci(n-2))",
+   "a67768c0": "# Solution\n\ndef can_spell(letters, word):\n    \"\"\"Check whether the letters can spell the word.\n    \n    >>> can_spell('table', 'belt')\n    True\n    >>> can_spell('table', 'late')\n    True\n    >>> can_spell('table', 'beet')\n    False\n    \"\"\"\n    return Counter(word) <= Counter(letters)"
+  },
+  "tags": {
+   "0249c4c8": [
+    "remove-cell"
+   ],
+   "036ec803": [
+    "remove-cell"
+   ],
+   "03b1afa9": [
+    "remove-cell"
+   ],
+   "091919bd": [
+    "remove-cell"
+   ],
+   "160a29b3": [
+    "remove-cell"
+   ],
+   "2024d4c6": [
+    "remove-cell"
+   ],
+   "25525582": [
+    "remove-cell"
+   ],
+   "25ff32b9": [
+    "remove-cell"
+   ],
+   "260216be": [
+    "remove-cell"
+   ],
+   "2aa7da71": [
+    "remove-cell"
+   ],
+   "339f912a": [
+    "remove-cell"
+   ],
+   "3b9d5bac": [
+    "remove-cell"
+   ],
+   "3bbd3b72": [
+    "remove-cell"
+   ],
+   "3d797346": [
+    "remove-cell"
+   ],
+   "3f303544": [
+    "remove-cell"
+   ],
+   "52e32b33": [
+    "remove-cell"
+   ],
+   "54df18a1": [
+    "remove-cell"
+   ],
+   "5871229d": [
+    "raises-exception"
+   ],
+   "5c6addfb": [
+    "remove-cell"
+   ],
+   "6440d14b": [
+    "remove-cell"
+   ],
+   "737b8979": [
+    "remove-cell"
+   ],
+   "7900d2ed": [
+    "remove-cell"
+   ],
+   "863252da": [
+    "remove-cell"
+   ],
+   "871dafae": [
+    "raises-exception"
+   ],
+   "8b00461b": [
+    "remove-cell"
+   ],
+   "8db988e6": [
+    "remove-cell"
+   ],
+   "9b176e67": [
+    "remove-cell"
+   ],
+   "a714e145": [
+    "remove-cell"
+   ],
+   "ad0da137": [
+    "remove-cell"
+   ],
+   "aec0523b": [
+    "remove-cell"
+   ],
+   "b200cbc2": [
+    "remove-output"
+   ],
+   "b3c2c475": [
+    "remove-cell"
+   ],
+   "b4efde58": [
+    "remove-cell"
+   ],
+   "b9cf2e47": [
+    "remove-cell"
+   ],
+   "ba91298b": [
+    "raises-exception"
+   ],
+   "bfddf015": [
+    "remove-cell"
+   ],
+   "c236c5c7": [
+    "remove-cell"
+   ],
+   "c9c2a932": [
+    "remove-cell"
+   ],
+   "cd8bb7d2": [
+    "remove-cell"
+   ],
+   "d253e3ad": [
+    "remove-cell"
+   ],
+   "d476e43c": [
+    "remove-cell"
+   ],
+   "e61693ba": [
+    "raises-exception"
+   ],
+   "e97dfead": [
+    "remove-cell"
+   ],
+   "f5cb253c": [
+    "remove-cell"
+   ],
+   "f7b1cd91": [
+    "remove-cell"
+   ]
+  }
+ },
+ "chap19": {
+  "solutions": {},
+  "tags": {}
+ }
+}
