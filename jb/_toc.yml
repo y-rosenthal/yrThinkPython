@@ -9,11 +9,15 @@ parts:
   chapters:
     - file: chap01
     - file: chap02
-    - file: chap03
-    - file: chap04
 # Each yr/ review page sits in its own unnumbered part right after its chapter, so it shows
 # up in the sidebar under that chapter without changing the book's chapter numbers
 # (numbering continues across the numbered parts). See yr/README.md.
+- chapters:
+    - file: yr/chap02_review
+- numbered: True
+  chapters:
+    - file: chap03
+    - file: chap04
 - chapters:
     - file: yr/chap04_review
 - numbered: True

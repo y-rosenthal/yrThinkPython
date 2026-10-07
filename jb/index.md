@@ -29,6 +29,7 @@ For the third edition, the biggest changes are:
 **Chapter 2: Variables and Statements**
 
 * [Click here to run Chapter 2 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap02.ipynb)
+* [Click here to run 2b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap02_review.ipynb)
 
 
 **Chapter 3: Functions**
