@@ -32,6 +32,10 @@ parts:
 - numbered: True
   chapters:
     - file: chap06
+- chapters:
+    - file: yr/chap06_review
+- numbered: True
+  chapters:
     - file: chap07
     - file: chap08
     - file: chap09

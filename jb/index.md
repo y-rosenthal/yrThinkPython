@@ -52,6 +52,7 @@ For the third edition, the biggest changes are:
 **Chapter 6: Return Values**
 
 * [Click here to run Chapter 6 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap06.ipynb)
+* [Click here to run 6b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap06_review.ipynb)
 
 **Chapter 7: Iteration and Search**
 
