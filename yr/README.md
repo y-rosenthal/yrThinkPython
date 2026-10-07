@@ -10,7 +10,7 @@ Allen Downey's *Think Python*. Keeping it here, instead of inside the chapter no
 ```
 yr/
   README.md                this file: layout, format, style rules, tools
-  chapNN_review.ipynb      one review page per chapter (so far: chapters 2, 3, 4)
+  chapNN_review.ipynb      one review page per chapter (so far: chapters 2, 3, 4, 5)
   tools/
     review_cells.py        create a page skeleton; add, list, renumber questions
     review.sh images NB    draw the turtle pictures by running the code

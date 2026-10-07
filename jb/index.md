@@ -47,6 +47,7 @@ For the third edition, the biggest changes are:
 **Chapter 5: Conditionals and Recursion**
 
 * [Click here to run Chapter 5 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap05.ipynb)
+* [Click here to run 5b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap05_review.ipynb)
 
 **Chapter 6: Return Values**
 
