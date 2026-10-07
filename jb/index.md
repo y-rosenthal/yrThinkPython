@@ -35,6 +35,7 @@ For the third edition, the biggest changes are:
 **Chapter 3: Functions**
 
 * [Click here to run Chapter 3 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap03.ipynb)
+* [Click here to run 3b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap03_review.ipynb)
 
 
 **Chapter 4: Functions and Interfaces**
