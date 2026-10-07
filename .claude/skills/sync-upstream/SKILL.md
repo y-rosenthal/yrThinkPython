@@ -52,5 +52,9 @@ If a chapter conflict is a correction the fork already reported upstream (see
 
 1. `python3 ${CLAUDE_PROJECT_DIR}/.claude/skills/check-notebooks/check_notebooks.py` must print `OK`
    (a bad conflict resolution shows up as invalid JSON here).
-2. Build locally with the `build-book` skill; check `_toc.yml` still lists every chapter.
-3. Do not push; report the merge summary and let the user decide to deploy (`deploy-book` skill).
+2. Regenerate the display-tag overlay from Downey's ThinkPythonSolutions notebooks, so new or
+   changed cells get his tags and solutions: `python3 jb/update_overlay.py` (commit the changed
+   `jb/soln_overlay.json` with the merge).
+3. Build locally with the `build-book` skill (it executes the chapters); check `_toc.yml` still
+   lists every chapter and look for new execution warnings.
+4. Do not push; report the merge summary and let the user decide to deploy (`deploy-book` skill).

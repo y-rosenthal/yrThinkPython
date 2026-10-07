@@ -39,6 +39,7 @@ For the third edition, the biggest changes are:
 **Chapter 4: Functions and Interfaces**
 
 * [Click here to run Chapter 4 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap04.ipynb)
+* [Click here to run 4b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap04_review.ipynb)
 
 
 **Chapter 5: Conditionals and Recursion**

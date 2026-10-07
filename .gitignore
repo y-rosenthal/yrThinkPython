@@ -29,3 +29,4 @@ pip-log.txt
 # Jupyter Book build artifacts (notebooks are copied into jb/ at build time)
 jb/_build/
 jb/chap*.ipynb
+jb/yr/

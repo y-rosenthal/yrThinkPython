@@ -1,18 +1,28 @@
 """Prepare the notebook copies in jb/ for the Jupyter Book build.
 
-- strips the %%expect cell magic so the site shows plain code
+- adds Downey's display tags from soln_overlay.json (remove-input, remove-cell, section_*
+  labels, ...; see update_overlay.py), so pages show and hide the same cells as his site
+- strips the %%expect cell magic so the site shows plain code (outputs, produced by
+  execute_notebooks.py, are kept)
 - turns 'chapter*' / 'section*' cell tags into MyST cross-reference labels
 - handles '# Solution goes here' cells: if solutions/chapNN.ipynb exists and has a
   code cell with the same id, the solution is shown on the site inside a collapsed
   "Suggested solution" dropdown (readers click to reveal it); otherwise the cell is
   blanked as before. The notebooks in chapters/ (which Colab opens) are never touched.
+- prepares the review pages copied from yr/ into jb/yr/ (see yr/README.md): markdown cells
+  written as <details><summary>Title</summary> ... </details> become the same collapsible
+  box the solutions use (collapsed; or shown, for <details open>), and '# Your code here'
+  cells (space for the reader's own code in Colab) are dropped from the website.
 """
+import json
+import re
 from pathlib import Path
 from glob import glob
 
 import nbformat as nbf
 
 SOLUTIONS_DIR = Path(__file__).resolve().parent.parent / 'solutions'
+OVERLAY = Path(__file__).resolve().parent / 'soln_overlay.json'
 PLACEHOLDER = '# Solution goes here'
 
 SOLUTIONS_NOTE = (
@@ -99,8 +109,20 @@ def add_note(cells):
             return
 
 
+def add_overlay_tags(cells, path):
+    """Add the display tags recorded for this chapter in soln_overlay.json (matched by cell id)."""
+    if not OVERLAY.exists():
+        return
+    tags = json.loads(OVERLAY.read_text()).get(Path(path).stem, {}).get('tags', {})
+    for cell in cells:
+        extra = [t for t in tags.get(cell.get('id'), []) if t not in cell['metadata'].get('tags', [])]
+        if extra:
+            cell['metadata']['tags'] = cell['metadata'].get('tags', []) + extra
+
+
 def process_notebook(path):
     ntbk = nbf.read(path, nbf.NO_CONVERT)
+    add_overlay_tags(ntbk.cells, path)
 
     solutions = load_solutions(path)
     if solutions:
@@ -114,9 +136,47 @@ def process_notebook(path):
     nbf.write(ntbk, path)
 
 
+DETAILS = re.compile(r'\s*<details( open)?>\s*<summary>(.*?)</summary>(.*)</details>\s*', re.S)
+YOUR_CODE = '# Your code here'
+
+
+def details_to_dropdown(cell):
+    """Turn a markdown <details> answer into a collapsed MyST admonition (same look as solutions)."""
+    m = DETAILS.fullmatch(cell['source'])
+    if cell['cell_type'] == 'markdown' and m:
+        shown, title, body = m.group(1), re.sub(r'<[^>]+>', '', m.group(2)).strip(), m.group(3).strip()
+        classes = 'dropdown toggle-shown' if shown else 'dropdown'  # toggle-shown: open by default
+        cell['source'] = f':::{{admonition}} {title}\n:class: {classes}\n\n{body}\n:::\n'
+
+
+TURTLE_IMG = re.compile(r'<img\b[^>]*\bdata-turtle\b[^>]*>')
+
+
+def raw_pictures(cell):
+    """Wrap turtle pictures in a <div>, so they are passed through as plain HTML. (MyST would
+    otherwise turn a lone <img> into a Sphinx image and wrap it in a link to the image data.)"""
+    if cell['cell_type'] == 'markdown':
+        cell['source'] = TURTLE_IMG.sub(lambda m: f'<div class="turtle-picture">{m.group(0)}</div>', cell['source'])
+
+
+def process_review(path):
+    ntbk = nbf.read(path, nbf.NO_CONVERT)
+    ntbk.cells = [c for c in ntbk.cells
+                  if not (c['cell_type'] == 'code' and c['source'].strip() == YOUR_CODE)]
+    for cell in ntbk.cells:
+        raw_pictures(cell)
+        details_to_dropdown(cell)
+        process_cell(cell)
+    nbf.write(ntbk, path)
+
+
 # Collect a list of the notebooks in the content folder
 paths = glob("chap*.ipynb")
 
 for path in sorted(paths):
     print('prepping', path)
     process_notebook(path)
+
+for path in sorted(glob("yr/*.ipynb")):
+    print('prepping', path)
+    process_review(path)

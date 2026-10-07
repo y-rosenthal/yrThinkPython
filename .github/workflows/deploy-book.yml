@@ -24,13 +24,19 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install Jupyter Book
-        run: pip install "jupyter-book<2" ghp-import
+      - name: Install Jupyter Book and the packages the chapters use
+        run: pip install "jupyter-book<2" ghp-import ipykernel nbclient matplotlib pyyaml
 
       - name: Copy notebooks into the book folder
-        run: cp chapters/chap[01][0-9].ipynb jb/
+        run: |
+          cp chapters/chap[01][0-9].ipynb jb/
+          mkdir -p jb/yr && cp yr/*.ipynb jb/yr/
 
-      - name: Strip %%expect magics and add section labels
+      - name: Run the chapters so the pages show their outputs
+        working-directory: jb
+        run: python execute_notebooks.py
+
+      - name: Strip %%expect magics, add section labels and solutions, prepare yr/ review pages
         working-directory: jb
         run: python prep_notebooks.py
 

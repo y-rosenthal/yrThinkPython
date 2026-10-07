@@ -8,6 +8,8 @@
 #     "# Solution goes here" cells that are intentionally empty.
 #   - a "%%expect SomeError" cell that raises exactly SomeError is a pass (the magic re-raises
 #     the traceback as an error output under nbconvert);
+#   - a cell tagged "raises-exception" may raise anything (used by the yr/ review questions
+#     that ask what error a piece of code produces);
 #   - input() is replaced by a stub returning a non-numeric string (IPython startup file), so
 #     the chapter 5 input() cells and the "%%expect ValueError / int(speed)" cell behave as in the book.
 # download() cells fetch files from upstream GitHub into the scratch dir, never into the repo.
@@ -57,7 +59,7 @@ ex_start = next((i for i, c in enumerate(cells)
 ansi = re.compile(r"\x1b\[[0-9;]*m")
 real, expected = [], []
 for i, c in enumerate(cells):
-    if c["cell_type"] != "code":
+    if c["cell_type"] != "code" or "raises-exception" in c["metadata"].get("tags", []):
         continue
     first = "".join(c["source"]).split("\n", 1)[0].split()
     declared = first[1] if len(first) == 2 and first[0] == "%%expect" else None

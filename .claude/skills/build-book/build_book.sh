@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 # Build the Jupyter Book locally, mirroring .github/workflows/deploy-book.yml.
-# Usage: build_book.sh [--clean] [--open] [--update-baseline]
+# Usage: build_book.sh [--clean] [--open] [--update-baseline] [--no-exec]
 set -euo pipefail
 ROOT="$(git -C "$(dirname "$0")" rev-parse --show-toplevel)"
 cd "$ROOT"
 source "$ROOT/.claude/skills/build-book/ensure_venv.sh"
 
-CLEAN=0; OPEN=0; UPDATE=0
+CLEAN=0; OPEN=0; UPDATE=0; NOEXEC=0
 for a in "$@"; do
   case "$a" in
     --clean) CLEAN=1 ;;
     --open) OPEN=1 ;;
     --update-baseline) UPDATE=1 ;;
+    --no-exec) NOEXEC=1 ;;
     *) echo "unknown option: $a" >&2; exit 2 ;;
   esac
 done
@@ -22,6 +23,15 @@ fi
 
 echo ">> copying chapters/chap[01][0-9].ipynb -> jb/"
 cp chapters/chap[01][0-9].ipynb jb/
+echo ">> copying yr/*.ipynb (review pages) -> jb/yr/"
+mkdir -p jb/yr && cp yr/*.ipynb jb/yr/
+
+if [ "$NOEXEC" = 1 ]; then
+  echo ">> skipping execute_notebooks.py (--no-exec): pages will have no outputs"
+else
+  echo ">> execute_notebooks.py (run the chapters so the pages show their outputs)"
+  (cd jb && python execute_notebooks.py)
+fi
 
 echo ">> prep_notebooks.py (strip %%expect, blank '# Solution' cells, add section labels)"
 (cd jb && python prep_notebooks.py >/dev/null)
