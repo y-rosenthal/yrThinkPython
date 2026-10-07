@@ -57,6 +57,7 @@ For the third edition, the biggest changes are:
 **Chapter 7: Iteration and Search**
 
 * [Click here to run Chapter 7 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap07.ipynb)
+* [Click here to run 7b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_review.ipynb)
 
 **Chapter 8: Strings and Regular Expressions**
 
