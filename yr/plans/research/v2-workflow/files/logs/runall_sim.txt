@@ -1,0 +1,11 @@
+chap05_review.ipynb [colablike] BEFORE running: 13 code cells with stored output inside collapsed Answers, 0 outside
+   Run all: REACHED THE END; executed 22/22 code cells; reply status not ok: none
+   AFTER Run all: 13 code cells with output inside collapsed Answers, 1 outside
+   VISIBLE cell 6 (126b6e13, tags ['setup']): stream: 'Downloaded jupyturtle.py'
+   RESULT: PASS
+chap05_review.ipynb [bookvenv] BEFORE running: 13 code cells with stored output inside collapsed Answers, 0 outside
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+   Run all: REACHED THE END; executed 22/22 code cells; reply status not ok: none
+   AFTER Run all: 13 code cells with output inside collapsed Answers, 1 outside
+   VISIBLE cell 6 (126b6e13, tags ['setup']): stream: 'Downloaded jupyturtle.py'
+   RESULT: PASS
