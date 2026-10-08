@@ -57,9 +57,9 @@ STACK_PROBE = ("import sys as _s, json as _j, IPython as _I, ipykernel as _k\n"
 HELP_CELL = '''**Using this page in Colab or Jupyter**
 
 - Each question's **Answer** is closed: click the arrow next to **Answer** to open it. For questions about what code displays or draws, the Answer also shows that code's output. The output is saved with the page, so it is there before you run anything. The code that produced it is hidden: click **Show code** in Colab, or the grey bar in Jupyter, to see it.
-- To run code yourself, first run the setup cell. **Runtime → Run all** (Jupyter: **Run → Run All Cells**) does that, and re-runs the code in every Answer. The Answers stay closed, and Run all does not stop at the errors that are answers. If Colab warns that the notebook was not authored by Google, choose **Run anyway**.
+- To run code yourself, start with **Runtime → Run all** (Jupyter: **Run → Run All Cells**). It runs the page's setup and re-runs the code in every Answer. The Answers stay closed, and Run all does not stop at the errors that are answers. If Colab warns that the notebook was not authored by Google, choose **Run anyway**.
 - Run your own code with **Ctrl+Enter**.
-- When an Answer's code runs again, its output comes from your session. If the setup cell has not run, or your own code changed a name that the question uses, it can differ from the saved output.
+- When an Answer's code runs again, its output comes from your session. It can differ from the saved output if the setup has not run yet, or if your own code changed a name that the question uses.
 - VS Code, GitHub's preview and nbviewer show the Answers open.'''
 
 
