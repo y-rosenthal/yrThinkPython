@@ -63,7 +63,7 @@ def main(argv):
                             on_cell_executed=lambda cell, cell_index, execute_reply: executed.append(
                                 (cell_index, execute_reply['content']['status'])))
     try:
-        client.execute()
+        client.execute(env={**os.environ, 'TMPDIR': '/tmp'})
         status = 'REACHED THE END'
     except CellExecutionError as e:
         status = 'STOPPED: ' + str(e).strip().splitlines()[-1][:120]
