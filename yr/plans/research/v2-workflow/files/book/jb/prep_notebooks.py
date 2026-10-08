@@ -14,11 +14,13 @@
   box the solutions use (collapsed; or shown, for <details open>), and '# Your code here'
   cells (space for the reader's own code in Colab) are dropped from the website.
   New-format pages (prototype v2): each '#### Answer' section becomes one collapsed "Answer" dropdown
-  holding its explanation and the STORED outputs of its run cells (code hidden), and a guard stops the
-  build if any answer would be published openly.
+  holding its explanation and the STORED outputs of its run cells (code hidden; tracebacks without paths),
+  and a guard stops the build if any answer would be published openly, or if the stored outputs are not
+  what `review.sh sync` wrote for the current code (the sync stamp), or are too long.
 """
 import json
 import re
+import sys
 from pathlib import Path
 from glob import glob
 
@@ -162,85 +164,23 @@ def raw_pictures(cell):
         cell['source'] = TURTLE_IMG.sub(lambda m: f'<div class="turtle-picture">{m.group(0)}</div>', cell['source'])
 
 
-ANSWER_HEADING = '#### Answer'
+# The review-page format is defined once, in yr/tools/review_v2.py (stdlib only; the real version will be
+# yr/tools/review_format.py): the same renderer and stamp rules as sync and check.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'yr' / 'tools'))
+from review_v2 import (ANSWER_HEADING, output_problems, parse_run_cell, render_outputs, stamp_problems,
+                       strip_error_comments, heading_level)
+
 CREDITS_LINE = re.compile(r'\A## Credits\n+')
 CREDIT_LINE = '*Summary and questions by'
-ANSI = re.compile(r'\x1b\[[0-9;]*[A-Za-z]')
 
 
-def heading_level(md):
-    """Smallest heading level in a markdown cell (ATX, setext or HTML <hN>), outside code fences; or None."""
-    lines, fence, best = md.split('\n'), False, None
-    for k, line in enumerate(lines):
-        if line.lstrip().startswith(('```', '~~~')):
-            fence = not fence
-            continue
-        if fence:
-            continue
-        m = re.match(r'\s{0,3}(#{1,6})(\s|$)', line)
-        lev = len(m.group(1)) if m else None
-        if lev is None and k > 0 and lines[k - 1].strip() and re.match(r'\s{0,3}(=+|-+)\s*$', line):
-            lev = 1 if '=' in line else 2
-        if lev is None:
-            h = re.search(r'<h([1-6])\b', line, re.I)
-            lev = int(h.group(1)) if h else None
-        if lev and (best is None or lev < best):
-            best = lev
-    return best
-
-
-def text_block(text):
-    """A ```text block holding text exactly (the fence is longer than any run of backticks inside)."""
-    ticks = '`' * max(3, 1 + max((len(m) for m in re.findall(r'`+', text)), default=0))
-    return f'{ticks}text\n{text.rstrip(chr(10))}\n{ticks}'
-
-
-def raw_html(html):
-    """Raw HTML passed through by MyST: one HTML block (no blank lines, which would end it)."""
-    return '<div class="review-output">\n' + re.sub(r'\n\s*\n', '\n', html.strip()) + '\n</div>'
-
-
-def render_outputs(outputs):
-    """The stored outputs of an Answer's run cell as markdown: printed text and tracebacks as ```text blocks
-    (ANSI colours removed), drawings and other displays as raw HTML / images."""
-    parts, stream = [], None
-    for o in outputs:
-        t = o['output_type']
-        if t == 'stream':
-            text = ANSI.sub('', o['text'] if isinstance(o['text'], str) else ''.join(o['text']))
-            if stream is not None and stream[0] == o['name']:
-                stream[1] += text
-            else:
-                stream = [o['name'], text]
-                parts.append(stream)
-            continue
-        stream = None
-        if t == 'error':
-            parts.append(text_block(ANSI.sub('', '\n'.join(o['traceback']))))
-            continue
-        data = {k: (''.join(v) if isinstance(v, list) else v) for k, v in o.get('data', {}).items()}
-        if 'image/svg+xml' in data:
-            parts.append(raw_html(data['image/svg+xml']))
-        elif 'text/html' in data:
-            parts.append(raw_html(data['text/html']))
-        elif 'image/png' in data:
-            size = o.get('metadata', {}).get('image/png', {})
-            attrs = ''.join(f' {k}="{size[k]}"' for k in ('width', 'height') if k in size)
-            alt = 'Turtle drawing' if 'jupyturtle' in o.get('metadata', {}) else 'output'
-            parts.append(raw_html(f'<img alt="{alt}"{attrs} src="data:image/png;base64,{data["image/png"].strip()}">'))
-        elif 'text/markdown' in data:
-            parts.append(data['text/markdown'])
-        elif 'text/plain' in data:
-            parts.append(text_block(data['text/plain']))
-    return '\n\n'.join(text_block(p[1]) if isinstance(p, list) else p for p in parts)
-
-
-def answer_sections(cells):
+def answer_sections(cells, problems):
     """Turn each '#### Answer' section (the heading and every cell under it, up to the next heading of level 4
-    or higher) into ONE collapsed "Answer" dropdown, like the solutions: its markdown cells, in order, with
-    each run cell replaced by its STORED outputs (the website does not execute review pages, and the run
-    cell's code is the question's code shown above). The heading disappears, so it is not listed in the
-    page's contents. Pages still in the <details> format have no such heading: nothing changes."""
+    or higher) into ONE collapsed "Answer" dropdown, like the solutions: its markdown cells, in order (without
+    the invisible '<!-- error: X -->' records), with each run cell replaced by its STORED outputs (the website
+    does not execute review pages, and the run cell's code is the question's code shown above). The heading
+    disappears, so it is not listed in the page's contents. Pages still in the <details> format have no such
+    heading: nothing changes."""
     out, i = [], 0
     while i < len(cells):
         c = cells[i]
@@ -254,7 +194,13 @@ def answer_sections(cells):
             lev = heading_level(d['source']) if d['cell_type'] == 'markdown' else None
             if lev is not None and lev <= 4:
                 break
-            body = d['source'].strip() if d['cell_type'] == 'markdown' else render_outputs(d.get('outputs', []))
+            if d['cell_type'] == 'markdown':
+                body = strip_error_comments(d['source']).strip()
+            else:
+                if parse_run_cell(d['source']) is None:
+                    problems.append(f'cell {d.get("id")}: a code cell inside an Answer is not a run cell')
+                problems.extend(f'run cell {d.get("id")}: {p}' for p in output_problems(d.get('outputs', [])))
+                body = render_outputs(d.get('outputs', []))
             if body:
                 parts.append(body)
             j += 1
@@ -267,9 +213,8 @@ def answer_sections(cells):
     return out
 
 
-def review_guard(cells, path):
-    """Stop the build if a review page would publish an answer openly (e.g. new-format page, old tools)."""
-    problems = []
+def review_guard(ntbk, cells, path, problems):
+    """Stop the build if a review page would publish an answer openly, or a stale or missing output."""
     questions = [k for k, c in enumerate(cells) if c['cell_type'] == 'markdown' and c['source'].lstrip().startswith('### Question')]
     answers = [k for k, c in enumerate(cells) if c['cell_type'] == 'markdown'
                and re.match(r':{3,}\{admonition\} Answer\n:class: dropdown\n', c['source'])]
@@ -278,11 +223,12 @@ def review_guard(cells, path):
     for k, c in enumerate(cells):
         if c['cell_type'] == 'markdown' and k not in answers and re.search(r'^#### Answer\s*$', c['source'], re.M):
             problems.append(f'cell {k}: an "#### Answer" heading survived')
-    for k in answers:
-        nxt = cells[k + 1] if k + 1 < len(cells) else None
-        if nxt is not None and not (nxt['cell_type'] == 'markdown' and ((heading_level(nxt['source']) or 9) <= 3
-                                                                      or nxt['source'].startswith(CREDIT_LINE))):
-            problems.append(f'cell {k + 1}: content after an Answer dropdown, before the next heading (would be shown openly)')
+    for k in answers:                      # nothing between an Answer and the next question / section / credits
+        for d in cells[k + 1:]:
+            if d['cell_type'] == 'markdown' and ((heading_level(d['source']) or 9) <= 3 or d['source'].startswith(CREDIT_LINE)):
+                break
+            problems.append(f'cell {d.get("id")}: content after an Answer dropdown, before the next question (would be '
+                            f'shown openly)')
     for c in cells:
         if c['cell_type'] == 'code' and c.get('outputs') and 'remove-cell' not in c['metadata'].get('tags', []):
             problems.append(f'code cell {c.get("id")} has stored outputs and would show them openly')
@@ -292,16 +238,19 @@ def review_guard(cells, path):
 
 def process_review(path):
     ntbk = nbf.read(path, nbf.NO_CONVERT)
+    problems = []
+    if any(c['cell_type'] == 'markdown' and c['source'].strip() == ANSWER_HEADING for c in ntbk.cells):
+        problems.extend(stamp_problems(ntbk))         # new-format page: outputs must be what sync wrote
     ntbk.cells = [c for c in ntbk.cells
                   if not (c['cell_type'] == 'code' and c['source'].strip() == YOUR_CODE)]
-    ntbk.cells = answer_sections(ntbk.cells)
+    ntbk.cells = answer_sections(ntbk.cells, problems)
     for cell in ntbk.cells:
         if cell['cell_type'] == 'markdown':
             cell['source'] = CREDITS_LINE.sub('', cell['source'])  # '## Credits' is for Colab/Jupyter only
         raw_pictures(cell)
         details_to_dropdown(cell)
         process_cell(cell)
-    review_guard(ntbk.cells, path)
+    review_guard(ntbk, ntbk.cells, path, problems)
     nbf.write(ntbk, path)
 
 

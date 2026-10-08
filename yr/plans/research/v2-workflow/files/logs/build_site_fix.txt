@@ -1,0 +1,17 @@
+>> copying chapters and yr/*.ipynb into jb/
+>> execute_notebooks.py
+>> prep_notebooks.py
+>> jb build .
+>> warnings: 4 total, 4 known (known_warnings.txt has 4)
+>> no new warnings
+>> missing known warnings:
+chap02_review.html
+chap03_review.html
+chap04_review.html
+chap05_review.html
+chap06_review.html
+chap07_review.html
+
+real	0m55.399s
+user	0m50.856s
+sys	0m6.509s

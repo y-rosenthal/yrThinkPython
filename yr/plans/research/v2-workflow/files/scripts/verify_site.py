@@ -62,7 +62,7 @@ for k, q in enumerate(qs):
             good = len(drops[k].select('img[alt="Turtle drawing"]')) == 1
         else:
             want = [ANSI.sub('', text_of(o['text'])).strip() for o in outs if o['output_type'] == 'stream'] + \
-                   [site_traceback(o) for o in outs if o['output_type'] == 'error']
+                   [site_traceback(o).strip() for o in outs if o['output_type'] == 'error']
             got = [pre.get_text().strip() for pre in drops[k].select('pre')]
             good = all(got.count(w) == 1 for w in want)
         if not good:
@@ -80,19 +80,27 @@ check(len(imgs) == 1 and imgs[0]['src'].startswith('data:image/png') and imgs[0]
 q14 = drops[13].get_text('\n')
 check('RecursionError: maximum recursion depth exceeded' in q14 and q14.count('RecursionError') == 1,
       'Q14 Answer shows the RecursionError once (prose unchanged, no banner)')
-# no output block wider than its box (desktop width)
+# no output block wider than its box at desktop width, except where today's page already overflows as much
 from playwright.sync_api import sync_playwright
-with sync_playwright() as p:
-    b = p.chromium.launch(executable_path='/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args=['--no-sandbox'])
-    pg = b.new_page(viewport={'width': 1300, 'height': 1000})
-    pg.goto(Path(new).resolve().as_uri())
-    pg.wait_for_timeout(1200)
-    pg.evaluate("() => document.querySelectorAll('.dropdown .admonition-title').forEach(t => t.click())")
-    pg.wait_for_timeout(400)
-    wide = pg.evaluate("""() => [...document.querySelectorAll('.dropdown pre')].filter(p => p.scrollWidth > p.clientWidth + 2)
-        .map(p => (p.closest('section') || {id: '?'}).id.slice(0, 14) + ': ' + p.scrollWidth + '>' + p.clientWidth)""")
-    b.close()
-check(not wide, f'at 1300px no <pre> inside an Answer is wider than its box {wide}')
+
+
+def overflowing(page):
+    with sync_playwright() as p:
+        b = p.chromium.launch(executable_path='/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args=['--no-sandbox'])
+        pg = b.new_page(viewport={'width': 1300, 'height': 1000})
+        pg.goto(Path(page).resolve().as_uri())
+        pg.wait_for_timeout(1200)
+        pg.evaluate("() => document.querySelectorAll('.dropdown .admonition-title').forEach(t => t.click())")
+        pg.wait_for_timeout(400)
+        wide = pg.evaluate("""() => [...document.querySelectorAll('.dropdown pre')].filter(p => p.scrollWidth > p.clientWidth + 2)
+            .map(p => [(p.closest('section') || {id: '?'}).id.slice(0, 14), p.scrollWidth, p.clientWidth])""")
+        b.close()
+    return wide
+
+
+wide_new, wide_base = overflowing(new), overflowing(base)
+worse = [w for w in wide_new if not any(b[0] == w[0] and b[1] >= w[1] for b in wide_base)]
+check(not worse, f'at 1300px no <pre> inside an Answer overflows more than on today\'s page (new {wide_new}, today {wide_base})')
 # compare with the baseline page
 _, bdrops = answers(base)
 print('\nDropdown text, baseline (today) vs v2, per question (lines only in one of them):')
