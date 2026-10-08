@@ -1,0 +1,4 @@
+chap01.ipynb: WARNING: Lexing literal_block '  Cell In[27], line 1\n    `Hello`\n    ^\nSyntaxError: invalid syntax\n' as "ipythontb" resulted in an error at token: '`'. Retrying in relaxed mode.
+chap01.ipynb: WARNING: Lexing literal_block '\n`Hello`' as "ipython3" resulted in an error at token: '`'. Retrying in relaxed mode.
+chap02.ipynb: WARNING: Lexing literal_block "  Cell In[15], line 1\n    class = 'Self-Defence Against Fresh Fruit'\n          ^\nSyntaxError: invalid syntax\n" as "ipythontb" resulted in an error at token: '='. Retrying in relaxed mode.
+chap02.ipynb: WARNING: Lexing literal_block "\nclass = 'Self-Defence Against Fresh Fruit'" as "ipython3" resulted in an error at token: '='. Retrying in relaxed mode.

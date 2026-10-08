@@ -1,0 +1,29 @@
+unmutated page: PASS
+caught  m_block_edited                 expect S4   got ['S4']  | S4: Question 8 (medium): find the error: run cell 846ec840 does not run its run block's code (run sync)
+caught  m_block_edited_and_synced      expect S10  got ['S10']  | S10: Question 8 (medium): find the error: the Answer's prose for part a names SyntaxError, but part a does not
+caught  m_output_tampered              expect R3   got ['R3']  | R3: Question 1 (easy): what is displayed?: stored output of run cell d1784c6f differs from a fresh run (run sy
+caught  m_heading_in_answer            expect S2   got ['S2']  | S2: Question 5 (medium): what is displayed?: cell 31 contains a heading (it would end or split the Answer)
+caught  m_setext_in_answer             expect S2   got ['S2']  | S2: cell 36 (55486a6b) has an unexpected heading (level 2): it would end a question or an Answer early
+caught  m_html_heading_in_answer       expect S2   got ['S2']  | S2: Question 7 (medium): what is displayed?: cell 41 contains a heading (it would end or split the Answer)
+caught  m_duplicate_text_block         expect S9   got ['S9']  | S9: Question 1 (easy): what is displayed?: a ```text block in the Answer repeats the output of run cell d1784c
+caught  m_duplicate_error_block        expect S9   got ['S9']  | S9: Question 14 (hard): infinite recursion: a ```text block in the Answer repeats the error "RecursionError: m
+caught  m_duplicate_picture            expect S9   got ['S9']  | S9: Question 17 (hard): what is drawn?: a data-turtle picture in the Answer repeats the drawing of run cell 58
+caught  m_unwrapped_raising            expect R1   got ['R1', 'R3', 'R4', 'S11']  | R1: Run all would stop at cell 48 (846ec840): reply status "error"
+caught  m_wrapped_not_raising          expect S11  got ['S11']  | S11: Question 1 (easy): what is displayed?: run cell d1784c6f is wrapped in run_code but its stored output has
+caught  m_collapsed_sections_missing   expect S1   got ['S1']  | S1: colab.collapsed_sections is not exactly the Answer heading ids in page order
+caught  m_heading_not_collapsed        expect S1   got ['S1']  | S1: Answer heading 61b70332 is not saved collapsed (metadata {'id': '61b70332'})
+caught  m_code_not_hidden              expect S5   got ['S5']  | S5: Question 3 (easy): what is displayed?: run cell 53171d18 does not hide its code (metadata {'cellView': 'fo
+caught  m_error_name_wrong             expect S10  got ['S10']  | S10: Question 14 (hard): infinite recursion: the code raises RecursionError, but the Answer's prose  does not 
+caught  m_error_name_missing           expect S10  got ['S10']  | S10: Question 8 (medium): find the error: part b raises SyntaxError, but the Answer's prose for part b does no
+caught  m_output_on_setup              expect S8   got ['S8']  | S8: cell 6 (126b6e13) has stored output but is not a run cell
+caught  m_execution_count              expect S8   got ['S8']  | S8: cell 16: execution_count is stored (must be null)
+caught  m_outputs_missing              expect R3   got ['R3']  | R3: Question 17 (hard): what is drawn?: stored output of run cell 586a560b differs from a fresh run (run sync)
+caught  m_run_cells_swapped            expect S4   got ['S10', 'S4', 'S5']  | S4: Question 8 (medium): find the error: run cell 9b6401a8 does not run its run block's code (run sync)
+caught  m_summary_moved                expect S6   got ['S6']  | S6: Question 8 (medium): find the error: the run cell for part c must come right after the "**Part c:**" cell
+caught  m_tag_left                     expect S12  got ['S12', 'S5']  | S12: cell 82 has tags ['raises-exception'] (allowed: ['no-signature', 'remove-cell', 'setup'])
+caught  m_run_code_edited              expect S12  got ['S12']  | S12: the run_code cell is missing or edited (must be exactly review_v2.RUN_CODE_CELL)
+caught  m_code_before_answer           expect S7   got ['S7']  | S7: Question 1 (easy): what is displayed?: code cell 10 before the Answer is neither "# Your code here" nor a 
+caught  m_no_credits                   expect S12  got ['S12']  | S12: the page must end with a '## Credits' cell
+caught  m_label_on_single_block        expect S3   got ['S3']  | S3: Question 2 (easy): what is displayed?: run block labels ['a'] (1 block: none; 2+: a, b, c, ...)
+caught  m_definition_prints            expect R4   got ['R2', 'R3', 'R4', 'S7']  | R4: Question 14 (hard): infinite recursion: definition cell 77 displays or raises something
+27 checks OK, 0 failure(s)
