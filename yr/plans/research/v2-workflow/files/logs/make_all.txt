@@ -68,6 +68,8 @@ synced out/chap05_converted.ipynb -> out/determinism/run1.ipynb with kernel cola
 synced out/chap05_converted.ipynb -> out/determinism/run2.ipynb with kernel colablike: 13 change(s)
 synced out/chap05_review.ipynb -> out/determinism/resync.ipynb with kernel colablike: 0 change(s)
 97b0b95c1472d008416b8545086391939a4f261b6523a854dcd73b9a5b9eeef8  out/chap05_review.ipynb
+270a77fff6975d1e6b513b18f15a0f503bd1bff4a818f7ee84f1eaf1cc7b120b  out/determinism/bookvenv_run1.ipynb
+270a77fff6975d1e6b513b18f15a0f503bd1bff4a818f7ee84f1eaf1cc7b120b  out/determinism/bookvenv_run2.ipynb
 97b0b95c1472d008416b8545086391939a4f261b6523a854dcd73b9a5b9eeef8  out/determinism/resync.ipynb
 97b0b95c1472d008416b8545086391939a4f261b6523a854dcd73b9a5b9eeef8  out/determinism/run1.ipynb
 97b0b95c1472d008416b8545086391939a4f261b6523a854dcd73b9a5b9eeef8  out/determinism/run2.ipynb

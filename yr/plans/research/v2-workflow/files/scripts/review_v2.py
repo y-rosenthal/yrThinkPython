@@ -213,12 +213,12 @@ def collapsed_sections_hidden(nb):
 # ---------------------------------------------------------------- outputs
 
 TMP_PATH = re.compile(r'/tmp/ipykernel_\d+/')
-CELL_IN = re.compile(r'Cell In\[\d+\]')
+CELL_IN = re.compile(r'(Cell(?:\x1b\[[0-9;]*m)*\s?(?:\x1b\[[0-9;]*m)*In\[)\d+(\])')   # IPython 8+ colours each word
 
 
 def normalize_text(s):
     s = TMP_PATH.sub('/tmp/ipykernel_0/', s)
-    return CELL_IN.sub('Cell In[1]', s)
+    return CELL_IN.sub(r'\g<1>1\2', s)
 
 
 SVG_DRAWING = re.compile(r'\s*<svg width="(\d+)" height="(\d+)">.*</svg>\s*$', re.S)
