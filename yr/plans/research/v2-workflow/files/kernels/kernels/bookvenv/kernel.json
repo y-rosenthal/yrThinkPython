@@ -1,0 +1,2 @@
+{"argv": ["/root/.venvs/yrThinkPython/bin/python", "-Xfrozen_modules=off", "-m", "ipykernel_launcher", "-f", "{connection_file}"],
+ "display_name": "bookvenv (py3.13, IPython 9.17)", "language": "python"}
