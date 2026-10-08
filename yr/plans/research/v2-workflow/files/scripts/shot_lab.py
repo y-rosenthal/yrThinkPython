@@ -92,4 +92,6 @@ with sync_playwright() as p:
     shot_region(pg, heading_cell(pg, 'Question 8 (medium)'), None, f'{out}/lab_runall_q8_expanded.png', 1250)
     print('Q1 hidden-cells button after Run All:', expand(pg, 'Question 1 (easy)'))
     shot_region(pg, heading_cell(pg, 'Question 1 (easy)'), None, f'{out}/lab_runall_q1_expanded.png', 620)
+    print('Q17 hidden-cells button after Run All:', expand(pg, 'Question 17 (hard)'))
+    shot_region(pg, heading_cell(pg, 'Question 17 (hard)'), None, f'{out}/lab_runall_q17_expanded.png', 1100)
     b.close()

@@ -126,3 +126,84 @@ caught  m_definition_prints            expect R4   got ['R2', 'R3', 'R4', 'S7'] 
 >> copying chapters and yr/*.ipynb into jb/
 >> execute_notebooks.py
 >> prep_notebooks.py
+>> jb build .
+>> warnings: 4 total, 4 known (known_warnings.txt has 4)
+>> no new warnings
+>> missing known warnings:
+chap02_review.html
+chap03_review.html
+chap04_review.html
+chap05_review.html
+chap06_review.html
+chap07_review.html
+PASS 17 "Answer" dropdowns for 17 questions
+PASS every Answer dropdown starts closed (class "dropdown" without "toggle-shown"; the concept lists keep toggle-shown)
+PASS the two concept-list dropdowns are still shown open (2)
+PASS no h4 headings (0)
+PASS no Answer/Credits/Output entries in the right-hand contents (47 entries)
+PASS no run_code text on the page
+PASS no help note on the page
+PASS no @title / display-mode text (hidden code) on the page
+PASS no unrendered fences
+PASS Q8 Answer shows each of the three errors exactly once
+PASS Q8 Answer interleaves Part a/b/c explanations with their outputs, summary last [11, 169, 235, 416, 434, 633, 656]
+PASS Q1 Answer shows the output once
+PASS Q17 Answer shows exactly one picture: the stored drawing (1 img)
+PASS Q14 Answer shows the RecursionError traceback
+PASS no ANSI escape codes
+
+Dropdown text, baseline (today) vs v2, per question (lines only in one of them):
+Q1: identical
+Q2: identical
+Q3: identical
+Q4: identical
+Q5: identical
+Q6: identical
+Q7: identical
+Q8: 21 changed line(s)
+     +, so this is a
+     +SyntaxError
+     +File "/tmp/ipykernel_0/2636000202.py", line 2
+     +if x = 5:
+     +^
+     -statement must end with a colon:
+     +statement must end with a colon, so this is a
+     +SyntaxError
+     +:
+     +File "/tmp/ipykernel_0/230109869.py", line 2
+     +if x > 0
+     +^
+     -The second line is indented by one space, but it is not inside a block:
+     +The second line is indented by one space, but it is not inside a block, so this is an
+Q9: identical
+Q10: identical
+Q11: identical
+Q12: identical
+Q13: identical
+Q14: 17 changed line(s)
+     -This is infinite recursion. It ends when there are too many frames on the stack:
+     +This is infinite recursion. It ends with a
+     +RecursionError
+     +when there are too many frames on the stack:
+     +---------------------------------------------------------------------------
+     +RecursionError                            Traceback (most recent call last)
+     +/tmp/ipykernel_0/3608748751.py in <cell line: 0>()
+     +----> 1 countdown_by_two(5)
+     +/tmp/ipykernel_0/3568901665.py in countdown_by_two(n)
+     +3         print('Blastoff!')
+     +4     else:
+     +----> 5         countdown_by_two(n - 2)
+     +... last 1 frames repeated, from the frame below ...
+     +/tmp/ipykernel_0/3568901665.py in countdown_by_two(n)
+Q15: identical
+Q16: identical
+Q17: identical
+old-format chap02: prep output identical to today's prep
+old-format chap03: prep output identical to today's prep
+old-format chap04: prep output identical to today's prep
+old-format chap06: prep output identical to today's prep
+old-format chap07: prep output identical to today's prep
+saved out/shots/site_v2_q1_open.png
+saved out/shots/site_v2_q8_open.png
+saved out/shots/site_v2_q14_open.png
+saved out/shots/site_v2_q17_open.png
