@@ -12,6 +12,9 @@ with sync_playwright() as p:
     pg = b.new_page(viewport={'width': 1300, 'height': 1000}, device_scale_factor=1)
     pg.goto(Path(page).resolve().as_uri())
     pg.wait_for_timeout(1500)
+    # the sticky header would cover part of an element screenshot
+    pg.add_style_tag(content='.skip-link{display:none!important} header, .bd-header, .bd-header-article'
+                             '{position:static!important}')
     for q in qs:
         sec = pg.locator(f'section[id^="question-{q}-"]').first
         sec.scroll_into_view_if_needed()
