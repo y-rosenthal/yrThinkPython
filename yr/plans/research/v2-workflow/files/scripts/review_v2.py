@@ -221,9 +221,40 @@ def normalize_text(s):
     return CELL_IN.sub('Cell In[1]', s)
 
 
-def normalize_outputs(outputs):
+SVG_DRAWING = re.compile(r'\s*<svg width="(\d+)" height="(\d+)">.*</svg>\s*$', re.S)
+
+
+def drawing_svg(o):
+    """The SVG of a jupyturtle drawing output (live: text/html), or None."""
+    html = o.get('data', {}).get('text/html')
+    html = ''.join(html) if isinstance(html, list) else html
+    return html if html and SVG_DRAWING.match(html) else None
+
+
+def svg_sha1(svg):
+    return hashlib.sha1(svg.encode()).hexdigest()
+
+
+def store_drawing(o, previous):
+    """A jupyturtle drawing is stored as a PNG (shown everywhere before Run all: Colab, JupyterLab even
+    when the notebook is not trusted, GitHub's preview, the website), with the SHA-1 of its SVG.
+    The PNG is rendered only when the SVG changed, so another machine's cairo does not rewrite it."""
+    svg = drawing_svg(o)
+    sha = svg_sha1(svg)
+    for p in previous:
+        if p.get('metadata', {}).get('jupyturtle', {}).get('svg_sha1') == sha:
+            return json.loads(json.dumps(p))
+    import base64
+    import cairosvg
+    w, h = SVG_DRAWING.match(svg).groups()
+    png = base64.b64encode(cairosvg.svg2png(bytestring=svg.encode(), scale=2)).decode()
+    return {'output_type': 'display_data', 'data': {'image/png': png, 'text/plain': '<jupyturtle drawing>'},
+            'metadata': {'image/png': {'width': int(w), 'height': int(h)}, 'jupyturtle': {'svg_sha1': sha}}}
+
+
+def normalize_outputs(outputs, previous=()):
     """Make stored outputs independent of the run: no execution counts, no kernel PID in traceback
-    paths, IPython 8+ 'Cell In[N]' headers numbered 1. Text is stored as one string per output."""
+    paths, IPython 8+ 'Cell In[N]' headers numbered 1, drawings as PNG + SVG hash (see store_drawing)."""
     out = []
     for o in outputs:
         o = json.loads(json.dumps(o))
@@ -234,6 +265,8 @@ def normalize_outputs(outputs):
         elif o['output_type'] == 'error':
             o['evalue'] = normalize_text(o['evalue'])
             o['traceback'] = [normalize_text(t) for t in o['traceback']]
+        elif drawing_svg(o):
+            o = store_drawing(o, [p for p in previous if p.get('output_type') == 'display_data'])
         o.pop('transient', None)
         out.append(o)
     return out
@@ -245,7 +278,7 @@ def plain_traceback(o):
 
 def semantic(outputs):
     """What a student sees, independent of the IPython version: stdout/stderr text, error kind and
-    message (without SyntaxError's '(file, line N)'), displayed data."""
+    message (without SyntaxError's '(file, line N)'), drawings (by SVG hash), other displayed data."""
     sem = []
     for o in outputs:
         t = o['output_type']
@@ -257,6 +290,10 @@ def semantic(outputs):
                 sem.append(('stream:' + o['name'], text))
         elif t == 'error':
             sem.append(('error', o['ename'], re.sub(r' \([^()]*, line \d+\)$', '', ANSI.sub('', o['evalue']))))
+        elif drawing_svg(o):
+            sem.append(('drawing', svg_sha1(drawing_svg(o))))
+        elif o.get('metadata', {}).get('jupyturtle', {}).get('svg_sha1'):
+            sem.append(('drawing', o['metadata']['jupyturtle']['svg_sha1']))
         else:
             data = {k: (''.join(v) if isinstance(v, list) else v) for k, v in o.get('data', {}).items()}
             sem.append(('data', json.dumps(data, sort_keys=True)))

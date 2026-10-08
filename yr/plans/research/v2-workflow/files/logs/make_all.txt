@@ -1,0 +1,128 @@
+
+=== 1. convert (static) /home/user/yrThinkPython/yr/chap05_review.ipynb
+wrote out/chap05_converted.ipynb: 99 cells, 17 collapsed Answers, 13 expected-output blocks removed
+  review wording, cell 4: The setup cell below downloads `jupyturtle` and imports those functions.
+  review wording, cell 5: - To run code yourself, first run the setup cells. **Runtime → Run all** (Jupyter: **Run → Run All Cells**) do
+  review wording, cell 76: Run this cell to define `countdown_by_two`.
+
+=== 2. sync: run on the Colab-like stack, wrap raising run cells, store normalized outputs
+  - stored output of run cell d1784c6f changed:
+      old []
+      new [('stream:stdout', '2 15\n2 0 3\n3 -4\n')]
+  - stored output of run cell 00d7bfda changed:
+      old []
+      new [('stream:stdout', "False True\nTrue\nTrue\nFalse\n<class 'bool'>\n")]
+  - stored output of run cell 53171d18 changed:
+      old []
+      new [('stream:stdout', '4 is even\n7 is odd\n0 is even\n')]
+  - stored output of run cell e1885c89 changed:
+      old []
+      new [('stream:stdout', 'pass\npass\nfail\n')]
+  - stored output of run cell 3bee7ed2 changed:
+      old []
+      new [('stream:stdout', 'big\nmedium\nsmall\n')]
+  - stored output of run cell 05e86a96 changed:
+      old []
+      new [('stream:stdout', '5 is a positive single digit\n-3 is not positive\n10 is 10 or more\n')]
+  - stored output of run cell 846ec840 changed:
+      old []
+      new [('error', 'SyntaxError', "invalid syntax. Maybe you meant '==' or ':=' instead of '='?")]
+  - stored output of run cell 9b6401a8 changed:
+      old []
+      new [('error', 'SyntaxError', "expected ':'")]
+  - stored output of run cell 57198ee6 changed:
+      old []
+      new [('error', 'IndentationError', 'unexpected indent')]
+  - stored output of run cell 5f611ef4 changed:
+      old []
+      new [('stream:stdout', 'n = 3 s = 0\nn = 2 s = 3\nn = 1 s = 5\nn = 0 s = 6\nresult: 6\n')]
+  - stored output of run cell 3fd7e862 changed:
+      old []
+      new [('stream:stdout', '***\n**\n*\n*\n**\n***\n')]
+  - stored output of run cell 2b7f1ccf changed:
+      old []
+      new [('error', 'RecursionError', 'maximum recursion depth exceeded')]
+  - stored output of run cell 586a560b changed:
+      old []
+      new [('drawing', 'bcc133aac65126a5732dc4bdc4fbb772dae1099a')]
+synced out/chap05_converted.ipynb -> out/chap05_review.ipynb with kernel colablike: 13 change(s)
+
+=== 3. conversion gate: every removed expected-output block equals the stored real output
+OK  Question 1 (easy): what is displayed?    part=None: removed '```text\n2 15\n2 0 3\n3 -4\n```' | stdout='2 15\n2 0 3\n3 -4' errors=[]
+OK  Question 2 (easy): what is displayed?    part=None: removed "```text\nFalse True\nTrue\nTrue\nFalse\n<class 'bool'>\n```" | stdout="False True\nTrue\nTrue\nFalse\n<class 'bool'>" errors=[]
+OK  Question 3 (easy): what is displayed?    part=None: removed '```text\n4 is even\n7 is odd\n0 is even\n```' | stdout='4 is even\n7 is odd\n0 is even' errors=[]
+OK  Question 5 (medium): what is displayed?  part=None: removed '```text\npass\npass\nfail\n```' | stdout='pass\npass\nfail' errors=[]
+OK  Question 6 (medium): what is displayed?  part=None: removed '```text\nbig\nmedium\nsmall\n```' | stdout='big\nmedium\nsmall' errors=[]
+OK  Question 7 (medium): what is displayed?  part=None: removed '```text\n5 is a positive single digit\n-3 is not positive\n10 i' | stdout='5 is a positive single digit\n-3 is not positive\n10 is 10 or more' errors=[]
+OK  Question 8 (medium): find the error      part=a: removed "```text\nSyntaxError: invalid syntax. Maybe you meant '==' or" | stdout='' errors=["SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?"]
+OK  Question 8 (medium): find the error      part=b: removed "```text\nSyntaxError: expected ':'\n```" | stdout='' errors=["SyntaxError: expected ':'"]
+OK  Question 8 (medium): find the error      part=c: removed '```text\nIndentationError: unexpected indent\n```' | stdout='' errors=['IndentationError: unexpected indent']
+OK  Question 12 (hard): what is displayed?   part=None: removed '```text\nn = 3 s = 0\nn = 2 s = 3\nn = 1 s = 5\nn = 0 s = 6\nresu' | stdout='n = 3 s = 0\nn = 2 s = 3\nn = 1 s = 5\nn = 0 s = 6\nresult: 6' errors=[]
+OK  Question 13 (hard): what is displayed?   part=None: removed '```text\n***\n**\n*\n*\n**\n***\n```' | stdout='***\n**\n*\n*\n**\n***' errors=[]
+OK  Question 14 (hard): infinite recursion   part=None: removed '```text\nRecursionError: maximum recursion depth exceeded\n```' | stdout='' errors=['RecursionError: maximum recursion depth exceeded']
+OK  Question 17 (hard): what is drawn?       part=None: removed '<img data-turtle ...>' | stored drawing (PNG, SVG sha1 bcc133aac6)
+13/13 removed blocks equal the stored real output
+
+=== 4. determinism: two more syncs from the converted page, and a re-sync of the result
+synced out/chap05_converted.ipynb -> out/determinism/run1.ipynb with kernel colablike: 13 change(s)
+synced out/chap05_converted.ipynb -> out/determinism/run2.ipynb with kernel colablike: 13 change(s)
+synced out/chap05_review.ipynb -> out/determinism/resync.ipynb with kernel colablike: 0 change(s)
+97b0b95c1472d008416b8545086391939a4f261b6523a854dcd73b9a5b9eeef8  out/chap05_review.ipynb
+97b0b95c1472d008416b8545086391939a4f261b6523a854dcd73b9a5b9eeef8  out/determinism/resync.ipynb
+97b0b95c1472d008416b8545086391939a4f261b6523a854dcd73b9a5b9eeef8  out/determinism/run1.ipynb
+97b0b95c1472d008416b8545086391939a4f261b6523a854dcd73b9a5b9eeef8  out/determinism/run2.ipynb
+run1: byte-identical
+run2: byte-identical
+resync: byte-identical
+
+=== 5. Run-all simulation on both stacks (stop at first error status; tags ignored; real download)
+chap05_review.ipynb [colablike] BEFORE running: 13 code cells with stored output inside collapsed Answers, 0 outside
+   Run all: REACHED THE END; executed 22/22 code cells; reply status not ok: none
+   AFTER Run all: 13 code cells with output inside collapsed Answers, 1 outside
+   VISIBLE cell 6 (126b6e13, tags ['setup']): stream: 'Downloaded jupyturtle.py'
+   RESULT: PASS
+chap05_review.ipynb [bookvenv] BEFORE running: 13 code cells with stored output inside collapsed Answers, 0 outside
+   Run all: REACHED THE END; executed 22/22 code cells; reply status not ok: none
+   AFTER Run all: 13 code cells with output inside collapsed Answers, 1 outside
+   VISIBLE cell 6 (126b6e13, tags ['setup']): stream: 'Downloaded jupyturtle.py'
+   RESULT: PASS
+
+=== 6. checks on both stacks
+OK: out/chap05_review.ipynb [colablike]
+OK: out/chap05_review.ipynb [bookvenv]
+
+=== 7. mutation self-test of the checks
+unmutated page: PASS
+caught  m_block_edited                 expect S4   got ['S4']  | S4: Question 8 (medium): find the error: run cell 846ec840 does not run its run block's code (run sync)
+caught  m_block_edited_and_synced      expect S10  got ['S10']  | S10: Question 8 (medium): find the error: the Answer's prose for part a names SyntaxError, but part a does not
+caught  m_output_tampered              expect R3   got ['R3']  | R3: Question 1 (easy): what is displayed?: stored output of run cell d1784c6f differs from a fresh run (run sy
+caught  m_heading_in_answer            expect S2   got ['S2']  | S2: Question 5 (medium): what is displayed?: cell 31 contains a heading (it would end or split the Answer)
+caught  m_setext_in_answer             expect S2   got ['S2']  | S2: cell 36 (55486a6b) has an unexpected heading (level 2): it would end a question or an Answer early
+caught  m_html_heading_in_answer       expect S2   got ['S2']  | S2: Question 7 (medium): what is displayed?: cell 41 contains a heading (it would end or split the Answer)
+caught  m_duplicate_text_block         expect S9   got ['S9']  | S9: Question 1 (easy): what is displayed?: a ```text block in the Answer repeats the output of run cell d1784c
+caught  m_duplicate_error_block        expect S9   got ['S9']  | S9: Question 14 (hard): infinite recursion: a ```text block in the Answer repeats the error "RecursionError: m
+caught  m_duplicate_picture            expect S9   got ['S9']  | S9: Question 17 (hard): what is drawn?: a data-turtle picture in the Answer repeats the drawing of run cell 58
+caught  m_unwrapped_raising            expect R1   got ['R1', 'R3', 'R4', 'S11']  | R1: Run all would stop at cell 48 (846ec840): reply status "error"
+caught  m_wrapped_not_raising          expect S11  got ['S11']  | S11: Question 1 (easy): what is displayed?: run cell d1784c6f is wrapped in run_code but its stored output has
+caught  m_collapsed_sections_missing   expect S1   got ['S1']  | S1: colab.collapsed_sections is not exactly the Answer heading ids in page order
+caught  m_heading_not_collapsed        expect S1   got ['S1']  | S1: Answer heading 61b70332 is not saved collapsed (metadata {'id': '61b70332'})
+caught  m_code_not_hidden              expect S5   got ['S5']  | S5: Question 3 (easy): what is displayed?: run cell 53171d18 does not hide its code (metadata {'cellView': 'fo
+caught  m_error_name_wrong             expect S10  got ['S10']  | S10: Question 14 (hard): infinite recursion: the code raises RecursionError, but the Answer's prose  does not 
+caught  m_error_name_missing           expect S10  got ['S10']  | S10: Question 8 (medium): find the error: part b raises SyntaxError, but the Answer's prose for part b does no
+caught  m_output_on_setup              expect S8   got ['S8']  | S8: cell 6 (126b6e13) has stored output but is not a run cell
+caught  m_execution_count              expect S8   got ['S8']  | S8: cell 16: execution_count is stored (must be null)
+caught  m_outputs_missing              expect R3   got ['R3']  | R3: Question 17 (hard): what is drawn?: stored output of run cell 586a560b differs from a fresh run (run sync)
+caught  m_run_cells_swapped            expect S4   got ['S10', 'S4', 'S5']  | S4: Question 8 (medium): find the error: run cell 9b6401a8 does not run its run block's code (run sync)
+caught  m_summary_moved                expect S6   got ['S6']  | S6: Question 8 (medium): find the error: the run cell for part c must come right after the "**Part c:**" cell
+caught  m_tag_left                     expect S12  got ['S12', 'S5']  | S12: cell 82 has tags ['raises-exception'] (allowed: ['no-signature', 'remove-cell', 'setup'])
+caught  m_run_code_edited              expect S12  got ['S12']  | S12: the run_code cell is missing or edited (must be exactly review_v2.RUN_CODE_CELL)
+caught  m_code_before_answer           expect S7   got ['S7']  | S7: Question 1 (easy): what is displayed?: code cell 10 before the Answer is neither "# Your code here" nor a 
+caught  m_no_credits                   expect S12  got ['S12']  | S12: the page must end with a '## Credits' cell
+caught  m_label_on_single_block        expect S3   got ['S3']  | S3: Question 2 (easy): what is displayed?: run block labels ['a'] (1 block: none; 2+: a, b, c, ...)
+caught  m_definition_prints            expect R4   got ['R2', 'R3', 'R4', 'S7']  | R4: Question 14 (hard): infinite recursion: definition cell 77 displays or raises something
+27 checks OK, 0 failure(s)
+
+=== 8. website: build a copy of the repo with the v2 page and the adapted prep
+>> copying chapters and yr/*.ipynb into jb/
+>> execute_notebooks.py
+>> prep_notebooks.py

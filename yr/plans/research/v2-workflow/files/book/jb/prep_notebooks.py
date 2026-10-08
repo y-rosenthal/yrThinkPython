@@ -224,7 +224,10 @@ def render_outputs(outputs):
         elif 'text/html' in data:
             parts.append(raw_html(data['text/html']))
         elif 'image/png' in data:
-            parts.append(raw_html(f'<img alt="output" src="data:image/png;base64,{data["image/png"].strip()}">'))
+            size = o.get('metadata', {}).get('image/png', {})
+            attrs = ''.join(f' {k}="{size[k]}"' for k in ('width', 'height') if k in size)
+            alt = 'Turtle drawing' if 'jupyturtle' in o.get('metadata', {}) else 'output'
+            parts.append(raw_html(f'<img alt="{alt}"{attrs} src="data:image/png;base64,{data["image/png"].strip()}">'))
         elif 'text/markdown' in data:
             parts.append(data['text/markdown'])
         elif 'text/plain' in data:

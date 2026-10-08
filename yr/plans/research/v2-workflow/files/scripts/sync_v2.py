@@ -9,7 +9,8 @@
 3. wrap exactly the run cells whose code raised in run_code(r\"\"\"...\"\"\"), unwrap the others; if that
    changed anything, run again
 4. store the outputs of the run cells only (setup and other cells: none), normalized so that a re-run
-   gives byte-identical JSON: no execution counts, no kernel PID in paths, 'Cell In[1]'
+   gives byte-identical JSON: no execution counts, no kernel PID in paths, 'Cell In[1]'; a turtle drawing
+   is stored as a PNG plus the SHA-1 of its SVG (re-rendered only when the SVG changes)
 5. print which stored outputs changed (for the author to review), write the notebook
 """
 import copy
@@ -108,7 +109,7 @@ def sync(nb, kernel):
     for i, (c, r) in enumerate(zip(nb.cells, run.cells)):
         if c.cell_type != 'code':
             continue
-        new = normalize_outputs(r.outputs) if i in run_cells else []
+        new = normalize_outputs(r.outputs, c.get('outputs', [])) if i in run_cells else []
         if i in run_cells and semantic(c.get('outputs', [])) != semantic(new):
             report.append(f'stored output of run cell {c.id} changed:\n      old {semantic(c.get("outputs", []))}'
                           f'\n      new {semantic(new)}'[:600])

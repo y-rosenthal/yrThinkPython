@@ -69,8 +69,7 @@ def stdout_of(cell):
 
 
 def has_drawing(cell):
-    return any('<line' in (''.join(v) if isinstance(v, list) else v)
-               for o in cell.get('outputs', []) for v in o.get('data', {}).values())
+    return any(s[0] == 'drawing' for s in semantic(cell.get('outputs', [])))
 
 
 def part_prose(nb, q):
@@ -289,7 +288,8 @@ def runtime_checks(nb, qs, kernel, problems):
     for q in qs:
         t = q['title'][:40]
         for ri in q['run_cells']:
-            stored, fresh = nb.cells[ri].outputs, normalize_outputs(run.cells[ri].outputs)
+            stored = nb.cells[ri].outputs
+            fresh = normalize_outputs(run.cells[ri].outputs, stored)
             if kernel == 'colablike':
                 if json.dumps(stored, sort_keys=True) != json.dumps(fresh, sort_keys=True):
                     problems.append(f'R3: {t}: stored output of run cell {nb.cells[ri].id} differs from a fresh run '

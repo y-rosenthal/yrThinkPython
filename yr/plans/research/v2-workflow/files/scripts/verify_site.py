@@ -46,8 +46,9 @@ check(q8.count('SyntaxError: invalid syntax. Maybe you meant') == 1 and q8.count
 order = [q8.find(s) for s in ['Part a:', 'invalid syntax. Maybe', 'Part b:', "expected ':'", 'Part c:', 'unexpected indent', 'Each is found']]
 check(order == sorted(order) and -1 not in order, f'Q8 Answer interleaves Part a/b/c explanations with their outputs, summary last {order}')
 check(drops[0].get_text('\n').count('2 15') == 1, 'Q1 Answer shows the output once')
-check(drops[16].select('svg line'), f'Q17 Answer contains the stored drawing ({len(drops[16].select("svg line"))} <line> elements)')
-check(not drops[16].select('img'), 'Q17 Answer has no PNG picture any more')
+imgs = drops[16].select('img')
+check(len(imgs) == 1 and imgs[0]['src'].startswith('data:image/png') and imgs[0].get('alt') == 'Turtle drawing',
+      f'Q17 Answer shows exactly one picture: the stored drawing ({len(imgs)} img)')
 check('RecursionError: maximum recursion depth exceeded' in drops[13].get_text('\n'), 'Q14 Answer shows the RecursionError traceback')
 check(not re.search(r'\x1b\[|\[0;3\dm', str(main)), 'no ANSI escape codes')
 # compare with the baseline page

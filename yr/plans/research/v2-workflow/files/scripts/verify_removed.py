@@ -24,10 +24,9 @@ for r in removed:
         ok = (text == stdout and not errors) or (not stdout and errors and all(line in errors[0] for line in text.split('\n')))
         what = f'stdout={stdout!r} errors={errors}'
     else:
-        html = ''.join(s[1] for s in sem if s[0] == 'data')
-        n = html.count('<line')
-        ok = n > 0
-        what = f'stored drawing has {n} <line> elements'
+        d = [s[1] for s in sem if s[0] == 'drawing']
+        ok = len(d) == 1
+        what = f'stored drawing (PNG, SVG sha1 {d[0][:10] if d else None})'
     bad += not ok
     print(('OK  ' if ok else 'BAD ') + f"{r['question'][:40]:40} part={r['part']}: removed {block[:60]!r} | {what[:110]}")
 print(f'{len(removed) - bad}/{len(removed)} removed blocks equal the stored real output')
