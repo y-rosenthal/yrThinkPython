@@ -1,0 +1,46 @@
+ON OPEN: {
+ "cells": 98,
+ "shownCells": 63,
+ "outputs": 13,
+ "shownOutputs": [],
+ "hiddenButtons": [
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  ""
+ ]
+}
+saved out/shots/lab_open_q1_collapsed.png
+Q1 hidden-cells button: 2 cells hidden
+saved out/shots/lab_open_q1_expanded.png
+Q8 hidden-cells button: 7 cells hidden
+saved out/shots/lab_open_q8_expanded.png
+Q17 hidden-cells button: 
+saved out/shots/lab_open_q17_expanded.png
+AFTER RUN ALL: prompts                 [17]:  [19]: [20]: 
+AFTER RUN ALL: shown outputs (outside collapsed Answers): [
+ {
+  "cell": 6,
+  "shown": true,
+  "text": ""
+ }
+]
+Q8 hidden-cells button after Run All: 
+saved out/shots/lab_runall_q8_expanded.png
+Q1 hidden-cells button after Run All: 
+saved out/shots/lab_runall_q1_expanded.png
+Q17 hidden-cells button after Run All: 
+saved out/shots/lab_runall_q17_expanded.png
