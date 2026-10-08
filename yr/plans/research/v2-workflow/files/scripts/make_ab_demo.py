@@ -72,7 +72,9 @@ cells += [md('### B: the traceback as text', 'ab000003'),
 for p, src in PARTS.items():
     cells += [md(f'**Part {p}:**', stable_id('ab', 'B', p)),
               code(f'# @title Output of part {p}\nrun_code_b(\n{quote(src)})', stable_id('ab', 'Brun', p))]
-cells += [md('### End', 'ab000004'), code("print('END: Run all reached the end')", 'ab0000e1', hidden=False)]
+cells += [md('### End\n\nThe cell below also shows which Python and IPython this Colab session runs.', 'ab000004'),
+          code("import sys, IPython, ipykernel\nprint('END: Run all reached the end. Python', sys.version.split()[0], "
+               "'| IPython', IPython.__version__, '| ipykernel', ipykernel.__version__)", 'ab0000e1', hidden=False)]
 nb = nbf.v4.new_notebook(cells=cells)
 nb.metadata = nbf.from_dict({'colab': {'collapsed_sections': ['ab0000a0', 'ab0000b0']},
                              'kernelspec': {'display_name': 'Python 3 (ipykernel)', 'language': 'python', 'name': 'python3'},

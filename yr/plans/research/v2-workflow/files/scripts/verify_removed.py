@@ -3,8 +3,9 @@ output that now replaces them (so removing them lost no information).
 
     python verify_removed.py NB REMOVED.json
 
-Per part: the removed ```text blocks, in order, must equal the run cell's stdout lines followed by its error lines
-(an error block may hold only the last line, 'Name: message', or a substring of it, as today's rule allowed);
+Per part: the removed ```text blocks, in order, must equal the run cell's stdout and displayed values (text/plain of
+execute_result), followed by its error lines (an error block may hold only the last line, 'Name: message', or a
+substring of it, as today's rule allowed); trailing spaces are ignored (a text block cannot show them);
 a removed picture must be byte-identical to the stored PNG.
 """
 import base64
@@ -27,7 +28,9 @@ for (title, part), rs in groups.items():
     ri = q['run_cells'][0] if part is None else next(i for i in q['run_cells'] if q['run_part'][i] == part)
     outs = nb['cells'][ri]['outputs']
     sem = semantic(outs)
-    stdout = ''.join(s[1] for s in sem if s[0] == 'stream:stdout').rstrip('\n')
+    shown = [s[1] if s[0] == 'stream:stdout' else json.loads(s[1]).get('text/plain', '') + '\n'
+             for s in sem if s[0] == 'stream:stdout' or (s[0] == 'data' and 'text/plain' in s[1])]
+    stdout = '\n'.join(l.rstrip() for l in ''.join(shown).rstrip('\n').split('\n'))
     errors = [f'{s[1]}: {s[2]}' for s in sem if s[0] == 'error']
     texts = [r['block'][len('```text\n'):-len('\n```')] for r in rs if r['block'].startswith('```text')]
     pics = [r for r in rs if not r['block'].startswith('```')]
@@ -35,7 +38,7 @@ for (title, part), rs in groups.items():
     if texts:
         out_blocks = [t for t in texts if not any(t.startswith(e.split(':')[0] + ':') for e in errors)]
         err_blocks = [t for t in texts if t not in out_blocks]
-        ok &= '\n'.join(out_blocks) == stdout
+        ok &= '\n'.join(l.rstrip() for l in '\n'.join(out_blocks).split('\n')) == stdout
         ok &= len(err_blocks) == len(errors) and all(b in e for b, e in zip(err_blocks, errors))
         what.append(f'stdout={stdout!r:.60} errors={errors}')
     for r in pics:

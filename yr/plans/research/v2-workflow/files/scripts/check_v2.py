@@ -346,8 +346,9 @@ def static_checks(nb, problems):
                 if not m:
                     continue
                 name = m.group(1)
+                own = {i for i, _, _ in q['run_blocks']}       # the question's own code may bind it after the error
                 for j, c in enumerate(cells):
-                    if j == ri or j in q['run_cells']:
+                    if j == ri or j in q['run_cells'] or j in own:
                         continue
                     src = blocks_code.get(j) if c.cell_type == 'markdown' else (
                         parse_run_cell(source(c)) or {'code': source(c)})['code'] if c.cell_type == 'code' else None
