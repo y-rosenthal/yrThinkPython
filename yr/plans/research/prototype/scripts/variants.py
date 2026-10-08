@@ -32,7 +32,7 @@ def build(kind):
             new_q.append(code(f'%%question q8{p}\n{src}'))
     # answer: keep heading + explanation; replace run cells
     expl = cells[h + 1]
-    runs = [code(f"# Part {p}: the question's code\nrun_code(q8{p})") for p in parts]
+    runs = [code(f'run_code(q8{p})') for p in parts]
     j = h + 2
     while j < len(cells) and cells[j].cell_type == 'code':
         j += 1
