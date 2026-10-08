@@ -1,29 +1,204 @@
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
 unmutated page: PASS
-caught  m_block_edited                 expect S4   got ['S4']  | S4: Question 8 (medium): find the error: run cell 846ec840 does not run its run block's code (run sync)
-caught  m_block_edited_and_synced      expect S10  got ['S10']  | S10: Question 8 (medium): find the error: the Answer's prose for part a names SyntaxError, but part a does not
-caught  m_output_tampered              expect R3   got ['R3']  | R3: Question 1 (easy): what is displayed?: stored output of run cell d1784c6f differs from a fresh run (run sy
-caught  m_heading_in_answer            expect S2   got ['S2']  | S2: Question 5 (medium): what is displayed?: cell 31 contains a heading (it would end or split the Answer)
-caught  m_setext_in_answer             expect S2   got ['S2']  | S2: cell 36 (55486a6b) has an unexpected heading (level 2): it would end a question or an Answer early
-caught  m_html_heading_in_answer       expect S2   got ['S2']  | S2: Question 7 (medium): what is displayed?: cell 41 contains a heading (it would end or split the Answer)
-caught  m_duplicate_text_block         expect S9   got ['S9']  | S9: Question 1 (easy): what is displayed?: a ```text block in the Answer repeats the output of run cell d1784c
-caught  m_duplicate_error_block        expect S9   got ['S9']  | S9: Question 14 (hard): infinite recursion: a ```text block in the Answer repeats the error "RecursionError: m
-caught  m_duplicate_picture            expect S9   got ['S9']  | S9: Question 17 (hard): what is drawn?: a data-turtle picture in the Answer repeats the drawing of run cell 58
-caught  m_unwrapped_raising            expect R1   got ['R1', 'R3', 'R4', 'S11']  | R1: Run all would stop at cell 48 (846ec840): reply status "error"
-caught  m_wrapped_not_raising          expect S11  got ['S11']  | S11: Question 1 (easy): what is displayed?: run cell d1784c6f is wrapped in run_code but its stored output has
-caught  m_collapsed_sections_missing   expect S1   got ['S1']  | S1: colab.collapsed_sections is not exactly the Answer heading ids in page order
-caught  m_heading_not_collapsed        expect S1   got ['S1']  | S1: Answer heading 61b70332 is not saved collapsed (metadata {'id': '61b70332'})
-caught  m_code_not_hidden              expect S5   got ['S5']  | S5: Question 3 (easy): what is displayed?: run cell 53171d18 does not hide its code (metadata {'cellView': 'fo
-caught  m_error_name_wrong             expect S10  got ['S10']  | S10: Question 14 (hard): infinite recursion: the code raises RecursionError, but the Answer's prose  does not 
-caught  m_error_name_missing           expect S10  got ['S10']  | S10: Question 8 (medium): find the error: part b raises SyntaxError, but the Answer's prose for part b does no
-caught  m_output_on_setup              expect S8   got ['S8']  | S8: cell 6 (126b6e13) has stored output but is not a run cell
-caught  m_execution_count              expect S8   got ['S8']  | S8: cell 16: execution_count is stored (must be null)
-caught  m_outputs_missing              expect R3   got ['R3']  | R3: Question 17 (hard): what is drawn?: stored output of run cell 586a560b differs from a fresh run (run sync)
-caught  m_run_cells_swapped            expect S4   got ['S10', 'S4', 'S5']  | S4: Question 8 (medium): find the error: run cell 9b6401a8 does not run its run block's code (run sync)
-caught  m_summary_moved                expect S6   got ['S6']  | S6: Question 8 (medium): find the error: the run cell for part c must come right after the "**Part c:**" cell
-caught  m_tag_left                     expect S12  got ['S12', 'S5']  | S12: cell 82 has tags ['raises-exception'] (allowed: ['no-signature', 'remove-cell', 'setup'])
-caught  m_run_code_edited              expect S12  got ['S12']  | S12: the run_code cell is missing or edited (must be exactly review_v2.RUN_CODE_CELL)
-caught  m_code_before_answer           expect S7   got ['S7']  | S7: Question 1 (easy): what is displayed?: code cell 10 before the Answer is neither "# Your code here" nor a 
-caught  m_no_credits                   expect S12  got ['S12']  | S12: the page must end with a '## Credits' cell
-caught  m_label_on_single_block        expect S3   got ['S3']  | S3: Question 2 (easy): what is displayed?: run block labels ['a'] (1 block: none; 2+: a, b, c, ...)
-caught  m_definition_prints            expect R4   got ['R2', 'R3', 'R4', 'S7']  | R4: Question 14 (hard): infinite recursion: definition cell 77 displays or raises something
-27 checks OK, 0 failure(s)
+caught  m_block_edited                         expect S4   got ['S4']  | S4: Question 8 (medium): find the error: run cell 846ec840 does not run its run block's code (run sync)
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+caught  m_block_edited_and_synced              expect S10  got ['S10']  | S10: Question 8 (medium): find the error: the Answer's text for part a names SyntaxError, but part a does
+caught  m_static_normalize_stale               expect S14  got ['S14']  | S14: code changed since the last sync (a run block, definition cell or setup cell): run review.sh sync
+caught  m_output_tampered                      expect S14  got ['S14']  | S14: stored outputs differ from what the last sync wrote (edited, cleared or added by hand, or by Colab):
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+caught  m_output_tampered_restamped            expect R3   got ['R3', 'R5']  | R3: Question 1 (easy): what is displayed?: stored output of run cell d1784c6f differs from a fresh run on
+caught  m_plain_outputs_cleared                expect S14  got ['S14']  | S14: stored outputs differ from what the last sync wrote (edited, cleared or added by hand, or by Colab):
+caught  m_outputs_missing                      expect S14  got ['S14']  | S14: stored outputs differ from what the last sync wrote (edited, cleared or added by hand, or by Colab):
+caught  m_wrong_stack                          expect S14  got ['S14']  | S14: stored outputs were written on {'python': '3.13.16', 'ipython': '9.17.1', 'ipykernel': '7.4.0'}, not
+caught  m_never_synced                         expect S14  got ['S14']  | S14: the page was never synced (no metadata.yr_review): run review.sh sync
+caught  m_corrupt_png                          expect S17  got ['S17']  | S17: Question 17 (hard): what is drawn?: run cell 586a560b: the stored drawing is not valid base64
+caught  m_png_size                             expect S17  got ['S17']  | S17: Question 17 (hard): what is drawn?: run cell 586a560b: the stored drawing PNG is 600x440, not twice 
+caught  m_line_ref_plain                       expect S11  got ['S11']  | S11: Question 2 (easy): what is displayed?: run cell 00d7bfda is not wrapped in run_cell but its stored o
+caught  m_heading_in_answer                    expect S2   got ['S2']  | S2: Question 5 (medium): what is displayed?: cell 30 contains a heading (it would end or split the Answer
+caught  m_setext_in_answer                     expect S2   got ['S2']  | S2: cell 35 (55486a6b) has an unexpected heading (level 2): it would end a question or an Answer early
+caught  m_html_heading_in_answer               expect S2   got ['S2']  | S2: Question 7 (medium): what is displayed?: cell 40 contains a heading (it would end or split the Answer
+caught  m_duplicate_text_block                 expect S9   got ['S9']  | S9: Question 1 (easy): what is displayed?: cell 11 (3fb9249d) has an output block ("2 15
+2 0 3
+3 -4") tha
+caught  m_near_duplicate_plain_fence           expect S9   got ['S9']  | S9: Question 1 (easy): what is displayed?: cell 11 (3fb9249d) has an output block ("2 15
+2 0 3") that doe
+caught  m_contradicting_block                  expect S9   got ['S9']  | S9: Question 1 (easy): what is displayed?: cell 11 (3fb9249d) has an output block ("3 -3") that does not 
+caught  m_output_fence                         expect S9   got ['S9']  | S9: Question 3 (easy): what is displayed?: cell 21 (2ae976c3) has an output block ("4 is even") that does
+caught  m_indented_block                       expect S9   got ['S9']  | S9: Question 3 (easy): what is displayed?: cell 21 (2ae976c3) has an output block ("    4 is even
+    7 i
+caught  m_duplicate_error_block                expect S9   got ['S9']  | S9: Question 14 (hard): infinite recursion: cell 80 (91f14330) has an output block ("RecursionError: maxi
+caught  m_short_error_line_in_python_fence     expect S9   got ['S9']  | S9: Question 8 (medium): find the error: cell 48 (994fad7b) has an output block ("SyntaxError: expected '
+caught  m_duplicate_picture                    expect S9   got ['S9']  | S9: Question 17 (hard): what is drawn?: cell 94 (5f56652b) has an output block ("<img data-turtle alt="Tu
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+caught  m_pair_wrong_text                      expect S13  got ['S13']  | S13: Question 7 (medium): what is displayed?: the ```text block after Answer code block 2 is not what it 
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+caught  m_unwrapped_raising                    expect R1   got ['R1', 'R3', 'R4', 'S11', 'S14']  | R1: Run all would stop at cell 47 (846ec840): reply status "error"
+caught  m_wrapped_not_raising                  expect S11  got ['S11', 'S14']  | S11: Question 1 (easy): what is displayed?: run cell d1784c6f is wrapped in run_cell but its stored outpu
+caught  m_collapsed_sections_missing           expect S1   got ['S1']  | S1: colab.collapsed_sections is not exactly the Answer heading ids in page order
+caught  m_heading_not_collapsed                expect S1   got ['S1']  | S1: Answer heading 61b70332 is not saved collapsed (metadata {'id': '61b70332'})
+caught  m_code_not_hidden                      expect S5   got ['S5']  | S5: Question 3 (easy): what is displayed?: run cell 53171d18 does not hide its code (needs cellView=form 
+caught  m_colab_title                          expect S5   got ['S14', 'S5']  | S5: Question 1 (easy): what is displayed?: run cell d1784c6f is not in canonical form, e.g. its title "#@
+caught  m_colab_metadata                       expect S5   got ['S5']  | S5: Question 2 (easy): what is displayed?: run cell 00d7bfda has metadata sync would remove ['executionIn
+caught  m_error_name_wrong                     expect S10  got ['S10']  | S10: Question 14 (hard): infinite recursion: the code raises RecursionError, but the Answer does not name
+caught  m_error_name_missing                   expect S10  got ['S10']  | S10: Question 8 (medium): find the error: part b raises SyntaxError, but the Answer does not name it (in 
+caught  m_error_named_only_in_summary_wrongly  expect S10  got ['S10']  | S10: Question 8 (medium): find the error: the summary names TypeError, which no part raises
+caught  m_output_on_setup                      expect S8   got ['S14', 'S8']  | S8: cell 6 (126b6e13) has stored output but is not a run cell
+caught  m_execution_count                      expect S8   got ['S8']  | S8: cell 15: execution_count is stored (must be null)
+caught  m_run_cells_swapped                    expect S6   got ['S14', 'S6']  | S6: Question 8 (medium): find the error: the run cell for part b must come right after the "**Part b:**" 
+caught  m_summary_moved                        expect S6   got ['S6']  | S6: Question 8 (medium): find the error: the run cell for part c must come right after the "**Part c:**" 
+caught  m_tag_left                             expect S12  got ['S12', 'S5']  | S12: cell 81 has tags ['raises-exception'] (allowed: ['no-signature', 'remove-cell', 'setup'])
+caught  m_old_marker                           expect S19  got ['S19', 'S4']  | S19: cell 13 uses the old "```python run" marker (run blocks are ~~~python fences)
+caught  m_tilde_elsewhere                      expect S19  got ['S19']  | S19: cell 40 (2664ac43) has a ~~~ fence but is not a run-block cell (~~~ marks run blocks; use ``` for ot
+caught  m_param_in_block                       expect S16  got ['S16', 'S4']  | S16: Question 1 (easy): what is displayed?: run block : line "# @param..." (Colab form markup, a cell mag
+caught  m_cell_magic_in_block                  expect S16  got ['S16', 'S4']  | S16: Question 1 (easy): what is displayed?: run block : line "%%..." (Colab form markup, a cell magic or 
+caught  m_code_before_answer                   expect S7   got ['S14', 'S7']  | S7: Question 1 (easy): what is displayed?: code cell 9 before the Answer is neither "# Your code here" no
+caught  m_no_credits                           expect S12  got ['S12']  | S12: the page must end with a '## Credits' cell
+caught  m_label_on_single_block                expect S3   got ['S3']  | S3: Question 2 (easy): what is displayed?: run block labels ['a'] (1 block: none; 2+: a, b, c, ...)
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+caught  m_definition_prints                    expect R4   got ['R2', 'R3', 'R4', 'S14', 'S7']  | R4: Question 14 (hard): infinite recursion: definition cell 76 displays or raises something
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+caught  m_part_added_without_text              expect S20  got ['S10', 'S20']  | S20: Question 8 (medium): find the error: cell 53 still says TODO (write the explanation)
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+caught  m_nameerror_bound_elsewhere            expect S18  got ['S18']  | S18: Question 2 (hard): what is displayed?: run cell d56fa453's answer is "NameError: total", but cell 81
+ok      s_unit_tmpdir_path                     | File "/tmp/ipykernel_0/12.py", line 2; [0;32m/tmp/ipykernel_0/9.py[0m; /tmp/ipykernel_0/3.py
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+ok      s_sync_refuses_unaccepted_change       | Question 1 (easy): what is displayed?: stored output of run cell d1784c6f changes
+ok      s_static_normalize_repairs_colab_save  | 4 repairs; remaining: []
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+  note: R0: WEAK: kernel "bookvenv" runs {'python': '3.13.16', 'ipython': '9.17.1', 'ipykernel': '7.4.0'}, not the pinned Colab-like stack: outputs compared semantically only (tracebacks and line numbers not verified)
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+ok      s_new_questions                        | placed=True one_stream=True doctest wrapped & "line 6"=True problems=[]
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+ok      s_part_added_and_removed               | added=True removed=True problems=[]
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+ok      s_sync_refuses_lost_value              |  6, in NoName\nFailed example:\n    c); a value shown by the last line is not displayed when wrapped: print it
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+ok      s_sync_refuses_memory_address          | ed?: run cell 5a1654bd: the output contains a memory address ("at 0x7f3f0bbc7880"), which changes on every run
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+ok      s_sync_refuses_wrong_stack             | the kernel "bookvenv" runs {'python': '3.13.16', 'ipython': '9.17.1', 'ipykernel': '7.4.0'}, not the pinned Co
+ok      s_unit_stream_coalesced                | [{'output_type': 'stream', 'name': 'stdout', 'text': 'a\nb\n'}]
+59/59 self-tests OK (49 mutations, 9 scenarios, unmutated page)

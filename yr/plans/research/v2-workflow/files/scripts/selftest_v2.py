@@ -59,7 +59,7 @@ def insert_question(nb, n, title, block, explanation, before=None, extra=()):
     nb.cells[pos:pos] = cells
 
 
-def sync(nb, accept=False):
+def sync(nb, accept=True):
     report, refused, not_accepted, bad = sync_v2.sync(nb, 'colablike', accept=accept)
     assert not refused and not bad, (refused, bad)
     return report, not_accepted
@@ -88,7 +88,7 @@ def m_block_edited(nb):
 
 def m_block_edited_and_synced(nb):
     m_block_edited(nb)
-    sync(nb, accept=True)                       # the '<!-- error: SyntaxError -->' record now contradicts it
+    sync(nb)                                    # accepted; the '<!-- error: SyntaxError -->' record now contradicts it
 
 
 def m_static_normalize_stale(nb):
@@ -350,10 +350,10 @@ def s_unit_stream_coalesced(nb):
 
 
 def s_sync_refuses_unaccepted_change(nb):
-    before = json.dumps(nb, sort_keys=True)
     c = run_block(nb, 1)
     c.source = c.source.replace('minutes = 135', 'minutes = 150')
-    report, not_accepted = sync(nb)
+    before = json.dumps(nb, sort_keys=True)
+    report, not_accepted = sync(nb, accept=False)
     return bool(not_accepted) and json.dumps(nb, sort_keys=True) == before, \
         (not_accepted[0].splitlines()[0][:110] if not_accepted else 'accepted silently')
 
@@ -373,7 +373,7 @@ def s_new_questions(nb):
     insert_question(nb, 18, 'what is displayed?', "import time\nprint('a')\ntime.sleep(0.6)\nprint('b')",
                     'Both lines are displayed, one after the other.')
     insert_question(nb, 19, 'what is displayed?', DOCTEST, 'The second example fails: `eel` has two letters e.')
-    report, _ = sync(nb)
+    report, _ = sync(nb, accept=False)
     p = check(nb) + check(nb, 'bookvenv', semantic_ok=True)
     x18, x19 = q(nb, 18), q(nb, 19)
     r18, r19 = nb.cells[x18['run_cells'][0]], nb.cells[x19['run_cells'][0]]
@@ -389,13 +389,13 @@ def s_part_added_and_removed(nb):
     nb.cells.insert(nb.cells.index(c) + 1, md('**Part d**\n\n~~~python\nx = 5\nprint(x +)\n~~~'))
     rc = run_cell(nb, 8, 'c')
     nb.cells.insert(nb.cells.index(rc) + 1, md('**Part d:** An operator needs two operands:\n\n<!-- error: SyntaxError -->'))
-    sync(nb)
+    sync(nb, accept=False)
     x = q(nb, 8)
     added = len(x['run_cells']) == 4 and x['run_cells'][3] == x['part_cells']['d'] + 1
     p1 = check(nb)
     for idx in sorted([x['run_blocks'][3][0], x['part_cells']['d']], reverse=True):
         del nb.cells[idx]
-    sync(nb, accept=True)
+    sync(nb, accept=False)
     removed = len(q(nb, 8)['run_cells']) == 3
     p2 = check(nb)
     return added and removed and not p1 and not p2, f'added={added} removed={removed} problems={(p1 + p2)[:2]}'
@@ -404,13 +404,13 @@ def s_part_added_and_removed(nb):
 def s_sync_refuses_lost_value(nb):
     insert_question(nb, 18, 'what is displayed?', DOCTEST + "\ncount_e('eel')", 'Two letters e.')
     report, refused, _, _ = sync_v2.sync(nb, 'colablike')
-    return any('changes what it shows' in r for r in refused), (refused or ['not refused'])[0][:110]
+    return any('not displayed when wrapped' in r for r in refused), (refused or ['not refused'])[0][-110:]
 
 
 def s_sync_refuses_memory_address(nb):
     insert_question(nb, 18, 'what is displayed?', 'def f():\n    pass\n\nprint(f)', 'A function object.')
     report, refused, _, _ = sync_v2.sync(nb, 'colablike')
-    return any('memory address' in r for r in refused), (refused or ['not refused'])[0][:110]
+    return refused and all('memory address' in r for r in refused), (refused or ['not refused'])[0][-110:]
 
 
 def s_sync_refuses_wrong_stack(nb):

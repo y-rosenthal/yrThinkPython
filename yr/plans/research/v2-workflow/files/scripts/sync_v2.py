@@ -13,8 +13,10 @@
    - the help note, Answer heading metadata and colab.collapsed_sections are rewritten
    - outputs and execution counts of non-run cells are cleared
 2. run the page in a fresh kernel (default: the pinned Colab-like stack; TMPDIR=/tmp), allow_errors, tags
-   ignored, with every run cell PLAIN; a run cell is wrapped exactly when that run raises or prints a line
-   number; if any is wrapped, run again and require that wrapping changed nothing a student sees
+   ignored, with every run cell holding only the question's code (the REFERENCE run: what a student gets by
+   pasting the code into a new cell); a run cell is wrapped exactly when that run raises or names a line;
+   then run the page as it will be stored, and require that every run cell shows the same as in the
+   reference run (so neither the title line nor the wrapper changes anything a student sees)
 3. refuse (exit 2) if the kernel is not the pinned stack (unless --force), if an output is too long or contains
    a memory address, or if a run block uses Colab form markup / a cell magic
 4. snapshot acceptance: a stored output that was not empty and changes is shown (semantic and byte diff) and
@@ -226,10 +228,10 @@ def sync(nb, kernel, accept=False, force=False):
     report, errors = static_normalize(work)
     if errors:
         return report, errors, [], []
-    # run 1: every run cell plain -> which ones must be wrapped
+    # run 1, the reference: every run cell holds only the question's code -> which ones must be wrapped
     plain = copy.deepcopy(work)
     for q, part, code, ri in run_cell_list(plain):
-        plain.cells[ri].source = render_run_cell(code, False, part)
+        plain.cells[ri].source = code
     run1, status, stack = execute(plain, kernel)
     if not stack_pinned(stack) and not force:
         return report, [f'the kernel "{kernel}" runs {stack}, not the pinned Colab-like stack: stored outputs must '
@@ -242,15 +244,13 @@ def sync(nb, kernel, accept=False, force=False):
             report.append(f"{q['title'][:40]}: run cell {work.cells[ri].id} "
                           f"{'wrapped in run_cell' if wrap[ri] else 'unwrapped'}")
             work.cells[ri].source = new
-    run = run1
-    if any(wrap.values()):                          # run 2, as stored; wrapping must change nothing visible
-        run, status, stack = execute(work, kernel)
-        for q, part, code, ri in run_cell_list(work):
-            a, b = semantic(run1.cells[ri].outputs), semantic(run.cells[ri].outputs)
-            if wrap[ri] and a != b:
-                errors.append(f"{q['title'][:40]}: wrapping run cell {work.cells[ri].id} changes what it shows "
-                              f"(plain {a!r:.150}, wrapped {b!r:.150}); a value shown by the last line is not "
-                              f"displayed when wrapped: print it instead")
+    run, status, stack = execute(work, kernel)      # run 2, as stored: must show what the reference run showed
+    for q, part, code, ri in run_cell_list(work):
+        a, b = semantic(run1.cells[ri].outputs), semantic(run.cells[ri].outputs)
+        if a != b:
+            errors.append(f"{q['title'][:40]}: run cell {work.cells[ri].id} {'wrapped' if wrap[ri] else 'with its title'} "
+                          f"shows something else than the question's code alone (alone {a!r:.150}, stored form "
+                          f"{b!r:.150}){'; a value shown by the last line is not displayed when wrapped: print it' if wrap[ri] else ''}")
     not_accepted, run_idx = [], set()
     for q, part, code, ri in run_cell_list(work):
         run_idx.add(ri)

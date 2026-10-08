@@ -44,7 +44,8 @@ Runtime rules (fresh runs, allow_errors=True, tags ignored, TMPDIR=/tmp):
   R3  stored outputs == the fresh run: byte-identical after normalization on the pinned stack (drawings
       re-rendered unless the stored PNG is intact), the same semantically elsewhere
   R4  wrapped exactly when the fresh run raises or names a line number; definition cells display nothing
-  R5  wrapping is invisible: a second run with every run cell plain shows the same (semantically)
+  R5  the title line and the wrapper are invisible: a second run in which every run cell holds only the
+      question's code shows the same (semantically, line numbers included)
 Exit status 1 if any problem is found.
 """
 import ast
@@ -446,20 +447,17 @@ def runtime_checks(nb, qs, kernel, problems, semantic_ok=False):
             if q['answer'] is not None and i < q['answer'] and source(nb.cells[i]).strip() != PLACEHOLDER \
                     and run.cells[i].outputs:
                 problems.append(f"R4: {q['title'][:40]}: definition cell {i} displays or raises something")
-    # R5: the same page with every run cell plain
+    # R5: the same page with every run cell holding only the question's code (no title line, no wrapper)
     plain = nbf.from_dict(json.loads(json.dumps(nb)))
-    wrapped_any = False
     for q, part, code, ri in run_cell_list(plain):
-        if ri is not None and parse_run_cell(source(plain.cells[ri]))['wrapped']:
-            plain.cells[ri].source = render_run_cell(code, False, part)
-            wrapped_any = True
-    if wrapped_any:
-        run2, _, _ = execute(plain, kernel)
-        for q, part, code, ri in run_cell_list(nb):
-            if ri is not None and semantic(nb.cells[ri].outputs) != semantic(run2.cells[ri].outputs):
-                problems.append(f"R5: {q['title'][:40]}: run cell {nb.cells[ri].id} shows something else when it is "
-                                f"not wrapped: stored {semantic(nb.cells[ri].outputs)!r:.120} plain "
-                                f"{semantic(run2.cells[ri].outputs)!r:.120}")
+        if ri is not None:
+            plain.cells[ri].source = code
+    run2, _, _ = execute(plain, kernel)
+    for q, part, code, ri in run_cell_list(nb):
+        if ri is not None and semantic(nb.cells[ri].outputs) != semantic(run2.cells[ri].outputs):
+            problems.append(f"R5: {q['title'][:40]}: run cell {nb.cells[ri].id} shows something else than the "
+                            f"question's code alone: stored {semantic(nb.cells[ri].outputs)!r:.120} alone "
+                            f"{semantic(run2.cells[ri].outputs)!r:.120}")
 
 
 def check(nb, kernel='colablike', static_only=False, semantic_ok=False):
