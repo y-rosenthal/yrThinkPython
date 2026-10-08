@@ -1,0 +1,54 @@
+# judge:2
+
+```json
+{
+ "scores": [
+  {
+   "plan_index": 0,
+   "correctness": 8.5,
+   "student_experience": 9,
+   "maintainability": 7.5,
+   "risk_handling": 8,
+   "total": 33,
+   "strengths": "Answers the user's question correctly. I checked the journal (wf_f52e2176-172/journal.jsonl) and both worker transcripts (af37ec9a..., a1fdadad...): each ends with '[Request interrupted by user]' at 2026-10-08T17:20:58.398Z. The workers were then relaunched as a20fcc3e and a24699395, and both finished. The plan says plainly that nothing needs fixing and that the environment traps were not the cause. The design is sound: question code is written as markdown, the Answer is a collapsed heading holding the explanation plus live run cells, and run_code uses nested run_cell with the KeyboardInterrupt re-raise. It is the best plan for students: multi-part Answers are interleaved (Part a explanation, then its live cell); D7 turns question-code cells back into code cells on the site so the site looks exactly as it does today; plain run cells keep their syntax colours; there is a precise table of text edits; the intro wording works on both the site and Colab. The check is strong: reply status is recorded via on_cell_executed, there is a visibility pass, the reverse error rule fixes M1, execute_result is checked, stderr tracebacks are parsed so M15 cannot happen, and unwrapping uses ast. A prep guard counts dropdowns against questions, and tools and pages ship in one merge so they cannot get out of step. The professor can test today: the L3 link is real (yr/plans/research/prototype/out/all/chap05_review.ipynb exists on origin/yr-runall-research), and L1/L2 test notebooks are already built. Cell ids are kept.",
+   "weaknesses": "sync has to execute the page to decide which cells get run_code, so derived content depends on the venv and kernel. There is no guard for the IPython 9 doctest '>>>' stripping inside run_code strings (Plans 1 and 2 found this). The mutation suite stays in scratch and is not committed as a selftest. There is no git rev-parse ROOT fallback and no CI lint step; the deploy workflow is left unchanged and relies only on the prep guard. Plan B (HTML <details> 'Real output') is only sketched and was never built. Minor: it cites the research branch at e68aa02, but the branch is now at 6ec87ba (the file is still there)."
+  },
+  {
+   "plan_index": 1,
+   "correctness": 7,
+   "student_experience": 7.5,
+   "maintainability": 9,
+   "risk_handling": 6.5,
+   "total": 30,
+   "strengths": "The strongest DRY and maintenance story. A single stdlib normalize() owns every derived artifact: run cells, collapse metadata, the managed setup cell and output stripping. Both lints enforce 'check == normalize is a no-op', so nothing has to execute to regenerate cells. The ```python run fence is an explicit, visible marker; it renders without the word 'run' on the site (verified). The %%run_question magic takes code verbatim, so there are no quoting or escaping rules. It was verified on IPython 7.34 and 9.17: status ok, normal tracebacks, the last expression shown, doctests intact. The plan found the real IPython 9 PromptStripper bug that string wrapping triggers on ch07 Q14. It shows 0 output differences across all 103 questions on both stacks. Other strengths: selftest_review.py with 19 mutations is committed; turtle_images --check runs as part of check; there is a ROOT fallback for git rev-parse; a CI lint step is added to deploy-book.yml; the managed cell is remove-cell so the site never shows it; the static lint is fence-aware for headings, including setext.",
+   "weaknesses": "It does not answer the user's direct question. It says it 'cannot see those workers' transcripts' and guesses at environment traps, but the journal and transcripts are readable and show a user interrupt at 17:20:58Z. The custom magic adds Colab unknowns that the plain-function design avoids: the 'unsupported_magics_check' flag; Colab may lint the body, and it did lint %%writefile bodies in 2022, so raw syntax errors sit in real code cells instead of string literals; unknown magics may display as uncoloured text when an Answer is opened. Fallback (b) is unverified. Run cells sit at the end of each Answer instead of interleaved. If C1 fails the plan says only 'stop and rethink'; it has no prepared alternative to collapsed sections. Students must run two setup cells."
+  },
+  {
+   "plan_index": 2,
+   "correctness": 8.5,
+   "student_experience": 8,
+   "maintainability": 7,
+   "risk_handling": 9.5,
+   "total": 33.5,
+   "strengths": "The best risk handling, aimed squarely at the professor's goals. Nothing is rolled out until one roughly 20-minute Colab session settles every unknown. The smoke notebooks test metadata variants side by side: full markers, top-level id only, and jp key only. They put variant A (red error output) and variant B (stderr) rows next to each other to spot error badges, and include an editor/squiggle notebook and a Stop test. An outcome table maps each result to an action. Fallback C (run_hidden: captured output inside a closed HTML <details>, plus metadata for the check) is prototyped and verified on both stacks, so goal 2 survives even if Colab ignores collapsed_sections. It answers the worker question correctly and in more detail (interrupt at 17:20:58.398Z, resumed by resumeFromRunId, results now in use) and gives prevention advice. Technical findings: the IPython >=8 '>>>' stripping guard, docstring-in-string quoting, and a check that parses stderr tracebacks. The Colab-only help cell is tagged remove-cell, so Colab instructions never appear on the site. turtle_images is hardened: if example-picture code raises, it exits without writing. Rollout goes page by page with gates and rollback. The committed selftest uses a fixture page, and a CI lint step is added.",
+   "weaknesses": "Dual-format tools during Stages 2-4 are temporary code paths that add complexity and a cleanup stage. Like Plan 0, sync executes the page to decide wrapping. The '# Part x' comment line in run cells is a special case the check must strip, and it shifts line numbers in plain (unwrapped) cells. Multi-part Answers are not interleaved. Question code shows on the site as markdown blocks instead of code cells, which the plan accepts. Answer-run tags add more metadata to keep consistent. Committing make_smoke.py and convert_answers.py and then deleting them adds churn. Some side claims about why the interrupt happened (the CPU limit, the 'web app interrupts on send' mechanism) are speculative, though labelled as such."
+  }
+ ],
+ "best_ideas_to_graft": [
+  "Answer the user's question with the verified cause from Plans 0 and 2. Both worker transcripts end with '[Request interrupted by user]' at 2026-10-08T17:20:58.398Z (journal wf_f52e2176-172). The workflow resumed at 17:24 and re-ran workers 3 and 4 (a20fcc3e, a24699395) to completion, so nothing needs fixing. Advise not pressing Stop or rejecting a step while a workflow runs. Drop Plan 1's 'cannot see the transcripts' guess.",
+  "From Plan 1: make 'check == normalize is a no-op' the single DRY and metadata invariant, enforced by review.sh check and check_notebooks.py. Make normalize stdlib-only so it covers collapse metadata, setup, stripping and everything else that does not need execution.",
+  "From Plan 1: commit yr/tools/selftest_review.py (review.sh selftest) with the full mutation list: M1, M2, M3, M15, the prototype's 10, stale collapsed_sections ids, a missing Credits heading, a setext heading in an Answer, a '>>>' line inside run_code, and so on. Future sessions must run it whenever the checker changes.",
+  "From Plan 1: turtle_images --check inside review.sh check (fail if a stored PNG differs from a fresh render); a git rev-parse ROOT fallback in review.sh, build_book.sh and run_notebooks.sh; a check_notebooks.py step in deploy-book.yml.",
+  "From Plan 2: before any implementation, push one smoke branch combining Plan 0's L1/L2 and Plan 2's make_smoke notebooks. Include the metadata variants (full markers vs top-level id only vs jp key only), variant A and B rows side by side to detect error badges, the editor/squiggle notebook, and the Stop test. Plan 0's L3 link (origin/yr-runall-research, prototype chap05) can be opened today.",
+  "From Plan 2: keep fallback C (run_hidden: closed HTML <details> 'Show the output', with results in display metadata for the check) as a prototyped fallback in case Colab ignores collapsed_sections. Keep fallback B (the stderr traceback run_code) together with the check that parses stderr tracebacks.",
+  "From Plan 2, using Plan 1's finding: guard against IPython >=8 stripping '>>>' lines inside string literals. Have sync refuse to wrap code with '^\\s*>>> ' lines and add a check rule for it. Pick r\"\"\" or r''' and verify the result with ast.literal_eval.",
+  "From Plan 0: interleave multi-part Answers (the 'Part a' explanation, then its live cell, and so on). Keep positions on resync, and keep run cells free of added comment lines, which shift traceback and doctest line numbers. Prefer this over Plan 2's '# Part x' comment.",
+  "From Plan 0: D7. prep turns question-code markdown cells back into code cells on the website so the site looks exactly as today. Add the prep guard that fails the build if any '#### Answer' heading or run cell survives, or if the number of dropdowns differs from the number of questions.",
+  "From Plan 2: a Colab-only help cell tagged remove-cell (use Run all, click the arrow next to Answer, step with Ctrl+Enter rather than Shift+Enter, VS Code shows everything open), so the website never shows Colab instructions.",
+  "From Plan 2: harden turtle_images so that if an example picture's code raises, it exits 1 without writing. That stops it silently rewriting 19 ch04 PNGs under version skew.",
+  "From Plans 0 and 1: check rules to keep. Record reply status via on_cell_executed with allow_errors=True. Run a visibility pass that follows real section semantics (no heading of any kind inside a question except the Answer heading; ## Credits ends the last Answer). Compare stdout plus execute_result in output order with ```text blocks. Add the reverse rule that every error named in an Answer is actually raised. Require that a turtle display_data has a stored picture. Optionally run a second pass on the IPython 7.34 stack.",
+  "Prefer keeping raising code inside run_code string literals (Plans 0 and 2) over Plan 1's raw %%run_question bodies, since Colab has linted magic bodies before and has an unsupported-magics check. Keep Plan 1's magic as a documented alternative to try only if the smoke test's editor notebook shows custom magics are clean.",
+  "Ship in a single merge with the prep guard (Plan 0) rather than Plan 2's dual-format tools, unless the professor wants to publish page by page. In that case keep Plan 2's stage gates and git revert rollback."
+ ]
+}
+```
