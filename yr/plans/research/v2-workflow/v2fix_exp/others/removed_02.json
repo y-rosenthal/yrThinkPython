@@ -1,0 +1,122 @@
+[
+ {
+  "question": "Question 1 (easy): what is displayed?",
+  "part": null,
+  "block": "```text\n10 16\n4.0\n64\n```",
+  "src": null
+ },
+ {
+  "question": "Question 2 (easy): what is displayed?",
+  "part": null,
+  "block": "```text\nName: Ada\nAda is 36 years old\nname\n```",
+  "src": null
+ },
+ {
+  "question": "Question 3 (easy): what is displayed?",
+  "part": null,
+  "block": "```text\nhahaha 6\nha!ha\n```",
+  "src": null
+ },
+ {
+  "question": "Question 5 (medium): what is displayed?",
+  "part": null,
+  "block": "```text\n10 6\n```",
+  "src": null
+ },
+ {
+  "question": "Question 6 (medium): what is displayed?",
+  "part": null,
+  "block": "```text\ntwo\nfour # five\n```",
+  "src": null
+ },
+ {
+  "question": "Question 7 (medium): what is displayed?",
+  "part": null,
+  "block": "```text\n4.0\n8.0\n8\n3.14\n```",
+  "src": null
+ },
+ {
+  "question": "Question 8 (medium): what is displayed?",
+  "part": null,
+  "block": "```text\n5\n14\n2.7 3\n```",
+  "src": null
+ },
+ {
+  "question": "Question 9 (medium): legal and illegal names",
+  "part": "a",
+  "block": "```text\n10\n```",
+  "src": null
+ },
+ {
+  "question": "Question 9 (medium): legal and illegal names",
+  "part": "b",
+  "block": "```text\nSyntaxError: invalid decimal literal\n```",
+  "src": null
+ },
+ {
+  "question": "Question 9 (medium): legal and illegal names",
+  "part": "c",
+  "block": "```text\nSyntaxError: cannot assign to expression here. Maybe you meant '==' instead of '='?\n```",
+  "src": null
+ },
+ {
+  "question": "Question 9 (medium): legal and illegal names",
+  "part": "d",
+  "block": "```text\nSyntaxError: invalid syntax\n```",
+  "src": null
+ },
+ {
+  "question": "Question 9 (medium): legal and illegal names",
+  "part": "e",
+  "block": "```text\n0.5\n```",
+  "src": null
+ },
+ {
+  "question": "Question 10 (medium): wrong calls",
+  "part": "a",
+  "block": "```text\nTypeError: pow expected 2 arguments, got 1\n```",
+  "src": null
+ },
+ {
+  "question": "Question 10 (medium): wrong calls",
+  "part": "b",
+  "block": "```text\nTypeError: pow expected 2 arguments, got 3\n```",
+  "src": null
+ },
+ {
+  "question": "Question 10 (medium): wrong calls",
+  "part": "c",
+  "block": "```text\nTypeError: must be real number, not str\n```",
+  "src": null
+ },
+ {
+  "question": "Question 13 (hard): what is displayed?",
+  "part": null,
+  "block": "```text\n5 3\n```",
+  "src": null
+ },
+ {
+  "question": "Question 14 (hard): syntax errors and runtime errors",
+  "part": "a",
+  "block": "```text\nstart\n```",
+  "src": null
+ },
+ {
+  "question": "Question 14 (hard): syntax errors and runtime errors",
+  "part": "a",
+  "block": "```text\nModuleNotFoundError: No module named 'maath'\n```",
+  "src": null
+ },
+ {
+  "question": "Question 14 (hard): syntax errors and runtime errors",
+  "part": "b",
+  "block": "```text\nSyntaxError: invalid syntax\n```",
+  "src": null
+ },
+ {
+  "question": "Question 15 (hard): find the error",
+  "part": null,
+  "block": "```text\n193.33333333333334\n```",
+  "src": null
+ }
+]

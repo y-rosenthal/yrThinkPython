@@ -1,0 +1,92 @@
+[
+ {
+  "question": "Question 1 (easy): what is displayed?",
+  "part": null,
+  "block": "```text\nHello\nGoodbye\nHello\nGoodbye\n```",
+  "src": null
+ },
+ {
+  "question": "Question 2 (easy): what is displayed?",
+  "part": null,
+  "block": "```text\ntwo\nthree\none\n```",
+  "src": null
+ },
+ {
+  "question": "Question 3 (easy): what is displayed?",
+  "part": null,
+  "block": "```text\nababab\n----------\n```",
+  "src": null
+ },
+ {
+  "question": "Question 4 (easy): what is displayed?",
+  "part": null,
+  "block": "```text\n0 0\n1 1\n2 4\n3 9\ndone\n```",
+  "src": null
+ },
+ {
+  "question": "Question 6 (medium): what is displayed?",
+  "part": null,
+  "block": "```text\nstart begins\nin middle\nstart ends\n```",
+  "src": null
+ },
+ {
+  "question": "Question 7 (medium): what is displayed?",
+  "part": null,
+  "block": "```text\ninside: 11\noutside: 10\n```",
+  "src": null
+ },
+ {
+  "question": "Question 8 (medium): what is displayed?",
+  "part": null,
+  "block": "```text\n*\n**\n***\n****\n\n**\n```",
+  "src": null
+ },
+ {
+  "question": "Question 9 (medium): what is displayed?",
+  "part": null,
+  "block": "```text\n<function __main__.greet()>\n```",
+  "src": null
+ },
+ {
+  "question": "Question 10 (medium): local variables and wrong calls",
+  "part": "a",
+  "block": "```text\n1 + 2 = 3\n```",
+  "src": null
+ },
+ {
+  "question": "Question 10 (medium): local variables and wrong calls",
+  "part": "a",
+  "block": "```text\nNameError: name 'total' is not defined\n```",
+  "src": null
+ },
+ {
+  "question": "Question 10 (medium): local variables and wrong calls",
+  "part": "b",
+  "block": "```text\nTypeError: add_and_show() missing 1 required positional argument: 'b'\n```",
+  "src": null
+ },
+ {
+  "question": "Question 10 (medium): local variables and wrong calls",
+  "part": "c",
+  "block": "```text\nTypeError: add_and_show() takes 2 positional arguments but 3 were given\n```",
+  "src": null
+ },
+ {
+  "question": "Question 13 (hard): what is displayed?",
+  "part": null,
+  "block": "```text\n---\n---\nend of block\n-----\nend of block\n```",
+  "src": null
+ },
+ {
+  "question": "Question 14 (hard): tracebacks",
+  "part": null,
+  "block": "```text\nouter got hi\n```",
+  "src": null
+ },
+ {
+  "question": "Question 14 (hard): tracebacks",
+  "part": null,
+  "block": "```text\nTypeError: can only concatenate str (not \"int\") to str\n```",
+  "src": null
+ }
+]

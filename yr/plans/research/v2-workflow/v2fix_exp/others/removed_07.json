@@ -1,0 +1,74 @@
+[
+ {
+  "question": "Question 1 (easy): what is displayed?",
+  "part": null,
+  "block": "```text\nhh\nii\nc o d e\n```",
+  "src": null
+ },
+ {
+  "question": "Question 2 (easy): what is displayed?",
+  "part": null,
+  "block": "```text\n20\n```",
+  "src": null
+ },
+ {
+  "question": "Question 3 (easy): what is displayed?",
+  "part": null,
+  "block": "```text\nFalse True False\nTrue\ngadsby Gadsby\n```",
+  "src": null
+ },
+ {
+  "question": "Question 5 (medium): what is displayed?",
+  "part": null,
+  "block": "```text\n4 11\n```",
+  "src": null
+ },
+ {
+  "question": "Question 6 (medium): what is displayed?",
+  "part": null,
+  "block": "```text\nHello\nhello\n```",
+  "src": null
+ },
+ {
+  "question": "Question 7 (medium): what is displayed?",
+  "part": null,
+  "block": "```text\n15 11\nhello world!\n```",
+  "src": null
+ },
+ {
+  "question": "Question 8 (medium): what happens?",
+  "part": null,
+  "block": "```text\nNameError: name 'num_letters' is not defined\n```",
+  "src": null
+ },
+ {
+  "question": "Question 9 (medium): reading a file",
+  "part": null,
+  "block": "```text\n3 3\naah\n```",
+  "src": null
+ },
+ {
+  "question": "Question 12 (hard): what is displayed?",
+  "part": null,
+  "block": "```text\nTrue False\n```",
+  "src": null
+ },
+ {
+  "question": "Question 13 (hard): what is displayed?",
+  "part": null,
+  "block": "```text\naxayaz\nbxbybz\n6\n```",
+  "src": null
+ },
+ {
+  "question": "Question 14 (hard): doctests",
+  "part": null,
+  "block": "```text\n**********************************************************************\nFile \"__main__\", line 9, in count_e\nFailed example:\n    count_e('Eerie')\nExpected:\n    3\nGot:\n    2\n```",
+  "src": null
+ },
+ {
+  "question": "Question 15 (hard): searching a file",
+  "part": null,
+  "block": "```text\n10\n```",
+  "src": null
+ }
+]

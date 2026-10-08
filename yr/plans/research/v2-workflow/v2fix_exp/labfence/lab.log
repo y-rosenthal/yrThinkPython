@@ -1,0 +1,29 @@
+[W 2026-10-08 22:27:59.597 ServerApp] ServerApp.token config is deprecated in 2.0. Use IdentityProvider.token.
+[I 2026-10-08 22:27:59.626 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2026-10-08 22:27:59.628 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2026-10-08 22:27:59.631 ServerApp] jupyterlab | extension was successfully linked.
+[I 2026-10-08 22:27:59.633 ServerApp] notebook | extension was successfully linked.
+[I 2026-10-08 22:27:59.669 ServerApp] notebook_shim | extension was successfully linked.
+[W 2026-10-08 22:27:59.680 ServerApp] All authentication is disabled.  Anyone who can connect to this server will be able to run code.
+[I 2026-10-08 22:27:59.680 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2026-10-08 22:27:59.682 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2026-10-08 22:27:59.682 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2026-10-08 22:27:59.684 LabApp] JupyterLab extension loaded from /tmp/claude-0/-home-user-yrThinkPython/6571a165-f8cc-5e43-8b74-c00357a4a6f6/scratchpad/ultra/jupyter-facts/venv-lab/lib/python3.12/site-packages/jupyterlab
+[I 2026-10-08 22:27:59.684 LabApp] JupyterLab application directory is /tmp/claude-0/-home-user-yrThinkPython/6571a165-f8cc-5e43-8b74-c00357a4a6f6/scratchpad/ultra/jupyter-facts/venv-lab/share/jupyter/lab
+[I 2026-10-08 22:27:59.684 LabApp] Extension Manager is 'pypi'.
+[I 2026-10-08 22:27:59.735 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2026-10-08 22:27:59.737 ServerApp] notebook | extension was successfully loaded.
+[I 2026-10-08 22:27:59.738 ServerApp] Serving notebooks from local directory: /tmp/claude-0/-home-user-yrThinkPython/6571a165-f8cc-5e43-8b74-c00357a4a6f6/scratchpad/ultra/v2fix_exp/labfence
+[I 2026-10-08 22:27:59.738 ServerApp] Jupyter Server 2.21.1 is running at:
+[I 2026-10-08 22:27:59.738 ServerApp] http://localhost:8961/lab
+[I 2026-10-08 22:27:59.738 ServerApp]     http://127.0.0.1:8961/lab
+[I 2026-10-08 22:27:59.738 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[I 2026-10-08 22:27:59.848 ServerApp] Skipped non-installed server(s): basedpyright, bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyrefly, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[W 2026-10-08 22:28:11.488 ServerApp] 404 GET /api/contents/chap05_review.ipynb?content=0&hash=0&1791498491477 (01ef246b818b432b9b74260b019cd9dd@127.0.0.1) 8.35ms referer=http://127.0.0.1:8961/lab/tree/fence.ipynb
+[W 2026-10-08 22:28:11.489 ServerApp] 404 GET /api/contents/chap05_review.ipynb?content=0&hash=0&1791498491477 (127.0.0.1): No such file or directory: chap05_review.ipynb
+[W 2026-10-08 22:28:11.506 ServerApp] 404 GET /api/contents/chap05_review.ipynb?content=0&hash=0&1791498491500 (01ef246b818b432b9b74260b019cd9dd@127.0.0.1) 1.72ms referer=http://127.0.0.1:8961/lab/tree/fence.ipynb
+[W 2026-10-08 22:28:11.507 ServerApp] 404 GET /api/contents/chap05_review.ipynb?content=0&hash=0&1791498491500 (127.0.0.1): No such file or directory: chap05_review.ipynb
+[I 2026-10-08 22:28:11.590 LabApp] Build is up to date
+[W 2026-10-08 22:28:12.900 ServerApp] Notebook fence.ipynb is not trusted
+[C 2026-10-08 22:28:40.712 ServerApp] received signal 15, stopping
+[I 2026-10-08 22:28:40.713 ServerApp] Shutting down 5 extensions

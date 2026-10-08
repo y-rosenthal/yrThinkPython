@@ -1,0 +1,68 @@
+[
+ {
+  "question": "Question 1 (easy): what is displayed?",
+  "part": null,
+  "block": "```text\n10 20\nabab\n```",
+  "src": null
+ },
+ {
+  "question": "Question 2 (easy): what is displayed?",
+  "part": null,
+  "block": "```text\nhi!\nNone\n```",
+  "src": null
+ },
+ {
+  "question": "Question 3 (easy): what is displayed?",
+  "part": null,
+  "block": "```text\nstart\n2\n```",
+  "src": null
+ },
+ {
+  "question": "Question 5 (medium): what is displayed?",
+  "part": null,
+  "block": "```text\n3 4 None\n```",
+  "src": null
+ },
+ {
+  "question": "Question 6 (medium): what is displayed?",
+  "part": null,
+  "block": "```text\nTrue False\n10 is even\n3 is odd\nTrue\n```",
+  "src": null
+ },
+ {
+  "question": "Question 7 (medium): what is displayed?",
+  "part": null,
+  "block": "```text\n25\n16\n4\n```",
+  "src": null
+ },
+ {
+  "question": "Question 8 (medium): find the bug",
+  "part": null,
+  "block": "```text\n50\n```",
+  "src": null
+ },
+ {
+  "question": "Question 9 (medium): what is displayed?",
+  "part": null,
+  "block": "```text\n4\nhalf needs an integer\nNone\n```",
+  "src": null
+ },
+ {
+  "question": "Question 13 (hard): what is displayed?",
+  "part": null,
+  "block": "```text\npower 2 3\npower 2 2\npower 2 1\npower 2 0\nreturning 2\nreturning 4\nreturning 8\n8\n```",
+  "src": null
+ },
+ {
+  "question": "Question 14 (hard): what is displayed?",
+  "part": null,
+  "block": "```text\n7 6 36\n```",
+  "src": null
+ },
+ {
+  "question": "Question 15 (hard): missing the base case",
+  "part": null,
+  "block": "```text\nRecursionError: maximum recursion depth exceeded\n```",
+  "src": null
+ }
+]
