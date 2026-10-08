@@ -158,6 +158,27 @@ These come from Prof. Rosenthal's instructions; follow them for every page.
 - **Questions whose answer is an error**: tag the code cell `raises-exception`. Students see the
   error when they run the cell, and the checks still run the page top to bottom. Do **not** use
   `%%expect`: it would show the answer.
+- **Errors an editor can see without running the code** (syntax errors, a name that is not defined,
+  a call with missing, extra, misnamed or wrongly typed arguments, an unknown module): Colab's editor
+  checks code as you type and underlines these, which gives the answer away. Put such code in a
+  string run by `run_code`, which the setup cell defines (`exec(code, globals())`, with a docstring
+  saying why):
+
+  ````
+  run_code("""
+  x = 5
+  if x = 5:
+      print('five')
+  """)
+  ````
+
+  Do the same for every part of the question, including parts with no error, so the cells don't
+  hint which ones are wrong, and say in the introduction of the Questions section what `run_code`
+  is for (see `chap05_review.ipynb`). `review.sh check` fails if a syntax error is not inside
+  `run_code`. To find the other cases, run Pyright (the checker Colab's editor is based on) on
+  each code cell together with the cells above it; errors it reports, other than "unknown import
+  symbol" for `jupyturtle`, give the answer away. Runtime errors such as `ZeroDivisionError` or
+  `RecursionError` are not visible to the editor and can stay as normal code.
 - **Setup cell**: tag it `setup`. It runs before every picture and in the checks.
 - **Avoid text the website turns into symbols**: `(c)`, `(r)`, `(tm)` and `+-` become ©, ®, ™
   and ±. For parts of a question write **Part a**, **Part b**, **Part c**.
@@ -181,7 +202,7 @@ yr/tools/review.sh check yr/chap04_review.ipynb
 
 `review.sh check` runs the page in Jupyter and fails if: a cell raises without the
 `raises-exception` tag; a question's printed output or error is not shown exactly in its
-Answer; an answer's ```python block does not run as a standalone .py file; a write-code question
+Answer; a syntax error is not inside `run_code`; an answer's ```python block does not run as a standalone .py file; a write-code question
 lacks the function header or has fewer than two examples with output; a wrong-call question
 shows fewer than two correct calls; a turtle picture is missing; or the text contains
 `(c)`-style symbols.

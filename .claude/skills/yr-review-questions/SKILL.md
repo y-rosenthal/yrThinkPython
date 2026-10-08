@@ -30,7 +30,10 @@ questions in `yr/chap04_review.ipynb` as models. If the chapter has no review pa
 - **Answers** are collapsible, give more than one approach when there is one, and every ```python
   block in them runs unchanged as a new .py file: imports, all helper functions, and a call.
 - **Errors as answers**: tag the code cell `raises-exception` (never `%%expect`); show the exact
-  `ErrorType: message` line in a ```text block.
+  `ErrorType: message` line in a ```text block. If an editor can see the error without running the
+  code (syntax error, undefined name, wrong arguments, unknown module), Colab underlines it and
+  gives the answer away: put the code of every part of that question in `run_code("""...""")`
+  (defined in the setup cell; see "Errors an editor can see" in `yr/README.md`).
 - **No `(c)`/`(r)`/`(tm)`/`+-` in text**: write **Part a**, **Part b**, **Part c**.
 - Only use Python taught up to this chapter, or explain the extra bit in the question.
 

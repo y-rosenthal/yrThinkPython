@@ -19,7 +19,9 @@ What it checks (a question starts at a '### ' heading; see yr/README.md for the 
      (a cell tagged "raises-exception" in a question whose code defines a function): it shows
      at least two correct calls with their output first.
   5. No empty data-turtle pictures (run `review.sh images` to draw them).
-  6. No text that the website would turn into a symbol: (c) (r) (tm) +- become © ® ™ ±
+  6. A cell that raises a SyntaxError or IndentationError puts its code in a string run by run_code(...),
+     so that Colab's editor does not underline the mistake before the student predicts it.
+  7. No text that the website would turn into a symbol: (c) (r) (tm) +- become © ® ™ ±
      (MyST "replacements"). Write "part c" or "**c.**" instead.
 Exit status 1 if any problem is found.
 """
@@ -108,6 +110,10 @@ def main(path, jupyturtle):
                     problems.append(f'{title}: cell is tagged "raises-exception" but raised nothing')
                 if answers and stdout and stdout not in texts:
                     problems.append(f'{title}: the code prints\n{stdout}\n   but no ```text block in the Answer says exactly that')
+                if any(e.startswith(('SyntaxError', 'IndentationError')) for e in errors) \
+                        and not c.source.lstrip().startswith('run_code('):
+                    problems.append(f'{title}: a cell with a syntax error must put its code in run_code(\"\"\"...\"\"\"), '
+                                    'or Colab underlines the error before the student predicts it')
                 for e in errors:
                     if answers and not any(e in t for t in texts):
                         problems.append(f'{title}: the code raises "{e}" but the Answer does not show it')
