@@ -1,0 +1,2 @@
+chap01.ipynb: WARNING: Lexing literal_block '\n`Hello`' as "ipython3" resulted in an error at token: '`'. Retrying in relaxed mode.
+chap02.ipynb: WARNING: Lexing literal_block "\nclass = 'Self-Defence Against Fresh Fruit'" as "ipython3" resulted in an error at token: '='. Retrying in relaxed mode.
