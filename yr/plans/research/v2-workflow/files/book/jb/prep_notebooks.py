@@ -164,6 +164,7 @@ def raw_pictures(cell):
 
 ANSWER_HEADING = '#### Answer'
 CREDITS_LINE = re.compile(r'\A## Credits\n+')
+CREDIT_LINE = '*Summary and questions by'
 ANSI = re.compile(r'\x1b\[[0-9;]*[A-Za-z]')
 
 
@@ -276,7 +277,8 @@ def review_guard(cells, path):
             problems.append(f'cell {k}: an "#### Answer" heading survived')
     for k in answers:
         nxt = cells[k + 1] if k + 1 < len(cells) else None
-        if nxt is not None and not (nxt['cell_type'] == 'markdown' and (heading_level(nxt['source']) or 9) <= 3):
+        if nxt is not None and not (nxt['cell_type'] == 'markdown' and ((heading_level(nxt['source']) or 9) <= 3
+                                                                      or nxt['source'].startswith(CREDIT_LINE))):
             problems.append(f'cell {k + 1}: content after an Answer dropdown, before the next heading (would be shown openly)')
     for c in cells:
         if c['cell_type'] == 'code' and c.get('outputs') and 'remove-cell' not in c['metadata'].get('tags', []):
