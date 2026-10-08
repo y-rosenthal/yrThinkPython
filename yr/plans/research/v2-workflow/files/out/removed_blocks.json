@@ -1,0 +1,67 @@
+[
+ {
+  "question": "Question 1 (easy): what is displayed?",
+  "part": null,
+  "block": "```text\n2 15\n2 0 3\n3 -4\n```"
+ },
+ {
+  "question": "Question 2 (easy): what is displayed?",
+  "part": null,
+  "block": "```text\nFalse True\nTrue\nTrue\nFalse\n<class 'bool'>\n```"
+ },
+ {
+  "question": "Question 3 (easy): what is displayed?",
+  "part": null,
+  "block": "```text\n4 is even\n7 is odd\n0 is even\n```"
+ },
+ {
+  "question": "Question 5 (medium): what is displayed?",
+  "part": null,
+  "block": "```text\npass\npass\nfail\n```"
+ },
+ {
+  "question": "Question 6 (medium): what is displayed?",
+  "part": null,
+  "block": "```text\nbig\nmedium\nsmall\n```"
+ },
+ {
+  "question": "Question 7 (medium): what is displayed?",
+  "part": null,
+  "block": "```text\n5 is a positive single digit\n-3 is not positive\n10 is 10 or more\n```"
+ },
+ {
+  "question": "Question 8 (medium): find the error",
+  "part": "a",
+  "block": "```text\nSyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?\n```"
+ },
+ {
+  "question": "Question 8 (medium): find the error",
+  "part": "b",
+  "block": "```text\nSyntaxError: expected ':'\n```"
+ },
+ {
+  "question": "Question 8 (medium): find the error",
+  "part": "c",
+  "block": "```text\nIndentationError: unexpected indent\n```"
+ },
+ {
+  "question": "Question 12 (hard): what is displayed?",
+  "part": null,
+  "block": "```text\nn = 3 s = 0\nn = 2 s = 3\nn = 1 s = 5\nn = 0 s = 6\nresult: 6\n```"
+ },
+ {
+  "question": "Question 13 (hard): what is displayed?",
+  "part": null,
+  "block": "```text\n***\n**\n*\n*\n**\n***\n```"
+ },
+ {
+  "question": "Question 14 (hard): infinite recursion",
+  "part": null,
+  "block": "```text\nRecursionError: maximum recursion depth exceeded\n```"
+ },
+ {
+  "question": "Question 17 (hard): what is drawn?",
+  "part": null,
+  "block": "<img data-turtle ...>"
+ }
+]
