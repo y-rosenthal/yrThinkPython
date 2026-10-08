@@ -42,7 +42,7 @@ RUN_CELL_METADATA = {'cellView': 'form', 'jupyter': {'source_hidden': True}}
 WRAP_CALL = "__import__('IPython').get_ipython().run_cell"
 # Run-block hazards: Colab form markup (Colab parses it on any line), cell magics (break under the title line),
 # a tilde fence line (would end the run block's fence)
-BLOCK_HAZARD = re.compile(r'^\s*#\s*@(title|param|markdown)\b|^%%|^\s{0,3}~~~', re.M)
+BLOCK_HAZARD = re.compile(r'#\s*@(title|param|markdown)\b|^%%|^\s{0,3}~~~', re.M)
 # output that names a line number: shifted by 1 in a plain run cell (its first line is the title)
 LINE_REF = re.compile(r'\bline \d+\b|<>:\d+:|Cell In\[')
 MEM_ADDR = re.compile(r' at 0x[0-9a-fA-F]{6,}')
@@ -371,7 +371,13 @@ def output_problems(outputs):
 
 def semantic(outputs):
     """What a student sees, independent of the IPython version: stdout/stderr text, error kind and message
-    (without SyntaxError's '(file, line N)'), drawings (by SVG hash), other displayed data."""
+    (without SyntaxError's '(file, line N)'), drawings (by SVG hash), other displayed data. Memory addresses are
+    masked here only, so that comparing two runs reports them as output_problems, not as a difference."""
+    sem = [(k, *(MEM_ADDR.sub(' at 0x?', v) if isinstance(v, str) else v for v in rest)) for k, *rest in _semantic(outputs)]
+    return sem
+
+
+def _semantic(outputs):
     sem = []
     for o in outputs:
         t = o['output_type']
