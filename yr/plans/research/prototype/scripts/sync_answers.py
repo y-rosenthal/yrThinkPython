@@ -20,7 +20,7 @@ def blocks(md):
     return out
 
 def needs_wrap(code, old):
-    if old is not None and re.sub(r'^(#.*\n)+', '', old).lstrip().startswith('run_code('):
+    if old is not None and old.lstrip().startswith('run_code('):
         return True
     try:
         compile(code, '<q>', 'exec'); return False
@@ -36,14 +36,15 @@ for s in reversed(starts):
     h = next((j for j in range(s, e) if cells[j]['cell_type'] == 'markdown' and ANSWER.match(text(cells[j]))), None)
     if h is None:
         continue
+    if any(c['cell_type'] == 'code' and text(c).strip() == '# Your code here' for c in cells[s:h]):
+        continue  # write-code question: its Answer runs nothing
     qb = blocks(''.join(text(c) for c in cells[s:h] if c['cell_type'] == 'markdown'))
     run_idx = [j for j in range(h + 1, e) if cells[j]['cell_type'] == 'code']
     old = [text(cells[j]) for j in run_idx]
     new = []
     for k, b in enumerate(qb):
         o = old[k] if k < len(old) else None
-        comment = re.match(r'(#.*\n)', o).group(1) if o and re.match(r'#.*\n', o) else ("# The question's code: run it to see its output\n" if len(qb) == 1 else f"# Part {chr(97 + k)}: the question's code\n")
-        new.append(comment + (f'run_code("""\n{b}\n""")' if needs_wrap(b, o) else b))
+        new.append(f'run_code("""\n{b}\n""")' if needs_wrap(b, o) else b)
     if new == old:
         continue
     changed += 1

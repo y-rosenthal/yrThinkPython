@@ -167,12 +167,8 @@ SHOW_RUN_CELLS = os.environ.get('REVIEW_SHOW_RUN_CELLS') == '1'
 
 
 def run_cell_as_block(source):
-    """The code of an Answer's run cell, as a ```python block: without its first-line comment
-    ('# The question's code ...') and without the run_code(\"\"\"...\"\"\") wrapper."""
-    lines = source.strip().split('\n')
-    if lines and lines[0].startswith('#'):
-        lines = lines[1:]
-    code = '\n'.join(lines)
+    """The code of an Answer's run cell as a ```python block, without the run_code(\"\"\"...\"\"\") wrapper."""
+    code = source.strip('\n')
     m = RUN_CODE.match(code)
     return f'```python\n{m.group(1) if m else code}\n```'
 

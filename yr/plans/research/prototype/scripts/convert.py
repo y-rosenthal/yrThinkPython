@@ -82,7 +82,10 @@ def main(src, dst, wrap='errors'):
         if c.cell_type == 'markdown' and c.source.lstrip().startswith('## Questions'):
             c.source = INTRO_OLD.sub(INTRO_NEW, c.source)
         if c.cell_type == 'code' and 'setup' in c.metadata.get('tags', []):
-            c.source = re.sub(r'def run_code\(code\):.*', NEW_RUN_CODE, c.source, flags=re.S)
+            if 'def run_code(' in c.source:
+                c.source = re.sub(r'def run_code\(code\):.*', NEW_RUN_CODE, c.source, flags=re.S)
+            else:
+                c.source = c.source.rstrip() + '\n\n' + NEW_RUN_CODE
         if c.cell_type == 'markdown' and c.source.lstrip().startswith(CREDIT):
             # A collapsed heading hides every cell up to the next heading of the same or a higher level,
             # so without a heading of its own the credit line would be hidden inside the last Answer.
@@ -143,13 +146,10 @@ def main(src, dst, wrap='errors'):
             collapsed.append(head.id)
             out.append(head)
             out.append(md(DETAILS.match(answer.source).group(1)))
-            multi = len(runs) > 1
+            # The run cell holds exactly the question's code (no added comment line: it would shift
+            # line numbers in tracebacks and doctest reports).
             for lab, body, raises in runs:
-                note = f"# {lab.strip('*')}: the question's code" if multi and lab else "# The question's code: run it to see its output"
-                if raises or wrap == 'all':
-                    out.append(code(f'{note}\nrun_code("""\n{body}\n""")'))
-                else:
-                    out.append(code(f'{note}\n{body}'))
+                out.append(code(f'run_code("""\n{body}\n""")' if raises or wrap == 'all' else body))
         i = j
 
     nb.cells = out

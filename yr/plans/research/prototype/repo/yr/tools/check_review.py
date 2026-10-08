@@ -74,8 +74,8 @@ def without_comment(source):
 
 
 def run_cell_code(source):
-    """The question code a run cell runs: without the comment and the run_code(\"\"\"...\"\"\") wrapper."""
-    code = without_comment(source)
+    """The question code a run cell runs: its source, without the run_code(\"\"\"...\"\"\") wrapper."""
+    code = source.strip('\n')
     m = RUN_CODE_CALL.match(code)
     return (m.group(1) if m else code).strip('\n')
 
@@ -165,7 +165,7 @@ def main(path, jupyturtle):
                 stdout = ''.join(o.get('text', '') for o in c.outputs
                                  if o.output_type == 'stream' and o.name == 'stdout').strip()
                 errors = [error_line(o) for o in c.outputs if o.output_type == 'error']
-                if errors and not without_comment(c.source).lstrip().startswith('run_code('):
+                if errors and not c.source.lstrip().startswith('run_code('):
                     problems.append(f'{title}: an Answer code cell raised {errors[0]} without run_code(...)')
                 if stdout and stdout not in texts:
                     problems.append(f'{title}: the code prints\n{stdout}\n   but no ```text block in the Answer says exactly that')
@@ -175,7 +175,8 @@ def main(path, jupyturtle):
 
             # DRY (option A): the Answer's code cells run exactly the question's code blocks
             question = ''.join(c.source for c in qcells if c.cell_type == 'markdown')
-            qb = question_blocks(question)
+            has_placeholder = any(c.cell_type == 'code' and c.source.strip() == PLACEHOLDER for c in qcells)
+            qb = [] if has_placeholder else question_blocks(question)  # write-code questions run nothing
             rb = [run_cell_code(c.source) for c in run_cells]
             if qb != rb:
                 problems.append(f'{title}: the Answer\'s code cells do not run exactly the question\'s code blocks '

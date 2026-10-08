@@ -2,7 +2,7 @@ import sys, json
 from playwright.sync_api import sync_playwright
 out = sys.argv[1]
 JS_STATE = """() => {
-  const cells = [...document.querySelectorAll('.jp-Notebook .jp-Cell')];
+  const cells = [...document.querySelectorAll('.jp-NotebookPanel:not(.lm-mod-hidden) .jp-Notebook .jp-Cell')];
   const vis = c => c.offsetParent !== null && !c.classList.contains('lm-mod-hidden');
   const outs = [...document.querySelectorAll('.jp-Notebook .jp-OutputArea-output')];
   return {cells: cells.length, visibleCells: cells.filter(vis).length,
@@ -14,8 +14,8 @@ JS_STATE = """() => {
 with sync_playwright() as p:
     b = p.chromium.launch(executable_path='/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args=['--no-sandbox'])
     pg = b.new_page(viewport={'width': 1280, 'height': 1000})
-    pg.goto('http://127.0.0.1:8931/lab/tree/chap05_review.ipynb')
-    pg.wait_for_selector('.jp-Notebook .jp-Cell', timeout=60000)
+    pg.goto('http://127.0.0.1:8931/lab/workspaces/final/tree/chap05_review.ipynb?reset')
+    pg.wait_for_selector('.jp-NotebookPanel:not(.lm-mod-hidden) .jp-Notebook .jp-Cell', timeout=60000)
     pg.wait_for_timeout(4000)
     print('ON OPEN:', json.dumps(pg.evaluate(JS_STATE), indent=1))
     q = pg.locator('.jp-MarkdownCell', has_text='Question 8 (medium): find the error').first
