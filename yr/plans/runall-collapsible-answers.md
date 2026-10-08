@@ -109,8 +109,12 @@ their questions and answers are laid out. Research notes collected so far:
 
 ## How to resume (for a future Claude session)
 
-The research was done by a multi-agent workflow in a cloud session on 2026-10-08. If its final plan
-is not in this file, redo the missing parts: map every question on the six pages and every tool that
+The research was done by a multi-agent workflow in a cloud session on 2026-10-08. While it ran, a
+background script pushed each finished agent's result to the branch **`yr-runall-research`**, in
+`yr/plans/research/`: one markdown file per agent (research, verify, plan, judge, synthesize, critic,
+revise) plus the prototype's files in `prototype/` (converted chapter 5 notebook, modified
+`prep_notebooks.py`, conversion scripts). Start there: `git fetch origin yr-runall-research`. If the
+final plan (`revise.md`) is missing there and not in this file, redo only the missing parts: map every question on the six pages and every tool that
 would change, build a prototype of the chapter 5 conversion in a scratch folder (convert the page,
 run it top to bottom with nbclient `allow_errors=False`, build the website from it), then write the
 final plan here and ask Prof. Rosenthal for the decisions above before changing the live pages.
