@@ -1,0 +1,178 @@
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+==================== setup status= ok
+[stream stdout] 3.12.3 7.34.0
+
+==================== normal_syntax status= error
+[error] SyntaxError | invalid syntax. Maybe you meant '==' or ':=' instead of '='? (3366795179.py, line 2)
+  File "/tmp/ipykernel_13788/3366795179.py", line 2
+    if x = 5:
+       ^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+==================== normal_rt status= error
+[stream stdout] start
+
+[error] ZeroDivisionError | division by zero
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+/tmp/ipykernel_13788/3021276776.py in <cell line: 0>()
+      2     return n / 0
+      3 print('start')
+----> 4 f(3)
+
+/tmp/ipykernel_13788/3021276776.py in f(n)
+      1 def f(n):
+----> 2     return n / 0
+      3 print('start')
+      4 f(3)
+
+ZeroDivisionError: division by zero
+==================== rc_show_syn status= ok
+[error] SyntaxError | invalid syntax. Maybe you meant '==' or ':=' instead of '='? (<string>, line 3)
+  File "<string>", line 3
+    if x = 5:
+       ^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+==================== rc_show_rt status= ok
+[stream stdout] start
+
+[error] ZeroDivisionError | division by zero
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+<string> in <module>
+
+<string> in f(n)
+
+ZeroDivisionError: division by zero
+==================== rc_show_name status= ok
+[error] NameError | name 'total' is not defined
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<string> in <module>
+
+NameError: name 'total' is not defined
+==================== rc_show_expr status= ok
+==================== rc_cell_syn status= ok
+[error] SyntaxError | invalid syntax. Maybe you meant '==' or ':=' instead of '='? (445721521.py, line 2)
+  File "/tmp/ipykernel_13788/445721521.py", line 2
+    if x = 5:
+       ^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+==================== rc_cell_rt status= ok
+[stream stdout] start
+
+[error] ZeroDivisionError | division by zero
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+/tmp/ipykernel_13788/1696820460.py in <cell line: 0>()
+      2     return n / 0
+      3 print('start')
+----> 4 f(3)
+
+/tmp/ipykernel_13788/1696820460.py in f(n)
+      1 def f(n):
+----> 2     return n / 0
+      3 print('start')
+      4 f(3)
+
+ZeroDivisionError: division by zero
+==================== rc_cell_name status= ok
+[error] NameError | name 'total' is not defined
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+/tmp/ipykernel_13788/1590327027.py in <cell line: 0>()
+----> 1 print(total)
+
+NameError: name 'total' is not defined
+==================== rc_cell_expr status= ok
+[execute_result] 11 12
+==================== rc_stderr_syn status= ok
+[stream stderr] ---------------------------------------------------------------------------
+SyntaxError                               Traceback (most recent call last)
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='? (<string>, line 3)
+
+==================== rc_stderr_rt status= ok
+[stream stdout] start
+
+[stream stderr] ---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+<string> in <module>
+
+<string> in f(n)
+
+ZeroDivisionError: division by zero
+
+==================== rc_stderr_name status= ok
+[stream stderr] ---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<string> in <module>
+
+NameError: name 'total' is not defined
+
+==================== rc_stderr_expr status= ok
+==================== rc_linecache_syn status= ok
+[error] SyntaxError | invalid syntax. Maybe you meant '==' or ':=' instead of '='? (<run_code>, line 3)
+  File "<run_code>", line 3
+    if x = 5:
+       ^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+==================== rc_linecache_rt status= ok
+[stream stdout] start
+
+[error] ZeroDivisionError | division by zero
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+<run_code> in f(n)
+      1 
+      2 def f(n):
+----> 3     return n / 0
+      4 print('start')
+      5 f(3)
+
+ZeroDivisionError: division by zero
+==================== rc_linecache_name status= ok
+[error] NameError | name 'total' is not defined
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+NameError: name 'total' is not defined
+==================== rc_linecache_expr status= ok
+==================== rc_show_off1_rt status= ok
+[stream stdout] start
+
+[error] ZeroDivisionError | division by zero
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+<string> in <module>
+
+<string> in f(n)
+
+ZeroDivisionError: division by zero
+==================== normal_expr status= ok
+[execute_result] 21 12
+==================== magic_def status= ok
+==================== magic_use status= ok
+==================== magic_check status= ok
+[stream stdout] "x = 5\nif x = 5:\n    print('five')\n"
+
+[error] SyntaxError | invalid syntax. Maybe you meant '==' or ':=' instead of '='? (2636000202.py, line 2)
+  File "/tmp/ipykernel_13788/2636000202.py", line 2
+    if x = 5:
+       ^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+==================== unknown_magic status= error
+[stream stderr] UsageError: Cell magic `%%questoin` not found.
+
+==================== last status= ok
+[stream stdout] reached last cell
+

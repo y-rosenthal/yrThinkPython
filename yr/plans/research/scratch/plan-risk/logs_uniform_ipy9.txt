@@ -1,0 +1,10 @@
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+ch07q14 DIFFERENT
+  plain: [('stdout', '**********************************************************************\nFile "__main__", line 9, in count_e\nFailed example:\n    count_e(\'Eerie\')\nExpected:\n    3\nGot:\n    2\n')]
+  wrapped: []
+ch03q9 SAME
+   [('result', '<function __main__.greet()>')]
+ch02q4 SAME
+   [('result', '12')]
+ch04q14c SAME
+   [('display', '<svg width="300" height="150">\n    <rect')]

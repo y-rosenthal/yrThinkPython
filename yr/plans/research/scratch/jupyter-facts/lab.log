@@ -1,0 +1,123 @@
+[W 2026-10-08 17:03:01.386 ServerApp] ServerApp.token config is deprecated in 2.0. Use IdentityProvider.token.
+[I 2026-10-08 17:03:01.405 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2026-10-08 17:03:01.408 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2026-10-08 17:03:01.410 ServerApp] jupyterlab | extension was successfully linked.
+[I 2026-10-08 17:03:01.438 ServerApp] notebook_shim | extension was successfully linked.
+[I 2026-10-08 17:03:01.449 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2026-10-08 17:03:01.450 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2026-10-08 17:03:01.451 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2026-10-08 17:03:01.452 LabApp] JupyterLab extension loaded from /tmp/claude-0/-home-user-yrThinkPython/6571a165-f8cc-5e43-8b74-c00357a4a6f6/scratchpad/ultra/jupyter-facts/venv-lab/lib/python3.12/site-packages/jupyterlab
+[I 2026-10-08 17:03:01.452 LabApp] JupyterLab application directory is /tmp/claude-0/-home-user-yrThinkPython/6571a165-f8cc-5e43-8b74-c00357a4a6f6/scratchpad/ultra/jupyter-facts/venv-lab/share/jupyter/lab
+[I 2026-10-08 17:03:01.452 LabApp] Extension Manager is 'pypi'.
+[I 2026-10-08 17:03:01.501 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2026-10-08 17:03:01.501 ServerApp] Serving notebooks from local directory: /tmp/claude-0/-home-user-yrThinkPython/6571a165-f8cc-5e43-8b74-c00357a4a6f6/scratchpad/ultra/jupyter-facts/labroot
+[I 2026-10-08 17:03:01.501 ServerApp] Jupyter Server 2.21.1 is running at:
+[I 2026-10-08 17:03:01.501 ServerApp] http://127.0.0.1:8899/lab?token=...
+[I 2026-10-08 17:03:01.501 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[I 2026-10-08 17:03:01.599 ServerApp] Skipped non-installed server(s): basedpyright, bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyrefly, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[I 2026-10-08 17:03:26.822 LabApp] Build is up to date
+[I 2026-10-08 17:03:28.307 ServerApp] Writing notebook-signing key to /root/.local/share/jupyter/notebook_secret
+[W 2026-10-08 17:03:28.307 ServerApp] Notebook tagged.ipynb is not trusted
+[I 2026-10-08 17:03:28.667 ServerApp] Kernel started: 0e757852-f562-46f3-8004-bca395f5a0e5
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+[I 2026-10-08 17:03:29.836 ServerApp] Adapting from protocol version 5.3 (kernel 0e757852-f562-46f3-8004-bca395f5a0e5) to 5.4 (client).
+[I 2026-10-08 17:03:29.837 ServerApp] Connecting to kernel 0e757852-f562-46f3-8004-bca395f5a0e5.
+[W 2026-10-08 17:03:29.839 ServerApp] The websocket_ping_timeout (90000) cannot be longer than the websocket_ping_interval (30000).
+    Setting websocket_ping_timeout=30000
+[I 2026-10-08 17:03:29.850 ServerApp] Adapting from protocol version 5.3 (kernel 0e757852-f562-46f3-8004-bca395f5a0e5) to 5.4 (client).
+[I 2026-10-08 17:03:29.850 ServerApp] Connecting to kernel 0e757852-f562-46f3-8004-bca395f5a0e5.
+[I 2026-10-08 17:03:29.862 ServerApp] Adapting from protocol version 5.3 (kernel 0e757852-f562-46f3-8004-bca395f5a0e5) to 5.4 (client).
+[I 2026-10-08 17:03:29.863 ServerApp] Connecting to kernel 0e757852-f562-46f3-8004-bca395f5a0e5.
+[I 2026-10-08 17:03:35.139 ServerApp] Starting buffering for 0e757852-f562-46f3-8004-bca395f5a0e5:336ba824-000b-4a0b-95a2-dc12e6064f34
+[I 2026-10-08 17:03:35.730 ServerApp] Adapting from protocol version 5.3 (kernel 0e757852-f562-46f3-8004-bca395f5a0e5) to 5.4 (client).
+[I 2026-10-08 17:03:35.731 ServerApp] Connecting to kernel 0e757852-f562-46f3-8004-bca395f5a0e5.
+[I 2026-10-08 17:03:35.800 ServerApp] Starting buffering for 0e757852-f562-46f3-8004-bca395f5a0e5:c57c4a04-06a9-4b80-9f60-ddeb4b812e9d
+[I 2026-10-08 17:03:36.513 LabApp] Build is up to date
+[W 2026-10-08 17:03:37.246 ServerApp] Notebook untagged.ipynb is not trusted
+[I 2026-10-08 17:03:37.564 ServerApp] Kernel started: b8e4b326-8ef2-4684-8a70-789de0b78490
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+[I 2026-10-08 17:03:37.796 ServerApp] Adapting from protocol version 5.3 (kernel b8e4b326-8ef2-4684-8a70-789de0b78490) to 5.4 (client).
+[I 2026-10-08 17:03:37.796 ServerApp] Connecting to kernel b8e4b326-8ef2-4684-8a70-789de0b78490.
+[I 2026-10-08 17:03:42.874 ServerApp] Starting buffering for b8e4b326-8ef2-4684-8a70-789de0b78490:8895b248-0281-4e8d-8c7a-83c2e65d4e12
+[I 2026-10-08 17:03:43.307 ServerApp] Adapting from protocol version 5.3 (kernel 0e757852-f562-46f3-8004-bca395f5a0e5) to 5.4 (client).
+[I 2026-10-08 17:03:43.308 ServerApp] Connecting to kernel 0e757852-f562-46f3-8004-bca395f5a0e5.
+[I 2026-10-08 17:03:43.323 ServerApp] Adapting from protocol version 5.3 (kernel b8e4b326-8ef2-4684-8a70-789de0b78490) to 5.4 (client).
+[I 2026-10-08 17:03:43.323 ServerApp] Connecting to kernel b8e4b326-8ef2-4684-8a70-789de0b78490.
+[I 2026-10-08 17:03:43.520 ServerApp] Starting buffering for 0e757852-f562-46f3-8004-bca395f5a0e5:c523cde1-0291-4583-85ec-59a452da6e91
+[I 2026-10-08 17:03:43.520 ServerApp] Starting buffering for b8e4b326-8ef2-4684-8a70-789de0b78490:d979128e-f7cc-4c3b-8d57-e9a8498e570f
+[I 2026-10-08 17:03:44.020 LabApp] Build is up to date
+[W 2026-10-08 17:03:44.738 ServerApp] Notebook tagged.ipynb is not trusted
+[I 2026-10-08 17:03:44.981 ServerApp] Adapting from protocol version 5.3 (kernel 0e757852-f562-46f3-8004-bca395f5a0e5) to 5.4 (client).
+[I 2026-10-08 17:03:44.981 ServerApp] Connecting to kernel 0e757852-f562-46f3-8004-bca395f5a0e5.
+[I 2026-10-08 17:05:44.816 ServerApp] Saving file at /tagged.ipynb
+[I 2026-10-08 17:06:46.625 ServerApp] Starting buffering for 0e757852-f562-46f3-8004-bca395f5a0e5:fd77b273-63be-4b5c-af63-a864a0287b43
+[I 2026-10-08 17:07:08.572 ServerApp] Adapting from protocol version 5.3 (kernel 0e757852-f562-46f3-8004-bca395f5a0e5) to 5.4 (client).
+[I 2026-10-08 17:07:08.572 ServerApp] Connecting to kernel 0e757852-f562-46f3-8004-bca395f5a0e5.
+[I 2026-10-08 17:07:08.585 ServerApp] Adapting from protocol version 5.3 (kernel b8e4b326-8ef2-4684-8a70-789de0b78490) to 5.4 (client).
+[I 2026-10-08 17:07:08.586 ServerApp] Connecting to kernel b8e4b326-8ef2-4684-8a70-789de0b78490.
+[I 2026-10-08 17:07:08.653 ServerApp] Starting buffering for b8e4b326-8ef2-4684-8a70-789de0b78490:63f68a49-7b7f-444b-b8c6-3706e7ee766f
+[I 2026-10-08 17:07:08.658 ServerApp] Starting buffering for 0e757852-f562-46f3-8004-bca395f5a0e5:510d8811-f521-4619-a5d7-4c9a064b3bd6
+[I 2026-10-08 17:07:08.972 LabApp] Build is up to date
+[I 2026-10-08 17:07:10.488 ServerApp] Kernel started: d671f02a-bf44-4f22-84ad-c1a50de29c2e
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+[I 2026-10-08 17:07:10.695 ServerApp] Adapting from protocol version 5.3 (kernel d671f02a-bf44-4f22-84ad-c1a50de29c2e) to 5.4 (client).
+[I 2026-10-08 17:07:10.695 ServerApp] Connecting to kernel d671f02a-bf44-4f22-84ad-c1a50de29c2e.
+[I 2026-10-08 17:07:19.400 ServerApp] Starting buffering for d671f02a-bf44-4f22-84ad-c1a50de29c2e:819f031e-1a47-42bd-aeea-4d25d1e4c6eb
+[I 2026-10-08 17:07:19.923 ServerApp] Adapting from protocol version 5.3 (kernel 0e757852-f562-46f3-8004-bca395f5a0e5) to 5.4 (client).
+[I 2026-10-08 17:07:19.924 ServerApp] Connecting to kernel 0e757852-f562-46f3-8004-bca395f5a0e5.
+[I 2026-10-08 17:07:19.949 ServerApp] Adapting from protocol version 5.3 (kernel b8e4b326-8ef2-4684-8a70-789de0b78490) to 5.4 (client).
+[I 2026-10-08 17:07:19.956 ServerApp] Connecting to kernel b8e4b326-8ef2-4684-8a70-789de0b78490.
+[I 2026-10-08 17:07:19.968 ServerApp] Adapting from protocol version 5.3 (kernel d671f02a-bf44-4f22-84ad-c1a50de29c2e) to 5.4 (client).
+[I 2026-10-08 17:07:19.968 ServerApp] Connecting to kernel d671f02a-bf44-4f22-84ad-c1a50de29c2e.
+[I 2026-10-08 17:07:20.009 ServerApp] Starting buffering for b8e4b326-8ef2-4684-8a70-789de0b78490:3d9f1e42-f829-4368-a3c2-b6d90f500da4
+[I 2026-10-08 17:07:20.009 ServerApp] Starting buffering for 0e757852-f562-46f3-8004-bca395f5a0e5:e0e1ee12-a9d1-43ca-87d5-4b4cfa277e84
+[I 2026-10-08 17:07:20.023 ServerApp] Starting buffering for d671f02a-bf44-4f22-84ad-c1a50de29c2e:4dff1aed-ac96-4a40-a64a-1f28c88b903a
+[I 2026-10-08 17:07:20.361 LabApp] Build is up to date
+[I 2026-10-08 17:07:21.636 ServerApp] Kernel started: 3d7eabed-c9f3-4a90-a9db-80639aafc601
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+[I 2026-10-08 17:07:21.843 ServerApp] Adapting from protocol version 5.3 (kernel 3d7eabed-c9f3-4a90-a9db-80639aafc601) to 5.4 (client).
+[I 2026-10-08 17:07:21.845 ServerApp] Connecting to kernel 3d7eabed-c9f3-4a90-a9db-80639aafc601.
+[I 2026-10-08 17:07:30.178 ServerApp] Starting buffering for 3d7eabed-c9f3-4a90-a9db-80639aafc601:5d32d30a-5cb3-4bfe-afe7-bc68a7644c1e
+[I 2026-10-08 17:07:30.552 ServerApp] Adapting from protocol version 5.3 (kernel 0e757852-f562-46f3-8004-bca395f5a0e5) to 5.4 (client).
+[I 2026-10-08 17:07:30.552 ServerApp] Connecting to kernel 0e757852-f562-46f3-8004-bca395f5a0e5.
+[I 2026-10-08 17:07:30.567 ServerApp] Adapting from protocol version 5.3 (kernel b8e4b326-8ef2-4684-8a70-789de0b78490) to 5.4 (client).
+[I 2026-10-08 17:07:30.568 ServerApp] Connecting to kernel b8e4b326-8ef2-4684-8a70-789de0b78490.
+[I 2026-10-08 17:07:30.582 ServerApp] Adapting from protocol version 5.3 (kernel d671f02a-bf44-4f22-84ad-c1a50de29c2e) to 5.4 (client).
+[I 2026-10-08 17:07:30.582 ServerApp] Connecting to kernel d671f02a-bf44-4f22-84ad-c1a50de29c2e.
+[I 2026-10-08 17:07:30.594 ServerApp] Adapting from protocol version 5.3 (kernel 3d7eabed-c9f3-4a90-a9db-80639aafc601) to 5.4 (client).
+[I 2026-10-08 17:07:30.595 ServerApp] Connecting to kernel 3d7eabed-c9f3-4a90-a9db-80639aafc601.
+[I 2026-10-08 17:07:30.620 ServerApp] Starting buffering for 0e757852-f562-46f3-8004-bca395f5a0e5:26146e8d-6118-4c8c-8351-6e56f73cc813
+[I 2026-10-08 17:07:30.625 ServerApp] Starting buffering for b8e4b326-8ef2-4684-8a70-789de0b78490:a640e37e-251d-437c-8154-eebca6ce313f
+[I 2026-10-08 17:07:30.631 ServerApp] Starting buffering for d671f02a-bf44-4f22-84ad-c1a50de29c2e:24d50a87-ffc6-4987-baee-f60b3f9da2f4
+[I 2026-10-08 17:07:30.643 ServerApp] Starting buffering for 3d7eabed-c9f3-4a90-a9db-80639aafc601:c7843f11-0610-44d6-8815-7c25c324fab3
+[I 2026-10-08 17:07:31.022 LabApp] Build is up to date
+[I 2026-10-08 17:07:32.213 ServerApp] Adapting from protocol version 5.3 (kernel 3d7eabed-c9f3-4a90-a9db-80639aafc601) to 5.4 (client).
+[I 2026-10-08 17:07:32.213 ServerApp] Connecting to kernel 3d7eabed-c9f3-4a90-a9db-80639aafc601.
+[I 2026-10-08 17:07:34.702 ServerApp] Starting buffering for 3d7eabed-c9f3-4a90-a9db-80639aafc601:fa558adc-ee0b-443c-89ee-01647f28156d
+[I 2026-10-08 17:07:55.968 ServerApp] Adapting from protocol version 5.3 (kernel 0e757852-f562-46f3-8004-bca395f5a0e5) to 5.4 (client).
+[I 2026-10-08 17:07:55.968 ServerApp] Connecting to kernel 0e757852-f562-46f3-8004-bca395f5a0e5.
+[I 2026-10-08 17:07:55.980 ServerApp] Adapting from protocol version 5.3 (kernel b8e4b326-8ef2-4684-8a70-789de0b78490) to 5.4 (client).
+[I 2026-10-08 17:07:55.980 ServerApp] Connecting to kernel b8e4b326-8ef2-4684-8a70-789de0b78490.
+[I 2026-10-08 17:07:55.991 ServerApp] Adapting from protocol version 5.3 (kernel d671f02a-bf44-4f22-84ad-c1a50de29c2e) to 5.4 (client).
+[I 2026-10-08 17:07:55.992 ServerApp] Connecting to kernel d671f02a-bf44-4f22-84ad-c1a50de29c2e.
+[I 2026-10-08 17:07:56.003 ServerApp] Adapting from protocol version 5.3 (kernel 3d7eabed-c9f3-4a90-a9db-80639aafc601) to 5.4 (client).
+[I 2026-10-08 17:07:56.004 ServerApp] Connecting to kernel 3d7eabed-c9f3-4a90-a9db-80639aafc601.
+[I 2026-10-08 17:07:56.046 ServerApp] Starting buffering for 0e757852-f562-46f3-8004-bca395f5a0e5:883390bd-933d-4bfa-bf72-c1d7acaefc99
+[I 2026-10-08 17:07:56.047 ServerApp] Starting buffering for b8e4b326-8ef2-4684-8a70-789de0b78490:ab665ddd-1642-4523-9d5f-8361ddc57afc
+[I 2026-10-08 17:07:56.048 ServerApp] Starting buffering for d671f02a-bf44-4f22-84ad-c1a50de29c2e:83086965-1224-4003-bf0d-62230f144c8d
+[I 2026-10-08 17:07:56.068 ServerApp] Starting buffering for 3d7eabed-c9f3-4a90-a9db-80639aafc601:0fe44b7c-ba27-442d-b373-64eef54a6949
+[I 2026-10-08 17:07:56.398 LabApp] Build is up to date
+[W 2026-10-08 17:07:57.457 ServerApp] Notebook lastcell.ipynb is not trusted
+[I 2026-10-08 17:07:57.831 ServerApp] Kernel started: c269e23b-5c5c-4cde-8375-e1f26ed19bd8
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+[I 2026-10-08 17:07:58.084 ServerApp] Adapting from protocol version 5.3 (kernel c269e23b-5c5c-4cde-8375-e1f26ed19bd8) to 5.4 (client).
+[I 2026-10-08 17:07:58.085 ServerApp] Connecting to kernel c269e23b-5c5c-4cde-8375-e1f26ed19bd8.
+[I 2026-10-08 17:08:03.534 ServerApp] Starting buffering for c269e23b-5c5c-4cde-8375-e1f26ed19bd8:0d1f9b8d-d4eb-45e9-ba1b-b4d712311190
+[C 2026-10-08 17:10:36.633 ServerApp] received signal 15, stopping
+[I 2026-10-08 17:10:36.634 ServerApp] Shutting down 4 extensions
+[I 2026-10-08 17:10:36.635 ServerApp] Shutting down 5 kernels
+[I 2026-10-08 17:10:36.635 ServerApp] Kernel shutdown: 0e757852-f562-46f3-8004-bca395f5a0e5
+[I 2026-10-08 17:10:36.635 ServerApp] Kernel shutdown: b8e4b326-8ef2-4684-8a70-789de0b78490
+[I 2026-10-08 17:10:36.635 ServerApp] Kernel shutdown: 3d7eabed-c9f3-4a90-a9db-80639aafc601
+[I 2026-10-08 17:10:36.636 ServerApp] Kernel shutdown: c269e23b-5c5c-4cde-8375-e1f26ed19bd8
+[I 2026-10-08 17:10:36.636 ServerApp] Kernel shutdown: d671f02a-bf44-4f22-84ad-c1a50de29c2e

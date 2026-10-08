@@ -1,0 +1,611 @@
+# python 3.12.3; kernel IPython: see setup; nbclient allow_errors=False finished all cells
+
+==============================================================================
+[A_normal_zero] tags=['raises-exception'] execute_reply.status=error
+--- source:
+x = 10
+y = 0
+print('before')
+print(x / y)
+
+--- outputs:
+<stream stdout> before
+<error output: ename='ZeroDivisionError' evalue='division by zero'>
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+/tmp/ipykernel_1529/3604253274.py in <cell line: 0>()
+      2 y = 0
+      3 print('before')
+----> 4 print(x / y)
+
+ZeroDivisionError: division by zero
+==============================================================================
+[A_normal_syntax] tags=['raises-exception'] execute_reply.status=error
+--- source:
+x = 5
+if x = 5:
+    print('five')
+
+--- outputs:
+<error output: ename='SyntaxError' evalue="invalid syntax. Maybe you meant '==' or ':=' instead of '='? (2636000202.py, line 2)">
+  File "/tmp/ipykernel_1529/2636000202.py", line 2
+    if x = 5:
+       ^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+==============================================================================
+[A_normal_name] tags=['raises-exception'] execute_reply.status=error
+--- source:
+def f(n):
+    return n + undefined_name
+
+print(f(3))
+
+--- outputs:
+<error output: ename='NameError' evalue="name 'undefined_name' is not defined">
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+/tmp/ipykernel_1529/2418866578.py in <cell line: 0>()
+      2     return n + undefined_name
+      3 
+----> 4 print(f(3))
+
+/tmp/ipykernel_1529/2418866578.py in f(n)
+      1 def f(n):
+----> 2     return n + undefined_name
+      3 
+      4 print(f(3))
+
+NameError: name 'undefined_name' is not defined
+==============================================================================
+[A_normal_typeerr] tags=['raises-exception'] execute_reply.status=error
+--- source:
+def area(w, h):
+    return w * h
+
+area(3)
+
+--- outputs:
+<error output: ename='TypeError' evalue="area() missing 1 required positional argument: 'h'">
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+/tmp/ipykernel_1529/4290588141.py in <cell line: 0>()
+      2     return w * h
+      3 
+----> 4 area(3)
+
+TypeError: area() missing 1 required positional argument: 'h'
+==============================================================================
+[A_normal_expr] tags=[] execute_reply.status=ok
+--- source:
+x = 3
+x * 2
+
+--- outputs:
+<execute_result count=6> 6
+==============================================================================
+[run_plain_zero] tags=['raises-exception'] execute_reply.status=error
+--- source:
+run_plain("""
+x = 10
+y = 0
+print('before')
+print(x / y)
+""")
+--- outputs:
+<stream stdout> before
+<error output: ename='ZeroDivisionError' evalue='division by zero'>
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+/tmp/ipykernel_1529/3551355298.py in <cell line: 0>()
+----> 1 run_plain("""
+      2 x = 10
+      3 y = 0
+      4 print('before')
+      5 print(x / y)
+
+/tmp/ipykernel_1529/2330194707.py in run_plain(code)
+      4 def run_plain(code):
+      5     """exec, exception propagates"""
+----> 6     exec(code, globals())
+      7 
+      8 def run_show(code):
+
+<string> in <module>
+
+ZeroDivisionError: division by zero
+==============================================================================
+[run_plain_syntax] tags=['raises-exception'] execute_reply.status=error
+--- source:
+run_plain("""
+x = 5
+if x = 5:
+    print('five')
+""")
+--- outputs:
+<error output: ename='SyntaxError' evalue="invalid syntax. Maybe you meant '==' or ':=' instead of '='? (<string>, line 3)">
+Traceback (most recent call last):
+
+  File "/tmp/claude-0/-home-user-yrThinkPython/6571a165-f8cc-5e43-8b74-c00357a4a6f6/scratchpad/ultra/jupyter-facts/venv-ipy7/lib/python3.12/site-packages/IPython/core/interactiveshell.py", line 3553, in run_code
+    exec(code_obj, self.user_global_ns, self.user_ns)
+
+  File "/tmp/ipykernel_1529/418741386.py", line 1, in <cell line: 0>
+    run_plain("""
+
+  File "/tmp/ipykernel_1529/2330194707.py", line 6, in run_plain
+    exec(code, globals())
+
+  File "<string>", line 3
+    if x = 5:
+       ^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+==============================================================================
+[run_plain_name] tags=['raises-exception'] execute_reply.status=error
+--- source:
+run_plain("""
+def f(n):
+    return n + undefined_name
+
+print(f(3))
+""")
+--- outputs:
+<error output: ename='NameError' evalue="name 'undefined_name' is not defined">
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+/tmp/ipykernel_1529/3244979840.py in <cell line: 0>()
+----> 1 run_plain("""
+      2 def f(n):
+      3     return n + undefined_name
+      4 
+      5 print(f(3))
+
+/tmp/ipykernel_1529/2330194707.py in run_plain(code)
+      4 def run_plain(code):
+      5     """exec, exception propagates"""
+----> 6     exec(code, globals())
+      7 
+      8 def run_show(code):
+
+<string> in <module>
+
+<string> in f(n)
+
+NameError: name 'undefined_name' is not defined
+==============================================================================
+[run_plain_typeerr] tags=['raises-exception'] execute_reply.status=error
+--- source:
+run_plain("""
+def area(w, h):
+    return w * h
+
+area(3)
+""")
+--- outputs:
+<error output: ename='TypeError' evalue="area() missing 1 required positional argument: 'h'">
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+/tmp/ipykernel_1529/662847386.py in <cell line: 0>()
+----> 1 run_plain("""
+      2 def area(w, h):
+      3     return w * h
+      4 
+      5 area(3)
+
+/tmp/ipykernel_1529/2330194707.py in run_plain(code)
+      4 def run_plain(code):
+      5     """exec, exception propagates"""
+----> 6     exec(code, globals())
+      7 
+      8 def run_show(code):
+
+<string> in <module>
+
+TypeError: area() missing 1 required positional argument: 'h'
+==============================================================================
+[run_plain_expr] tags=[] execute_reply.status=ok
+--- source:
+run_plain("""
+x = 3
+x * 2
+""")
+--- outputs:
+==============================================================================
+[run_show_zero] tags=[] execute_reply.status=ok
+--- source:
+run_show("""
+x = 10
+y = 0
+print('before')
+print(x / y)
+""")
+--- outputs:
+<stream stdout> before
+<error output: ename='ZeroDivisionError' evalue='division by zero'>
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+<string> in <module>
+
+ZeroDivisionError: division by zero
+==============================================================================
+[run_show_syntax] tags=[] execute_reply.status=ok
+--- source:
+run_show("""
+x = 5
+if x = 5:
+    print('five')
+""")
+--- outputs:
+<error output: ename='SyntaxError' evalue="invalid syntax. Maybe you meant '==' or ':=' instead of '='? (<string>, line 3)">
+  File "<string>", line 3
+    if x = 5:
+       ^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+==============================================================================
+[run_show_name] tags=[] execute_reply.status=ok
+--- source:
+run_show("""
+def f(n):
+    return n + undefined_name
+
+print(f(3))
+""")
+--- outputs:
+<error output: ename='NameError' evalue="name 'undefined_name' is not defined">
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<string> in <module>
+
+<string> in f(n)
+
+NameError: name 'undefined_name' is not defined
+==============================================================================
+[run_show_typeerr] tags=[] execute_reply.status=ok
+--- source:
+run_show("""
+def area(w, h):
+    return w * h
+
+area(3)
+""")
+--- outputs:
+<error output: ename='TypeError' evalue="area() missing 1 required positional argument: 'h'">
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<string> in <module>
+
+TypeError: area() missing 1 required positional argument: 'h'
+==============================================================================
+[run_show_expr] tags=[] execute_reply.status=ok
+--- source:
+run_show("""
+x = 3
+x * 2
+""")
+--- outputs:
+==============================================================================
+[run_show_offset_zero] tags=[] execute_reply.status=ok
+--- source:
+run_show_offset("""
+x = 10
+y = 0
+print('before')
+print(x / y)
+""")
+--- outputs:
+<stream stdout> before
+<error output: ename='ZeroDivisionError' evalue='division by zero'>
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+<string> in <module>
+
+ZeroDivisionError: division by zero
+==============================================================================
+[run_show_offset_syntax] tags=[] execute_reply.status=ok
+--- source:
+run_show_offset("""
+x = 5
+if x = 5:
+    print('five')
+""")
+--- outputs:
+<error output: ename='SyntaxError' evalue="invalid syntax. Maybe you meant '==' or ':=' instead of '='? (<string>, line 3)">
+  File "<string>", line 3
+    if x = 5:
+       ^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+==============================================================================
+[run_show_offset_name] tags=[] execute_reply.status=ok
+--- source:
+run_show_offset("""
+def f(n):
+    return n + undefined_name
+
+print(f(3))
+""")
+--- outputs:
+<error output: ename='NameError' evalue="name 'undefined_name' is not defined">
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<string> in <module>
+
+<string> in f(n)
+
+NameError: name 'undefined_name' is not defined
+==============================================================================
+[run_show_offset_typeerr] tags=[] execute_reply.status=ok
+--- source:
+run_show_offset("""
+def area(w, h):
+    return w * h
+
+area(3)
+""")
+--- outputs:
+<error output: ename='TypeError' evalue="area() missing 1 required positional argument: 'h'">
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<string> in <module>
+
+TypeError: area() missing 1 required positional argument: 'h'
+==============================================================================
+[run_show_offset_expr] tags=[] execute_reply.status=ok
+--- source:
+run_show_offset("""
+x = 3
+x * 2
+""")
+--- outputs:
+==============================================================================
+[run_show_only_zero] tags=[] execute_reply.status=ok
+--- source:
+run_show_only("""
+x = 10
+y = 0
+print('before')
+print(x / y)
+""")
+--- outputs:
+<stream stdout> before
+<error output: ename='ZeroDivisionError' evalue='division by zero'>
+An exception has occurred, use %tb to see the full traceback.
+
+ZeroDivisionError: division by zero
+
+==============================================================================
+[run_show_only_syntax] tags=[] execute_reply.status=ok
+--- source:
+run_show_only("""
+x = 5
+if x = 5:
+    print('five')
+""")
+--- outputs:
+<error output: ename='SyntaxError' evalue="invalid syntax. Maybe you meant '==' or ':=' instead of '='? (<string>, line 3)">
+  File "<string>", line 3
+    if x = 5:
+       ^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+==============================================================================
+[run_show_only_name] tags=[] execute_reply.status=ok
+--- source:
+run_show_only("""
+def f(n):
+    return n + undefined_name
+
+print(f(3))
+""")
+--- outputs:
+<error output: ename='NameError' evalue="name 'undefined_name' is not defined">
+An exception has occurred, use %tb to see the full traceback.
+
+NameError: name 'undefined_name' is not defined
+
+==============================================================================
+[run_show_only_typeerr] tags=[] execute_reply.status=ok
+--- source:
+run_show_only("""
+def area(w, h):
+    return w * h
+
+area(3)
+""")
+--- outputs:
+<error output: ename='TypeError' evalue="area() missing 1 required positional argument: 'h'">
+An exception has occurred, use %tb to see the full traceback.
+
+TypeError: area() missing 1 required positional argument: 'h'
+
+==============================================================================
+[run_show_only_expr] tags=[] execute_reply.status=ok
+--- source:
+run_show_only("""
+x = 3
+x * 2
+""")
+--- outputs:
+==============================================================================
+[run_cached_zero] tags=[] execute_reply.status=ok
+--- source:
+run_cached("""
+x = 10
+y = 0
+print('before')
+print(x / y)
+""")
+--- outputs:
+<stream stdout> before
+<error output: ename='ZeroDivisionError' evalue='division by zero'>
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+/tmp/ipykernel_1529/1165738485.py in <module>
+      3 y = 0
+      4 print('before')
+----> 5 print(x / y)
+
+ZeroDivisionError: division by zero
+==============================================================================
+[run_cached_syntax] tags=[] execute_reply.status=ok
+--- source:
+run_cached("""
+x = 5
+if x = 5:
+    print('five')
+""")
+--- outputs:
+<error output: ename='SyntaxError' evalue="invalid syntax. Maybe you meant '==' or ':=' instead of '='? (445721521.py, line 3)">
+  File "/tmp/ipykernel_1529/445721521.py", line 3
+    if x = 5:
+       ^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+==============================================================================
+[run_cached_name] tags=[] execute_reply.status=ok
+--- source:
+run_cached("""
+def f(n):
+    return n + undefined_name
+
+print(f(3))
+""")
+--- outputs:
+<error output: ename='NameError' evalue="name 'undefined_name' is not defined">
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+/tmp/ipykernel_1529/2750457560.py in <module>
+      3     return n + undefined_name
+      4 
+----> 5 print(f(3))
+
+/tmp/ipykernel_1529/2750457560.py in f(n)
+      1 
+      2 def f(n):
+----> 3     return n + undefined_name
+      4 
+      5 print(f(3))
+
+NameError: name 'undefined_name' is not defined
+==============================================================================
+[run_cached_typeerr] tags=[] execute_reply.status=ok
+--- source:
+run_cached("""
+def area(w, h):
+    return w * h
+
+area(3)
+""")
+--- outputs:
+<error output: ename='TypeError' evalue="area() missing 1 required positional argument: 'h'">
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+/tmp/ipykernel_1529/2321388245.py in <module>
+      3     return w * h
+      4 
+----> 5 area(3)
+
+TypeError: area() missing 1 required positional argument: 'h'
+==============================================================================
+[run_cached_expr] tags=[] execute_reply.status=ok
+--- source:
+run_cached("""
+x = 3
+x * 2
+""")
+--- outputs:
+==============================================================================
+[run_cell_nested_zero] tags=[] execute_reply.status=ok
+--- source:
+run_cell_nested("""
+x = 10
+y = 0
+print('before')
+print(x / y)
+""")
+--- outputs:
+<stream stdout> before
+<error output: ename='ZeroDivisionError' evalue='division by zero'>
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+/tmp/ipykernel_1529/1165738485.py in <cell line: 0>()
+      2 y = 0
+      3 print('before')
+----> 4 print(x / y)
+
+ZeroDivisionError: division by zero
+==============================================================================
+[run_cell_nested_syntax] tags=[] execute_reply.status=ok
+--- source:
+run_cell_nested("""
+x = 5
+if x = 5:
+    print('five')
+""")
+--- outputs:
+<error output: ename='SyntaxError' evalue="invalid syntax. Maybe you meant '==' or ':=' instead of '='? (445721521.py, line 2)">
+  File "/tmp/ipykernel_1529/445721521.py", line 2
+    if x = 5:
+       ^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+==============================================================================
+[run_cell_nested_name] tags=[] execute_reply.status=ok
+--- source:
+run_cell_nested("""
+def f(n):
+    return n + undefined_name
+
+print(f(3))
+""")
+--- outputs:
+<error output: ename='NameError' evalue="name 'undefined_name' is not defined">
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+/tmp/ipykernel_1529/2750457560.py in <cell line: 0>()
+      2     return n + undefined_name
+      3 
+----> 4 print(f(3))
+
+/tmp/ipykernel_1529/2750457560.py in f(n)
+      1 def f(n):
+----> 2     return n + undefined_name
+      3 
+      4 print(f(3))
+
+NameError: name 'undefined_name' is not defined
+==============================================================================
+[run_cell_nested_typeerr] tags=[] execute_reply.status=ok
+--- source:
+run_cell_nested("""
+def area(w, h):
+    return w * h
+
+area(3)
+""")
+--- outputs:
+<error output: ename='TypeError' evalue="area() missing 1 required positional argument: 'h'">
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+/tmp/ipykernel_1529/2321388245.py in <cell line: 0>()
+      2     return w * h
+      3 
+----> 4 area(3)
+
+TypeError: area() missing 1 required positional argument: 'h'
+==============================================================================
+[run_cell_nested_expr] tags=[] execute_reply.status=ok
+--- source:
+run_cell_nested("""
+x = 3
+x * 2
+""")
+--- outputs:
+<execute_result count=36> 6
+==============================================================================
+[after_all] tags=[] execute_reply.status=ok
+--- source:
+print('still running: last cell reached')
+--- outputs:
+<stream stdout> still running: last cell reached

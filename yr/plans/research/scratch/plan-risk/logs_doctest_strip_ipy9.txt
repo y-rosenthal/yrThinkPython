@@ -1,0 +1,13 @@
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+---- run_code(B)
+'Doc.\n\n>>> f()\n3\n'
+
+---- run_code(r'''
+'Doc.\n\nf()\n    3\n    '
+
+---- print(repr(get_ipython().trans
+'run_code(r\'\'\'\ndef f():\n    """Doc.\n\nf()\n    3\n    """\nprint(repr(f.__doc__))\n\'\'\')\n'
+
+---- x = r'''
+'\ndef f():\n    """Doc.\n\nf()\n    3\n    """\nprint(repr(f.__doc__))\n'
+

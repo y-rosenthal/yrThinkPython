@@ -1,0 +1,51 @@
+--- cell 0 status=ok
+--- cell 1 status=ok
+  ERROR SyntaxError | invalid syntax. Maybe you meant '==' or ':=' instead of '='? (2636000202.py, line 2)
+      File "/tmp/ipykernel_20425/2636000202.py", line 2
+        if x = 5:
+           ^
+    SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+--- cell 2 status=ok
+  STREAM stdout 'start\n'
+  ERROR ZeroDivisionError | division by zero
+    ---------------------------------------------------------------------------
+    ZeroDivisionError                         Traceback (most recent call last)
+    /tmp/ipykernel_20425/1862101479.py in <cell line: 0>()
+          1 print('start')
+    ----> 2 print(1/0)
+    
+    ZeroDivisionError: division by zero
+--- cell 3 status=ok
+  ERROR NameError | name 'undefined_name' is not defined
+    ---------------------------------------------------------------------------
+    NameError                                 Traceback (most recent call last)
+    /tmp/ipykernel_20425/3731931395.py in <cell line: 0>()
+          1 def f(n):
+          2     return n + undefined_name
+    ----> 3 f(3)
+    
+    /tmp/ipykernel_20425/3731931395.py in f(n)
+--- cell 4 status=ok
+   execute_result 12
+--- cell 5 status=ok
+  STREAM stdout '**********************************************************************\nFile "__main__", line 9, in count_e\nFailed example:\n    count_e(\'Eerie\')\nExpected:\n    3\nGot:\n    2\n'
+--- cell 6 status=ok
+  ERROR ModuleNotFoundError | No module named 'maath'
+    ---------------------------------------------------------------------------
+    ModuleNotFoundError                       Traceback (most recent call last)
+    /tmp/ipykernel_20425/3147434888.py in <cell line: 0>()
+    ----> 1 import maath
+    
+    ModuleNotFoundError: No module named 'maath'
+--- cell 7 status=ok
+  ERROR IndentationError | unexpected indent (2365500740.py, line 2)
+      File "/tmp/ipykernel_20425/2365500740.py", line 2
+        y = 6
+        ^
+    IndentationError: unexpected indent
+--- cell 8 status=ok
+  STREAM stdout '15 11\n'
+--- cell 9 status=ok
+  STREAM stdout 'Hello, Ada\n'
+--- cell 10 status=ok
+  STREAM stdout 'END REACHED\n'

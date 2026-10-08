@@ -1,0 +1,110 @@
+IPython 7.34.0 Python 3.12.3
+
+==============================================================================
+[magic_syntax] In[2] tags=[] execute_reply.status=ok
+%%question q1
+x = 5
+if x = 5:
+    print('five')
+
+--- outputs: (none)
+==============================================================================
+[show_stored] In[3] tags=[] execute_reply.status=ok
+print(repr(questions['q1']))
+--- outputs:
+<stream stdout> "x = 5\nif x = 5:\n    print('five')\n"
+==============================================================================
+[answer_syntax] In[4] tags=[] execute_reply.status=ok
+run_question('q1')
+--- outputs:
+<error output: ename='SyntaxError'>
+  File "/tmp/ipykernel_1648/2636000202.py", line 2
+    if x = 5:
+       ^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+==============================================================================
+[magic_indent] In[5] tags=[] execute_reply.status=ok
+%%question q2
+x = 5
+ y = 6
+
+--- outputs: (none)
+==============================================================================
+[answer_indent] In[6] tags=[] execute_reply.status=ok
+run_question('q2')
+--- outputs:
+<error output: ename='IndentationError'>
+  File "/tmp/ipykernel_1648/2365500740.py", line 2
+    y = 6
+    ^
+IndentationError: unexpected indent
+
+==============================================================================
+[magic_runtime] In[7] tags=[] execute_reply.status=ok
+%%question q3
+x = 10
+y = 0
+print('before')
+print(x / y)
+
+--- outputs: (none)
+==============================================================================
+[answer_runtime] In[8] tags=[] execute_reply.status=ok
+run_question('q3')
+--- outputs:
+<stream stdout> before
+<error output: ename='ZeroDivisionError'>
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+/tmp/ipykernel_1648/3604253274.py in <cell line: 0>()
+      2 y = 0
+      3 print('before')
+----> 4 print(x / y)
+
+ZeroDivisionError: division by zero
+==============================================================================
+[magic_expr] In[9] tags=[] execute_reply.status=ok
+%%question q4
+x = 3
+x * 2
+
+--- outputs: (none)
+==============================================================================
+[answer_expr] In[10] tags=[] execute_reply.status=ok
+run_question('q4')
+--- outputs:
+<execute_result count=9> 6
+==============================================================================
+[magic_with_magics_inside] In[11] tags=[] execute_reply.status=ok
+%%question q5
+%time y = 1
+print(y)
+
+--- outputs: (none)
+==============================================================================
+[answer_with_magics_inside] In[12] tags=[] execute_reply.status=ok
+run_question('q5')
+--- outputs:
+<stream stdout> CPU times: user 1 µs, sys: 1e+03 ns, total: 2 µs
+Wall time: 3.81 µs
+1
+==============================================================================
+[magic_empty_line_name] In[13] tags=[] execute_reply.status=ok
+%%question
+print('no name')
+
+--- outputs: (none)
+==============================================================================
+[unknown_magic] In[14] tags=['raises-exception'] execute_reply.status=error
+%%questoin q6
+print('typo in magic name')
+
+--- outputs:
+<stream stderr> UsageError: Cell magic `%%questoin` not found.
+==============================================================================
+[after_all] In[15] tags=[] execute_reply.status=ok
+print('last cell reached'); print(sorted(questions))
+--- outputs:
+<stream stdout> last cell reached
+['', 'q1', 'q2', 'q3', 'q4', 'q5']

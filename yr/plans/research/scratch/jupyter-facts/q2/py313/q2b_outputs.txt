@@ -1,0 +1,450 @@
+IPython 9.17.1 Python 3.13.16
+
+==============================================================================
+[normal_zero] In[2] tags=['raises-exception'] execute_reply.status=error
+x = 10
+y = 0
+print('before')
+print(x / y)
+
+--- outputs:
+<stream stdout> before
+<error output: ename='ZeroDivisionError'>
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+Cell In[2], line 4
+      1 x = 10
+      2 y = 0
+      3 print('before')
+----> 4 print(x / y)
+
+ZeroDivisionError: division by zero
+==============================================================================
+[normal_syntax] In[3] tags=['raises-exception'] execute_reply.status=error
+x = 5
+if x = 5:
+    print('five')
+
+--- outputs:
+<error output: ename='SyntaxError'>
+  Cell In[3], line 2
+    if x = 5:
+       ^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+==============================================================================
+[normal_indent] In[4] tags=['raises-exception'] execute_reply.status=error
+x = 5
+ y = 6
+
+--- outputs:
+<error output: ename='IndentationError'>
+  Cell In[4], line 2
+    y = 6
+    ^
+IndentationError: unexpected indent
+
+==============================================================================
+[normal_name] In[5] tags=['raises-exception'] execute_reply.status=error
+def f(n):
+    return n + undefined_name
+
+print(f(3))
+
+--- outputs:
+<error output: ename='NameError'>
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[5], line 4
+      1 def f(n):
+      2     return n + undefined_name
+      3 
+----> 4 print(f(3))
+
+Cell In[5], line 2, in f(n)
+      1 def f(n):
+----> 2     return n + undefined_name
+
+NameError: name 'undefined_name' is not defined
+==============================================================================
+[normal_expr] In[6] tags=[] execute_reply.status=ok
+x = 3
+x * 2
+
+--- outputs:
+<execute_result count=6> 6
+==============================================================================
+[run_offset2_zero] In[7] tags=[] execute_reply.status=ok
+run_offset2("""
+x = 10
+y = 0
+print('before')
+print(x / y)
+""")
+--- outputs:
+<stream stdout> before
+<error output: ename='ZeroDivisionError'>
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+Cell In[1], line 8, in run_offset2(code)
+      4 def run_offset2(code):
+      5     try:
+      6         exec(code, globals())
+      7     except Exception:
+----> 8         get_ipython().showtraceback(tb_offset=2)
+
+File <string>:5
+      1 'Could not get source, probably due dynamically evaluated source code.'
+
+ZeroDivisionError: division by zero
+==============================================================================
+[run_offset2_syntax] In[8] tags=[] execute_reply.status=ok
+run_offset2("""
+x = 5
+if x = 5:
+    print('five')
+""")
+--- outputs:
+<error output: ename='SyntaxError'>
+  File <string>:3
+    if x = 5:
+       ^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+==============================================================================
+[run_offset2_indent] In[9] tags=[] execute_reply.status=ok
+run_offset2("""
+x = 5
+ y = 6
+""")
+--- outputs:
+<error output: ename='IndentationError'>
+  File <string>:3
+    y = 6
+    ^
+IndentationError: unexpected indent
+
+==============================================================================
+[run_offset2_name] In[10] tags=[] execute_reply.status=ok
+run_offset2("""
+def f(n):
+    return n + undefined_name
+
+print(f(3))
+""")
+--- outputs:
+<error output: ename='NameError'>
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[1], line 8, in run_offset2(code)
+      4 def run_offset2(code):
+      5     try:
+      6         exec(code, globals())
+      7     except Exception:
+----> 8         get_ipython().showtraceback(tb_offset=2)
+
+File <string>:5
+      1 'Could not get source, probably due dynamically evaluated source code.'
+
+File <string>:3, in f(n)
+      2 'Could not get source, probably due dynamically evaluated source code.'
+
+NameError: name 'undefined_name' is not defined
+==============================================================================
+[run_offset2_expr] In[11] tags=[] execute_reply.status=ok
+run_offset2("""
+x = 3
+x * 2
+""")
+--- outputs:
+==============================================================================
+[run_tbnext_zero] In[12] tags=[] execute_reply.status=ok
+run_tbnext("""
+x = 10
+y = 0
+print('before')
+print(x / y)
+""")
+--- outputs:
+<stream stdout> before
+<error output: ename='ZeroDivisionError'>
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+File <string>:5
+      1 'Could not get source, probably due dynamically evaluated source code.'
+
+ZeroDivisionError: division by zero
+==============================================================================
+[run_tbnext_syntax] In[13] tags=[] execute_reply.status=ok
+run_tbnext("""
+x = 5
+if x = 5:
+    print('five')
+""")
+--- outputs:
+<error output: ename='SyntaxError'>
+  File <string>:3
+    if x = 5:
+       ^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+==============================================================================
+[run_tbnext_indent] In[14] tags=[] execute_reply.status=ok
+run_tbnext("""
+x = 5
+ y = 6
+""")
+--- outputs:
+<error output: ename='IndentationError'>
+  File <string>:3
+    y = 6
+    ^
+IndentationError: unexpected indent
+
+==============================================================================
+[run_tbnext_name] In[15] tags=[] execute_reply.status=ok
+run_tbnext("""
+def f(n):
+    return n + undefined_name
+
+print(f(3))
+""")
+--- outputs:
+<error output: ename='NameError'>
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+File <string>:5
+      1 'Could not get source, probably due dynamically evaluated source code.'
+
+File <string>:3, in f(n)
+      2 'Could not get source, probably due dynamically evaluated source code.'
+
+NameError: name 'undefined_name' is not defined
+==============================================================================
+[run_tbnext_expr] In[16] tags=[] execute_reply.status=ok
+run_tbnext("""
+x = 3
+x * 2
+""")
+--- outputs:
+==============================================================================
+[run_cached_next_zero] In[17] tags=[] execute_reply.status=ok
+run_cached_next("""
+x = 10
+y = 0
+print('before')
+print(x / y)
+""")
+--- outputs:
+<stream stdout> before
+<error output: ename='ZeroDivisionError'>
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+Cell In[18], line 4
+      1 x = 10
+      2 y = 0
+      3 print('before')
+----> 4 print(x / y)
+
+ZeroDivisionError: division by zero
+==============================================================================
+[run_cached_next_syntax] In[18] tags=[] execute_reply.status=ok
+run_cached_next("""
+x = 5
+if x = 5:
+    print('five')
+""")
+--- outputs:
+<error output: ename='SyntaxError'>
+  Cell In[19], line 2
+    if x = 5:
+       ^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+==============================================================================
+[run_cached_next_indent] In[19] tags=[] execute_reply.status=ok
+run_cached_next("""
+x = 5
+ y = 6
+""")
+--- outputs:
+<error output: ename='IndentationError'>
+  Cell In[20], line 2
+    y = 6
+    ^
+IndentationError: unexpected indent
+
+==============================================================================
+[run_cached_next_name] In[20] tags=[] execute_reply.status=ok
+run_cached_next("""
+def f(n):
+    return n + undefined_name
+
+print(f(3))
+""")
+--- outputs:
+<error output: ename='NameError'>
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[21], line 4
+      1 def f(n):
+      2     return n + undefined_name
+      3 
+----> 4 print(f(3))
+
+Cell In[21], line 2, in f(n)
+      1 def f(n):
+----> 2     return n + undefined_name
+
+NameError: name 'undefined_name' is not defined
+==============================================================================
+[run_cached_next_expr] In[21] tags=[] execute_reply.status=ok
+run_cached_next("""
+x = 3
+x * 2
+""")
+--- outputs:
+==============================================================================
+[run_cell_nested_zero] In[22] tags=[] execute_reply.status=ok
+run_cell_nested("""
+x = 10
+y = 0
+print('before')
+print(x / y)
+""")
+--- outputs:
+<stream stdout> before
+<error output: ename='ZeroDivisionError'>
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+Cell In[23], line 4
+      1 x = 10
+      2 y = 0
+      3 print('before')
+----> 4 print(x / y)
+
+ZeroDivisionError: division by zero
+==============================================================================
+[run_cell_nested_syntax] In[23] tags=[] execute_reply.status=ok
+run_cell_nested("""
+x = 5
+if x = 5:
+    print('five')
+""")
+--- outputs:
+<error output: ename='SyntaxError'>
+  Cell In[24], line 2
+    if x = 5:
+       ^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+==============================================================================
+[run_cell_nested_indent] In[24] tags=[] execute_reply.status=ok
+run_cell_nested("""
+x = 5
+ y = 6
+""")
+--- outputs:
+<error output: ename='IndentationError'>
+  Cell In[25], line 2
+    y = 6
+    ^
+IndentationError: unexpected indent
+
+==============================================================================
+[run_cell_nested_name] In[25] tags=[] execute_reply.status=ok
+run_cell_nested("""
+def f(n):
+    return n + undefined_name
+
+print(f(3))
+""")
+--- outputs:
+<error output: ename='NameError'>
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[26], line 4
+      1 def f(n):
+      2     return n + undefined_name
+      3 
+----> 4 print(f(3))
+
+Cell In[26], line 2, in f(n)
+      1 def f(n):
+----> 2     return n + undefined_name
+
+NameError: name 'undefined_name' is not defined
+==============================================================================
+[run_cell_nested_expr] In[26] tags=[] execute_reply.status=ok
+run_cell_nested("""
+x = 3
+x * 2
+""")
+--- outputs:
+<execute_result count=26> 6
+==============================================================================
+[run_cell_nested_recursion] In[27] tags=[] execute_reply.status=ok
+run_cell_nested("""
+def f(n):
+    return f(n + 1)
+
+f(0)
+""")
+--- outputs:
+<error output: ename='RecursionError'>
+---------------------------------------------------------------------------
+RecursionError                            Traceback (most recent call last)
+Cell In[28], line 4
+      1 def f(n):
+      2     return f(n + 1)
+      3 
+----> 4 f(0)
+
+Cell In[28], line 2, in f(n)
+      1 def f(n):
+----> 2     return f(n + 1)
+
+Cell In[28], line 2, in f(n)
+      1 def f(n):
+   ...
+
+Cell In[28], line 2, in f(n)
+      1 def f(n):
+----> 2     return f(n + 1)
+
+RecursionError: maximum recursion depth exceeded
+==============================================================================
+[normal_recursion] In[28] tags=['raises-exception'] execute_reply.status=error
+def f(n):
+    return f(n + 1)
+
+f(0)
+
+--- outputs:
+<error output: ename='RecursionError'>
+---------------------------------------------------------------------------
+RecursionError                            Traceback (most recent call last)
+Cell In[28], line 4
+      1 def f(n):
+      2     return f(n + 1)
+      3 
+----> 4 f(0)
+
+Cell In[28], line 2, in f(n)
+      1 def f(n):
+----> 2     return f(n + 1)
+
+Cell In[28], line 2, in f(n)
+      1 def f(n):
+   ...
+
+Cell In[28], line 2, in f(n)
+      1 def f(n):
+----> 2     return f(n + 1)
+
+RecursionError: maximum recursion depth exceeded
+==============================================================================
+[after_all] In[29] tags=[] execute_reply.status=ok
+print('still running: last cell reached')
+--- outputs:
+<stream stdout> still running: last cell reached

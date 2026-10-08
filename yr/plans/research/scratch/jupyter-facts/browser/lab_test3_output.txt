@@ -1,0 +1,26 @@
+== lastcell: after open (activeCellIndex=0)
+   {"i":0,"type":"markdown","src":"# Test page","hidden":false,"collapsed":false}
+   {"i":1,"type":"code","src":"def run_code(code):","hidden":false,"count":null,"outputs":[]}
+   {"i":2,"type":"markdown","src":"## Question 1","hidden":false,"collapsed":false}
+   {"i":3,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":4,"type":"code","src":"run_code(\"\"\"","hidden":true,"count":null,"outputs":[]}
+   {"i":5,"type":"markdown","src":"## Question 2","hidden":false,"collapsed":false}
+   {"i":6,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":7,"type":"code","src":"run_code(\"\"\"","hidden":true,"count":null,"outputs":[]}
+   {"i":8,"type":"markdown","src":"## Question 3","hidden":false,"collapsed":false}
+   {"i":9,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":10,"type":"code","src":"print('last answer ran')","hidden":true,"count":null,"outputs":[]}
+   {"i":11,"type":"markdown","src":"Credit line (last cell, inside the collapsed section).","hidden":true,"collapsed":false}
+== lastcell: after notebook:run-all-cells (activeCellIndex=11)
+   {"i":0,"type":"markdown","src":"# Test page","hidden":false,"collapsed":false}
+   {"i":1,"type":"code","src":"def run_code(code):","hidden":false,"count":1,"outputs":[]}
+   {"i":2,"type":"markdown","src":"## Question 1","hidden":false,"collapsed":false}
+   {"i":3,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":4,"type":"code","src":"run_code(\"\"\"","hidden":true,"count":2,"outputs":["error:SyntaxError"]}
+   {"i":5,"type":"markdown","src":"## Question 2","hidden":false,"collapsed":false}
+   {"i":6,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":7,"type":"code","src":"run_code(\"\"\"","hidden":true,"count":3,"outputs":["error:ZeroDivisionError"]}
+   {"i":8,"type":"markdown","src":"## Question 3","hidden":false,"collapsed":false}
+   {"i":9,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":10,"type":"code","src":"print('last answer ran')","hidden":true,"count":4,"outputs":["stream:last answer ran"]}
+   {"i":11,"type":"markdown","src":"Credit line (last cell, inside the collapsed section).","hidden":true,"collapsed":false}

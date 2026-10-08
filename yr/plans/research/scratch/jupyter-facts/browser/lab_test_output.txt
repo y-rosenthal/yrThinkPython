@@ -1,0 +1,77 @@
+== tagged.ipynb: after open (activeCellIndex=0)
+   {"i":0,"type":"markdown","src":"# Test page","hidden":false,"collapsed":false}
+   {"i":1,"type":"code","src":"print('setup ran')","hidden":false,"count":null,"outputs":[]}
+   {"i":2,"type":"markdown","src":"## Question 1","hidden":false,"collapsed":false}
+   {"i":3,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":4,"type":"code","src":"print('answer one ran')","hidden":true,"count":null,"outputs":[]}
+   {"i":5,"type":"markdown","src":"Explanation one.","hidden":true,"collapsed":false}
+   {"i":6,"type":"markdown","src":"## Question 2","hidden":false,"collapsed":false}
+   {"i":7,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":8,"type":"code","src":"1/0","hidden":true,"count":null,"outputs":[]}
+   {"i":9,"type":"markdown","src":"## Question 3","hidden":false,"collapsed":false}
+   {"i":10,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":11,"type":"code","src":"print('answer three ran')","hidden":true,"count":null,"outputs":[]}
+   {"i":12,"type":"markdown","src":"## End","hidden":false,"collapsed":false}
+   {"i":13,"type":"code","src":"print('end reached')","hidden":false,"count":null,"outputs":[]}
+== tagged.ipynb: after notebook:run-all-cells (activeCellIndex=13)
+   {"i":0,"type":"markdown","src":"# Test page","hidden":false,"collapsed":false}
+   {"i":1,"type":"code","src":"print('setup ran')","hidden":false,"count":1,"outputs":["stream:setup ran"]}
+   {"i":2,"type":"markdown","src":"## Question 1","hidden":false,"collapsed":false}
+   {"i":3,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":4,"type":"code","src":"print('answer one ran')","hidden":true,"count":2,"outputs":["stream:answer one ran"]}
+   {"i":5,"type":"markdown","src":"Explanation one.","hidden":true,"collapsed":false}
+   {"i":6,"type":"markdown","src":"## Question 2","hidden":false,"collapsed":false}
+   {"i":7,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":8,"type":"code","src":"1/0","hidden":true,"count":3,"outputs":["error:ZeroDivisionError"]}
+   {"i":9,"type":"markdown","src":"## Question 3","hidden":false,"collapsed":false}
+   {"i":10,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":11,"type":"code","src":"print('answer three ran')","hidden":true,"count":4,"outputs":["stream:answer three ran"]}
+   {"i":12,"type":"markdown","src":"## End","hidden":false,"collapsed":false}
+   {"i":13,"type":"code","src":"print('end reached')","hidden":false,"count":5,"outputs":["stream:end reached"]}
+== untagged.ipynb: after open (activeCellIndex=0)
+   {"i":0,"type":"markdown","src":"# Test page","hidden":false,"collapsed":false}
+   {"i":1,"type":"code","src":"print('setup ran')","hidden":false,"count":null,"outputs":[]}
+   {"i":2,"type":"markdown","src":"## Question 1","hidden":false,"collapsed":false}
+   {"i":3,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":4,"type":"code","src":"print('answer one ran')","hidden":true,"count":null,"outputs":[]}
+   {"i":5,"type":"markdown","src":"Explanation one.","hidden":true,"collapsed":false}
+   {"i":6,"type":"markdown","src":"## Question 2","hidden":false,"collapsed":false}
+   {"i":7,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":8,"type":"code","src":"1/0","hidden":true,"count":null,"outputs":[]}
+   {"i":9,"type":"markdown","src":"## Question 3","hidden":false,"collapsed":false}
+   {"i":10,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":11,"type":"code","src":"print('answer three ran')","hidden":true,"count":null,"outputs":[]}
+   {"i":12,"type":"markdown","src":"## End","hidden":false,"collapsed":false}
+   {"i":13,"type":"code","src":"print('end reached')","hidden":false,"count":null,"outputs":[]}
+== untagged.ipynb: after notebook:run-all-cells (activeCellIndex=13)
+   {"i":0,"type":"markdown","src":"# Test page","hidden":false,"collapsed":false}
+   {"i":1,"type":"code","src":"print('setup ran')","hidden":false,"count":1,"outputs":["stream:setup ran"]}
+   {"i":2,"type":"markdown","src":"## Question 1","hidden":false,"collapsed":false}
+   {"i":3,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":4,"type":"code","src":"print('answer one ran')","hidden":true,"count":2,"outputs":["stream:answer one ran"]}
+   {"i":5,"type":"markdown","src":"Explanation one.","hidden":true,"collapsed":false}
+   {"i":6,"type":"markdown","src":"## Question 2","hidden":false,"collapsed":false}
+   {"i":7,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":8,"type":"code","src":"1/0","hidden":true,"count":3,"outputs":["error:ZeroDivisionError"]}
+   {"i":9,"type":"markdown","src":"## Question 3","hidden":false,"collapsed":false}
+   {"i":10,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":11,"type":"code","src":"print('answer three ran')","hidden":true,"count":null,"outputs":[]}
+   {"i":12,"type":"markdown","src":"## End","hidden":false,"collapsed":false}
+   {"i":13,"type":"code","src":"print('end reached')","hidden":false,"count":null,"outputs":[]}
+file:///tmp/claude-0/-home-user-yrThinkPython/6571a165-f8cc-5e43-8b74-c00357a4a6f6/scratchpad/ultra/jupyter-facts/browser/node_modules/puppeteer-core/lib/esm/puppeteer/common/CallbackRegistry.js:97
+    #error = new ProtocolError();
+             ^
+
+ProtocolError: Runtime.callFunctionOn timed out. Increase the 'protocolTimeout' setting in launch/connect calls for a higher timeout if needed.
+    at <instance_members_initializer> (file:///tmp/claude-0/-home-user-yrThinkPython/6571a165-f8cc-5e43-8b74-c00357a4a6f6/scratchpad/ultra/jupyter-facts/browser/node_modules/puppeteer-core/lib/esm/puppeteer/common/CallbackRegistry.js:97:14)
+    at new Callback (file:///tmp/claude-0/-home-user-yrThinkPython/6571a165-f8cc-5e43-8b74-c00357a4a6f6/scratchpad/ultra/jupyter-facts/browser/node_modules/puppeteer-core/lib/esm/puppeteer/common/CallbackRegistry.js:101:16)
+    at CallbackRegistry.create (file:///tmp/claude-0/-home-user-yrThinkPython/6571a165-f8cc-5e43-8b74-c00357a4a6f6/scratchpad/ultra/jupyter-facts/browser/node_modules/puppeteer-core/lib/esm/puppeteer/common/CallbackRegistry.js:20:26)
+    at Connection._rawSend (file:///tmp/claude-0/-home-user-yrThinkPython/6571a165-f8cc-5e43-8b74-c00357a4a6f6/scratchpad/ultra/jupyter-facts/browser/node_modules/puppeteer-core/lib/esm/puppeteer/cdp/Connection.js:89:26)
+    at CdpCDPSession.send (file:///tmp/claude-0/-home-user-yrThinkPython/6571a165-f8cc-5e43-8b74-c00357a4a6f6/scratchpad/ultra/jupyter-facts/browser/node_modules/puppeteer-core/lib/esm/puppeteer/cdp/CDPSession.js:65:33)
+    at #evaluate (file:///tmp/claude-0/-home-user-yrThinkPython/6571a165-f8cc-5e43-8b74-c00357a4a6f6/scratchpad/ultra/jupyter-facts/browser/node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:360:50)
+    at ExecutionContext.evaluate (file:///tmp/claude-0/-home-user-yrThinkPython/6571a165-f8cc-5e43-8b74-c00357a4a6f6/scratchpad/ultra/jupyter-facts/browser/node_modules/puppeteer-core/lib/esm/puppeteer/cdp/ExecutionContext.js:275:36)
+    at IsolatedWorld.evaluate (file:///tmp/claude-0/-home-user-yrThinkPython/6571a165-f8cc-5e43-8b74-c00357a4a6f6/scratchpad/ultra/jupyter-facts/browser/node_modules/puppeteer-core/lib/esm/puppeteer/cdp/IsolatedWorld.js:97:30)
+    at CdpFrame.evaluate (file:///tmp/claude-0/-home-user-yrThinkPython/6571a165-f8cc-5e43-8b74-c00357a4a6f6/scratchpad/ultra/jupyter-facts/browser/node_modules/puppeteer-core/lib/esm/puppeteer/api/Frame.js:345:43)
+    at CdpFrame.<anonymous> (file:///tmp/claude-0/-home-user-yrThinkPython/6571a165-f8cc-5e43-8b74-c00357a4a6f6/scratchpad/ultra/jupyter-facts/browser/node_modules/puppeteer-core/lib/esm/puppeteer/util/decorators.js:101:27)
+
+Node.js v22.22.0

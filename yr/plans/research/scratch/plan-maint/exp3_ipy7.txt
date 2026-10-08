@@ -1,0 +1,26 @@
+== chap02_review.ipynb
+  reply status != ok (Run all would stop): none
+  outputs visible outside Answers (setup excluded): none
+  R1 unbacked text block in ### Question 4 (easy): what is displayed?: '8\n12'
+  R1 unbacked text block in ### Question 15 (hard): find the error: '80.0'
+  questions with output differences: 0; R1 misses: 2; R2 misses: 0
+== chap03_review.ipynb
+  reply status != ok (Run all would stop): none
+  outputs visible outside Answers (setup excluded): none
+  questions with output differences: 0; R1 misses: 0; R2 misses: 0
+== chap04_review.ipynb
+  reply status != ok (Run all would stop): none
+  outputs visible outside Answers (setup excluded): none
+  questions with output differences: 0; R1 misses: 0; R2 misses: 0
+== chap05_review.ipynb
+  reply status != ok (Run all would stop): none
+  outputs visible outside Answers (setup excluded): none
+  questions with output differences: 0; R1 misses: 0; R2 misses: 0
+== chap06_review.ipynb
+  reply status != ok (Run all would stop): none
+  outputs visible outside Answers (setup excluded): none
+  questions with output differences: 0; R1 misses: 0; R2 misses: 0
+== chap07_review.ipynb
+  reply status != ok (Run all would stop): none
+  outputs visible outside Answers (setup excluded): none
+  questions with output differences: 0; R1 misses: 0; R2 misses: 0

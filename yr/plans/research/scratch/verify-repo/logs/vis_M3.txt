@@ -1,0 +1,2 @@
+M3_new.ipynb REACHED END | cells with output: visible 1 hidden 12
+   VISIBLE (10, 'minutes = 135', 'stream', '2 15\n2 0 3\n3 -4\n')

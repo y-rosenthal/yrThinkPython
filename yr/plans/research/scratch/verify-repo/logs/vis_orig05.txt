@@ -1,0 +1,8 @@
+chap05_review.ipynb STOPPED: [31mSyntaxError[39m[31m:[39m invalid syntax. Maybe you meant '==' or ':=' instead of '='? | cells with output: visible 7 hidden 0
+   VISIBLE (7, 'minutes = 135', 'stream', '2 15\n2 0 3\n3 -4\n')
+   VISIBLE (10, 'x = 5', 'stream', "False True\nTrue\nTrue\nFalse\n<class 'bool'")
+   VISIBLE (13, 'def check(n):', 'stream', '4 is even\n7 is odd\n0 is even\n')
+   VISIBLE (19, 'def grade(score):', 'stream', 'pass\npass\nfail\n')
+   VISIBLE (22, 'x = 15', 'stream', 'big\nmedium\nsmall\n')
+   VISIBLE (25, 'def describe(x):', 'stream', '5 is a positive single digit\n-3 is not p')
+   VISIBLE (28, 'run_code("""', 'error', 'SyntaxError')

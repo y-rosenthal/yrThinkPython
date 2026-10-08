@@ -1,0 +1,42 @@
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+== chap02_review.ipynb
+  reply status != ok (Run all would stop): none
+  outputs visible outside Answers (setup excluded): none
+  R1 unbacked text block in ### Question 4 (easy): what is displayed?: '8\n12'
+  R1 unbacked text block in ### Question 15 (hard): find the error: '80.0'
+  questions with output differences: 0; R1 misses: 2; R2 misses: 0
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+== chap03_review.ipynb
+  reply status != ok (Run all would stop): none
+  outputs visible outside Answers (setup excluded): none
+  questions with output differences: 0; R1 misses: 0; R2 misses: 0
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+== chap04_review.ipynb
+  reply status != ok (Run all would stop): none
+  outputs visible outside Answers (setup excluded): none
+  questions with output differences: 0; R1 misses: 0; R2 misses: 0
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+== chap05_review.ipynb
+  reply status != ok (Run all would stop): none
+  outputs visible outside Answers (setup excluded): none
+  questions with output differences: 0; R1 misses: 0; R2 misses: 0
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+== chap06_review.ipynb
+  reply status != ok (Run all would stop): none
+  outputs visible outside Answers (setup excluded): none
+  questions with output differences: 0; R1 misses: 0; R2 misses: 0
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+== chap07_review.ipynb
+  reply status != ok (Run all would stop): none
+  outputs visible outside Answers (setup excluded): none
+  DIFF ### Question 14 (hard): doctests
+     orig [('stdout', '**********************************************************************\nFile "__main__", line 9, in count_e\nFailed example:\n    count_e(\'Eerie\')\nExpected:\n    3\nGot:\n    2')]
+     new  []
+  R1 unbacked text block in ### Question 14 (hard): doctests: '**********************************************************************'
+  questions with output differences: 1; R1 misses: 1; R2 misses: 0

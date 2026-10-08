@@ -1,0 +1,121 @@
+{
+"Question 1 (easy): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 2 (easy): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 3 (easy): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 4 (easy): write a function": {
+"stdout": 0,
+"errors": 0,
+"pyblocks": 1,
+"writecode": true,
+"wrongcall": false
+},
+"Question 5 (medium): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 6 (medium): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 7 (medium): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 8 (medium): what happens?": {
+"stdout": 0,
+"errors": 1,
+"pyblocks": 1,
+"writecode": false,
+"wrongcall": false
+},
+"Question 9 (medium): reading a file": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 10 (medium): write a function": {
+"stdout": 0,
+"errors": 0,
+"pyblocks": 2,
+"writecode": true,
+"wrongcall": false
+},
+"Question 11 (medium): write a function": {
+"stdout": 0,
+"errors": 0,
+"pyblocks": 1,
+"writecode": true,
+"wrongcall": false
+},
+"Question 12 (hard): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 1,
+"writecode": false,
+"wrongcall": false
+},
+"Question 13 (hard): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 14 (hard): doctests": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 1,
+"writecode": false,
+"wrongcall": false
+},
+"Question 15 (hard): searching a file": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 16 (hard): write a function": {
+"stdout": 0,
+"errors": 0,
+"pyblocks": 1,
+"writecode": true,
+"wrongcall": false
+},
+"Question 17 (hard): write a function with doctests": {
+"stdout": 0,
+"errors": 0,
+"pyblocks": 1,
+"writecode": true,
+"wrongcall": false
+}
+}

@@ -1,0 +1,121 @@
+{
+"Question 1 (easy): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 2 (easy): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 3 (easy): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 4 (easy): write a function": {
+"stdout": 0,
+"errors": 0,
+"pyblocks": 2,
+"writecode": true,
+"wrongcall": false
+},
+"Question 5 (medium): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 6 (medium): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 7 (medium): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 1,
+"writecode": false,
+"wrongcall": false
+},
+"Question 8 (medium): find the error": {
+"stdout": 0,
+"errors": 3,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 9 (medium): write a function": {
+"stdout": 0,
+"errors": 0,
+"pyblocks": 1,
+"writecode": true,
+"wrongcall": false
+},
+"Question 10 (medium): write a function": {
+"stdout": 0,
+"errors": 0,
+"pyblocks": 2,
+"writecode": true,
+"wrongcall": false
+},
+"Question 11 (medium): write a function": {
+"stdout": 0,
+"errors": 0,
+"pyblocks": 2,
+"writecode": true,
+"wrongcall": false
+},
+"Question 12 (hard): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 13 (hard): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 14 (hard): infinite recursion": {
+"stdout": 0,
+"errors": 1,
+"pyblocks": 1,
+"writecode": false,
+"wrongcall": true
+},
+"Question 15 (hard): write a recursive function": {
+"stdout": 0,
+"errors": 0,
+"pyblocks": 2,
+"writecode": true,
+"wrongcall": false
+},
+"Question 16 (hard): write two recursive functions": {
+"stdout": 0,
+"errors": 0,
+"pyblocks": 2,
+"writecode": true,
+"wrongcall": false
+},
+"Question 17 (hard): what is drawn?": {
+"stdout": 0,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+}
+}

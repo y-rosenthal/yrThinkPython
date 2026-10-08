@@ -1,0 +1,75 @@
+== shift1: before, active = collapsed "### Answer" heading (cell 3) (activeCellIndex=3)
+   {"i":0,"type":"markdown","src":"# Test page","hidden":false,"collapsed":false}
+   {"i":1,"type":"code","src":"print('setup ran')","hidden":false,"count":null,"outputs":[]}
+   {"i":2,"type":"markdown","src":"## Question 1","hidden":false,"collapsed":false}
+   {"i":3,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":4,"type":"code","src":"print('answer one ran')","hidden":true,"count":null,"outputs":[]}
+   {"i":5,"type":"markdown","src":"Explanation one.","hidden":true,"collapsed":false}
+   {"i":6,"type":"markdown","src":"## Question 2","hidden":false,"collapsed":false}
+   {"i":7,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":8,"type":"code","src":"1/0","hidden":true,"count":null,"outputs":[]}
+   {"i":9,"type":"markdown","src":"## Question 3","hidden":false,"collapsed":false}
+   {"i":10,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":11,"type":"code","src":"print('answer three ran')","hidden":true,"count":null,"outputs":[]}
+   {"i":12,"type":"markdown","src":"## End","hidden":false,"collapsed":false}
+   {"i":13,"type":"code","src":"print('end reached')","hidden":false,"count":null,"outputs":[]}
+== shift1: after one notebook:run-cell-and-select-next (activeCellIndex=4)
+   {"i":0,"type":"markdown","src":"# Test page","hidden":false,"collapsed":false}
+   {"i":1,"type":"code","src":"print('setup ran')","hidden":false,"count":null,"outputs":[]}
+   {"i":2,"type":"markdown","src":"## Question 1","hidden":false,"collapsed":false}
+   {"i":3,"type":"markdown","src":"### Answer","hidden":false,"collapsed":false}
+   {"i":4,"type":"code","src":"print('answer one ran')","hidden":false,"count":null,"outputs":[]}
+   {"i":5,"type":"markdown","src":"Explanation one.","hidden":false,"collapsed":false}
+   {"i":6,"type":"markdown","src":"## Question 2","hidden":false,"collapsed":false}
+   {"i":7,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":8,"type":"code","src":"1/0","hidden":true,"count":null,"outputs":[]}
+   {"i":9,"type":"markdown","src":"## Question 3","hidden":false,"collapsed":false}
+   {"i":10,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":11,"type":"code","src":"print('answer three ran')","hidden":true,"count":null,"outputs":[]}
+   {"i":12,"type":"markdown","src":"## End","hidden":false,"collapsed":false}
+   {"i":13,"type":"code","src":"print('end reached')","hidden":false,"count":null,"outputs":[]}
+== shift1: after a second notebook:run-cell-and-select-next (activeCellIndex=5)
+   {"i":0,"type":"markdown","src":"# Test page","hidden":false,"collapsed":false}
+   {"i":1,"type":"code","src":"print('setup ran')","hidden":false,"count":null,"outputs":[]}
+   {"i":2,"type":"markdown","src":"## Question 1","hidden":false,"collapsed":false}
+   {"i":3,"type":"markdown","src":"### Answer","hidden":false,"collapsed":false}
+   {"i":4,"type":"code","src":"print('answer one ran')","hidden":false,"count":1,"outputs":["stream:answer one ran"]}
+   {"i":5,"type":"markdown","src":"Explanation one.","hidden":false,"collapsed":false}
+   {"i":6,"type":"markdown","src":"## Question 2","hidden":false,"collapsed":false}
+   {"i":7,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":8,"type":"code","src":"1/0","hidden":true,"count":null,"outputs":[]}
+   {"i":9,"type":"markdown","src":"## Question 3","hidden":false,"collapsed":false}
+   {"i":10,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":11,"type":"code","src":"print('answer three ran')","hidden":true,"count":null,"outputs":[]}
+   {"i":12,"type":"markdown","src":"## End","hidden":false,"collapsed":false}
+   {"i":13,"type":"code","src":"print('end reached')","hidden":false,"count":null,"outputs":[]}
+== shift2: after pressing real Shift+Enter twice starting at cell 2 "## Question 1" (activeCellIndex=4)
+   {"i":0,"type":"markdown","src":"# Test page","hidden":false,"collapsed":false}
+   {"i":1,"type":"code","src":"print('setup ran')","hidden":false,"count":null,"outputs":[]}
+   {"i":2,"type":"markdown","src":"## Question 1","hidden":false,"collapsed":false}
+   {"i":3,"type":"markdown","src":"### Answer","hidden":false,"collapsed":false}
+   {"i":4,"type":"code","src":"print('answer one ran')","hidden":false,"count":null,"outputs":[]}
+   {"i":5,"type":"markdown","src":"Explanation one.","hidden":false,"collapsed":false}
+   {"i":6,"type":"markdown","src":"## Question 2","hidden":false,"collapsed":false}
+   {"i":7,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":8,"type":"code","src":"1/0","hidden":true,"count":null,"outputs":[]}
+   {"i":9,"type":"markdown","src":"## Question 3","hidden":false,"collapsed":false}
+   {"i":10,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":11,"type":"code","src":"print('answer three ran')","hidden":true,"count":null,"outputs":[]}
+   {"i":12,"type":"markdown","src":"## End","hidden":false,"collapsed":false}
+   {"i":13,"type":"code","src":"print('end reached')","hidden":false,"count":null,"outputs":[]}
+== shift2 reopened: after notebook:move-cursor-down from collapsed heading (cell 3) (activeCellIndex=6)
+   {"i":0,"type":"markdown","src":"# Test page","hidden":false,"collapsed":false}
+   {"i":1,"type":"code","src":"print('setup ran')","hidden":false,"count":null,"outputs":[]}
+   {"i":2,"type":"markdown","src":"## Question 1","hidden":false,"collapsed":false}
+   {"i":3,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":4,"type":"code","src":"print('answer one ran')","hidden":true,"count":null,"outputs":[]}
+   {"i":5,"type":"markdown","src":"Explanation one.","hidden":true,"collapsed":false}
+   {"i":6,"type":"markdown","src":"## Question 2","hidden":false,"collapsed":false}
+   {"i":7,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":8,"type":"code","src":"1/0","hidden":true,"count":null,"outputs":[]}
+   {"i":9,"type":"markdown","src":"## Question 3","hidden":false,"collapsed":false}
+   {"i":10,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":11,"type":"code","src":"print('answer three ran')","hidden":true,"count":null,"outputs":[]}
+   {"i":12,"type":"markdown","src":"## End","hidden":false,"collapsed":false}
+   {"i":13,"type":"code","src":"print('end reached')","hidden":false,"count":null,"outputs":[]}

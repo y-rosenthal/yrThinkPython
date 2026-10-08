@@ -1,0 +1,9 @@
+setup ('ok', [])
+exec+catch, interrupted : ('error', ['error:KeyboardInterrupt'])
+nested run_cell, interrupted: ('ok', ['error:KeyboardInterrupt'])
+plain cell, interrupted     : ('error', ['error:KeyboardInterrupt'])
+Exception ignored in: <function KernelClient.__del__ at 0x7f9e3a1c65c0>
+Traceback (most recent call last):
+  File "/tmp/claude-0/-home-user-yrThinkPython/6571a165-f8cc-5e43-8b74-c00357a4a6f6/scratchpad/ultra/jupyter-facts/venv-ipy7/lib/python3.12/site-packages/jupyter_client/client.py", line 128, in __del__
+  File "/usr/lib/python3.12/logging/__init__.py", line 1800, in isEnabledFor
+TypeError: 'NoneType' object is not callable

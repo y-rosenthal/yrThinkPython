@@ -1,0 +1,755 @@
+============================== nbs/chap02_review.ipynb 72 cells
+--- [0] markdown id=bd59e0e2 tags=[] (8 lines)
+   > # 2b. Prof. Rosenthal's Review
+   > 
+   > A review of [Chapter 2: Variables and Statements](https://y-rosenthal.github.io/yrThinkPython/chap02.html),
+   > for students who have already studied the chapter.
+   > Use the two lists under **Concepts covered** as a checklist (click a list's title to hide it), then work through the **Questions**, which go from easy to hard.
+   > Each question has a suggested answer: click **Answer** to reveal it, but try the question yourself first.
+   > 
+   > [Run this page on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap02_review.ipynb)
+--- [1] markdown id=2befa7ea tags=[] (1 lines)
+   > ## Concepts covered
+--- [2] markdown id=11a7a912 tags=[] (54 lines)
+   > <details open>
+   > <summary><strong>Python Syntax and Semantics</strong></summary>
+   > 
+   > **Variables and assignment**
+   > 
+   > - `VARIABLE_NAME = EXPRESSION` computes the value of the expression and makes the variable refer to it. For example, `n = 17` creates the variable `n` with the value `17`.
+   > - The variable goes on the left of `=`: `17 = n` is a `SyntaxError`.
+   > - An assignment statement displays nothing.
+   > - A variable can be used anywhere its value can: in expressions and as a function argument. For example, after `n = 17`, `n + 25` is `42` and `print(n)` displays `17`.
+   > - Assigning to an existing variable makes it refer to the new value. A variable computed from it earlier keeps its old value: after `x = 5`, `y = x + 1` and `x = 10`, `y` is still `6`.
+   > - `NAME1 = NAME2 = EXPRESSION` assigns the same value to both variables.
+   > - Using a variable that has not been assigned is a `NameError`.
+   > 
+   > **Variable names**
+   > 
+   > - A name can contain letters, digits and the underscore, `_`, and cannot start with a digit. No spaces or other punctuation are allowed. For example, `your_name` and `score2` are legal; `2nd_place`, `million!` and `my score` are a `SyntaxError`.
+   > - By convention, variable names use only lowercase letters, with `_` between words.
+   > - Uppercase and lowercase letters are different: `Score` and `score` are two different names.
+   > - A keyword (a word such as `class`, `def`, `for`, `import`, `if`, `lambda`, `True`, `None`) cannot be a variable name: `class = 'Python'` is a `SyntaxError`.
+   > - `int`, `float` and `str` are not keywords, so they are legal variable names, but using them as names is a bad idea.
+   > 
+   > **Importing modules**
+   > 
+   > - `import MODULE_NAME` makes a module's variables and functions available as `MODULE_NAME.NAME`. For example, after `import math`, `math.pi` is `3.141592653589793`.
+   > - The math module provides `math.pi`, `math.e`, `math.sqrt(X)` (square root), `math.pow(X, Y)` (X to the power Y), `math.exp(X)` (e to the power X), `math.sin(X)` and `math.cos(X)`. These functions return floats: `math.sqrt(25)` is `5.0` and `math.pow(5, 2)` is `25.0`.
+   > - `X ** Y` also raises X to the power Y, and is used more often than `math.pow`. With two integers it produces an integer: `5 ** 2` is `25`.
+   > - Importing a module that does not exist, such as `import maath`, is a `ModuleNotFoundError`.
+   > - Using `math.pi` without first running `import math` is a `NameError`.
+   > 
+   > **Expressions, statements and display**
+   > 
+   > - An expression (a value, a variable, a function call, or a combination of these with operators) has a value. A statement (such as an assignment or an import) has an effect but no value.
+   > - In a notebook cell, only the value of the last expression is displayed.
+   > - `print(VALUE1, VALUE2, ...)` displays any number of values on one line, separated by spaces. For example, `print('The answer is', 42)` displays `The answer is 42`.
+   > - Each call to `print` displays a new line. `print` displays strings without their quotes.
+   > 
+   > **Function arguments**
+   > 
+   > - Some functions take one argument, like `len(STRING)`; some take two, like `math.pow(X, Y)`; some take any number, like `print`.
+   > - Some arguments are optional. `int(STRING, BASE)` reads the string as a number in that base: `int('101', 2)` is `5`. `round(NUMBER, DIGITS)` rounds to that many decimal places: `round(3.14159, 3)` is `3.142`.
+   > - Calling a function with too many arguments, too few arguments, or an argument of the wrong type is a `TypeError`. For example, `math.pow(2)` and `math.sqrt('123')` are each a `TypeError`.
+   > 
+   > **Comments**
+   > 
+   > - `#` starts a comment: Python ignores everything from the `#` to the end of the line. A comment can be on its own line or at the end of a line of code.
+   > - A `#` inside a string is part of the string, not a comment: `print('a # b')` displays `a # b`.
+   > 
+   > **Errors**
+   > 
+   > - If a cell has a syntax error anywhere, none of its code runs: Python displays the error immediately.
+   > - A runtime error stops the program at the line where it happens; the lines before it have already run.
+   > - A program with a semantic error runs without any error message, but does not do what was intended.
+   > 
+   > </details>
+--- [3] markdown id=b7bbd586 tags=[] (30 lines)
+   > <details open>
+   > <summary><strong>Definitions, etc.</strong></summary>
+   > 
+   > **Definitions**
+   > 
+   > - DEFINITION: A **variable** is a name that refers to a value.
+   > - DEFINITION: An **assignment statement** is a statement that assigns a value to a variable.
+   > - DEFINITION: A **state diagram** shows a set of variables, each name with an arrow pointing to its value.
+   > - DEFINITION: A **keyword** is a special word used to specify the structure of a program. Keywords cannot be used as variable names.
+   > - DEFINITION: A **module** is a file that contains Python code, such as variables and function definitions.
+   > - DEFINITION: An **import statement** is a statement that reads a module so its variables and functions can be used.
+   > - DEFINITION: The **dot operator**, `.`, is used to get a variable or function from a module, as in `math.sqrt`.
+   > - DEFINITION: To **evaluate** an expression is to compute its value.
+   > - DEFINITION: A **statement** is a unit of code that has an effect but no value, such as an assignment or an import.
+   > - DEFINITION: To **execute** a statement is to run it and do what it says.
+   > - DEFINITION: An **argument** is a value given to a function when it is called.
+   > - DEFINITION: A **comment** is text in a program that explains the program and has no effect on how it runs.
+   > - DEFINITION: A **syntax error** is an error in the structure of a program; Python does not run a program that has one.
+   > - DEFINITION: A **runtime error** is an error that makes a running program display an error message and stop.
+   > - DEFINITION: An **exception** is an error detected while the program is running (another name for a runtime error).
+   > - DEFINITION: A **semantic error** is an error that makes a program do the wrong thing without displaying an error message.
+   > 
+   > **Other ideas**
+   > 
+   > - Comments are most useful when they explain what is not obvious from the code, especially *why* the code does something. A comment that repeats what the code says is useless.
+   > - Good variable names reduce the need for comments, but very long names make expressions hard to read.
+   > - Knowing which kind of error you have (syntax, runtime or semantic) helps you find it faster.
+   > - When you learn a new feature, make mistakes on purpose to learn what the error messages mean.
+   > 
+   > </details>
+--- [4] markdown id=93af88e1 tags=[] (7 lines)
+   > ## Questions
+   > 
+   > All the questions use only variables, arithmetic, strings, `print` and the `math` module.
+   > 
+   > Some questions show their code inside `run_code("""...""")`. `run_code` (defined in the next cell) runs the code in the string. The code is in a string only so that the notebook editor (Colab, for example) does not underline its mistakes before you have made your prediction.
+   > 
+   > Run the next cell first: it imports `math` and defines `run_code`.
+--- [5] code id=17cdc97d tags=['setup'] (9 lines)
+   | import math
+   | 
+   | def run_code(code):
+   |     """Run the Python code in the string code, as if it were in a cell of its own.
+   | 
+   |     Some questions put their code in a string and run it with run_code, so that
+   |     the notebook's editor does not point out the mistakes before you predict them.
+   |     """
+   |     exec(code, globals())
+--- [6] markdown id=2ea6a31f tags=[] (3 lines)
+   > ### Question 1 (easy): what is displayed?
+   > 
+   > Predict what this code displays, then run it to check.
+--- [7] code id=f454f36b tags=[] (5 lines)
+   | x = 8
+   | y = 2
+   | print(x + y, x * y)
+   | print(x / y)
+   | print(x ** y)
+--- [8] markdown id=c0f5ed6b tags=[] (13 lines)
+   > <details>
+   > <summary>Answer</summary>
+   > 
+   > ```text
+   > 10 16
+   > 4.0
+   > 64
+   > ```
+   > 
+   > `print(x + y, x * y)` displays two values on one line, separated by a space.
+   > `/` always produces a float, so `8 / 2` is `4.0`. `**` is exponentiation: `8 ** 2` is `64`.
+   > 
+   > </details>
+--- [9] markdown id=59a33b5d tags=[] (1 lines)
+   > ### Question 2 (easy): what is displayed?
+--- [10] code id=5b4fc3ea tags=[] (5 lines)
+   | name = 'Ada'
+   | age = 36
+   | print('Name:', name)
+   | print(name, 'is', age, 'years old')
+   | print('name')
+--- [11] markdown id=cc3e20ef tags=[] (13 lines)
+   > <details>
+   > <summary>Answer</summary>
+   > 
+   > ```text
+   > Name: Ada
+   > Ada is 36 years old
+   > name
+   > ```
+   > 
+   > Without quotes, `name` is a variable, and `print` displays its value, `Ada`.
+   > With quotes, `'name'` is a string, and `print` displays the string itself (without the quotes).
+   > 
+   > </details>
+--- [12] markdown id=fac7089b tags=[] (1 lines)
+   > ### Question 3 (easy): what is displayed?
+--- [13] code id=a98fdb76 tags=[] (4 lines)
+   | word = 'ha'
+   | laugh = word * 3
+   | print(laugh, len(laugh))
+   | print(word + '!' + word)
+--- [14] markdown id=94653b7a tags=[] (12 lines)
+   > <details>
+   > <summary>Answer</summary>
+   > 
+   > ```text
+   > hahaha 6
+   > ha!ha
+   > ```
+   > 
+   > `word * 3` makes 3 copies of `'ha'` joined together, and `len` counts its 6 letters.
+   > `+` joins strings.
+   > 
+   > </details>
+--- [15] markdown id=c4d3d7be tags=[] (3 lines)
+   > ### Question 4 (easy): what is displayed?
+   > 
+   > What does this cell display when you run it in a notebook?
+--- [16] code id=ef3d60c4 tags=[] (3 lines)
+   | price = 4
+   | price * 2
+   | price * 3
+--- [17] markdown id=f190d97b tags=[] (22 lines)
+   > <details>
+   > <summary>Answer</summary>
+   > 
+   > `12`, and nothing else.
+   > 
+   > In a notebook cell, only the value of the *last* expression is displayed.
+   > `price * 2` is computed, but its value, `8`, is not displayed. To display both values, use `print`:
+   > 
+   > ```python
+   > price = 4
+   > print(price * 2)
+   > print(price * 3)
+   > ```
+   > 
+   > That displays:
+   > 
+   > ```text
+   > 8
+   > 12
+   > ```
+   > 
+   > </details>
+--- [18] markdown id=ed30dea2 tags=[] (1 lines)
+   > ### Question 5 (medium): what is displayed?
+--- [19] code id=ea8e060f tags=[] (4 lines)
+   | x = 5
+   | y = x + 1
+   | x = 10
+   | print(x, y)
+--- [20] markdown id=be1336b5 tags=[] (11 lines)
+   > <details>
+   > <summary>Answer</summary>
+   > 
+   > ```text
+   > 10 6
+   > ```
+   > 
+   > `y = x + 1` computes `5 + 1` and makes `y` refer to `6`.
+   > Assigning a new value to `x` afterwards does not change `y`: `y` refers to a value, not to the expression that computed it.
+   > 
+   > </details>
+--- [21] markdown id=b0127764 tags=[] (1 lines)
+   > ### Question 6 (medium): what is displayed?
+--- [22] code id=88747fa5 tags=[] (3 lines)
+   | # print('one')
+   | print('two')   # print('three')
+   | print('four # five')
+--- [23] markdown id=9533a2b5 tags=[] (13 lines)
+   > <details>
+   > <summary>Answer</summary>
+   > 
+   > ```text
+   > two
+   > four # five
+   > ```
+   > 
+   > The first line is a comment, so it does nothing.
+   > On the second line, everything from `#` to the end of the line is a comment, so only `print('two')` runs.
+   > On the third line the `#` is inside a string, so it is part of the string, not the start of a comment.
+   > 
+   > </details>
+--- [24] markdown id=abd95ed3 tags=[] (1 lines)
+   > ### Question 7 (medium): what is displayed?
+--- [25] code id=e22aa94b tags=[] (5 lines)
+   | import math
+   | print(math.sqrt(16))
+   | print(math.pow(2, 3))
+   | print(2 ** 3)
+   | print(round(math.pi, 2))
+--- [26] markdown id=533585bb tags=[] (15 lines)
+   > <details>
+   > <summary>Answer</summary>
+   > 
+   > ```text
+   > 4.0
+   > 8.0
+   > 8
+   > 3.14
+   > ```
+   > 
+   > The math functions return floats, even when the result is a whole number, so `math.sqrt(16)` is `4.0` and `math.pow(2, 3)` is `8.0`.
+   > `**` with two integers produces an integer.
+   > The optional second argument of `round` is the number of decimal places.
+   > 
+   > </details>
+--- [27] markdown id=0f67707c tags=[] (1 lines)
+   > ### Question 8 (medium): what is displayed?
+--- [28] code id=ef7e565a tags=[] (3 lines)
+   | print(int('101', 2))
+   | print(int('11', 2) + int('11'))
+   | print(round(2.71828, 1), round(2.71828))
+--- [29] markdown id=ac071891 tags=[] (14 lines)
+   > <details>
+   > <summary>Answer</summary>
+   > 
+   > ```text
+   > 5
+   > 14
+   > 2.7 3
+   > ```
+   > 
+   > The optional second argument of `int` is the base: `'101'` in base 2 is 4 + 0 + 1 = 5, and `'11'` in base 2 is 2 + 1 = 3.
+   > Without it, `int('11')` is eleven, so the second line is 3 + 11 = 14.
+   > Without its second argument, `round` rounds to the nearest integer.
+   > 
+   > </details>
+--- [30] markdown id=3c3f99f9 tags=[] (5 lines)
+   > ### Question 9 (medium): legal and illegal names
+   > 
+   > For each cell, predict whether it runs or causes an error. If it runs, what does it display?
+   > 
+   > **Part a**
+--- [31] code id=88bbfab4 tags=[] (4 lines)
+   | run_code("""
+   | my_score = 10
+   | print(my_score)
+   | """)
+--- [32] markdown id=c252749e tags=[] (1 lines)
+   > **Part b**
+--- [33] code id=19ae4de0 tags=['raises-exception'] (3 lines)
+   | run_code("""
+   | 2nd_place = 'Bo'
+   | """)
+--- [34] markdown id=71ec4ef2 tags=[] (1 lines)
+   > **Part c**
+--- [35] code id=d3539869 tags=['raises-exception'] (3 lines)
+   | run_code("""
+   | total-cost = 5
+   | """)
+--- [36] markdown id=0e0abb5c tags=[] (1 lines)
+   > **Part d**
+--- [37] code id=fb92808f tags=['raises-exception'] (3 lines)
+   | run_code("""
+   | lambda = 0.5
+   | """)
+--- [38] markdown id=080e982f tags=[] (1 lines)
+   > **Part e**
+--- [39] code id=a8d97efd tags=[] (4 lines)
+   | run_code("""
+   | Lambda = 0.5
+   | print(Lambda)
+   | """)
+--- [40] markdown id=83ab4ea2 tags=[] (39 lines)
+   > <details>
+   > <summary>Answer</summary>
+   > 
+   > **Part a:** It runs and displays:
+   > 
+   > ```text
+   > 10
+   > ```
+   > 
+   > Letters, digits and `_` are allowed in names.
+   > 
+   > **Part b:** A name cannot start with a digit:
+   > 
+   > ```text
+   > SyntaxError: invalid decimal literal
+   > ```
+   > 
+   > **Part c:** `-` is not allowed in a name (the only punctuation allowed is `_`). Python reads `total-cost` as `total` minus `cost`, which cannot be assigned to:
+   > 
+   > ```text
+   > SyntaxError: cannot assign to expression here. Maybe you meant '==' instead of '='?
+   > ```
+   > 
+   > **Part d:** `lambda` is a keyword, so it cannot be a variable name:
+   > 
+   > ```text
+   > SyntaxError: invalid syntax
+   > ```
+   > 
+   > **Part e:** It runs and displays:
+   > 
+   > ```text
+   > 0.5
+   > ```
+   > 
+   > Uppercase and lowercase letters are different, so `Lambda` is not the keyword `lambda`.
+   > It is legal, but by convention variable names use only lowercase letters.
+   > 
+   > </details>
+--- [41] markdown id=eeb8207b tags=[] (23 lines)
+   > ### Question 10 (medium): wrong calls
+   > 
+   > `math.pow(X, Y)` raises X to the power Y. Two correct ways to call it:
+   > 
+   > ```python
+   > import math
+   > print(math.pow(5, 2))
+   > ```
+   > ```text
+   > 25.0
+   > ```
+   > 
+   > ```python
+   > import math
+   > print(math.pow(2, 0.5))
+   > ```
+   > ```text
+   > 1.4142135623730951
+   > ```
+   > 
+   > Each of the next three calls is wrong in a different way. Predict the error for each, then run the cells to check.
+   > 
+   > **Part a**
+--- [42] code id=a83e2a33 tags=['raises-exception'] (3 lines)
+   | run_code("""
+   | math.pow(2)
+   | """)
+--- [43] markdown id=22233b06 tags=[] (1 lines)
+   > **Part b**
+--- [44] code id=0957d00b tags=['raises-exception'] (3 lines)
+   | run_code("""
+   | math.pow(2, 3, 4)
+   | """)
+--- [45] markdown id=c3aa9fea tags=[] (1 lines)
+   > **Part c**
+--- [46] code id=5e18bdc8 tags=['raises-exception'] (3 lines)
+   | run_code("""
+   | math.pow('2', 3)
+   | """)
+--- [47] markdown id=ee5c347e tags=[] (24 lines)
+   > <details>
+   > <summary>Answer</summary>
+   > 
+   > **Part a:** Too few arguments:
+   > 
+   > ```text
+   > TypeError: pow expected 2 arguments, got 1
+   > ```
+   > 
+   > **Part b:** Too many arguments:
+   > 
+   > ```text
+   > TypeError: pow expected 2 arguments, got 3
+   > ```
+   > 
+   > **Part c:** `'2'` is a string, not a number. Its quotes make it a string even though it contains a digit:
+   > 
+   > ```text
+   > TypeError: must be real number, not str
+   > ```
+   > 
+   > All three are a `TypeError`. Use `math.pow(2, 3)` (or `2 ** 3`) instead.
+   > 
+   > </details>
+--- [48] markdown id=260a378b tags=[] (24 lines)
+   > ### Question 11 (medium): write code
+   > 
+   > The variables `hours`, `minutes` and `seconds` have already been assigned.
+   > Write code that computes the total number of seconds, assigns it to a variable called `total`, and displays it.
+   > 
+   > **Examples** (the first lines assign the variables; your code comes after them)
+   > 
+   > ```python
+   > hours = 1
+   > minutes = 2
+   > seconds = 3
+   > ```
+   > ```text
+   > 3723
+   > ```
+   > 
+   > ```python
+   > hours = 0
+   > minutes = 42
+   > seconds = 42
+   > ```
+   > ```text
+   > 2562
+   > ```
+--- [49] code id=436a229f tags=['no-signature'] (1 lines)
+   | # Your code here
+--- [50] markdown id=88124e27 tags=[] (28 lines)
+   > <details>
+   > <summary>Answer</summary>
+   > 
+   > ```python
+   > hours = 1
+   > minutes = 2
+   > seconds = 3
+   > 
+   > total = hours * 60 * 60 + minutes * 60 + seconds
+   > print(total)
+   > ```
+   > 
+   > An hour has `60 * 60` seconds and a minute has `60`. Multiplication happens before addition, so no parentheses are needed.
+   > 
+   > Another approach: give the conversion factors names, so the code explains itself:
+   > 
+   > ```python
+   > hours = 1
+   > minutes = 2
+   > seconds = 3
+   > 
+   > seconds_per_minute = 60
+   > seconds_per_hour = 60 * seconds_per_minute
+   > total = hours * seconds_per_hour + minutes * seconds_per_minute + seconds
+   > print(total)
+   > ```
+   > 
+   > </details>
+--- [51] markdown id=2f5af256 tags=[] (21 lines)
+   > ### Question 12 (medium): write code with comments
+   > 
+   > The variable `km` holds a distance in kilometers.
+   > Write code that displays the distance in miles, rounded to 2 decimal places, in the form shown below.
+   > A mile is `1.61` kilometers. Add a comment that says where the number `1.61` comes from.
+   > 
+   > **Examples**
+   > 
+   > ```python
+   > km = 10
+   > ```
+   > ```text
+   > 10 km is 6.21 miles
+   > ```
+   > 
+   > ```python
+   > km = 42.195
+   > ```
+   > ```text
+   > 42.195 km is 26.21 miles
+   > ```
+--- [52] code id=d5561057 tags=['no-signature'] (1 lines)
+   | # Your code here
+--- [53] markdown id=67f7613f tags=[] (23 lines)
+   > <details>
+   > <summary>Answer</summary>
+   > 
+   > ```python
+   > km = 10
+   > 
+   > miles = km / 1.61    # one mile is about 1.61 kilometers
+   > print(km, 'km is', round(miles, 2), 'miles')
+   > ```
+   > 
+   > The comment explains something that is not obvious from the code.
+   > A comment like `# divide km by 1.61` would only repeat what the code says.
+   > 
+   > Another approach: give the number a name, which also documents it:
+   > 
+   > ```python
+   > km = 10
+   > 
+   > km_per_mile = 1.61    # one mile is about 1.61 kilometers
+   > print(km, 'km is', round(km / km_per_mile, 2), 'miles')
+   > ```
+   > 
+   > </details>
+--- [54] markdown id=6b029ba1 tags=[] (1 lines)
+   > ### Question 13 (hard): what is displayed?
+--- [55] code id=a1c8fe8c tags=[] (6 lines)
+   | a = 3
+   | b = 5
+   | a = a + b
+   | b = a - b
+   | a = a - b
+   | print(a, b)
+--- [56] markdown id=320728fe tags=[] (16 lines)
+   > <details>
+   > <summary>Answer</summary>
+   > 
+   > ```text
+   > 5 3
+   > ```
+   > 
+   > Follow the values one line at a time:
+   > 
+   > - `a = a + b` makes `a` refer to `3 + 5`, which is `8` (`b` is still `5`).
+   > - `b = a - b` makes `b` refer to `8 - 5`, which is `3`.
+   > - `a = a - b` makes `a` refer to `8 - 3`, which is `5`.
+   > 
+   > The code swaps the values of `a` and `b`. On the right side of `=`, each variable has the value it got from the most recent assignment.
+   > 
+   > </details>
+--- [57] markdown id=d533ec2b tags=[] (5 lines)
+   > ### Question 14 (hard): syntax errors and runtime errors
+   > 
+   > Each cell has an error on its second line. Predict what each cell displays before the error, and which error it shows.
+   > 
+   > **Part a**
+--- [58] code id=fe011ca8 tags=['raises-exception'] (5 lines)
+   | run_code("""
+   | print('start')
+   | import maath
+   | print('end')
+   | """)
+--- [59] markdown id=700d3b60 tags=[] (1 lines)
+   > **Part b**
+--- [60] code id=91df27b8 tags=['raises-exception'] (5 lines)
+   | run_code("""
+   | print('start')
+   | my score = 10
+   | print('end')
+   | """)
+--- [61] markdown id=0813b093 tags=[] (23 lines)
+   > <details>
+   > <summary>Answer</summary>
+   > 
+   > **Part a:** The first line runs, then the program stops at the runtime error, so `end` is never displayed:
+   > 
+   > ```text
+   > start
+   > ```
+   > 
+   > ```text
+   > ModuleNotFoundError: No module named 'maath'
+   > ```
+   > 
+   > **Part b:** Nothing is displayed except the error, not even `start`:
+   > 
+   > ```text
+   > SyntaxError: invalid syntax
+   > ```
+   > 
+   > A syntax error (here, a space in a name) is found before any of the code runs, so none of it runs.
+   > A runtime error happens while the code runs, so the lines before it have already run.
+   > 
+   > </details>
+--- [62] markdown id=44da499f tags=[] (4 lines)
+   > ### Question 15 (hard): find the error
+   > 
+   > This code should display the average of three test scores, which is `80.0`.
+   > What does it display instead? What kind of error is it (syntax, runtime or semantic), and how do you fix it?
+--- [63] code id=f81ae748 tags=[] (5 lines)
+   | score1 = 90
+   | score2 = 80
+   | score3 = 70
+   | average = score1 + score2 + score3 / 3
+   | print(average)
+--- [64] markdown id=72417481 tags=[] (26 lines)
+   > <details>
+   > <summary>Answer</summary>
+   > 
+   > ```text
+   > 193.33333333333334
+   > ```
+   > 
+   > Division happens before addition, so only `score3` is divided by 3: `90 + 80 + 23.333333333333332`.
+   > It is a **semantic error**: the code runs without an error message, but does not do what was intended.
+   > Fix it with parentheses:
+   > 
+   > ```python
+   > score1 = 90
+   > score2 = 80
+   > score3 = 70
+   > average = (score1 + score2 + score3) / 3
+   > print(average)
+   > ```
+   > 
+   > That displays:
+   > 
+   > ```text
+   > 80.0
+   > ```
+   > 
+   > </details>
+--- [65] markdown id=d979fb47 tags=[] (22 lines)
+   > ### Question 16 (hard): write code
+   > 
+   > The variables `price` and `quantity` hold **strings**, as if a user had typed them, for example `price = '19.99'`.
+   > Write code that displays the total cost, `price` times `quantity`, rounded to 2 decimal places, in the form shown below.
+   > 
+   > **Examples**
+   > 
+   > ```python
+   > price = '19.99'
+   > quantity = '3'
+   > ```
+   > ```text
+   > Total: 59.97
+   > ```
+   > 
+   > ```python
+   > price = '2.5'
+   > quantity = '4'
+   > ```
+   > ```text
+   > Total: 10.0
+   > ```
+--- [66] code id=a53fd422 tags=['no-signature'] (1 lines)
+   | # Your code here
+--- [67] markdown id=c901c189 tags=[] (20 lines)
+   > <details>
+   > <summary>Answer</summary>
+   > 
+   > Convert the strings to numbers first:
+   > 
+   > ```python
+   > price = '19.99'
+   > quantity = '3'
+   > 
+   > total = float(price) * int(quantity)
+   > print('Total:', round(total, 2))
+   > ```
+   > 
+   > Without the conversions, `price * quantity` is a `TypeError` (a string cannot be multiplied by a string),
+   > and `price * 3` would make 3 copies of the string: `'19.9919.9919.99'`.
+   > 
+   > `round` is needed because floating-point arithmetic is not exact: with `price = '0.1'` and `quantity = '3'`, the total is `0.30000000000000004` before rounding.
+   > `float(quantity)` also works, for quantities like `'1.5'` (kilograms, for example).
+   > 
+   > </details>
+--- [68] markdown id=45c2a3d3 tags=[] (21 lines)
+   > ### Question 17 (hard): write code
+   > 
+   > The variable `total` holds a number of seconds (a whole number).
+   > Write code that displays it as hours, minutes and seconds, in the form shown below.
+   > Use integer division, `//`, which divides and rounds down to an integer (for example, `7 // 2` is `3`).
+   > 
+   > **Examples**
+   > 
+   > ```python
+   > total = 3725
+   > ```
+   > ```text
+   > 1 h 2 min 5 s
+   > ```
+   > 
+   > ```python
+   > total = 7384
+   > ```
+   > ```text
+   > 2 h 3 min 4 s
+   > ```
+--- [69] code id=4663de8e tags=['no-signature'] (1 lines)
+   | # Your code here
+--- [70] markdown id=6868f5f7 tags=[] (30 lines)
+   > <details>
+   > <summary>Answer</summary>
+   > 
+   > Take out the whole hours first, then the whole minutes from what is left:
+   > 
+   > ```python
+   > total = 3725
+   > 
+   > hours = total // 3600              # 3600 seconds in an hour
+   > rest = total - hours * 3600        # seconds left after the whole hours
+   > minutes = rest // 60
+   > seconds = rest - minutes * 60
+   > print(hours, 'h', minutes, 'min', seconds, 's')
+   > ```
+   > 
+   > Another approach computes the minutes from the total first:
+   > 
+   > ```python
+   > total = 7384
+   > 
+   > total_minutes = total // 60
+   > seconds = total - total_minutes * 60
+   > hours = total_minutes // 60
+   > minutes = total_minutes - hours * 60
+   > print(hours, 'h', minutes, 'min', seconds, 's')
+   > ```
+   > 
+   > **By the way:** Python also has an operator, `%`, that computes the remainder of a division directly (`3725 % 3600` is `125`), which makes this shorter.
+   > 
+   > </details>
+--- [71] markdown id=c4ed17aa tags=[] (3 lines)
+   > *Summary and questions by Prof. Y. Rosenthal, based on*
+   > [Think Python: 3rd Edition](https://allendowney.github.io/ThinkPython/index.html) *by Allen B. Downey.*
+   > *Text license:* [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/)

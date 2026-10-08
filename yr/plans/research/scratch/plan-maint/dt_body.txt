@@ -1,0 +1,20 @@
+from doctest import run_docstring_examples
+
+def run_doctests(func):
+    run_docstring_examples(func, globals(), name=func.__name__)
+
+def count_e(word):
+    """Count the letter e (or E) in word.
+
+    >>> count_e('Eerie')
+    3
+    >>> count_e('sky')
+    0
+    """
+    count = 0
+    for letter in word:
+        if letter == 'e':
+            count += 1
+    return count
+
+run_doctests(count_e)

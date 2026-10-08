@@ -1,0 +1,3 @@
+# Test book
+
+Index page.

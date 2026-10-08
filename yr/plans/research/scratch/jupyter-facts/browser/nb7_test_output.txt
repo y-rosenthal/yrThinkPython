@@ -1,0 +1,64 @@
+pageerror Cannot read properties of undefined (reading 'schema')
+http://127.0.0.1:8898/static/notebook/notebook_core.1038f6e3d817cc41.js?v=1038f6e3d817cc41:501:207
+== nb7_tagged.ipynb: after open (activeCellIndex=0)
+   {"i":0,"type":"markdown","src":"# Test page","hidden":false,"collapsed":false}
+   {"i":1,"type":"code","src":"print('setup ran')","hidden":false,"count":null,"outputs":[]}
+   {"i":2,"type":"markdown","src":"## Question 1","hidden":false,"collapsed":false}
+   {"i":3,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":4,"type":"code","src":"print('answer one ran')","hidden":true,"count":null,"outputs":[]}
+   {"i":5,"type":"markdown","src":"Explanation one.","hidden":true,"collapsed":false}
+   {"i":6,"type":"markdown","src":"## Question 2","hidden":false,"collapsed":false}
+   {"i":7,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":8,"type":"code","src":"1/0","hidden":true,"count":null,"outputs":[]}
+   {"i":9,"type":"markdown","src":"## Question 3","hidden":false,"collapsed":false}
+   {"i":10,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":11,"type":"code","src":"print('answer three ran')","hidden":true,"count":null,"outputs":[]}
+   {"i":12,"type":"markdown","src":"## End","hidden":false,"collapsed":false}
+   {"i":13,"type":"code","src":"print('end reached')","hidden":false,"count":null,"outputs":[]}
+== nb7_tagged.ipynb: after notebook:run-all-cells (activeCellIndex=13)
+   {"i":0,"type":"markdown","src":"# Test page","hidden":false,"collapsed":false}
+   {"i":1,"type":"code","src":"print('setup ran')","hidden":false,"count":1,"outputs":["stream:setup ran"]}
+   {"i":2,"type":"markdown","src":"## Question 1","hidden":false,"collapsed":false}
+   {"i":3,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":4,"type":"code","src":"print('answer one ran')","hidden":true,"count":2,"outputs":["stream:answer one ran"]}
+   {"i":5,"type":"markdown","src":"Explanation one.","hidden":true,"collapsed":false}
+   {"i":6,"type":"markdown","src":"## Question 2","hidden":false,"collapsed":false}
+   {"i":7,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":8,"type":"code","src":"1/0","hidden":true,"count":3,"outputs":["error:ZeroDivisionError"]}
+   {"i":9,"type":"markdown","src":"## Question 3","hidden":false,"collapsed":false}
+   {"i":10,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":11,"type":"code","src":"print('answer three ran')","hidden":true,"count":4,"outputs":["stream:answer three ran"]}
+   {"i":12,"type":"markdown","src":"## End","hidden":false,"collapsed":false}
+   {"i":13,"type":"code","src":"print('end reached')","hidden":false,"count":5,"outputs":["stream:end reached"]}
+pageerror Cannot read properties of undefined (reading 'schema')
+http://127.0.0.1:8898/static/notebook/notebook_core.1038f6e3d817cc41.js?v=1038f6e3d817cc41:501:207
+== nb7_untagged.ipynb: after open (activeCellIndex=0)
+   {"i":0,"type":"markdown","src":"# Test page","hidden":false,"collapsed":false}
+   {"i":1,"type":"code","src":"print('setup ran')","hidden":false,"count":null,"outputs":[]}
+   {"i":2,"type":"markdown","src":"## Question 1","hidden":false,"collapsed":false}
+   {"i":3,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":4,"type":"code","src":"print('answer one ran')","hidden":true,"count":null,"outputs":[]}
+   {"i":5,"type":"markdown","src":"Explanation one.","hidden":true,"collapsed":false}
+   {"i":6,"type":"markdown","src":"## Question 2","hidden":false,"collapsed":false}
+   {"i":7,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":8,"type":"code","src":"1/0","hidden":true,"count":null,"outputs":[]}
+   {"i":9,"type":"markdown","src":"## Question 3","hidden":false,"collapsed":false}
+   {"i":10,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":11,"type":"code","src":"print('answer three ran')","hidden":true,"count":null,"outputs":[]}
+   {"i":12,"type":"markdown","src":"## End","hidden":false,"collapsed":false}
+   {"i":13,"type":"code","src":"print('end reached')","hidden":false,"count":null,"outputs":[]}
+== nb7_untagged.ipynb: after notebook:run-all-cells (activeCellIndex=13)
+   {"i":0,"type":"markdown","src":"# Test page","hidden":false,"collapsed":false}
+   {"i":1,"type":"code","src":"print('setup ran')","hidden":false,"count":1,"outputs":["stream:setup ran"]}
+   {"i":2,"type":"markdown","src":"## Question 1","hidden":false,"collapsed":false}
+   {"i":3,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":4,"type":"code","src":"print('answer one ran')","hidden":true,"count":2,"outputs":["stream:answer one ran"]}
+   {"i":5,"type":"markdown","src":"Explanation one.","hidden":true,"collapsed":false}
+   {"i":6,"type":"markdown","src":"## Question 2","hidden":false,"collapsed":false}
+   {"i":7,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":8,"type":"code","src":"1/0","hidden":true,"count":3,"outputs":["error:ZeroDivisionError"]}
+   {"i":9,"type":"markdown","src":"## Question 3","hidden":false,"collapsed":false}
+   {"i":10,"type":"markdown","src":"### Answer","hidden":false,"collapsed":true}
+   {"i":11,"type":"code","src":"print('answer three ran')","hidden":true,"count":null,"outputs":[]}
+   {"i":12,"type":"markdown","src":"## End","hidden":false,"collapsed":false}
+   {"i":13,"type":"code","src":"print('end reached')","hidden":false,"count":null,"outputs":[]}

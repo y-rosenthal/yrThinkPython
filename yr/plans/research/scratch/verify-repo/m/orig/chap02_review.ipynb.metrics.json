@@ -1,0 +1,121 @@
+{
+"Question 1 (easy): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 2 (easy): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 3 (easy): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 4 (easy): what is displayed?": {
+"stdout": 0,
+"errors": 0,
+"pyblocks": 1,
+"writecode": false,
+"wrongcall": false
+},
+"Question 5 (medium): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 6 (medium): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 7 (medium): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 8 (medium): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 9 (medium): legal and illegal names": {
+"stdout": 2,
+"errors": 3,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 10 (medium): wrong calls": {
+"stdout": 0,
+"errors": 3,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 11 (medium): write code": {
+"stdout": 0,
+"errors": 0,
+"pyblocks": 2,
+"writecode": true,
+"wrongcall": false
+},
+"Question 12 (medium): write code with comments": {
+"stdout": 0,
+"errors": 0,
+"pyblocks": 2,
+"writecode": true,
+"wrongcall": false
+},
+"Question 13 (hard): what is displayed?": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 14 (hard): syntax errors and runtime errors": {
+"stdout": 1,
+"errors": 2,
+"pyblocks": 0,
+"writecode": false,
+"wrongcall": false
+},
+"Question 15 (hard): find the error": {
+"stdout": 1,
+"errors": 0,
+"pyblocks": 1,
+"writecode": false,
+"wrongcall": false
+},
+"Question 16 (hard): write code": {
+"stdout": 0,
+"errors": 0,
+"pyblocks": 1,
+"writecode": true,
+"wrongcall": false
+},
+"Question 17 (hard): write code": {
+"stdout": 0,
+"errors": 0,
+"pyblocks": 2,
+"writecode": true,
+"wrongcall": false
+}
+}

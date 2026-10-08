@@ -1,0 +1,4 @@
+setup ('ok', [])
+exec+catch, interrupted : ('error', ['error:KeyboardInterrupt'])
+nested run_cell, interrupted: ('ok', ['error:KeyboardInterrupt'])
+plain cell, interrupted     : ('error', ['error:KeyboardInterrupt'])
