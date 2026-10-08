@@ -15,7 +15,8 @@ scripts) is on branch `yr-runall-research` in `yr/plans/research/`.
 Step numbers refer to section 8 of the plan below.
 
 - [x] Finish the plan (research, prototype, review) and write it into this file (Step 0)
-- [ ] Step 1: Prof. Rosenthal runs Colab checklist Part A and decides D1–D13
+- [x] Step 1a: Prof. Rosenthal ran Part A on prototype v1 (results above): Run all OK; Answers too repetitive
+- [ ] Step 1b: build prototype v2 (no repetition); Prof. Rosenthal tests it in Colab and decides D1–D13
 - [ ] Step 2: with his OK, push `colab-smoke-test`; he runs checklist Part B; adjust the plan if the results call for it
 - [ ] Step 3: build the new tools (`review_format.py`, `sync_review.py`, new `check_review.py`, `turtle_images.py`,
       `prep_notebooks.py` guard, self-test), keeping old pages working
@@ -28,6 +29,21 @@ Step numbers refer to section 8 of the plan below.
 - [ ] Step 6: convert ch02, ch03, ch06, ch07, then ch04, each with a Colab spot-check
 - [ ] Step 7: check on the live pages that each problem Prof. Rosenthal reported is gone (goal 6), remove the
       legacy code, add the CI lint step, delete the "Pending work" note from `CLAUDE.md`, mark this plan done
+
+## Colab test results so far
+
+**2026-10-08, prototype v1** (chapter 5, opened from the `yr-runall-research` branch; Run all, then Answers opened):
+- **Run all does not stop at caught errors (variant A works in Colab).** The page has 21 code cells; the screenshots show
+  Question 8's three error cells numbered [9], [10], [11] and Question 2's cell [3], exactly their positions, and Question 1
+  re-run later as [22]. So Run all executed every cell in order.
+- **Problem: repetition.** Each Answer showed the expected output as text, then the question's code again in a code cell, then
+  the real output again (Questions 1 and 2).
+- **Problem: Question 8 "not exactly right".** The three run cells were bunched at the end of the Answer instead of next to each
+  part; each showed the `run_code("""...""")` wrapper; each error appeared twice (text block and live output); tracebacks were
+  headed `File "/tmp/ipykernel_.../...py", line 2` (off by one); each error cell had a red (!) icon and an "Explain error" button.
+- **Response (in progress):** prototype v2, in which each Answer shows the real output **once**, next to its explanation: the
+  repeated code is hidden (Colab form view, "Show code" still available), outputs are stored in the notebook (visible before
+  Run all and on the website), and parts are interleaved. The plan sections below will be updated when v2 is reviewed.
 
 ## What Prof. Rosenthal wants
 
