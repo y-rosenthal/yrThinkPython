@@ -13,6 +13,10 @@ their questions and answers are laid out. Research notes collected so far:
 - [ ] Convert the chapter 5 page first and publish it
 - [ ] Prof. Rosenthal tests chapter 5 in Colab with the checklist below
 - [ ] Convert the other five pages; update the tools, `yr/README.md` and the skills
+- [ ] Skills: update `yr-review-questions` and `yr-review-page` (and add a skill if useful) so every
+      question with an error, or with output that must stay hidden, is written the same way (goal 7)
+- [ ] Human guide: how to add each kind of question, pointing to the skills and tools (goal 8)
+- [ ] Check that each problem Prof. Rosenthal reported is fixed on the live pages (goal 6)
 - [ ] Publish, verify the live site, then remove the "Pending work" note from `CLAUDE.md`
       and mark this plan done
 
@@ -28,6 +32,17 @@ their questions and answers are laid out. Research notes collected so far:
 4. His idea: show each question's code as plain text, and put the runnable code cell inside the
    Answer.
 5. Don't Repeat Yourself: whoever writes a question shouldn't have to type its code twice.
+6. **The research must end in fixes**, not just a report: the problems he found must be fixed on
+   the live pages. Those problems are: Colab's editor underlining the error before students predict it,
+   Run all stopping at the first error, and answers visible after Run all outside a collapsed Answer.
+7. **Same treatment every time:** once the approach is settled, create or update the Claude skills
+   (`yr-review-questions`, `yr-review-page`, and any new one that helps) so that every future question
+   whose code has an error, or whose output must stay hidden, is written the same way. The tools
+   (`review_cells.py`, `review.sh check`) should make the right way the easy way and fail on the
+   wrong way.
+8. **Documentation for people:** a guide for a human editing the review pages that explains how to
+   add each kind of question, especially ones whose code has an error, and points to the skills and
+   tools to use (for example, a section near the top of `yr/README.md`, or a separate guide linked from it).
 
 ## What is live now (for context)
 
