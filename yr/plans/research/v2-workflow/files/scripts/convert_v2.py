@@ -2,17 +2,20 @@
 
     python convert_v2.py OLD.ipynb NEW.ipynb REMOVED.json
 
-- question code cells -> '```python run' markdown cells (same id); part labels folded in;
+- question code cells -> '~~~python' run-block markdown cells (same id); part labels folded in;
   definition-only cells and '# Your code here' cells stay code cells
 - <details> Answer -> '#### Answer' heading (old id, saved collapsed) + explanation cells; each run block
-  gets ONE hidden-code run cell, placed where the Answer's expected-output block (```text block or
-  data-turtle picture) was. That block is removed (it would duplicate the stored real output) and
-  written to REMOVED.json, so verify_removed.py can prove it equalled the real output.
+  gets ONE hidden-code run cell, placed where the Answer's expected-output blocks (```text blocks or
+  data-turtle picture) were. They are removed (they would duplicate the stored real output) and
+  written to REMOVED.json (pictures with their src), so verify_removed.py can prove they equalled the real
+  output. An error line in a removed block (the author's prediction) is kept as an invisible
+  '<!-- error: Name -->' record in that part's text, which check_v2.py compares with the real error.
 - multi-part Answers are split at '**Part x:**' paragraphs (interleaved) and the summary paragraph
   goes into its own cell after the last run cell
-- page edits: title sentence, intro, help note, managed run_code cell, '## Credits', wording edits
-Run cells get no outputs here: sync_v2.py runs the page, wraps exactly the raising run cells in
-run_code(...) and stores the outputs.
+- page edits: title sentence, intro, help note, '## Credits', wording edits; the old run_code helper is
+  deleted from the setup cell (wrapped run cells call IPython's run_cell themselves)
+Run cells get no outputs here: sync_v2.py runs the page, wraps exactly the raising run cells and stores the
+outputs.
 """
 import ast
 import copy
@@ -23,7 +26,7 @@ import sys
 import nbformat as nbf
 
 sys.path.insert(0, __import__('os').path.dirname(__file__))
-from review_v2 import (ANSWER_HEADING, CREDITS_HEADING, HELP_CELL, PLACEHOLDER, RUN_CELL_METADATA, RUN_CODE_CELL,
+from review_v2 import (ANSWER_HEADING, CREDITS_HEADING, ERROR_NAME, HELP_CELL, PLACEHOLDER, RUN_CELL_METADATA,
                        render_run_cell, source, stable_id)
 
 DETAILS = re.compile(r'\s*<details>\s*<summary>Answer</summary>\s*(.*?)\s*</details>\s*$', re.S)
@@ -44,22 +47,18 @@ QUESTION_EDITS = [
     ('Each cell has one mistake. Predict the error for each, then run the cells to check.',
      'Each part has one mistake. Predict the error for each, then open the Answer to check.'),
     ('Describe what it draws, then run the cell to check.', 'Describe what it draws, then open the Answer to check.'),
+    ('What happens with this call? How would you fix the function?',
+     'What happens with this call? How would you fix the function? '
+     '(Try your fix in a new cell, so that the cell above keeps the original code.)'),
 ]
-# Answer prose: the removed ```text block named the error; the prose now names it (checked by check_v2.py)
+# Answer prose edits (the explanations are otherwise kept word for word)
 ANSWER_EDITS = [
-    ('**Part a:** `=` assigns; comparing needs `==`:',
-     '**Part a:** `=` assigns; comparing needs `==`, so this is a `SyntaxError`:'),
-    ('**Part b:** The header of an `if` statement must end with a colon:',
-     '**Part b:** The header of an `if` statement must end with a colon, so this is a `SyntaxError`:'),
-    ('**Part c:** The second line is indented by one space, but it is not inside a block:',
-     '**Part c:** The second line is indented by one space, but it is not inside a block, so this is an `IndentationError`:'),
     ('All three are found before the cell runs, so nothing is displayed or assigned.',
-     'Each is found before any of that part\'s code runs, so nothing is displayed or assigned.'),
-    ('This is infinite recursion. It ends when there are too many frames on the stack:',
-     'This is infinite recursion. It ends with a `RecursionError` when there are too many frames on the stack:'),
+     "Python finds each of these mistakes before it runs any of that part's code, so nothing is displayed and "
+     "`x` is never assigned."),
 ]
 # Summary paragraphs of multi-part Answers (explicit list, read by hand; text after ANSWER_EDITS)
-SUMMARY_STARTS = ["Each is found before any of that part's code runs"]
+SUMMARY_STARTS = ["Python finds each of these mistakes"]
 
 used = {}
 
@@ -104,11 +103,30 @@ def definition_only(cell):
 
 
 def split_expected(segment):
-    """(before, block, after): the first expected-output block not preceded by a ```python block."""
-    m = EXPECTED.search(segment)
-    if not m or '```python' in segment[:m.start()]:
-        return segment, None, ''
-    return segment[:m.start()], m.group(0), segment[m.end():]
+    """(before, blocks, after): the expected-output blocks of a segment, in order, that are not preceded by a
+    ```python block (those belong to example code in the prose). The run cell replaces them: it goes where the
+    first one was; text between two removed blocks moves before the run cell."""
+    blocks, before, pos = [], '', 0
+    for m in EXPECTED.finditer(segment):
+        if '```python' in segment[:m.start()]:
+            break
+        before += segment[pos:m.start()]
+        blocks.append(m.group(0))
+        pos = m.end()
+    if not blocks:
+        return segment, [], ''
+    return before, blocks, segment[pos:]
+
+
+def predicted_errors(blocks):
+    """Error names on the error lines of removed ```text blocks: the author's prediction."""
+    names = []
+    for b in blocks:
+        for line in b.split('\n'):
+            m = re.match(r'(' + ERROR_NAME.pattern + r'):', line)
+            if m and m.group(1) not in names:
+                names.append(m.group(1))
+    return names
 
 
 def convert_answer(answer, runs, title, removed):
@@ -143,11 +161,16 @@ def convert_answer(answer, runs, title, removed):
         add_md(body[:starts[0]])
         segments = [body[a:b] for a, b in zip(starts, starts[1:] + [len(body)])]
     for (part, code, wrapped), seg in zip(runs, segments):
-        before, block, after = split_expected(seg)
+        before, blocks, after = split_expected(seg)
+        errs = predicted_errors(blocks)
+        if errs:
+            before = before.rstrip('\n') + '\n\n' + ''.join(f'<!-- error: {e} -->' for e in errs) + '\n'
         add_md(before)
         out.append(run_cell(code, wrapped, part, stable_id(aid, 'run', part or '-')))
-        if block is not None:
-            removed.append({'question': title, 'part': part, 'block': block if block.startswith('```') else '<img data-turtle ...>'})
+        for block in blocks:
+            src = re.search(r'\bsrc="([^"]*)"', block)
+            removed.append({'question': title, 'part': part, 'block': block if block.startswith('```') else
+                            '<img data-turtle ...>', 'src': src.group(1) if src and not block.startswith('```') else None})
         add_md(after)
     add_md(summary)
     return out
@@ -171,10 +194,6 @@ def main(src, dst, removed_path):
         if c.cell_type == 'code' and 'setup' in c.metadata.get('tags', []):
             c.source = re.sub(r'\n*def run_code\(code\):.*', '', s, flags=re.S).rstrip('\n')
             out.append(c)
-            rc = nbf.v4.new_code_cell(RUN_CODE_CELL)
-            rc.id = stable_id('run-code-cell')
-            rc.metadata['tags'] = ['setup', 'remove-cell']
-            out.append(rc)
             i += 1
             continue
         if c.cell_type == 'markdown' and s.lstrip().startswith(CREDIT):
@@ -210,7 +229,7 @@ def main(src, dst, removed_path):
                 continue
             code, wrapped = old_code(g.source)
             wrapped = wrapped or 'raises-exception' in g.metadata.get('tags', [])
-            text = (f'**Part {label}**\n\n' if label else '') + f'```python run\n{code}\n```'
+            text = (f'**Part {label}**\n\n' if label else '') + f'~~~python\n{code}\n~~~'
             out.append(md_cell(text, g.id))
             runs.append((label, code, wrapped))
             label = None
