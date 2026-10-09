@@ -7,110 +7,114 @@ argument-hint: [chapter number] [how many / what topics]
 
 # Add or revise review questions
 
-Read `yr/README.md` first (format, **style rules**, cell conventions, tools), and look at a few
-questions in `yr/chap04_review.ipynb` as models. If the chapter has no review page yet, use the
-`yr-review-page` skill instead. Work on a topic branch, not `v3`.
+Read `yr/README.md` first: the guide "Adding a question", the **style rules**, the markers, the
+format rules and the tools. If the chapter has no review page yet, use the `yr-review-page` skill
+instead. Work on a topic branch, not `v3`.
 
-**A new page format is planned, not yet built** (`yr/plans/runall-collapsible-answers.md`:
-section "DRY audit and decisions E1–E20" and sections 2–5). Until it is, write questions in
-today's format below. Don't start converting pages without Prof. Rosenthal's go-ahead. Whenever the
-design or the tools change, update this skill (and `yr-review-page`) in the same change.
+**Which format is the page in?** New format: its Answers are `#### Answer` headings. Old format:
+its Answers are `<details>` blocks. Pages are converted one at a time
+(`yr/plans/runall-collapsible-answers.md`); don't convert a page without Prof. Rosenthal's go-ahead.
+Follow the section for the page's format. Whenever the design or the tools change, update this
+skill, `yr-review-page` and `yr/README.md` in the same change.
 
-## The rules that matter most
+## The rules for both formats
 
-- **Focus on code.** Mostly "what is displayed / drawn / happens?" (code cell, then Answer with
-  the exact output) and "write code" (task, examples, `# Your code here` cell, Answer).
+- **Focus on code.** Mostly "what is displayed / drawn / happens?" and "write code".
 - **Standalone.** Each question must make sense to someone who never saw Think Python: no
-  references to the book or its examples; show every helper function the question uses, in the
-  question; the main point is the Python, and context goes last in a "**By the way:**" paragraph.
+  references to the book or its examples; give every helper function the question uses; the main
+  point is the Python, and context goes last in a "**By the way:**" paragraph.
 - **Levels.** Heading `### Question N (easy|medium|hard): <kind>`; keep the page ordered easy → hard.
 - **Question numbers never change during a semester** (homework is assigned by number). A question
-  inserted between Questions 3 and 4 is **Question 3b** (then 3c, ...). Never renumber the others;
+  inserted between Questions 3 and 4 is **Question 3b** (then 3c, ...): get the number with
+  `python3 yr/tools/review_cells.py next NB --before 4`. Never renumber the others;
   `review_cells.py renumber` is only for the start of a new semester, when Prof. Rosenthal asks.
-- **Write-code questions give the function header** of every function to write, as a
-  ```python block with `...` as the body, after "Start from this header (replace `...` with the
-  body):". Only a question that tests writing the header itself may skip it (tag its
-  `# Your code here` cell `no-signature`).
-- **Write-code questions show at least 2 examples**, each a ```python block followed by its
-  output (```text block, or `<img data-turtle src="">` for a drawing).
-- **Wrong-call questions** ("predict the error" for calls to a function) first show at least 2
-  correct ways to call the function, each with its output ("Two correct ways to call it:").
-- **Answers** are collapsible, give more than one approach when there is one, and every ```python
-  block in them runs unchanged as a new .py file: imports, all helper functions, and a call.
-- **Errors as answers**: tag the code cell `raises-exception` (never `%%expect`); show the exact
-  `ErrorType: message` line in a ```text block. If an editor can see the error without running the
-  code (syntax error, undefined name, wrong arguments, unknown module), Colab underlines it and
-  gives the answer away: put the code of every part of that question in `run_code("""...""")`
-  (defined in the setup cell; see "Errors an editor can see" in `yr/README.md`).
+- **Write-code questions** give the function header (unless the point is writing it: tag the
+  `# Your code here` cell `no-signature`) and at least 2 examples with their output.
+- **Wrong-call questions** first show at least 2 correct ways to call the function, with output.
+- **Answers** give more than one approach when there is one.
 - **No `(c)`/`(r)`/`(tm)`/`+-` in text**: write **Part a**, **Part b**, **Part c**.
 - Only use Python taught up to this chapter, or explain the extra bit in the question.
 
-## Steps
+## New format: type each fact once
 
-1. `python3 yr/tools/review_cells.py list yr/chapNN_review.ipynb` to see the existing questions,
-   and pick topics from the page's Concepts covered that have few or no questions.
-2. Write the new questions in a spec file in your scratchpad (format: run
-   `python3 yr/tools/review_cells.py` without arguments). A typical write-code question:
+You type: the question's code (a `~~~python` run block), the prompt, the example calls, the
+solutions, the fixes, helpers (once, in a definition cell), and the explanation with each value
+written as an expression and a marker. `review.sh sync` writes everything else by running the code
+on the pinned Colab-like kernel: run cells and their outputs, error names, example outputs and
+pictures, the "Start from this header" block, import lines, "Then try:", "uses X from Question N",
+"Run this cell to define X", values, and the template cells.
 
-   ````
-   %%% markdown
-   ### Question 21 (medium): write a function
+**Never type or edit by hand:** run cells, stored outputs, ```` ```text ```` blocks or pictures in a
+question, anything between `<!-- begin generated: ... -->` and `<!-- end generated: ... -->`, the
+first N lines of a block under `<!-- generated imports: N -->`, a value after a marker (type `?`), the
+help note, the helper cell, the credits, the notebook metadata `yr_review`. `review.sh check` fails
+on any of these.
 
-   Write a function called `square` that takes `length` and draws a square.
+Per kind (the README has a spec example for each):
 
-   Start from this header (replace `...` with the body):
+- **What is displayed / drawn / happens**: `%%% run` with the code; the Answer explains, and quotes
+  values as `` `EXPR` is <!--=-->`?` `` or `` <!--= EXPR -->`?` ``. A value marker never starts a line
+  or a list item (Colab shows the line as raw HTML).
+- **Errors** (syntax errors, NameError, wrong calls, a failing import, RecursionError): the same,
+  with `%%% run a` / `%%% run b` for parts and `%%% part a` / `%%% part b` for each part's
+  explanation; name each error with `` <!--=error-->`?` ``. Nothing else is needed: the code is text, so
+  Colab's editor can't underline it, and sync wraps the run cell so the traceback prints as text.
+- **Write a function**: the prompt, `**Examples**`, ```` ```python ```` blocks with the calls only,
+  `%%% placeholder`, and the solution(s) in the Answer with **no** example calls, example inputs,
+  provided helpers or imports. Every Answer block must give every example's output; mark a
+  halfway version `<!-- not a solution -->`.
+- **Write code without a function**: examples assign the inputs; `%%% placeholder no-signature`;
+  the solution is only the computation.
+- **Helpers**: one definition cell (`%%% code`) where the helper is first provided; later questions
+  just use it.
+- **Fixes and "what if"**: a short ```` ```python ```` block in the Answer: the changed lines, or the
+  new `def` (the question's calls run after it). Keep an input line if a later question assigns
+  that name (check prints those names as notes). For the whole code with one change, use
+  `<!-- derive: from=QN replace="OLD" with="NEW" -->` over an empty block.
+- **Turtle drawings**: start example and run-block code with `make_turtle()`; keep the drawing
+  inside the canvas (300 × 150, the turtle starts in the middle).
 
-   ```python
-   def square(length):
-       ...
-   ```
+### Steps (new format)
 
-   **Examples**
+1. `python3 yr/tools/review_cells.py list yr/chapNN_review.ipynb`; pick topics from the page's
+   Concepts covered that have few or no questions.
+2. Write the questions in a spec file in your scratchpad (format: run `python3 yr/tools/review_cells.py`
+   without arguments; examples in `yr/README.md`, "Adding a question").
+3. `python3 yr/tools/review_cells.py add yr/chapNN_review.ipynb SPEC [--before N]`. The tool refuses a
+   number that already exists and prints the free one.
+4. `yr/tools/review.sh sync yr/chapNN_review.ipynb`. Read every new output and value in its report:
+   does the explanation still say the right thing? If sync says an output that was already on the
+   page changes, reread that Answer; only if it is still right, run sync again with `--accept`. Sync
+   refuses (exit 2) if a solution disagrees with another, a value marker fails, or an output is too
+   long; fix the question.
+5. `yr/tools/review.sh check yr/chapNN_review.ipynb` must print OK. Fix the question or the answer
+   until it passes; never weaken the check. Its rule numbers are in `yr/README.md`, "Format rules";
+   rule 12 (C4) means an Answer block does not run, or does not show what the page says, when a
+   student copies it into a new cell after Run all.
+6. Look at new pictures (extract a PNG from the stored output or the `data:` URI, or build the site).
+7. If "Concepts covered" lacks a fact a new question relies on, add it there (same style).
+8. `python3 .claude/skills/check-notebooks/check_notebooks.py` and
+   `.claude/skills/build-book/build_book.sh` (no new warnings); look at the page.
 
-   ```python
-   make_turtle()
-   square(50)
-   ```
-   <img data-turtle src="">
+To revise a question, edit the cells you typed (NotebookEdit tool or a `json` script, keeping cell
+ids), then steps 4-8. If the page was saved from Colab, run `yr/tools/review.sh normalize NB` first.
+After changing any tool, run `yr/tools/review.sh selftest`.
 
-   ```python
-   make_turtle()
-   square(20)
-   ```
-   <img data-turtle src="">
-   %%% placeholder
-   %%% answer
-   ```python
-   from jupyturtle import make_turtle, forward, left
+## Old format (pages not converted yet)
 
-   def square(length):
-       for i in range(4):
-           forward(length)
-           left(90)
+- The question's code is a code cell; the Answer is a `<details>` block with the exact output in a
+  ```text block, then the explanation.
+- Write-code questions type the header block and at least 2 examples by hand, each a ```python
+  block followed by its output (```text block, or `<img data-turtle src="">` for a drawing).
+- Every ```python block in an Answer runs unchanged as a new .py file: imports, all helper
+  functions, and a call.
+- Errors as answers: tag the code cell `raises-exception` (never `%%expect`); show the exact
+  `ErrorType: message` line. If an editor can see the error without running the code (syntax error,
+  undefined name, wrong arguments, unknown module), put the code of every part in
+  `run_code("""...""")` (see `yr/README.md`, "Old format").
 
-   make_turtle()
-   square(50)
-   ```
-   ````
-
-3. Insert them: `python3 yr/tools/review_cells.py add yr/chapNN_review.ipynb SPEC [--before N]`
-   (to keep easy → hard order). Number a new question after the one before it with a letter
-   (between 3 and 4: `3b`); a question added at the end gets the next number. **Do not run
-   `renumber`** (only between semesters, when Prof. Rosenthal asks; then fix any "Question N" cross
-   references it reports).
-4. If any turtle pictures were added or their code changed: `yr/tools/review.sh images yr/chapNN_review.ipynb`.
-   Look at the pictures (extract a few PNGs from the data: URIs to your scratchpad and view them):
-   is the drawing inside the canvas and is it what the text says?
-5. `yr/tools/review.sh check yr/chapNN_review.ipynb` must print OK. It runs the page, compares
-   every printed output and error with the Answer, runs each answer code block as a standalone
-   .py file, and checks headers, examples, correct calls before wrong ones, pictures and
-   symbol text. Fix the question or the answer
-   until it passes; never weaken the check.
-6. If "Concepts covered" lacks a fact a new question relies on, add it there (same style).
-7. `python3 .claude/skills/check-notebooks/check_notebooks.py` and
-   `.claude/skills/build-book/build_book.sh` (no new warnings); look at the page if the layout changed.
-
-To revise existing questions, edit the cells (NotebookEdit tool or a `json` script, keeping cell
-ids), then steps 4-7.
+Steps: write a spec (`%%% markdown`, `%%% code [tags]`, `%%% placeholder`, `%%% answer`), `review_cells.py
+add`, `yr/tools/review.sh images NB` if pictures were added or changed (look at them),
+`yr/tools/review.sh check NB` (must print OK), then `check_notebooks.py` and `build_book.sh`.
 
 Report which questions were added or changed and that `review.sh check` passed.
