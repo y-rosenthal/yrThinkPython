@@ -8,7 +8,8 @@
 2. Done 2026-10-09: sections 1–5 rewritten (v3); section 9 restated.
 3. Done 2026-10-09: the C4 prototype passes on all 11 fix blocks (results in section 4.4).
 4. Done 2026-10-09: all of D1–D18 decided (section 9).
-5. Next: Step 2 (update `make_smoke.py` to v3 and run the smoke test), then Step 3 (build the tools).
+5. Done 2026-10-09: Step 2, the v3 smoke test in Colab (results below).
+6. Next: Step 3, build the tools (section 4), with the skills and README updated in the same change.
 
 The two prototype v2 notebooks for Part A2:
 - Chapter 5 review page: https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/yr-runall-research/yr/plans/research/prototype-v2/chap05_review.ipynb
@@ -46,8 +47,9 @@ Step numbers refer to section 8 of the plan below.
       leftover sentences, the check gaps
 - [x] Save the prototype v2 files the checkpoint skipped (lock file, shell scripts, `v2fix_exp/` experiments) to
       `yr-runall-research` under `yr/plans/research/v2-workflow/` (2026-10-08, commit 632e55e)
-- [ ] Step 2: update `make_smoke.py` to v2 (Part B lists the changes and drops the tests v1 and A2 settle); with his
-      OK, push `colab-smoke-test`; he runs checklist Part B; adjust the plan if the results call for it
+- [x] Step 2 (2026-10-09): a v3 smoke test (`make_smoke_v3.py`, on `yr-runall-research` under `yr/plans/research/smoke-v3/`,
+      which never deploys, instead of a `colab-smoke-test` branch) run in Colab by Claude; results under "Colab test results
+      so far"; the plan is adjusted (2.2: imports marker, gentler out-of-order click)
 - [ ] Step 3: build the new tools (`review_format.py`, `sync_review.py`, new `check_review.py`, `turtle_images.py`,
       `ensure_colab_venv.sh` and `colablike.lock`, `prep_notebooks.py` guard, self-test), keeping old pages working
 - [ ] Skills: update `yr-review-questions` and `yr-review-page` so every question with an error, or with output
@@ -61,6 +63,21 @@ Step numbers refer to section 8 of the plan below.
       legacy code, add the CI lint step, delete the "Pending work" note from `CLAUDE.md`, mark this plan done
 
 ## Colab test results so far
+
+**2026-10-09, v3 smoke test (Step 2)**, run by Claude in Prof. Rosenthal's Chrome (`yr/plans/research/smoke-v3/` on
+`yr-runall-research`: `results-2026-10-09.md`, `screens/`). VERIFIED in Colab (Python 3.13.16):
+- **Collapse:** Colab honours only its `collapsed_sections` list (a heading with only the JupyterLab key stays open); keep
+  both, as 2.2 says.
+- **Variant B works everywhere it matters:** Run all reaches the end; closed Answers show no red marks; a failing import
+  (ch02 Q14a) prints the ModuleNotFoundError as text with Colab's NOTE, and a second failing import does too; a syntax
+  error and a RecursionError print as text. The NOTE mentions an "Open Examples button below" that B doesn't show.
+- **Copy-and-run (goal 11) works:** a trimmed Answer (generated import line, `def` using the provided `square`) typed into a
+  new cell after Run all draws correctly. Colab underlines `jupyturtle` in the import (unresolved, harmless).
+- **Name reuse (E10) confirmed in Colab:** without its input line a fix prints `19.9919.9919.99`; with it, `12`.
+- **Out-of-order click:** ▶ on a wrapped run cell in a fresh session gives `NameError: name 'run_code' is not defined`
+  with a red icon, and the traceback shows the hidden wrapper code. Response in 2.2: wrapped cells check for the helper.
+- **Imports can't be delimited inside a code block** (a comment in a fence shows as code): 2.2 now uses a marker line above
+  the block.
 
 **2026-10-09, prototype v2 (Part A2) and DRY tests 1-4**, run by Claude in Prof. Rosenthal's Chrome (Claude in Chrome
 extension). Full table and screenshots: `yr/plans/research/dry-audit/colab-tests/` on `yr-runall-research`
@@ -407,6 +424,9 @@ inside: Colab form markup, a `%%` magic, a `~~~` line, or both `"""` and `'''`.
   `Output of Question 3b, part a`.
 - **Plain** (title line + the code) when the code, run alone, neither raises nor prints a line number.
 - **Wrapped** otherwise: `run_code(` + newline + `r"""` + the code + `""")`. The traceback is printed as text.
+  To fail gently when a student clicks ▶ before the setup has run (Step 2 showed a red NameError that reveals the wrapper),
+  the wrapped call is guarded: `if 'run_code' in globals(): run_code(…)` /
+  `else: print('Run the setup cells first: Runtime → Run all.')`. Recommended; test it in Step 3's smoke run.
 
 **Helper cell** (generated, variant B; prototype `errors_A_vs_B.ipynb`, cell `ab0000h1`):
 ```python
@@ -454,8 +474,10 @@ def run_code(code):
 - In the Answer prose, `?` is what the author types; `sync` replaces it with the value and keeps it in step.
 
 **Generated regions** (E17): `sync` writes generated text between `<!-- begin generated: KIND -->` and
-`<!-- end generated: KIND -->`, each alone on its line (invisible, VERIFIED T2). KIND is `header`, `example`, `imports`,
-`then-try`, `fix-output`. `check` reports a hand edit inside a region before `sync` would overwrite it.
+`<!-- end generated: KIND -->`, each alone on its line (invisible, VERIFIED T2). KIND is `header`, `example`, `then-try`,
+`fix-output`. **Generated import lines** sit inside a code block, where a comment would show as code, so the line above
+the block says how many of its first lines are generated: `<!-- generated imports: 1 -->` (found building the Step 2 smoke
+test). `check` reports a hand edit inside a region before `sync` would overwrite it.
 
 **Sync stamp** (notebook metadata `yr_review`): `code_sha1` (every code cell), `outputs_sha1` (every stored output),
 `generated_sha1` (every generated region and filled value), and `stack` (python 3.13.x, ipython 7.34.0, ipykernel 6.17.1).
