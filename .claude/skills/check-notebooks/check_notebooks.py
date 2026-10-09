@@ -15,6 +15,8 @@ from glob import glob
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(ROOT / "yr" / "tools"))
+import review_format  # noqa: E402  (stdlib only)
 KNOWN_MAGICS = {"%%expect", "%%add_method_to", "%%expect_error"}
 SOLUTION_MARK = "# Solution goes here"
 
@@ -35,6 +37,18 @@ def check_notebook(path: Path):
         problems.append(f"{path}: nbformat is {nb.get('nbformat')}, expected 4")
     has_ids = nb.get("nbformat_minor", 0) >= 5
     ids = set()
+    # converted review pages (yr/, #### Answer headings) store the outputs of their run cells, written by
+    # `review.sh sync`; nothing else may store output, and the sync stamp must match (no hand edits)
+    review = path.parent.name == "yr" and review_format.page_format(nb) == "v3"
+    run_cells = set()
+    if review:
+        run_cells = {i for q in review_format.parse_page(nb) for i in q["run_cells"]}
+        for p in review_format.stamp_problems(nb):
+            problems.append(f"{path}: {p}")
+        for i, c in enumerate(nb.get("cells", [])):
+            if c.get("cell_type") == "markdown":
+                for p in review_format.marker_problems(review_format.source(c)):
+                    problem(path, i, p)
     for i, c in enumerate(nb.get("cells", [])):
         src = c.get("source", "")
         if isinstance(src, list):
@@ -50,9 +64,12 @@ def check_notebook(path: Path):
             problem(path, i, f"duplicate cell id {cid}")
         ids.add(cid)
         if c.get("cell_type") == "code":
-            if c.get("outputs"):
-                problem(path, i, "has stored outputs (notebooks are committed without outputs)")
+            if c.get("outputs") and i not in run_cells:
+                problem(path, i, "has stored outputs (notebooks are committed without outputs"
+                                 + ("; on review pages only run cells, written by review.sh sync)" if review else ")"))
             ec = c.get("execution_count")
+            if review and ec is not None:
+                problem(path, i, "execution_count is stored (review pages: run review.sh sync)")
             if ec is not None and not isinstance(ec, int):
                 problem(path, i, f"execution_count is {ec!r}")
             if "outputs" not in c:

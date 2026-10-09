@@ -7,7 +7,8 @@ Reads jb/_toc.yml for the pages, then checks on the live site that:
   - the home page and every page in the TOC load (HTTP 200);
   - chapter pages with code show outputs (chapter 5 must also show the stack diagram image in
     section 5.9, a page that only had outputs since the build started executing chapters);
-  - yr/ review pages have both concept lists, Answer boxes and their turtle pictures.
+  - yr/ review pages have both concept lists, Answer boxes and their turtle pictures; converted pages
+    (#### Answer headings) also show none of the notebook machinery (@title, run_code, markers).
 Retries until --wait seconds have passed (GitHub Pages lags a minute or two behind the deploy).
 Exit status 1 if anything is still wrong.
 """
@@ -58,6 +59,12 @@ def check():
             src = (ROOT / f'{page}.ipynb').read_text()
             expected = src.count('data-turtle')
             found = html.count('turtle-picture')
+            if '"#### Answer' in src:                   # converted page: stored drawings are pictures too
+                expected = src.count('<img data-turtle') + src.count('"review_drawing"')
+                found = html.count('alt="Turtle drawing"')
+                for bad in ('@title', 'run_code', '&lt;!--', '<!--=', 'generated imports', 'Using this page in Colab'):
+                    if bad in html:
+                        problems.append(f'{page}: "{bad}" appears on the page')
             summary.append(f'{page}: {found}/{expected} pictures')
             if found < expected:
                 problems.append(f'{page}: {found} turtle pictures on the page, {expected} in the notebook')

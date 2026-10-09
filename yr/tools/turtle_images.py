@@ -1,5 +1,7 @@
 """Draw the turtle pictures in a review notebook by running the code, and embed them as PNGs.
 
+Old-format pages only (<details> Answers). On converted pages, `review.sh sync` draws every picture.
+
 Usage (through the wrapper, which sets up the venv):
     yr/tools/review.sh images yr/chap04_review.ipynb
 
@@ -78,7 +80,12 @@ def png_tag(svg):
 
 
 def main(path):
+    import json
     import os
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import review_format
+    if review_format.page_format(json.loads(Path(path).read_text(encoding='utf-8'))) != 'legacy':
+        sys.exit(f'{path} is in the new format: its pictures are written by review.sh sync')
     import tempfile
     path = path.resolve()
     os.chdir(tempfile.mkdtemp())  # the setup cell may download files: keep them out of the repo

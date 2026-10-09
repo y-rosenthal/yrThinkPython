@@ -971,9 +971,10 @@ def render_outputs(outputs):
             if o['name'] == 'stderr':
                 text = site_traceback(text) + '\n'
             if parts and isinstance(parts[-1], list):
-                parts[-1][1] += text
+                parts[-1][1] += ('\n' if parts[-1][2] != o['name'] and parts[-1][1].strip() else '') + text
+                parts[-1][2] = o['name']
             else:
-                parts.append(['text', text])
+                parts.append(['text', text, o['name']])
             continue
         if t == 'error':
             parts.append(text_block(site_traceback(ANSI.sub('', '\n'.join(o['traceback'])))))
