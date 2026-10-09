@@ -14,11 +14,8 @@ reference example: read it before writing a new page.
 Work on a topic branch, not `v3` (`git switch -c yr-review-chNN`); leave committing/pushing to
 the user unless asked.
 
-**Build new pages in the new format** (`#### Answer` headings; `yr/README.md`, "Layout of a page"):
-`review_cells.py new` creates one, and `review.sh sync` writes the template cells (help note,
-helper cell, credits), the run cells and every output. The six existing pages are converted one at
-a time (`yr/plans/runall-collapsible-answers.md`); edit a page that is not converted yet in the old
-format. Whenever the design or the tools change, update this skill, `yr-review-questions` and
+`review_cells.py new` creates a page (`yr/README.md`, "Layout of a page"), and `review.sh sync` writes
+the template cells (help note, helper cell, credits), the run cells and every output. Whenever the design or the tools change, update this skill, `yr-review-questions` and
 `yr/README.md` in the same change. Question numbers stay fixed once a page is in use during a
 semester (insert as 3b; see `yr-review-questions`).
 
@@ -105,7 +102,7 @@ Then `python3 yr/tools/verify_site.py jb/_build/html/yr/chapNN_review.html yr/ch
 (one closed Answer per question, no hidden code or markers on the page), and look at
 `jb/_build/html/yr/chapNN_review.html` (or serve `jb/_build/html` with `python3 -m http.server`):
 sidebar position, numbering of the neighbouring chapters, the two concept lists open, answers
-collapsed, outputs and pictures shown. (Old-format page: `review.sh images` instead of `sync`.)
+collapsed, outputs and pictures shown.
 
 Report to the user what was added, what was verified, and anything not verified (e.g. how the
 page looks in Colab, which needs the notebook on GitHub).

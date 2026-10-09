@@ -24,6 +24,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Lint the notebooks (format, ids, review pages' stored outputs and sync stamp; stdlib only)
+        run: python .claude/skills/check-notebooks/check_notebooks.py
+
       - name: Install Jupyter Book and the packages the chapters use
         run: pip install "jupyter-book<2" ghp-import ipykernel nbclient matplotlib pyyaml
 

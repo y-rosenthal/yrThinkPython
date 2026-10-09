@@ -11,13 +11,10 @@ Read `yr/README.md` first: the guide "Adding a question", the **style rules**, t
 format rules and the tools. If the chapter has no review page yet, use the `yr-review-page` skill
 instead. Work on a topic branch, not `v3`.
 
-**Which format is the page in?** New format: its Answers are `#### Answer` headings. Old format:
-its Answers are `<details>` blocks. Pages are converted one at a time
-(`yr/plans/runall-collapsible-answers.md`); don't convert a page without Prof. Rosenthal's go-ahead.
-Follow the section for the page's format. Whenever the design or the tools change, update this
-skill, `yr-review-page` and `yr/README.md` in the same change.
+Whenever the design or the tools change, update this skill, `yr-review-page` and `yr/README.md` in the
+same change.
 
-## The rules for both formats
+## The rules
 
 - **Focus on code.** Mostly "what is displayed / drawn / happens?" and "write code".
 - **Standalone.** Each question must make sense to someone who never saw Think Python: no
@@ -35,7 +32,7 @@ skill, `yr-review-page` and `yr/README.md` in the same change.
 - **No `(c)`/`(r)`/`(tm)`/`+-` in text**: write **Part a**, **Part b**, **Part c**.
 - Only use Python taught up to this chapter, or explain the extra bit in the question.
 
-## New format: type each fact once
+## Type each fact once
 
 You type: the question's code (a `~~~python` run block), the prompt, the example calls, the
 solutions, the fixes, helpers (once, in a definition cell), and the explanation with each value
@@ -74,7 +71,7 @@ Per kind (the README has a spec example for each):
 - **Turtle drawings**: start example and run-block code with `make_turtle()`; keep the drawing
   inside the canvas (300 × 150, the turtle starts in the middle).
 
-### Steps (new format)
+### Steps
 
 1. `python3 yr/tools/review_cells.py list yr/chapNN_review.ipynb`; pick topics from the page's
    Concepts covered that have few or no questions.
@@ -99,22 +96,5 @@ Per kind (the README has a spec example for each):
 To revise a question, edit the cells you typed (NotebookEdit tool or a `json` script, keeping cell
 ids), then steps 4-8. If the page was saved from Colab, run `yr/tools/review.sh normalize NB` first.
 After changing any tool, run `yr/tools/review.sh selftest`.
-
-## Old format (pages not converted yet)
-
-- The question's code is a code cell; the Answer is a `<details>` block with the exact output in a
-  ```text block, then the explanation.
-- Write-code questions type the header block and at least 2 examples by hand, each a ```python
-  block followed by its output (```text block, or `<img data-turtle src="">` for a drawing).
-- Every ```python block in an Answer runs unchanged as a new .py file: imports, all helper
-  functions, and a call.
-- Errors as answers: tag the code cell `raises-exception` (never `%%expect`); show the exact
-  `ErrorType: message` line. If an editor can see the error without running the code (syntax error,
-  undefined name, wrong arguments, unknown module), put the code of every part in
-  `run_code("""...""")` (see `yr/README.md`, "Old format").
-
-Steps: write a spec (`%%% markdown`, `%%% code [tags]`, `%%% placeholder`, `%%% answer`), `review_cells.py
-add`, `yr/tools/review.sh images NB` if pictures were added or changed (look at them),
-`yr/tools/review.sh check NB` (must print OK), then `check_notebooks.py` and `build_book.sh`.
 
 Report which questions were added or changed and that `review.sh check` passed.

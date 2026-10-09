@@ -16,8 +16,7 @@ renumbers on its own (review.sh check fails if a published number disappears). R
 starting a new semester, to go back to 1, 2, 3, ...: it also rewrites "Question N" in the text, derive
 markers and run-cell titles, and records the date so check knows the page was renumbered.
 
-SPEC is a text file of cells, each starting with a line "%%% <kind>".
-For pages in the new format (#### Answer headings; see yr/README.md, "Adding a question"):
+SPEC is a text file of cells, each starting with a line "%%% <kind>" (see yr/README.md, "Adding a question"):
 
   %%% markdown                     a markdown cell: the heading, the prompt, examples (```python blocks)
   %%% run [a]                      a run block: the question's code (Part a, b, ... with a letter)
@@ -36,9 +35,6 @@ Example: a new question (then run review.sh sync, which writes its output and va
   print(7 / 2)
   %%% answer
   `/` always produces a float: `7 / 2` is <!--=-->`?`.
-
-For pages still in the old format: %%% markdown, %%% code [tag ...], %%% placeholder, and %%% answer (a
-collapsible <details> Answer); after adding, run review.sh images, then review.sh check.
 """
 import datetime
 import json
@@ -110,11 +106,8 @@ def parse_spec(spec, used, new_format):
                 cells.append(md_cell(body, used))
         elif kind == 'part' and new_format and args:
             cells.append(md_cell(f'**Part {args[0]}:** {body.strip()}', used))
-        elif kind == 'answer':
-            cells.append(md_cell(f'<details>\n<summary>Answer</summary>\n\n{body.strip()}\n\n</details>', used))
         else:
-            sys.exit(f'unknown cell kind in {spec}: {kind!r} '
-                     f'({"new" if new_format else "old"}-format page; see review_cells.py --help)')
+            sys.exit(f'unknown cell kind in {spec}: {kind!r} (see review_cells.py --help)')
     return cells
 
 
@@ -156,7 +149,9 @@ def next_number(nb, before=None):
 def cmd_add(path, spec, before=None):
     nb = load(path)
     used = {c.get('id') for c in nb['cells']}
-    new_format = rf.page_format(nb) == 'v3'
+    new_format = rf.page_format(nb) in ('v3', 'empty')
+    if not new_format:
+        sys.exit(f'{path} has <details> Answers, the old format: write Answers as "#### Answer" headings')
     new = parse_spec(spec, used, new_format)
     have = set(numbers(nb))
     for c in new:
@@ -178,7 +173,7 @@ def cmd_add(path, spec, before=None):
     nb['cells'][at:at] = new
     save(nb, path)
     print(f'inserted {len(new)} cell(s) at position {at} in {path}')
-    print('next: ' + ('review.sh sync, then review.sh check' if new_format else 'review.sh images, then review.sh check'))
+    print('next: review.sh sync, then review.sh check')
 
 
 def cmd_renumber(path):

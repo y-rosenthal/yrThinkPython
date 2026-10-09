@@ -18,27 +18,18 @@ yr/
     review.sh check NB     verify the page (fails if sync would change anything)
     review.sh normalize NB repair a page that was saved in Colab
     review.sh selftest     prove that sync and check catch broken pages
-    review.sh images NB    old-format pages only: draw the turtle pictures
     review_format.py       the page format (used by all the tools and by jb/prep_notebooks.py)
     sync_review.py, check_review.py, selftest_review.py, selftest/   (used by review.sh)
     ensure_colab_venv.sh, colablike.lock   the pinned Colab-like kernel
-    legacy_check_review.py, turtle_images.py   old-format pages (until all pages are converted)
     verify_site.py         check a converted page on the built website
 ```
 
 Claude Code skills that use all this: `yr-review-page` (create a page or write its concept
 summary) and `yr-review-questions` (add or revise questions).
 
-**Two formats, for now.** The pages are moving to a new format, one page at a time
-(`yr/plans/runall-collapsible-answers.md`, section 8). In the new format, Colab's **Run all** works, and
-the answers stay hidden until a student opens them. A page is in the new format if its Answers are
-`#### Answer` headings; it is in the old format if its Answers are `<details>` blocks. The tools
-work on both. This file describes the new format first; see "Old format" for pages that are not
-converted yet.
-
 ## Adding a question: a guide for people
 
-This guide is for pages in the new format. For each kind of question, it tells you what to type.
+For each kind of question, this guide tells you what to type.
 The tools write everything else. You can also ask Claude: the `yr-review-questions` skill follows
 these rules.
 
@@ -169,7 +160,7 @@ One notebook per chapter, titled `NNb. Prof. Rosenthal's Review` (e.g. `4b.` for
 - **Colab:** each page has a "Run this page on Colab" link at the top, and `jb/index.md` lists
   it under its chapter. (The links point at `v3`, so they work once the page is merged there.)
 
-### Layout of a page (new format)
+### Layout of a page
 
 Sync writes the cells marked *(template)*; do not edit them.
 
@@ -247,13 +238,12 @@ These come from Prof. Rosenthal's instructions; follow them for every page.
   ("like `circle` in the chapter"); give any helper function a question uses (a definition cell,
   or a pointer to the question that defines it); introduce any module the page uses (e.g.
   `jupyturtle`) at the top of the Questions section.
-- **Write-code questions give the function header** of each function to write. In the new format,
-  sync writes it ("Start from this header (replace `...` with the body):"). Exception: a question
+- **Write-code questions give the function header** of each function to write. Sync writes it ("Start from this header (replace `...` with the body):"). Exception: a question
   whose point is writing the header itself; tag its `# Your code here` cell `no-signature`.
 - **Write-code questions show at least two examples**, each with its output (sync writes it).
 - **Questions about wrong calls** (predict the error) first show the function being used
-  correctly in at least two ways, each with its output ("Two correct ways to call it:"). In the new
-  format, these are ```` ```python ```` blocks in the prompt; sync writes their output.
+  correctly in at least two ways, each with its output ("Two correct ways to call it:"). These are
+  ```` ```python ```` blocks in the prompt; sync writes their output.
 - Put the main point about the *Python* first. Side remarks about the context of an example go
   last, in a paragraph that starts "**By the way:**".
 
@@ -263,13 +253,11 @@ These come from Prof. Rosenthal's instructions; follow them for every page.
   displayed" questions, the Answer shows the real output (written by sync), then a short
   explanation. For drawings, the picture.
 - Give more than one approach when there is more than one reasonable one.
-- **New format: a student can copy any ```` ```python ```` block of an Answer into a new cell after
-  Run all and run it.** The block has its own import lines (sync writes them), and uses the helpers
-  that the questions define; it has no example calls or example inputs.
-- **Old format: every ```python block in an answer must run unchanged when pasted into a new .py
-  file**: it includes its imports, every helper function it uses, and a call that shows it working.
+- **A student can copy any ```` ```python ```` block of an Answer into a new cell after Run all and
+  run it.** The block has its own import lines (sync writes them), and uses the helpers that the
+  questions define; it has no example calls or example inputs.
 
-### Markers (new format)
+### Markers
 
 Markers are HTML comments: Colab, Jupyter and GitHub do not show them, and the website build
 removes them. Type `?` as a value; sync replaces it.
@@ -291,7 +279,7 @@ only), with the value shown as a notebook shows it (`'abc'` with quotes, `4.0`).
   Write "`-7 // 2` is <!--=-->`?`", not "<!--= -7 // 2 -->`?` is ...".
 - A block marker (the last three) is alone on its line.
 
-### What sync writes (new format)
+### What sync writes
 
 - **Run cells**, one per run block, under the Answer heading (multi-part: after each part's
   explanation). The code is hidden; the title names the question ("Output of Question 8a"); the
@@ -310,7 +298,7 @@ Never edit what sync writes. Sync runs the code only on the pinned Colab-like ke
 IPython 7.34.0, ipykernel 6.17.1, as Colab; `yr/tools/ensure_colab_venv.sh`, which `review.sh`
 calls), so that the stored outputs look like what students see.
 
-### Format rules (new format; `review.sh check` enforces them)
+### Format rules (`review.sh check` enforces them)
 
 1. Question headings are `### Question N (level): kind`; N is digits and an optional letter (`3b`),
    unique on the page.
@@ -344,7 +332,7 @@ Colab adds metadata and outputs when it saves. Do not save to GitHub from Colab.
 from Colab: `yr/tools/review.sh normalize NB` (removes what Colab added), then `review.sh sync NB`.
 `check_notebooks.py` (also in CI) fails until the page is repaired.
 
-### Turtle pictures (new format)
+### Turtle pictures
 
 Sync draws them: the picture of a run cell's code, of an example, or of a fix. Example code should
 start with `make_turtle()`. Pictures stay within the canvas: the turtle starts in the middle of a
@@ -365,7 +353,6 @@ yr/tools/review.sh sync yr/chap04_review.ipynb [--accept]
 yr/tools/review.sh check yr/chap04_review.ipynb [--static]
 yr/tools/review.sh normalize yr/chap04_review.ipynb
 yr/tools/review.sh selftest
-yr/tools/review.sh images yr/chap04_review.ipynb                     # old format only
 ```
 
 `review_cells.py add` takes a small text file of cells; run it without arguments for the format.
@@ -394,76 +381,17 @@ Use the `yr-review-page` skill, or by hand:
 - `.github/workflows/deploy-book.yml` and `.claude/skills/build-book/build_book.sh` copy
   `yr/*.ipynb` into `jb/yr/` (gitignored) next to the chapter copies. Review pages are not run
   by the build: the website shows the outputs that sync stored.
-- `jb/prep_notebooks.py` (`process_review`): on new-format pages, each Answer (its text and its run
-  cells' stored outputs, without their code) becomes one closed dropdown; the helper cell and the
-  "Credits" heading are dropped; markers are removed (values stay); tracebacks are shortened. On
-  old-format pages, it converts the `<details>` cells to collapsible boxes. Both: the concept lists
-  stay open, and `# Your code here` cells are dropped. The notebooks in `yr/` are never modified by
+- `jb/prep_notebooks.py` (`process_review`): each Answer (its text and its run cells' stored outputs,
+  without their code) becomes one closed dropdown; the helper cell and the "Credits" heading are
+  dropped; markers are removed (values stay); tracebacks are shortened; the concept lists stay open;
+  `# Your code here` cells are dropped. The notebooks in `yr/` are never modified by
   the build.
 - `yr/tools/verify_site.py jb/_build/html/yr/chapNN_review.html yr/chapNN_review.ipynb [BEFORE.html]`
-  checks a converted page on the built site, and compares it with the page built before conversion.
-- `check_notebooks.py` lints `yr/*.ipynb` (on new-format pages: outputs only on run cells, the
-  stamp, the markers) and checks that each one is in the TOC and that the workflow copies `yr/`.
-
-## Old format (pages not converted yet)
-
-These rules apply to pages whose Answers are `<details>` blocks, until they are converted.
-
-- **Collapsible sections** are markdown cells written as HTML `<details>`.
-  - Answer (collapsed): `<details>` + `<summary>Answer</summary>`
-  - Concept lists (shown by default): `<details open>` + `<summary><strong>Title</strong></summary>`
-
-  Keep the blank lines after `<summary>…</summary>` and before `</details>`, or the markdown
-  inside will not be rendered:
-
-  ````
-  <details>
-  <summary>Answer</summary>
-
-  ```text
-  expected output
-  ```
-
-  Explanation, and/or ```python code blocks.
-
-  </details>
-  ````
-
-- **The question's code** is a code cell; the Answer shows its exact output in a ```text block.
-- **Write-code questions** type the header block and at least two examples with their outputs (a
-  ```text block, or a turtle picture) by hand.
-- **Turtle pictures**: write `<img data-turtle src="">` right after a ```python block (in a
-  question's examples) or in an Answer (the picture of what the question's code cell draws). Then
-  run `yr/tools/review.sh images yr/chapNN_review.ipynb`, which runs the code and stores each
-  picture as a PNG. To draw an example that calls the function the student must write, the tool
-  first runs the question's answer code and the question's code cells above the picture.
-- **`# Your code here`**: a code cell whose entire source is this is space for the student's
-  code in Colab. The website drops it.
-- **Questions whose answer is an error**: tag the code cell `raises-exception`. Do **not** use
-  `%%expect`: it would show the answer.
-- **Errors an editor can see without running the code** (syntax errors, a name that is not defined,
-  a call with missing, extra, misnamed or wrongly typed arguments, an unknown module): put such code
-  in a string run by `run_code` (defined in the setup cell), for every part of the question:
-
-  ````
-  run_code("""
-  x = 5
-  if x = 5:
-      print('five')
-  """)
-  ````
-
-  `review.sh check` fails if a syntax error is not inside `run_code`. To find the other cases, run
-  Pyright on each code cell together with the cells above it.
-- **Setup cell**: tag it `setup`. It runs before every picture and in the checks.
-- No stored outputs; every cell has a unique 8-hex-digit id (`review_cells.py` takes care of this).
-
-`review.sh check` (through `legacy_check_review.py`) runs the page and fails if: a cell raises
-without the `raises-exception` tag; a question's printed output or error is not shown exactly in
-its Answer; a syntax error is not inside `run_code`; an answer's ```python block does not run as a
-standalone .py file; a write-code question lacks the function header or has fewer than two examples
-with output; a wrong-call question shows fewer than two correct calls; a turtle picture is missing;
-or the text contains `(c)`-style symbols.
+  checks a page on the built site, and compares it with another build of the page (for example, before a
+  big change).
+- `check_notebooks.py` lints `yr/*.ipynb` (outputs only on run cells, the stamp, the markers) and checks
+  that each one is in the TOC and that the workflow copies `yr/`. The deploy workflow runs it first, so a
+  page with a problem is not published.
 
 ## Other course additions outside this folder
 

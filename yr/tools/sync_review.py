@@ -280,8 +280,8 @@ def static_normalize(nb, path):
     """Template cells, run cells, metadata. Returns (changes, errors); changes nb in place."""
     changes, errors = [], []
     if rf.page_format(nb) == 'legacy':
-        return [], ['this page is in the old format (<details> Answers): sync works only on converted pages; '
-                    'use review.sh images / check for it']
+        return [], ['this page has <details> Answers, the old format: write Answers as "#### Answer" headings '
+                    '(yr/README.md)']
     if rf.page_format(nb) == 'mixed':
         return [], ['this page mixes <details> Answers and #### Answer headings']
     for c in nb.cells:

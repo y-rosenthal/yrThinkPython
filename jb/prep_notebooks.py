@@ -9,13 +9,12 @@
   code cell with the same id, the solution is shown on the site inside a collapsed
   "Suggested solution" dropdown (readers click to reveal it); otherwise the cell is
   blanked as before. The notebooks in chapters/ (which Colab opens) are never touched.
-- prepares the review pages copied from yr/ into jb/yr/ (see yr/README.md): markdown cells
-  written as <details><summary>Title</summary> ... </details> become the same collapsible
-  box the solutions use (collapsed; or shown, for <details open>), and '# Your code here'
-  cells (space for the reader's own code in Colab) are dropped from the website.
-  On converted pages (#### Answer headings), each Answer (its explanation and the stored
-  outputs of its run cells, without their code) becomes one closed dropdown; the helper
-  cell and the "Credits" heading are dropped; sync's markers are removed (values stay).
+- prepares the review pages copied from yr/ into jb/yr/ (see yr/README.md): each Answer (its
+  explanation and the stored outputs of its run cells, without their code) becomes one closed
+  dropdown; the concept lists, written as <details open><summary>Title</summary> ... </details>,
+  become the same collapsible box the solutions use, shown; '# Your code here' cells (space for
+  the reader's own code in Colab), the helper cell and the "Credits" heading are dropped; sync's
+  markers are removed (values stay).
 """
 import json
 import re
@@ -214,16 +213,9 @@ def process_review_v3(ntbk, path):
 
 def process_review(path):
     ntbk = nbf.read(path, nbf.NO_CONVERT)
-    if review_format.page_format(ntbk) == 'v3':
-        process_review_v3(ntbk, path)
-        nbf.write(ntbk, path)
-        return
-    ntbk.cells = [c for c in ntbk.cells
-                  if not (c['cell_type'] == 'code' and c['source'].strip() == YOUR_CODE)]
-    for cell in ntbk.cells:
-        raw_pictures(cell)
-        details_to_dropdown(cell)
-        process_cell(cell)
+    if review_format.page_format(ntbk) != 'v3':
+        sys.exit(f'prep_notebooks: {path}: review pages need "#### Answer" headings (yr/README.md)')
+    process_review_v3(ntbk, path)
     nbf.write(ntbk, path)
 
 

@@ -1,10 +1,8 @@
 """`review.sh check`: verify a review page. Fails if `sync` would change anything, or a format rule is broken.
 
-    python check_review.py NB [JUPYTURTLE] [--kernel colablike] [--static] [--renumbered] [--cache DIR]
+    python check_review.py NB [--kernel colablike] [--static] [--renumbered] [--cache DIR]
 
-Pages in the old format (<details> Answers) are checked by legacy_check_review.py, as before.
-
-For converted pages (yr/README.md, "Format rules"; the numbers are the rule numbers there):
+The rules are in yr/README.md, "Format rules"; the numbers are the rule numbers there.
 Static (no kernel; --static runs only these):
   1  question headings "### Question N (level): kind"; N is digits and an optional letter, unique on the page
   2  stable numbers: every question number of the published page (git: v3) is still there, on the same question,
@@ -376,15 +374,9 @@ def main(argv):
     path = Path(argv[0])
     nb = json.loads(path.read_text(encoding='utf-8'))
     fmt = rf.page_format(nb)
-    if fmt == 'legacy':
-        import legacy_check_review
-        jt = next((a for a in argv[1:] if not a.startswith('-') and a.endswith('.py')), None)
-        if jt is None:
-            sys.exit('old-format page: pass the path of jupyturtle.py (review.sh does)')
-        legacy_check_review.problems.clear()
-        return legacy_check_review.main(path, Path(jt))
-    if fmt == 'mixed':
-        print(f'1 problem(s):\n  - {path} mixes <details> Answers and #### Answer headings')
+    if fmt in ('legacy', 'mixed'):
+        print(f'1 problem(s):\n  - {path} has <details> Answers (the old format); write Answers as '
+              f'"#### Answer" headings (yr/README.md)')
         return 1
     opt = lambda name, default: argv[argv.index(name) + 1] if name in argv else default  # noqa: E731
     problems = check(path, opt('--kernel', 'colablike'), '--static' in argv, '--renumbered' in argv,

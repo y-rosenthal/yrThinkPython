@@ -1,14 +1,19 @@
 # Plan: review pages that work with Colab's "Run all", with answers hidden until clicked
 
-**Status (2026-10-09): Step 3 is done. The new tools are built and tested on branch `yr-review-runall` (3 commits on top of `v3`; not merged, nothing deployed). `review.sh selftest` is green (a fixture with every kind of question syncs, passes check, and 27 kinds of broken page are caught); the six live pages still pass the old checks through the new tools, and the website build of old-format pages is byte-identical. The synced fixture passed a Colab test (guard, Run all, variant B; "Colab test results so far"). Sections 4, 6–8 and 10 now describe what was built. No live page is converted yet. Next: Step 4, convert chapter 5 on `yr-review-runall`, then Prof. Rosenthal runs checklist Part C from the branch link.**
+**Status (2026-10-09): all six review pages are converted, on branch `yr-review-runall`; nothing is published yet.** Steps 3, 4 and 6 and the parts of Step 7 that don't deploy are done there:
+- the tools;
+- chapter 5's Part C in Colab;
+- all six pages converted and verified: conversion gate, `review.sh check`, lint, site build and `verify_site.py`;
+- the old-format code removed;
+- the CI lint step added.
+
+**Next: publish (Step 5, now for all six pages at once).** Merge `yr-review-runall` into `v3` and push; this deploys the site, so Prof. Rosenthal does it, or gives Claude permission. Then run `verify_live.py`, do the Colab spot checks of the other five pages (Run all, one error question, one turtle question), and delete the "Pending work" note from `CLAUDE.md`.
 
 **Next step:**
-1. Done 2026-10-09: Part A2, DRY tests 1-4, D1–D18, E1–E20, the C4 prototype, Step 2 (v3 smoke test).
-2. Done 2026-10-09: Step 3, the tools (section 4, "What was built"), with the README guide for people and both
-   skills updated in the same change, and a Colab test of the synced fixture.
-3. Next: Step 4, convert chapter 5 only (section 5; the one-off converter `convert_v2.py` on `yr-runall-research`
-   must be extended for v3 first), run V1–V10 (section 6), push `yr-review-runall`, and Prof. Rosenthal runs
-   Part C from the branch link (section 7).
+1. Done 2026-10-09: Steps 2, 3, 4 (Part C passes), 6, and the non-deploying parts of 7 (section 8).
+2. Next: Prof. Rosenthal publishes: `git switch v3 && git merge yr-review-runall && git push` (or the yrpublish skill).
+   Then `verify_live.py`, the Colab spot checks of ch02, ch03, ch04, ch06 and ch07, and the open decisions listed
+   under "To do".
 
 The two prototype v2 notebooks for Part A2:
 - Chapter 5 review page: https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/yr-runall-research/yr/plans/research/prototype-v2/chap05_review.ipynb
@@ -63,12 +68,28 @@ Step numbers refer to section 8 of the plan below.
       the chapter 5 conversion needs it, or decide to drop it
 - [x] Step 4 (2026-10-09): chapter 5 converted on `yr-review-runall` (`convert_v3.py`, gate 41/41, check, lint, site
       build and `verify_site.py` pass); Part C run in Colab by Claude from the branch link: passes
-- [ ] Step 5: publish chapter 5 and verify the live page
-- [ ] Step 6: convert ch02, ch03, ch06, ch07, then ch04, each with a Colab spot-check
-- [ ] Step 7: check on the live pages that each problem Prof. Rosenthal reported is gone (goal 6), remove the
-      legacy code, add the CI lint step, delete the "Pending work" note from `CLAUDE.md`, mark this plan done
+- [x] Step 6 (2026-10-09, on `yr-review-runall`): ch02, ch03, ch04, ch06 and ch07 converted (`convert_v3.py` with an
+      edits file per page, on `yr-runall-research`); gate OK on all (one intended difference: ch07 Q14's doctest line
+      number, 9 to 4); `review.sh check`, lint (Python 3.12), site build and `verify_site.py` pass on all six
+- [ ] Colab spot checks of ch02, ch03, ch04, ch06, ch07 (Run all, one error question, one turtle question). Only ch04's
+      "on opening" check was done (19 closed Answers, pictures, generated lines); Colab's session limit stopped Run all
+- [x] Step 7, the parts that don't deploy (2026-10-09, on `yr-review-runall`): legacy code removed (`legacy_check_review.py`,
+      `turtle_images.py`, old-format cell kinds, prep's old path, the README's and skills' old-format sections); check
+      and prep reject `<details>` Answers; the deploy workflow runs `check_notebooks.py` first
+- [ ] Step 5 (now all six pages at once): Prof. Rosenthal merges `yr-review-runall` into `v3` and pushes (it deploys;
+      Claude's push to `v3` was refused by the permission system on 2026-10-09). Then `verify_live.py`
+- [ ] Step 7, after publishing: check on the live pages that each problem Prof. Rosenthal reported is gone (goal 6),
+      delete the "Pending work" note from `CLAUDE.md`, mark this plan done, and (with his OK) delete the research
+      branches
+- [ ] Decide: E14 says to delete ch04's jupyturtle paragraph in the Questions intro (it repeats Concepts), but the
+      README's style rule says the Questions section introduces every module it uses. Kept for now
 
 ## Colab test results so far
+
+**2026-10-09, Step 6 spot check (partial):** ch04 from the branch link, on opening: 19 closed Answers, 19 example
+pictures, no marker text, the generated "Run this cell to define `square` and `jump`." and "This question uses `jump` and
+`square` from Question 11." lines. Run all could not start: Colab's limit on active sessions (the Part C runtime was
+still connected).
 
 **2026-10-09, Part C: chapter 5 converted, from the branch link** (`yr-review-runall`), run by Claude in Prof. Rosenthal's
 Chrome. VERIFIED in Colab:
