@@ -80,7 +80,8 @@ extension). Full table and screenshots: `yr/plans/research/dry-audit/colab-tests
     cell after Run all. The plan's response: an empty title, or one that names the question.
 - Run all took under 10 s, but the runtime was already connected (a Terminal panel opened by accident), so a cold start was not
   timed.
-- **For Prof. Rosenthal:** variant A or B (screenshots `a2-6-variant-A-after-runall.jpg`, `a2-6-variant-B-after-runall.jpg`),
+- **Prof. Rosenthal chose variant B (2026-10-09)**: error answers show the traceback as plain text, so nothing is flagged and no red icon appears on closed Answers. This settles section 9's D15 (B: a hidden helper cell again; checks read the error from text; failing-import test in Part B).
+- **Still for Prof. Rosenthal:** variant A or B (decided: B) (screenshots `a2-6-variant-A-after-runall.jpg`, `a2-6-variant-B-after-runall.jpg`),
   the run-cell titles, and the help note's wording (A2-7).
 
 **2026-10-08, prototype v1** (chapter 5 from `yr-runall-research`; Run all, then Answers opened). VERIFIED from his screenshots:
