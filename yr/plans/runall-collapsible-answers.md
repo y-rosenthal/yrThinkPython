@@ -1,13 +1,6 @@
 # Plan: review pages that work with Colab's "Run all", with answers hidden until clicked
 
-**Status (2026-10-09): all six review pages are converted, on branch `yr-review-runall`; nothing is published yet.** Steps 3, 4 and 6 and the parts of Step 7 that don't deploy are done there:
-- the tools;
-- chapter 5's Part C in Colab;
-- all six pages converted and verified: conversion gate, `review.sh check`, lint, site build and `verify_site.py`;
-- the old-format code removed;
-- the CI lint step added.
-
-**Next: publish (Step 5, now for all six pages at once).** Merge `yr-review-runall` into `v3` and push; this deploys the site, so Prof. Rosenthal does it, or gives Claude permission. Then run `verify_live.py`, do the Colab spot checks of the other five pages (Run all, one error question, one turtle question), and delete the "Pending work" note from `CLAUDE.md`.
+**Status (2026-10-09): DONE. The new format is live on all six review pages.** `yr-review-runall` was merged into `v3` (merge `b488464`, deploy run 37996571197: success). `verify_live.py` passes, and `verify_site.py` passes 12/12 on every live page. Colab spot checks from the live links pass on ch02, ch03, ch04, ch06 and ch07 (Run all reaches the end, the error answers re-run live as plain text, all Answers stay closed); ch05 passed Part C. Open items, none blocking: the E14 jupyturtle paragraph in ch04 (see To do), and the checks not built (C8, C9, C11, E7, refactor, overlap lint).
 
 **Next step:**
 1. Done 2026-10-09: Steps 2, 3, 4 (Part C passes), 6, and the non-deploying parts of 7 (section 8).
@@ -71,16 +64,18 @@ Step numbers refer to section 8 of the plan below.
 - [x] Step 6 (2026-10-09, on `yr-review-runall`): ch02, ch03, ch04, ch06 and ch07 converted (`convert_v3.py` with an
       edits file per page, on `yr-runall-research`); gate OK on all (one intended difference: ch07 Q14's doctest line
       number, 9 to 4); `review.sh check`, lint (Python 3.12), site build and `verify_site.py` pass on all six
-- [ ] Colab spot checks of ch02, ch03, ch04, ch06, ch07 (Run all, one error question, one turtle question). Only ch04's
-      "on opening" check was done (19 closed Answers, pictures, generated lines); Colab's session limit stopped Run all
+- [x] Colab spot checks of ch02, ch03, ch04, ch06, ch07 from the live links (2026-10-09): Run all reaches the end, nothing
+      visible outside closed Answers, error run cells re-run live as text (ch02 Q14a with Colab's NOTE), ch07's doctest and
+      words.txt question run
 - [x] Step 7, the parts that don't deploy (2026-10-09, on `yr-review-runall`): legacy code removed (`legacy_check_review.py`,
       `turtle_images.py`, old-format cell kinds, prep's old path, the README's and skills' old-format sections); check
       and prep reject `<details>` Answers; the deploy workflow runs `check_notebooks.py` first
-- [ ] Step 5 (now all six pages at once): Prof. Rosenthal merges `yr-review-runall` into `v3` and pushes (it deploys;
-      Claude's push to `v3` was refused by the permission system on 2026-10-09). Then `verify_live.py`
-- [ ] Step 7, after publishing: check on the live pages that each problem Prof. Rosenthal reported is gone (goal 6),
-      delete the "Pending work" note from `CLAUDE.md`, mark this plan done, and (with his OK) delete the research
-      branches
+- [x] Step 5 (all six pages at once, 2026-10-09): `yr-review-runall` merged into `v3` (b488464) with the yrpublish skill;
+      deploy run 37996571197 succeeded; `verify_live.py` OK; `verify_site.py` 12/12 on each live page
+- [x] Step 7, after publishing (2026-10-09): the three reported problems are gone on the live pages (goal 6): question
+      code is text, so Colab underlines nothing; Run all reaches the end; nothing is visible outside closed Answers.
+      "Pending work" note deleted from `CLAUDE.md`; plan marked done
+- [ ] With Prof. Rosenthal's OK: delete the branches `yr-runall-research` (never merge it) and `yr-review-runall`
 - [ ] Decide: E14 says to delete ch04's jupyturtle paragraph in the Questions intro (it repeats Concepts), but the
       README's style rule says the Questions section introduces every module it uses. Kept for now
 

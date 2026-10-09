@@ -1,0 +1,601 @@
+---
+title: "Content Author Guide"
+---
+
+This chapter tells a content author what to know to work in this repository. Part 1 gives the
+overview, the setup and the workflow. Part 2 is about the book's chapter notebooks. Part 3, the
+largest part, is about the **Prof. Rosenthal's Review** pages.
+
+## Part 1: the repository
+
+### What the repository holds
+
+The repository is a fork of Allen Downey's *Think Python*, 3rd edition. The course adds its own
+material, and keeps it apart from the book.
+
+| Folder or file | What it holds | Do you edit it? |
+|---|---|---|
+| `chapters/chapNN.ipynb` | The book's chapters, 0 to 19 | Yes, carefully (Part 2) |
+| `blank/chapNN.ipynb` | "Fill in the blanks" copies of the chapters | No: a tool writes them |
+| `solutions/chapNN.ipynb` | Suggested solutions to the book's exercises | Yes (Part 2) |
+| `yr/chapNN_review.ipynb` | The review pages, one per chapter (2 to 7 so far) | Yes (Part 3) |
+| `yr/README.md` | The rules for the review pages | Yes, when a rule changes |
+| `yr/tools/` | The review-page tools | Only to change a tool |
+| `jb/` | The website build (Jupyter Book) | Rarely |
+| `.claude/skills/` | Instructions that Claude Code follows | When a rule changes |
+| `author-guide/` | This guide (a Quarto book) | Yes |
+
+The website is <https://y-rosenthal.github.io/yrThinkPython/>. Each review page shows on the
+website right after its chapter, as "4b. Prof. Rosenthal's Review" (for chapter 4). Each page also
+has a "Run this page on Colab" link.
+
+### Set up your computer
+
+You need Linux or macOS, `git`, and Python 3.12 at `/usr/bin/python3`. The tools create the rest:
+
+- **The book's venv**, `~/.venvs/yrThinkPython`. The build scripts create it the first time.
+  The repository is in Dropbox, so the venv is outside it.
+- **The Colab-like kernel**, `~/.venvs/colablike`. `yr/tools/review.sh` creates it the first
+  time you run `sync` or `check`. It has the same Python, IPython and ipykernel versions as Colab
+  (Python 3.13, IPython 7.34.0, ipykernel 6.17.1). The tools write the stored outputs of the
+  review pages with this kernel only, so the pages look the same as in Colab.
+- **`uv`**, the tool that builds the Colab-like kernel. `review.sh` installs it into the book's
+  venv if it is missing.
+
+Run all commands from the root folder of the repository.
+
+### The workflow: branch, check, publish
+
+Every push to the branch `v3` publishes the website. Thus:
+
+1. Make a topic branch before you change anything:
+
+   ```bash
+   git switch v3
+   git pull
+   git switch -c my-topic
+   ```
+
+2. Make your changes, and run the checks for what you changed (the next chapters tell you which).
+3. Always run the fast check of all notebooks:
+
+   ```bash
+   python3 .claude/skills/check-notebooks/check_notebooks.py
+   ```
+
+4. Build the website on your computer, and look at the pages you changed:
+
+   ```bash
+   .claude/skills/build-book/build_book.sh
+   ```
+
+   The output is in `jb/_build/html/`. The script must say "no new warnings".
+5. Commit, and push your branch.
+6. To publish, merge the branch into `v3` and push `v3`. The `yrpublish` skill of Claude Code does
+   all the checks, the merge, the push and a check of the live site.
+
+The deploy workflow (`.github/workflows/deploy-book.yml`) runs `check_notebooks.py` first. If it
+finds a problem, the website does not change.
+
+**Corrections to the book itself** go to Allen Downey as a GitHub issue, not as a pull request.
+The `contribute-upstream` skill writes the issue text.
+
+## Part 2: the chapter notebooks
+
+The book's chapters are in `chapters/`. The website shows them, and Colab opens them. Keep your
+changes small, because the fork must stay close to Downey's version.
+
+- **Find a cell** before you change it:
+
+  ```bash
+  python3 .claude/skills/notebook-conventions/nb_cells.py chapters/chap03.ipynb
+  ```
+
+- **Do not store outputs.** The website build runs the chapters and makes the outputs.
+- **Tag your additions.** Give each cell that you add or change for the course the tag `course`.
+  Do not tag a correction of an error in the book.
+- **Exercises** have code cells that contain only `# Solution goes here`. Put a suggested solution
+  in `solutions/chapNN.ipynb`, in the cell with the same id. The website shows it in a closed
+  "Suggested solution" box.
+- **Expected errors** use the cell magic `%%expect ErrorName` on the first line.
+- **After a change**, run the checks, and run the changed chapter:
+
+  ```bash
+  python3 .claude/skills/check-notebooks/check_notebooks.py
+  .claude/skills/check-notebooks/run_notebooks.sh chapters/chap03.ipynb
+  ```
+
+- **Blank versions.** If the chapter has a `blank/` copy, make it again with the `make-blank`
+  skill.
+
+New course material does not go in `chapters/`. It goes in a review page (Part 3).
+
+## Part 3: the review pages
+
+### What a review page is
+
+A review page (`yr/chapNN_review.ipynb`) helps students review one chapter. It has:
+
+1. **Concepts covered**: two lists of facts, as a checklist.
+2. **Questions**: practice questions, from easy to hard. Each question has an **Answer** that is
+   closed until the student opens it.
+
+### What a student sees
+
+In Colab:
+
+- Each Answer is closed. The student clicks the arrow next to **Answer** to open it.
+- An Answer can show the real output of the question's code (printed text, an error, a drawing).
+  The output is stored in the page, so the student sees it before running anything.
+- The student can use **Runtime → Run all**. Run all runs the whole page, and it does not stop at
+  the questions whose answer is an error. All Answers stay closed.
+- The question's code is text, not a code cell. Thus, Colab's editor does not mark the mistakes in
+  the code before the student makes a prediction.
+- After Run all, the student can copy any code block from an Answer into a new cell, and run it.
+
+On the website, each Answer is a closed box with the explanation and the stored outputs.
+
+### The main rule: type each fact once
+
+You type each fact one time. The tools write the rest by running the code.
+
+| You type | The tools write |
+|---|---|
+| The question's code | The hidden cell that runs it, and its output |
+| The explanation, with a marker for each error name | The error name |
+| Each helper function, in one cell | "Run this cell to define ..." and "This question uses ... from Question N" |
+| The task and the example calls | The "Start from this header" block, and the output of each example |
+| The solutions (no imports, no example calls) | The import lines of each solution, and a "Then try:" line |
+| Fixes and "what if" code | Their outputs and pictures |
+| Each value in the text, as an expression | The value |
+
+Two commands do the work:
+
+- `yr/tools/review.sh sync PAGE` writes everything in the right column.
+- `yr/tools/review.sh check PAGE` makes sure that the page is correct. It fails if `sync` would
+  change something, so it also finds text that somebody typed in a place that the tools write.
+
+### The steps to add a question
+
+1. **Get the question number.** Numbers stay the same during a semester, because homework uses
+   them. A question between Questions 3 and 4 is Question 3b:
+
+   ```bash
+   python3 yr/tools/review_cells.py next yr/chap05_review.ipynb --before 4
+   ```
+
+   For a question at the end of the page, do not use `--before`.
+
+2. **Write the question in a spec file.** A spec file is a text file of cells. Each cell starts
+   with a line `%%% KIND`. Section "Each kind of question" shows examples. These are the kinds:
+
+   | Line | The cell it makes |
+   |---|---|
+   | `%%% markdown` | A text cell: the heading, the task, examples |
+   | `%%% run` or `%%% run a` | The question's code (a "run block"); `a`, `b`, ... for parts |
+   | `%%% code` | A definition cell: a helper that the question gives (definitions only) |
+   | `%%% placeholder` | A `# Your code here` cell for the student |
+   | `%%% placeholder no-signature` | The same, for a task without a function |
+   | `%%% answer` | The `#### Answer` heading; text after it goes into the first Answer cell |
+   | `%%% part a` | An Answer cell that explains part a |
+
+3. **Add the cells to the page:**
+
+   ```bash
+   python3 yr/tools/review_cells.py add yr/chap05_review.ipynb my-question.txt --before 4
+   ```
+
+   You can also edit the notebook in Jupyter. Do not edit it in Colab (see "If you edit a page in
+   Colab").
+
+4. **Run sync:**
+
+   ```bash
+   yr/tools/review.sh sync yr/chap05_review.ipynb
+   ```
+
+   Read the report. It shows each new output and each new value. Make sure that your text agrees
+   with them. Section "Read the report of sync" tells you what to do with each message.
+
+5. **Run check:**
+
+   ```bash
+   yr/tools/review.sh check yr/chap05_review.ipynb
+   ```
+
+   It must print `OK`. If it shows problems, correct the question and do steps 4 and 5 again.
+
+6. **Run the notebook check and the website build** (Part 1, steps 3 and 4). Look at the page.
+
+### Each kind of question
+
+#### What is displayed, drawn, or what happens
+
+Type the code in a run block. In the Answer, write each value as an expression, then the marker
+`<!--=-->`, then `` `?` ``. Sync puts the value in place of the `?`.
+
+```text
+%%% markdown
+### Question 3b (easy): what is displayed?
+
+Predict what this code displays, then open the Answer to check.
+%%% run
+minutes = 135
+print(minutes // 60, minutes % 60)
+%%% answer
+135 minutes is 2 hours (`135 // 60` is <!--=-->`?`) and `135 % 60` is <!--=-->`?` minutes left over.
+```
+
+Sync adds a hidden cell under the Answer heading. This cell shows the real output of the code.
+
+#### Find the error, in parts
+
+Use one run block for each part (`%%% run a`, `%%% run b`) and one Answer cell for each part
+(`%%% part a`). Write `` <!--=error-->`?` `` where the text names the error. Sync writes the name of
+the error that the part's code really gives.
+
+```text
+%%% markdown
+### Question 9 (medium): find the error
+
+Each part has one mistake. Predict the error for each, then open the Answer to check.
+%%% run a
+x = 5
+if x = 5:
+    print('five')
+%%% run b
+print(undefined_name)
+%%% answer
+%%% part a
+`=` assigns; comparing needs `==`, so this is a <!--=error-->`?`.
+%%% part b
+The name was never assigned: a <!--=error-->`?`.
+%%% markdown
+Python finds a syntax error before it runs any of that part's code.
+```
+
+The last markdown cell is the summary. Sync puts the output of each part after the explanation of
+that part. The output shows the traceback as text, so Run all does not stop and Colab shows no red
+marks.
+
+#### Write a function
+
+Type the task, a line that starts with `**Examples**`, and the example calls in
+```` ```python ```` blocks. Type the solution in the Answer. **Do not type:**
+
+- the "Start from this header" block;
+- the output of the examples;
+- import lines in the solution;
+- example calls in the solution.
+
+````text
+%%% markdown
+### Question 10 (medium): write a function
+
+Write a function called `end_hour` that takes `start` and `duration` and displays the hour
+when the event ends, on a 24-hour clock.
+
+**Examples**
+
+```python
+end_hour(9, 3)
+end_hour(22, 5)
+```
+
+```python
+end_hour(20, 28)
+```
+%%% placeholder
+%%% answer
+```python
+def end_hour(start, duration):
+    print((start + duration) % 24)
+```
+````
+
+Each ```` ```python ```` block in this Answer is a solution. `check` runs each solution with each
+example, and all must give the same output.
+
+- A block that is not a full solution (for example, a first draft) gets the line
+  `<!-- not a solution -->` immediately above it. Sync then writes the output of that block.
+- If the solution has a helper function, the header shows it too. To show only some functions,
+  write `<!-- header: end_hour -->` on its own line in the task.
+
+#### Write code without a function
+
+The student writes code that uses variables that already have values. Tag the student's cell
+`no-signature`. Make the first example a definition cell, so that Run all gives values to the
+variables. Sync writes the output of that example in the text cell after it.
+
+````text
+%%% markdown
+### Question 11 (medium): write code
+
+The variables `hours` and `minutes` have values. Write code that displays the total number of
+minutes.
+
+**Examples** (each example assigns the variables; your code comes after them)
+%%% code
+hours = 1
+minutes = 2
+%%% markdown
+```python
+hours = 0
+minutes = 42
+```
+%%% placeholder no-signature
+%%% answer
+```python
+print(hours * 60 + minutes)
+```
+````
+
+The solution contains only the computation, not the example values.
+
+#### A question that gives a helper function
+
+Put the helper in a definition cell (`%%% code`). Give each helper only one time, in the first
+question that uses it. Sync writes "Run this cell to define `square`." above the cell. A later
+question that uses the helper gets the line "This question uses `square` from Question 11."
+
+A definition cell can contain only definitions: `def`, `class`, `import` and assignments. It must
+display nothing.
+
+#### Wrong calls (predict the error)
+
+First show two correct calls in ```` ```python ```` blocks in the task. Sync writes their outputs.
+Then give the wrong calls as run blocks, in parts.
+
+#### Fixes and "what if" code in an Answer
+
+Write a short ```` ```python ```` block in the Answer. Sync runs it after the question's code and
+writes its output or picture under it.
+
+- **Only the changed lines.** For example, `average = (score1 + score2 + score3) / 3` and
+  `print(average)`.
+- **Only the new `def`.** Sync then runs the question's own calls after it.
+- **Keep an input line** if a later question gives the same name a new value. After Run all, the
+  name has the later value. `check` prints a note with the names that more than one question
+  assigns.
+- **The full code with one change.** Write a `derive` marker on its own line, and an empty block
+  under it. Sync fills the block:
+
+  ````text
+  <!-- derive: from=Q14 replace="for letter in word:" with="for letter in word.lower():" -->
+  ```python
+  ```
+  ````
+
+  `from=Q14` uses Question 14's run block. If the text to replace is in Question 14's definition
+  cell, sync uses the definition cell and the run block. `from=solution` uses the first solution
+  of this question. In OLD and NEW, `\n` is a line break.
+
+#### Drawings (jupyturtle)
+
+Start each drawing with `make_turtle()`. The canvas is 300 × 150. The turtle starts in the middle,
+facing east. To make room, use `jump(-x)` or `make_turtle(width=..., height=...)`. Sync makes each
+picture. Look at new pictures on the built page.
+
+### Markers
+
+Markers are HTML comments. Colab, Jupyter and GitHub do not show them. The website build removes
+them. You type `?` as the value, and sync writes the value.
+
+| You type | Sync writes |
+|---|---|
+| `` `EXPR` is <!--=-->`?` `` | The value of the code before the marker, on the same line |
+| `` <!--= EXPR -->`?` `` | The value of EXPR. Statements before it are allowed: `<!--= import sys; sys.getrecursionlimit() -->` |
+| `` <!--=error-->`?` `` | The error name that this part's code gives (in the summary: the error that all parts give) |
+| `<!--do: CODE -->` | Nothing: CODE runs before the values after it, in the same cell |
+| `<!-- not a solution -->` | The output of the next ```` ```python ```` block |
+| `<!-- header: f g -->` | A header block for these functions only |
+| `<!-- derive: from=QN replace="OLD" with="NEW" -->` | The next ```` ```python ```` block |
+
+Two rules:
+
+- **A value marker must not start a line or a list item.** If it does, Colab shows the line as raw
+  HTML. Write "`` `-7 // 2` is <!--=-->`?` ``", not "`` <!--= -7 // 2 -->`?` is ... ``".
+- **A block marker** (the last three rows) is alone on its line.
+
+Sync shows each value as a notebook shows it: `'abc'` with quotes, `4.0`. In the Concepts lists,
+sync computes values after the setup cell only. In a question, sync computes them after Run all and
+after the question's code.
+
+### What sync writes (do not edit it)
+
+- **Run cells.** One hidden cell for each run block, with the title "Output of Question 8a" and
+  the stored output. Code that gives an error, or prints a line number, calls the page's
+  `run_code` helper. This helper prints the traceback as text.
+- **Generated regions.** Text between `<!-- begin generated: KIND -->` and
+  `<!-- end generated: KIND -->`. The kinds are `header`, `example`, `output`, `then-try`, `uses`
+  and `define`.
+- **Import lines.** The line `<!-- generated imports: N -->` above a code block tells you that sync
+  wrote the first N lines of the block.
+- **Values** in place of each `?`.
+- **Template cells.** The title cell, the help note "Using this page in Colab or Jupyter", the
+  helper cell "Helper for the Answers", and the credits.
+- **The stamp.** Notebook metadata `yr_review`: the versions that wrote the outputs, and
+  checksums. `check` uses them to find changes that somebody made by hand.
+
+### Read the report of sync
+
+| Message | What it means | What to do |
+|---|---|---|
+| `new ... output` or `value of ... is ...` | Sync wrote something new | Make sure that the text agrees with it |
+| `NOT WRITTEN: these would change` | A stored output, region or value would change | Read the Answer again. If it is still correct, run `sync` again with `--accept` |
+| `REFUSED, nothing written` | Sync cannot continue | Read the reasons, correct the page, run `sync` again |
+| `the solutions disagree` | Two solutions give different outputs for an example | Correct a solution, or mark a draft `<!-- not a solution -->` |
+| `the kernel ... runs ..., not the pinned Colab-like stack` | The wrong kernel | Run `yr/tools/ensure_colab_venv.sh`, or use `review.sh`, which does it |
+| `derive marker: ... occurs N times` | The OLD text must occur exactly one time | Use a longer OLD text |
+| `the expression has no value` | A value marker's expression displays nothing | Use an expression, not a statement |
+
+### The format rules that check enforces
+
+`check` gives each problem a rule number:
+
+| Rule | The rule |
+|---|---|
+| 1 | Question headings are `### Question N (level): kind`; each N is unique on the page |
+| 2 | Numbers do not change during a semester; a question "3b" must not exist while Question 3 has a part b |
+| 3 | One `#### Answer` heading for each question, saved closed; no other headings in a question |
+| 4 | Run blocks (`~~~python`) only before the Answer; with two or more, labels `**Part a**`, `**Part b**`, ... |
+| 5 | Code cells before the Answer: definition cells and `# Your code here` only |
+| 6 | Code cells in an Answer: run cells only |
+| 7 | A ```` ```text ```` block or a picture appears only inside a generated region |
+| 8 | Each error that a run cell gives has a `<!--=error-->` marker; the text of a part names no other error |
+| 9 | Stored outputs only on run cells, as sync wrote them |
+| 10 | Markers as in the table; no `?` left |
+| 11 | Sync would change nothing |
+| 12 | Each code block in an Answer imports what it uses, runs after Run all, and shows what the page says |
+| 13 | A "NameError" answer stays true: no other cell assigns that name |
+| 14 | The page ends with the credits; tags only `setup`, `no-signature`, and `remove-cell` (help note) |
+| 16 | No `TODO` left; no `(c)`, `(r)`, `(tm)` or `+-` in the text (the website changes them to symbols) |
+
+`check --static` runs only the rules that do not need a kernel. It is fast.
+
+### Style rules
+
+These rules come from Prof. Rosenthal. The full list is in `yr/README.md`, "Style rules".
+
+**Concepts covered**
+
+- Write a checklist of facts, as in an instruction manual. Give little or no explanation.
+- Use plain English and little notation. Do not use arrows or symbols as short forms.
+- Show the general form with UPPERCASE placeholders, say what it does in one sentence, then give an
+  example.
+- An example is not a fact. State the rule.
+- **Python Syntax and Semantics** holds the facts about Python. **Definitions, etc.** holds the
+  definitions (`DEFINITION: **term** is ...`), then **Other ideas**.
+
+**Questions**
+
+- Most questions are "what is displayed / drawn / happens" or "write code".
+- Each question must make sense to a person who never read *Think Python*. Do not refer to the book.
+- Give each helper that a question uses.
+- Put the questions in order, from easy to hard. Put the level in the heading.
+- Use only the Python that the chapter (or an earlier chapter) teaches, or explain the new part.
+- Put the main point about Python first. Put other remarks last, in a paragraph that starts with
+  "**By the way:**".
+- For parts, write **Part a**, **Part b**. Do not write "(c)".
+
+**Answers**
+
+- Give more than one approach when there is more than one good approach.
+- A student must be able to copy any code block of an Answer into a new cell after Run all, and run
+  it.
+
+### Change a question
+
+1. Edit the cells that you typed (in Jupyter, or with a small `json` script). Keep the cell ids.
+2. Do not edit the run cells, the generated regions, or the values.
+3. Run `sync`, then `check`.
+
+If you change a question's code, sync makes its run cell again. If the output changes, sync asks
+you to read the Answer again (`NOT WRITTEN`). Use `--accept` only if the Answer is still correct.
+
+### Question numbers between semesters
+
+During a semester, do not change a number. Use letters for new questions (3b, 3c). At the start of
+a new semester, you can number the questions 1, 2, 3, ... again:
+
+```bash
+python3 yr/tools/review_cells.py renumber yr/chap05_review.ipynb
+yr/tools/review.sh sync yr/chap05_review.ipynb
+```
+
+`renumber` also changes "Question N" in the text, the `derive` markers and the run-cell titles.
+Read the changed text before you commit.
+
+### A new review page
+
+Use the `yr-review-page` skill, or do these steps:
+
+1. Make the page:
+
+   ```bash
+   python3 yr/tools/review_cells.py new 8 "Strings and Regular Expressions"
+   ```
+
+2. Write the two Concepts lists and the questions.
+3. Add the page to `jb/_toc.yml`, after its chapter (see how `yr/chap04_review` is listed).
+4. Add its Colab link to `jb/index.md`, under its chapter.
+5. Run `sync`, `check`, the notebook check, and the website build.
+6. Check the page on the built website:
+
+   ```bash
+   python3 yr/tools/verify_site.py jb/_build/html/yr/chap08_review.html yr/chap08_review.ipynb
+   ```
+
+### If you edit a page in Colab
+
+Colab adds metadata and outputs when it saves a page. Do not save a page from Colab to GitHub. If
+it happened, repair the page:
+
+```bash
+yr/tools/review.sh normalize yr/chap05_review.ipynb
+yr/tools/review.sh sync yr/chap05_review.ipynb
+```
+
+### How the website shows a review page
+
+The website build does not run the review pages. `jb/prep_notebooks.py` changes each page:
+
+- Each Answer becomes one closed box, with the explanation and the stored outputs, without code.
+- The markers go; the values stay.
+- The help note, the helper cell, and the `# Your code here` cells go.
+- Tracebacks are shorter.
+
+## Tools reference
+
+| Command | What it does |
+|---|---|
+| `python3 yr/tools/review_cells.py list PAGE` | Lists the questions |
+| `python3 yr/tools/review_cells.py next PAGE [--before N]` | Prints the number for a new question |
+| `python3 yr/tools/review_cells.py add PAGE SPEC [--before N]` | Adds the cells of a spec file |
+| `python3 yr/tools/review_cells.py new NN "Title"` | Makes a new review page |
+| `python3 yr/tools/review_cells.py renumber PAGE` | Numbers the questions again (between semesters only) |
+| `yr/tools/review.sh sync PAGE [--accept]` | Writes all that can be derived, by running the code |
+| `yr/tools/review.sh check PAGE [--static]` | Checks a page |
+| `yr/tools/review.sh normalize PAGE` | Repairs a page that Colab saved |
+| `yr/tools/review.sh selftest` | Tests the tools (run it after you change a tool) |
+| `python3 yr/tools/verify_site.py HTML PAGE [BEFORE.html]` | Checks a page on the built website |
+| `python3 .claude/skills/check-notebooks/check_notebooks.py` | Fast check of all notebooks |
+| `.claude/skills/check-notebooks/run_notebooks.sh chapters/chapNN.ipynb` | Runs a chapter |
+| `.claude/skills/build-book/build_book.sh` | Builds the website on your computer |
+| `python3 .claude/skills/yrpublish/verify_live.py` | Checks the live website |
+
+## Working with Claude Code
+
+Claude Code follows the skills in `.claude/skills/`. You can ask in your own words, or type the
+skill name:
+
+| Skill | Use it to |
+|---|---|
+| `yr-review-questions` | Add, change or check questions on a review page |
+| `yr-review-page` | Make a review page, or write its Concepts lists |
+| `notebook-conventions` | Edit a chapter notebook |
+| `make-blank` | Make the `blank/` copy of a chapter again |
+| `check-notebooks` | Check or run notebooks |
+| `build-book` | Build the website on your computer |
+| `yrpublish` | Check, merge into `v3`, push, and check the live site |
+| `sync-upstream` | Get the changes from Downey's repository |
+| `upstream-diff` | See how the fork differs from Downey's version |
+| `contribute-upstream` | Send a correction to Downey as a GitHub issue |
+
+When a rule or a tool changes, change `yr/README.md`, the two review skills and this guide in the
+same commit.
+
+## Troubleshooting
+
+- **`check` says rule 11 (sync would change the page).** Run `sync` and read its report.
+- **`check` says rule 9 (stored outputs differ, or generated text was edited).** Somebody changed
+  text that sync writes. Run `sync`, and read the differences before you use `--accept`.
+- **`check` says rule 12 (an Answer block does not run).** The block uses a name that it does not
+  import or define, or its output is not what the page says. Run `sync` (it writes the imports).
+  If the problem stays, the block needs its own input line, or the solution is wrong.
+- **`check` says rule 2 (a published number is gone).** You changed or removed a question number.
+  Use its old number again, and give the new question a letter (3b).
+- **A value marker shows as raw HTML in Colab.** The marker starts a line. Put some text before it.
+- **The build stops with "prep_notebooks: ... Answer dropdowns".** A page has a problem. Run
+  `check` on the page.
+- **Colab says "Too many sessions".** End old sessions: **Connect ▾ → Manage sessions**.

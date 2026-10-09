@@ -1,0 +1,21 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "yrThinkPython: Guide for Content Authors"
+  author: "Prof. Y. Rosenthal"
+  date: last-modified
+  repo-url: https://github.com/y-rosenthal/yrThinkPython
+  repo-subdir: author-guide
+  chapters:
+    - index.qmd
+    - CONTENT-AUTHOR-GUIDE.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-copy: true

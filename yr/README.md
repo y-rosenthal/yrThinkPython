@@ -24,6 +24,9 @@ yr/
     verify_site.py         check a converted page on the built website
 ```
 
+For a step-by-step guide for people, see `author-guide/CONTENT-AUTHOR-GUIDE.qmd` (a Quarto book:
+`cd author-guide && quarto render`). Keep it in step with this file.
+
 Claude Code skills that use all this: `yr-review-page` (create a page or write its concept
 summary) and `yr-review-questions` (add or revise questions).
 
