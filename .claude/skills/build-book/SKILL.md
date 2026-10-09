@@ -23,12 +23,15 @@ What it does, mirroring `.github/workflows/deploy-book.yml` exactly:
    from `jb/soln_overlay.json`, so the exercise test cells draw their example pictures. Unexpected
    errors are dropped and reported as warnings; a chapter that cannot run is left without outputs.
    About 45 seconds; needs network (Gutenberg texts, jupyturtle). The yr/ review pages are
-   deliberately not executed (outputs would give away the answers).
+   not executed: converted pages show the outputs that `yr/tools/review.sh sync` stored in their
+   hidden run cells, inside the closed Answer dropdowns.
 4. `python jb/prep_notebooks.py`: adds Downey's display tags from `jb/soln_overlay.json`
    (`remove-input`, `remove-cell`, `section_*` labels: same shown/hidden cells as his site),
    strips `%%expect` lines, adds section labels, turns `# Solution…` cells into collapsed
    "Suggested solution" dropdowns when `solutions/chapNN.ipynb` has a matching cell id (see the
-   notebook-conventions skill), otherwise blanks them, and prepares the yr/ review pages.
+   notebook-conventions skill), otherwise blanks them, and prepares the yr/ review pages
+   (`yr/README.md`, "How the build handles yr/"; on a converted page it stops the build if an
+   Answer dropdown is missing or notebook machinery such as `@title` or a marker is left).
 5. `jb build .` inside `jb/`. Output: `jb/_build/html/index.html`, one `chapNN.html` per chapter.
 
 Flags: `--clean` runs `jb clean` first (use after changing `_toc.yml` or `_config.yml`, since

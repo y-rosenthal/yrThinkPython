@@ -1,15 +1,19 @@
 # Plan: review pages that work with Colab's "Run all", with answers hidden until clicked
 
-**Status (2026-10-09): the DRY audit (goals 9-11) is done and Prof. Rosenthal has decided E1–E20 (section "DRY audit and decisions E1–E20" below). The design is now "v2 plus a sync step that fills markdown": the author types each fact once and `review.sh sync` generates every output, header, import, error name and quoted value. The design summary and sections 1–5 were rewritten for it (v3) the same day, with variant B errors, run-cell titles that name the question and Python 3.13; section 9 says which old decisions are settled. Sections 6–8 and 10 are still v2's and get revised in Step 3. Nothing of the new format is implemented yet; the one live change is that question numbers stay fixed (`3b` inserts). All decisions are made and Step 2 is done. Next: Step 3, build the tools (section 4); update the skills and README in the same change.**
+**Status (2026-10-09): all six review pages are converted, on branch `yr-review-runall`; nothing is published yet.** Steps 3, 4 and 6 and the parts of Step 7 that don't deploy are done there:
+- the tools;
+- chapter 5's Part C in Colab;
+- all six pages converted and verified: conversion gate, `review.sh check`, lint, site build and `verify_site.py`;
+- the old-format code removed;
+- the CI lint step added.
+
+**Next: publish (Step 5, now for all six pages at once).** Merge `yr-review-runall` into `v3` and push; this deploys the site, so Prof. Rosenthal does it, or gives Claude permission. Then run `verify_live.py`, do the Colab spot checks of the other five pages (Run all, one error question, one turtle question), and delete the "Pending work" note from `CLAUDE.md`.
 
 **Next step:**
-1. Done 2026-10-09 (see "Colab test results so far"): Claude ran Part A2 and DRY tests 1-4 in Prof. Rosenthal's Chrome. Prof.
-   Rosenthal then chose variant B, run-cell titles that name the question, and the help note as is.
-2. Done 2026-10-09: sections 1–5 rewritten (v3); section 9 restated.
-3. Done 2026-10-09: the C4 prototype passes on all 11 fix blocks (results in section 4.4).
-4. Done 2026-10-09: all of D1–D18 decided (section 9).
-5. Done 2026-10-09: Step 2, the v3 smoke test in Colab (results below).
-6. Next: Step 3, build the tools (section 4), with the skills and README updated in the same change.
+1. Done 2026-10-09: Steps 2, 3, 4 (Part C passes), 6, and the non-deploying parts of 7 (section 8).
+2. Next: Prof. Rosenthal publishes: `git switch v3 && git merge yr-review-runall && git push` (or the yrpublish skill).
+   Then `verify_live.py`, the Colab spot checks of ch02, ch03, ch04, ch06 and ch07, and the open decisions listed
+   under "To do".
 
 The two prototype v2 notebooks for Part A2:
 - Chapter 5 review page: https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/yr-runall-research/yr/plans/research/prototype-v2/chap05_review.ipynb
@@ -36,11 +40,13 @@ Step numbers refer to section 8 of the plan below.
       `yr/plans/research/dry-audit/`, commit ad089b6)
 - [x] Prof. Rosenthal decided E1–E20 (2026-10-09; `dry-audit/decisions.md`, commit 9d4f4ee; summarized below)
 - [x] DRY Colab tests 1-4 (2026-10-09; results below): E12 works with one rule, E13 confirmed (1000), E18 needs Python 3.13
-- [ ] DRY Colab tests 5-7 and the site-build diff, once a converted page exists
-- [ ] Move `colablike.lock` to Colab's Python 3.13.16 (IPython 7.34.0, ipykernel 6.17.1 unchanged) and re-sync (E18)
+- [ ] DRY Colab tests 5-6 and the site-build diff, once a converted page exists (test 7, the out-of-order click,
+      passed on the Step 3 test page: the guard prints "Run the setup cells first")
+- [x] Move `colablike.lock` to Colab's Python 3.13.16 (IPython 7.34.0, ipykernel 6.17.1 unchanged) (E18; 2026-10-09,
+      `yr/tools/colablike.lock`; the kernel also sets the recursion limit back to Colab's 1000)
 - [x] Rewrite the design summary and sections 1–5 for E1–E20 (v3), and restate section 9's D1–D18 (2026-10-09)
 - [x] Live now: question numbers stay fixed during a semester (`review_cells.py` accepts `3b`; README and skills say so; 2026-10-09)
-- [ ] Revise sections 6–8 and 10 (verification, checklists, rollout, uncertainties) for v3, with Step 3
+- [x] Revise sections 6–8 and 10 (verification, checklists, rollout, uncertainties) for v3, with Step 3 (2026-10-09)
 - [x] Prototype check C4 on the 11 fix blocks (2026-10-09): all 11 pass trimmed, and 3 negative tests fail as they must
       (`yr/plans/research/c4-prototype/` on `yr-runall-research`). E5 is confirmed
 - [ ] Fix the problems the audit found (list in the DRY audit section): ch05 "about 3000" frames (E13), the v2 converter's
@@ -50,19 +56,64 @@ Step numbers refer to section 8 of the plan below.
 - [x] Step 2 (2026-10-09): a v3 smoke test (`make_smoke_v3.py`, on `yr-runall-research` under `yr/plans/research/smoke-v3/`,
       which never deploys, instead of a `colab-smoke-test` branch) run in Colab by Claude; results under "Colab test results
       so far"; the plan is adjusted (2.2: imports marker, gentler out-of-order click)
-- [ ] Step 3: build the new tools (`review_format.py`, `sync_review.py`, new `check_review.py`, `turtle_images.py`,
-      `ensure_colab_venv.sh` and `colablike.lock`, `prep_notebooks.py` guard, self-test), keeping old pages working
-- [ ] Skills: update `yr-review-questions` and `yr-review-page` so every question with an error, or with output
-      that must stay hidden, is written the same way (goal 7; Step 3)
-- [ ] Human guide: "Adding a question: a guide for people" near the top of `yr/README.md`, pointing to the
-      skills and tools (goal 8; Step 3)
-- [ ] Step 4: convert chapter 5 only; Prof. Rosenthal runs checklist Part C from the branch link
-- [ ] Step 5: publish chapter 5 and verify the live page
-- [ ] Step 6: convert ch02, ch03, ch06, ch07, then ch04, each with a Colab spot-check
-- [ ] Step 7: check on the live pages that each problem Prof. Rosenthal reported is gone (goal 6), remove the
-      legacy code, add the CI lint step, delete the "Pending work" note from `CLAUDE.md`, mark this plan done
+- [x] Step 3 (2026-10-09, branch `yr-review-runall`): build the new tools (`review_format.py`, `sync_review.py`, new
+      `check_review.py`, `turtle_images.py` guard, `ensure_colab_venv.sh` and `colablike.lock`, `prep_notebooks.py`
+      guard, `verify_site.py`, self-test), keeping old pages working. What was built and what is left: section 4
+- [x] Skills: update `yr-review-questions` and `yr-review-page` so every question with an error, or with output
+      that must stay hidden, is written the same way (goal 7; Step 3, 2026-10-09)
+- [x] Human guide: "Adding a question: a guide for people" near the top of `yr/README.md`, pointing to the
+      skills and tools (goal 8; Step 3, 2026-10-09)
+- [ ] Checks not built in Step 3 (section 4, "Not built yet"): C8 verdicts, C9 code spans, C11 prompt names, E7
+      identical copies, the refactor "same output" check, the Concepts overlap lint; build each one in Step 4 if
+      the chapter 5 conversion needs it, or decide to drop it
+- [x] Step 4 (2026-10-09): chapter 5 converted on `yr-review-runall` (`convert_v3.py`, gate 41/41, check, lint, site
+      build and `verify_site.py` pass); Part C run in Colab by Claude from the branch link: passes
+- [x] Step 6 (2026-10-09, on `yr-review-runall`): ch02, ch03, ch04, ch06 and ch07 converted (`convert_v3.py` with an
+      edits file per page, on `yr-runall-research`); gate OK on all (one intended difference: ch07 Q14's doctest line
+      number, 9 to 4); `review.sh check`, lint (Python 3.12), site build and `verify_site.py` pass on all six
+- [ ] Colab spot checks of ch02, ch03, ch04, ch06, ch07 (Run all, one error question, one turtle question). Only ch04's
+      "on opening" check was done (19 closed Answers, pictures, generated lines); Colab's session limit stopped Run all
+- [x] Step 7, the parts that don't deploy (2026-10-09, on `yr-review-runall`): legacy code removed (`legacy_check_review.py`,
+      `turtle_images.py`, old-format cell kinds, prep's old path, the README's and skills' old-format sections); check
+      and prep reject `<details>` Answers; the deploy workflow runs `check_notebooks.py` first
+- [ ] Step 5 (now all six pages at once): Prof. Rosenthal merges `yr-review-runall` into `v3` and pushes (it deploys;
+      Claude's push to `v3` was refused by the permission system on 2026-10-09). Then `verify_live.py`
+- [ ] Step 7, after publishing: check on the live pages that each problem Prof. Rosenthal reported is gone (goal 6),
+      delete the "Pending work" note from `CLAUDE.md`, mark this plan done, and (with his OK) delete the research
+      branches
+- [ ] Decide: E14 says to delete ch04's jupyturtle paragraph in the Questions intro (it repeats Concepts), but the
+      README's style rule says the Questions section introduces every module it uses. Kept for now
 
 ## Colab test results so far
+
+**2026-10-09, Step 6 spot check (partial):** ch04 from the branch link, on opening: 19 closed Answers, 19 example
+pictures, no marker text, the generated "Run this cell to define `square` and `jump`." and "This question uses `jump` and
+`square` from Question 11." lines. Run all could not start: Colab's limit on active sessions (the Part C runtime was
+still connected).
+
+**2026-10-09, Part C: chapter 5 converted, from the branch link** (`yr-review-runall`), run by Claude in Prof. Rosenthal's
+Chrome. VERIFIED in Colab:
+- **P1:** on opening, 17 closed Answers ("N cells hidden"), no run cell visible, the help note shown, values filled
+  (recursion limit `1000`), no marker text, generated headers and example outputs shown under the examples.
+- **P2:** Run all reaches the end (Q17's run cell ran last, green check); afterwards only "Downloaded jupyturtle.py" is
+  visible; every Answer stays closed; no error marks.
+- **P3:** Q8 after Run all: Part a/b/c text, each followed by its live error as plain text (`ipykernel_1142`), then the
+  summary. **P4:** Q14 shows the RecursionError; Q17 the live tree.
+- **P6 (DRY test 6, goal 11):** Q9's trimmed solution typed into a new cell with `end_hour(22, 5)` prints `3`, as the
+  example says.
+- Not done: P7's wording review of the help note (a human judgment), and the keyboard check (D10 accepts it).
+- Note: Colab allows a limited number of active sessions; Claude ended three old test sessions (Step 2, Step 3 and the
+  A/B prototype) to start this one.
+
+**2026-10-09, Step 3 test page**, run by Claude in Prof. Rosenthal's Chrome: the self-test fixture after `review.sh sync`
+(`yr/plans/research/step3/` on `yr-runall-research`: `colab_step3.ipynb`, `results-2026-10-09.md`). VERIFIED in Colab:
+- **The guard works** (plan 2.2): ▶ on a wrapped run cell before setup prints `Run the setup cells first: Runtime → Run all.`
+  with a green check; no red icon and no wrapper code (Step 2's out-of-order NameError is gone).
+- Run all reaches the end with no error marks; Answers stay closed, with no red mark on their rows.
+- The live RecursionError has the same file hash and frames as the stored one; a failing import adds Colab's NOTE
+  (live only, as planned).
+- Values written by sync and generated example outputs render; markers and region delimiters are invisible.
+- Locally: Pyright (basic and standard, IPython resolvable) reports nothing in the helper cell or the run cells.
 
 **2026-10-09, v3 smoke test (Step 2)**, run by Claude in Prof. Rosenthal's Chrome (`yr/plans/research/smoke-v3/` on
 `yr-runall-research`: `results-2026-10-09.md`, `screens/`). VERIFIED in Colab (Python 3.13.16):
@@ -261,11 +312,9 @@ Two reviewers then checked the draft against the repo. This revision fixes every
 
 Prototype v2 later replaced the helper cell and `run_code` with an inline `run_cell` and stored outputs (section 2.2). The bullets above are history.
 
-**Status.**
-- **Step 0 is done (2026-10-08).** This plan is in this file on `v3`. The research, the prototype and the agents' helper scripts (`make_smoke.py`, `exp.py`, `conv3.py`, `runvis.py`, the `final-rev` tests) are on branch `yr-runall-research` under `yr/plans/research/` (`scratch/` and `prototype/`). Prototype v2 is there too: `prototype-v2/` (the two A2 notebooks) and `v2-workflow/` (`files/scripts/`, the three reviews, logs and `fix-v2.md`). The virtualenv that the checkpoint script copied there by mistake was removed.
-- **The live review pages are unchanged.** They still use the `run_code` layout published on 2026-10-08.
-- **Next:** see the Status at the top: the Colab tests (Part A2 and the DRY tests), then rewriting sections 2–5 for E1–E20.
-- **Sections 1–5 below describe v3** (rewritten 2026-10-09). Sections 6–8 and 10 are still v2's.
+**Status.** See the Status line at the top. Steps 0–3 are done (2026-10-08 and 2026-10-09); the live review pages
+are unchanged. The research, prototypes and test pages are on branch `yr-runall-research` under `yr/plans/research/`
+(never merge it: its history contains a committed venv); the tools are on branch `yr-review-runall`.
 
 **Evidence labels.** **VERIFIED** = tested in this container or seen in primary sources. **BELIEVED** = strong but indirect evidence. **UNKNOWN** = only a live Colab session can tell (section 7).
 
@@ -426,7 +475,7 @@ inside: Colab form markup, a `%%` magic, a `~~~` line, or both `"""` and `'''`.
 - **Wrapped** otherwise: `run_code(` + newline + `r"""` + the code + `""")`. The traceback is printed as text.
   To fail gently when a student clicks ▶ before the setup has run (Step 2 showed a red NameError that reveals the wrapper),
   the wrapped call is guarded: `if 'run_code' in globals(): run_code(…)` /
-  `else: print('Run the setup cells first: Runtime → Run all.')`. Recommended; test it in Step 3's smoke run.
+  `else: print('Run the setup cells first: Runtime → Run all.')`. Built in Step 3 and VERIFIED in Colab (2026-10-09).
 
 **Helper cell** (generated, variant B; prototype `errors_A_vs_B.ipynb`, cell `ab0000h1`):
 ```python
@@ -448,7 +497,7 @@ def run_code(code):
     finally:
         del ip._showtraceback
 ```
-- Must stay Pyright-clean when Colab joins the cells (re-verify in Step 3; v2's inline `run_cell` was).
+- Pyright-clean when Colab joins the cells: VERIFIED in Step 3 (Pyright 1.1.414, basic and standard modes).
 - The error name is read from stderr: the **last line matching the exception regex**, not the literal last line, because
   Colab appends a NOTE after ModuleNotFoundError (section 4.4).
 
@@ -642,6 +691,34 @@ marks on closed Answers, A2-4).
 
 ### 4. Tool, README and skill changes
 
+#### What was built in Step 3 (2026-10-09, branch `yr-review-runall`)
+
+All of 4.1–4.8 below exists, with these differences from the text that follows:
+- **C4 checks imports statically.** Removing the setup cell's imported names from the namespace (as the C4 prototype
+  did) also breaks the page's helper functions, which use those names (`square` calls `forward`). So check reads
+  each Answer block's own import lines (rule 12, static), and runs the block in the normal end-of-Run-all
+  namespace, where it must show what the page says.
+- **Snippets run in forked copies of the kernel.** Example outputs, fix and "what if" outputs and prose values are
+  generated after Run all, each in a `fork()` of the kernel process with its own output capture, so they can't
+  affect each other; two page runs per sync (the reference run and the stored run) are all that is needed. The
+  9-question self-test fixture syncs in about 4 seconds.
+- **The pinned kernel sets the recursion limit to 1000**: jedi, which IPython's completer imports, raises it to 3000
+  locally, while Colab has 1000. The deepest recursion is 979 frames locally and 977 in Colab (Colab's own wrapper
+  uses 2 frames); the stored tracebacks don't show the frame count, so they are the same.
+- **`normalize` is `review.sh normalize`** (`sync_review.py --static`), not a `review_cells.py` command (that tool
+  stays stdlib-only).
+- **`review_cells.py next NB [--before N]`** prints the number for a new question; `add` refuses a number that
+  exists. `renumber` stores the date in `metadata.yr_review.renumbered`, which check's stable-number rule reads.
+- **`check --semantic` on the book venv was not built**: check needs the pinned kernel (the first `review.sh sync`
+  or `check` creates it with uv).
+- **Pictures in markdown carry `data-svg-sha1`**, so sync reuses a stored PNG while the drawing is unchanged.
+- **Values for Concepts** are computed after the setup cell only; in a question, after Run all and the question's code.
+
+**Not built yet** (to do in Step 4 if the chapter 5 conversion needs them, or drop): C8 (verdicts and "nothing is
+displayed" against stored outputs), C9 (code spans in explanations appear in the code), C11 (prompt names in the
+header), E7 (`describe` copies identical), the refactor "same output before and after" check, and the Concepts
+overlap lint. Check rule 8 already checks that error names in a part's prose are ones that part raises.
+
 #### 4.1 `yr/tools/review_format.py` (new, stdlib)
 As v2 (start from `review_v2.py`), plus: marker parsing and filling (`markers`, `fill_values`), generated regions
 (`regions`, `write_region`), the helper-cell text, the run-cell title from the question number, `stable_numbers` (compare
@@ -684,7 +761,8 @@ ipykernel 6.17.1, jupyter_client, pygments, traitlets, pyzmq, …), kernel `cola
 - **C4 prototype (VERIFIED 2026-10-09, `yr/plans/research/c4-prototype/` on `yr-runall-research`):** all 11 fix blocks pass
   trimmed; a block missing its input line (ch02 Q4 prints `19.9919.99` once Q16's inputs are a cell), a missing import and a
   failing doctest all fail. **Each block must run in its own fresh end-of-Run-all namespace**: in one shared kernel an
-  earlier block's `price = 4` hid the hazard. Run on the book venv; repeat on the pinned 3.13 stack in Step 3.
+  earlier block's `price = 4` hid the hazard. Step 3 runs each block in its own fork of the end-of-Run-all kernel (on
+  the pinned 3.13 stack), and checks imports statically (see "What was built").
 
 #### 4.5 `yr/tools/turtle_images.py`
 As v2 (SVG hash, `--check`, hardening), plus: example pictures in write-code questions and "what if" pictures are
@@ -790,31 +868,35 @@ cells.
 
 ### 6. Verification here, before anything reaches you
 
-- **V1. Checks on two stacks.** `check` on the pinned stack (byte comparison), and `check --kernel bookvenv --semantic`.
-- **V2. Nothing changed.** For all 103 questions:
-  - the conversion gate (`verify_removed.py`, section 5) compares every removed block and picture with the stored outputs;
-  - `check` R3 compares the stored outputs with a fresh run, on both stacks.
-  - Expect 0 differences except the intended ones.
-  - v1's `exp.py` can't read v2 pages: it finds run cells only by `run_code(`, `# Part` or `%%run_question`, and runs kernel `python3`. Adapting it to `parse_run_cell` and the colablike kernel is optional.
-- **V3. Run-all simulation.** nbclient with `allow_errors=False` and `force_raise_errors=True`, ignoring tags as Colab does, with `TMPDIR=/tmp`, on both stacks (`runall_sim.py`, prototype v2, saved under `v2-workflow/files/scripts/`). It must reach the end with no visible output except the setup lines.
-- **V4. Idempotent.** Byte-identical results for: a re-sync, two syncs from the converted page, a venv rebuilt from the lock, and TMPDIR set elsewhere. All VERIFIED on ch05.
-- **V5. Self-test.** `review.sh selftest` catches every mutation.
-- **V6. Lint.** `check_notebooks.py` passes, including the new lint, on Python 3.12 as in CI.
-- **V7. Website.** `build_book.sh` gives no warnings beyond `known_warnings.txt`. A script over `yr/chap0*_review.html` asserts:
-  - "Answer" dropdowns equal the number of questions (17/16/19/17/17/17) and none is open, while the concept-list dropdowns are unchanged;
-  - 0 `h4` headings, and 0 "Answer" or "Credits" contents entries;
-  - no help text and no `def run_code`;
-  - dropdown text identical to today's site, except the intended changes: ch02 Q4 now shows its stored `12`, and error Answers show their shortened tracebacks (for ch05: Q8 and Q14, section 1);
-  - no traceback paths, banner, `<cell line` or `<!-- error`;
-  - each run-block Answer shows each stored output once;
-  - no new `<pre>` overflow at 1300 px compared with today's page.
+(Revised for v3 with Step 3, 2026-10-09. The tools named here exist on `yr-review-runall`.)
 
-  For pages still in the old format: prep's output notebooks (`jb/yr/*.ipynb` after `prep_notebooks.py`) must be identical with old and new tools; identical HTML is a nice-to-have. Screenshots: ch04 Q2 and Q14, ch05 Q8 and Q17, ch07 Q14, with the D7 alternative side by side.
+- **V1. Check on the pinned stack.** `review.sh check` (sync would change nothing, byte for byte, plus the format rules
+  and C4). There is no second, "semantic" stack any more: sync and check run only on `colablike`.
+- **V2. Nothing changed by the conversion.** For every question:
+  - the conversion gate (`verify_removed.py`, extended for v3) compares every removed output block, error line,
+    example output and picture with what sync generates (the audit found 86 of 86 example outputs identical);
+  - a value that sync generates differently from the old prose is listed and reread (E12's render-diff gate).
+  - Expect 0 differences except the intended ones (the "about 3000" frames, E13).
+- **V3. Run all.** `review.sh check` rules R1 (no cell replies "error") and R2 (nothing visible outside closed Answers
+  but the setup cell's printed lines), on a fresh kernel with tags ignored, as Colab runs. (This replaces v2's
+  `runall_sim.py`.)
+- **V4. Idempotent.** A second sync changes nothing (the self-test asserts it; VERIFIED on the fixture).
+- **V5. Self-test.** `review.sh selftest` is green: 27 mutations caught (VERIFIED 2026-10-09). Add a mutation for
+  every new rule.
+- **V6. Lint.** `check_notebooks.py` passes on Python 3.12, as in CI (VERIFIED for the fixture and the six old pages).
+- **V7. Website.** `build_book.sh` gives no warnings beyond `known_warnings.txt`, then
+  `yr/tools/verify_site.py jb/_build/html/yr/chapNN_review.html yr/chapNN_review.ipynb BEFORE.html`:
+  one closed Answer dropdown per question, concept lists still open, no h4, no Answer/Credits/Output contents
+  entries, no help note, `run_code`, `@title`, markers, traceback paths or ANSI codes, each stored output once,
+  and the per-question text diff against the page built before conversion (E20: only intended changes).
+  Old-format pages: prep output identical with old and new tools (VERIFIED 2026-10-09 for all six).
 - **V8 (pilot only).** Headless JupyterLab 4.6.4: the page opens collapsed, and Run All keeps outputs hidden.
-- **V9. Pyright.** Run it on every visible code cell together with the cells above it. Expect nothing beyond the known jupyturtle import note. Run cells, including the wrapped `__import__('IPython').get_ipython().run_cell` form, are Pyright-clean in basic and off modes (VERIFIED, section 1).
-- **V10. Diff.** `git diff` touches only the intended files. Outputs are stored only on run cells (lint), and ids are preserved: 62 of 64 kept; the two Part-label cells are folded into their run blocks.
+- **V9. Pyright** on every code cell joined in page order, with IPython resolvable: nothing beyond the known
+  jupyturtle import note (VERIFIED on the fixture in basic and standard modes).
+- **V10. Diff.** `git diff` touches only the intended files; ids are preserved.
 
-**Environment traps to avoid:**
+**Environment traps to avoid** (the first ones are from the cloud container; on the laptop, the Colab-like kernel
+needs `uv`, which `review.sh` installs into the book's venv):
 - there is no `rsync`: use `cp -a` or `tar`;
 - work on a real branch, or rely on the ROOT fallback;
 - Playwright needs `executable_path=/opt/pw-browsers/chromium-1194/chrome-linux/chrome`;
@@ -825,6 +907,9 @@ cells.
 ---
 
 ### 7. Colab test checklist for you
+
+**Status (2026-10-09):** Parts A, A2 and B are done (Part B became the v3 smoke test in Step 2, and the Step 3 test
+page; results under "Colab test results so far"). **Only Part C is left**, for Step 4. Parts A–B are kept as history.
 
 Use Chrome, signed in, with default settings. Take a screenshot wherever it says [shot]. Between notebooks, use Runtime → Disconnect and delete runtime.
 
@@ -854,7 +939,7 @@ History: Part A is done, and Part A2 replaces it. Its items are labelled "v1 A1"
 
 **Not reported:** v1 A1 (whether every Answer was closed on open, and the exact wording), v1 A2's run time, and v1 A4 (keyboard).
 
-#### Part A2: prototype v2
+#### Part A2: prototype v2 (DONE 2026-10-09)
 
 The checklist below was written with prototype v2. Its source is key `colab_checklist_v2` in the scratchpad file `v2_final.json`, which will not last; a copy is also in `yr/plans/research/v2-workflow/fix-v2.md` on `yr-runall-research`. This plan adds two questions to it: error-record text in A2-3, and the run time in A2-4.
 
@@ -917,7 +1002,7 @@ Don't use the page's own "Run this page on Colab" link: it opens today's page.
 | Prefers B in A2-6 | Switch to variant B: a helper cell again, stderr parsing in the checks (4.4), and a failing-import test (Part B) |
 | END line shows Python 3.13 or IPython 8+ | Update `colablike.lock`, re-sync with `--accept`, and re-run V1 (section 10 item 7); nested `run_cell` already looks normal on 9.17 |
 
-#### Part B: smoke-test notebooks (about 10 minutes; needs your OK to push branch `colab-smoke-test`, which never deploys)
+#### Part B: smoke-test notebooks (DONE differently: the v3 smoke test of Step 2, on `yr-runall-research`)
 **Before pushing, the generator `make_smoke.py` is updated to v2:**
 - question code is a `~~~python` run block;
 - a wrapped run cell is the inline `__import__('IPython').get_ipython().run_cell(r"""…""");`, with no helper;
@@ -957,14 +1042,20 @@ Checks:
 
 #### Part C: the real chapter 5 pilot (about 15 minutes, from branch `yr-review-runall`)
 `https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/yr-review-runall/yr/chap05_review.ipynb`
+(Claude can run it in Prof. Rosenthal's Chrome, as in Step 2 and Step 3; D9.)
 
-12. **P1.** On opening: all 17 Answers closed, question code shown as text, the help note visible, no underlines anywhere. Each Answer shows its stored output before Run all.
-13. **P2.** Run all (accept the "not authored by Google" warning) reaches the end. Afterwards nothing is visible except "Downloaded jupyturtle.py".
-14. **P3.** Q8 shows three errors, each shown once, before and after Run all, interleaved with their Part a/b/c explanations, then the summary.
+12. **P1.** On opening: all 17 Answers closed, question code shown as text, the help note visible, no underlines anywhere.
+    Each Answer shows its stored output before Run all; values in the prose are filled; no marker text is visible.
+13. **P2.** Run all (accept the "not authored by Google" warning) reaches the end. Afterwards nothing is visible except
+    "Downloaded jupyturtle.py", and no Answer row has a red mark.
+14. **P3.** Q8 shows three errors as plain text, each once, before and after Run all, interleaved with their Part a/b/c
+    explanations, then the summary.
 15. **P4.** Q14 shows the RecursionError; Q17 shows one tree (stored before Run all, live after).
-16. **P5.** Q9 (write code): your own code in `# Your code here` runs with Ctrl+Enter, and the Answer shows the solution text.
-17. **P6.** Close an Answer again: it hides again.
-18. **P7.** Does the help note's wording match what you saw (arrow, "cells hidden", the warning dialog)? Suggest changes.
+16. **P5.** Q9 (write code): the generated header and example outputs look as before; your own code in
+    `# Your code here` runs with Ctrl+Enter; the Answer shows the trimmed solution with its "Then try:" line.
+17. **P6.** Copy-and-run (DRY test 6, goal 11): after Run all, copy a trimmed Answer block (a write-code solution, and
+    Q7's or Q14's fix) into a new cell and run it: it runs and shows what the page says.
+18. **P7.** Close an Answer again: it hides again. Does the help note's wording match what you saw? Suggest changes.
 
 #### What the results decide
 Prototype v2's outcomes are in the A2 table above ("What the A2 results decide"). v1's results are under "Colab test results so far". This table covers Part B:
@@ -1000,8 +1091,12 @@ Your plan file's to-do list says "convert chapter 5 first and publish it". So fo
    - **1c. DONE (2026-10-08).** Prototype v2 (2 notebooks) was pushed to `yr-runall-research` under `yr/plans/research/prototype-v2/`.
    - **1d.** You run Part A2 and decide D1–D18 (the defaults are the recommendations).
    - The files the checkpoint skipped were saved on 2026-10-08 (see To do).
-2. **Step 2.** Update `make_smoke.py` to v2 (Part B lists the changes). With your OK, push `colab-smoke-test`, and you run Part B. If the results call for variant B or fallback C, the plan is adjusted before any page is touched.
-3. **Step 3.** Branch `yr-review-runall` from `origin/v3`.
+2. **Step 2. DONE (2026-10-09)**: the v3 smoke test (`make_smoke_v3.py`) on `yr-runall-research`, run in Colab by
+   Claude; no `colab-smoke-test` branch was needed.
+3. **Step 3. DONE (2026-10-09)** on branch `yr-review-runall` (from `origin/v3`; 3 commits, not pushed yet). Every gate
+   below passed: the six old pages pass the old checks through the new tools, their prep output is identical, the
+   self-test is green, `check_notebooks` passes on Python 3.12, and `ensure_colab_venv.sh` builds the kernel. Built
+   (section 4 lists the differences from this list):
    - **Build:**
      - `review_format.py`, `sync_review.py`, the new `check_review.py` and `turtle_images.py`, with legacy paths;
      - `ensure_colab_venv.sh` and `colablike.lock` (4.3);
@@ -1017,6 +1112,8 @@ Your plan file's to-do list says "convert chapter 5 first and publish it". So fo
      - `check_notebooks` passes on Python 3.12;
      - the Colab-like venv recipe works.
 4. **Step 4.** Convert **chapter 5 only** and run V1–V10. Push the branch; you run Part C from the branch link (D9).
+   - First extend the one-off converter (`convert_v2.py` + `verify_removed.py`, on `yr-runall-research`) for v3
+     (section 5): run blocks, Answer cells, trimmed solutions, markers, `<!--=error-->`, and the wording edits.
 5. **Step 5.** Publish chapter 5 with the yrpublish skill: the tools and ch05 go to v3 in one merge.
    - `verify_live.py` checks the live page.
    - Then a 2-minute check by you: open the live "Run this page on Colab" link, Run all, open one Answer.
@@ -1098,66 +1195,33 @@ Your plan file's to-do list says "convert chapter 5 first and publish it". So fo
 
 ### 10. Known uncertainties and fallbacks
 
-**The kernel side is VERIFIED on Colab's last known versions (Python 3.12, IPython 7.34.0, ipykernel 6.17.1); A2-6's END line confirms them. These are not verified:**
+(Revised for v3 with Step 3, 2026-10-09.) **VERIFIED in Colab** (Python 3.13.16, IPython 7.34.0, ipykernel 6.17.1):
+collapsed Answers (Colab needs only `colab.collapsed_sections`), Run all to the end, variant B errors as plain text
+(syntax errors, NameError, two failing imports with Colab's NOTE, RecursionError), no red marks on closed Answers, the
+guard on an out-of-order click, value markers mid-sentence, invisible block markers and regions, the recursion limit
+1000, copy-and-run of a trimmed Answer, and the name-reuse hazard (E10). Still open:
 
-1. **Run all past caught errors:** VERIFIED in Colab (v1). Fallback B remains only as the D15 option, not as a fix for Run all.
-   - **Fallback B** (variant B of D15; `errors_A_vs_B.ipynb` uses a shorter copy, `run_code_b`, without the Stop fix): route the traceback to stderr. No error output at all, the same traceback text, status ok:
-     ```python
-     def run_code(code):                       # variant B (D15)
-         import sys
-         try:
-             from IPython import get_ipython
-             ip = get_ipython()
-         except ImportError:
-             ip = None
-         if ip is None:
-             exec(code, globals())
-             return
-         def to_stderr(etype, evalue, stb):
-             stb = getattr(stb, 'stb', stb)    # Colab passes a ColabTraceback for ImportError
-             print(ip.InteractiveTB.stb2text(stb), file=sys.stderr)
-         ip._showtraceback = to_stderr
-         try:
-             result = ip.run_cell(code, store_history=False)
-         finally:
-             del ip._showtraceback
-         if isinstance(result.error_in_exec, KeyboardInterrupt):
-             raise KeyboardInterrupt
-     ```
-   - **Why the unwrap line.** Colab's custom ImportError handler passes an object, not a list, as the traceback. Without the unwrap, ch02 Q14a would print a TypeError and turn off Colab's handler for the session (found by a reviewer).
-   - **What is VERIFIED.** On IPython 7.34 and 9.17, with a simulated copy of Colab's handler:
-     - the unwrap gives the ModuleNotFoundError plus Colab's NOTE on stderr, with status ok;
-     - the handler keeps working for later cells.
-   - **Not verified:** real Colab. A2-6 shows variant B's look on syntax errors only. The unwrap (ch02 Q14a's failing import) stays unverified in Colab until a failing-import test runs (Part B Test 5, if D15 = B).
-   - **The checks** must then parse stderr, skipping the NOTE (4.4). v1's checks did; v2's do not yet, and v2's self-test has no such mutation.
-2. **Are Answers closed on open from GitHub?** (A2-1, B1) The format matches real Colab-saved files exactly; Part B's Tests 2 and 3 isolate the markers, to show which ones Colab really needs.
-   - **Fallback C**, if closed sections don't work or Run all opens them:
-     - the run cells sit outside any closed section and call `run_hidden(r"""…""")`;
-     - that captures stdout, the traceback text (with the same unwrap), the last drawing and the last value into one closed HTML "Show the output" box, with the exact values in metadata for `check_review`;
-     - the explanation stays a `<details>` block.
-   - **Status:** VERIFIED locally on both stacks; B8 tests rendering in Colab (Part B Test 4, run only if needed).
-   - **Costs:** no live animation, and tracebacks lose colour.
-   - **Not a one-function change.** It also changes check rules 2 and 6, since run cells would sit outside Answers, plus the turtle rules, the prep step and the README. That would be a separate small plan revision.
-3. **Error badges:** VERIFIED after Run all: the red (!) icon and "Explain error" button on each error output (v1). UNKNOWN on stored errors before Run all (A2-3), and on closed Answer rows (A2-1, A2-4).
-4. **Keyboard stepping** (B9). In JupyterLab, Shift+Enter opens closed Answers (VERIFIED). A 2018 Colab issue says the Down arrow did too. In Colab it stays UNKNOWN until B9 or Part C: v1 A4 was not reported, and A2 has no keyboard step. Mitigation: D10.
-5. **The `~~~python` run-block marker in Colab** (A2-1). Highlighting VERIFIED in JupyterLab 4.6.4 and on the site, BELIEVED in Colab. Fallback: a cell tag.
-6. **Editing a page in Colab and saving** (B11).
-   - Colab may add outputs and `metadata.id`, and may change the closed layout (it has a separate "Save collapsed section layout" command).
-   - `normalize` repairs all of this, and `check_notebooks` (also in CI) fails until it is repaired.
-7. **Version drift.**
-   - Stored outputs come from the pinned stack: Python 3.12, IPython 7.34, ipykernel 6.17.1.
-   - If Colab moves to Python 3.13 or IPython 8+ (A2-6's END line shows its versions), update the lock and re-sync every page with `--accept`; the diffs show what changed.
-   - Harmless differences after Run all:
-     - live tracebacks show Colab's pid, and Q14's definition-cell frames read `/tmp/ipython-input-<hash>.py` (BELIEVED);
-     - ch02 Q14a gains Colab's NOTE and "Open Examples".
-8. **Stop button.** The Stop fix was dropped with the helper (2.2). Stop during a wrapped cell no longer halts Run all. This is accepted, because wrapped cells take milliseconds. Variant B's `run_code` (item 1) would bring the fix back.
-9. **Nested `run_cell`:** in v1, Colab ran it for errors without duplicated output (VERIFIED). Printed output and drawings stay plain cells.
-10. **Other viewers** (VS Code, GitHub preview, nbviewer, classic Notebook 6): Answers show open (BELIEVED). Accepted and documented.
-11. **The January 2026 Colab redesign.** Labels like "↳ N cells hidden" and the Settings path may differ. The help note's final wording waits for A2-2, A2-7 and P7.
-12. **Run all on ch04** animates several turtle drawings in hidden cells, so it may take a minute or two. A2-4 records the time for ch05.
-13. **Students' own names.** A student who redefines a name that a question uses (for example `import jupyturtle` before ch04 Q7) changes that Answer's live output. Rule 2.4.12 covers re-runs of the page itself; the help note covers the rest.
-14. **Hidden run cells and Pyright:** run cells are Pyright-clean, so "Show code" should show no underline (VERIFIED locally, BELIEVED in Colab).
-15. **Drawing tamper gap:** a hand-replaced but valid PNG passes if its png_sha1 and the stamp are recomputed. This is deliberate: the PNG is not re-rendered while the SVG is unchanged, because cairo output differs between machines.
+1. **Keyboard stepping** (D10, accepted): Shift+Enter or the Down arrow may open a closed Answer. Not tested in Colab.
+2. **Editing a page in Colab and saving.** Colab may add outputs and metadata and change the closed layout. `review.sh
+   normalize` and sync repair the page; `check_notebooks` (also in CI, Step 7) fails until then. Saving a copy to Drive
+   was not tested (it needs Prof. Rosenthal's OK to write to Drive).
+3. **Version drift.** Stored outputs come from the pinned stack. If Colab moves (another Python, IPython 8+), update
+   `colablike.lock` and the pins in `review_format.PINNED_STACK`, re-sync every page with `--accept`, and read the diffs.
+   Known harmless differences after Run all: live tracebacks show Colab's kernel number instead of `ipykernel_0`; a
+   failing import adds Colab's NOTE (its "Open Examples button" is not shown with variant B); the deepest recursion is 977
+   frames in Colab and 979 locally (not shown in the stored tracebacks).
+4. **Other viewers** (VS Code, GitHub preview, nbviewer, classic Notebook 6): Answers show open, and the generated
+   regions' outputs show (BELIEVED). Accepted (D11).
+5. **Run all on ch04** animates several turtle drawings in hidden cells, so it may take a minute or two in Colab.
+   (Sync sets the turtle delay to 0 locally, so it is fast there.)
+6. **Students' own names.** A student who redefines a name that a question uses changes that Answer's live output after
+   a re-run. The help note covers it; rule 13 and the E10 notes cover the page's own names.
+7. **Drawing tamper gap:** a hand-replaced but valid PNG passes if its png_sha1 and the stamp are recomputed. Deliberate:
+   the PNG is not re-rendered while the SVG is unchanged, because cairo output differs between machines.
+8. **Fork-based snippets** need a POSIX `fork()` (Linux, macOS). Sync runs on the laptop (Linux); it would not run on
+   Windows without WSL.
+9. **Fallback C** (run cells outside closed sections, "Show the output" boxes) is no longer needed: collapsed sections
+   work in Colab. It stays described in the history below (Part B, Test 4) only.
 
 **Scratch artifacts used by this plan** (temporary until Step 0 saves the scripts; under `/tmp/claude-0/-home-user-yrThinkPython/6571a165-f8cc-5e43-8b74-c00357a4a6f6/scratchpad/ultra/`):
 - `plan-risk/`: smoke notebook generator and logs;
@@ -1177,7 +1241,13 @@ This revision also registered two test kernelspecs (`rk_yrThinkPython`, `rk_venv
 
 ## How to resume (for a future Claude session)
 
-**Latest first (2026-10-09):** goals 9-12 came after prototype v2. The DRY audit for them is done, and Prof. Rosenthal decided
+**Latest first (2026-10-09, after Step 3):** the tools are built on branch `yr-review-runall` (`git switch
+yr-review-runall`). Start with `yr/README.md` (the format and the guide for people), then `yr/tools/review_format.py`,
+`sync_review.py` and `check_review.py`; `yr/tools/review.sh selftest` must be green. Next is Step 4 (section 8): extend
+the one-off converter for v3 and convert chapter 5. Don't change the live review pages before Prof. Rosenthal's
+go-ahead.
+
+**Earlier (2026-10-09):** goals 9-12 came after prototype v2. The DRY audit for them is done, and Prof. Rosenthal decided
 E1–E20 (section "DRY audit and decisions E1–E20"; full results on branch `yr-runall-research` in `yr/plans/research/dry-audit/`).
 On the laptop, that branch is checked out as a worktree at `../yrThinkPython-research`, and the agents' scratch folder is
 `../yrThinkPython-work/`. Next: the Colab tests (Part A2 plus the DRY tests), then rewrite sections 2–5 for E1–E20. Don't change

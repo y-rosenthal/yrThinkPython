@@ -14,10 +14,10 @@ reference example: read it before writing a new page.
 Work on a topic branch, not `v3` (`git switch -c yr-review-chNN`); leave committing/pushing to
 the user unless asked.
 
-**A new page format is planned, not yet built** (`yr/plans/runall-collapsible-answers.md`). Until
-it is, build pages in today's format. Whenever the design or the tools change, update this skill
-(and `yr-review-questions`) in the same change. Question numbers stay fixed once a page is in use
-during a semester (insert as 3b; see `yr-review-questions`).
+`review_cells.py new` creates a page (`yr/README.md`, "Layout of a page"), and `review.sh sync` writes
+the template cells (help note, helper cell, credits), the run cells and every output. Whenever the design or the tools change, update this skill, `yr-review-questions` and
+`yr/README.md` in the same change. Question numbers stay fixed once a page is in use during a
+semester (insert as 3b; see `yr-review-questions`).
 
 ## 1. Study the chapter
 
@@ -35,8 +35,10 @@ python3 yr/tools/review_cells.py new NN "Chapter title"     # -> yr/chapNN_revie
 ```
 
 It has the title cell, `## Concepts covered` with the two `<details open>` lists (TODO
-placeholders), `## Questions` with a setup cell tagged `setup`, and the credit line.
+placeholders), `## Questions` with a setup cell tagged `setup`, and the credits.
 Edit cells with the NotebookEdit tool or a small `json` script (never sed on the JSON).
+The first `review.sh sync` adds the help note and the helper cell "Helper for the Answers" (it defines
+`run_code`, which error answers use); never edit those or the title and credits cells by hand.
 
 ## 3. Write "Concepts covered"
 
@@ -55,6 +57,9 @@ Follow the style rules in `yr/README.md`. In short:
 - Nothing that is not about Python or programming.
 - Complete: someone who ticks off every bullet has reviewed the whole chapter. Add facts that the
   questions rely on.
+- Values in the lists are written as expressions with a marker, and sync fills them in:
+  `` `-7 // 2` is <!--=-->`?` `` (never at the start of a line or list item). Concepts values are
+  computed after the setup cell only.
 
 For "concepts-only" requests (revise the summary of an existing page) stop after this step and
 go to step 6.
@@ -87,15 +92,17 @@ questions use at the top of the Questions section.
 ## 6. Verify
 
 ```bash
-yr/tools/review.sh images yr/chapNN_review.ipynb      # if there are turtle pictures
-yr/tools/review.sh check  yr/chapNN_review.ipynb      # must print OK
+yr/tools/review.sh sync  yr/chapNN_review.ipynb       # writes outputs, pictures, values; read its report
+yr/tools/review.sh check yr/chapNN_review.ipynb       # must print OK
 python3 .claude/skills/check-notebooks/check_notebooks.py
 .claude/skills/build-book/build_book.sh               # must report no new warnings
 ```
 
-Then look at `jb/_build/html/yr/chapNN_review.html` (or serve `jb/_build/html` with
-`python3 -m http.server` and open it): sidebar position, numbering of the neighbouring chapters,
-the two concept lists open, answers collapsed, pictures shown.
+Then `python3 yr/tools/verify_site.py jb/_build/html/yr/chapNN_review.html yr/chapNN_review.ipynb`
+(one closed Answer per question, no hidden code or markers on the page), and look at
+`jb/_build/html/yr/chapNN_review.html` (or serve `jb/_build/html` with `python3 -m http.server`):
+sidebar position, numbering of the neighbouring chapters, the two concept lists open, answers
+collapsed, outputs and pictures shown.
 
 Report to the user what was added, what was verified, and anything not verified (e.g. how the
 page looks in Colab, which needs the notebook on GitHub).

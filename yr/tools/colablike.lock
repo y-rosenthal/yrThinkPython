@@ -1,0 +1,31 @@
+# Pinned Colab-like kernel stack for review.sh sync / check: Python 3.13, IPython 7.34.0, ipykernel 6.17.1,
+# as on Colab (seen 2026-10-09: Python 3.13.16). Installed by ensure_colab_venv.sh (uv pip sync).
+# To update: edit the three pins in the uv pip compile command below, then re-sync every page with --accept.
+#   uv pip compile --python-version 3.13 - <<< $'ipykernel==6.17.1\nipython==7.34.0\njupyter-client<8'
+backcall==0.2.0
+debugpy==1.8.22
+decorator==5.3.1
+entrypoints==0.4
+ipykernel==6.17.1
+ipython==7.34.0
+jedi==0.20.0
+jupyter-client==7.4.9
+jupyter-core==5.9.1
+matplotlib-inline==0.2.2
+nest-asyncio==1.6.0
+packaging==26.3
+parso==0.8.7
+pexpect==4.9.0
+pickleshare==0.7.5
+platformdirs==4.12.4
+prompt-toolkit==3.0.53
+psutil==7.2.2
+ptyprocess==0.7.0
+pygments==2.21.0
+python-dateutil==2.9.0.post0
+pyzmq==27.2.0
+setuptools==84.0.0
+six==1.17.0
+tornado==6.5.10
+traitlets==5.16.1
+wcwidth==0.9.2

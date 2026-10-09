@@ -85,7 +85,9 @@ one review notebook per chapter, `yr/chapNN_review.ipynb`, shown on the site as
 editing one: it has the page layout (concepts checklist, then easy → hard questions), the
 `<details>` answer format, the `# Your code here` and `raises-exception` conventions, and the
 TOC / index.md steps. The `yr-review-page` and `yr-review-questions` skills cover creating
-pages and adding questions, with tools in `yr/tools/` that draw turtle pictures and verify answers.
+pages and adding questions, with tools in `yr/tools/` that write outputs and pictures (`review.sh sync`)
+and verify answers (`review.sh check`). Review pages follow their own format (`yr/README.md`): they
+store outputs on their hidden run cells, so the "no stored outputs" rule above does not apply to them.
 
 ## Suggested solutions: `solutions/chapNN.ipynb`
 

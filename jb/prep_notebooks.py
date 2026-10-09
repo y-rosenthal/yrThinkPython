@@ -9,17 +9,23 @@
   code cell with the same id, the solution is shown on the site inside a collapsed
   "Suggested solution" dropdown (readers click to reveal it); otherwise the cell is
   blanked as before. The notebooks in chapters/ (which Colab opens) are never touched.
-- prepares the review pages copied from yr/ into jb/yr/ (see yr/README.md): markdown cells
-  written as <details><summary>Title</summary> ... </details> become the same collapsible
-  box the solutions use (collapsed; or shown, for <details open>), and '# Your code here'
-  cells (space for the reader's own code in Colab) are dropped from the website.
+- prepares the review pages copied from yr/ into jb/yr/ (see yr/README.md): each Answer (its
+  explanation and the stored outputs of its run cells, without their code) becomes one closed
+  dropdown; the concept lists, written as <details open><summary>Title</summary> ... </details>,
+  become the same collapsible box the solutions use, shown; '# Your code here' cells (space for
+  the reader's own code in Colab), the helper cell and the "Credits" heading are dropped; sync's
+  markers are removed (values stay).
 """
 import json
 import re
+import sys
 from pathlib import Path
 from glob import glob
 
 import nbformat as nbf
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'yr' / 'tools'))
+import review_format  # noqa: E402
 
 SOLUTIONS_DIR = Path(__file__).resolve().parent.parent / 'solutions'
 OVERLAY = Path(__file__).resolve().parent / 'soln_overlay.json'
@@ -159,14 +165,57 @@ def raw_pictures(cell):
         cell['source'] = TURTLE_IMG.sub(lambda m: f'<div class="turtle-picture">{m.group(0)}</div>', cell['source'])
 
 
+def answer_dropdown(cells):
+    """One closed dropdown cell for an Answer: its markdown and its run cells' stored outputs, in order."""
+    parts = []
+    for c in cells:
+        if c['cell_type'] == 'markdown':
+            parts.append(review_format.strip_markers(c['source']).strip('\n'))
+        elif review_format.parse_run_cell(c['source']):
+            parts.append(review_format.render_outputs(c.get('outputs', [])))
+    body = '\n\n'.join(p for p in parts if p.strip())
+    cell = nbf.v4.new_markdown_cell(f':::{{admonition}} Answer\n:class: dropdown\n\n{body}\n:::\n')
+    raw_pictures(cell)
+    return cell
+
+
+def process_review_v3(ntbk, path):
+    cells, out, expected = ntbk.cells, [], 0
+    questions = {q['answer']: q['end'] for q in review_format.parse_page(ntbk) if q['answer'] is not None}
+    i = 0
+    while i < len(cells):
+        c = cells[i]
+        if i in questions:
+            out.append(answer_dropdown(cells[i + 1:questions[i]]))
+            expected += 1
+            i = questions[i]
+            continue
+        i += 1
+        if (c['cell_type'] == 'code' and c['source'].strip() == YOUR_CODE) or review_format.is_helper_cell(c):
+            continue
+        if c['cell_type'] == 'markdown':
+            c['source'] = review_format.strip_markers(c['source'])
+            if c['source'].startswith(review_format.CREDITS_HEADING):
+                c['source'] = c['source'][len(review_format.CREDITS_HEADING):].lstrip('\n')
+            raw_pictures(c)
+            details_to_dropdown(c)
+        process_cell(c)
+        out.append(c)
+    ntbk.cells = out
+    # guard: one closed Answer dropdown per question, and nothing of the notebook machinery left
+    dropdowns = sum(1 for c in out if c['cell_type'] == 'markdown' and c['source'].startswith(':::{admonition} Answer\n'))
+    leftovers = [m for c in out if c['cell_type'] == 'markdown'
+                 for m in re.findall(r'<!--|@title|run_code\(|ipykernel_[1-9]', c['source'])]
+    if dropdowns != expected or leftovers:
+        sys.exit(f'prep_notebooks: {path}: {dropdowns} Answer dropdowns for {expected} Answers, '
+                 f'left over: {sorted(set(leftovers))}')
+
+
 def process_review(path):
     ntbk = nbf.read(path, nbf.NO_CONVERT)
-    ntbk.cells = [c for c in ntbk.cells
-                  if not (c['cell_type'] == 'code' and c['source'].strip() == YOUR_CODE)]
-    for cell in ntbk.cells:
-        raw_pictures(cell)
-        details_to_dropdown(cell)
-        process_cell(cell)
+    if review_format.page_format(ntbk) != 'v3':
+        sys.exit(f'prep_notebooks: {path}: review pages need "#### Answer" headings (yr/README.md)')
+    process_review_v3(ntbk, path)
     nbf.write(ntbk, path)
 
 
