@@ -351,16 +351,51 @@ def strip_imports(code, n):
 
 def prompt_examples(nb, q):
     """[(cell idx, token idx, code)] for the example blocks of a question's prompt: in a write-code question the
-    ```python blocks after the **Examples** line; otherwise every ```python block (e.g. correct calls)."""
+    ```python blocks after the **Examples** line; otherwise every ```python block (e.g. correct calls).
+    In a write-code question, a definition cell after the **Examples** line is an example too (its inputs are then
+    assigned by Run all, so a student's code and the Answer's code run after it); its output goes at the top of the
+    markdown cell after it: (that cell's idx, -1, the definition cell's code)."""
     out, after = [], q['placeholder'] is None
-    for i in sorted(set(q['prompt_md']) | {q['heading']}):
-        toks = md_tokens(source(nb.cells[i]))
+    end = q['answer'] if q['answer'] is not None else q['end']
+    for i in range(q['start'], end):
+        c = nb.cells[i]
+        if c.cell_type == 'code':
+            if after and is_writecode(q) and i in q['defs'] and i + 1 < end and is_prompt_md(nb, i + 1):
+                out.append((i + 1, -1, source(c)))
+            continue
+        if i != q['heading'] and i not in q['prompt_md']:
+            continue
+        toks = md_tokens(source(c))
         for k, t in enumerate(toks):
             if t.kind == 'text' and any(rf.is_examples_line(x) for x in t.lines):
                 after = True
             if rf.is_python(t) and after:
                 out.append((i, k, t.code))
     return out
+
+
+def is_prompt_md(nb, i):
+    c = nb.cells[i]
+    return c.cell_type == 'markdown' and not rf.RUN_FENCE.match(source(c)) and source(c).strip() != rf.ANSWER_HEADING \
+        and not rf.QUESTION_LINE.match(source(c))
+
+
+def example_cells(nb, changes):
+    """Make sure a definition cell that is an example (write-code, after **Examples**) has a markdown cell after it
+    for its output. Returns True if a cell was added (indices moved)."""
+    for q in rf.parse_page(nb):
+        if not is_writecode(q):
+            continue
+        after = False
+        for i in range(q['start'], q['answer'] if q['answer'] is not None else q['end']):
+            c = nb.cells[i]
+            if c.cell_type == 'markdown' and any(rf.is_examples_line(x) for x in source(c).split('\n')):
+                after = True
+            if after and i in q['defs'] and not is_prompt_md(nb, i + 1):
+                nb.cells.insert(i + 1, new_md(md_join([region_tok('example', '')]), rf.stable_id(c.id, 'example')))
+                changes.append(f'{q["title"][:40]}: a cell for the output of the example in cell {c.id} added')
+                return True
+    return False
 
 
 def is_writecode(q):
@@ -427,6 +462,8 @@ def and_list(items):
 
 def static_generate(nb, imports, changes, errors):
     """Derived fixes, header blocks, import lines, "Then try:", "uses" and "Run this cell to define" lines."""
+    while example_cells(nb, changes):
+        pass
     qs = rf.parse_page(nb)
     by_number = {q['number']: q for q in qs}
     provided = provided_names(nb, qs)
@@ -452,7 +489,9 @@ def static_generate(nb, imports, changes, errors):
                         src_q = by_number.get(m.group('q'))
                         blocks = src_q and [c for _, p, c in src_q['run_blocks']
                                             if not m.group('part') or p == m.group('part')[1:]]
-                        if src_q and len(blocks) == 1 and src_q['defs'] and not m.group('part'):
+                        old_text = m.group('old').replace('\\n', '\n')
+                        if src_q and len(blocks) == 1 and src_q['defs'] and not m.group('part') \
+                                and blocks[0].count(old_text) != 1:     # the change is in a definition cell
                             blocks = ['\n\n'.join([source(nb.cells[d]) for d in src_q['defs']] + blocks)]
                     if not blocks or len(blocks) != 1:
                         errors.append(f'{t}: derive marker: no single code block to derive from')
