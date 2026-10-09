@@ -3,7 +3,9 @@
 **Status (2026-10-09): the DRY audit (goals 9-11) is done and Prof. Rosenthal has decided E1–E20 (section "DRY audit and decisions E1–E20" below). The design is now "v2 plus a sync step that fills markdown": the author types each fact once and `review.sh sync` generates every output, header, import, error name and quoted value. Sections 2–5 below still describe v2 and have not yet been rewritten for E1–E20. Nothing is implemented in the repo yet: the live review pages are unchanged.**
 
 **Next step:**
-1. Colab tests: Part A2 on prototype v2 (section 7) plus the new DRY tests (listed in the DRY audit section). Claude can run most of them in Prof. Rosenthal's Chrome with the Claude in Chrome extension; Prof. Rosenthal only needs to be signed in to Colab.
+1. Done 2026-10-09 (see "Colab test results so far"): Claude ran Part A2 and DRY tests 1-4 in Prof. Rosenthal's Chrome. Still
+   for Prof. Rosenthal: choose error variant A or B (A2-6; the new finding in A2-4 bears on it), the "Output" titles in the
+   sidebar, and read the help note (A2-7).
 2. Rewrite sections 2–5 for E1–E20, prototype check C4 on the 11 fix blocks, then bring Prof. Rosenthal the old D1–D18 (section 9) that are still open, restated where E1–E20 changed them.
 
 The two prototype v2 notebooks for Part A2:
@@ -24,11 +26,15 @@ Step numbers refer to section 8 of the plan below.
 - [x] Step 1a: Prof. Rosenthal ran Part A on prototype v1 (results below): Run all OK; Answers too repetitive
 - [x] Step 1b: prototype v2 built (each output shown once, code hidden, outputs stored); three reviews; all blocking and major issues fixed
 - [x] Step 1c: push prototype v2 (2 files) to `yr-runall-research` (2026-10-08)
-- [ ] Step 1d: Prof. Rosenthal runs Part A2 and decides D1–D18
+- [x] Step 1d, the test part: Part A2 run in Colab by Claude in Prof. Rosenthal's Chrome (2026-10-09; results below)
+- [ ] Step 1d, the decisions: Prof. Rosenthal picks error variant A or B and the run-cell titles, and decides D1–D18
+      (restated for E1–E20)
 - [x] DRY audit for goals 9-11 (17-agent workflow, run on the laptop 2026-10-09; results on `yr-runall-research` in
       `yr/plans/research/dry-audit/`, commit ad089b6)
 - [x] Prof. Rosenthal decided E1–E20 (2026-10-09; `dry-audit/decisions.md`, commit 9d4f4ee; summarized below)
-- [ ] DRY Colab tests (list in the DRY audit section); they settle E12, E13 and E18
+- [x] DRY Colab tests 1-4 (2026-10-09; results below): E12 works with one rule, E13 confirmed (1000), E18 needs Python 3.13
+- [ ] DRY Colab tests 5-7 and the site-build diff, once a converted page exists
+- [ ] Move `colablike.lock` to Colab's Python 3.13.16 (IPython 7.34.0, ipykernel 6.17.1 unchanged) and re-sync (E18)
 - [ ] Rewrite sections 2–5 (layout, DRY, tools, conversion) for E1–E20; restate the old D1–D18 that E1–E20 change
 - [ ] Prototype check C4 on the 11 fix blocks (ch02 Q4, Q15; ch05 Q7, Q10, Q14; ch06 Q5, Q8, Q15; ch07 Q8, Q12, Q14),
       with the name-reuse lint (E5, E10)
@@ -51,6 +57,31 @@ Step numbers refer to section 8 of the plan below.
       legacy code, add the CI lint step, delete the "Pending work" note from `CLAUDE.md`, mark this plan done
 
 ## Colab test results so far
+
+**2026-10-09, prototype v2 (Part A2) and DRY tests 1-4**, run by Claude in Prof. Rosenthal's Chrome (Claude in Chrome
+extension). Full table and screenshots: `yr/plans/research/dry-audit/colab-tests/` on `yr-runall-research`
+(`results-2026-10-09.md`, `screens/`). VERIFIED:
+- **Colab's stack is Python 3.13.16**, IPython 7.34.0, ipykernel 6.17.1, not Python 3.12 as this plan assumed. `colablike.lock`
+  must move to 3.13 (E18). Consequence: ch04 Q15c's "Did you mean 'sides'?" **does** appear in Colab, so section 9's D17
+  (accept the 3.12 output) is reversed; today's page text already matches Colab.
+- **E12 markers work mid-sentence** (also in bold, bullets, two per line and inside a collapsed Answer), **but a marker at the
+  very start of a line breaks that whole line** (rendered as raw HTML, backticks visible). Rule: a value marker never starts a
+  line or list item; check enforces it. Block comments on their own line are invisible everywhere (T2).
+- **Recursion limit is 1000** (depth 977), as locally: ch05's "about 3000" and the book's "almost 3000" are wrong for Colab (E13).
+- help() layout, float reprs and the ch04 Q15a SyntaxError text are the same as locally.
+- **A2 passes:** Answers closed on opening (Q1 "2 cells hidden", Q8 "7 cells hidden"); question code coloured; Q1's output once,
+  under the title "Output" and a "Show code" link, no code; Q8 in order with `/tmp/ipykernel_0/….py", line 2` headers and no
+  `<!-- error` text; Q17's tree at 300×220; Run all reaches the end with Answers closed and nothing outside them but
+  "Downloaded jupyturtle.py"; Q8 and Q14 re-run (Q14 still `<cell line: 0>`, "last 1 frames repeated"); Q9's code cell runs.
+- **Two A2 findings:**
+  - **A red run icon appears on a CLOSED Answer row after Run all** when the Answer holds an error cell (seen on Q14). It tells
+    students the answer is an error before they open it. Variant B (traceback as text) would avoid it, since nothing raises.
+  - **"Output" entries do appear in the contents sidebar**, under an Answer once it is opened and under every Answer with a run
+    cell after Run all. The plan's response: an empty title, or one that names the question.
+- Run all took under 10 s, but the runtime was already connected (a Terminal panel opened by accident), so a cold start was not
+  timed.
+- **For Prof. Rosenthal:** variant A or B (screenshots `a2-6-variant-A-after-runall.jpg`, `a2-6-variant-B-after-runall.jpg`),
+  the run-cell titles, and the help note's wording (A2-7).
 
 **2026-10-08, prototype v1** (chapter 5 from `yr-runall-research`; Run all, then Answers opened). VERIFIED from his screenshots:
 - **Run all does not stop at a caught error (variant A works in Colab).** The page's 21 code cells ran in order: Q2's cell [3], Q8's three error cells [9] [10] [11], and Q1 re-run as [22]. This settles test B4 for variant A.
