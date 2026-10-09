@@ -7,7 +7,8 @@
    Rosenthal then chose variant B, run-cell titles that name the question, and the help note as is.
 2. Done 2026-10-09: sections 1–5 rewritten (v3); section 9 restated.
 3. Done 2026-10-09: the C4 prototype passes on all 11 fix blocks (results in section 4.4).
-4. Next: ask Prof. Rosenthal the still-open D1–D18 (section 9 table); then Step 2 (smoke test) and Step 3 (tools).
+4. Done 2026-10-09: all of D1–D18 decided (section 9).
+5. Next: Step 2 (update `make_smoke.py` to v3 and run the smoke test), then Step 3 (build the tools).
 
 The two prototype v2 notebooks for Part A2:
 - Chapter 5 review page: https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/yr-runall-research/yr/plans/research/prototype-v2/chap05_review.ipynb
@@ -29,7 +30,7 @@ Step numbers refer to section 8 of the plan below.
 - [x] Step 1c: push prototype v2 (2 files) to `yr-runall-research` (2026-10-08)
 - [x] Step 1d, the test part: Part A2 run in Colab by Claude in Prof. Rosenthal's Chrome (2026-10-09; results below)
 - [x] Step 1d, A2 decisions: variant B, run-cell titles name the question, help note as is (2026-10-09)
-- [ ] Prof. Rosenthal decides the rest of D1–D18, restated for E1–E20 (D15, D16 and D17 are now settled)
+- [x] Prof. Rosenthal decided the rest of D1–D18 (2026-10-09: all as recommended)
 - [x] DRY audit for goals 9-11 (17-agent workflow, run on the laptop 2026-10-09; results on `yr-runall-research` in
       `yr/plans/research/dry-audit/`, commit ad089b6)
 - [x] Prof. Rosenthal decided E1–E20 (2026-10-09; `dry-audit/decisions.md`, commit 9d4f4ee; summarized below)
@@ -1019,25 +1020,25 @@ Your plan file's to-do list says "convert chapter 5 first and publish it". So fo
 | | Topic | Status in v3 |
 |---|---|---|
 | D1 | Overall design | **Settled** by E1 (v2 + sync fills markdown) |
-| D2 | Permission to push | (a)–(c) done; (d) `colab-smoke-test` and (e) `yr-review-runall` still need an OK when the time comes |
-| D3 | No runnable solution cell in write-code questions | **Still recommended**; solutions are markdown blocks, trimmed and checked by C4 (E3, E5) |
+| D2 | Permission to push | **Decided 2026-10-09: yes** — (a)–(c) done; (d) `colab-smoke-test` and (e) `yr-review-runall` may be pushed when the plan reaches them (neither deploys) |
+| D3 | No runnable solution cell in write-code questions | **Decided 2026-10-09: as recommended** (solutions are markdown blocks, trimmed and checked by C4; E3, E5) |
 | D4 | Multi-part Answers interleaved | **Settled** (VERIFIED in Colab, A2-3) |
 | D5 | `~~~python` marker for question code | **Settled** (renders coloured in Colab, A2-1) |
 | D6 | Wrap only code that raises or names a line | **Changed**: wrapped cells call the variant B helper `run_code` (2.2) |
-| D7 | Question code as highlighted code blocks on the site | Still open (recommended) |
+| D7 | Question code as highlighted code blocks on the site | **Decided 2026-10-09: as recommended** |
 | D8 | `## Credits` heading, removed on the site | **Settled** by E15 (template) |
-| D9 | Test chapter 5 from the branch link before publishing | Still open (recommended) |
-| D10 | Shift+Enter / Down arrow may open Answers | Still open (recommended: accept) |
-| D11 | Accept the cosmetic side effects | Still open (recommended); the contents entries now name the question |
-| D12 | No new skill | Still open (recommended) |
-| D13 | One-off conversion scripts not on v3 | Still open (recommended) |
+| D9 | Test chapter 5 from the branch link before publishing | **Decided 2026-10-09: as recommended** (Claude can run it in Prof. Rosenthal's Chrome) |
+| D10 | Shift+Enter / Down arrow may open Answers | **Decided 2026-10-09: accept** |
+| D11 | Accept the cosmetic side effects | **Decided 2026-10-09: accept** (the contents entries now name the question) |
+| D12 | No new skill | **Decided 2026-10-09: as recommended** |
+| D13 | One-off conversion scripts not on v3 | **Decided 2026-10-09: as recommended** |
 | D14 | Store outputs in the notebook | **Settled** by E2, E12, E17, E18 (outputs, examples and values are generated and stored) |
 | D15 | Error variant A or B | **Settled: B** (2026-10-09) |
 | D16 | Run-cell titles | **Settled**: name the question, "Output of Question 8a" (2026-10-09) |
 | D17 | ch04 Q15c: accept the Python 3.12 output | **Moot**: Colab is Python 3.13 and shows "Did you mean 'sides'?", as the page already says |
-| D18 | ch04 Q14's empty canvases stay | Still open (recommended) |
+| D18 | ch04 Q14's empty canvases stay | **Decided 2026-10-09: keep them** |
 
-Open now: D2 (d, e when needed), D3, D7, D9, D10, D11, D12, D13, D18. The original text follows.
+**All of D1–D18 are now decided** (2026-10-09: Prof. Rosenthal took the recommendation for every one still open). The original text follows.
 
 - **D1. The overall design.** Question code as text; a closed Answer heading with the explanation plus hidden run cells that show the code's stored output, re-run by Run all. *Recommended.*
 - **D2. Permission to push.** *Recommended.* Pushes (a) and (b) are done. The pushes:
