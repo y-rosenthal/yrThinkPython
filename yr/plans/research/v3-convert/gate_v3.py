@@ -62,11 +62,13 @@ for r in removed:
         outs = cells[ri]['outputs']
         if r['block'].startswith('```'):
             want = text_of_block(r['block']).strip('\n')
-            out = rf.ANSI.sub('', rf.stream_text(outs, 'stdout')).strip('\n')
+            out = rf.ANSI.sub('', rf.stream_text(outs, 'stdout') + ''.join(
+                rf.text_of(o['data'].get('text/plain', '')) for o in outs if o['output_type'] == 'execute_result')).strip('\n')
             err = rf.ANSI.sub('', rf.stream_text(outs, 'stderr'))
             lines = [m.group(0) for m in re.finditer(r'^' + rf.EXC_LINE.pattern.lstrip('^') + r'.*$', err, re.M)]
             got = (out + ('\n' if out and lines else '') + (lines[-1] if lines else '')).strip('\n')
-            ok = got == want or (lines and want == lines[-1]) or (out == want)
+            norm = lambda t: '\n'.join(x.rstrip() for x in t.split('\n'))      # typed text drops trailing spaces
+            ok = norm(got) == norm(want) or (lines and want == lines[-1]) or norm(out) == norm(want)
             report(ok, f'{title[:40]} run {r["part"] or ""}: {want[:60]!r}' + ('' if ok else f' != {got[:120]!r}'))
         else:
             drawings = [o for o in outs if o.get('metadata', {}).get('review_drawing')]
@@ -74,7 +76,7 @@ for r in removed:
             ok = bool(new) and rf.png_size(old) == rf.png_size(new)
             report(ok, f'{title[:40]} run picture: sizes {rf.png_size(old)} vs {rf.png_size(new)}'
                        f'{", same bytes" if old == new else ", bytes differ (re-rendered)"}')
-    elif kind in ('example', 'header'):
+    elif kind in ('example', 'header', 'output'):
         bodies = regions.get(title, {}).get(kind, [])
         got = bodies[k] if k < len(bodies) else None
         if kind == 'header':

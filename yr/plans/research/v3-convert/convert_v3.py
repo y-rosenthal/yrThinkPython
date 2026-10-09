@@ -79,21 +79,25 @@ def mark_values(md, where):
     return '\n'.join(out)
 
 
-def trim_block(code, where, drop_calls_of=None, calls=None):
-    """Drop import lines (sync writes them) and, after the last def, example calls (write-code: calls of the
-    functions the block defines) or the question's own calls (a fix that only redefines a function)."""
+def trim_block(code, where, drop_calls_of=None, calls=None, example_lines=()):
+    """Drop import lines (sync writes them) and, after the last def: in a write-code solution, calls of the functions
+    the block defines and lines that repeat an example; in a fix, the question's own calls, but only if they are all
+    that follows the defs (sync then runs them after the block)."""
     tree = ast.parse(code)
     lines = code.split('\n')
-    keep = []
     last_def = max((k for k, n in enumerate(tree.body) if isinstance(n, (ast.FunctionDef, ast.ClassDef))), default=-1)
-    for k, n in enumerate(tree.body):
-        seg = '\n'.join(lines[n.lineno - 1:n.end_lineno])
+    segs = [(n, '\n'.join(lines[n.lineno - 1:n.end_lineno])) for n in tree.body]
+    tail = [seg for k, (n, seg) in enumerate(segs) if k > last_def]
+    fix_calls_only = calls is not None and last_def >= 0 and tail and all(t.strip() in calls for t in tail)
+    keep = []
+    for k, (n, seg) in enumerate(segs):
         if isinstance(n, (ast.Import, ast.ImportFrom)):
             removed.append({'kind': 'trim', 'where': where, 'text': seg})
             continue
-        if k > last_def >= 0 and isinstance(n, ast.Expr) and isinstance(n.value, ast.Call):
-            name = rf.used_names(seg)[:1]
-            if (drop_calls_of and name and name[0] in drop_calls_of) or (calls is not None and seg.strip() in calls):
+        if k > last_def >= 0:
+            is_call = isinstance(n, ast.Expr) and isinstance(n.value, ast.Call)
+            if (drop_calls_of and is_call and set(rf.used_names(seg)) & drop_calls_of) \
+                    or (drop_calls_of is not None and seg.strip() in example_lines) or fix_calls_only:
                 removed.append({'kind': 'trim', 'where': where, 'text': seg})
                 continue
         keep.append(seg)
@@ -105,11 +109,16 @@ def trim_block(code, where, drop_calls_of=None, calls=None):
     return '\n'.join(out).strip('\n')
 
 
-def trim_answer_blocks(body, where, writecode, qcalls):
+def trim_answer_blocks(body, where, writecode, qcalls, input_lines=(), example_lines=()):
     def repl(m):
         code = m.group(1)
+        if writecode and input_lines and not rf.defined_functions(code):
+            lines = code.split('\n')
+            while lines and lines[0].strip() and lines[0].strip() in input_lines:
+                removed.append({'kind': 'trim', 'where': where, 'text': lines.pop(0)})
+            return '```python\n' + '\n'.join(lines).strip('\n') + '\n```'
         if writecode:
-            new = trim_block(code, where, drop_calls_of=set(rf.defined_functions(code)))
+            new = trim_block(code, where, drop_calls_of=set(rf.defined_functions(code)), example_lines=example_lines)
         else:
             new = trim_block(code, where, calls=qcalls if rf.defined_functions(code) else None)
         return f'```python\n{new}\n```'
@@ -149,11 +158,18 @@ def md(text, cid):
     return c
 
 
-def convert_answer(answer, runs, title, writecode, qcalls, summary_starts):
+def convert_answer(answer, runs, title, writecode, qcalls, summary_starts, input_lines=(), example_lines=()):
     aid = answer.id
     head = md(rf.ANSWER_HEADING, aid)
     body = DETAILS.match(answer.source).group(1)
-    body = trim_answer_blocks(body, title, writecode, qcalls)
+    def fix_out(m):
+        removed.append({'kind': 'output', 'where': title, 'block': m.group(3)})
+        return m.group(1)
+    # a typed output right after a code block in the Answer (a fix): sync writes it; a short lead-in such as
+    # "That displays:" between them goes too
+    body = re.sub(r'(```python\n(?:(?!```).)*?\n```)\n+((?:[^\n`]{0,40}:)\n+)?(```text\n.*?\n```|<img\b[^>]*\bdata-turtle\b[^>]*>)',
+                  fix_out, body, flags=re.S)
+    body = trim_answer_blocks(body, title, writecode, qcalls, input_lines, example_lines)
     body = mark_values(body, title)
     out, k = [head], 0
 
@@ -193,12 +209,15 @@ def convert_answer(answer, runs, title, writecode, qcalls, summary_starts):
         before = error_marker(before, names)
         for b in blocks:
             removed.append({'kind': 'run', 'where': title, 'part': part, 'block': b})
-        add(before)
+        if blocks or len(runs) > 1:
+            add(before)
         number = rf.QUESTION_LINE.match('### ' + title).group('num')
         rc = nbf.v4.new_code_cell(rf.render_run_cell(code, False, number, part if len(runs) > 1 else None))
         rc.id = rf.stable_id(aid, 'run', part or '-')
         rc.metadata = dict(rf.RUN_CELL_METADATA)
         out.append(rc)                                 # where the old output was; sync stores its output
+        if not blocks and len(runs) == 1:
+            add(before)                                # no typed output: the run cell comes first
         add(after)
     add(summary)
     return out
@@ -221,7 +240,8 @@ def main(src, dst, removed_path, edits_path):
             continue
         if c.cell_type == 'code' and 'setup' in rf.tags(c):
             c.source = re.sub(r'\n*def run_code\(code\):.*', '', s, flags=re.S).rstrip('\n')
-            out.append(c)
+            if c.source.strip():                       # a setup cell that only defined run_code goes
+                out.append(c)
             i += 1
             continue
         if c.cell_type == 'markdown' and not rf.QUESTION_LINE.match(s):
@@ -241,6 +261,18 @@ def main(src, dst, removed_path, edits_path):
         title = s.lstrip('# ').split('\n')[0]
         group = cells[i:j]
         writecode = any(g.cell_type == 'code' and g.source.strip() == rf.PLACEHOLDER for g in group)
+        ans = next((g for g in group if g.cell_type == 'markdown' and DETAILS.match(g.source)), None)
+        nosig = writecode and ans is not None and 'def ' not in ans.source
+        input_lines, example_lines = set(), set()
+        for g in group:
+            if writecode and g.cell_type == 'markdown' and g is not ans:
+                for code in re.findall(r'```python\n(.*?)\n```', HEADER.sub('', g.source), re.S):
+                    example_lines.update(x.strip() for x in code.split('\n') if x.strip())
+        if nosig:
+            for g in group:
+                if g.cell_type == 'markdown' and g is not ans:
+                    for code in re.findall(r'```python\n(.*?)\n```', g.source, re.S):
+                        input_lines.update(x.strip() for x in code.split('\n') if x.strip())
         label, runs, answer = None, [], None
         for g in group:
             if g.cell_type == 'markdown' and DETAILS.match(g.source):
@@ -261,6 +293,18 @@ def main(src, dst, removed_path, edits_path):
                 m = PART_LINE.search(t)
                 if m:
                     label, t = m.group('part'), t[:m.start()]
+                ex = re.search(r'^\*\*Examples?\*\*.*?\n(```python\n(.*?)\n```)\n?', t, re.S | re.M) if nosig else None
+                if ex:
+                    # example 1's inputs become a definition cell, so Run all assigns them (plan 2.3)
+                    g.source = t[:ex.start(1)].rstrip('\n')
+                    out.append(g)
+                    d = nbf.v4.new_code_cell(ex.group(2))
+                    d.id = rf.stable_id(g.id, 'example-1')
+                    out.append(d)
+                    rest = t[ex.end(1):].strip('\n')
+                    if rest:
+                        out.append(md(rest, rf.stable_id(g.id, 'examples-rest')))
+                    continue
                 if t.strip():
                     g.source = t.rstrip('\n')
                     out.append(g)
@@ -276,7 +320,7 @@ def main(src, dst, removed_path, edits_path):
         if answer is None:
             sys.exit(f'{title}: no <details> Answer')
         qcalls = {line.strip() for code in [c for _, c in runs] for line in rf.calls_only(code).split('\n') if line.strip()}
-        out.extend(convert_answer(answer, runs, title, writecode, qcalls, edits.get('SUMMARY_STARTS', [])))
+        out.extend(convert_answer(answer, runs, title, writecode, qcalls, edits.get('SUMMARY_STARTS', []), input_lines, example_lines))
         i = j
     nb.cells = out
     nb.metadata.pop('colab', None)
@@ -289,9 +333,23 @@ def main(src, dst, removed_path, edits_path):
         for c in nb.cells:
             if old in c.source:
                 c.source = c.source.replace(old, new)
-    for cid, after_id, text in edits.get('NEW_CELLS', []):   # hand-written markdown cells
+    for cell_id, start, end, code, code_id, md_id in edits.get('SPLITS', []):
+        # the text of cell_id from `start` up to `end` becomes a definition cell; from `end` on, a new markdown cell
+        at = next(k for k, c in enumerate(nb.cells) if c.id == cell_id)
+        src = nb.cells[at].source
+        a, b = src.index(start), src.index(end)
+        nb.cells[at].source = src[:a].rstrip('\n')
+        d = nbf.v4.new_code_cell(code)
+        d.id = code_id
+        nb.cells[at + 1:at + 1] = [d, md(src[b:], md_id)]
+    for cid, after_id, text, *kind in edits.get('NEW_CELLS', []):   # hand-written cells (markdown, or 'code')
         at = next(k for k, c in enumerate(nb.cells) if c.id == after_id)
-        nb.cells.insert(at + 1, md(text, cid))
+        if kind == ['code']:
+            new_cell = nbf.v4.new_code_cell(text)
+            new_cell.id = cid
+        else:
+            new_cell = md(text, cid)
+        nb.cells.insert(at + 1, new_cell)
     nbf.validate(nb)
     nbf.write(nb, dst)
     Path(removed_path).write_text(json.dumps(removed, indent=1, ensure_ascii=False))
