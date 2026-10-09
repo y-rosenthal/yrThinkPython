@@ -1,0 +1,1326 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6b. Prof. Rosenthal’s Review &#8212; Think Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'yr/chap06_review';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7. Iteration and Search" href="../chap07.html" />
+    <link rel="prev" title="6. Return Values" href="../chap06.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Think Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap00.html">Preface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap01.html">1. Programming as a way of thinking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap02.html">2. Variables and Statements</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap02_review.html">2b. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap03.html">3. Functions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap03_review.html">3b. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap04.html">4. Functions and Interfaces</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap04_review.html">4b. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap05.html">5. Conditionals and Recursion</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap05_review.html">5b. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap06.html">6. Return Values</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6b. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap07.html">7. Iteration and Search</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap07_review.html">7b. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap08.html">8. Strings and Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap09.html">9. Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap10.html">10. Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap11.html">11. Tuples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap12.html">12. Text Analysis and Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap13.html">13. Files and Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap14.html">14. Classes and Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap15.html">15. Classes and Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap16.html">16. Classes and Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap17.html">17. Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap18.html">18. Python Extras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap19.html">19. Final thoughts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../blank.html">Blank Notebooks</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/y-rosenthal/yrThinkPython" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/yr/chap06_review.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>6b. Prof. Rosenthal’s Review</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concepts-covered">Concepts covered</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">Questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-easy-what-is-displayed">Question 1 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-easy-what-is-displayed">Question 2 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-easy-what-is-displayed">Question 3 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-easy-write-a-function">Question 4 (easy): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-medium-what-is-displayed">Question 5 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-medium-what-is-displayed">Question 6 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-7-medium-what-is-displayed">Question 7 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-8-medium-find-the-bug">Question 8 (medium): find the bug</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-9-medium-what-is-displayed">Question 9 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-10-medium-write-two-functions">Question 10 (medium): write two functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-11-medium-write-a-boolean-function">Question 11 (medium): write a boolean function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-12-medium-simplify-a-boolean-function">Question 12 (medium): simplify a boolean function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-13-hard-what-is-displayed">Question 13 (hard): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-14-hard-what-is-displayed">Question 14 (hard): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-15-hard-missing-the-base-case">Question 15 (hard): missing the base case</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-16-hard-write-a-recursive-function">Question 16 (hard): write a recursive function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-17-hard-incremental-development">Question 17 (hard): incremental development</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="b-prof-rosenthals-review">
+<h1>6b. Prof. Rosenthal’s Review<a class="headerlink" href="#b-prof-rosenthals-review" title="Link to this heading">#</a></h1>
+<p>A review of <a class="reference external" href="https://y-rosenthal.github.io/yrThinkPython/chap06.html">Chapter 6: Return Values</a>,
+for students who have already studied the chapter.
+Use the two lists under <strong>Concepts covered</strong> as a checklist (click a list’s title to hide it), then work through the <strong>Questions</strong>, which go from easy to hard.
+Each question has a suggested answer under <strong>Answer</strong>. Try the question first, then open the Answer.</p>
+<p><a class="reference external" href="https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap06_review.ipynb">Run this page on Colab</a></p>
+<section id="concepts-covered">
+<h2>Concepts covered<a class="headerlink" href="#concepts-covered" title="Link to this heading">#</a></h2>
+<div class="dropdown toggle-shown admonition">
+<p class="admonition-title">Python Syntax and Semantics</p>
+<p><strong>Return values</strong></p>
+<ul>
+<li><p>This defines a function that returns a value:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">FUNCTION_NAME</span><span class="p">(</span><span class="n">PARAMETERS</span><span class="p">):</span>
+    <span class="n">BODY</span>
+    <span class="k">return</span> <span class="n">EXPRESSION</span>
+</pre></div>
+</div>
+<p>A call to the function is an expression whose value is the return value. For example, after</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">double</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">double(5)</span></code> is <code class="docutils literal notranslate"><span class="pre">10</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">double(5)</span></code> assigns <code class="docutils literal notranslate"><span class="pre">10</span></code> to <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">double(5)</span> <span class="pre">+</span> <span class="pre">1</span></code> is <code class="docutils literal notranslate"><span class="pre">11</span></code>.</p>
+</li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">return</span></code> statement ends the function immediately; any statements after it in the same block never run.</p></li>
+<li><p>A function returns <code class="docutils literal notranslate"><span class="pre">None</span></code> if it ends without running a <code class="docutils literal notranslate"><span class="pre">return</span></code> statement (or runs <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">None</span></code>). <code class="docutils literal notranslate"><span class="pre">None</span></code> is a special value, like <code class="docutils literal notranslate"><span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print</span></code> displays a value; <code class="docutils literal notranslate"><span class="pre">return</span></code> hands a value back to the caller. A function that only prints returns <code class="docutils literal notranslate"><span class="pre">None</span></code>, so its result cannot be used in an expression.</p></li>
+<li><p>In a notebook, a cell whose last expression is <code class="docutils literal notranslate"><span class="pre">None</span></code> displays nothing; <code class="docutils literal notranslate"><span class="pre">print(None)</span></code> displays <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p>Calling a function without using its return value (not assigning it, printing it or using it in an expression) throws the value away.</p></li>
+<li><p>Local variables of a function, including the variable it returns, cannot be used outside the function: that is a <code class="docutils literal notranslate"><span class="pre">NameError</span></code>.</p></li>
+<li><p>A function can have several <code class="docutils literal notranslate"><span class="pre">return</span></code> statements, for example one in each branch of an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement. Every possible path through the function should reach a <code class="docutils literal notranslate"><span class="pre">return</span></code>; a path that does not returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+<p><strong>Boolean functions</strong></p>
+<ul class="simple">
+<li><p>A function can return <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>. A comparison already has a boolean value, so it can be returned directly: <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">x</span> <span class="pre">%</span> <span class="pre">y</span> <span class="pre">==</span> <span class="pre">0</span></code> instead of an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement that returns <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p>A boolean function can be used directly as a condition: <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">is_divisible(6,</span> <span class="pre">2):</span></code>. Comparing its result with <code class="docutils literal notranslate"><span class="pre">==</span> <span class="pre">True</span></code> is unnecessary.</p></li>
+</ul>
+<p><strong>Recursion with return values</strong></p>
+<ul>
+<li><p>A recursive function can return a value: the base case returns a value directly, and the other cases combine the result of a recursive call into their return value. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>If an argument can skip past the base case (for example, <code class="docutils literal notranslate"><span class="pre">factorial(1.5)</span></code> calls <code class="docutils literal notranslate"><span class="pre">factorial(0.5)</span></code>, then <code class="docutils literal notranslate"><span class="pre">factorial(-0.5)</span></code>, …), the result is infinite recursion and a <code class="docutils literal notranslate"><span class="pre">RecursionError</span></code>.</p></li>
+</ul>
+<p><strong>Checking types</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">isinstance(VALUE,</span> <span class="pre">TYPE)</span></code> returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the value has that type: <code class="docutils literal notranslate"><span class="pre">isinstance(3,</span> <span class="pre">int)</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">isinstance(1.5,</span> <span class="pre">int)</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p>A function can check its arguments first, and display an error message and return <code class="docutils literal notranslate"><span class="pre">None</span></code> if they are not valid.</p></li>
+</ul>
+<p><strong>The math module</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">math</span></code> makes <code class="docutils literal notranslate"><span class="pre">math.sqrt(X)</span></code> (square root, returns a float) and <code class="docutils literal notranslate"><span class="pre">math.pi</span></code> available.</p></li>
+</ul>
+</div>
+<div class="dropdown toggle-shown admonition">
+<p class="admonition-title">Definitions, etc.</p>
+<p><strong>Definitions</strong></p>
+<ul class="simple">
+<li><p>DEFINITION: A <strong>return value</strong> is the result of a function. If a function call is used as an expression, the return value is the value of the expression.</p></li>
+<li><p>DEFINITION: A <strong>pure function</strong> is a function that does not display anything or have any other effect, other than returning a value.</p></li>
+<li><p>DEFINITION: <strong>Dead code</strong> is part of a program that can never run, often because it comes after a <code class="docutils literal notranslate"><span class="pre">return</span></code> statement.</p></li>
+<li><p>DEFINITION: <strong>Incremental development</strong> is a way of writing programs by adding and testing only a small amount of code at a time.</p></li>
+<li><p>DEFINITION: <strong>Scaffolding</strong> is code used while developing a program (such as <code class="docutils literal notranslate"><span class="pre">print</span></code> calls that show intermediate values) that is not part of the final version.</p></li>
+<li><p>DEFINITION: A language, or part of a language, is <strong>Turing complete</strong> if it can perform any computation that can be described by an algorithm. Python with functions, conditionals, return values and recursion is Turing complete.</p></li>
+<li><p>DEFINITION: <strong>Input validation</strong> is checking the parameters of a function to make sure they have the correct types and values.</p></li>
+</ul>
+<p><strong>Other ideas</strong></p>
+<ul class="simple">
+<li><p>Incremental development:</p>
+<ol class="arabic simple">
+<li><p>Start with a working program (for example, a function that always returns <code class="docutils literal notranslate"><span class="pre">0</span></code>), make small changes, and test after every change.</p></li>
+<li><p>Use variables to hold intermediate values so you can display and check them.</p></li>
+<li><p>Once the program works, remove the scaffolding.</p></li>
+</ol>
+</li>
+<li><p>When testing a function, choose arguments for which you know the right answer (for example, points 3 and 4 apart, whose distance is 5).</p></li>
+<li><p>The “leap of faith”: when reading a function call, including a recursive call, assume the function works correctly and returns the right result, instead of following the flow of execution into it.</p></li>
+<li><p>A recursive definition (such as: the factorial of 0 is 1, and the factorial of n is n times the factorial of n minus 1) can be translated directly into a recursive function.</p></li>
+<li><p>If a function is not working, there are three possibilities: its arguments are wrong (a precondition is violated), the function is wrong (a postcondition is violated), or the caller uses the return value wrongly (or not at all).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print</span></code> calls at the beginning and end of a function (showing the parameters and the return value) make the flow of execution visible.</p></li>
+</ul>
+</div>
+</section>
+<section id="questions">
+<h2>Questions<a class="headerlink" href="#questions" title="Link to this heading">#</a></h2>
+<p>The questions use functions that return values, <code class="docutils literal notranslate"><span class="pre">if</span></code> statements, recursion and the <code class="docutils literal notranslate"><span class="pre">math</span></code> module.
+The setup cell below imports <code class="docutils literal notranslate"><span class="pre">math</span></code>.</p>
+<div class="cell tag_setup docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="question-1-easy-what-is-displayed">
+<h3>Question 1 (easy): what is displayed?<a class="headerlink" href="#question-1-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays, then open the Answer to check.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">double</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">double</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">double</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">double</span><span class="p">(</span><span class="s1">'ab'</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>10 20
+abab
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">double(5)</span></code> returns <code class="docutils literal notranslate"><span class="pre">10</span></code>, which is assigned to <code class="docutils literal notranslate"><span class="pre">y</span></code>; then <code class="docutils literal notranslate"><span class="pre">double(y)</span></code> returns <code class="docutils literal notranslate"><span class="pre">20</span></code>.
+<code class="docutils literal notranslate"><span class="pre">'ab'</span> <span class="pre">*</span> <span class="pre">2</span></code> is <code class="docutils literal notranslate"><span class="pre">'abab'</span></code>: the function works with any value that can be multiplied by 2.</p>
+</div>
+</section>
+<section id="question-2-easy-what-is-displayed">
+<h3>Question 2 (easy): what is displayed?<a class="headerlink" href="#question-2-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shout</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">word</span> <span class="o">+</span> <span class="s1">'!'</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">shout</span><span class="p">(</span><span class="s1">'hi'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hi!
+None
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">shout</span></code> <em>displays</em> <code class="docutils literal notranslate"><span class="pre">hi!</span></code> but has no <code class="docutils literal notranslate"><span class="pre">return</span></code> statement, so it returns <code class="docutils literal notranslate"><span class="pre">None</span></code>, and <code class="docutils literal notranslate"><span class="pre">None</span></code> is assigned to <code class="docutils literal notranslate"><span class="pre">result</span></code>.</p>
+</div>
+</section>
+<section id="question-3-easy-what-is-displayed">
+<h3>Question 3 (easy): what is displayed?<a class="headerlink" href="#question-3-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">add_one</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'start'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'never'</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">add_one</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>start
+2
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">return</span></code> ends the function immediately, so <code class="docutils literal notranslate"><span class="pre">print('never')</span></code> never runs. Code like that is called dead code.
+The <code class="docutils literal notranslate"><span class="pre">2</span></code> is displayed by the <code class="docutils literal notranslate"><span class="pre">print</span></code> outside the function, which displays the return value.</p>
+</div>
+</section>
+<section id="question-4-easy-write-a-function">
+<h3>Question 4 (easy): write a function<a class="headerlink" href="#question-4-easy-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">average</span></code> that takes two numbers and <strong>returns</strong> (not displays) their average.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">average</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">average</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>4.0
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">average</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>3.0
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">average</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(average(3,</span> <span class="pre">5))</span></code>.</p>
+<p>The parentheses matter: <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span> <span class="pre">/</span> <span class="pre">2</span></code> would divide only <code class="docutils literal notranslate"><span class="pre">b</span></code>.
+Another approach uses a local variable, which is useful while testing (you can display it):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">average</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="n">total</span> <span class="o">/</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="question-5-medium-what-is-displayed">
+<h3>Question 5 (medium): what is displayed?<a class="headerlink" href="#question-5-medium-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">absolute_value_wrong</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">x</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">absolute_value_wrong</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">),</span> <span class="n">absolute_value_wrong</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">absolute_value_wrong</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>3 4 None
+</pre></div>
+</div>
+<p>When <code class="docutils literal notranslate"><span class="pre">x</span></code> is <code class="docutils literal notranslate"><span class="pre">0</span></code>, neither condition is true, so the function ends without reaching a <code class="docutils literal notranslate"><span class="pre">return</span></code> statement and returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+Every possible path through a function should reach a <code class="docutils literal notranslate"><span class="pre">return</span></code>. One fix is to replace the second <code class="docutils literal notranslate"><span class="pre">if</span></code> with <code class="docutils literal notranslate"><span class="pre">else</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">absolute_value</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">x</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">absolute_value</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">),</span> <span class="n">absolute_value</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">absolute_value</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>3 4 0
+</pre></div>
+</div>
+</div>
+</section>
+<section id="question-6-medium-what-is-displayed">
+<h3>Question 6 (medium): what is displayed?<a class="headerlink" href="#question-6-medium-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">is_even</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">is_even</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">is_even</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">is_even</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'10 is even'</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">is_even</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'3 is odd'</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">is_even</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="ow">or</span> <span class="n">is_even</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>True False
+10 is even
+3 is odd
+True
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">%</span> <span class="pre">2</span> <span class="pre">==</span> <span class="pre">0</span></code> is a boolean expression, so <code class="docutils literal notranslate"><span class="pre">is_even</span></code> returns <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>.
+A boolean function can be used directly as a condition, or combined with <code class="docutils literal notranslate"><span class="pre">not</span></code>, <code class="docutils literal notranslate"><span class="pre">and</span></code> and <code class="docutils literal notranslate"><span class="pre">or</span></code>. <code class="docutils literal notranslate"><span class="pre">is_even(5)</span> <span class="pre">or</span> <span class="pre">is_even(6)</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span> <span class="pre">or</span> <span class="pre">True</span></code>, which is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</div>
+</section>
+<section id="question-7-medium-what-is-displayed">
+<h3>Question 7 (medium): what is displayed?<a class="headerlink" href="#question-7-medium-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">sum_of_squares</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">square</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">square</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">sum_of_squares</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">square</span><span class="p">(</span><span class="n">square</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">square</span><span class="p">(</span><span class="n">sum_of_squares</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>25
+16
+4
+</pre></div>
+</div>
+<p>A call is an expression, so its return value can be used as an argument of another call:
+<code class="docutils literal notranslate"><span class="pre">square(square(2))</span></code> is <code class="docutils literal notranslate"><span class="pre">square(4)</span></code>, which is <code class="docutils literal notranslate"><span class="pre">16</span></code>, and <code class="docutils literal notranslate"><span class="pre">square(sum_of_squares(1,</span> <span class="pre">1))</span></code> is <code class="docutils literal notranslate"><span class="pre">square(2)</span></code>, which is <code class="docutils literal notranslate"><span class="pre">4</span></code>.</p>
+</div>
+</section>
+<section id="question-8-medium-find-the-bug">
+<h3>Question 8 (medium): find the bug<a class="headerlink" href="#question-8-medium-find-the-bug" title="Link to this heading">#</a></h3>
+<p>This code should display <code class="docutils literal notranslate"><span class="pre">60</span></code> (a bill of <code class="docutils literal notranslate"><span class="pre">50</span></code> plus a 20% tip). What does it display instead, and how do you fix it?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">add_tip</span><span class="p">(</span><span class="n">bill</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">bill</span> <span class="o">+</span> <span class="n">bill</span> <span class="o">//</span> <span class="mi">5</span>
+
+<span class="n">bill</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">add_tip</span><span class="p">(</span><span class="n">bill</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bill</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>50
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">add_tip(bill)</span></code> returns <code class="docutils literal notranslate"><span class="pre">60</span></code>, but the caller does nothing with the return value, so it is thrown away.
+The function does not change the variable <code class="docutils literal notranslate"><span class="pre">bill</span></code> outside it (its parameter is a different, local variable).
+Fix it by using the return value:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bill</span> <span class="o">=</span> <span class="n">add_tip</span><span class="p">(</span><span class="n">bill</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bill</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>60
+</pre></div>
+</div>
+<p>or simply <code class="docutils literal notranslate"><span class="pre">print(add_tip(50))</span></code>.</p>
+</div>
+</section>
+<section id="question-9-medium-what-is-displayed">
+<h3>Question 9 (medium): what is displayed?<a class="headerlink" href="#question-9-medium-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">half</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'half needs an integer'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">half</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">half</span><span class="p">(</span><span class="mf">9.0</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>4
+half needs an integer
+None
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">isinstance(9,</span> <span class="pre">int)</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, so <code class="docutils literal notranslate"><span class="pre">half(9)</span></code> returns <code class="docutils literal notranslate"><span class="pre">9</span> <span class="pre">//</span> <span class="pre">2</span></code>, which is <code class="docutils literal notranslate"><span class="pre">4</span></code>.
+<code class="docutils literal notranslate"><span class="pre">9.0</span></code> is a float, not an integer, so <code class="docutils literal notranslate"><span class="pre">half(9.0)</span></code> displays the message and returns <code class="docutils literal notranslate"><span class="pre">None</span></code>, which the outer <code class="docutils literal notranslate"><span class="pre">print</span></code> displays.
+Checking the arguments like this is called input validation.</p>
+</div>
+</section>
+<section id="question-10-medium-write-two-functions">
+<h3>Question 10 (medium): write two functions<a class="headerlink" href="#question-10-medium-write-two-functions" title="Link to this heading">#</a></h3>
+<p>Write a function <code class="docutils literal notranslate"><span class="pre">larger(a,</span> <span class="pre">b)</span></code> that returns the larger of two numbers, and a function <code class="docutils literal notranslate"><span class="pre">largest(a,</span> <span class="pre">b,</span> <span class="pre">c)</span></code> that returns the largest of three numbers by calling <code class="docutils literal notranslate"><span class="pre">larger</span></code>.
+Do not use the built-in function <code class="docutils literal notranslate"><span class="pre">max</span></code>.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">larger</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">largest</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">larger</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">larger</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>7 7
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">largest</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">largest</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>9 -1
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">larger</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">a</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">b</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">largest</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">larger</span><span class="p">(</span><span class="n">larger</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(larger(3,</span> <span class="pre">7),</span> <span class="pre">larger(7,</span> <span class="pre">3))</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">larger(a,</span> <span class="pre">b)</span></code> is the larger of the first two, and the larger of that and <code class="docutils literal notranslate"><span class="pre">c</span></code> is the largest of all three.
+Because <code class="docutils literal notranslate"><span class="pre">larger</span></code> <em>returns</em> its result (instead of displaying it), <code class="docutils literal notranslate"><span class="pre">largest</span></code> can use it.</p>
+<p><code class="docutils literal notranslate"><span class="pre">larger</span></code> can also be written without <code class="docutils literal notranslate"><span class="pre">else</span></code>, because <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">a</span></code> ends the function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">larger</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">a</span>
+    <span class="k">return</span> <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="question-11-medium-write-a-boolean-function">
+<h3>Question 11 (medium): write a boolean function<a class="headerlink" href="#question-11-medium-write-a-boolean-function" title="Link to this heading">#</a></h3>
+<p>A year is a leap year if it is divisible by 4, except that years divisible by 100 are not leap years, unless they are also divisible by 400.
+Write a function <code class="docutils literal notranslate"><span class="pre">is_leap</span></code> that takes a year and returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if it is a leap year and <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">is_leap</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">is_leap</span><span class="p">(</span><span class="mi">2024</span><span class="p">),</span> <span class="n">is_leap</span><span class="p">(</span><span class="mi">2023</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>True False
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">is_leap</span><span class="p">(</span><span class="mi">1900</span><span class="p">),</span> <span class="n">is_leap</span><span class="p">(</span><span class="mi">2000</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>False True
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>A chained conditional that checks the most specific rule first:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">is_leap</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">year</span> <span class="o">%</span> <span class="mi">400</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">elif</span> <span class="n">year</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">elif</span> <span class="n">year</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(is_leap(2024),</span> <span class="pre">is_leap(2023))</span></code>.</p>
+<p>Or return one boolean expression:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">is_leap</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">year</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">(</span><span class="n">year</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">year</span> <span class="o">%</span> <span class="mi">400</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="question-12-medium-simplify-a-boolean-function">
+<h3>Question 12 (medium): simplify a boolean function<a class="headerlink" href="#question-12-medium-simplify-a-boolean-function" title="Link to this heading">#</a></h3>
+<p>This function works, but it is longer than it needs to be.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">is_teen</span><span class="p">(</span><span class="n">age</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">13</span> <span class="ow">and</span> <span class="n">age</span> <span class="o">&lt;=</span> <span class="mi">19</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>Rewrite it with a single <code class="docutils literal notranslate"><span class="pre">return</span></code> statement and no <code class="docutils literal notranslate"><span class="pre">if</span></code> statement.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">is_teen</span><span class="p">(</span><span class="n">age</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">is_teen</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span> <span class="n">is_teen</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>True False
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">is_teen</span><span class="p">(</span><span class="mi">19</span><span class="p">),</span> <span class="n">is_teen</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>True False
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>The condition already has the value <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>, so return it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">is_teen</span><span class="p">(</span><span class="n">age</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">13</span> <span class="ow">and</span> <span class="n">age</span> <span class="o">&lt;=</span> <span class="mi">19</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(is_teen(15),</span> <span class="pre">is_teen(12))</span></code>.</p>
+<p>The same, with the shorthand for a range of values:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">is_teen</span><span class="p">(</span><span class="n">age</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">13</span> <span class="o">&lt;=</span> <span class="n">age</span> <span class="o">&lt;=</span> <span class="mi">19</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="question-13-hard-what-is-displayed">
+<h3>Question 13 (hard): what is displayed?<a class="headerlink" href="#question-13-hard-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">power</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'power'</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">e</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">b</span> <span class="o">*</span> <span class="n">power</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">e</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'returning'</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">power</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>power 2 3
+power 2 2
+power 2 1
+power 2 0
+returning 2
+returning 4
+returning 8
+8
+</pre></div>
+</div>
+<p>Each call displays its arguments and then waits for its recursive call to return. The call with <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">==</span> <span class="pre">0</span></code> is the base case: it returns <code class="docutils literal notranslate"><span class="pre">1</span></code> without displaying <code class="docutils literal notranslate"><span class="pre">returning</span></code>.
+Then the calls finish in the opposite order: <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">1</span></code> is <code class="docutils literal notranslate"><span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">2</span></code> is <code class="docutils literal notranslate"><span class="pre">4</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">4</span></code> is <code class="docutils literal notranslate"><span class="pre">8</span></code>.
+The last line is displayed by the <code class="docutils literal notranslate"><span class="pre">print</span></code> outside the function. The <code class="docutils literal notranslate"><span class="pre">print</span></code> calls inside <code class="docutils literal notranslate"><span class="pre">power</span></code> are scaffolding, useful to see the flow of execution.</p>
+</div>
+</section>
+<section id="question-14-hard-what-is-displayed">
+<h3>Question 14 (hard): what is displayed?<a class="headerlink" href="#question-14-hard-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays. What does <code class="docutils literal notranslate"><span class="pre">mystery</span></code> compute, in general?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mystery</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">mystery</span><span class="p">(</span><span class="n">n</span> <span class="o">//</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">mystery</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">mystery</span><span class="p">(</span><span class="mi">123</span><span class="p">),</span> <span class="n">mystery</span><span class="p">(</span><span class="mi">9999</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>7 6 36
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">mystery</span></code> returns the sum of the digits of <code class="docutils literal notranslate"><span class="pre">n</span></code>: <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">%</span> <span class="pre">10</span></code> is the last digit and <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">//</span> <span class="pre">10</span></code> is the number without its last digit.
+With the leap of faith: assuming <code class="docutils literal notranslate"><span class="pre">mystery(12)</span></code> correctly returns <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">mystery(123)</span></code> returns <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">+</span> <span class="pre">mystery(12)</span></code>, which is <code class="docutils literal notranslate"><span class="pre">6</span></code>.
+A number with one digit (less than 10) is the base case.</p>
+</div>
+</section>
+<section id="question-15-hard-missing-the-base-case">
+<h3>Question 15 (hard): missing the base case<a class="headerlink" href="#question-15-hard-missing-the-base-case" title="Link to this heading">#</a></h3>
+<p>Run this cell to define <code class="docutils literal notranslate"><span class="pre">factorial</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Two correct ways to call it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+<p>What happens with this call? Change <code class="docutils literal notranslate"><span class="pre">factorial</span></code> so that it displays a message and returns <code class="docutils literal notranslate"><span class="pre">None</span></code> when its argument is not a non-negative integer.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">factorial</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>The calls get <code class="docutils literal notranslate"><span class="pre">n</span></code> = 1.5, 0.5, -0.5, -1.5, … and never <code class="docutils literal notranslate"><span class="pre">0</span></code>, so the base case is never reached (a <code class="docutils literal notranslate"><span class="pre">RecursionError</span></code>):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>----&gt; 1 factorial(1.5)
+
+In factorial(n):
+      2     if n == 0:
+      3         return 1
+----&gt; 4     return n * factorial(n - 1)
+
+... last 1 frames repeated, from the frame below ...
+
+In factorial(n):
+      2     if n == 0:
+      3         return 1
+----&gt; 4     return n * factorial(n - 1)
+
+RecursionError: maximum recursion depth exceeded
+</pre></div>
+</div>
+<p>Check the argument before the recursion (input validation):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'factorial is only defined for integers.'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'factorial is not defined for negative numbers.'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mf">1.5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>factorial is only defined for integers.
+None
+factorial is not defined for negative numbers.
+None
+6
+</pre></div>
+</div>
+<p>Negative integers also need a check: <code class="docutils literal notranslate"><span class="pre">factorial(-2)</span></code> would call <code class="docutils literal notranslate"><span class="pre">factorial(-3)</span></code>, and so on, forever.</p>
+</div>
+</section>
+<section id="question-16-hard-write-a-recursive-function">
+<h3>Question 16 (hard): write a recursive function<a class="headerlink" href="#question-16-hard-write-a-recursive-function" title="Link to this heading">#</a></h3>
+<p>Write a recursive function <code class="docutils literal notranslate"><span class="pre">multiply</span></code> that takes two integers <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>, where <code class="docutils literal notranslate"><span class="pre">b</span></code> is not negative, and returns <code class="docutils literal notranslate"><span class="pre">a</span></code> times <code class="docutils literal notranslate"><span class="pre">b</span></code>, using only <code class="docutils literal notranslate"><span class="pre">+</span></code> and <code class="docutils literal notranslate"><span class="pre">-</span></code> (no <code class="docutils literal notranslate"><span class="pre">*</span></code> and no loops).
+Hint: <code class="docutils literal notranslate"><span class="pre">a</span></code> times <code class="docutils literal notranslate"><span class="pre">b</span></code> is <code class="docutils literal notranslate"><span class="pre">a</span></code> plus <code class="docutils literal notranslate"><span class="pre">a</span></code> times <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">-</span> <span class="pre">1</span></code>.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">multiply</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>42
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">multiply</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">multiply</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-12 0
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>The base case is <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">==</span> <span class="pre">0</span></code>, because anything times <code class="docutils literal notranslate"><span class="pre">0</span></code> is <code class="docutils literal notranslate"><span class="pre">0</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(multiply(6,</span> <span class="pre">7))</span></code>.</p>
+<p>With the leap of faith: if <code class="docutils literal notranslate"><span class="pre">multiply(a,</span> <span class="pre">b</span> <span class="pre">-</span> <span class="pre">1)</span></code> is right, adding one more <code class="docutils literal notranslate"><span class="pre">a</span></code> gives <code class="docutils literal notranslate"><span class="pre">a</span></code> times <code class="docutils literal notranslate"><span class="pre">b</span></code>.
+Another approach puts the recursive result in a variable first, which makes it easy to display while testing:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rest</span> <span class="o">=</span> <span class="n">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">rest</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="question-17-hard-incremental-development">
+<h3>Question 17 (hard): incremental development<a class="headerlink" href="#question-17-hard-incremental-development" title="Link to this heading">#</a></h3>
+<p>The area of a triangle with sides <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code> and <code class="docutils literal notranslate"><span class="pre">c</span></code> can be computed in two steps (Heron’s formula):</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">s</span></code> is half the perimeter: <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">+</span> <span class="pre">b</span> <span class="pre">+</span> <span class="pre">c)</span> <span class="pre">/</span> <span class="pre">2</span></code>.</p></li>
+<li><p>The area is the square root of <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">*</span> <span class="pre">(s</span> <span class="pre">-</span> <span class="pre">a)</span> <span class="pre">*</span> <span class="pre">(s</span> <span class="pre">-</span> <span class="pre">b)</span> <span class="pre">*</span> <span class="pre">(s</span> <span class="pre">-</span> <span class="pre">c)</span></code>.</p></li>
+</ol>
+<p>Write a function <code class="docutils literal notranslate"><span class="pre">triangle_area</span></code> that returns the area. Use incremental development: start with a version that returns <code class="docutils literal notranslate"><span class="pre">0</span></code>, then add one step at a time, displaying the intermediate values, and remove those <code class="docutils literal notranslate"><span class="pre">print</span></code> calls at the end.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">triangle_area</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">triangle_area</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>6.0
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">triangle_area</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">triangle_area</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>12.0 1.732
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>A version in the middle of the development, with scaffolding, could be:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">triangle_area</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'s is'</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>         <span class="c1"># for 3, 4, 5 it should be 6.0</span>
+    <span class="k">return</span> <span class="mi">0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">triangle_area</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>s is 6.0
+0
+</pre></div>
+</div>
+<p>And the final version, without the scaffolding:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">triangle_area</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">product</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="n">c</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(triangle_area(3,</span> <span class="pre">4,</span> <span class="pre">5))</span></code>.</p>
+<p>The examples were chosen because their answers are known: a 3-4-5 right triangle has area 3 * 4 / 2 = 6.</p>
+</div>
+<p><em>Summary and questions by Prof. Y. Rosenthal, based on</em>
+<a class="reference external" href="https://allendowney.github.io/ThinkPython/index.html">Think Python: 3rd Edition</a> <em>by Allen B. Downey.</em>
+<em>Text license:</em> <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./yr"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../chap06.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Return Values</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../chap07.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Iteration and Search</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concepts-covered">Concepts covered</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">Questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-easy-what-is-displayed">Question 1 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-easy-what-is-displayed">Question 2 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-easy-what-is-displayed">Question 3 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-easy-write-a-function">Question 4 (easy): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-medium-what-is-displayed">Question 5 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-medium-what-is-displayed">Question 6 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-7-medium-what-is-displayed">Question 7 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-8-medium-find-the-bug">Question 8 (medium): find the bug</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-9-medium-what-is-displayed">Question 9 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-10-medium-write-two-functions">Question 10 (medium): write two functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-11-medium-write-a-boolean-function">Question 11 (medium): write a boolean function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-12-medium-simplify-a-boolean-function">Question 12 (medium): simplify a boolean function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-13-hard-what-is-displayed">Question 13 (hard): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-14-hard-what-is-displayed">Question 14 (hard): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-15-hard-missing-the-base-case">Question 15 (hard): missing the base case</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-16-hard-write-a-recursive-function">Question 16 (hard): write a recursive function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-17-hard-incremental-development">Question 17 (hard): incremental development</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

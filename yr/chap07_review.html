@@ -1,0 +1,1283 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>7b. Prof. Rosenthal’s Review &#8212; Think Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'yr/chap07_review';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="8. Strings and Regular Expressions" href="../chap08.html" />
+    <link rel="prev" title="7. Iteration and Search" href="../chap07.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Think Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap00.html">Preface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap01.html">1. Programming as a way of thinking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap02.html">2. Variables and Statements</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap02_review.html">2b. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap03.html">3. Functions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap03_review.html">3b. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap04.html">4. Functions and Interfaces</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap04_review.html">4b. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap05.html">5. Conditionals and Recursion</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap05_review.html">5b. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap06.html">6. Return Values</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap06_review.html">6b. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap07.html">7. Iteration and Search</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">7b. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap08.html">8. Strings and Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap09.html">9. Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap10.html">10. Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap11.html">11. Tuples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap12.html">12. Text Analysis and Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap13.html">13. Files and Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap14.html">14. Classes and Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap15.html">15. Classes and Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap16.html">16. Classes and Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap17.html">17. Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap18.html">18. Python Extras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap19.html">19. Final thoughts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../blank.html">Blank Notebooks</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/y-rosenthal/yrThinkPython" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/yr/chap07_review.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>7b. Prof. Rosenthal’s Review</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concepts-covered">Concepts covered</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">Questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-easy-what-is-displayed">Question 1 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-easy-what-is-displayed">Question 2 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-easy-what-is-displayed">Question 3 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-easy-write-a-function">Question 4 (easy): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-medium-what-is-displayed">Question 5 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-medium-what-is-displayed">Question 6 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-7-medium-what-is-displayed">Question 7 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-8-medium-what-happens">Question 8 (medium): what happens?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-9-medium-reading-a-file">Question 9 (medium): reading a file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-10-medium-write-a-function">Question 10 (medium): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-11-medium-write-a-function">Question 11 (medium): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-12-hard-what-is-displayed">Question 12 (hard): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-13-hard-what-is-displayed">Question 13 (hard): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-14-hard-doctests">Question 14 (hard): doctests</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-15-hard-searching-a-file">Question 15 (hard): searching a file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-16-hard-write-a-function">Question 16 (hard): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-17-hard-write-a-function-with-doctests">Question 17 (hard): write a function with doctests</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="b-prof-rosenthals-review">
+<h1>7b. Prof. Rosenthal’s Review<a class="headerlink" href="#b-prof-rosenthals-review" title="Link to this heading">#</a></h1>
+<p>A review of <a class="reference external" href="https://y-rosenthal.github.io/yrThinkPython/chap07.html">Chapter 7: Iteration and Search</a>,
+for students who have already studied the chapter.
+Use the two lists under <strong>Concepts covered</strong> as a checklist (click a list’s title to hide it), then work through the <strong>Questions</strong>, which go from easy to hard.
+Each question has a suggested answer under <strong>Answer</strong>. Try the question first, then open the Answer.</p>
+<p><a class="reference external" href="https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_review.ipynb">Run this page on Colab</a></p>
+<section id="concepts-covered">
+<h2>Concepts covered<a class="headerlink" href="#concepts-covered" title="Link to this heading">#</a></h2>
+<div class="dropdown toggle-shown admonition">
+<p class="admonition-title">Python Syntax and Semantics</p>
+<p><strong>Looping through a string</strong></p>
+<ul>
+<li><p>This runs the body once for each character of the string, in order, with the loop variable referring to that character:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">LOOP_VARIABLE</span> <span class="ow">in</span> <span class="n">STRING</span><span class="p">:</span>
+    <span class="n">BODY</span>
+</pre></div>
+</div>
+<p>For example, this displays <code class="docutils literal notranslate"><span class="pre">G</span></code>, <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">d</span></code> on separate lines:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s1">'Gad'</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(VALUE,</span> <span class="pre">end='</span> <span class="pre">')</span></code> displays the value followed by a space instead of a newline, so the next <code class="docutils literal notranslate"><span class="pre">print</span></code> continues on the same line.</p></li>
+</ul>
+<p><strong>Updating variables</strong></p>
+<ul>
+<li><p>A new assignment makes an existing variable refer to a new value. <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code> is an update: it computes the right side with the current value of <code class="docutils literal notranslate"><span class="pre">x</span></code>, then assigns the result to <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+<li><p>Updating a variable that does not exist yet, such as <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span> <span class="pre">z</span> <span class="pre">+</span> <span class="pre">1</span></code>, is a <code class="docutils literal notranslate"><span class="pre">NameError</span></code>. Initialize it first, for example with <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span> <span class="pre">0</span></code>.</p></li>
+<li><p>Augmented assignment: <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+=</span> <span class="pre">N</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">N</span></code>. Likewise <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">-=</span> <span class="pre">N</span></code> and <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">*=</span> <span class="pre">N</span></code>.</p></li>
+<li><p>A counter is a variable initialized to <code class="docutils literal notranslate"><span class="pre">0</span></code> before a loop and incremented inside it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">LOOP_VARIABLE</span> <span class="ow">in</span> <span class="n">SEQUENCE</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">CONDITION</span><span class="p">:</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p><strong>The in operator and string methods</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">STRING1</span> <span class="pre">in</span> <span class="pre">STRING2</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> if STRING1 appears in STRING2: <code class="docutils literal notranslate"><span class="pre">'e'</span> <span class="pre">in</span> <span class="pre">'Gadsby'</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>, and <code class="docutils literal notranslate"><span class="pre">'ads'</span> <span class="pre">in</span> <span class="pre">'Gadsby'</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>. Uppercase and lowercase letters are different: <code class="docutils literal notranslate"><span class="pre">'g'</span> <span class="pre">in</span> <span class="pre">'Gadsby'</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p>A method is a function associated with a value, called with a dot: <code class="docutils literal notranslate"><span class="pre">VALUE.METHOD_NAME(ARGUMENTS)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">STRING.lower()</span></code> returns a new string with the letters in lowercase: <code class="docutils literal notranslate"><span class="pre">'Gadsby'.lower()</span></code> is <code class="docutils literal notranslate"><span class="pre">'gadsby'</span></code>. It does not change the original string; to keep the result, assign it, as in <code class="docutils literal notranslate"><span class="pre">word</span> <span class="pre">=</span> <span class="pre">word.lower()</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">STRING.strip()</span></code> returns a new string without the whitespace (spaces, tabs and newlines) at its beginning and end: <code class="docutils literal notranslate"><span class="pre">'</span>&#160; <span class="pre">hi</span> <span class="pre">\n'.strip()</span></code> is <code class="docutils literal notranslate"><span class="pre">'hi'</span></code>.</p></li>
+</ul>
+<p><strong>Reading files</strong></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">open(FILE_NAME)</span></code> returns a file object for reading the file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FILE_OBJECT.readline()</span></code> returns the next line of the file as a string, including the newline at its end (<code class="docutils literal notranslate"><span class="pre">'\n'</span></code>). The file object keeps track of where it is, so each call returns the next line.</p></li>
+<li><p>This runs the body once for each line of the file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="n">FILE_NAME</span><span class="p">):</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">BODY</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p><strong>Linear search</strong></p>
+<ul>
+<li><p>A linear search loops through a sequence and returns as soon as it finds what it is looking for; if the loop ends without finding it, the function returns after the loop:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">has_e</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">letter</span> <span class="o">==</span> <span class="s1">'e'</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">False</span></code> must be after the loop, not in an <code class="docutils literal notranslate"><span class="pre">else</span></code> inside it: otherwise the function returns after checking only the first letter.</p></li>
+</ul>
+<p><strong>Doctests</strong></p>
+<ul>
+<li><p>A docstring can contain tests: a line starting with <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span> </code> followed by an expression, and on the next line the value the expression should have:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">FUNCTION_NAME</span><span class="p">(</span><span class="n">PARAMETERS</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""WHAT THE FUNCTION DOES</span>
+
+<span class="sd">    &gt;&gt;&gt; FUNCTION_NAME(ARGUMENTS)</span>
+<span class="sd">    EXPECTED_VALUE</span>
+<span class="sd">    """</span>
+    <span class="n">BODY</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">run_docstring_examples(FUNCTION,</span> <span class="pre">globals(),</span> <span class="pre">name=FUNCTION.__name__)</span></code>, after <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">doctest</span> <span class="pre">import</span> <span class="pre">run_docstring_examples</span></code>, runs a function’s doctests. It displays nothing if all of them pass; for each test that fails, it displays the example, the expected value and the value it got.</p></li>
+</ul>
+</div>
+<div class="dropdown toggle-shown admonition">
+<p class="admonition-title">Definitions, etc.</p>
+<p><strong>Definitions</strong></p>
+<ul class="simple">
+<li><p>DEFINITION: A <strong>loop variable</strong> is the variable defined in the header of a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</p></li>
+<li><p>DEFINITION: A <strong>file object</strong> is a value that represents an open file and keeps track of which parts of it have been read.</p></li>
+<li><p>DEFINITION: A <strong>method</strong> is a function associated with a value (an object), called using the dot operator, as in <code class="docutils literal notranslate"><span class="pre">word.lower()</span></code>.</p></li>
+<li><p>DEFINITION: An <strong>update</strong> is an assignment that gives a new value to a variable that already exists, often computed from its old value.</p></li>
+<li><p>DEFINITION: To <strong>initialize</strong> a variable is to create it and give it a first value.</p></li>
+<li><p>DEFINITION: To <strong>increment</strong> a variable is to increase its value; to <strong>decrement</strong> it is to decrease its value.</p></li>
+<li><p>DEFINITION: An <strong>augmented assignment operator</strong>, such as <code class="docutils literal notranslate"><span class="pre">+=</span></code>, <code class="docutils literal notranslate"><span class="pre">-=</span></code> or <code class="docutils literal notranslate"><span class="pre">*=</span></code>, updates a variable concisely.</p></li>
+<li><p>DEFINITION: A <strong>counter</strong> is a variable used to count something, usually initialized to zero and then incremented.</p></li>
+<li><p>DEFINITION: A <strong>linear search</strong> is a pattern that goes through a sequence of elements one at a time and stops when it finds what it is looking for.</p></li>
+<li><p>DEFINITION: A <strong>doctest</strong> is a test written in a docstring: an expression after <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code> and the value it should have.</p></li>
+<li><p>DEFINITION: A test <strong>passes</strong> if it runs and the result is as expected; otherwise it <strong>fails</strong>.</p></li>
+</ul>
+<p><strong>Other ideas</strong></p>
+<ul class="simple">
+<li><p>Give the loop variable a name that says what it refers to, such as <code class="docutils literal notranslate"><span class="pre">letter</span></code> or <code class="docutils literal notranslate"><span class="pre">line</span></code>.</p></li>
+<li><p>A function that loops through a string and returns <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> can often be simplified with the <code class="docutils literal notranslate"><span class="pre">in</span></code> operator.</p></li>
+<li><p>Converting strings with <code class="docutils literal notranslate"><span class="pre">lower</span></code> before comparing them makes a function work with any combination of uppercase and lowercase letters.</p></li>
+<li><p>Doctests document what a function does and test it at the same time. When all tests pass, no news is good news.</p></li>
+</ul>
+</div>
+</section>
+<section id="questions">
+<h2>Questions<a class="headerlink" href="#questions" title="Link to this heading">#</a></h2>
+<p>The questions use <code class="docutils literal notranslate"><span class="pre">for</span></code> loops over strings, counters, the <code class="docutils literal notranslate"><span class="pre">in</span></code> operator, string methods and doctests. One question reads <code class="docutils literal notranslate"><span class="pre">words.txt</span></code>, a list of about 114,000 English words, one per line, in alphabetical order (the first two are <code class="docutils literal notranslate"><span class="pre">aa</span></code> and <code class="docutils literal notranslate"><span class="pre">aah</span></code>).</p>
+<p>The setup cell below downloads <code class="docutils literal notranslate"><span class="pre">words.txt</span></code>.</p>
+<div class="cell tag_setup docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlretrieve</span>
+
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Downloaded "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">local</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">filename</span>
+
+<span class="n">download</span><span class="p">(</span><span class="s1">'https://raw.githubusercontent.com/AllenDowney/ThinkPython/v3/words.txt'</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="question-1-easy-what-is-displayed">
+<h3>Question 1 (easy): what is displayed?<a class="headerlink" href="#question-1-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays, then open the Answer to check.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s1">'hi'</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">letter</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s1">'code'</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">letter</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">' '</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hh
+ii
+c o d e 
+</pre></div>
+</div>
+<p>The loop variable <code class="docutils literal notranslate"><span class="pre">letter</span></code> refers to each character of the string in turn.
+<code class="docutils literal notranslate"><span class="pre">end='</span> <span class="pre">'</span></code> makes <code class="docutils literal notranslate"><span class="pre">print</span></code> display a space instead of a newline after each letter, so the letters of <code class="docutils literal notranslate"><span class="pre">'code'</span></code> are on one line.</p>
+</div>
+</section>
+<section id="question-2-easy-what-is-displayed">
+<h3>Question 2 (easy): what is displayed?<a class="headerlink" href="#question-2-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">x</span> <span class="o">+=</span> <span class="mi">2</span>
+<span class="n">x</span> <span class="o">*=</span> <span class="mi">3</span>
+<span class="n">x</span> <span class="o">-=</span> <span class="mi">4</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>20
+</pre></div>
+</div>
+<p>The value of <code class="docutils literal notranslate"><span class="pre">x</span></code> is 5, then 6, then 8, then 24, then 20.
+<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+=</span> <span class="pre">2</span></code> means <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">*=</span> <span class="pre">3</span></code> means <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">*</span> <span class="pre">3</span></code>, and <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">-=</span> <span class="pre">4</span></code> means <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">-</span> <span class="pre">4</span></code>.</p>
+</div>
+</section>
+<section id="question-3-easy-what-is-displayed">
+<h3>Question 3 (easy): what is displayed?<a class="headerlink" href="#question-3-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="s1">'Gadsby'</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'e'</span> <span class="ow">in</span> <span class="n">word</span><span class="p">,</span> <span class="s1">'G'</span> <span class="ow">in</span> <span class="n">word</span><span class="p">,</span> <span class="s1">'g'</span> <span class="ow">in</span> <span class="n">word</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'ads'</span> <span class="ow">in</span> <span class="n">word</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">word</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>False True False
+True
+gadsby Gadsby
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">in</span></code> checks whether one string appears in another. Uppercase and lowercase letters are different, so <code class="docutils literal notranslate"><span class="pre">'g'</span></code> is not in <code class="docutils literal notranslate"><span class="pre">'Gadsby'</span></code>.
+It also works for longer strings: <code class="docutils literal notranslate"><span class="pre">'ads'</span></code> appears in <code class="docutils literal notranslate"><span class="pre">'Gadsby'</span></code>.
+<code class="docutils literal notranslate"><span class="pre">lower</span></code> returns a new string; <code class="docutils literal notranslate"><span class="pre">word</span></code> itself does not change.</p>
+</div>
+</section>
+<section id="question-4-easy-write-a-function">
+<h3>Question 4 (easy): write a function<a class="headerlink" href="#question-4-easy-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">exclaim_letters</span></code> that takes a string <code class="docutils literal notranslate"><span class="pre">word</span></code> and displays each of its letters followed by <code class="docutils literal notranslate"><span class="pre">!</span></code>, one per line.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">exclaim_letters</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">exclaim_letters</span><span class="p">(</span><span class="s1">'hi'</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>h!
+i!
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">exclaim_letters</span><span class="p">(</span><span class="s1">'yes'</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>y!
+e!
+s!
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">exclaim_letters</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">letter</span> <span class="o">+</span> <span class="s1">'!'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">exclaim_letters('hi')</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">print(letter,</span> <span class="pre">'!')</span></code> would put a space between the letter and the <code class="docutils literal notranslate"><span class="pre">!</span></code>, so join them with <code class="docutils literal notranslate"><span class="pre">+</span></code> instead.</p>
+</div>
+</section>
+<section id="question-5-medium-what-is-displayed">
+<h3>Question 5 (medium): what is displayed?<a class="headerlink" href="#question-5-medium-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s1">'Mississippi'</span><span class="p">:</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">letter</span> <span class="o">==</span> <span class="s1">'s'</span><span class="p">:</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>4 11
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">total</span></code> is incremented for every letter, so it counts all 11 letters.
+<code class="docutils literal notranslate"><span class="pre">count</span></code> is incremented only for the letter <code class="docutils literal notranslate"><span class="pre">s</span></code>, which appears 4 times.
+Both counters are initialized to <code class="docutils literal notranslate"><span class="pre">0</span></code> before the loop.</p>
+</div>
+</section>
+<section id="question-6-medium-what-is-displayed">
+<h3>Question 6 (medium): what is displayed?<a class="headerlink" href="#question-6-medium-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="s1">'Hello'</span>
+<span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+<span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Hello
+hello
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">lower</span></code> does not change the string it is called on: it returns a new string.
+On the second line, that new string is not assigned to anything, so it is thrown away.
+On the fourth line, it is assigned to <code class="docutils literal notranslate"><span class="pre">word</span></code>, so <code class="docutils literal notranslate"><span class="pre">word</span></code> now refers to <code class="docutils literal notranslate"><span class="pre">'hello'</span></code>.</p>
+</div>
+</section>
+<section id="question-7-medium-what-is-displayed">
+<h3>Question 7 (medium): what is displayed?<a class="headerlink" href="#question-7-medium-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">line</span> <span class="o">=</span> <span class="s1">'  hello world </span><span class="se">\n</span><span class="s1">'</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">+</span> <span class="s1">'!'</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>15 11
+hello world!
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">line</span></code> has 2 spaces, the 11 characters of <code class="docutils literal notranslate"><span class="pre">hello</span> <span class="pre">world</span></code>, a space and a newline (<code class="docutils literal notranslate"><span class="pre">\n</span></code> is one character): 15 in all.
+<code class="docutils literal notranslate"><span class="pre">strip</span></code> removes the whitespace at the beginning and end (spaces and the newline), but not the space between the words.</p>
+</div>
+</section>
+<section id="question-8-medium-what-happens">
+<h3>Question 8 (medium): what happens?<a class="headerlink" href="#question-8-medium-what-happens" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s1">'abc'</span><span class="p">:</span>
+    <span class="n">num_letters</span> <span class="o">=</span> <span class="n">num_letters</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">num_letters</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>This is a <code class="docutils literal notranslate"><span class="pre">NameError</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>      1 for letter in 'abc':
+----&gt; 2     num_letters = num_letters + 1
+      3 print(num_letters)
+
+NameError: name 'num_letters' is not defined
+</pre></div>
+</div>
+<p>To compute <code class="docutils literal notranslate"><span class="pre">num_letters</span> <span class="pre">+</span> <span class="pre">1</span></code>, Python needs the current value of <code class="docutils literal notranslate"><span class="pre">num_letters</span></code>, but the variable has never been assigned.
+Initialize it before the loop:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num_letters</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s1">'abc'</span><span class="p">:</span>
+    <span class="n">num_letters</span> <span class="o">=</span> <span class="n">num_letters</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">num_letters</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+<p>This displays <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p>
+</div>
+</section>
+<section id="question-9-medium-reading-a-file">
+<h3>Question 9 (medium): reading a file<a class="headerlink" href="#question-9-medium-reading-a-file" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">words.txt</span></code> has one word per line; its first two lines are <code class="docutils literal notranslate"><span class="pre">aa</span></code> and <code class="docutils literal notranslate"><span class="pre">aah</span></code>. Predict what this code displays.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">file_object</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'words.txt'</span><span class="p">)</span>
+<span class="n">first</span> <span class="o">=</span> <span class="n">file_object</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="n">second</span> <span class="o">=</span> <span class="n">file_object</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">first</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">second</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">second</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>3 3
+aah
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">readline</span></code> returns the next line <em>including</em> its newline, so <code class="docutils literal notranslate"><span class="pre">first</span></code> is <code class="docutils literal notranslate"><span class="pre">'aa\n'</span></code>, which has 3 characters.
+The file object remembers where it is, so the second call returns the second line, <code class="docutils literal notranslate"><span class="pre">'aah\n'</span></code>; after <code class="docutils literal notranslate"><span class="pre">strip</span></code> it is <code class="docutils literal notranslate"><span class="pre">'aah'</span></code>, with 3 characters.</p>
+</div>
+</section>
+<section id="question-10-medium-write-a-function">
+<h3>Question 10 (medium): write a function<a class="headerlink" href="#question-10-medium-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">count_vowels</span></code> that takes a string and returns the number of vowels (<code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">e</span></code>, <code class="docutils literal notranslate"><span class="pre">i</span></code>, <code class="docutils literal notranslate"><span class="pre">o</span></code>, <code class="docutils literal notranslate"><span class="pre">u</span></code>, uppercase or lowercase) in it.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">count_vowels</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">count_vowels</span><span class="p">(</span><span class="s1">'banana'</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">count_vowels</span><span class="p">(</span><span class="s1">'Python'</span><span class="p">),</span> <span class="n">count_vowels</span><span class="p">(</span><span class="s1">'AEIOU'</span><span class="p">),</span> <span class="n">count_vowels</span><span class="p">(</span><span class="s1">'rhythm'</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>1 5 0
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>A counter, and the <code class="docutils literal notranslate"><span class="pre">in</span></code> operator to check each letter:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">count_vowels</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s1">'aeiou'</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">count</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(count_vowels('banana'))</span></code>.</p>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">lower</span></code> first makes uppercase vowels count too. Without <code class="docutils literal notranslate"><span class="pre">lower</span></code>, check both cases:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">count_vowels</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s1">'aeiouAEIOU'</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">count</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="question-11-medium-write-a-function">
+<h3>Question 11 (medium): write a function<a class="headerlink" href="#question-11-medium-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">first_vowel</span></code> that takes a string and returns its first vowel (<code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">e</span></code>, <code class="docutils literal notranslate"><span class="pre">i</span></code>, <code class="docutils literal notranslate"><span class="pre">o</span></code> or <code class="docutils literal notranslate"><span class="pre">u</span></code>, lowercase), or <code class="docutils literal notranslate"><span class="pre">None</span></code> if it has none.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">first_vowel</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">first_vowel</span><span class="p">(</span><span class="s1">'python'</span><span class="p">),</span> <span class="n">first_vowel</span><span class="p">(</span><span class="s1">'strength'</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>o e
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">first_vowel</span><span class="p">(</span><span class="s1">'rhythm'</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>None
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>A linear search: return the first letter that is a vowel; if the loop ends, there is none.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">first_vowel</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s1">'aeiou'</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">letter</span>
+    <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(first_vowel('python'),</span> <span class="pre">first_vowel('strength'))</span></code>.</p>
+<p>A function that ends without <code class="docutils literal notranslate"><span class="pre">return</span></code> also returns <code class="docutils literal notranslate"><span class="pre">None</span></code>, so the last line could be left out, but writing it makes the intention clear.</p>
+</div>
+</section>
+<section id="question-12-hard-what-is-displayed">
+<h3>Question 12 (hard): what is displayed?<a class="headerlink" href="#question-12-hard-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">uses_any_wrong</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">letters</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">letters</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">uses_any_wrong</span><span class="p">(</span><span class="s1">'nab'</span><span class="p">,</span> <span class="s1">'n'</span><span class="p">),</span> <span class="n">uses_any_wrong</span><span class="p">(</span><span class="s1">'banana'</span><span class="p">,</span> <span class="s1">'n'</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>True False
+</pre></div>
+</div>
+<p>The function is supposed to return <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">word</span></code> uses any of the <code class="docutils literal notranslate"><span class="pre">letters</span></code>, but it returns after checking only the first letter of <code class="docutils literal notranslate"><span class="pre">word</span></code>:
+<code class="docutils literal notranslate"><span class="pre">'n'</span></code> is in <code class="docutils literal notranslate"><span class="pre">'n'</span></code>, so the first call returns <code class="docutils literal notranslate"><span class="pre">True</span></code>, but <code class="docutils literal notranslate"><span class="pre">'b'</span></code> is not, so the second returns <code class="docutils literal notranslate"><span class="pre">False</span></code> even though <code class="docutils literal notranslate"><span class="pre">banana</span></code> has an <code class="docutils literal notranslate"><span class="pre">n</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">False</span></code> belongs after the loop:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">uses_any</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">letters</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">letters</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">uses_any</span><span class="p">(</span><span class="s1">'nab'</span><span class="p">,</span> <span class="s1">'n'</span><span class="p">),</span> <span class="n">uses_any</span><span class="p">(</span><span class="s1">'banana'</span><span class="p">,</span> <span class="s1">'n'</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>True True
+</pre></div>
+</div>
+</div>
+</section>
+<section id="question-13-hard-what-is-displayed">
+<h3>Question 13 (hard): what is displayed?<a class="headerlink" href="#question-13-hard-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="s1">'ab'</span><span class="p">:</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="s1">''</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="s1">'xyz'</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">+=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>axayaz
+bxbybz
+6
+</pre></div>
+</div>
+<p>For each letter <code class="docutils literal notranslate"><span class="pre">a</span></code> of <code class="docutils literal notranslate"><span class="pre">'ab'</span></code>, the inner loop runs through all three letters of <code class="docutils literal notranslate"><span class="pre">'xyz'</span></code>.
+<code class="docutils literal notranslate"><span class="pre">line</span></code> is set back to the empty string at the start of each outer loop, and <code class="docutils literal notranslate"><span class="pre">count</span></code> is incremented 2 times 3 = 6 times in all.
+<code class="docutils literal notranslate"><span class="pre">+=</span></code> works with strings too: <code class="docutils literal notranslate"><span class="pre">line</span> <span class="pre">+=</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></code> adds two letters to the end of <code class="docutils literal notranslate"><span class="pre">line</span></code>.</p>
+</div>
+</section>
+<section id="question-14-hard-doctests">
+<h3>Question 14 (hard): doctests<a class="headerlink" href="#question-14-hard-doctests" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">run_doctests</span></code> runs the tests in a function’s docstring (you can ignore how it works: <code class="docutils literal notranslate"><span class="pre">globals()</span></code> and <code class="docutils literal notranslate"><span class="pre">__name__</span></code> are explained later).
+Predict what the last line displays. What is wrong with <code class="docutils literal notranslate"><span class="pre">count_e</span></code>, and how do you fix it?</p>
+<p>Run this cell to define <code class="docutils literal notranslate"><span class="pre">run_doctests</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">doctest</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_docstring_examples</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_doctests</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="n">run_docstring_examples</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="nb">globals</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">count_e</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Count the letter e (or E) in word.</span>
+
+<span class="sd">    &gt;&gt;&gt; count_e('Eerie')</span>
+<span class="sd">    3</span>
+<span class="sd">    &gt;&gt;&gt; count_e('sky')</span>
+<span class="sd">    0</span>
+<span class="sd">    """</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">letter</span> <span class="o">==</span> <span class="s1">'e'</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">count</span>
+
+<span class="n">run_doctests</span><span class="p">(</span><span class="n">count_e</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>The first test fails, and the second one passes (a test that passes displays nothing). The output is something like this (the line number may differ):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>**********************************************************************
+File "__main__", line 4, in count_e
+Failed example:
+    count_e('Eerie')
+Expected:
+    3
+Got:
+    2
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">count_e</span></code> only counts lowercase <code class="docutils literal notranslate"><span class="pre">e</span></code>, so for <code class="docutils literal notranslate"><span class="pre">'Eerie'</span></code> it returns <code class="docutils literal notranslate"><span class="pre">2</span></code>, not <code class="docutils literal notranslate"><span class="pre">3</span></code>.
+Fix it by converting the word to lowercase first; then running the tests displays nothing, because they all pass:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">count_e</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Count the letter e (or E) in word.</span>
+
+<span class="sd">    &gt;&gt;&gt; count_e('Eerie')</span>
+<span class="sd">    3</span>
+<span class="sd">    &gt;&gt;&gt; count_e('sky')</span>
+<span class="sd">    0</span>
+<span class="sd">    """</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">letter</span> <span class="o">==</span> <span class="s1">'e'</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">count</span>
+
+<span class="n">run_doctests</span><span class="p">(</span><span class="n">count_e</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(nothing is displayed)</p>
+</div>
+</section>
+<section id="question-15-hard-searching-a-file">
+<h3>Question 15 (hard): searching a file<a class="headerlink" href="#question-15-hard-searching-a-file" title="Link to this heading">#</a></h3>
+<p>What does this code display? Explain what it counts. (You cannot know the number without running it; predict what it means, then open the Answer to see the number.)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'words.txt'</span><span class="p">):</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">if</span> <span class="s1">'q'</span> <span class="ow">in</span> <span class="n">word</span> <span class="ow">and</span> <span class="s1">'u'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+<p>It counts the words in <code class="docutils literal notranslate"><span class="pre">words.txt</span></code> that contain a <code class="docutils literal notranslate"><span class="pre">q</span></code> but no <code class="docutils literal notranslate"><span class="pre">u</span></code>: only 10 of about 114,000 words.
+<code class="docutils literal notranslate"><span class="pre">'u'</span> <span class="pre">not</span> <span class="pre">in</span> <span class="pre">word</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">'u'</span> <span class="pre">in</span> <span class="pre">word</span></code>.
+Each line is stripped first, so that the newline is not part of the word (here it would not change the result, but it would for a test like <code class="docutils literal notranslate"><span class="pre">word</span> <span class="pre">==</span> <span class="pre">'qat'</span></code>).</p>
+</div>
+</section>
+<section id="question-16-hard-write-a-function">
+<h3>Question 16 (hard): write a function<a class="headerlink" href="#question-16-hard-write-a-function" title="Link to this heading">#</a></h3>
+<p>A word is <em>abecedarian</em> if its letters are in alphabetical order (repeated letters are allowed), like <code class="docutils literal notranslate"><span class="pre">almost</span></code> or <code class="docutils literal notranslate"><span class="pre">abbey</span></code>.
+Write a function <code class="docutils literal notranslate"><span class="pre">is_abecedarian</span></code> that takes a lowercase word and returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if it is abecedarian and <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.
+Strings can be compared with <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>: <code class="docutils literal notranslate"><span class="pre">'a'</span> <span class="pre">&lt;</span> <span class="pre">'b'</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, and <code class="docutils literal notranslate"><span class="pre">'h'</span> <span class="pre">&lt;</span> <span class="pre">'e'</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">is_abecedarian</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">is_abecedarian</span><span class="p">(</span><span class="s1">'almost'</span><span class="p">),</span> <span class="n">is_abecedarian</span><span class="p">(</span><span class="s1">'abbey'</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>True True
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">is_abecedarian</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">),</span> <span class="n">is_abecedarian</span><span class="p">(</span><span class="s1">'a'</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>False True
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>A linear search for a letter that comes before the one just before it. A variable remembers the previous letter:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">is_abecedarian</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="n">previous</span> <span class="o">=</span> <span class="s1">'a'</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">letter</span> <span class="o">&lt;</span> <span class="n">previous</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">previous</span> <span class="o">=</span> <span class="n">letter</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(is_abecedarian('almost'),</span> <span class="pre">is_abecedarian('abbey'))</span></code>.</p>
+<p>Starting with <code class="docutils literal notranslate"><span class="pre">previous</span> <span class="pre">=</span> <span class="pre">'a'</span></code> works because no lowercase letter comes before <code class="docutils literal notranslate"><span class="pre">'a'</span></code>.
+As soon as one letter is out of order, the answer is <code class="docutils literal notranslate"><span class="pre">False</span></code>; only after checking all the letters is it <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</div>
+</section>
+<section id="question-17-hard-write-a-function-with-doctests">
+<h3>Question 17 (hard): write a function with doctests<a class="headerlink" href="#question-17-hard-write-a-function-with-doctests" title="Link to this heading">#</a></h3>
+<p>Write a function <code class="docutils literal notranslate"><span class="pre">count_doubles</span></code> that takes a word and returns the number of times a letter is immediately followed by the same letter.
+Give it a docstring with at least three doctests, and check that running them displays nothing.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">count_doubles</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">count_doubles</span><span class="p">(</span><span class="s1">'bookkeeper'</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">count_doubles</span><span class="p">(</span><span class="s1">'Mississippi'</span><span class="p">),</span> <span class="n">count_doubles</span><span class="p">(</span><span class="s1">'cat'</span><span class="p">),</span> <span class="n">count_doubles</span><span class="p">(</span><span class="s1">'aaa'</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>3 0 2
+</pre></div>
+</div>
+<p>This question uses <code class="docutils literal notranslate"><span class="pre">run_doctests</span></code> from Question 14.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>Remember the previous letter, as in a search, and count instead of returning:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">count_doubles</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Count the letters immediately followed by the same letter.</span>
+
+<span class="sd">    &gt;&gt;&gt; count_doubles('bookkeeper')</span>
+<span class="sd">    3</span>
+<span class="sd">    &gt;&gt;&gt; count_doubles('cat')</span>
+<span class="sd">    0</span>
+<span class="sd">    &gt;&gt;&gt; count_doubles('aaa')</span>
+<span class="sd">    2</span>
+<span class="sd">    """</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">previous</span> <span class="o">=</span> <span class="s1">''</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">letter</span> <span class="o">==</span> <span class="n">previous</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">previous</span> <span class="o">=</span> <span class="n">letter</span>
+    <span class="k">return</span> <span class="n">count</span>
+
+<span class="n">run_doctests</span><span class="p">(</span><span class="n">count_doubles</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(count_doubles('bookkeeper'))</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">previous</span></code> starts as the empty string, which is not equal to any letter, so the first letter is never counted.
+In <code class="docutils literal notranslate"><span class="pre">'aaa'</span></code> there are two pairs of neighbors, and both are doubles.</p>
+</div>
+<p><em>Summary and questions by Prof. Y. Rosenthal, based on</em>
+<a class="reference external" href="https://allendowney.github.io/ThinkPython/index.html">Think Python: 3rd Edition</a> <em>by Allen B. Downey.</em>
+<em>Text license:</em> <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./yr"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../chap07.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Iteration and Search</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../chap08.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Strings and Regular Expressions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concepts-covered">Concepts covered</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">Questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-easy-what-is-displayed">Question 1 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-easy-what-is-displayed">Question 2 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-easy-what-is-displayed">Question 3 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-easy-write-a-function">Question 4 (easy): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-medium-what-is-displayed">Question 5 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-medium-what-is-displayed">Question 6 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-7-medium-what-is-displayed">Question 7 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-8-medium-what-happens">Question 8 (medium): what happens?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-9-medium-reading-a-file">Question 9 (medium): reading a file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-10-medium-write-a-function">Question 10 (medium): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-11-medium-write-a-function">Question 11 (medium): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-12-hard-what-is-displayed">Question 12 (hard): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-13-hard-what-is-displayed">Question 13 (hard): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-14-hard-doctests">Question 14 (hard): doctests</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-15-hard-searching-a-file">Question 15 (hard): searching a file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-16-hard-write-a-function">Question 16 (hard): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-17-hard-write-a-function-with-doctests">Question 17 (hard): write a function with doctests</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
