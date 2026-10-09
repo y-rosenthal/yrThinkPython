@@ -6,7 +6,8 @@
 1. Done 2026-10-09 (see "Colab test results so far"): Claude ran Part A2 and DRY tests 1-4 in Prof. Rosenthal's Chrome. Prof.
    Rosenthal then chose variant B, run-cell titles that name the question, and the help note as is.
 2. Done 2026-10-09: sections 1–5 rewritten (v3); section 9 restated.
-3. Next: prototype check C4 on the 11 fix blocks; ask Prof. Rosenthal the still-open D1–D18 (section 9 table); then Step 2 (smoke test) and Step 3 (tools).
+3. Done 2026-10-09: the C4 prototype passes on all 11 fix blocks (results in section 4.4).
+4. Next: ask Prof. Rosenthal the still-open D1–D18 (section 9 table); then Step 2 (smoke test) and Step 3 (tools).
 
 The two prototype v2 notebooks for Part A2:
 - Chapter 5 review page: https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/yr-runall-research/yr/plans/research/prototype-v2/chap05_review.ipynb
@@ -38,8 +39,8 @@ Step numbers refer to section 8 of the plan below.
 - [x] Rewrite the design summary and sections 1–5 for E1–E20 (v3), and restate section 9's D1–D18 (2026-10-09)
 - [x] Live now: question numbers stay fixed during a semester (`review_cells.py` accepts `3b`; README and skills say so; 2026-10-09)
 - [ ] Revise sections 6–8 and 10 (verification, checklists, rollout, uncertainties) for v3, with Step 3
-- [ ] Prototype check C4 on the 11 fix blocks (ch02 Q4, Q15; ch05 Q7, Q10, Q14; ch06 Q5, Q8, Q15; ch07 Q8, Q12, Q14),
-      with the name-reuse lint (E5, E10)
+- [x] Prototype check C4 on the 11 fix blocks (2026-10-09): all 11 pass trimmed, and 3 negative tests fail as they must
+      (`yr/plans/research/c4-prototype/` on `yr-runall-research`). E5 is confirmed
 - [ ] Fix the problems the audit found (list in the DRY audit section): ch05 "about 3000" frames (E13), the v2 converter's
       leftover sentences, the check gaps
 - [x] Save the prototype v2 files the checkpoint skipped (lock file, shell scripts, `v2fix_exp/` experiments) to
@@ -524,8 +525,10 @@ assign `hours`, `minutes` and `seconds`"); its output is generated; the Answer h
 and `jump` in Q11; `polygon` stays in Q14 with its docstring; `describe` stays in both Q5 and Q15 (check: identical).
 ch07: `run_doctests` where first used.
 
-**Fixes** (E9, E10). An Answer's fix block shows only the changed lines; sync runs it after the question's code (in the
-end-of-Run-all namespace) and writes its output below (or "(nothing is displayed)"). ch07 Q14, ch05 Q14 and ch05 Q10's
+**Fixes** (E9, E10). Four ways to trim a fix, all VERIFIED by the C4 prototype: (1) only the changed lines, run after the
+question's code (ch02 Q15, ch06 Q8); (2) only the new `def`, then the question's own calls (ch05 Q7, Q14, ch06 Q15);
+(3) a fix that renames the function keeps its own call (ch06 Q5, ch07 Q12); (4) a change that must come before the question's
+code keeps the whole block (ch07 Q8, 4 lines). sync writes each fix's output below it (or "(nothing is displayed)"). ch07 Q14, ch05 Q14 and ch05 Q10's
 second approach use a derive marker, so the full fixed code is shown but not retyped. A fix that uses a name a later question
 reassigns (ch02 Q4 `price`) keeps its own input line; a lint lists names assigned by more than one question.
 
@@ -655,7 +658,10 @@ ipykernel 6.17.1, jupyter_client, pygments, traitlets, pyzmq, …), kernel `cola
   - Generated regions and filled values equal what `sync` writes; markers well formed (rule 10).
   - "Same output before and after" for refactor questions (text: stdout; drawings: SVG hash).
   - Name-reuse lint (E10); Concepts overlap lint (E14).
-- **Prototype first:** C4 on the 11 fix blocks (ch02 Q4, Q15; ch05 Q7, Q10, Q14; ch06 Q5, Q8, Q15; ch07 Q8, Q12, Q14).
+- **C4 prototype (VERIFIED 2026-10-09, `yr/plans/research/c4-prototype/` on `yr-runall-research`):** all 11 fix blocks pass
+  trimmed; a block missing its input line (ch02 Q4 prints `19.9919.99` once Q16's inputs are a cell), a missing import and a
+  failing doctest all fail. **Each block must run in its own fresh end-of-Run-all namespace**: in one shared kernel an
+  earlier block's `price = 4` hid the hazard. Run on the book venv; repeat on the pinned 3.13 stack in Step 3.
 
 #### 4.5 `yr/tools/turtle_images.py`
 As v2 (SVG hash, `--check`, hardening), plus: example pictures in write-code questions and "what if" pictures are
