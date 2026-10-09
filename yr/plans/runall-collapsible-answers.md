@@ -61,13 +61,28 @@ Step numbers refer to section 8 of the plan below.
 - [ ] Checks not built in Step 3 (section 4, "Not built yet"): C8 verdicts, C9 code spans, C11 prompt names, E7
       identical copies, the refactor "same output" check, the Concepts overlap lint; build each one in Step 4 if
       the chapter 5 conversion needs it, or decide to drop it
-- [ ] Step 4: convert chapter 5 only; Prof. Rosenthal runs checklist Part C from the branch link
+- [x] Step 4 (2026-10-09): chapter 5 converted on `yr-review-runall` (`convert_v3.py`, gate 41/41, check, lint, site
+      build and `verify_site.py` pass); Part C run in Colab by Claude from the branch link: passes
 - [ ] Step 5: publish chapter 5 and verify the live page
 - [ ] Step 6: convert ch02, ch03, ch06, ch07, then ch04, each with a Colab spot-check
 - [ ] Step 7: check on the live pages that each problem Prof. Rosenthal reported is gone (goal 6), remove the
       legacy code, add the CI lint step, delete the "Pending work" note from `CLAUDE.md`, mark this plan done
 
 ## Colab test results so far
+
+**2026-10-09, Part C: chapter 5 converted, from the branch link** (`yr-review-runall`), run by Claude in Prof. Rosenthal's
+Chrome. VERIFIED in Colab:
+- **P1:** on opening, 17 closed Answers ("N cells hidden"), no run cell visible, the help note shown, values filled
+  (recursion limit `1000`), no marker text, generated headers and example outputs shown under the examples.
+- **P2:** Run all reaches the end (Q17's run cell ran last, green check); afterwards only "Downloaded jupyturtle.py" is
+  visible; every Answer stays closed; no error marks.
+- **P3:** Q8 after Run all: Part a/b/c text, each followed by its live error as plain text (`ipykernel_1142`), then the
+  summary. **P4:** Q14 shows the RecursionError; Q17 the live tree.
+- **P6 (DRY test 6, goal 11):** Q9's trimmed solution typed into a new cell with `end_hour(22, 5)` prints `3`, as the
+  example says.
+- Not done: P7's wording review of the help note (a human judgment), and the keyboard check (D10 accepts it).
+- Note: Colab allows a limited number of active sessions; Claude ended three old test sessions (Step 2, Step 3 and the
+  A/B prototype) to start this one.
 
 **2026-10-09, Step 3 test page**, run by Claude in Prof. Rosenthal's Chrome: the self-test fixture after `review.sh sync`
 (`yr/plans/research/step3/` on `yr-runall-research`: `colab_step3.ipynb`, `results-2026-10-09.md`). VERIFIED in Colab:
