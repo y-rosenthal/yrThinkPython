@@ -438,23 +438,29 @@ def static_generate(nb, imports, changes, errors):
             dirty = False
             for k, tok in enumerate(toks):
                 if tok.kind == 'marker' and tok.name == 'derive':
-                    m = re.fullmatch(r'from=Q(?P<q>\d+[a-z]?)(?P<part>:[a-z])?\s+replace="(?P<old>[^"]*)"\s+'
-                                     r'with="(?P<new>[^"]*)"', tok.arg)
+                    m = re.fullmatch(r'from=(?:Q(?P<q>\d+[a-z]?)(?P<part>:[a-z])?|(?P<sol>solution))\s+'
+                                     r'replace="(?P<old>[^"]*)"\s+with="(?P<new>[^"]*)"', tok.arg)
                     nxt = toks[k + 1] if k + 1 < len(toks) else None
                     if not m or nxt is None or not rf.is_python(nxt):
-                        errors.append(f'{t}: bad derive marker {tok.lines[0]!r} (it needs from=QN replace="..." '
-                                      f'with="..." and a ```python block on the next line)')
+                        errors.append(f'{t}: bad derive marker {tok.lines[0]!r} (it needs from=QN or from=solution, '
+                                      f'replace="..." with="...", and a ```python block on the next line)')
                         continue
-                    src_q = by_number.get(m.group('q'))
-                    blocks = src_q and [c for _, p, c in src_q['run_blocks']
-                                        if not m.group('part') or p == m.group('part')[1:]]
+                    if m.group('sol'):
+                        ref = reference_solution(nb, q)
+                        blocks = [ref] if ref else []
+                    else:
+                        src_q = by_number.get(m.group('q'))
+                        blocks = src_q and [c for _, p, c in src_q['run_blocks']
+                                            if not m.group('part') or p == m.group('part')[1:]]
+                        if src_q and len(blocks) == 1 and src_q['defs'] and not m.group('part'):
+                            blocks = ['\n\n'.join([source(nb.cells[d]) for d in src_q['defs']] + blocks)]
                     if not blocks or len(blocks) != 1:
-                        errors.append(f'{t}: derive marker: Question {m.group("q")} has no single run block to derive from')
+                        errors.append(f'{t}: derive marker: no single code block to derive from')
                         continue
                     old = m.group('old').replace('\\n', '\n')
                     if blocks[0].count(old) != 1:
-                        errors.append(f'{t}: derive marker: "{old}" occurs {blocks[0].count(old)} times in Question '
-                                      f'{m.group("q")}\'s code (it must occur exactly once)')
+                        errors.append(f'{t}: derive marker: "{old}" occurs {blocks[0].count(old)} times in the code '
+                                      f'it derives from (it must occur exactly once)')
                         continue
                     want = blocks[0].replace(old, m.group('new').replace('\\n', '\n'))
                     if nxt.code != want:

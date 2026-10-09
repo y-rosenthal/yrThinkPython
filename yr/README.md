@@ -282,7 +282,7 @@ removes them. Type `?` as a value; sync replaces it.
 | `<!--do: CODE -->` | nothing: CODE runs (hidden) before the values that follow it in the same cell |
 | `<!-- not a solution -->` | the output of the next ```` ```python ```` block (in a write-code Answer) |
 | `<!-- header: f g -->` | "Start from this header" for these functions |
-| `<!-- derive: from=QN replace="OLD" with="NEW" -->` | the next ```` ```python ```` block: Question N's code with OLD replaced by NEW |
+| `<!-- derive: from=QN replace="OLD" with="NEW" -->` | the next ```` ```python ```` block: Question N's code (its definition cells, then its run block) with OLD replaced by NEW; `from=solution`: this question's first solution. `\n` in OLD or NEW is a line break |
 
 Values are computed after Run all and after the question's code (in Concepts: after the setup cell
 only), with the value shown as a notebook shows it (`'abc'` with quotes, `4.0`).
