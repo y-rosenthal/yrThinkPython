@@ -1,11 +1,12 @@
 # Plan: review pages that work with Colab's "Run all", with answers hidden until clicked
 
-**Status (2026-10-09): the DRY audit (goals 9-11) is done and Prof. Rosenthal has decided E1–E20 (section "DRY audit and decisions E1–E20" below). The design is now "v2 plus a sync step that fills markdown": the author types each fact once and `review.sh sync` generates every output, header, import, error name and quoted value. Sections 2–5 below still describe v2 and have not yet been rewritten for E1–E20. Nothing is implemented in the repo yet: the live review pages are unchanged.**
+**Status (2026-10-09): the DRY audit (goals 9-11) is done and Prof. Rosenthal has decided E1–E20 (section "DRY audit and decisions E1–E20" below). The design is now "v2 plus a sync step that fills markdown": the author types each fact once and `review.sh sync` generates every output, header, import, error name and quoted value. The design summary and sections 1–5 were rewritten for it (v3) the same day, with variant B errors, run-cell titles that name the question and Python 3.13; section 9 says which old decisions are settled. Sections 6–8 and 10 are still v2's and get revised in Step 3. Nothing of the new format is implemented yet; the one live change is that question numbers stay fixed (`3b` inserts).**
 
 **Next step:**
 1. Done 2026-10-09 (see "Colab test results so far"): Claude ran Part A2 and DRY tests 1-4 in Prof. Rosenthal's Chrome. Prof.
    Rosenthal then chose variant B, run-cell titles that name the question, and the help note as is.
-2. Rewrite sections 2–5 for E1–E20, prototype check C4 on the 11 fix blocks, then bring Prof. Rosenthal the old D1–D18 (section 9) that are still open, restated where E1–E20 changed them.
+2. Done 2026-10-09: sections 1–5 rewritten (v3); section 9 restated.
+3. Next: prototype check C4 on the 11 fix blocks; ask Prof. Rosenthal the still-open D1–D18 (section 9 table); then Step 2 (smoke test) and Step 3 (tools).
 
 The two prototype v2 notebooks for Part A2:
 - Chapter 5 review page: https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/yr-runall-research/yr/plans/research/prototype-v2/chap05_review.ipynb
@@ -34,7 +35,9 @@ Step numbers refer to section 8 of the plan below.
 - [x] DRY Colab tests 1-4 (2026-10-09; results below): E12 works with one rule, E13 confirmed (1000), E18 needs Python 3.13
 - [ ] DRY Colab tests 5-7 and the site-build diff, once a converted page exists
 - [ ] Move `colablike.lock` to Colab's Python 3.13.16 (IPython 7.34.0, ipykernel 6.17.1 unchanged) and re-sync (E18)
-- [ ] Rewrite sections 2–5 (layout, DRY, tools, conversion) for E1–E20; restate the old D1–D18 that E1–E20 change
+- [x] Rewrite the design summary and sections 1–5 for E1–E20 (v3), and restate section 9's D1–D18 (2026-10-09)
+- [x] Live now: question numbers stay fixed during a semester (`review_cells.py` accepts `3b`; README and skills say so; 2026-10-09)
+- [ ] Revise sections 6–8 and 10 (verification, checklists, rollout, uncertainties) for v3, with Step 3
 - [ ] Prototype check C4 on the 11 fix blocks (ch02 Q4, Q15; ch05 Q7, Q10, Q14; ch06 Q5, Q8, Q15; ch07 Q8, Q12, Q14),
       with the name-reuse lint (E5, E10)
 - [ ] Fix the problems the audit found (list in the DRY audit section): ch05 "about 3000" frames (E13), the v2 converter's
@@ -243,8 +246,7 @@ Prototype v2 later replaced the helper cell and `run_code` with an inline `run_c
 - **Step 0 is done (2026-10-08).** This plan is in this file on `v3`. The research, the prototype and the agents' helper scripts (`make_smoke.py`, `exp.py`, `conv3.py`, `runvis.py`, the `final-rev` tests) are on branch `yr-runall-research` under `yr/plans/research/` (`scratch/` and `prototype/`). Prototype v2 is there too: `prototype-v2/` (the two A2 notebooks) and `v2-workflow/` (`files/scripts/`, the three reviews, logs and `fix-v2.md`). The virtualenv that the checkpoint script copied there by mistake was removed.
 - **The live review pages are unchanged.** They still use the `run_code` layout published on 2026-10-08.
 - **Next:** see the Status at the top: the Colab tests (Part A2 and the DRY tests), then rewriting sections 2–5 for E1–E20.
-- **Sections 2–5 below still describe v2.** Where they disagree with E1–E20 (for example: hand-typed example outputs, Answer
-  blocks that run as standalone .py files, `<!-- error: X -->` records, check S13), E1–E20 win.
+- **Sections 1–5 below describe v3** (rewritten 2026-10-09). Sections 6–8 and 10 are still v2's.
 
 **Evidence labels.** **VERIFIED** = tested in this container or seen in primary sources. **BELIEVED** = strong but indirect evidence. **UNKNOWN** = only a live Colab session can tell (section 7).
 
@@ -282,207 +284,184 @@ Nothing needs fixing. This plan is the "continue".
 
 ---
 
-### The design in one paragraph
+### The design in one paragraph (v3, 2026-10-09)
 
-- **Question.** The code is highlighted text: a markdown cell holding a `~~~python` fence, called a **run block**. The tildes mean "the Answer runs this"; ```` ```python ```` blocks are never run.
-  - Text can't run, so Run all can't reveal an answer through it.
-  - Colab's editor is BELIEVED never to check markdown.
-- **Answer.** A `#### Answer` heading saved collapsed (Colab and JupyterLab). Inside it, the explanation and one **run cell** per run block, which shows the code's **real output once**, next to its explanation. Multi-part questions alternate: Part a's text, Part a's output, Part b's text, …, then the summary.
-- **Run cell.** Generated by `review.sh sync`.
-  - Its code is hidden: Colab form view and JupyterLab `source_hidden`. "Show code" still works.
-  - Its **output is stored in the notebook**, so the Answer shows it before Run all, on GitHub's preview and on the website. Run all re-runs it.
-- **Errors.** A run cell whose code raises, or prints a line number, is wrapped as `__import__('IPython').get_ipython().run_cell(r"""…""");`.
-  - The error looks like a normal cell's, with the question's line numbers.
-  - Run all continues: VERIFIED in Colab with v1.
-  - There is no helper cell, so the run cell also works before setup.
-- **One copy of the code; outputs are generated, never typed.** `sync` writes the run cells, the stored outputs and a stamp. `check`, the lint and the build refuse stale, hand-edited or wrong-stack outputs.
-- **Website.** Each Answer is one closed dropdown holding the explanation and the stored outputs (tracebacks shortened), with no code.
+This is prototype v2's design, revised for goals 9–12, decisions E1–E20 and the 2026-10-09 Colab results (variant B,
+run-cell titles that name the question, Python 3.13). **The author types each fact once; `review.sh sync` generates
+everything that can be derived, by running the code; `review.sh check` fails if running `sync` again would change anything.**
+
+- **Question code** is highlighted text: a markdown cell holding a `~~~python` fence, a **run block**. Text can't run, so Run
+  all can't reveal an answer through it, and Colab's editor doesn't check it.
+- **Answer.** A `#### Answer` heading saved collapsed. Inside it: the explanation, and one generated **run cell** per run
+  block that shows the code's real output once (code hidden, output stored). Multi-part questions alternate part text and
+  part output, then the summary.
+- **Errors (variant B, chosen 2026-10-09).** A run cell whose code raises, or prints a line number, calls the page's hidden
+  helper `run_code(r"""…""")`, which runs the code as its own cell and prints the traceback **as text** (stderr). Nothing
+  raises, so Colab shows no red (!) icon, no "Explain error" button, and no red mark on a closed Answer row (A2-4).
+- **Write-code questions.** The author types the prompt, the example calls and the solutions. `sync` writes the "Start from
+  this header" block (E4), every example output (E2), the import lines of each Answer block (E5) and a "Then try:" line
+  (E19). `check` runs **every** Answer block against every example (E3).
+- **Fixes and "what if" variants** in Answers are short ```` ```python ```` blocks; `sync` runs each one after the
+  question's code and writes its output or picture below it (E9–E11).
+- **Values in prose** (Answers and Concepts) are written as expressions with a marker; `sync` writes the value (E12).
+- **Provided helpers** are runnable definition cells, typed once, where first provided (E6).
+- **Question numbers are fixed during a semester** (goal 12, E16). `sync` writes the run-cell titles from them
+  ("Output of Question 8a"); only `review.sh renumber`, run between semesters, renumbers.
+- **The page frame** (title paragraph, intro, help note, credits) comes from one template (E15).
+- **Generated text** sits inside the author's cells between invisible delimiters that `sync` writes (E17).
+- **One pinned stack:** `sync` and `check` generate only on `colablike.lock`, which matches Colab: **Python 3.13**,
+  IPython 7.34.0, ipykernel 6.17.1 (E18).
+- **Website.** Each Answer is one closed dropdown with the explanation and the stored outputs, no code; prep strips every
+  marker and delimiter, and each converted page passes a before/after diff of the built site (E20).
 
 ---
 
 ### 1. What students will see
 
-#### Colab: opening a page from its "Run this page on Colab" link
-- **Unchanged:** the title, "Concepts covered" and the "Questions" intro (the setup sentence is reworded, see section 5).
-- **Help note** "Using this page in Colab or Jupyter", hidden on the website. The text is in 2.1.
-- **One setup cell:** the page's own. The managed `run_code` cell is dropped. ch03 has none, because its old setup cell held only `run_code`.
-- **Each question shows:**
-  - its heading and prompt ("…then open the Answer to check.");
-  - the code as a highlighted block;
-  - **Part a**, **Part b**, … in multi-part questions.
-- **A closed Answer** with an "N cells hidden" row. The format is VERIFIED from Colab-saved notebooks; that Colab honours it when opened from GitHub is BELIEVED (A2-1).
-- **The only code cells outside Answers:** the setup cell, definition cells (which display nothing) and `# Your code here`. No stored output sits outside an Answer (VERIFIED, rules S8 and R2).
-- **No red underlines.** Question code is text. Every code cell is Pyright-clean when the cells are joined as Colab does: Pyright 1.1.414, basic and off modes, reports only today's jupyturtle import notes (VERIFIED).
+#### Colab: opening a page
+- **Unchanged:** the title, "Concepts covered" and the "Questions" intro (the intro's setup sentence is reworded, section 5).
+- **Help note** "Using this page in Colab or Jupyter" (text in 2.1; approved as is, A2-7), hidden on the website.
+- **Setup:** the page's own setup cell, then the hidden helper cell that defines `run_code` (variant B). ch03 had only
+  `run_code` in its setup cell; it now has only the helper cell.
+- **Each question shows** its heading and prompt ("…then open the Answer to check."), the code as a highlighted block,
+  **Part a**, **Part b**, … in multi-part questions, and definition cells ("Run this cell to define `square` and `jump`").
+- **Write-code questions** show the header block, the examples with their outputs (both generated, looking as today) and the
+  `# Your code here` cell.
+- **A closed Answer** with an "N cells hidden" row (VERIFIED in Colab, A2-1).
+- **The only code cells outside Answers:** the setup and helper cells, definition cells (which display nothing) and
+  `# Your code here`. No stored output sits outside an Answer.
+- **No red underlines** (question code is text) and **no red marks** before Run all (VERIFIED, A2-1).
 
 #### Colab: after Runtime → Run all
-- **First run:** a "not authored by Google" warning is BELIEVED; the student chooses Run anyway.
-- **Every cell runs,** including the hidden ones, and **Run all reaches the end**:
-  - VERIFIED in Colab with v1, which uses the same mechanism;
-  - VERIFIED for v2 in nbclient simulations on both stacks: 21/21 cells, every reply status ok.
-- **Visible afterwards:** only "Downloaded jupyturtle.py" (VERIFIED: simulation and JupyterLab 4.6.4).
-- **After Run all, each error output inside the closed Answer gets Colab's red (!) icon and "Explain error" button** (VERIFIED with v1). Whether a closed Answer row also gets a red mark is UNKNOWN (A2-4).
-- **What visibly changes, proving the cells re-ran:**
-  - execution counters appear;
-  - Q8's headers change from `ipykernel_0` to Colab's process id;
-  - Q14's frames from the definition cell read `/tmp/ipython-input-3568901665.py` (BELIEVED, harmless).
+- The "not authored by Google" warning appears; the student chooses Run anyway (VERIFIED).
+- **Every cell runs and Run all reaches the end** (VERIFIED with v1 and v2; B raises nothing, so it can't stop).
+- **Visible afterwards:** only "Downloaded jupyturtle.py" (VERIFIED, A2-4).
+- **No red marks anywhere** with variant B: error outputs are text, so there is no (!) icon, no "Explain error" and no red
+  icon on a closed Answer row (VERIFIED on the A/B page, A2-6).
+- The table of contents lists one entry per run cell under its Answer ("Output of Question 8a"), once the Answer is open
+  or after Run all (A2-1); the titles name the question, so the entries are useful.
 
 #### Opening an Answer
-- **How:** click the arrow next to **Answer**, or the "N cells hidden" row.
-- **What appears:** the explanation and each run cell's output, once: printed lines, a red traceback, the turtle drawing (stored as a PNG; the live SVG after Run all), or a value like `12`. A run cell shows only its title ("Output" or "Output of part a") and "Show code". The 2026 wording is BELIEVED (A2-2).
-- **Before Run all,** the stored output, with no execution counter. **After Run all,** the live output.
-- **▶ on one run cell before setup:**
-  - wrapped cells show exactly their stored output;
-  - Q14 and Q17 show a plain NameError that doesn't reveal the hidden code;
-  - VERIFIED on the Colab-like kernel. The help note covers it.
-- **Errors look like a normal cell's:** no wrapper frame, the question's line numbers, and the code line with a caret for syntax errors (VERIFIED on 7.34 and 9.17).
-
-#### Write-code questions
-- **No change on the question side:** header, at least 2 examples, and the `# Your code here` cell.
-- **The Answer:** the same closed heading, containing the suggested solution(s) as text. It has no run cell: one would overwrite the student's own function during Run all.
+- Click the arrow next to **Answer** or the "N cells hidden" row.
+- The explanation, each run cell's output once (printed lines, a traceback as text, a turtle drawing, a value like `12`)
+  under its title and a **Show code** link (VERIFIED wording, A2-2); fix and "what if" blocks with their generated output;
+  values in the prose that were generated by running the code.
+- Before Run all, the stored output; after Run all, the live output.
+- **▶ on one run cell before setup:** plain run cells show their output again; an error run cell shows
+  `NameError: name 'run_code' is not defined` (B's setup dependency). The help note covers it ("It can differ from the
+  saved output if the setup has not run yet").
+- **Copying an Answer's code** into a new cell after Run all runs it (goal 11, check C4): it has its own imports and uses
+  the helpers the question defined.
 
 #### JupyterLab 4 / Notebook 7
-VERIFIED in JupyterLab 4.6.4 on v2:
-- **On opening:** 17 closed Answers and 0 outputs visible.
-- **Question code is highlighted.** The first v2 marker, ```` ```python run ````, gave 0 highlight spans; `~~~python` gives the same highlighting as ```` ```python ````.
-- **An expanded Answer** shows the stored outputs. Hidden code shows as a grey bar: `# @title Output of part a •••`.
-- **Run All** regenerates the outputs (headers read `Cell In[N]` on its IPython 9 kernel), and nothing becomes visible outside the Answers.
-- **Downloaded pages are untrusted, but stored drawings still show,** because they are stored as PNG (untrusted HTML/SVG would render blank).
-- **Shift+Enter onto a closed heading opens it** (D10).
+As v2 (VERIFIED in JupyterLab 4.6.4): Answers closed on opening; question code highlighted; hidden code shows as a grey bar
+with the title; Run All regenerates the outputs; stored drawings are PNG, so they show in untrusted notebooks; Shift+Enter
+onto a closed heading opens it (section 9, D10).
 
 #### The website (Jupyter Book; review pages are not executed there)
-- **One closed Answer dropdown per question,** holding the explanation and the stored outputs, with no code. There are no Answer or Credits entries in the contents, and no new warnings (VERIFIED, V7).
-- **Tracebacks are shortened for the site only:**
-  - no banner, dashed line, file paths or `<cell line: 0>`;
-  - syntax errors keep the code line, the caret and the message.
-- **Overflow:** Q14 no longer overflows its box at 1300 px. The one overflow left, Q8a's 73-character message, is identical on today's site.
-- **Dropdown text is identical to today's for 15 of 17 questions.**
-  - Q8 adds each error's code line and caret, and its summary is reworded.
-  - Q14 adds the traceback frames.
-- **Question code shows as highlighted code blocks** (D7).
+- One closed Answer dropdown per question with the explanation and the stored outputs, no code; no Answer or Credits
+  entries in the contents (V7).
+- Tracebacks shortened for the site only (no banner, file paths or `<cell line: 0>`; syntax errors keep the code line and
+  caret).
+- No marker, delimiter or helper cell is visible; the diff gate (E20) checks every converted page.
 
 #### Other viewers
-- **VS Code, GitHub's preview, nbviewer and classic Notebook 6:** Answers open, code visible including the title line, stored outputs shown (BELIEVED; GitHub and nbviewer were not checked).
-- **Anyone browsing the repo sees the answers,** including the stored outputs. Accepted (D11, D14). The Colab link stays the way students open the page.
+VS Code, GitHub's preview, nbviewer and classic Notebook 6 show the Answers open, the hidden code and the stored outputs.
+Anyone browsing the repo sees the answers (accepted, D11, D14).
 
 ---
 
 ### 2. Page layout, per kind of question
 
-#### 2.1 Page skeleton, in order
-1. **Title cell.** Same text, plus one sentence that works everywhere: "Each question has a suggested answer under **Answer**. Try the question first, then open the Answer."
-2. **`## Concepts covered`**: unchanged.
-3. **`## Questions` intro.**
-   - The paragraph about `run_code("""...""")` is deleted.
-   - "Run the next cell first: …" becomes a per-page sentence that is true in Colab and on the site (table in section 5).
-4. **The help note:** a managed markdown cell tagged `remove-cell`; `sync` writes it.
+#### 2.1 Page skeleton, in order (E15: written from one template by `sync`, except the author's text)
+1. **Title cell** (template): "NNb. Prof. Rosenthal's Review", the link to the chapter, and "Each question has a suggested
+   answer under **Answer**. Try the question first, then open the Answer."
+2. **`## Concepts covered`**: the author's two lists; values in them use markers (E12, E14).
+3. **`## Questions` intro**: the author's text plus the template's setup sentence (table in section 5).
+4. **The help note** (template; tagged `remove-cell`), approved as is (A2-7):
    > **Using this page in Colab or Jupyter**
    > - Each question's **Answer** is closed: click the arrow next to **Answer** to open it. For questions about what code displays or draws, the Answer also shows that code's output. The output is saved with the page, so it is there before you run anything. The code that produced it is hidden: click **Show code** in Colab, or the grey bar in Jupyter, to see it.
    > - To run code yourself, start with **Runtime → Run all** (Jupyter: **Run → Run All Cells**). It runs the page's setup and re-runs the code in every Answer. The Answers stay closed, and Run all does not stop at the errors that are answers. If Colab warns that the notebook was not authored by Google, choose **Run anyway**.
    > - Run your own code with **Ctrl+Enter**.
    > - When an Answer's code runs again, its output comes from your session. It can differ from the saved output if the setup has not run yet, or if your own code changed a name that the question uses.
    > - VS Code, GitHub's preview and nbviewer show the Answers open.
-5. **The page's own setup cell**, tagged `setup`. The old `run_code` is removed from it, and ch03's then-empty setup cell is deleted. **There is no managed `run_code` cell.**
-6. **The questions.**
-7. **`## Credits`** (unchanged): the heading is added to the existing credit cell.
-   - Without it, the last Answer would swallow the credits.
-   - The website build removes the heading line, so the site's contents list is unchanged (checked in V7).
+5. **The page's setup cell** (author), tagged `setup`, if the page needs one.
+6. **The helper cell** (template), tagged `setup`, code hidden, title "Helper for the Answers": defines `run_code` (2.2).
+7. **The questions.**
+8. **`## Credits`** (template); the website build removes the heading line.
 
 #### 2.2 The building blocks (exact format, for Claude)
 
-**Run block.** The question's code, written once: a markdown cell before the Answer, holding one fence. In a multi-part question it starts with a part label.
-~~~~
-**Part a**
+**Run block** (author): one `~~~python` fence in a markdown cell before the Answer; `**Part x**` label above it in
+multi-part questions. Tildes mean "the Answer runs this"; ```` ```python ```` blocks are examples or solutions. Not allowed
+inside: Colab form markup, a `%%` magic, a `~~~` line, or both `"""` and `'''`.
 
-~~~python
-x = 5
-if x = 5:
-    print('five')
-~~~
-~~~~
-- **Tildes mark a run block.** Examples, headers and solutions use ```` ```python ````.
-- **Highlighting.** The info string is plain `python`, so every renderer highlights it: VERIFIED in JupyterLab 4.6.4 and on the site, BELIEVED in Colab (A2-1).
-- **Not allowed inside a run block:** Colab form markup (`#@title`, `#@param`, `#@markdown`, anywhere on a line; Colab parses it), a `%%` cell magic, a `~~~` line, or code containing both `"""` and `'''`.
+**Answer heading:** `#### Answer` with `metadata.id` and `jp-MarkdownHeadingCollapsed: true`; its id is listed in
+`colab.collapsed_sections` (VERIFIED in Colab).
 
-**Answer heading:** unchanged (`metadata.id` plus `jp-MarkdownHeadingCollapsed`). `metadata.id` equals `id`, which is what Colab itself writes for nbformat 4.5 files.
-```json
-{"cell_type": "markdown", "id": "9c41e7b2",
- "metadata": {"id": "9c41e7b2", "jp-MarkdownHeadingCollapsed": true},
- "source": ["#### Answer"]}
+**Run cell** (generated): code hidden (`cellView: "form"`, `jupyter.source_hidden`), stored output.
+- **Title** (generated from the question number, goal 12): `# @title Output of Question 8a` for part a of Question 8,
+  `# @title Output of Question 1` for a one-part question. For a lettered question with parts, a comma keeps it readable:
+  `Output of Question 3b, part a`.
+- **Plain** (title line + the code) when the code, run alone, neither raises nor prints a line number.
+- **Wrapped** otherwise: `run_code(` + newline + `r"""` + the code + `""")`. The traceback is printed as text.
+
+**Helper cell** (generated, variant B; prototype `errors_A_vs_B.ipynb`, cell `ab0000h1`):
+```python
+# @title Helper for the Answers
+def run_code(code):
+    """Run code as a cell of its own; print an error's traceback as text instead of raising."""
+    import sys
+    from IPython import get_ipython
+    ip = get_ipython()
+    if ip is None:
+        exec(code, globals())
+        return
+    def to_stderr(etype, evalue, stb):
+        stb = getattr(stb, 'stb', stb)           # Colab passes a ColabTraceback for import errors
+        print(ip.InteractiveTB.stb2text(stb), file=sys.stderr)
+    ip._showtraceback = to_stderr
+    try:
+        ip.run_cell(code, store_history=False)
+    finally:
+        del ip._showtraceback
 ```
+- Must stay Pyright-clean when Colab joins the cells (re-verify in Step 3; v2's inline `run_cell` was).
+- The error name is read from stderr: the **last line matching the exception regex**, not the literal last line, because
+  Colab appends a NOTE after ModuleNotFoundError (section 4.4).
 
-**Run cell.** A code cell inside the Answer, generated by `sync`, with hidden code and stored output:
-```json
-{"cell_type": "code", "id": "846ec840", "execution_count": null,
- "metadata": {"cellView": "form", "jupyter": {"source_hidden": true}},
- "outputs": [{"output_type": "error", "ename": "SyntaxError", "evalue": "…", "traceback": ["…"]}],
- "source": ["# @title Output of part a\n", "__import__('IPython').get_ipython().run_cell(\n", "r\"\"\"\n",
-            "x = 5\n", "if x = 5:\n", "    print('five')\n", "\"\"\");"]}
-```
-- **Title.** `# @title Output`, or `# @title Output of part x` in multi-part questions.
-  - Colab shows it above the output; JupyterLab shows it in the hidden-code bar.
-  - It still names the output after its explanation has scrolled away.
-  - "Answer" or "Solution" were rejected: the cell shows Python's output, not a model answer.
-- **No `{ display-mode: "form" }` annotation.**
-  - `cellView: "form"` alone is what Colab's own hide-code command writes. Strong evidence: 332 of about 420 titled cells in a corpus of Colab-saved notebooks, and TF docs rely on it for GitHub links.
-  - The annotation read as jargon in JupyterLab's bar.
-  - A2-2 confirms the code opens hidden; the fallback is one constant.
-  - The parser accepts any `#\s*@title` line, and `sync` rewrites Colab's variants.
-- **Plain or wrapped.** Plain means the title line plus the code. A cell is wrapped exactly when the code, run alone, raises or prints a line number (`line N`, `<>:N:`, `Cell In[`).
-  - Why: the title is line 1 of a plain cell and shifts such numbers by one (VERIFIED: a failing doctest reports line 7 instead of 6).
-  - Inside `run_cell` the title has no effect.
-- **Why an inline `run_cell` and no `run_code` helper:**
-  - it is the mechanism Colab ran in v1 (`ip.run_cell`);
-  - there is no setup dependency: ▶ before setup shows the stored error again, not `NameError: run_code` with the wrapper;
-  - there is no managed cell to show or keep in step;
-  - it is Pyright-clean in basic and off modes. Bare `get_ipython()` is "not defined"; `from IPython import get_ipython` gives "run_cell is not a known attribute of None".
-- **The trailing `;`** hides the ExecutionResult. It also hides a value shown by the code's last line, so `sync` refuses a wrapped cell that would lose one (R5).
-- **Dropped with the helper:**
-  - the Stop fix: a KeyboardInterrupt inside a wrapped cell no longer stops Run all (wrapped cells take milliseconds);
-  - the plain-Python fallback: no tool runs run cells outside IPython.
-- **Quoting.**
-  - `r"""…"""`, or `r'''…'''` when the code contains `"""`.
-  - The opening quote goes on its own line; otherwise IPython 9 empties doctests.
-  - `sync` refuses code that contains both styles.
-  - `>>>` lines are allowed (VERIFIED on 7.34 and 9.17).
-- **Stored outputs, normalized:**
-  - `execution_count` is null;
-  - any `…ipykernel_<pid>/` path (any TMPDIR) becomes `/tmp/ipykernel_0/`;
-  - `Cell In[N]` becomes `Cell In[1]`;
-  - consecutive stream outputs are merged (ipykernel splits them by timing);
-  - ANSI colours are kept (stripped only on the site);
-  - a jupyturtle drawing is stored as a PNG shown at its SVG size, with output metadata `review_drawing: {svg_sha1, png_sha1}`. The PNG is re-rendered only when the SVG changes, and reused only if intact.
-  - **Limits:** 8000 characters / 60 lines of text, and no memory addresses.
+**Stored outputs, normalized** (as v2): null `execution_count`; `ipykernel_<pid>` paths → `ipykernel_0`; `Cell In[N]` →
+`Cell In[1]`; streams merged; ANSI kept (stripped on the site); drawings as PNG with `review_drawing` metadata; limits
+8000 characters / 60 lines; no memory addresses.
 
-**Error record.** The author's expected error, at the end of that part's explanation:
-```
-**Part a:** `=` assigns; comparing needs `==`:
+**Markers** (author; all invisible in Colab, VERIFIED 2026-10-09 T1/T2, and stripped on the site):
 
-<!-- error: SyntaxError -->
-```
-- It is invisible: VERIFIED in JupyterLab and on the site (prep strips it), BELIEVED in Colab.
-- `check` compares it with the real error (S10).
-- The converter writes it from the error line of the removed text block, so the prose stays as the author wrote it. v2's first build had added "…, so this is a `SyntaxError`", which echoed the traceback.
+| Form | Meaning |
+|---|---|
+| `` `EXPR` is <!--=-->`?` `` | sync writes the value of the code span just before the marker (E12) |
+| `` <!--= EXPR -->`?` `` | sync writes the value of EXPR (E12) |
+| `` <!--=error-->`?` `` | sync writes the error name this part's run cell raises (E8; replaces v2's `<!-- error: X -->` records) |
+| `<!--do: CODE -->` | hidden context run before the values that follow in the same cell (rare) |
+| `<!-- not a solution -->` | the next ```` ```python ```` block in a write-code Answer is not a full solution (E3) |
+| `<!-- header: f g -->` | the header block shows these functions (overrides the guess, E4) |
+| `<!-- derive: from=Q14 replace="OLD" with="NEW" -->` | sync writes the next block as Q14's code with one change (E9) |
 
-**Sync stamp** (notebook metadata):
-```json
-"yr_review": {"code_sha1": "…", "outputs_sha1": "…",
-              "stack": {"python": "3.12.3", "ipython": "7.34.0", "ipykernel": "6.17.1"}}
-```
-- `code_sha1` covers every code cell's source: setup, definition and run cells.
-- `outputs_sha1` covers every stored output.
-- Lint recomputes both and reports "code changed since the last sync" or "stored outputs differ from what sync wrote".
+- **Rule (Colab T1):** an inline marker (the first four) **never starts a line or a list item**: a line that begins with
+  `<!--` and has text after the comment renders as raw HTML, so its backticks show. A block marker (the last three) is
+  **alone on its line**. `check` enforces both.
+- In the Answer prose, `?` is what the author types; `sync` replaces it with the value and keeps it in step.
 
-**Notebook metadata:** `colab.collapsed_sections` (as before) and `yr_review`. `collapsed_sections` lists exactly the Answer heading ids, in page order; `sync` writes both.
-```json
-"metadata": {"colab": {"collapsed_sections": ["9c41e7b2", "…one per Answer…"]},
-             "kernelspec": {"display_name": "Python 3 (ipykernel)", "language": "python", "name": "python3"},
-             "language_info": {"name": "python"},
-             "yr_review": {"…": "the sync stamp above"}}
-```
+**Generated regions** (E17): `sync` writes generated text between `<!-- begin generated: KIND -->` and
+`<!-- end generated: KIND -->`, each alone on its line (invisible, VERIFIED T2). KIND is `header`, `example`, `imports`,
+`then-try`, `fix-output`. `check` reports a hand edit inside a region before `sync` would overwrite it.
 
-#### 2.3 Tiny examples
+**Sync stamp** (notebook metadata `yr_review`): `code_sha1` (every code cell), `outputs_sha1` (every stored output),
+`generated_sha1` (every generated region and filled value), and `stack` (python 3.13.x, ipython 7.34.0, ipykernel 6.17.1).
 
-**What is displayed** (one run block). A new run cell goes right after the Answer heading, output first. If the author moves it, `sync` keeps the new position.
+#### 2.3 Per kind of question (what the author types → what students see)
+
+**What is displayed / drawn / happens.** Author: prompt + run block + Answer prose. Students: the code; in the Answer, the
+real output under "Output of Question 1", then the prose with its values generated.
 ~~~~
 [md]   ### Question 1 (easy): what is displayed?
        Predict what this code displays, then open the Answer to check.
@@ -490,357 +469,266 @@ if x = 5:
        minutes = 135
        print(minutes // 60, minutes % 60)
        ~~~
-[md]   #### Answer                                      <- saved collapsed
-[code] # @title Output                                  <- generated; code hidden; stored output "2 15"
-       minutes = 135
-       print(minutes // 60, minutes % 60)
-[md]   135 minutes is 2 hours (`135 // 60`) and 15 minutes left over ...
+[md]   #### Answer                                   <- saved collapsed
+[code] # @title Output of Question 1                 <- generated; code hidden; stored "2 15"
+[md]   135 minutes is 2 hours (`135 // 60` is <!--=-->`2`) and ...
 ~~~~
 
-**Errors, several parts** (ch05 Q8; also ch02 Q9, Q10, Q14, ch03 Q10, ch04 Q14, Q15):
+**Errors, several parts** (ch05 Q8; also ch02 Q9, Q10, Q14, ch03 Q10, ch04 Q14, Q15). Each part's run cell is wrapped;
+its prose names the error with `<!--=error-->`:
 ~~~~
 [md]   **Part a** + ~~~python ... ~~~     (and Part b, Part c)
 [md]   #### Answer
-[md]   **Part a:** `=` assigns; comparing needs `==`:   <!-- error: SyntaxError -->
-[code] # @title Output of part a                         <- wrapped; stored traceback
-       __import__('IPython').get_ipython().run_cell(
-       r"""
-       x = 5
-       if x = 5:
-           print('five')
-       """);
-[md]   **Part b:** ...   <!-- error: SyntaxError -->
-[code] # @title Output of part b ...
-[md]   **Part c:** ...   <!-- error: IndentationError -->
-[code] # @title Output of part c ...
-[md]   Python finds each of these mistakes before it runs any of that part's code, so nothing is displayed and `x` is never assigned.   <- summary
+[md]   **Part a:** `=` assigns; comparing needs `==`, so this is a <!--=error-->`SyntaxError`:
+[code] # @title Output of Question 8a              <- run_code(r"""…"""); stored traceback as text
+[md]   **Part b:** ...
+[code] # @title Output of Question 8b ...
+[md]   Python finds each of these mistakes before it runs ...   <- summary
 ~~~~
+Placement rule as v2: one run cell per run block, right after its `**Part x:**` cell; a missing Part cell is created as
+`**Part x:** TODO` and check fails until it is written.
 
-**Placement rule** (`sync` applies it, lint checks it):
-- **One run block:** one run cell. A new one goes right after `#### Answer`; an existing one keeps its place.
-- **Two or more run blocks:**
-  - the run blocks are labelled `**Part a**`, `**Part b**`, …;
-  - the Answer has one `**Part x:**` cell per part, in order;
-  - run cell x goes right after its `**Part x:**` cell, and `sync` moves it there;
-  - a missing Part cell is created as `**Part x:** TODO`, and lint fails until it is written.
-- **Matching:** run cells are matched to run blocks by the part letter in their title. An orphan run cell is deleted.
-- **Summary cells:** markdown cells after the last run cell.
-- **Parts without an error** (ch02 Q9 a and e, ch04 Q14 c) are plain cells.
+**Write a function** (E2–E5, E19). Author types:
+~~~~
+[md]   ### Question 9 (medium): write a function
+       Write a function called `end_hour` that takes `start` and `duration` ...
+       <!-- begin generated: header -->  ...  <!-- end generated: header -->     <- sync
+       **Examples**
+       ```python
+       end_hour(9, 3)
+       ```
+       <!-- begin generated: example --> ```text 12``` <!-- end generated: example -->   <- sync
+[code] # Your code here
+[md]   #### Answer
+[md]   ```python
+       def end_hour(start, duration):
+           print((start + duration) % 24)
+       ```
+       <!-- begin generated: then-try --> Then try: `end_hour(9, 3)` <!-- end generated: then-try -->
+~~~~
+- **Example outputs** come from running the solution, then each example (E2). A drawing example gets a generated picture.
+- **Every** ```` ```python ```` block in the Answer is a solution and must reproduce every example of the functions it
+  defines (a block that redefines only `larger` is checked against `larger`'s examples), unless marked
+  `<!-- not a solution -->` (today only ch06 Q17's halfway version, whose own output is still generated) (E3).
+- **Imports**: sync writes, at the top of each block, the import lines for the names the block uses (E5), in a generated
+  region; the author never types them.
+- **No example calls, example inputs or provided helpers in Answer blocks** (goal 11, E5).
+- "Two correct ways to call it" blocks are example pairs; their outputs are generated the same way (E2).
+- No run cell in write-code Answers: it would overwrite the student's own function during Run all (D3).
 
-**Last value shown** (ch02 Q4 `price * 3`, ch03 Q9 `greet`): the plain run cell stores the value (VERIFIED in the dry run for ch03 Q9). **No text block is added to ch02 Q4.**
+**Write code without a function** (ch02 Q11, Q12, Q16, Q17). Example 1's inputs become a definition cell ("Run this cell to
+assign `hours`, `minutes` and `seconds`"); its output is generated; the Answer holds only the computation.
 
-**Wrong calls** (ch03 Q10, Q14; ch04 Q14, Q15; ch05 Q14; ch06 Q15):
-- the definition cell stays a visible code cell that displays nothing;
-- the call is a run block, and the Answer's run cell is wrapped;
-- ch05 Q14's prompt adds "(Try your fix in a new cell, so that the cell above keeps the original code.)".
+**Provided helpers** (E6, E7). A definition cell where the helper is first provided ("Run this cell to define `square` and
+`jump`."), typed once; later questions get a generated pointer ("uses `square` and `jump` from Question 11"). ch04: `square`
+and `jump` in Q11; `polygon` stays in Q14 with its docstring; `describe` stays in both Q5 and Q15 (check: identical).
+ch07: `run_doctests` where first used.
 
-**What is drawn** (ch04 Q2, Q6, Q7; ch05 Q17):
-- The Answer picture is the run cell's stored PNG, byte-identical to today's (VERIFIED: ch05 Q17 and ch04's three). The Answer has no `<img data-turtle>` of its own.
-- **Empty canvases** (ch04 Q14 a–c) are stored as Colab shows them: an empty canvas before the traceback. Recommended, not yet reviewed by Prof. Rosenthal (D18). Dropping them would be one rule in `normalize_outputs`, applied to stored and fresh outputs alike.
+**Fixes** (E9, E10). An Answer's fix block shows only the changed lines; sync runs it after the question's code (in the
+end-of-Run-all namespace) and writes its output below (or "(nothing is displayed)"). ch07 Q14, ch05 Q14 and ch05 Q10's
+second approach use a derive marker, so the full fixed code is shown but not retyped. A fix that uses a name a later question
+reassigns (ch02 Q4 `price`) keeps its own input line; a lint lists names assigned by more than one question.
 
-**Doctest** (ch07 Q14): one run block, wrapped because the output names a line (`File "__main__", line 9`), so the number matches the question's code. VERIFIED in the dry run: `sync` wrapped it, and the check passes.
+**"What if" variants** (E11, all of them, drawings included): a small ```` ```python ```` block in the Answer ("With `elif`
+only:" …, "`left(144)` instead:" …); sync writes its output or picture below it. Covers ch05 Q5, Q6, Q10, Q11, Q15,
+ch02 Q16 and the drawing claims ("draws a flipped star", "below the starting line").
 
-**Unchanged:**
-- **Write code:** no run cell.
-- **Refactor / generalize / simplify:** the given code is a ```` ```python ```` block, never run.
-- **Reading a file:** as "what is displayed".
+**Refactor / generalize** (ch03 Q12; ch04 Q18, Q19; ch06 Q12). The given code is a ```` ```python ```` block; check runs it
+and the solution and requires identical stdout (text) or identical SVG hashes (drawings).
 
-#### 2.4 Format rules (go in the README; enforced by `review.sh check` and `check_notebooks.py`)
-1. **Extent of a question:** from `### Question N (level): kind` to the next heading of level 1–3.
-2. **One Answer heading:** exactly one cell whose source is `#### Answer`.
-3. **No other headings inside a question:** no ATX, setext or HTML `<hN>` headings, checked outside fences.
-4. **Run blocks:**
-   - `~~~python` fences, only before the Answer, one per markdown cell;
-   - with 2 or more, `**Part x**` labels and the placement rule of 2.3;
-   - no form markup, `%%` lines or `~~~` lines inside;
-   - `~~~` fences nowhere else, and the old ```` ```python run ```` marker is rejected.
-5. **Code cells before the Answer:** only setup cells, definition cells (which parse, display nothing and raise nothing) and `# Your code here`.
-6. **Code cells inside an Answer:** only generated run cells: hidden code, canonical title, exactly the two metadata keys.
-7. **Output belongs in the run cell.** In an Answer of a question with run blocks, an output-like block is allowed only right after a ```` ```python ```` block in the same cell, with at most one short line between them (e.g. "That displays:"). Output-like means any non-python fence, indented code, `<pre>` or a data-turtle picture. A ```` ```text ```` block there must equal what that code prints.
-8. **Error names:**
-   - every error a run cell raises is named in its part's prose or in the summary, visibly or as `<!-- error: Name -->`;
-   - every error name in a part's prose is raised by that part;
-   - a record lists exactly the errors raised;
-   - summary names are raised by some part.
-9. **Stored outputs:**
-   - only on run cells;
-   - written by `sync` on the pinned stack, with a matching stamp;
-   - within the limits, with no memory addresses;
-   - drawings intact.
-10. **End and tags:** the page ends with `## Credits`. The only tags are `setup`, `no-signature`, and `remove-cell` on the help note.
-11. **Hands off.** Never edit run cells, stored outputs, the stamp or the help note by hand: edit the run block or the prose, then run `review.sh sync`. Never save a review page from Colab back to GitHub (Colab adds its own metadata and outputs); `sync` repairs such a page.
-12. **NameError answers stay true:** a name that a run cell's NameError reports may not be bound at module level by another code cell or by another question's run block. VERIFIED in the dry run: ch03 Q10a, ch04 Q7 and ch07 Q8 pass.
-13. **No `TODO` left in an Answer.**
+**Doctest** (ch07 Q14). One run block, wrapped because the output names a line; a doctest that prints a failure fails C4.
+
+**Reading a file**: as "what is displayed".
+
+**Values in prose** (E12, E13). Each "`X` is `V`" claim in Answers and Concepts gets a marker, claim by claim, with the
+rendered page unchanged as the gate. ch05's "about 3000" frames becomes ``about <!--= sys.getrecursionlimit() -->`1000` (the exact number depends on the environment)``
+ (Colab: 1000, VERIFIED). Claims that can't be generated (verdicts, traces,
+general rules) are covered by checks C8, C9, C11 or listed for a reread (4.4).
+
+#### 2.4 Format rules (README; enforced by `review.sh check` and `check_notebooks.py`)
+1. **Extent of a question:** from `### Question N (level): kind` to the next heading of level 1–3. **N** is digits with an
+   optional letter (`3b`), unique on the page.
+2. **Numbers are stable** (goal 12): check compares the page's question numbers with the last published version (`v3`) and
+   fails if a published number disappeared, was reused or changed, unless `--renumbered` (only after `review.sh renumber`).
+   A lettered question `Nb` may not exist while Question N has a "Part b".
+3. **One Answer heading** per question; no other headings inside a question.
+4. **Run blocks:** `~~~python`, only before the Answer, one per markdown cell, part labels with 2 or more.
+5. **Code cells before the Answer:** setup cells, the helper cell, definition cells (parse, display nothing, raise
+   nothing) and `# Your code here`.
+6. **Code cells inside an Answer:** only generated run cells (hidden code, canonical title, exactly the two metadata keys).
+7. **Output belongs to code:** in an Answer, a ```` ```text ```` block or picture appears only in a generated region after
+   the ```` ```python ```` block that produced it.
+8. **Error names:** every error a run cell raises is named by `<!--=error-->` in its part's prose or in the summary;
+   any other error name in prose must be one the part raises (C8).
+9. **Stored outputs:** only on run cells; written by `sync` on the pinned stack, with a matching stamp; within the limits;
+   drawings intact.
+10. **Markers:** only the forms in 2.2; inline markers never start a line; block markers alone on their line; no `?` left.
+11. **Generated regions:** only `sync` writes them; their content equals what `sync` would write.
+12. **Answer code (goal 11, C4):** every Answer ```` ```python ```` block runs in the end-of-Run-all namespace with the setup
+    cell's imported names removed; every solution reproduces the examples; a doctest prints nothing.
+13. **NameError answers stay true** (as v2, S18).
+14. **End and tags:** the page ends with `## Credits`; tags only `setup`, `no-signature`, and `remove-cell` on the help note.
+15. **Hands off:** never edit run cells, stored outputs, generated regions, filled values, the stamp, the helper cell or the
+    help note by hand; never save a page from Colab back to GitHub (`sync` repairs such a page).
+16. **No `TODO` left.**
 
 ---
 
-### 3. Don't Repeat Yourself: how the code stays in one place
+### 3. Don't Repeat Yourself: what is typed once, what is generated
 
-- **Single source.** The question's code is written once, in a `~~~python` run block. Outputs are never typed: `sync` generates them.
-- **`review.sh sync NB… [--accept] [--force]`:**
-  1. **Normalize** (static, stdlib; also `review_cells.py normalize`):
-     - reconcile run cells with run blocks (2.3): create, delete orphans, move multi-part cells;
-     - regenerate a run cell whose block changed, **and clear its outputs**;
-     - make titles and layout canonical, and set exactly the two metadata keys;
-     - write the help note, the heading metadata and `collapsed_sections`;
-     - drop the metadata Colab adds on save;
-     - clear the outputs of non-run cells.
-  2. **Reference run.** Every run cell holds only the question's code: what a student gets by pasting it into a new cell.
-     - Fresh kernel of the **pinned Colab-like stack**, `TMPDIR=/tmp`, tags ignored, `allow_errors`.
-     - A cell is wrapped exactly when its code raises or names a line.
-  3. **Stored run.** The page as it will be saved. Each run cell must show what it showed in the reference run (semantically, line numbers included); otherwise `sync` refuses.
-  4. **Refusals** (exit 2, nothing written):
-     - the kernel is not the pinned stack (`--force` writes anyway, and `check` then fails);
-     - an output is over the limits or contains a memory address;
-     - a run block has form markup, a cell magic, a `~~~` line or both quote styles.
-  5. **Snapshot acceptance.** A stored output that was not empty and changes is printed with a semantic and a byte diff, and is **not written** (exit 1) unless `--accept`. The README says: reread the Answer prose before accepting. New outputs are written and printed.
-  6. **Store** the normalized outputs and the stamp.
-  7. **A second `sync` changes nothing.** VERIFIED byte-identical, also with a venv rebuilt from the lock and with TMPDIR set elsewhere.
-- **`review.sh check NB` fails if `sync` would change anything.** Static part: the lint, including the stamp. Runtime part: a fresh run, byte-identical on the pinned stack.
-- **Rejected:**
-  - B (a string variable), C (reading the notebook at run time), a `%%run_question` magic, `# type: ignore`;
-  - a cell-tag marker: invisible to authors; kept as the fallback if Colab renders `~~~python` badly;
-  - the expected output kept in metadata: snapshot acceptance does that job visibly.
+| The author types (once) | `sync` generates |
+|---|---|
+| question code (run blocks) | run cells, their stored outputs, run-cell titles |
+| the error explanation, with `<!--=error-->` | the error name |
+| each helper, in one definition cell | "uses X from Question N" pointers |
+| the prompt, the example calls | the header block, every example output and picture |
+| the solutions (no imports, helpers or example calls) | each block's import lines, the "Then try:" line |
+| fixes (changed lines only) and "what if" blocks | their outputs and pictures; derived fixes |
+| each prose value as an expression | the value |
+| the question number (stable) | nothing (only `review.sh renumber`, between semesters) |
+| the Concepts and Answer prose | the page frame, the help note, the helper cell, the credits |
+
+**`review.sh sync NB… [--accept] [--force]`** (as v2, extended):
+1. **Normalize** (static, stdlib): reconcile run cells with run blocks; regenerate a changed run cell and clear its outputs;
+   canonical titles and metadata; template cells; `collapsed_sections`; drop Colab's metadata; clear other outputs.
+2. **Reference run** on the pinned stack (fresh kernel, `TMPDIR=/tmp`, `allow_errors`): each run cell's code alone; each
+   write-code example after each solution; each fix and variant after the question's code; each marker's expression.
+3. **Stored run:** the page as it will be saved must show the same outputs.
+4. **Refusals** (exit 2): wrong stack (`--force` writes, `check` then fails); over the limits or a memory address; a bad run
+   block; solutions that disagree; a marker that starts a line.
+5. **Snapshot acceptance:** a stored output, generated region or value that changes is shown as a diff and not written
+   unless `--accept` (reread the prose first). New ones are written and printed.
+6. **Store** outputs, regions, values and the stamp. **A second `sync` changes nothing.**
+
+**`review.sh check NB`** fails if `sync` would change anything (static lint plus a fresh run, byte-identical on the pinned
+stack), plus the rules in 2.4.
+
+**What still repeats, by design (checked):** code quoted in prose (C9) and parameter names in prompts (C11); the OLD token
+of a derive marker; example inputs quoted in a prompt; the `def` line in each full solution; ch04 `describe` in Q5 and Q15;
+a fix's input line under E10; `#### Answer` and the difficulty labels; Concepts entries that overlap a question (E14; a lint
+warns about shared code lines of 15+ characters).
+
+**Rejected:** design-2's `%%question` / `%answer` magics (Colab may underline errors before students predict; Answer cells
+overwrite the student's function during Run all; clicking before setup wipes the stored output); variant A for errors (red
+marks on closed Answers, A2-4).
 
 ---
 
 ### 4. Tool, README and skill changes
 
-#### 4.1 New `yr/tools/review_format.py`
-- **Stdlib only, Python 3.12.** It works on raw JSON dicts (for `check_notebooks.py`, CI and prep) and on nbformat nodes.
-  - Start from the prototype `review_v2.py`, whose parse and render code already uses dict access.
-  - The static part of `check_v2.py` still uses attribute access and must be moved over.
-- **Constants:** `ANSWER_HEADING`, `RUN_FENCE`, `PLACEHOLDER`, `CREDITS_HEADING`, `HELP_CELL`, `RUN_CELL_METADATA`, `WRAP_CALL`, `PINNED_STACK`, the output limits and `STAMP_KEY`.
-- **Helpers:**
-  - `parse_page`, `heading_level`;
-  - `render_run_cell` and `parse_run_cell` (any `#\s*@title` first line), `quote`, `run_block_problems`;
-  - `normalize_outputs`, `semantic`, `canon_outputs`, `needs_wrap`, `output_problems`, `drawing_problems`;
-  - `make_stamp`, `stamp_problems`;
-  - the site renderer `render_outputs` and `site_traceback`, shared with prep.
-- **`normalize(nb)`, `lint(nb)`** (rules 2.4 = S1–S20) and **`page_format(nb)`** (`new`, `old` or `mixed`, which is an error).
+#### 4.1 `yr/tools/review_format.py` (new, stdlib)
+As v2 (start from `review_v2.py`), plus: marker parsing and filling (`markers`, `fill_values`), generated regions
+(`regions`, `write_region`), the helper-cell text, the run-cell title from the question number, `stable_numbers` (compare
+with `git show v3:PATH`), and lint rules for 2.4.
 
-#### 4.2 `yr/tools/review_cells.py` (stays stdlib)
-- **Spec kinds:**
-  - `%%% markdown`;
-  - **`%%% run`** or **`%%% run a`**: plain code, which becomes a run-block cell. With a letter, the `**Part a**` label line is written above the fence;
-  - `%%% code [tags]` (definition cells only);
-  - `%%% placeholder`;
-  - **`%%% answer`**: the `#### Answer` heading cell, plus one explanation cell if the body is not empty;
-  - **`%%% part a`**: an Answer cell starting with `**Part a:**` (added if missing);
-  - a `%%% markdown` after the Answer's parts becomes a summary cell.
-  - Headings in Answer bodies are rejected.
-- **`add` / `renumber`:** call `normalize`, then print "run `review.sh sync NB`, then `review.sh check NB`".
-- **New `normalize NB…`:** the static repair, e.g. after a page was saved in Colab.
-- **`new` skeleton:** title sentence, help note (written by `sync`), setup cell, `## Credits`, and `"colab": {"collapsed_sections": []}`.
-- **Docstring:** full spec examples, including a multi-part error question with a summary.
+#### 4.2 `yr/tools/review_cells.py`
+- **Done 2026-10-09:** lettered numbers (`3b`) in headings and `--before`; `renumber` documented as between-semesters only.
+- **Spec kinds** (new format): `%%% markdown`, `%%% run [a]`, `%%% code [tags]` (definition cells), `%%% placeholder`,
+  `%%% answer`, `%%% part a`; write-code examples are written without outputs.
+- **`add`** never renumbers; it suggests the next free number (`3b` between 3 and 4).
+- **`renumber`** also rewrites the "Question N" pointers and run-cell titles, and records the renumbering for check's
+  stable-number rule.
+- **`normalize NB…`**: the static repair after a page was saved in Colab.
 
-#### 4.3 New `yr/tools/sync_review.py`, run as `review.sh sync NB…`
-Implements section 3 (prototype: `sync_v2.py`). It needs nbclient and cairosvg (the book venv) and the pinned kernel.
+#### 4.3 `yr/tools/sync_review.py` (new), run as `review.sh sync NB…`
+Implements section 3 (prototype `sync_v2.py` plus design-3's `proto_writecode.py` and design-1's `gen_static.py` /
+`inline_values.py`, all on `yr-runall-research` under `yr/plans/research/`). Needs nbclient, cairosvg and the pinned kernel.
 
-**New `yr/tools/ensure_colab_venv.sh` + `yr/tools/colablike.lock`:**
-- runs `uv venv -p 3.12`, then `uv pip sync` of the lock, which pins every package: ipython 7.34.0, ipykernel 6.17.1, jupyter_client 7.4.9, pygments, traitlets, pyzmq, …;
-- registers the kernel `colablike`;
-- VERIFIED: a venv rebuilt from the lock gives byte-identical stored outputs;
-- the Python patch version is not pinned; the stamp records it, and a change would show as a byte diff that needs `--accept`.
+**`yr/tools/ensure_colab_venv.sh` + `colablike.lock`:** `uv venv -p 3.13`, `uv pip sync` of the lock (ipython 7.34.0,
+ipykernel 6.17.1, jupyter_client, pygments, traitlets, pyzmq, …), kernel `colablike`. The lock moves from 3.12 to 3.13
+(VERIFIED: Colab is Python 3.13.16, 2026-10-09). Re-check that IPython 7.34 runs on 3.13 locally, as it does on Colab.
 
 #### 4.4 `yr/tools/check_review.py` (new-format path)
-**How it runs.**
-- Static part: `review_format.lint`.
-- Runtime part: two executions on a fresh kernel, with `allow_errors`, tags ignored and `TMPDIR=/tmp`. `on_cell_executed` records reply statuses.
-  - the page as stored;
-  - the reference page, where each run cell holds only the question's code.
-
-**What counts as an error line:**
-- error names come from `error` outputs only (variant A; `review_v2.errors_of`, used by `needs_wrap` and S10);
-- if D15 picks B, add stderr parsing: the **last line matching the exception regex**, not the literal last line, because Colab appends a NOTE after ModuleNotFoundError (VERIFIED in simulation with v1's check);
-- then add a stderr mutation and a NOTE mutation to the self-test, so that switching to variant B can't silently disable the checks.
-
-**Rules** (prototype `check_v2.py`; none of today's checks is weakened):
-- **S1–S20:** rules 2.4, including S14 (the stamp), S9 (output belongs in the run cell), S10 (error records), S17 (drawing integrity) and S18 (NameError names).
-- **R0 pinned stack.** On any other stack the byte check is impossible: the run is reported WEAK and fails unless `--semantic` is given.
-- **R1** Run all reaches the end.
-- **R2** Nothing is visible outside collapsed Answers except the setup cell's stdout.
-- **R3 Stored output equals a fresh run:**
-  - byte-identical after normalization on the pinned stack (drawings re-rendered unless the stored PNG is intact);
-  - semantically equal elsewhere.
-- **R4** Wrapped exactly when the fresh run raises or names a line; definition cells display nothing.
-- **R5** The title line and the wrapper are invisible: the reference run shows the same output.
-- **S13** Answer ```` ```python ```` blocks run on their own, and a ```` ```text ```` block after one equals its output.
-
-**Kernel choice:** `--kernel colablike` by default. A second stack runs with `--kernel X --semantic`. This replaces `REVIEW_PYTHON`.
-
-**Today's rule 5 is retired:** outputs are generated, not typed. The author's intent is kept by:
-- the error records (S10);
-- snapshot acceptance (`sync`);
-- the conversion gate (section 5);
-- S13, for code in the prose.
+- Static: `review_format.lint`. Runtime: the page as stored and the reference page, on a fresh kernel.
+- **Error lines (variant B):** read from stderr: the last line matching the exception regex (Colab appends a NOTE after
+  ModuleNotFoundError). The self-test gets a stderr mutation and a NOTE mutation.
+- **Rules:** S1–S20 as v2, adapted to 2.4; R0 pinned stack; R1 Run all reaches the end; R2 nothing visible outside closed
+  Answers but the setup cell's stdout; R3 stored = fresh (byte-identical on the pinned stack); R4 wrapped exactly when the
+  code raises or names a line, and definition cells display nothing; R5 title and wrapper invisible.
+- **New checks:**
+  - **C4** (replaces S13; goal 11): each Answer ```` ```python ```` block runs after Run all with the setup cell's imported
+    names removed (a missing import fails); every solution reproduces the examples (E3); a doctest that prints fails;
+    a block followed by a generated output must print exactly it.
+  - **C8** verdicts and "nothing is displayed" against the stored outputs; **C9** each code span in an explanation appears
+    in the question code or a solution; **C11** names in the prompt appear in the header.
+  - **Stable numbers** (2.4 rule 2) and the `3b` / Part b clash.
+  - Generated regions and filled values equal what `sync` writes; markers well formed (rule 10).
+  - "Same output before and after" for refactor questions (text: stdout; drawings: SVG hash).
+  - Name-reuse lint (E10); Concepts overlap lint (E14).
+- **Prototype first:** C4 on the 11 fix blocks (ch02 Q4, Q15; ch05 Q7, Q10, Q14; ch06 Q5, Q8, Q15; ch07 Q8, Q12, Q14).
 
 #### 4.5 `yr/tools/turtle_images.py`
-- **What it runs:** it uses `parse_page`. Per question it runs:
-  1. the setup cells;
-  2. the Answer's ```` ```python ```` blocks;
-  3. the definition cells and run blocks, in page order.
-  - It **never runs run cells**.
-- **Example pictures only.** `turtle_images` draws the pictures in write-code questions and Answer examples.
-  - Each `<img data-turtle>` is drawn from the nearest ```` ```python ```` block above it in the same cell.
-  - With no such block it reports an error, because a picture of a run block is the run cell's stored output (S9).
-- **Two separate hashes:** `data-svg-sha1` on img tags (examples) and the `review_drawing` output metadata (run cells).
-- **SVG hash:** it writes `data-svg-sha1` and re-renders the PNG only when the hash changes.
-- **New `--check`:** compares hashes, writes nothing, and exits 1 on any difference.
-- **Hardening:** if an example picture's code raises, it exits 1 without writing anything. Today's tool silently rewrote 19 ch04 pictures with partial drawings on the new layout (VERIFIED).
+As v2 (SVG hash, `--check`, hardening), plus: example pictures in write-code questions and "what if" pictures are
+generated regions written by `sync`.
 
 #### 4.6 `jb/prep_notebooks.py` (`process_review`)
-1. Drop `# Your code here` cells (as now).
-2. `raw_pictures` and `details_to_dropdown`, as now. The concept lists stay `toggle-shown` dropdowns, and old-format pages use the same path.
-3. **`answer_sections`:** each `#### Answer` section becomes one `:::{admonition} Answer` / `:class: dropdown` cell, with no code. It holds:
-   - the markdown cells, without the `<!-- error: -->` records;
-   - each run cell's **stored outputs**, rendered by `review_format.render_outputs`:
-     - text and tracebacks in ```` ```text ```` blocks without ANSI, tracebacks shortened by `site_traceback`;
-     - PNG drawings as an `<img>` at display size, inside a raw-HTML div.
-4. **New:** remove the `## Credits` line from the credit cell.
-5. `process_cell` (as now). Never tag run cells `solution`: prep would blank them.
-6. **Guard.** Stop the build if:
-   - a new-format page's stamp does not match;
-   - the number of Answer dropdowns ≠ the number of questions;
-   - a `#### Answer` survives;
-   - **any** cell sits between an Answer dropdown and the next question, section or credits;
-   - a code cell inside an Answer is not a run cell;
-   - an output exceeds the limits;
-   - any other code cell has outputs.
-
-   The concept-list dropdowns ("Python Syntax and Semantics", …) are not counted. Without the guard, new pages with old tools publish every answer openly with zero warnings (VERIFIED risk).
-
-Old-format pages: prep output is byte-identical with old and new tools (VERIFIED for ch02, ch03, ch04, ch06, ch07).
-
-The help note is removed by myst-nb's standard `remove-cell` tag; V7 checks this.
+As v2 (Answer dropdowns with stored outputs, shortened tracebacks, Credits heading removed, guard), plus: strip every marker
+and delimiter (values stay), drop the helper cell, render definition cells as code. **Diff gate (E20):** build the site
+before and after converting a page and compare the rendered review page; only intended changes may appear.
+`verify_site.py` (prototype, `v2-workflow/files/scripts/`) joins the tools and checks that no `<!--`, `@title`, `run_code`
+or `ipykernel_[1-9]` reaches the HTML.
 
 #### 4.7 Other files
-- **`check_notebooks.py`** (`.claude/skills/check-notebooks/`):
-  - for `yr/*.ipynb`, call `review_format.lint(nb)`;
-  - allow outputs **only** on yr/ run cells, with `execution_count` null, output types stream / error / display_data / execute_result, no `transient`, and within the limits;
-  - chapters keep "no stored outputs";
-  - today it reports 13 "has stored outputs" on the v2 page, and nothing else (VERIFIED).
-- **`.claude/skills/check-notebooks/run_notebooks.sh`:** skip `yr/` pages and point to `review.sh check`. Its tag logic (line 62) would report the caught errors as failures (VERIFIED in simulation).
-- **`verify_live.py`** (`.claude/skills/yrpublish/`), per yr page:
-  - Answer dropdowns == questions, and none starts open;
-  - each run-block Answer has a `pre` or an `img`;
-  - no `@title`, `display-mode`, `run_cell`, `ipykernel_[1-9]` or `<!-- error`;
-  - no h4, and no Answer or Credits contents entries.
-- **`.claude/skills/yrpublish/SKILL.md` pre-flight:** add `yr/tools/review.sh selftest`, next to `review.sh check`.
-- **`.claude/skills/build-book/SKILL.md`, lines 25–31** (how prep handles yr/): mention `answer_sections` and the guard.
-- **`yr/tools/review.sh`:**
-  - new `sync` and `selftest` cases; `images` stays as an alias for the picture step;
-  - **ROOT fallback** for copies without `.git`. It walks up to `jb/_config.yml`, so it works at any depth (`yr/tools/` is 2 levels down, `.claude/skills/X/` is 3):
-    `ROOT="$(git -C "$(dirname "$0")" rev-parse --show-toplevel 2>/dev/null)" || ROOT="$(cd "$(dirname "$0")" && while [ ! -f jb/_config.yml ] && [ "$PWD" != / ]; do cd ..; done; pwd)"`
-  - The same line goes in `build_book.sh` and `run_notebooks.sh` (BELIEVED; tested in Step 3).
-- **`.github/workflows/deploy-book.yml`:** add `python3 .claude/skills/check-notebooks/check_notebooks.py` before the build. It is static, fast, and passes on today's 48 notebooks (VERIFIED).
-- **New `yr/tools/selftest_review.py`, run as `review.sh selftest`.**
-  - **The fixture:** `yr/tools/selftest/fixture_review.ipynb`, about 10 questions covering every kind, including ch04 Q14's empty-canvas case and a multi-part question with a summary. It is outside `yr/*.ipynb`, so it never reaches the site.
-  - **The test:** each mutation is applied to a copy and must make `check` fail with the expected message; the unmutated fixture must pass.
-  - **Self-test.** The prototype has 49 mutations and 9 scenarios; all pass.
-    - **Stale or edited outputs:**
-      - a block edited (S4); a block edited, then statically normalized (S14);
-      - an output edited (S14); an output edited and restamped (R3); outputs cleared (S14);
-      - a wrong stack in the stamp (S14); never synced (S14);
-      - a corrupt PNG, a wrong PNG size (S17).
-    - **Format:**
-      - ATX, setext and HTML headings (S2); part labels (S3);
-      - swapped run cells, a moved summary (S6);
-      - code not hidden, a Colab-rewritten title, Colab metadata (S5);
-      - the old marker, a stray `~~~` (S19); form markup or `%%` in a run block (S16);
-      - code before the Answer (S7); tags, credits (S12);
-      - output on the setup cell, an execution_count (S8); a TODO (S20).
-    - **S9:** a duplicate text block, a plain fence, a contradicting block, an ```` ```output ```` fence, an indented block, an error block, an error line in a part, a duplicate picture.
-    - **Errors:**
-      - a record contradicting a part that no longer raises, a wrong name, a missing record, a wrong summary name (S10);
-      - wrapped but not raising, a line number in a plain cell (S11);
-      - a plain raising cell (R1); a definition cell that prints (R4);
-      - a NameError name bound elsewhere (S18); a wrong text block after an Answer example (S13).
-    - **Scenarios:**
-      - an unaccepted change is refused and the file is left unchanged;
-      - static normalize repairs a Colab-saved page;
-      - new questions: placement, a split stream merged, a doctest wrapped and passing on both stacks;
-      - a part added, then removed;
-      - refusals: a lost value, a memory address, the wrong stack;
-      - TMPDIR paths normalized.
-    - **The fixture should add:** ch02 Q4's last value, stdout followed by an error, an empty canvas and a NameError answer.
+As v2: `check_notebooks.py` (lint yr/ pages; outputs only on run cells), `run_notebooks.sh` (skip yr/), `verify_live.py`
+(dropdowns, no `@title`, no `<!--`, no `run_code`), the yrpublish pre-flight (`review.sh selftest`), `build-book` SKILL,
+`review.sh` (`sync`, `renumber`, `selftest`, ROOT fallback), CI lint step, and `selftest_review.py` with a fixture that
+covers every kind in 2.3 (including variant B errors, write-code examples, a fix, a "what if" drawing, markers and a lettered
+question).
 
-#### 4.8 README, guide for people, skills (goals 7 and 8)
-- **`yr/README.md`:**
-  - **New section near the top, "Adding a question: a guide for people"** (goal 8). One short recipe per kind: what is displayed, what is drawn, an error answer, several parts (with a summary), wrong calls, write code, refactor, doctest. Each recipe gives:
-    - the exact text to type;
-    - the commands `review.sh sync`, `review.sh check`, `check_notebooks.py`;
-    - "or ask Claude: *add a question to chapter N's review page*".
-
-    It also covers "If you edit a page in Colab or Jupyter": download it, then run `review_cells.py normalize` or `review.sh sync`.
-  - **Rewrite these sections:**
-    - "Layout of a page", "Answers", "Cell conventions": replace the `<details>`, `raises-exception` and "Errors an editor can see" sections;
-    - "Turtle pictures" (SVG hash);
-    - "Tools" (`sync`, `normalize`, `selftest`, `--check`, `--kernel` / `--semantic`, and how to make the Colab-like venv with `ensure_colab_venv.sh`);
-    - the `review.sh check` list;
-    - "How the build handles yr/".
-  - **The file tree at the top:** add `review_format.py`, `sync_review.py`, `selftest_review.py`, `selftest/`, `ensure_colab_venv.sh`, `colablike.lock` and the temporary `legacy` module.
-- **`.claude/skills/yr-review-questions/SKILL.md`** (goal 7):
-  - **Rules:** question code goes in `%%% run` blocks; one way per kind (a table); never write run cells or `run_code` by hand; no headings in Answers; no `raises-exception`.
-  - **Spec examples:** an error question and a multi-part question with a summary.
-  - **Workflow:** add → `review.sh sync` → `review.sh check` → `check_notebooks.py` → `build_book.sh`.
-- **`.claude/skills/yr-review-page/SKILL.md`:** the new skeleton and verification steps.
-- **`.claude/skills/notebook-conventions/SKILL.md`, line ~86:** point to the README's Answer sections.
-- **`CLAUDE.md`:**
-  - update "Where things are": the review tools and `review.sh selftest`;
-  - at the end of the rollout, delete "Pending work".
+#### 4.8 README, guide for people, skills (goals 7 and 8; keep in step with every change)
+- **Rule:** every design decision or tool change updates `yr/README.md` and the two skills **in the same change**
+  (Prof. Rosenthal, 2026-10-09). Rules that already apply to today's pages go in at once (done: stable numbers); rules for
+  the new format go in with the tools that implement them (Step 3), so the skills never describe tools that don't exist.
+- **`yr/README.md`:** the guide for people near the top (one recipe per kind of 2.3: what to type, `review.sh sync`,
+  `review.sh check`, or "ask Claude"), the marker table, generated regions, stable numbers and `renumber`, "if you edit a
+  page in Colab", the tool list.
+- **`yr-review-questions` SKILL:** what the author types per kind (2.3), the marker rules (inline never starts a line),
+  never write run cells, generated regions, imports or example outputs by hand; numbers stay fixed (`3b`); workflow
+  add → `review.sh sync` → `review.sh check` → `check_notebooks.py` → `build_book.sh`; C4 explained.
+- **`yr-review-page` SKILL:** the template skeleton (2.1), the helper cell, the new verification steps.
+- **`notebook-conventions` SKILL:** point to the README's Answer sections. **`CLAUDE.md`:** tools in "Where things are";
+  delete "Pending work" at the end.
 - **No new skill** (D12).
-- **The plan file `yr/plans/runall-collapsible-answers.md`:**
-  - **Step 0** writes this plan into it, replacing "Draft plan". It also updates the Status line and to-do list and ticks item 1, as its own to-do order asks.
-  - **Step 7** marks it done.
 
 ---
 
 ### 5. Converting the six pages
 
-**The script.** A one-off converter: prototype v2's `convert_v2.py`, with the gate `verify_removed.py`. Both are saved on `yr-runall-research` under `yr/plans/research/v2-workflow/files/scripts/`. They are not committed to v3 (D13). They replace v1's `convert.py` and `plan-maint/conv3.py`. For each page:
-1. **Question code cells.** Every question code cell that isn't `# Your code here` and isn't definition-only becomes a `~~~python` run-block markdown cell **with the same id**.
-   - "Definition-only" means: by `ast`, only def/class/import/assignment, no output in an executed copy, and not tagged `raises-exception`. It finds exactly the 6 definition cells (VERIFIED).
-   - The `run_code("""…""")` wrapper is removed with `ast`.
-   - A trailing `**Part x**` line in the cell above, or a `**Part x**` cell, is folded into the run-block cell.
-2. **Answers** (`convert_v2.py`; the gate is `verify_removed.py`):
-   - The `<details>` Answer becomes `#### Answer` (keeping the old id) plus explanation cells, split at `**Part x:**` and at the listed summary starts. The tails were read (VERIFIED):
+**The script.** The one-off converter (`convert_v2.py` + gate `verify_removed.py`, on `yr-runall-research`), extended for
+v3. Not committed to v3 (D13). Per page:
+1. **Question code cells → run blocks** (as v2; same ids; `run_code` wrappers removed with `ast`; part labels folded in).
+2. **Answers** (as v2): `<details>` → `#### Answer` + explanation, part and summary cells (split points table below);
+   every expected-output block of a part is removed and its run cell goes there; each removed error line becomes the
+   prose's `<!--=error-->` marker on the error name it already names, or a short added clause where it names none.
+3. **Write-code questions:** the typed example outputs become generated regions; gate: each generated output equals the
+   typed one (86 of 86 already do, VERIFIED by the audit). Header blocks become generated (29 of 30 identical; one needs
+   `<!-- header: … -->`). Answer blocks are trimmed: example calls, inputs and provided helpers removed; imports become
+   generated; gate: C4 passes.
+4. **Helpers:** ch04 `square`/`jump` → a definition cell in Q11; `polygon` stays in Q14; ch07 `run_doctests` at first use;
+   pointers generated.
+5. **Fixes and "what if" claims:** fix blocks trimmed to the changed lines (derive markers for ch07 Q14, ch05 Q14, ch05 Q10
+   approach 2); "what if" claims become variant blocks (E11); their outputs generated.
+6. **Prose values:** markers added claim by claim (only 86 of 275 are found automatically); gate: the rendered page is
+   unchanged except where a value was wrong.
+7. **Page-level:** template cells (title, help note, helper cell, credits); remove old `run_code` definitions and all
+   `raises-exception` tags; ch03's setup cell goes; the stale "defines `run_code`" intro sentences are replaced (table below).
+8. **`review.sh sync`**, then all gates, `review.sh check`, the site diff (E20).
 
-     | Question | The summary starts with |
-     |---|---|
-     | ch02 Q10 | "All three are a `TypeError`." |
-     | ch02 Q14 | "A syntax error (here, a space in a name)…" |
-     | ch04 Q14 | "In all three parts the caller broke a precondition…" |
-     | ch04 Q15 | "Some correct calls: …" |
-     | ch05 Q8 | "All three are found before the cell runs…" (reworded below) |
+**Question numbers are kept as they are** (goal 12).
 
-     - ch02 Q9's last paragraph is about part e and stays in the Part e cell. ch04 Q15's "(Python versions before 3.13 …)" stays in the Part c cell. ch03 Q10 has no summary.
-   - **Every** expected-output block of a part is removed: text blocks, and the Answer picture of a run block.
-     - The run cell goes where the first removed block was.
-     - Each removed error line becomes an `<!-- error: Name -->` record.
-   - **Conversion gate** (`verify_removed.py`), per part:
-     - the removed text blocks equal stdout plus displayed values, then the error lines (substring match);
-     - trailing spaces are ignored;
-     - a removed picture is byte-identical to the stored PNG.
-3. **Page-level changes:**
-   - remove the old `run_code` definitions (ch02–ch05, ch07);
-   - delete ch03's then-empty setup cell;
-   - remove all `raises-exception` tags;
-   - add `## Credits`.
-4. **`review.sh sync`** writes the run cells (plain or wrapped), their stored outputs, the help note, the heading metadata and the stamp. Then the conversion gate of step 2 runs. `review.sh images` adds `data-svg-sha1` to the 19 example pictures (all in ch04); their PNGs must come out byte-identical (a conversion gate here). Counts: see the dry run below.
+**Answer split points** (VERIFIED in v2): ch02 Q10 "All three are a `TypeError`."; ch02 Q14 "A syntax error (here, a space
+in a name)…"; ch04 Q14 "In all three parts the caller broke a precondition…"; ch04 Q15 "Some correct calls: …"; ch05 Q8
+"All three are found before the cell runs…" (reworded below). ch02 Q9's last paragraph stays in Part e; ch04 Q15's
+"(Python versions before 3.13 …)" stays in Part c (true: Colab is 3.13 and shows the suggestion); ch03 Q10 has no summary.
 
-**Dry run here on all six pages: mechanical conversion only, VERIFIED.**
-- Convert, sync, the gate and the full check pass on all six pages: 86 removed blocks, and 4 pictures byte-identical.
-- One expected difference: ch04 Q15c's block was written on Python 3.13 and ends "Did you mean 'sides'?". Colab's Python 3.12 does not add that hint. The stored output shows what Colab shows, and the prose already explains the version difference. Needs Prof. Rosenthal's OK (D17).
-- **Wrapping:** 25 wrapped run cells, the 24 raising cells plus ch07 Q14 (its doctest names a line). This replaces the earlier count of 24.
-
-**Wording edits.** Each must match exactly once; any that don't are printed. Afterwards, grep **both question and Answer markdown** for `\bcells?\b`, `run (it|this)` and `run_code`, and review each hit. "Run this cell to define …" stays, since it is still true. ch02 Q4's Answer line "In a notebook cell, only the value of the *last* expression is displayed" stays too.
+**Wording edits** (each must match exactly once; then grep question and Answer markdown for `\bcells?\b`, `run (it|this)`
+and `run_code`):
 
 | Page / question | Old | New |
 |---|---|---|
-| ch02–ch05, ch07 intro | "Some questions show their code inside `run_code("""...""")`. … before you have made your prediction." | (deleted) |
+| ch02–ch05, ch07 intro | "Some questions show their code inside `run_code("""...""")`. …" | (deleted) |
 | ch02 intro | "Run the next cell first: it imports `math` and defines `run_code`." | "The setup cell below imports `math`." |
-| ch03 intro | "Run the next cell first: it defines `run_code`." | (deleted; no page setup cell) |
+| ch03 intro | "Run the next cell first: it defines `run_code`." | (deleted) |
 | ch04 intro | "Run the next cell first: it downloads `jupyturtle`, imports the functions the questions use, and defines `run_code`." | "The setup cell below downloads `jupyturtle` and imports the functions the questions use." |
 | ch05 intro | "Run the next cell first: it downloads `jupyturtle`, imports those functions, and defines `run_code`." | "The setup cell below downloads `jupyturtle` and imports those functions." |
 | ch06 intro | "Run the next cell first: it imports `math`." | "The setup cell below imports `math`." |
@@ -856,22 +744,18 @@ The help note is removed by myst-nb's standard `remove-cell` tag; V7 checks this
 | ch05 Q8 | "Each cell has one mistake." | "Each part has one mistake." |
 | ch05 Q8 Answer | "All three are found before the cell runs, so nothing is displayed or assigned." | "Python finds each of these mistakes before it runs any of that part's code, so nothing is displayed and `x` is never assigned." |
 | ch05 Q14 | "… How would you fix the function?" | "… How would you fix the function? (Try your fix in a new cell, so that the cell above keeps the original code.)" |
+| ch05 Concepts | "about 3000" frames | ``about <!--= sys.getrecursionlimit() -->`1000` (the exact number depends on the environment)`` (E13) |
 | ch07 Q15 | "(… then run it …)" | "(… then open the Answer to see the number …)" |
 
-- No error-name prose edits are needed, because the records carry the names.
-- Still to reread by hand: prose that leads into a removed block (ch02 Q14a, ch03 Q14).
+Also fix what the audit found in v2's dry run (final.md section 3): dangling lead-ins where a text block was removed (ch03
+Q10a, Q14; ch04 Q2, Q7, Q14, Q15; ch07 Q14), ch02 Q10's run cells relying on the setup cell's `import math` (each run
+block carries its own import), and unused imports (generated imports remove them). Delete ch04's repeated jupyturtle
+paragraph in the Questions intro and the facts listed twice in ch02 Concepts (E14).
 
-The new intro sentences are true both in Colab (the help note sits between the intro and the setup cell) and on the site (the setup cell is shown, the help note is hidden). The instruction to run first moves into the help note. Optionally, ch02 Q14a's Answer can mention the NOTE that Colab adds to ModuleNotFoundError.
+**Order:** ch05 first (pilot), then ch02, ch03, ch06, ch07, and ch04 last (most helpers and pictures).
 
-**Order.**
-1. **ch05 first, as the pilot:** it has syntax errors, a RecursionError, a turtle tree and write-code questions.
-2. **Then ch02, ch03, ch06 and ch07.**
-3. **ch04 last.** It has 22 pictures, Q7's "assume restarted" premise, Q14's empty canvases, Q15's version-dependent message and Q18's `jump`.
-
-**Cell ids.** Every cell that stays keeps its id.
-- New: run cells, the help note, and the explanation, Part and summary cells split from the old `<details>`.
-- Answer headings keep the old `<details>` id.
-- Two Part-label cells are folded into their run blocks (V10).
+**Cell ids:** every cell that stays keeps its id; new: run cells, template cells, split explanation cells, definition
+cells.
 
 ---
 
@@ -1124,10 +1008,30 @@ Your plan file's to-do list says "convert chapter 5 first and publish it". So fo
 
 ### 9. Decisions needed from you (recommendation first)
 
-**Still open (2026-10-09).** These came before goals 9-12 and decisions E1–E20 (section "DRY audit and decisions E1–E20").
-E1–E20 change some of them (for example D3: solutions stay markdown blocks, now trimmed and checked by C4 (E3, E5); D14: stored
-outputs now also cover example outputs and quoted values; D17: E18 pins the Colab-like stack). Restate them for E1–E20 before
-asking Prof. Rosenthal.
+**Status of D1–D18, restated for v3 (2026-10-09).** Settled ones are marked; the rest still need Prof. Rosenthal's answer.
+
+| | Topic | Status in v3 |
+|---|---|---|
+| D1 | Overall design | **Settled** by E1 (v2 + sync fills markdown) |
+| D2 | Permission to push | (a)–(c) done; (d) `colab-smoke-test` and (e) `yr-review-runall` still need an OK when the time comes |
+| D3 | No runnable solution cell in write-code questions | **Still recommended**; solutions are markdown blocks, trimmed and checked by C4 (E3, E5) |
+| D4 | Multi-part Answers interleaved | **Settled** (VERIFIED in Colab, A2-3) |
+| D5 | `~~~python` marker for question code | **Settled** (renders coloured in Colab, A2-1) |
+| D6 | Wrap only code that raises or names a line | **Changed**: wrapped cells call the variant B helper `run_code` (2.2) |
+| D7 | Question code as highlighted code blocks on the site | Still open (recommended) |
+| D8 | `## Credits` heading, removed on the site | **Settled** by E15 (template) |
+| D9 | Test chapter 5 from the branch link before publishing | Still open (recommended) |
+| D10 | Shift+Enter / Down arrow may open Answers | Still open (recommended: accept) |
+| D11 | Accept the cosmetic side effects | Still open (recommended); the contents entries now name the question |
+| D12 | No new skill | Still open (recommended) |
+| D13 | One-off conversion scripts not on v3 | Still open (recommended) |
+| D14 | Store outputs in the notebook | **Settled** by E2, E12, E17, E18 (outputs, examples and values are generated and stored) |
+| D15 | Error variant A or B | **Settled: B** (2026-10-09) |
+| D16 | Run-cell titles | **Settled**: name the question, "Output of Question 8a" (2026-10-09) |
+| D17 | ch04 Q15c: accept the Python 3.12 output | **Moot**: Colab is Python 3.13 and shows "Did you mean 'sides'?", as the page already says |
+| D18 | ch04 Q14's empty canvases stay | Still open (recommended) |
+
+Open now: D2 (d, e when needed), D3, D7, D9, D10, D11, D12, D13, D18. The original text follows.
 
 - **D1. The overall design.** Question code as text; a closed Answer heading with the explanation plus hidden run cells that show the code's stored output, re-run by Run all. *Recommended.*
 - **D2. Permission to push.** *Recommended.* Pushes (a) and (b) are done. The pushes:
