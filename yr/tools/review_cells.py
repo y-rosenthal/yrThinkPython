@@ -5,7 +5,12 @@
   review_cells.py list NOTEBOOK                      list the questions
   review_cells.py add NOTEBOOK SPEC [--before N]     insert the cells in SPEC (default: after the
                                                      last question; --before 7: before Question 7)
-  review_cells.py renumber NOTEBOOK                  number the questions 1, 2, 3, ... in order
+  review_cells.py renumber NOTEBOOK                  number the questions 1, 2, 3, ... in order:
+                                                     ONLY between semesters (see below)
+
+Question numbers stay fixed during a semester, because homework is assigned by number. A question
+inserted between Questions 3 and 4 is numbered 3b (then 3c, ...); no other number changes. Run
+renumber only when starting a new semester, to go back to 1, 2, 3, ...
 
 SPEC is a text file of cells, each starting with a line "%%% <kind>":
 
@@ -37,7 +42,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-QUESTION = re.compile(r'(\s*### Question )(\d+)\b')
+QUESTION = re.compile(r'(\s*### Question )(\d+[a-z]?)\b')
 
 
 def load(path):
@@ -128,7 +133,7 @@ def cmd_renumber(path):
         cell['source'] = lines(QUESTION.sub(lambda m: f'{m.group(1)}{n}', text(cell), count=1))
     save(nb, path)
     refs = [i for i, c in enumerate(nb['cells'])
-            if re.search(r'\bQuestion \d+\b', text(c)) and not QUESTION.match(text(c))]
+            if re.search(r'\bQuestion \d+[a-z]?\b', text(c)) and not QUESTION.match(text(c))]
     print(f'renumbered {len(question_starts(nb))} questions in {path}')
     if refs:
         print('check these cells, which mention "Question N" in their text:', refs)
@@ -200,6 +205,6 @@ if __name__ == '__main__':
     elif a[:1] == ['renumber'] and len(a) == 2:
         cmd_renumber(a[1])
     elif a[:1] == ['add'] and len(a) in (3, 5) and (len(a) == 3 or a[3] == '--before'):
-        cmd_add(a[1], a[2], int(a[4]) if len(a) == 5 else None)
+        cmd_add(a[1], a[2], a[4] if len(a) == 5 else None)
     else:
         sys.exit(__doc__)

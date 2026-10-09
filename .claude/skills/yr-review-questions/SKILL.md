@@ -11,6 +11,11 @@ Read `yr/README.md` first (format, **style rules**, cell conventions, tools), an
 questions in `yr/chap04_review.ipynb` as models. If the chapter has no review page yet, use the
 `yr-review-page` skill instead. Work on a topic branch, not `v3`.
 
+**A new page format is planned, not yet built** (`yr/plans/runall-collapsible-answers.md`:
+section "DRY audit and decisions E1–E20" and sections 2–5). Until it is, write questions in
+today's format below. Don't start converting pages without Prof. Rosenthal's go-ahead. Whenever the
+design or the tools change, update this skill (and `yr-review-page`) in the same change.
+
 ## The rules that matter most
 
 - **Focus on code.** Mostly "what is displayed / drawn / happens?" (code cell, then Answer with
@@ -19,6 +24,9 @@ questions in `yr/chap04_review.ipynb` as models. If the chapter has no review pa
   references to the book or its examples; show every helper function the question uses, in the
   question; the main point is the Python, and context goes last in a "**By the way:**" paragraph.
 - **Levels.** Heading `### Question N (easy|medium|hard): <kind>`; keep the page ordered easy → hard.
+- **Question numbers never change during a semester** (homework is assigned by number). A question
+  inserted between Questions 3 and 4 is **Question 3b** (then 3c, ...). Never renumber the others;
+  `review_cells.py renumber` is only for the start of a new semester, when Prof. Rosenthal asks.
 - **Write-code questions give the function header** of every function to write, as a
   ```python block with `...` as the body, after "Start from this header (replace `...` with the
   body):". Only a question that tests writing the header itself may skip it (tag its
@@ -86,8 +94,10 @@ questions in `yr/chap04_review.ipynb` as models. If the chapter has no review pa
    ````
 
 3. Insert them: `python3 yr/tools/review_cells.py add yr/chapNN_review.ipynb SPEC [--before N]`
-   (to keep easy → hard order), then `python3 yr/tools/review_cells.py renumber yr/chapNN_review.ipynb`.
-   Fix any "Question N" cross references it reports (better: avoid them).
+   (to keep easy → hard order). Number a new question after the one before it with a letter
+   (between 3 and 4: `3b`); a question added at the end gets the next number. **Do not run
+   `renumber`** (only between semesters, when Prof. Rosenthal asks; then fix any "Question N" cross
+   references it reports).
 4. If any turtle pictures were added or their code changed: `yr/tools/review.sh images yr/chapNN_review.ipynb`.
    Look at the pictures (extract a few PNGs from the data: URIs to your scratchpad and view them):
    is the drawing inside the canvas and is it what the text says?

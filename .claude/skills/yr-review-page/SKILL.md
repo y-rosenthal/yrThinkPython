@@ -14,6 +14,11 @@ reference example: read it before writing a new page.
 Work on a topic branch, not `v3` (`git switch -c yr-review-chNN`); leave committing/pushing to
 the user unless asked.
 
+**A new page format is planned, not yet built** (`yr/plans/runall-collapsible-answers.md`). Until
+it is, build pages in today's format. Whenever the design or the tools change, update this skill
+(and `yr-review-questions`) in the same change. Question numbers stay fixed once a page is in use
+during a semester (insert as 3b; see `yr-review-questions`).
+
 ## 1. Study the chapter
 
 Read every cell of `chapters/chapNN.ipynb`

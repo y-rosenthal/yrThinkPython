@@ -43,6 +43,9 @@ One notebook per chapter, titled `NNb. Prof. Rosenthal's Review` (e.g. `4b.` for
 3. **`## Questions`**: a short introduction (e.g. what the turtle functions do), the setup code
    cell (tagged `setup`), then `### Question N (easy|medium|hard): <kind>`, ordered easy → hard,
    each followed by its collapsible Answer.
+   **Question numbers stay fixed during a semester** (homework is assigned by number): a question
+   inserted between Questions 3 and 4 is numbered **3b** (then 3c, ...), and no other number
+   changes. Renumber 1, 2, 3, ... only when starting a new semester (`review_cells.py renumber`).
 4. A short credit line at the end.
 
 ### Style rules
@@ -192,7 +195,7 @@ All run from the repository root.
 python3 yr/tools/review_cells.py new 5 "Conditionals and Recursion"   # skeleton yr/chap05_review.ipynb
 python3 yr/tools/review_cells.py list yr/chap04_review.ipynb
 python3 yr/tools/review_cells.py add yr/chap04_review.ipynb spec.txt [--before 7]
-python3 yr/tools/review_cells.py renumber yr/chap04_review.ipynb
+python3 yr/tools/review_cells.py renumber yr/chap04_review.ipynb   # only between semesters
 yr/tools/review.sh images yr/chap04_review.ipynb
 yr/tools/review.sh check yr/chap04_review.ipynb
 ```
