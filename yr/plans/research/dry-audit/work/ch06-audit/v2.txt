@@ -1,0 +1,826 @@
+===== 0 markdown {}
+# 6b. Prof. Rosenthal's Review
+
+A review of [Chapter 6: Return Values](https://y-rosenthal.github.io/yrThinkPython/chap06.html),
+for students who have already studied the chapter.
+Use the two lists under **Concepts covered** as a checklist (click a list's title to hide it), then work through the **Questions**, which go from easy to hard.
+Each question has a suggested answer under **Answer**. Try the question first, then open the Answer.
+
+[Run this page on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap06_review.ipynb)
+===== 1 markdown {}
+## Concepts covered
+===== 2 markdown {}
+<details open>
+<summary><strong>Python Syntax and Semantics</strong></summary>
+
+**Return values**
+
+- This defines a function that returns a value:
+  ```
+  def FUNCTION_NAME(PARAMETERS):
+      BODY
+      return EXPRESSION
+  ```
+  A call to the function is an expression whose value is the return value. For example, after
+  ```python
+  def double(x):
+      return x * 2
+  ```
+  `double(5)` is `10`, `y = double(5)` assigns `10` to `y`, and `double(5) + 1` is `11`.
+- A `return` statement ends the function immediately; any statements after it in the same block never run.
+- A function returns `None` if it ends without running a `return` statement (or runs `return None`). `None` is a special value, like `True` and `False`.
+- `print` displays a value; `return` hands a value back to the caller. A function that only prints returns `None`, so its result cannot be used in an expression.
+- In a notebook, a cell whose last expression is `None` displays nothing; `print(None)` displays `None`.
+- Calling a function without using its return value (not assigning it, printing it or using it in an expression) throws the value away.
+- Local variables of a function, including the variable it returns, cannot be used outside the function: that is a `NameError`.
+- A function can have several `return` statements, for example one in each branch of an `if` statement. Every possible path through the function should reach a `return`; a path that does not returns `None`.
+
+**Boolean functions**
+
+- A function can return `True` or `False`. A comparison already has a boolean value, so it can be returned directly: `return x % y == 0` instead of an `if` statement that returns `True` or `False`.
+- A boolean function can be used directly as a condition: `if is_divisible(6, 2):`. Comparing its result with `== True` is unnecessary.
+
+**Recursion with return values**
+
+- A recursive function can return a value: the base case returns a value directly, and the other cases combine the result of a recursive call into their return value. For example:
+  ```python
+  def factorial(n):
+      if n == 0:
+          return 1
+      else:
+          return n * factorial(n - 1)
+  ```
+- If an argument can skip past the base case (for example, `factorial(1.5)` calls `factorial(0.5)`, then `factorial(-0.5)`, ...), the result is infinite recursion and a `RecursionError`.
+
+**Checking types**
+
+- `isinstance(VALUE, TYPE)` returns `True` if the value has that type: `isinstance(3, int)` is `True` and `isinstance(1.5, int)` is `False`.
+- A function can check its arguments first, and display an error message and return `None` if they are not valid.
+
+**The math module**
+
+- `import math` makes `math.sqrt(X)` (square root, returns a float) and `math.pi` available.
+
+</details>
+===== 3 markdown {}
+<details open>
+<summary><strong>Definitions, etc.</strong></summary>
+
+**Definitions**
+
+- DEFINITION: A **return value** is the result of a function. If a function call is used as an expression, the return value is the value of the expression.
+- DEFINITION: A **pure function** is a function that does not display anything or have any other effect, other than returning a value.
+- DEFINITION: **Dead code** is part of a program that can never run, often because it comes after a `return` statement.
+- DEFINITION: **Incremental development** is a way of writing programs by adding and testing only a small amount of code at a time.
+- DEFINITION: **Scaffolding** is code used while developing a program (such as `print` calls that show intermediate values) that is not part of the final version.
+- DEFINITION: A language, or part of a language, is **Turing complete** if it can perform any computation that can be described by an algorithm. Python with functions, conditionals, return values and recursion is Turing complete.
+- DEFINITION: **Input validation** is checking the parameters of a function to make sure they have the correct types and values.
+
+**Other ideas**
+
+- Incremental development:
+  1. Start with a working program (for example, a function that always returns `0`), make small changes, and test after every change.
+  2. Use variables to hold intermediate values so you can display and check them.
+  3. Once the program works, remove the scaffolding.
+- When testing a function, choose arguments for which you know the right answer (for example, points 3 and 4 apart, whose distance is 5).
+- The "leap of faith": when reading a function call, including a recursive call, assume the function works correctly and returns the right result, instead of following the flow of execution into it.
+- A recursive definition (such as: the factorial of 0 is 1, and the factorial of n is n times the factorial of n minus 1) can be translated directly into a recursive function.
+- If a function is not working, there are three possibilities: its arguments are wrong (a precondition is violated), the function is wrong (a postcondition is violated), or the caller uses the return value wrongly (or not at all).
+- `print` calls at the beginning and end of a function (showing the parameters and the return value) make the flow of execution visible.
+
+</details>
+===== 4 markdown {}
+## Questions
+
+The questions use functions that return values, `if` statements, recursion and the `math` module.
+Run the next cell first: it imports `math`.
+===== 5 markdown {"tags": ["remove-cell"]}
+**Using this page in Colab or Jupyter**
+
+- Each question's **Answer** is closed: click the arrow next to **Answer** to open it. For questions about what code displays or draws, the Answer also shows that code's output. The output is saved with the page, so it is there before you run anything. The code that produced it is hidden: click **Show code** in Colab, or the grey bar in Jupyter, to see it.
+- To run code yourself, start with **Runtime → Run all** (Jupyter: **Run → Run All Cells**). It runs the page's setup and re-runs the code in every Answer. The Answers stay closed, and Run all does not stop at the errors that are answers. If Colab warns that the notebook was not authored by Google, choose **Run anyway**.
+- Run your own code with **Ctrl+Enter**.
+- When an Answer's code runs again, its output comes from your session. It can differ from the saved output if the setup has not run yet, or if your own code changed a name that the question uses.
+- VS Code, GitHub's preview and nbviewer show the Answers open.
+===== 6 code {"tags": ["setup"]}
+import math
+===== 7 markdown {}
+### Question 1 (easy): what is displayed?
+
+Predict what this code displays, then open the Answer to check.
+===== 8 markdown {}
+~~~python
+def double(x):
+    return x * 2
+
+y = double(5)
+print(y, double(y))
+print(double('ab'))
+~~~
+===== 9 markdown {"id": "f96749b1", "jp-MarkdownHeadingCollapsed": true}
+#### Answer
+===== 10 code {"cellView": "form", "jupyter": {"source_hidden": true}}
+# @title Output
+def double(x):
+    return x * 2
+
+y = double(5)
+print(y, double(y))
+print(double('ab'))
+===== 11 markdown {}
+`double(5)` returns `10`, which is assigned to `y`; then `double(y)` returns `20`.
+`'ab' * 2` is `'abab'`: the function works with any value that can be multiplied by 2.
+===== 12 markdown {}
+### Question 2 (easy): what is displayed?
+===== 13 markdown {}
+~~~python
+def shout(word):
+    print(word + '!')
+
+result = shout('hi')
+print(result)
+~~~
+===== 14 markdown {"id": "f99fbf1c", "jp-MarkdownHeadingCollapsed": true}
+#### Answer
+===== 15 code {"cellView": "form", "jupyter": {"source_hidden": true}}
+# @title Output
+def shout(word):
+    print(word + '!')
+
+result = shout('hi')
+print(result)
+===== 16 markdown {}
+`shout` *displays* `hi!` but has no `return` statement, so it returns `None`, and `None` is assigned to `result`.
+===== 17 markdown {}
+### Question 3 (easy): what is displayed?
+===== 18 markdown {}
+~~~python
+def add_one(x):
+    print('start')
+    return x + 1
+    print('never')
+
+print(add_one(1))
+~~~
+===== 19 markdown {"id": "caf76260", "jp-MarkdownHeadingCollapsed": true}
+#### Answer
+===== 20 code {"cellView": "form", "jupyter": {"source_hidden": true}}
+# @title Output
+def add_one(x):
+    print('start')
+    return x + 1
+    print('never')
+
+print(add_one(1))
+===== 21 markdown {}
+`return` ends the function immediately, so `print('never')` never runs. Code like that is called dead code.
+The `2` is displayed by the `print` outside the function, which displays the return value.
+===== 22 markdown {}
+### Question 4 (easy): write a function
+
+Write a function called `average` that takes two numbers and **returns** (not displays) their average.
+
+Start from this header (replace `...` with the body):
+
+```python
+def average(a, b):
+    ...
+```
+
+**Examples**
+
+```python
+print(average(3, 5))
+```
+```text
+4.0
+```
+
+```python
+result = average(1, 2)
+print(result * 2)
+```
+```text
+3.0
+```
+===== 23 code {"tags": []}
+# Your code here
+===== 24 markdown {"id": "ac2b7b20", "jp-MarkdownHeadingCollapsed": true}
+#### Answer
+===== 25 markdown {}
+```python
+def average(a, b):
+    return (a + b) / 2
+
+print(average(3, 5))
+result = average(1, 2)
+print(result * 2)
+```
+
+The parentheses matter: `a + b / 2` would divide only `b`.
+Another approach uses a local variable, which is useful while testing (you can display it):
+
+```python
+def average(a, b):
+    total = a + b
+    return total / 2
+
+print(average(3, 5))
+```
+===== 26 markdown {}
+### Question 5 (medium): what is displayed?
+===== 27 markdown {}
+~~~python
+def absolute_value_wrong(x):
+    if x < 0:
+        return -x
+    if x > 0:
+        return x
+
+print(absolute_value_wrong(-3), absolute_value_wrong(4), absolute_value_wrong(0))
+~~~
+===== 28 markdown {"id": "382538dc", "jp-MarkdownHeadingCollapsed": true}
+#### Answer
+===== 29 code {"cellView": "form", "jupyter": {"source_hidden": true}}
+# @title Output
+def absolute_value_wrong(x):
+    if x < 0:
+        return -x
+    if x > 0:
+        return x
+
+print(absolute_value_wrong(-3), absolute_value_wrong(4), absolute_value_wrong(0))
+===== 30 markdown {}
+When `x` is `0`, neither condition is true, so the function ends without reaching a `return` statement and returns `None`.
+Every possible path through a function should reach a `return`. One fix is to replace the second `if` with `else`:
+
+```python
+def absolute_value(x):
+    if x < 0:
+        return -x
+    else:
+        return x
+
+print(absolute_value(-3), absolute_value(4), absolute_value(0))
+```
+===== 31 markdown {}
+### Question 6 (medium): what is displayed?
+===== 32 markdown {}
+~~~python
+def is_even(n):
+    return n % 2 == 0
+
+print(is_even(4), is_even(7))
+if is_even(10):
+    print('10 is even')
+if not is_even(3):
+    print('3 is odd')
+x = is_even(5) or is_even(6)
+print(x)
+~~~
+===== 33 markdown {"id": "6abee4c2", "jp-MarkdownHeadingCollapsed": true}
+#### Answer
+===== 34 code {"cellView": "form", "jupyter": {"source_hidden": true}}
+# @title Output
+def is_even(n):
+    return n % 2 == 0
+
+print(is_even(4), is_even(7))
+if is_even(10):
+    print('10 is even')
+if not is_even(3):
+    print('3 is odd')
+x = is_even(5) or is_even(6)
+print(x)
+===== 35 markdown {}
+`n % 2 == 0` is a boolean expression, so `is_even` returns `True` or `False`.
+A boolean function can be used directly as a condition, or combined with `not`, `and` and `or`. `is_even(5) or is_even(6)` is `False or True`, which is `True`.
+===== 36 markdown {}
+### Question 7 (medium): what is displayed?
+===== 37 markdown {}
+~~~python
+def square(x):
+    return x * x
+
+def sum_of_squares(a, b):
+    return square(a) + square(b)
+
+print(sum_of_squares(3, 4))
+print(square(square(2)))
+print(square(sum_of_squares(1, 1)))
+~~~
+===== 38 markdown {"id": "e9685454", "jp-MarkdownHeadingCollapsed": true}
+#### Answer
+===== 39 code {"cellView": "form", "jupyter": {"source_hidden": true}}
+# @title Output
+def square(x):
+    return x * x
+
+def sum_of_squares(a, b):
+    return square(a) + square(b)
+
+print(sum_of_squares(3, 4))
+print(square(square(2)))
+print(square(sum_of_squares(1, 1)))
+===== 40 markdown {}
+A call is an expression, so its return value can be used as an argument of another call:
+`square(square(2))` is `square(4)`, which is `16`, and `square(sum_of_squares(1, 1))` is `square(2)`, which is `4`.
+===== 41 markdown {}
+### Question 8 (medium): find the bug
+
+This code should display `60` (a bill of `50` plus a 20% tip). What does it display instead, and how do you fix it?
+===== 42 markdown {}
+~~~python
+def add_tip(bill):
+    return bill + bill // 5
+
+bill = 50
+add_tip(bill)
+print(bill)
+~~~
+===== 43 markdown {"id": "e8aee86b", "jp-MarkdownHeadingCollapsed": true}
+#### Answer
+===== 44 code {"cellView": "form", "jupyter": {"source_hidden": true}}
+# @title Output
+def add_tip(bill):
+    return bill + bill // 5
+
+bill = 50
+add_tip(bill)
+print(bill)
+===== 45 markdown {}
+`add_tip(bill)` returns `60`, but the caller does nothing with the return value, so it is thrown away.
+The function does not change the variable `bill` outside it (its parameter is a different, local variable).
+Fix it by using the return value:
+
+```python
+def add_tip(bill):
+    return bill + bill // 5
+
+bill = 50
+bill = add_tip(bill)
+print(bill)
+```
+
+or simply `print(add_tip(50))`.
+===== 46 markdown {}
+### Question 9 (medium): what is displayed?
+===== 47 markdown {}
+~~~python
+def half(n):
+    if not isinstance(n, int):
+        print('half needs an integer')
+        return None
+    return n // 2
+
+print(half(9))
+print(half(9.0))
+~~~
+===== 48 markdown {"id": "96db73ee", "jp-MarkdownHeadingCollapsed": true}
+#### Answer
+===== 49 code {"cellView": "form", "jupyter": {"source_hidden": true}}
+# @title Output
+def half(n):
+    if not isinstance(n, int):
+        print('half needs an integer')
+        return None
+    return n // 2
+
+print(half(9))
+print(half(9.0))
+===== 50 markdown {}
+`isinstance(9, int)` is `True`, so `half(9)` returns `9 // 2`, which is `4`.
+`9.0` is a float, not an integer, so `half(9.0)` displays the message and returns `None`, which the outer `print` displays.
+Checking the arguments like this is called input validation.
+===== 51 markdown {}
+### Question 10 (medium): write two functions
+
+Write a function `larger(a, b)` that returns the larger of two numbers, and a function `largest(a, b, c)` that returns the largest of three numbers by calling `larger`.
+Do not use the built-in function `max`.
+
+Start from this header (replace `...` with the body):
+
+```python
+def larger(a, b):
+    ...
+
+def largest(a, b, c):
+    ...
+```
+
+**Examples**
+
+```python
+print(larger(3, 7), larger(7, 3))
+```
+```text
+7 7
+```
+
+```python
+print(largest(4, 9, 2), largest(-1, -5, -3))
+```
+```text
+9 -1
+```
+===== 52 code {"tags": []}
+# Your code here
+===== 53 markdown {"id": "5b040ed0", "jp-MarkdownHeadingCollapsed": true}
+#### Answer
+===== 54 markdown {}
+```python
+def larger(a, b):
+    if a > b:
+        return a
+    else:
+        return b
+
+def largest(a, b, c):
+    return larger(larger(a, b), c)
+
+print(larger(3, 7), larger(7, 3))
+print(largest(4, 9, 2), largest(-1, -5, -3))
+```
+
+`larger(a, b)` is the larger of the first two, and the larger of that and `c` is the largest of all three.
+Because `larger` *returns* its result (instead of displaying it), `largest` can use it.
+
+`larger` can also be written without `else`, because `return a` ends the function:
+
+```python
+def larger(a, b):
+    if a > b:
+        return a
+    return b
+
+print(larger(3, 7))
+```
+===== 55 markdown {}
+### Question 11 (medium): write a boolean function
+
+A year is a leap year if it is divisible by 4, except that years divisible by 100 are not leap years, unless they are also divisible by 400.
+Write a function `is_leap` that takes a year and returns `True` if it is a leap year and `False` otherwise.
+
+Start from this header (replace `...` with the body):
+
+```python
+def is_leap(year):
+    ...
+```
+
+**Examples**
+
+```python
+print(is_leap(2024), is_leap(2023))
+```
+```text
+True False
+```
+
+```python
+print(is_leap(1900), is_leap(2000))
+```
+```text
+False True
+```
+===== 56 code {"tags": []}
+# Your code here
+===== 57 markdown {"id": "04d7be2c", "jp-MarkdownHeadingCollapsed": true}
+#### Answer
+===== 58 markdown {}
+A chained conditional that checks the most specific rule first:
+
+```python
+def is_leap(year):
+    if year % 400 == 0:
+        return True
+    elif year % 100 == 0:
+        return False
+    elif year % 4 == 0:
+        return True
+    else:
+        return False
+
+print(is_leap(2024), is_leap(2023))
+print(is_leap(1900), is_leap(2000))
+```
+
+Or return one boolean expression:
+
+```python
+def is_leap(year):
+    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+
+print(is_leap(2024), is_leap(2023))
+print(is_leap(1900), is_leap(2000))
+```
+===== 59 markdown {}
+### Question 12 (medium): simplify a boolean function
+
+This function works, but it is longer than it needs to be.
+
+```python
+def is_teen(age):
+    if age >= 13 and age <= 19:
+        return True
+    else:
+        return False
+```
+
+Rewrite it with a single `return` statement and no `if` statement.
+
+Start from this header (replace `...` with the body):
+
+```python
+def is_teen(age):
+    ...
+```
+
+**Examples**
+
+```python
+print(is_teen(15), is_teen(12))
+```
+```text
+True False
+```
+
+```python
+print(is_teen(19), is_teen(20))
+```
+```text
+True False
+```
+===== 60 code {"tags": []}
+# Your code here
+===== 61 markdown {"id": "7a36494d", "jp-MarkdownHeadingCollapsed": true}
+#### Answer
+===== 62 markdown {}
+The condition already has the value `True` or `False`, so return it:
+
+```python
+def is_teen(age):
+    return age >= 13 and age <= 19
+
+print(is_teen(15), is_teen(12))
+print(is_teen(19), is_teen(20))
+```
+
+The same, with the shorthand for a range of values:
+
+```python
+def is_teen(age):
+    return 13 <= age <= 19
+
+print(is_teen(15), is_teen(12))
+```
+===== 63 markdown {}
+### Question 13 (hard): what is displayed?
+===== 64 markdown {}
+~~~python
+def power(b, e):
+    print('power', b, e)
+    if e == 0:
+        return 1
+    result = b * power(b, e - 1)
+    print('returning', result)
+    return result
+
+print(power(2, 3))
+~~~
+===== 65 markdown {"id": "6b1f3c89", "jp-MarkdownHeadingCollapsed": true}
+#### Answer
+===== 66 code {"cellView": "form", "jupyter": {"source_hidden": true}}
+# @title Output
+def power(b, e):
+    print('power', b, e)
+    if e == 0:
+        return 1
+    result = b * power(b, e - 1)
+    print('returning', result)
+    return result
+
+print(power(2, 3))
+===== 67 markdown {}
+Each call displays its arguments and then waits for its recursive call to return. The call with `e == 0` is the base case: it returns `1` without displaying `returning`.
+Then the calls finish in the opposite order: `2 * 1` is `2`, `2 * 2` is `4`, `2 * 4` is `8`.
+The last line is displayed by the `print` outside the function. The `print` calls inside `power` are scaffolding, useful to see the flow of execution.
+===== 68 markdown {}
+### Question 14 (hard): what is displayed?
+
+Predict what this code displays. What does `mystery` compute, in general?
+===== 69 markdown {}
+~~~python
+def mystery(n):
+    if n < 10:
+        return n
+    return n % 10 + mystery(n // 10)
+
+print(mystery(7), mystery(123), mystery(9999))
+~~~
+===== 70 markdown {"id": "c84e8056", "jp-MarkdownHeadingCollapsed": true}
+#### Answer
+===== 71 code {"cellView": "form", "jupyter": {"source_hidden": true}}
+# @title Output
+def mystery(n):
+    if n < 10:
+        return n
+    return n % 10 + mystery(n // 10)
+
+print(mystery(7), mystery(123), mystery(9999))
+===== 72 markdown {}
+`mystery` returns the sum of the digits of `n`: `n % 10` is the last digit and `n // 10` is the number without its last digit.
+With the leap of faith: assuming `mystery(12)` correctly returns `1 + 2`, `mystery(123)` returns `3 + mystery(12)`, which is `6`.
+A number with one digit (less than 10) is the base case.
+===== 73 markdown {}
+### Question 15 (hard): missing the base case
+
+Run this cell to define `factorial`.
+===== 74 code {"tags": []}
+def factorial(n):
+    if n == 0:
+        return 1
+    return n * factorial(n - 1)
+===== 75 markdown {}
+Two correct ways to call it:
+
+```python
+print(factorial(3))
+```
+```text
+6
+```
+
+```python
+print(factorial(0))
+```
+```text
+1
+```
+
+What happens with this call? Change `factorial` so that it displays a message and returns `None` when its argument is not a non-negative integer.
+===== 76 markdown {}
+~~~python
+factorial(1.5)
+~~~
+===== 77 markdown {"id": "a9ff057a", "jp-MarkdownHeadingCollapsed": true}
+#### Answer
+===== 78 markdown {}
+The calls get `n` = 1.5, 0.5, -0.5, -1.5, ... and never `0`, so the base case is never reached:
+
+<!-- error: RecursionError -->
+===== 79 code {"cellView": "form", "jupyter": {"source_hidden": true}}
+# @title Output
+__import__('IPython').get_ipython().run_cell(
+r"""
+factorial(1.5)
+""");
+===== 80 markdown {}
+Check the argument before the recursion (input validation):
+
+```python
+def factorial(n):
+    if not isinstance(n, int):
+        print('factorial is only defined for integers.')
+        return None
+    elif n < 0:
+        print('factorial is not defined for negative numbers.')
+        return None
+    elif n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+print(factorial(1.5))
+print(factorial(-2))
+print(factorial(3))
+```
+
+Negative integers also need a check: `factorial(-2)` would call `factorial(-3)`, and so on, forever.
+===== 81 markdown {}
+### Question 16 (hard): write a recursive function
+
+Write a recursive function `multiply` that takes two integers `a` and `b`, where `b` is not negative, and returns `a` times `b`, using only `+` and `-` (no `*` and no loops).
+Hint: `a` times `b` is `a` plus `a` times `b - 1`.
+
+Start from this header (replace `...` with the body):
+
+```python
+def multiply(a, b):
+    ...
+```
+
+**Examples**
+
+```python
+print(multiply(6, 7))
+```
+```text
+42
+```
+
+```python
+print(multiply(-3, 4), multiply(5, 0))
+```
+```text
+-12 0
+```
+===== 82 code {"tags": []}
+# Your code here
+===== 83 markdown {"id": "60877d3f", "jp-MarkdownHeadingCollapsed": true}
+#### Answer
+===== 84 markdown {}
+The base case is `b == 0`, because anything times `0` is `0`:
+
+```python
+def multiply(a, b):
+    if b == 0:
+        return 0
+    return a + multiply(a, b - 1)
+
+print(multiply(6, 7))
+print(multiply(-3, 4), multiply(5, 0))
+```
+
+With the leap of faith: if `multiply(a, b - 1)` is right, adding one more `a` gives `a` times `b`.
+Another approach puts the recursive result in a variable first, which makes it easy to display while testing:
+
+```python
+def multiply(a, b):
+    if b == 0:
+        return 0
+    else:
+        rest = multiply(a, b - 1)
+        return a + rest
+
+print(multiply(6, 7))
+```
+===== 85 markdown {}
+### Question 17 (hard): incremental development
+
+The area of a triangle with sides `a`, `b` and `c` can be computed in two steps (Heron's formula):
+
+1. `s` is half the perimeter: `(a + b + c) / 2`.
+2. The area is the square root of `s * (s - a) * (s - b) * (s - c)`.
+
+Write a function `triangle_area` that returns the area. Use incremental development: start with a version that returns `0`, then add one step at a time, displaying the intermediate values, and remove those `print` calls at the end.
+
+Start from this header (replace `...` with the body):
+
+```python
+def triangle_area(a, b, c):
+    ...
+```
+
+**Examples**
+
+```python
+print(triangle_area(3, 4, 5))
+```
+```text
+6.0
+```
+
+```python
+print(triangle_area(5, 5, 6), round(triangle_area(2, 2, 2), 3))
+```
+```text
+12.0 1.732
+```
+===== 86 code {"tags": []}
+# Your code here
+===== 87 markdown {"id": "414f4e8a", "jp-MarkdownHeadingCollapsed": true}
+#### Answer
+===== 88 markdown {}
+A version in the middle of the development, with scaffolding, could be:
+
+```python
+def triangle_area(a, b, c):
+    s = (a + b + c) / 2
+    print('s is', s)         # for 3, 4, 5 it should be 6.0
+    return 0
+
+print(triangle_area(3, 4, 5))
+```
+
+And the final version, without the scaffolding:
+
+```python
+import math
+
+def triangle_area(a, b, c):
+    s = (a + b + c) / 2
+    product = s * (s - a) * (s - b) * (s - c)
+    return math.sqrt(product)
+
+print(triangle_area(3, 4, 5))
+print(triangle_area(5, 5, 6), round(triangle_area(2, 2, 2), 3))
+```
+
+The examples were chosen because their answers are known: a 3-4-5 right triangle has area 3 * 4 / 2 = 6.
+===== 89 markdown {}
+## Credits
+
+*Summary and questions by Prof. Y. Rosenthal, based on*
+[Think Python: 3rd Edition](https://allendowney.github.io/ThinkPython/index.html) *by Allen B. Downey.*
+*Text license:* [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/)

@@ -1,0 +1,471 @@
+[
+ {
+  "page": "02",
+  "q": "### Question 11 (medium): write code",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": null,
+  "trimmed_first": "total = hours * 60 * 60 + minutes * 60 + seconds\nprint(total)\n"
+ },
+ {
+  "page": "02",
+  "q": "### Question 12 (medium): write code with comments",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": null,
+  "trimmed_first": "miles = km / 1.61    # one mile is about 1.61 kilometers\nprint(km, 'km is', round(miles, 2), 'miles')\n"
+ },
+ {
+  "page": "02",
+  "q": "### Question 16 (hard): write code",
+  "r3": [
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": null,
+  "trimmed_first": "total = float(price) * int(quantity)\nprint('Total:', round(total, 2))\n"
+ },
+ {
+  "page": "02",
+  "q": "### Question 17 (hard): write code",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": null,
+  "trimmed_first": "hours = total // 3600              # 3600 seconds in an hour\nrest = total - hours * 3600        # seconds left after the whole hours\nminutes = rest // 60\nseconds = rest - minutes * 60\nprint(hours, 'h', minutes, 'min', seconds, 's')\n"
+ },
+ {
+  "page": "03",
+  "q": "### Question 5 (easy): write a function",
+  "r3": [
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def underline(text):\n    print(text)\n    print('-' * len(text))\n"
+ },
+ {
+  "page": "03",
+  "q": "### Question 11 (medium): write a function",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def print_right(text, width):\n    spaces = width - len(text)\n    print(' ' * spaces + text)\n"
+ },
+ {
+  "page": "03",
+  "q": "### Question 12 (medium): refactor into a function",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def verse(animal, sound):\n    print('Old MacDonald had a farm')\n    print('And on that farm he had a', animal)\n    print('With a', sound, sound, 'here')\n\nverse('duck', 'quack')\n"
+ },
+ {
+  "page": "03",
+  "q": "### Question 15 (hard): write a function",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def pyramid(char, height):\n    for i in range(height):\n        print(' ' * (height - 1 - i) + char * (2 * i + 1))\n"
+ },
+ {
+  "page": "03",
+  "q": "### Question 16 (hard): write two functions",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def print_border(n):\n    print('+---' * n + '+')\n\ndef print_bars(n):\n    print('|   ' * n + '|')\n\ndef print_grid(n):\n    print_border(n)\n    for i in range(n):\n        print_bars(n)\n        print_border(n)\n"
+ },
+ {
+  "page": "04",
+  "q": "### Question 3 (easy): write a function",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "from jupyturtle import make_turtle, forward, left, right\n\ndef triangle(length):\n    for i in range(3):\n        forward(length)\n        left(120)\n"
+ },
+ {
+  "page": "04",
+  "q": "### Question 10 (medium): write a function",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "from jupyturtle import make_turtle, forward, left, right\n\ndef star(length):\n    for i in range(5):\n        forward(length)\n        right(144)\n"
+ },
+ {
+  "page": "04",
+  "q": "### Question 11 (medium): write a function",
+  "r3": [
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "from jupyturtle import make_turtle, forward, left, penup, pendown\n\ndef row_of_squares(n, length):\n    for i in range(n):\n        square(length)\n        jump(length)\n"
+ },
+ {
+  "page": "04",
+  "q": "### Question 12 (medium): write a function with a docstring",
+  "r3": [
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "from jupyturtle import make_turtle, forward, left, right\n\ndef staircase(steps, size):\n    \"\"\"Draw a staircase going up and to the right.\n\n    steps: number of steps (a positive integer)\n    size: height and depth of each step\n    \"\"\"\n    for i in range(steps):\n        left(90)\n        forward(size)\n        right(90)\n        forward(size)\n"
+ },
+ {
+  "page": "04",
+  "q": "### Question 16 (hard): write a function",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "from jupyturtle import make_turtle, forward, left\n\ndef spiral(n, length, angle, increase):\n    for i in range(n):\n        forward(length)\n        left(angle)\n        length = length + increase\n"
+ },
+ {
+  "page": "04",
+  "q": "### Question 17 (hard): write a function",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "from jupyturtle import make_turtle, forward, left, right, penup, pendown\n\ndef row(cols, size):\n    for i in range(cols):\n        square(size)\n        jump(size)\n\ndef grid(rows, cols, size):\n    for i in range(rows):\n        row(cols, size)\n        jump(-cols * size)    # back to the start of this row\n        left(90)\n        jump(size)            # up to the start of the next row\n        right(90)\n"
+ },
+ {
+  "page": "04",
+  "q": "### Question 18 (hard): refactor",
+  "r3": [
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "from jupyturtle import make_turtle, forward, left, penup, pendown\n\ndef polygon_row(sides, n, length):\n    for i in range(n):\n        polygon(sides, length)\n        jump(length)\n\ndef triangle_row(n, length):\n    polygon_row(3, n, length)\n\ndef square_row(n, length):\n    polygon_row(4, n, length)\n"
+ },
+ {
+  "page": "04",
+  "q": "### Question 19 (hard): generalize a function",
+  "r3": [
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "import math\nfrom jupyturtle import make_turtle, forward, left\n\ndef arc_n(radius, angle, n):\n    arc_length = 2 * math.pi * radius * angle / 360\n    length = arc_length / n\n    step_angle = angle / n\n    for i in range(n):\n        forward(length)\n        left(step_angle)\n\ndef circle(radius):\n    circumference = 2 * math.pi * radius\n    n = int(circumference / 3) + 10\n    arc_n(radius, 360, n)\n"
+ },
+ {
+  "page": "05",
+  "q": "### Question 4 (easy): write a function",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def sign(x):\n    if x > 0:\n        print('positive')\n    elif x < 0:\n        print('negative')\n    else:\n        print('zero')\n"
+ },
+ {
+  "page": "05",
+  "q": "### Question 9 (medium): write a function",
+  "r3": [
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def end_hour(start, duration):\n    print((start + duration) % 24)\n"
+ },
+ {
+  "page": "05",
+  "q": "### Question 10 (medium): write a function",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def fizzbuzz(n):\n    if n % 3 == 0 and n % 5 == 0:\n        print('FizzBuzz')\n    elif n % 3 == 0:\n        print('Fizz')\n    elif n % 5 == 0:\n        print('Buzz')\n    else:\n        print(n)\n"
+ },
+ {
+  "page": "05",
+  "q": "### Question 11 (medium): write a function",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def largest(a, b, c):\n    if a >= b and a >= c:\n        print(a)\n    elif b >= c:\n        print(b)\n    else:\n        print(c)\n"
+ },
+ {
+  "page": "05",
+  "q": "### Question 15 (hard): write a recursive function",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def stairs(n):\n    if n > 0:\n        print('#' * n)\n        stairs(n - 1)\n"
+ },
+ {
+  "page": "05",
+  "q": "### Question 16 (hard): write two recursive functions",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def digits_backward(n):\n    print(n % 10)\n    if n >= 10:\n        digits_backward(n // 10)\n\ndef digits_forward(n):\n    if n >= 10:\n        digits_forward(n // 10)\n    print(n % 10)\n"
+ },
+ {
+  "page": "06",
+  "q": "### Question 4 (easy): write a function",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def average(a, b):\n    return (a + b) / 2\n"
+ },
+ {
+  "page": "06",
+  "q": "### Question 10 (medium): write two functions",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def larger(a, b):\n    if a > b:\n        return a\n    else:\n        return b\n\ndef largest(a, b, c):\n    return larger(larger(a, b), c)\n"
+ },
+ {
+  "page": "06",
+  "q": "### Question 11 (medium): write a boolean function",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def is_leap(year):\n    if year % 400 == 0:\n        return True\n    elif year % 100 == 0:\n        return False\n    elif year % 4 == 0:\n        return True\n    else:\n        return False\n"
+ },
+ {
+  "page": "06",
+  "q": "### Question 12 (medium): simplify a boolean function",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "DIFF generated='\\n' typed='def is_teen(age):\\n    ...\\n'",
+  "trimmed_first": "def is_teen(age):\n    return age >= 13 and age <= 19\n"
+ },
+ {
+  "page": "06",
+  "q": "### Question 16 (hard): write a recursive function",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def multiply(a, b):\n    if b == 0:\n        return 0\n    return a + multiply(a, b - 1)\n"
+ },
+ {
+  "page": "06",
+  "q": "### Question 17 (hard): incremental development",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def triangle_area(a, b, c):\n    s = (a + b + c) / 2\n    print('s is', s)         # for 3, 4, 5 it should be 6.0\n    return 0\n"
+ },
+ {
+  "page": "07",
+  "q": "### Question 4 (easy): write a function",
+  "r3": [
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def exclaim_letters(word):\n    for letter in word:\n        print(letter + '!')\n"
+ },
+ {
+  "page": "07",
+  "q": "### Question 10 (medium): write a function",
+  "r3": [
+   "ok",
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def count_vowels(word):\n    count = 0\n    for letter in word.lower():\n        if letter in 'aeiou':\n            count += 1\n    return count\n"
+ },
+ {
+  "page": "07",
+  "q": "### Question 11 (medium): write a function",
+  "r3": [
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def first_vowel(word):\n    for letter in word:\n        if letter in 'aeiou':\n            return letter\n    return None\n"
+ },
+ {
+  "page": "07",
+  "q": "### Question 16 (hard): write a function",
+  "r3": [
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def is_abecedarian(word):\n    previous = 'a'\n    for letter in word:\n        if letter < previous:\n            return False\n        previous = letter\n    return True\n"
+ },
+ {
+  "page": "07",
+  "q": "### Question 17 (hard): write a function with doctests",
+  "r3": [
+   "ok"
+  ],
+  "examples": [
+   "ok",
+   "ok"
+  ],
+  "header": "same",
+  "trimmed_first": "def count_doubles(word):\n    \"\"\"Count the letters immediately followed by the same letter.\n\n    >>> count_doubles('bookkeeper')\n    3\n    >>> count_doubles('cat')\n    0\n    >>> count_doubles('aaa')\n    2\n    \"\"\"\n    count = 0\n    previous = ''\n    for letter in word:\n        if letter == previous:\n            count += 1\n        previous = letter\n    return count\n\nrun_doctests(count_doubles)\nprint(count_doubles('Mississippi'))\n"
+ }
+]

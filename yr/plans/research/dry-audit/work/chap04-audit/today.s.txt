@@ -1,0 +1,1185 @@
+===== [0] markdown id=66ec5a13 meta={}
+# 4b. Prof. Rosenthal's Review
+
+A review of [Chapter 4: Functions and Interfaces](https://y-rosenthal.github.io/yrThinkPython/chap04.html),
+for students who have already studied the chapter.
+Use the two lists under **Concepts covered** as a checklist (click a list's title to hide it), then work through the **Questions**, which go from easy to hard.
+Each question has a suggested answer: click **Answer** to reveal it, but try the question yourself first.
+
+[Run this page on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap04_review.ipynb)
+===== [1] markdown id=188b1667 meta={}
+## Concepts covered
+===== [2] markdown id=b99de2d9 meta={}
+<details open>
+<summary><strong>Python Syntax and Semantics</strong></summary>
+
+**Importing**
+
+- `import MODULE_NAME` makes a module's functions available as `MODULE_NAME.FUNCTION_NAME(...)`. For example, after `import jupyturtle` you can call `jupyturtle.forward(100)`.
+- `from MODULE_NAME import NAME1, NAME2` makes only the listed functions available, by their names alone. For example, after `from jupyturtle import forward` you can call `forward(100)`. It does not define the name `MODULE_NAME`.
+- `import math` makes `math.pi` (the number pi, 3.14159...) available.
+
+**The jupyturtle module** (turtle graphics in Jupyter and Colab)
+
+- `make_turtle()` starts a new drawing, with the turtle in the middle, facing east (to the right).
+- `make_turtle` takes optional keyword arguments: `delay=SECONDS` (pause after each step; default `0.2`; `0` is fastest), `width=PIXELS`, `height=PIXELS`, and `auto_render=False` (show the drawing only when `render()` is called).
+- `forward(DISTANCE)` moves the turtle and draws a line. A negative distance moves it backward.
+- `left(DEGREES)` and `right(DEGREES)` turn the turtle.
+- `penup()` stops drawing as the turtle moves; `pendown()` starts drawing again.
+
+**for loops and range**
+
+- This repeats the indented code SOME_INTEGER times:
+  ```
+  for i in range(SOME_INTEGER):
+      SOME_CODE
+      SOME_MORE_CODE
+  ```
+  For example, this prints `hello` three times:
+  ```python
+  for i in range(3):
+      print('hello')
+  ```
+- `range(SOME_INTEGER)` is shorthand for the integers `0, 1, 2, ...` up to SOME_INTEGER minus 1. The loop variable (`i`) takes these values in turn: in `for i in range(4):`, `i` is `0`, then `1`, then `2`, then `3`.
+- `range` needs an integer: `range(4.5)` is a `TypeError`. `range(0)` and `range(-4)` produce no values, so the loop body runs zero times.
+
+**Functions with parameters**
+
+- This defines a function with two parameters:
+  ```
+  def FUNCTION_NAME(PARAMETER1, PARAMETER2):
+      BODY
+  ```
+  The body runs only when the function is called.
+- `FUNCTION_NAME(ARGUMENT1, ARGUMENT2)` calls it: the arguments are assigned to the parameters, in order.
+- A function can call other functions. Each call finishes before the next statement runs.
+
+**Keyword arguments**
+
+- `FUNCTION_NAME(PARAMETER_NAME=VALUE)` passes an argument by naming its parameter, as in `polygon(n=7, length=30)`. With keyword arguments, the order does not matter.
+- Positional arguments (without names) must come first: `polygon(n=7, 30)` is a `SyntaxError`.
+- Each parameter gets one value: `polygon(30, n=7)` is a `TypeError`. So is a name that is not a parameter: `polygon(7, size=30)`.
+
+**Local variables**
+
+- Parameters, and variables assigned inside a function, are local to one call of the function. The same name in two functions means two different variables.
+- Assigning a new value to a parameter does not change the caller's variable.
+
+**Division**
+
+- `/` always produces a float: `360 / 4` is `90.0`.
+- Dividing by zero, as in `360 / 0`, is a `ZeroDivisionError`.
+
+**Docstrings and multiline strings**
+
+- `"""TEXT"""` (triple quotes) is a string that can span several lines.
+- A string on the first line of a function's body is the function's docstring:
+  ```
+  def FUNCTION_NAME(PARAMETERS):
+      """WHAT THE FUNCTION DOES"""
+      BODY
+  ```
+- A docstring is not displayed when the function runs. `help(FUNCTION_NAME)` displays it.
+
+</details>
+===== [3] markdown id=5ead4f18 meta={}
+<details open>
+<summary><strong>Definitions, etc.</strong></summary>
+
+**Definitions**
+
+- DEFINITION: **Encapsulation** is wrapping a sequence of statements in a function definition.
+- DEFINITION: **Generalization** is replacing something unnecessarily specific (such as a number) with something more general (such as a parameter).
+- DEFINITION: A **keyword argument** is an argument that includes the name of the parameter.
+- DEFINITION: **Refactoring** is changing working code to improve it (for example, its function interfaces) without changing what it does.
+- DEFINITION: The **interface** of a function is how it is used: its name, its parameters, and what it does.
+- DEFINITION: The **implementation** of a function is how it does what it does.
+- DEFINITION: **Interface design** is deciding on a function's interface, including which parameters it takes.
+- DEFINITION: A **docstring** is a string at the beginning of a function that explains its interface.
+- DEFINITION: A **multiline string** is a string in triple quotes, which can span more than one line.
+- DEFINITION: A **precondition** is a requirement the caller must satisfy before a function starts.
+- DEFINITION: A **postcondition** is something a function guarantees when it ends: its intended effect and any side effects.
+- DEFINITION: A **stack diagram** shows the function calls in progress, one frame per call, with each call's parameters and their values.
+- DEFINITION: A **development plan** is a process for writing programs.
+
+**Other ideas**
+
+- Encapsulation gives code a name that documents it, and calling a function twice is shorter than copying its code.
+- Two functions can have the same interface and different implementations.
+- The "encapsulation and generalization" development plan:
+  1. Write a small program with no function definitions.
+  2. When it works, put a coherent piece of it in a function and give the function a name.
+  3. Generalize the function by adding parameters.
+  4. Repeat steps 1 to 3 until you have a set of working functions.
+  5. Look for chances to refactor, for example by replacing similar code in several places with one general function.
+- That plan is useful when you don't know in advance how to divide a program into functions.
+- Refactoring is normal: often you don't know enough at the start of a project to design all the functions.
+- A good docstring says what the function does (not how), what each parameter means, and each parameter's type if it is not obvious. If a function is hard to explain, its interface may need improving.
+- An interface is like a contract: the caller provides certain arguments and the function does certain work.
+- If the caller breaks a precondition, the bug is in the caller. If the preconditions hold but a postcondition does not, the bug is in the function.
+
+</details>
+===== [4] markdown id=63497811 meta={}
+## Questions
+
+Some questions draw pictures with `jupyturtle`, a small turtle-graphics module for Jupyter notebooks.
+The turtle starts in the middle of the canvas, facing east (to the right).
+`make_turtle()` starts a new drawing, `forward(d)` moves the turtle `d` units while drawing a line,
+`left(a)` and `right(a)` turn it `a` degrees, and `penup()` and `pendown()` stop and restart the drawing.
+
+Some questions show their code inside `run_code("""...""")`. `run_code` (defined in the next cell) runs the code in the string. The code is in a string only so that the notebook editor (Colab, for example) does not underline its mistakes before you have made your prediction.
+
+Run the next cell first: it downloads `jupyturtle`, imports the functions the questions use, and defines `run_code`.
+===== [5] code id=5529ad28 meta={"tags": ["setup"]}
+from os.path import basename, exists
+
+def download(url):
+    filename = basename(url)
+    if not exists(filename):
+        from urllib.request import urlretrieve
+
+        local, _ = urlretrieve(url, filename)
+        print("Downloaded " + str(local))
+    return filename
+
+download('https://github.com/ramalho/jupyturtle/releases/download/2024-03/jupyturtle.py');
+
+import math
+from jupyturtle import make_turtle, forward, left, right, penup, pendown
+
+def run_code(code):
+    """Run the Python code in the string code, as if it were in a cell of its own.
+
+    Some questions put their code in a string and run it with run_code, so that
+    the notebook's editor does not point out the mistakes before you predict them.
+    """
+    exec(code, globals())
+===== [6] markdown id=db5a65f4 meta={}
+### Question 1 (easy): what is displayed?
+
+Predict what this code displays, then run it to check.
+===== [7] code id=a6f5856b meta={"tags": []}
+for n in range(3, 7):
+    print(n, 360 / n)
+===== [8] markdown id=6af82ae0 meta={}
+<details>
+<summary>Answer</summary>
+
+```text
+3 120.0
+4 90.0
+5 72.0
+6 60.0
+```
+
+The `/` operator always produces a float, even when the division comes out even, so `360 / 4` is `90.0`, not `90`.
+Each `print` displays its two values separated by a space.
+
+**By the way:** `360 / n` is the number of degrees a turtle must turn at each corner to draw a regular polygon
+(all sides and angles equal) with `n` sides. Some of the later questions use this.
+
+</details>
+===== [9] markdown id=903d0b38 meta={}
+### Question 2 (easy): what is drawn?
+
+Describe the drawing this code makes, then run it to check.
+===== [10] code id=542d531b meta={"tags": []}
+make_turtle()
+for i in range(3):
+    forward(60)
+    left(120)
+===== [11] markdown id=a3953fa8 meta={}
+<details>
+<summary>Answer</summary>
+
+An equilateral triangle (three equal sides) with sides of length `60`:
+
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+
+The turtle starts facing east, so the first side goes to the right.
+Each `left(120)` turns it counterclockwise, so the triangle is drawn above the starting line.
+Three turns of `120` degrees add up to `360`, a full turn, so the turtle ends where it started, facing east again.
+
+</details>
+===== [12] markdown id=886327eb meta={}
+### Question 3 (easy): write a function
+
+Write a function called `triangle` that takes a parameter `length` and draws an equilateral triangle with that side length.
+
+Start from this header (replace `...` with the body):
+
+```python
+def triangle(length):
+    ...
+```
+
+**Examples**
+
+```python
+make_turtle()
+triangle(80)
+```
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+
+```python
+make_turtle()
+triangle(30)
+```
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+===== [13] code id=2d1ab1b4 meta={"tags": []}
+# Your code here
+===== [14] markdown id=3d9b9112 meta={}
+<details>
+<summary>Answer</summary>
+
+Use a loop that draws a side and turns `120` degrees, three times, with the parameter as the side length:
+
+```python
+from jupyturtle import make_turtle, forward, left, right
+
+def triangle(length):
+    for i in range(3):
+        forward(length)
+        left(120)
+
+make_turtle()
+triangle(80)
+```
+
+Another approach: write a general `polygon` function first, then use it.
+`triangle` works exactly the same way (same interface), with a different implementation:
+
+```python
+from jupyturtle import make_turtle, forward, left, right
+
+def polygon(n, length):
+    angle = 360 / n
+    for i in range(n):
+        forward(length)
+        left(angle)
+
+def triangle(length):
+    polygon(3, length)
+
+make_turtle()
+triangle(80)
+```
+
+</details>
+===== [15] markdown id=ed8bfbef meta={}
+### Question 4 (easy): what is displayed?
+===== [16] code id=72c0a4c7 meta={"tags": []}
+def greet(name):
+    """Print a greeting.
+
+    name: string
+    """
+    print('Hello,', name)
+
+greet('Ada')
+===== [17] markdown id=48825c1a meta={}
+<details>
+<summary>Answer</summary>
+
+```text
+Hello, Ada
+```
+
+The docstring documents the function. It is not displayed when the function runs.
+
+</details>
+===== [18] markdown id=dd713300 meta={}
+### Question 5 (easy): what is displayed?
+===== [19] code id=86bae68b meta={"tags": []}
+def describe(shape, sides):
+    print('A', shape, 'has', sides, 'sides')
+
+describe('square', 4)
+describe(sides=3, shape='triangle')
+===== [20] markdown id=063a8fc8 meta={}
+<details>
+<summary>Answer</summary>
+
+```text
+A square has 4 sides
+A triangle has 3 sides
+```
+
+With keyword arguments, each argument is assigned to the parameter it names, so their order in the call does not matter.
+
+</details>
+===== [21] markdown id=877b08d4 meta={}
+### Question 6 (medium): what is drawn?
+===== [22] code id=c5419234 meta={"tags": []}
+make_turtle()
+for i in range(4):
+    forward(50)
+    right(90)
+===== [23] markdown id=b21a6b54 meta={}
+<details>
+<summary>Answer</summary>
+
+A square with sides of length `50`, drawn clockwise, *below* the starting line:
+
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+
+The first side goes east. Turning right then points the turtle south, so the square goes downward.
+With `left(90)` instead of `right(90)`, the same square would be drawn above the starting line.
+
+</details>
+===== [24] markdown id=b8870179 meta={}
+### Question 7 (medium): what happens?
+
+Assume you have just restarted the notebook and run only the setup cell (at the start of the Questions) and this cell.
+===== [25] code id=fc196f44 meta={"tags": ["raises-exception"]}
+run_code("""
+from jupyturtle import make_turtle, forward
+make_turtle()
+forward(50)
+jupyturtle.left(90)
+forward(50)
+""")
+===== [26] markdown id=7de611de meta={}
+<details>
+<summary>Answer</summary>
+
+The turtle draws one line, `50` units to the east:
+
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+
+Then Python stops with an error:
+
+```text
+NameError: name 'jupyturtle' is not defined
+```
+
+`from jupyturtle import make_turtle, forward` defines the names `make_turtle` and `forward`, but not the name `jupyturtle`.
+To call `jupyturtle.left`, you need `import jupyturtle`. Or import `left` as well and call `left(90)`.
+The last line, `forward(50)`, never runs.
+
+</details>
+===== [27] markdown id=b6563379 meta={}
+### Question 8 (medium): what is displayed?
+===== [28] code id=45aa0be5 meta={"tags": []}
+def inner(angle):
+    angle = angle / 2
+    print('inner:', angle)
+
+def outer(angle):
+    inner(angle)
+    print('outer:', angle)
+
+outer(90)
+===== [29] markdown id=cd4e4962 meta={}
+<details>
+<summary>Answer</summary>
+
+```text
+inner: 45.0
+outer: 90
+```
+
+Parameters are local.
+`angle` in `inner` and `angle` in `outer` are two different variables, so changing one does not change the other.
+`outer`'s `angle` is still the integer `90`; `inner`'s is the float `45.0`.
+
+</details>
+===== [30] markdown id=5d57dbd4 meta={}
+### Question 9 (medium): what is displayed?
+===== [31] code id=fd3d7959 meta={"tags": []}
+def c(x):
+    print('c starts with', x)
+
+def b(x):
+    print('b starts with', x)
+    c(x * 2)
+    print('b ends with', x)
+
+def a(x):
+    print('a starts with', x)
+    b(x + 1)
+    print('a ends with', x)
+
+a(3)
+===== [32] markdown id=9c5a7932 meta={}
+<details>
+<summary>Answer</summary>
+
+```text
+a starts with 3
+b starts with 4
+c starts with 8
+b ends with 4
+a ends with 3
+```
+
+When a function calls another, it waits for that call to finish before going on.
+Each function has its own `x`, so after the calls return, `b`'s `x` is still `4` and `a`'s is still `3`.
+
+</details>
+===== [33] markdown id=c78f3926 meta={}
+### Question 10 (medium): write a function
+
+Write a function called `star` that takes a parameter `length` and draws a five-pointed star whose lines have that length.
+
+Start from this header (replace `...` with the body):
+
+```python
+def star(length):
+    ...
+```
+
+Hint: the turtle draws 5 lines and turns the same angle after each one. In total it turns around twice (720 degrees).
+
+**Examples**
+
+```python
+make_turtle()
+star(100)
+```
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+
+```python
+make_turtle()
+star(50)
+```
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+===== [34] code id=b1066df5 meta={"tags": []}
+# Your code here
+===== [35] markdown id=8028e2fc meta={}
+<details>
+<summary>Answer</summary>
+
+Each turn is 720 / 5 = 144 degrees:
+
+```python
+from jupyturtle import make_turtle, forward, left, right
+
+def star(length):
+    for i in range(5):
+        forward(length)
+        right(144)
+
+make_turtle()
+star(100)
+```
+
+Turning `left(144)` instead also draws a star, flipped upside down.
+Another approach: a general function that draws `n` lines with a given turn between them, then `star` uses it:
+
+```python
+from jupyturtle import make_turtle, forward, left, right
+
+def polyline(n, length, angle):
+    for i in range(n):
+        forward(length)
+        right(angle)
+
+def star(length):
+    polyline(5, length, 144)
+
+make_turtle()
+star(100)
+```
+
+</details>
+===== [36] markdown id=2f148fad meta={}
+### Question 11 (medium): write a function
+
+Write a function called `row_of_squares` that takes `n` and `length` and draws `n` squares in a row, side by side and touching, each with side length `length`.
+
+Start from this header (replace `...` with the body):
+
+```python
+def row_of_squares(n, length):
+    ...
+```
+
+You may use these two functions:
+
+```python
+def square(length):
+    for i in range(4):
+        forward(length)
+        left(90)
+
+def jump(length):
+    """Move forward length units without drawing."""
+    penup()
+    forward(length)
+    pendown()
+```
+
+**Examples** (`jump(-150)` first moves the turtle left, so the row fits on the canvas)
+
+```python
+make_turtle(width=400)
+jump(-150)
+row_of_squares(5, 40)
+```
+<img data-turtle alt="Turtle drawing" width="400" src="data:image/png;base64,…">
+
+```python
+make_turtle()
+jump(-120)
+row_of_squares(3, 60)
+```
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+===== [37] code id=01dc345c meta={"tags": []}
+# Your code here
+===== [38] markdown id=41421da4 meta={}
+<details>
+<summary>Answer</summary>
+
+`square` leaves the turtle where it started, facing east, so after each square, jump to the start of the next one:
+
+```python
+from jupyturtle import make_turtle, forward, left, penup, pendown
+
+def square(length):
+    for i in range(4):
+        forward(length)
+        left(90)
+
+def jump(length):
+    """Move forward length units without drawing."""
+    penup()
+    forward(length)
+    pendown()
+
+def row_of_squares(n, length):
+    for i in range(n):
+        square(length)
+        jump(length)
+
+make_turtle(width=400)
+jump(-150)
+row_of_squares(5, 40)
+```
+
+Using `forward(length)` instead of `jump(length)` draws the same picture, because the turtle moves along a bottom edge it has just drawn.
+`jump` makes the intention clearer: move without drawing.
+
+</details>
+===== [39] markdown id=f3060dbd meta={}
+### Question 12 (medium): write a function with a docstring
+
+Write a function called `staircase` that takes `steps` and `size` and draws a staircase going up and to the right:
+for each step, it goes up `size` units and then right `size` units.
+Give it a docstring that explains its interface (what it does and what each parameter means).
+
+Start from this header (replace `...` with the body):
+
+```python
+def staircase(steps, size):
+    ...
+```
+
+**Examples**
+
+```python
+make_turtle()
+staircase(4, 15)
+```
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+
+```python
+make_turtle()
+staircase(2, 30)
+```
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+
+`help` displays a function's docstring. Yours will have your own wording; for example:
+
+```python
+help(staircase)
+```
+```text
+Help on function staircase in module __main__:
+
+staircase(steps, size)
+    Draw a staircase going up and to the right.
+
+    steps: number of steps (a positive integer)
+    size: height and depth of each step
+```
+===== [40] code id=98cb8b47 meta={"tags": []}
+# Your code here
+===== [41] markdown id=fab9067a meta={}
+<details>
+<summary>Answer</summary>
+
+```python
+from jupyturtle import make_turtle, forward, left, right
+
+def staircase(steps, size):
+    """Draw a staircase going up and to the right.
+
+    steps: number of steps (a positive integer)
+    size: height and depth of each step
+    """
+    for i in range(steps):
+        left(90)
+        forward(size)
+        right(90)
+        forward(size)
+
+make_turtle()
+staircase(4, 15)
+```
+
+The docstring says *what* the function does, not how, and what each parameter means.
+The turtle starts facing east, so each step turns left (to face north), goes up, turns right (back to east) and goes forward.
+
+</details>
+===== [42] markdown id=f73969a7 meta={}
+### Question 13 (hard): what is displayed?
+===== [43] code id=7486fde6 meta={"tags": []}
+def square_txt(length):
+    print('square', length)
+
+def growing(n, length):
+    for i in range(n):
+        square_txt(length)
+        length = length * 2
+    print('growing ends with', length)
+
+length = 5
+growing(3, length)
+print('outside:', length)
+===== [44] markdown id=9af60988 meta={}
+<details>
+<summary>Answer</summary>
+
+```text
+square 5
+square 10
+square 20
+growing ends with 40
+outside: 5
+```
+
+Inside `growing`, `length` is a local variable.
+Assigning to it changes the value used in the next time through the loop, and after the loop it has been doubled 3 times (5, 10, 20, 40).
+The `length` outside the function is a different variable, so it is still `5`.
+
+</details>
+===== [45] markdown id=e578b797 meta={}
+### Question 14 (hard): preconditions
+
+Run this cell to define `polygon`. Its docstring states its preconditions.
+===== [46] code id=f95979bf meta={"tags": []}
+def polygon(n, length):
+    """Draw a regular polygon.
+
+    Preconditions: n is a positive integer; length is a positive number.
+    """
+    angle = 360 / n
+    for i in range(n):
+        forward(length)
+        left(angle)
+===== [47] markdown id=bb4cbf6b meta={}
+Two correct ways to use it:
+
+```python
+make_turtle()
+polygon(4, 40)
+```
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+
+```python
+make_turtle()
+polygon(n=6, length=25)
+```
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+
+For each of the next three cells, predict what happens.
+Then say whether the bug is in the caller or in `polygon`.
+
+**Part a**
+===== [48] code id=db9a789e meta={"tags": ["raises-exception"]}
+make_turtle()
+polygon(4.5, 20)
+===== [49] markdown id=a3a0ab30 meta={}
+**Part b**
+===== [50] code id=d2d9493c meta={"tags": ["raises-exception"]}
+make_turtle()
+polygon(0, 20)
+===== [51] markdown id=c7861c03 meta={}
+**Part c**
+===== [52] code id=edf9ffbe meta={"tags": []}
+make_turtle()
+polygon(-4, 20)
+===== [53] markdown id=a4047e9e meta={}
+<details>
+<summary>Answer</summary>
+
+**Part a:** `angle = 360 / 4.5` works (it is `80.0`), but `range(4.5)` fails, so nothing is drawn:
+
+```text
+TypeError: 'float' object cannot be interpreted as an integer
+```
+
+**Part b:** `360 / 0` fails before anything is drawn:
+
+```text
+ZeroDivisionError: division by zero
+```
+
+**Part c:** No error, and nothing is drawn: `angle` is `-90.0` and `range(-4)` is empty, so the loop body never runs.
+This is the most dangerous case, because nothing tells you something is wrong.
+
+In all three parts the caller broke a precondition, so **the bug is in the caller**, not in `polygon`.
+
+</details>
+===== [54] markdown id=8349485d meta={}
+### Question 15 (hard): keyword arguments
+
+Run this cell to define `describe`.
+===== [55] code id=dab4fda5 meta={"tags": []}
+def describe(shape, sides):
+    print('A', shape, 'has', sides, 'sides')
+===== [56] markdown id=36a75461 meta={}
+Two correct ways to call it:
+
+```python
+describe('hexagon', 6)
+```
+```text
+A hexagon has 6 sides
+```
+
+
+```python
+describe(sides=5, shape='pentagon')
+```
+```text
+A pentagon has 5 sides
+```
+
+
+Each of the next three calls is wrong in a different way.
+Predict the error for each, then run the cells to check.
+
+**Part a**
+===== [57] code id=8d6881ed meta={"tags": ["raises-exception"]}
+run_code("""
+describe(shape='square', 4)
+""")
+===== [58] markdown id=c5b2d7cf meta={}
+**Part b**
+===== [59] code id=0184d26f meta={"tags": ["raises-exception"]}
+run_code("""
+describe('square', shape='box')
+""")
+===== [60] markdown id=ec553ab0 meta={}
+**Part c**
+===== [61] code id=d70f3188 meta={"tags": ["raises-exception"]}
+run_code("""
+describe('square', size=4)
+""")
+===== [62] markdown id=cd4f5dfe meta={}
+<details>
+<summary>Answer</summary>
+
+**Part a:** Positional arguments must come before keyword arguments, so Python rejects the line before running it:
+
+```text
+SyntaxError: positional argument follows keyword argument
+```
+
+**Part b:** `'square'` is assigned to the first parameter, `shape`, and then `shape='box'` tries to assign `shape` again:
+
+```text
+TypeError: describe() got multiple values for argument 'shape'
+```
+
+**Part c:** `describe` has no parameter called `size`. A keyword must be one of the parameter names (`shape` or `sides`):
+
+```text
+TypeError: describe() got an unexpected keyword argument 'size'. Did you mean 'sides'?
+```
+
+(Python versions before 3.13 leave out the suggestion "Did you mean 'sides'?".)
+
+Some correct calls: `describe('square', 4)`, `describe(shape='square', sides=4)`, `describe(sides=4, shape='square')` and `describe('square', sides=4)`.
+
+</details>
+===== [63] markdown id=cfe0cd48 meta={}
+### Question 16 (hard): write a function
+
+Write a function called `spiral` that takes `n`, `length`, `angle` and `increase`.
+It draws `n` line segments, turning left `angle` degrees after each one.
+The first segment has length `length`, and each segment is `increase` units longer than the one before.
+
+Start from this header (replace `...` with the body):
+
+```python
+def spiral(n, length, angle, increase):
+    ...
+```
+
+**Examples**
+
+```python
+make_turtle(delay=0)
+spiral(40, 2, 30, 1)
+```
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+
+```python
+make_turtle(delay=0)
+spiral(20, 5, 90, 5)
+```
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+===== [64] code id=71212833 meta={"tags": []}
+# Your code here
+===== [65] markdown id=b455c112 meta={}
+<details>
+<summary>Answer</summary>
+
+`length` is a local variable, so the function can change it as it goes:
+
+```python
+from jupyturtle import make_turtle, forward, left
+
+def spiral(n, length, angle, increase):
+    for i in range(n):
+        forward(length)
+        left(angle)
+        length = length + increase
+
+make_turtle(delay=0)
+spiral(40, 2, 30, 1)
+```
+
+Another approach computes each segment's length from the loop variable, without changing `length`:
+
+```python
+from jupyturtle import make_turtle, forward, left
+
+def spiral(n, length, angle, increase):
+    for i in range(n):
+        forward(length + i * increase)
+        left(angle)
+
+make_turtle(delay=0)
+spiral(20, 5, 90, 5)
+```
+
+</details>
+===== [66] markdown id=fcf57214 meta={}
+### Question 17 (hard): write a function
+
+Write a function called `grid` that takes `rows`, `cols` and `size` and draws a grid of squares, `rows` high and `cols` wide, each with side length `size`.
+The turtle starts at the bottom-left corner of the grid, facing east.
+
+Start from this header (replace `...` with the body):
+
+```python
+def grid(rows, cols, size):
+    ...
+```
+
+You may use these two functions:
+
+```python
+def square(length):
+    for i in range(4):
+        forward(length)
+        left(90)
+
+def jump(length):
+    """Move forward length units without drawing."""
+    penup()
+    forward(length)
+    pendown()
+```
+
+Hint: to get from the end of one row to the start of the next, use `jump` (with a negative length to go back), `left` and `right`.
+
+**Examples**
+
+```python
+make_turtle(height=220, delay=0)
+jump(-75)
+grid(3, 5, 30)
+```
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+
+```python
+make_turtle(delay=0)
+jump(-60)
+grid(2, 4, 30)
+```
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+===== [67] code id=c7be64dc meta={"tags": []}
+# Your code here
+===== [68] markdown id=6a6250c2 meta={}
+<details>
+<summary>Answer</summary>
+
+Put one row in a function first, then call it once for each row:
+
+```python
+from jupyturtle import make_turtle, forward, left, right, penup, pendown
+
+def square(length):
+    for i in range(4):
+        forward(length)
+        left(90)
+
+def jump(length):
+    """Move forward length units without drawing."""
+    penup()
+    forward(length)
+    pendown()
+
+def row(cols, size):
+    for i in range(cols):
+        square(size)
+        jump(size)
+
+def grid(rows, cols, size):
+    for i in range(rows):
+        row(cols, size)
+        jump(-cols * size)    # back to the start of this row
+        left(90)
+        jump(size)            # up to the start of the next row
+        right(90)
+
+make_turtle(height=220, delay=0)
+jump(-75)
+grid(3, 5, 30)
+```
+
+The same thing with a loop inside a loop instead of the `row` function:
+
+```python
+from jupyturtle import make_turtle, forward, left, right, penup, pendown
+
+def square(length):
+    for i in range(4):
+        forward(length)
+        left(90)
+
+def jump(length):
+    """Move forward length units without drawing."""
+    penup()
+    forward(length)
+    pendown()
+
+def grid(rows, cols, size):
+    for i in range(rows):
+        for j in range(cols):
+            square(size)
+            jump(size)
+        jump(-cols * size)
+        left(90)
+        jump(size)
+        right(90)
+
+make_turtle(delay=0)
+jump(-60)
+grid(2, 4, 30)
+```
+
+The first version is easier to read and test, because each function does one thing and has a name that says what.
+
+</details>
+===== [69] markdown id=9b757839 meta={}
+### Question 18 (hard): refactor
+
+These two functions work, but they repeat almost all of their code.
+
+```python
+def triangle_row(n, length):
+    for i in range(n):
+        for j in range(3):
+            forward(length)
+            left(120)
+        jump(length)
+
+def square_row(n, length):
+    for i in range(n):
+        for j in range(4):
+            forward(length)
+            left(90)
+        jump(length)
+```
+
+Refactor them: write one general function, `polygon_row(sides, n, length)`, that draws a row of `n` regular polygons with `sides` sides.
+Then rewrite `triangle_row` and `square_row` to use it, **without changing how they are called or what they draw**.
+
+Start from this header (replace `...` with the body):
+
+```python
+def polygon_row(sides, n, length):
+    ...
+
+def triangle_row(n, length):
+    ...
+
+def square_row(n, length):
+    ...
+```
+You may use these two functions:
+
+```python
+def jump(length):
+    """Move forward length units without drawing."""
+    penup()
+    forward(length)
+    pendown()
+
+def polygon(n, length):
+    angle = 360 / n
+    for i in range(n):
+        forward(length)
+        left(angle)
+```
+
+**Examples** (they draw the same pictures before and after the refactoring)
+
+```python
+make_turtle(delay=0)
+jump(-80)
+triangle_row(4, 40)
+```
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+
+```python
+make_turtle(delay=0)
+jump(-60)
+square_row(3, 40)
+```
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+===== [70] code id=3f78f023 meta={"tags": []}
+# Your code here
+===== [71] markdown id=bc68e13e meta={}
+<details>
+<summary>Answer</summary>
+
+```python
+from jupyturtle import make_turtle, forward, left, penup, pendown
+
+def jump(length):
+    """Move forward length units without drawing."""
+    penup()
+    forward(length)
+    pendown()
+
+def polygon(n, length):
+    angle = 360 / n
+    for i in range(n):
+        forward(length)
+        left(angle)
+
+def polygon_row(sides, n, length):
+    for i in range(n):
+        polygon(sides, length)
+        jump(length)
+
+def triangle_row(n, length):
+    polygon_row(3, n, length)
+
+def square_row(n, length):
+    polygon_row(4, n, length)
+
+make_turtle(delay=0)
+jump(-80)
+triangle_row(4, 40)
+```
+
+`triangle_row` and `square_row` keep the same interface (name, parameters, what they draw) with a new implementation,
+so any code that calls them still works.
+The inner loops became calls to `polygon`, which already does that job.
+
+</details>
+===== [72] markdown id=52679f2c meta={}
+### Question 19 (hard): generalize a function
+
+This function draws an arc (part of a circle) with the given `radius`, spanning `angle` degrees, as 30 short straight lines:
+
+```python
+def arc(radius, angle):
+    arc_length = 2 * math.pi * radius * angle / 360
+    n = 30
+    length = arc_length / n
+    step_angle = angle / n
+    for i in range(n):
+        forward(length)
+        left(step_angle)
+```
+
+It always uses 30 lines: for a big circle each line is long and the circle looks jagged, and for a tiny one most lines are too short to see.
+
+1. Write `arc_n(radius, angle, n)`, which does the same but draws `n` lines.
+2. Write `circle(radius)`, which uses `arc_n` to draw a full circle, choosing `n` from the radius so that each line is about `3` units long, with at least `10` lines. (`int()` converts a float to an integer by dropping the fraction.)
+
+Start from this header (replace `...` with the body):
+
+```python
+def arc_n(radius, angle, n):
+    ...
+
+def circle(radius):
+    ...
+```
+
+**Examples**
+
+```python
+make_turtle(delay=0)
+arc_n(30, 180, 3)
+```
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+
+```python
+make_turtle(delay=0)
+arc_n(30, 180, 30)
+```
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+
+```python
+make_turtle(delay=0)
+circle(30)
+```
+<img data-turtle alt="Turtle drawing" width="300" src="data:image/png;base64,…">
+===== [73] code id=29298245 meta={"tags": []}
+# Your code here
+===== [74] markdown id=d8a3cdd2 meta={}
+<details>
+<summary>Answer</summary>
+
+```python
+import math
+from jupyturtle import make_turtle, forward, left
+
+def arc_n(radius, angle, n):
+    arc_length = 2 * math.pi * radius * angle / 360
+    length = arc_length / n
+    step_angle = angle / n
+    for i in range(n):
+        forward(length)
+        left(step_angle)
+
+def circle(radius):
+    circumference = 2 * math.pi * radius
+    n = int(circumference / 3) + 10
+    arc_n(radius, 360, n)
+
+make_turtle(delay=0)
+circle(30)
+```
+
+For `radius` 30 the circumference is about 188, so `n` is 62 + 10 = 72 lines; for `radius` 300 it would be 628 + 10 = 638.
+Adding `10` guarantees at least 10 lines, even for a tiny circle.
+
+Another way to say "at least 10" is `max(10, int(circumference / 3))`, if you know the `max` function.
+
+</details>
+===== [75] markdown id=649c827a meta={}
+*Summary and questions by Prof. Y. Rosenthal, based on*
+[Think Python: 3rd Edition](https://allendowney.github.io/ThinkPython/index.html) *by Allen B. Downey.*
+*Text license:* [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/)

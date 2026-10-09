@@ -3,7 +3,7 @@
 Multi-agent workflow scripts (for Claude Code's Workflow tool) used to plan the "Run all" redesign of the review pages.
 See `yr/plans/runall-collapsible-answers.md` on branch `v3` for the plan they feed.
 
-## `dry-generated-answers-audit.js` (portable; not yet completed)
+## `dry-generated-answers-audit.js` (portable; completed 2026-10-09, results in `../dry-audit/`)
 
 Audits every question on the six review pages for text typed twice (goal 9) and answers typed by hand instead of produced
 by running code (goal 10), runs every hand-typed example output and quoted value to find wrong ones, and designs a layout

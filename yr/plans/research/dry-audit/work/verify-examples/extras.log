@@ -1,0 +1,10 @@
+THAT-DISPLAYS yr/chap02_review.ipynb Question 4 (easy): what is displayed? OK
+THAT-DISPLAYS yr/chap02_review.ipynb Question 15 (hard): find the error OK
+PREDICT-IMG yr/chap04_review.ipynb Question 2 (easy): what is drawn? identical []
+PREDICT-IMG yr/chap04_review.ipynb Question 6 (medium): what is drawn? identical []
+PREDICT-IMG yr/chap04_review.ipynb Question 7 (medium): what happens? DIFFERS []
+PREDICT-IMG yr/chap05_review.ipynb Question 17 (hard): what is drawn? identical []
+DOCTEST-ANSWER yr/chap07_review.ipynb Question 14 (hard): doctests block 0: stdout='' errors=[]
+DOCTEST-QUESTION yr/chap07_review.ipynb Question 14 (hard): doctests '**********************************************************************\nFile "__main__", line 9, in count_e\nFailed example:\n    count_e(\'Eerie\')\nExpected:\n    3\nGot:\n    2\n'
+   answer text block present verbatim: True
+DOCTEST-ANSWER yr/chap07_review.ipynb Question 17 (hard): write a function with doctests block 0: stdout='3\n' errors=[]
