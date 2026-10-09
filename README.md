@@ -27,6 +27,9 @@ Like the original, this work is licensed under a
   chapter (`yr/chap04_review.ipynb`, shown on the site as "4b. Prof. Rosenthal's Review" right
   after chapter 4) with a concepts checklist and practice questions with collapsible answers.
   See [yr/README.md](yr/README.md) for the layout, conventions and how to add one.
+- `author-guide/` – the guide for content authors, a Quarto book (`CONTENT-AUTHOR-GUIDE.qmd`): how to
+  work in this repository, and step by step how to write review-page questions. Build it with
+  `cd author-guide && quarto render`.
 - `jb/` – Jupyter Book configuration (`_config.yml`, `_toc.yml`), the landing pages
   (`index.md`, `blank.md`), `execute_notebooks.py` (runs the chapters at build time so the
   pages show outputs), `prep_notebooks.py` (applies display tags, strips `%%expect` magics,

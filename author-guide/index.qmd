@@ -1,0 +1,21 @@
+# About this guide {.unnumbered}
+
+This book is for people who write content for the course fork of *Think Python* (3rd edition) at
+<https://github.com/y-rosenthal/yrThinkPython>. The fork's website is
+<https://y-rosenthal.github.io/yrThinkPython/>.
+
+Read the next chapter, **Content Author Guide**, before you edit anything. Most of it is about the
+"Prof. Rosenthal's Review" pages: how to add a question, which parts you type, and which parts the
+tools write for you.
+
+To build this book:
+
+```bash
+cd author-guide
+quarto render          # the HTML goes to author-guide/_book/ (not committed)
+quarto preview         # or: open a live preview in the browser
+```
+
+The source of each rule is the repository itself. If this guide and the repository disagree, the
+repository is correct: `yr/README.md` for the review pages, and the files in `.claude/skills/` for
+the other tasks.

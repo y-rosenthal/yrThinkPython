@@ -30,3 +30,7 @@ pip-log.txt
 jb/_build/
 jb/chap*.ipynb
 jb/yr/
+
+# Quarto build output of the author guide (render with: cd author-guide && quarto render)
+author-guide/_book/
+author-guide/.quarto/

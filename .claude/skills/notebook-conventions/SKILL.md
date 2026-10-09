@@ -82,9 +82,9 @@ the built site. For a new exercise, tag the `### Exercise` markdown cell and its
 New course material (chapter summaries, extra questions) goes in `yr/`, not in `chapters/`:
 one review notebook per chapter, `yr/chapNN_review.ipynb`, shown on the site as
 "NNb. Prof. Rosenthal's Review" right after the chapter. Read `yr/README.md` before creating or
-editing one: it has the page layout (concepts checklist, then easy → hard questions), the
-`<details>` answer format, the `# Your code here` and `raises-exception` conventions, and the
-TOC / index.md steps. The `yr-review-page` and `yr-review-questions` skills cover creating
+editing one: it has the page layout (concepts checklist, then easy → hard questions), how to write
+each kind of question (run blocks, `#### Answer` headings, markers), and the TOC / index.md steps.
+`CONTENT-AUTHOR-GUIDE.qmd` (in `author-guide/`) explains the same for a person, step by step. The `yr-review-page` and `yr-review-questions` skills cover creating
 pages and adding questions, with tools in `yr/tools/` that write outputs and pictures (`review.sh sync`)
 and verify answers (`review.sh check`). Review pages follow their own format (`yr/README.md`): they
 store outputs on their hidden run cells, so the "no stored outputs" rule above does not apply to them.
