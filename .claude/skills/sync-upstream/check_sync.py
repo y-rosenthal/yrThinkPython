@@ -135,7 +135,9 @@ def main(argv):
     before = opt('--before', default_before(merge))
     # Files edited after the merge commit (on purpose, on the sync branch) are checked as the merge left them; the
     # edits are listed for a person to read.
-    later = set((git('diff', '--name-only', merge) or '').split('\n')) - {''} if merge else set()
+    # (committed edits only: uncommitted changes in the working tree are always checked)
+    later = set((git('diff', '--name-only', merge, 'HEAD') or '').split('\n')) - {''} if merge else set()
+    later -= set((git('diff', '--name-only', 'HEAD') or '').split('\n'))
     base = (git('merge-base', before, upstream) or '').strip()
     if not base:
         sys.exit(f'no common commit for {before} and {upstream}')
@@ -150,7 +152,7 @@ def main(argv):
         b = git('show', f'{base}:{path}', binary=binary) if b_has else None
         f = git('show', f'{before}:{path}', binary=binary) if f_has else None
         u = git('show', f'{upstream}:{path}', binary=binary) if u_has else None
-        if path in later:
+        if path in later and (ROOT / path).exists():
             a = git('show', f'{merge}:{path}', binary=binary)
             notes.append(f'{path}: changed after the merge commit (checked as the merge left it; read the later edit)')
         else:
