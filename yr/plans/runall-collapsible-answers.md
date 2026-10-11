@@ -1,6 +1,6 @@
 # Plan: review pages that work with Colab's "Run all", with answers hidden until clicked
 
-**Status (2026-10-09): DONE. The new format is live on all six review pages.** `yr-review-runall` was merged into `v3` (merge `b488464`, deploy run 37996571197: success). `verify_live.py` passes, and `verify_site.py` passes 12/12 on every live page. Colab spot checks from the live links pass on ch02, ch03, ch04, ch06 and ch07 (Run all reaches the end, the error answers re-run live as plain text, all Answers stay closed); ch05 passed Part C. Open items, none blocking: the E14 jupyturtle paragraph in ch04 (see To do), and the checks not built (C8, C9, C11, E7, refactor, overlap lint).
+**Status (2026-10-09): DONE. The new format is live on all six review pages.** `yr-review-runall` was merged into `v3` (merge `b488464`, deploy run 37996571197: success). `verify_live.py` passes, and `verify_site.py` passes 12/12 on every live page. Colab spot checks from the live links pass on ch02, ch03, ch04, ch06 and ch07 (Run all reaches the end, the error answers re-run live as plain text, all Answers stay closed); ch05 passed Part C. Open items, none blocking: the checks not built (C8, C9, C11, E7, refactor, overlap lint).
 
 **Next step:**
 1. Done 2026-10-09: Steps 2, 3, 4 (Part C passes), 6, and the non-deploying parts of 7 (section 8).
@@ -76,8 +76,8 @@ Step numbers refer to section 8 of the plan below.
       code is text, so Colab underlines nothing; Run all reaches the end; nothing is visible outside closed Answers.
       "Pending work" note deleted from `CLAUDE.md`; plan marked done
 - [ ] With Prof. Rosenthal's OK: delete the branches `yr-runall-research` (never merge it) and `yr-review-runall`
-- [ ] Decide: E14 says to delete ch04's jupyturtle paragraph in the Questions intro (it repeats Concepts), but the
-      README's style rule says the Questions section introduces every module it uses. Kept for now
+- [x] Decided 2026-10-11 (Prof. Rosenthal): keep ch04's jupyturtle paragraph in the Questions intro (the style rule wins
+      over E14: the Questions section introduces every module it uses)
 
 ## Colab test results so far
 
