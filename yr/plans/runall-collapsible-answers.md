@@ -2,6 +2,11 @@
 
 **Status (2026-10-09): DONE. The new format is live on all six review pages.** `yr-review-runall` was merged into `v3` (merge `b488464`, deploy run 37996571197: success). `verify_live.py` passes, and `verify_site.py` passes 12/12 on every live page. Colab spot checks from the live links pass on ch02, ch03, ch04, ch06 and ch07 (Run all reaches the end, the error answers re-run live as plain text, all Answers stay closed); ch05 passed Part C. Open items, none blocking: the checks not built (C8, C9, C11, E7, refactor, overlap lint).
 
+**The research branch is now a tag (2026-10-11).** The branch `yr-runall-research` was deleted after its content was
+saved as the tag `research-2026-10`. Where this file says "tag `research-2026-10`", the work was done on that branch.
+To read it: `git fetch origin tag research-2026-10`, then `git switch --detach research-2026-10`. Never merge it into
+`v3`: its history contains a committed Python venv.
+
 **Next step:**
 1. Done 2026-10-09: Steps 2, 3, 4 (Part C passes), 6, and the non-deploying parts of 7 (section 8).
 2. Next: Prof. Rosenthal publishes: `git switch v3 && git merge yr-review-runall && git push` (or the yrpublish skill).
@@ -9,14 +14,14 @@
    under "To do".
 
 The two prototype v2 notebooks for Part A2:
-- Chapter 5 review page: https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/yr-runall-research/yr/plans/research/prototype-v2/chap05_review.ipynb
-- Errors, variant A vs B: https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/yr-runall-research/yr/plans/research/prototype-v2/errors_A_vs_B.ipynb
+- Chapter 5 review page: https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/research-2026-10/yr/plans/research/prototype-v2/chap05_review.ipynb
+- Errors, variant A vs B: https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/research-2026-10/yr/plans/research/prototype-v2/errors_A_vs_B.ipynb
 
 The review pages that are live today (2b–7b) are complete and working; this plan changes how
 their questions and answers are laid out. Early research notes:
 [runall-research-notes.md](runall-research-notes.md). Everything else the research produced (each
 agent's report, the three candidate plans, the judges, the critics, the prototype and the helper
-scripts) is on branch `yr-runall-research` in `yr/plans/research/`.
+scripts) is in the tag `research-2026-10` in `yr/plans/research/`.
 
 ## To do
 
@@ -25,11 +30,11 @@ Step numbers refer to section 8 of the plan below.
 - [x] Finish the plan (research, prototype, review) and write it into this file (Step 0)
 - [x] Step 1a: Prof. Rosenthal ran Part A on prototype v1 (results below): Run all OK; Answers too repetitive
 - [x] Step 1b: prototype v2 built (each output shown once, code hidden, outputs stored); three reviews; all blocking and major issues fixed
-- [x] Step 1c: push prototype v2 (2 files) to `yr-runall-research` (2026-10-08)
+- [x] Step 1c: push prototype v2 (2 files) to the research branch (now the tag `research-2026-10`) (2026-10-08)
 - [x] Step 1d, the test part: Part A2 run in Colab by Claude in Prof. Rosenthal's Chrome (2026-10-09; results below)
 - [x] Step 1d, A2 decisions: variant B, run-cell titles name the question, help note as is (2026-10-09)
 - [x] Prof. Rosenthal decided the rest of D1–D18 (2026-10-09: all as recommended)
-- [x] DRY audit for goals 9-11 (17-agent workflow, run on the laptop 2026-10-09; results on `yr-runall-research` in
+- [x] DRY audit for goals 9-11 (17-agent workflow, run on the laptop 2026-10-09; results in the tag `research-2026-10` in
       `yr/plans/research/dry-audit/`, commit ad089b6)
 - [x] Prof. Rosenthal decided E1–E20 (2026-10-09; `dry-audit/decisions.md`, commit 9d4f4ee; summarized below)
 - [x] DRY Colab tests 1-4 (2026-10-09; results below): E12 works with one rule, E13 confirmed (1000), E18 needs Python 3.13
@@ -41,12 +46,12 @@ Step numbers refer to section 8 of the plan below.
 - [x] Live now: question numbers stay fixed during a semester (`review_cells.py` accepts `3b`; README and skills say so; 2026-10-09)
 - [x] Revise sections 6–8 and 10 (verification, checklists, rollout, uncertainties) for v3, with Step 3 (2026-10-09)
 - [x] Prototype check C4 on the 11 fix blocks (2026-10-09): all 11 pass trimmed, and 3 negative tests fail as they must
-      (`yr/plans/research/c4-prototype/` on `yr-runall-research`). E5 is confirmed
+      (`yr/plans/research/c4-prototype/` in the tag `research-2026-10`). E5 is confirmed
 - [ ] Fix the problems the audit found (list in the DRY audit section): ch05 "about 3000" frames (E13), the v2 converter's
       leftover sentences, the check gaps
 - [x] Save the prototype v2 files the checkpoint skipped (lock file, shell scripts, `v2fix_exp/` experiments) to
-      `yr-runall-research` under `yr/plans/research/v2-workflow/` (2026-10-08, commit 632e55e)
-- [x] Step 2 (2026-10-09): a v3 smoke test (`make_smoke_v3.py`, on `yr-runall-research` under `yr/plans/research/smoke-v3/`,
+      the tag `research-2026-10`, under `yr/plans/research/v2-workflow/` (2026-10-08, commit 632e55e)
+- [x] Step 2 (2026-10-09): a v3 smoke test (`make_smoke_v3.py`, in the tag `research-2026-10` under `yr/plans/research/smoke-v3/`,
       which never deploys, instead of a `colab-smoke-test` branch) run in Colab by Claude; results under "Colab test results
       so far"; the plan is adjusted (2.2: imports marker, gentler out-of-order click)
 - [x] Step 3 (2026-10-09, branch `yr-review-runall`): build the new tools (`review_format.py`, `sync_review.py`, new
@@ -62,7 +67,7 @@ Step numbers refer to section 8 of the plan below.
 - [x] Step 4 (2026-10-09): chapter 5 converted on `yr-review-runall` (`convert_v3.py`, gate 41/41, check, lint, site
       build and `verify_site.py` pass); Part C run in Colab by Claude from the branch link: passes
 - [x] Step 6 (2026-10-09, on `yr-review-runall`): ch02, ch03, ch04, ch06 and ch07 converted (`convert_v3.py` with an
-      edits file per page, on `yr-runall-research`); gate OK on all (one intended difference: ch07 Q14's doctest line
+      edits file per page, in the tag `research-2026-10`); gate OK on all (one intended difference: ch07 Q14's doctest line
       number, 9 to 4); `review.sh check`, lint (Python 3.12), site build and `verify_site.py` pass on all six
 - [x] Colab spot checks of ch02, ch03, ch04, ch06, ch07 from the live links (2026-10-09): Run all reaches the end, nothing
       visible outside closed Answers, error run cells re-run live as text (ch02 Q14a with Colab's NOTE), ch07's doctest and
@@ -75,7 +80,8 @@ Step numbers refer to section 8 of the plan below.
 - [x] Step 7, after publishing (2026-10-09): the three reported problems are gone on the live pages (goal 6): question
       code is text, so Colab underlines nothing; Run all reaches the end; nothing is visible outside closed Answers.
       "Pending work" note deleted from `CLAUDE.md`; plan marked done
-- [ ] With Prof. Rosenthal's OK: delete the branches `yr-runall-research` (never merge it) and `yr-review-runall`
+- [x] Branches cleaned up (2026-10-11, Prof. Rosenthal's OK): `yr-review-runall` and `content-author-guide` deleted (both
+      merged); `yr-runall-research` archived as tag `research-2026-10`, then deleted, with its local worktree
 - [x] Decided 2026-10-11 (Prof. Rosenthal): keep ch04's jupyturtle paragraph in the Questions intro (the style rule wins
       over E14: the Questions section introduces every module it uses)
 
@@ -101,7 +107,7 @@ Chrome. VERIFIED in Colab:
   A/B prototype) to start this one.
 
 **2026-10-09, Step 3 test page**, run by Claude in Prof. Rosenthal's Chrome: the self-test fixture after `review.sh sync`
-(`yr/plans/research/step3/` on `yr-runall-research`: `colab_step3.ipynb`, `results-2026-10-09.md`). VERIFIED in Colab:
+(`yr/plans/research/step3/` in the tag `research-2026-10`: `colab_step3.ipynb`, `results-2026-10-09.md`). VERIFIED in Colab:
 - **The guard works** (plan 2.2): ▶ on a wrapped run cell before setup prints `Run the setup cells first: Runtime → Run all.`
   with a green check; no red icon and no wrapper code (Step 2's out-of-order NameError is gone).
 - Run all reaches the end with no error marks; Answers stay closed, with no red mark on their rows.
@@ -111,7 +117,7 @@ Chrome. VERIFIED in Colab:
 - Locally: Pyright (basic and standard, IPython resolvable) reports nothing in the helper cell or the run cells.
 
 **2026-10-09, v3 smoke test (Step 2)**, run by Claude in Prof. Rosenthal's Chrome (`yr/plans/research/smoke-v3/` on
-`yr-runall-research`: `results-2026-10-09.md`, `screens/`). VERIFIED in Colab (Python 3.13.16):
+the tag `research-2026-10`: `results-2026-10-09.md`, `screens/`). VERIFIED in Colab (Python 3.13.16):
 - **Collapse:** Colab honours only its `collapsed_sections` list (a heading with only the JupyterLab key stays open); keep
   both, as 2.2 says.
 - **Variant B works everywhere it matters:** Run all reaches the end; closed Answers show no red marks; a failing import
@@ -126,7 +132,7 @@ Chrome. VERIFIED in Colab:
   the block.
 
 **2026-10-09, prototype v2 (Part A2) and DRY tests 1-4**, run by Claude in Prof. Rosenthal's Chrome (Claude in Chrome
-extension). Full table and screenshots: `yr/plans/research/dry-audit/colab-tests/` on `yr-runall-research`
+extension). Full table and screenshots: `yr/plans/research/dry-audit/colab-tests/` in the tag `research-2026-10`
 (`results-2026-10-09.md`, `screens/`). VERIFIED:
 - **Colab's stack is Python 3.13.16**, IPython 7.34.0, ipykernel 6.17.1, not Python 3.12 as this plan assumed. `colablike.lock`
   must move to 3.13 (E18). Consequence: ch04 Q15c's "Did you mean 'sides'?" **does** appear in Colab, so section 9's D17
@@ -153,7 +159,7 @@ extension). Full table and screenshots: `yr/plans/research/dry-audit/colab-tests
 - **Earlier open items, now decided:** variant A or B (B) (screenshots `a2-6-variant-A-after-runall.jpg`, `a2-6-variant-B-after-runall.jpg`),
   the run-cell titles, and the help note's wording (A2-7).
 
-**2026-10-08, prototype v1** (chapter 5 from `yr-runall-research`; Run all, then Answers opened). VERIFIED from his screenshots:
+**2026-10-08, prototype v1** (chapter 5 from the tag `research-2026-10`; Run all, then Answers opened). VERIFIED from his screenshots:
 - **Run all does not stop at a caught error (variant A works in Colab).** The page's 21 code cells ran in order: Q2's cell [3], Q8's three error cells [9] [10] [11], and Q1 re-run as [22]. This settles test B4 for variant A.
 - **Q8's line numbers were right.** Each traceback read `File "/tmp/ipykernel_2148/445721521.py", line 2`, and line 2 is where each part's mistake is. The newline after `r"""` does not shift line numbers: IPython drops leading blank lines (VERIFIED on 7.34 and 9.17). 445721521 is ipykernel's hash of part a's code, and v2 stores the same file name.
   - The first version of this entry called these headers "off by one". That was a misreading.
@@ -201,7 +207,7 @@ extension). Full table and screenshots: `yr/plans/research/dry-audit/colab-tests
     quoted in explanations. Where something can't be generated (prose), the plan must say so and say how it is kept correct.
     An audit of every question against goals 9-11 was started in the cloud session (workflow wf_d7f38dd1-6fa), stopped, and
     run to the end on Prof. Rosenthal's laptop on 2026-10-09 (workflow wf_8b89496c-710). Its script is on branch
-    `yr-runall-research` at `yr/plans/research/workflows/dry-generated-answers-audit.js`; its results are summarized in the
+    the tag `research-2026-10`, at `yr/plans/research/workflows/dry-generated-answers-audit.js`; its results are summarized in the
     section "DRY audit and decisions E1–E20" below.
 11. **Answer code a student can copy and run (2026-10-09; replaces the "runs as a standalone .py file" rule).** "I don't need each
     Answer code block to be an actual .py file. I just mean that if a student copies the Answer from the rendered page, that the
@@ -217,7 +223,7 @@ extension). Full table and screenshots: `yr/plans/research/dry-audit/colab-tests
 
 ## DRY audit and decisions E1–E20 (2026-10-09)
 
-Full results on branch `yr-runall-research` in `yr/plans/research/dry-audit/`: `final.md` (the answer), `decisions.md`
+Full results in the tag `research-2026-10` in `yr/plans/research/dry-audit/`: `final.md` (the answer), `decisions.md`
 (Prof. Rosenthal's decisions, quoting Prof. Rosenthal where a recommendation was changed), `result.json` (every agent's result) and
 `work/` (the agents' scripts and prototypes: `design-1/`, `design-2/`, `design-3/`, `verify-examples/`, `prose-claims/`, ...).
 In those files the decisions are numbered D1–D20; here they are **E1–E20**, so they don't clash with section 9's D1–D18.
@@ -308,7 +314,7 @@ Two reviewers then checked the draft against the repo. This revision fixes every
 Prototype v2 later replaced the helper cell and `run_code` with an inline `run_cell` and stored outputs (section 2.2). The bullets above are history.
 
 **Status.** See the Status line at the top. Steps 0–3 are done (2026-10-08 and 2026-10-09); the live review pages
-are unchanged. The research, prototypes and test pages are on branch `yr-runall-research` under `yr/plans/research/`
+are unchanged. The research, prototypes and test pages are in the tag `research-2026-10` under `yr/plans/research/`
 (never merge it: its history contains a committed venv); the tools are on branch `yr-review-runall`.
 
 **Evidence labels.** **VERIFIED** = tested in this container or seen in primary sources. **BELIEVED** = strong but indirect evidence. **UNKNOWN** = only a live Colab session can tell (section 7).
@@ -730,7 +736,7 @@ with `git show v3:PATH`), and lint rules for 2.4.
 
 #### 4.3 `yr/tools/sync_review.py` (new), run as `review.sh sync NB…`
 Implements section 3 (prototype `sync_v2.py` plus design-3's `proto_writecode.py` and design-1's `gen_static.py` /
-`inline_values.py`, all on `yr-runall-research` under `yr/plans/research/`). Needs nbclient, cairosvg and the pinned kernel.
+`inline_values.py`, all in the tag `research-2026-10` under `yr/plans/research/`). Needs nbclient, cairosvg and the pinned kernel.
 
 **`yr/tools/ensure_colab_venv.sh` + `colablike.lock`:** `uv venv -p 3.13`, `uv pip sync` of the lock (ipython 7.34.0,
 ipykernel 6.17.1, jupyter_client, pygments, traitlets, pyzmq, …), kernel `colablike`. The lock moves from 3.12 to 3.13
@@ -753,7 +759,7 @@ ipykernel 6.17.1, jupyter_client, pygments, traitlets, pyzmq, …), kernel `cola
   - Generated regions and filled values equal what `sync` writes; markers well formed (rule 10).
   - "Same output before and after" for refactor questions (text: stdout; drawings: SVG hash).
   - Name-reuse lint (E10); Concepts overlap lint (E14).
-- **C4 prototype (VERIFIED 2026-10-09, `yr/plans/research/c4-prototype/` on `yr-runall-research`):** all 11 fix blocks pass
+- **C4 prototype (VERIFIED 2026-10-09, `yr/plans/research/c4-prototype/` in the tag `research-2026-10`):** all 11 fix blocks pass
   trimmed; a block missing its input line (ch02 Q4 prints `19.9919.99` once Q16's inputs are a cell), a missing import and a
   failing doctest all fail. **Each block must run in its own fresh end-of-Run-all namespace**: in one shared kernel an
   earlier block's `price = 4` hid the hazard. Step 3 runs each block in its own fork of the end-of-Run-all kernel (on
@@ -796,7 +802,7 @@ question).
 
 ### 5. Converting the six pages
 
-**The script.** The one-off converter (`convert_v2.py` + gate `verify_removed.py`, on `yr-runall-research`), extended for
+**The script.** The one-off converter (`convert_v2.py` + gate `verify_removed.py`, in the tag `research-2026-10`), extended for
 v3. Not committed to v3 (D13). Per page:
 1. **Question code cells → run blocks** (as v2; same ids; `run_code` wrappers removed with `ast`; part labels folded in).
 2. **Answers** (as v2): `<details>` → `#### Answer` + explanation, part and summary cells (split points table below);
@@ -910,7 +916,7 @@ Use Chrome, signed in, with default settings. Take a screenshot wherever it says
 
 #### Part A: prototype v1 (DONE 2026-10-08; results under "Colab test results so far")
 History: Part A is done, and Part A2 replaces it. Its items are labelled "v1 A1" to "v1 A4", so they don't clash with Part A2's A2-1 to A2-7. The v1 page, on the research branch (the URL returns HTTP 200, VERIFIED):
-`https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/yr-runall-research/yr/plans/research/prototype/out/all/chap05_review.ipynb`
+`https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/research-2026-10/yr/plans/research/prototype/out/all/chap05_review.ipynb`
 
 **How v1 differed from the plan of that time** (history; prototype v2 replaced that plan, section 2.2). Part A tested the key questions: collapse on open, Run all, live answers and the keyboard. The differences:
 - question code sits inside the heading cell, not in separate run-block cells;
@@ -936,13 +942,13 @@ History: Part A is done, and Part A2 replaces it. Its items are labelled "v1 A1"
 
 #### Part A2: prototype v2 (DONE 2026-10-09)
 
-The checklist below was written with prototype v2. Its source is key `colab_checklist_v2` in the scratchpad file `v2_final.json`, which will not last; a copy is also in `yr/plans/research/v2-workflow/fix-v2.md` on `yr-runall-research`. This plan adds two questions to it: error-record text in A2-3, and the run time in A2-4.
+The checklist below was written with prototype v2. Its source is key `colab_checklist_v2` in the scratchpad file `v2_final.json`, which will not last; a copy is also in `yr/plans/research/v2-workflow/fix-v2.md` in the tag `research-2026-10`. This plan adds two questions to it: error-record text in A2-3, and the run time in A2-4.
 
 **Prototype v2: Colab test (about 15 minutes).** Use Chrome, signed in, default settings. Take a screenshot wherever it says [shot].
 
-Both notebooks are pushed to branch `yr-runall-research` (it never deploys; pushed 2026-10-08):
-- Main page: https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/yr-runall-research/yr/plans/research/prototype-v2/chap05_review.ipynb
-- A/B page: https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/yr-runall-research/yr/plans/research/prototype-v2/errors_A_vs_B.ipynb
+Both notebooks were pushed on 2026-10-08 to the branch that is now the tag `research-2026-10` (it never deploys):
+- Main page: https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/research-2026-10/yr/plans/research/prototype-v2/chap05_review.ipynb
+- A/B page: https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/research-2026-10/yr/plans/research/prototype-v2/errors_A_vs_B.ipynb
 
 Don't use the page's own "Run this page on Colab" link: it opens today's page.
 
@@ -997,7 +1003,7 @@ Don't use the page's own "Run this page on Colab" link: it opens today's page.
 | Prefers B in A2-6 | Switch to variant B: a helper cell again, stderr parsing in the checks (4.4), and a failing-import test (Part B) |
 | END line shows Python 3.13 or IPython 8+ | Update `colablike.lock`, re-sync with `--accept`, and re-run V1 (section 10 item 7); nested `run_cell` already looks normal on 9.17 |
 
-#### Part B: smoke-test notebooks (DONE differently: the v3 smoke test of Step 2, on `yr-runall-research`)
+#### Part B: smoke-test notebooks (DONE differently: the v3 smoke test of Step 2, in the tag `research-2026-10`)
 **Before pushing, the generator `make_smoke.py` is updated to v2:**
 - question code is a `~~~python` run block;
 - a wrapped run cell is the inline `__import__('IPython').get_ipython().run_cell(r"""…""");`, with no helper;
@@ -1077,16 +1083,16 @@ Your plan file's to-do list says "convert chapter 5 first and publish it". So fo
 **Steps:**
 0. **Step 0, save the work. DONE on 2026-10-08** (see Status above).
    - Write this plan into `yr/plans/runall-collapsible-answers.md`: replace "Draft plan", set the Status line, tick to-do item 1. Commit it on a branch from `origin/v3` and push it to v3, the same way the earlier plan commits went (it changes only plan files; the site rebuilds unchanged).
-   - Commit the scratchpad scripts the plan depends on to `yr-runall-research` under `yr/plans/research/prototype/scripts/`: `plan-risk/make_smoke.py`, `plan-maint/exp.py`, `plan-maint/conv3.py`, `verify-repo/runvis.py`, and this revision's `final-rev/` tests.
+   - Commit the scratchpad scripts the plan depends on to the research branch (now the tag `research-2026-10`) under `yr/plans/research/prototype/scripts/`: `plan-risk/make_smoke.py`, `plan-maint/exp.py`, `plan-maint/conv3.py`, `verify-repo/runvis.py`, and this revision's `final-rev/` tests.
      - Saved on 2026-10-08 under `yr/plans/research/scratch/` (with the other agents' scripts and logs).
    - After this step, moving the session to your laptop loses nothing.
 1. **Step 1.**
    - **1a. DONE (2026-10-08).** You ran Part A on prototype v1; the results are at the top ("Colab test results so far").
    - **1b. DONE.** Prototype v2 was built and reviewed by three reviewers, and every blocking and major issue was fixed.
-   - **1c. DONE (2026-10-08).** Prototype v2 (2 notebooks) was pushed to `yr-runall-research` under `yr/plans/research/prototype-v2/`.
+   - **1c. DONE (2026-10-08).** Prototype v2 (2 notebooks) was pushed to the research branch (now the tag `research-2026-10`) under `yr/plans/research/prototype-v2/`.
    - **1d.** You run Part A2 and decide D1–D18 (the defaults are the recommendations).
    - The files the checkpoint skipped were saved on 2026-10-08 (see To do).
-2. **Step 2. DONE (2026-10-09)**: the v3 smoke test (`make_smoke_v3.py`) on `yr-runall-research`, run in Colab by
+2. **Step 2. DONE (2026-10-09)**: the v3 smoke test (`make_smoke_v3.py`) in the tag `research-2026-10`, run in Colab by
    Claude; no `colab-smoke-test` branch was needed.
 3. **Step 3. DONE (2026-10-09)** on branch `yr-review-runall` (from `origin/v3`; 3 commits, not pushed yet). Every gate
    below passed: the six old pages pass the old checks through the new tools, their prep output is identical, the
@@ -1107,7 +1113,7 @@ Your plan file's to-do list says "convert chapter 5 first and publish it". So fo
      - `check_notebooks` passes on Python 3.12;
      - the Colab-like venv recipe works.
 4. **Step 4.** Convert **chapter 5 only** and run V1–V10. Push the branch; you run Part C from the branch link (D9).
-   - First extend the one-off converter (`convert_v2.py` + `verify_removed.py`, on `yr-runall-research`) for v3
+   - First extend the one-off converter (`convert_v2.py` + `verify_removed.py`, in the tag `research-2026-10`) for v3
      (section 5): run blocks, Answer cells, trimmed solutions, markers, `<!--=error-->`, and the wording edits.
 5. **Step 5.** Publish chapter 5 with the yrpublish skill: the tools and ch05 go to v3 in one merge.
    - `verify_live.py` checks the live page.
@@ -1119,8 +1125,9 @@ Your plan file's to-do list says "convert chapter 5 first and publish it". So fo
    - confirm on the live pages that your three reported problems are gone: underlines, Run all stopping, answers visible;
    - mark the plan file done and delete "Pending work" from `CLAUDE.md`;
    - stop the checkpoint scripts `checkpoint.sh` and `checkpoint_v2.sh` if they are still running (they exit by themselves when their workflow finishes), then `git worktree remove` the scratchpad worktrees `v3wt` and `v3main`;
-   - with your OK, delete the `colab-smoke-test` and `yr-runall-research` branches.
-     - **`yr-runall-research` must never be merged.** Its history contains a committed Python venv: 2,525 files under `prototype/venv-colablike/`, removed from the tip in `d8da395` (VERIFIED).
+   - with your OK, delete the research branch. DONE 2026-10-11: archived as tag `research-2026-10`, then deleted (a
+     `colab-smoke-test` branch was never made).
+     - **Never merge the tag `research-2026-10`.** Its history contains a committed Python venv: 2,525 files under `prototype/venv-colablike/`, removed from the tip in `d8da395` (VERIFIED).
      - Keep it until Part A2 is done, since Part A2's links point at `prototype-v2/`.
 
 **Rollback.** `git revert` of a page commit on v3 brings back the old page. The tools read both formats until Step 7, the site redeploys on push, and Colab links follow v3 immediately. A bad tools commit is reverted the same way.
@@ -1156,9 +1163,9 @@ Your plan file's to-do list says "convert chapter 5 first and publish it". So fo
 
 - **D1. The overall design.** Question code as text; a closed Answer heading with the explanation plus hidden run cells that show the code's stored output, re-run by Run all. *Recommended.*
 - **D2. Permission to push.** *Recommended.* Pushes (a) and (b) are done. The pushes:
-  - (a) Step 0: the plan file to v3, and the scripts to `yr-runall-research` (done);
-  - (b) prototype v2 to `yr-runall-research` (done 2026-10-08);
-  - (c) the files the checkpoint skipped, to `yr-runall-research` (see To do);
+  - (a) Step 0: the plan file to v3, and the scripts to the research branch (now the tag `research-2026-10`) (done);
+  - (b) prototype v2 to the research branch (now the tag `research-2026-10`) (done 2026-10-08);
+  - (c) the files the checkpoint skipped, to the research branch (now the tag `research-2026-10`) (see To do);
   - (d) `colab-smoke-test` (never deploys);
   - (e) later, `yr-review-runall`.
 - **D3. Write-code questions get no runnable solution cell.** *Recommended.* A solution cell would replace the student's own function during Run all.
@@ -1175,7 +1182,7 @@ Your plan file's to-do list says "convert chapter 5 first and publish it". So fo
   - Answers show open in VS Code, "Colab in VS Code/Cursor", GitHub's preview, nbviewer and classic Notebook 6.
   - Anyone browsing the repo sees the answers, including the stored outputs (D14).
 - **D12. No new skill.** Update `yr-review-questions` and `yr-review-page`, and put the guide for people near the top of `yr/README.md`. *Recommended.*
-- **D13. Don't commit the one-off conversion scripts to v3.** `convert_v2.py` and `verify_removed.py` are saved on `yr-runall-research` under `yr/plans/research/v2-workflow/files/scripts/`, and `make_smoke.py` also goes on the smoke branch. *Recommended.*
+- **D13. Don't commit the one-off conversion scripts to v3.** `convert_v2.py` and `verify_removed.py` are saved in the tag `research-2026-10` under `yr/plans/research/v2-workflow/files/scripts/`, and `make_smoke.py` also goes on the smoke branch. *Recommended.*
 - **D14. Store outputs in the notebook,** generated by `sync` on the pinned Colab-like stack and stamped. *Recommended.*
   - Gain: Answers show their output before Run all and on the site.
   - Costs: a lint exception, running `ensure_colab_venv.sh` on your laptop, and answers visible to anyone browsing GitHub.
@@ -1232,7 +1239,7 @@ guard on an out-of-order click, value markers mid-sentence, invisible block mark
 - `v2_before_fix/`: prototype v2 before the review fixes;
 - `v2review_colab/`, `v2review_student/`: the v2 reviewers' probes.
 
-This revision also registered two test kernelspecs (`rk_yrThinkPython`, `rk_venv-ipy7`) under `/root/.local/share/jupyter/kernels`, outside the repo. The prototype is also on branch `yr-runall-research` under `yr/plans/research/prototype/`.
+This revision also registered two test kernelspecs (`rk_yrThinkPython`, `rk_venv-ipy7`) under `/root/.local/share/jupyter/kernels`, outside the repo. The prototype is also in the tag `research-2026-10` under `yr/plans/research/prototype/`.
 
 ## How to resume (for a future Claude session)
 
@@ -1243,17 +1250,17 @@ the one-off converter for v3 and convert chapter 5. Don't change the live review
 go-ahead.
 
 **Earlier (2026-10-09):** goals 9-12 came after prototype v2. The DRY audit for them is done, and Prof. Rosenthal decided
-E1–E20 (section "DRY audit and decisions E1–E20"; full results on branch `yr-runall-research` in `yr/plans/research/dry-audit/`).
-On the laptop, that branch is checked out as a worktree at `../yrThinkPython-research`, and the agents' scratch folder is
+E1–E20 (section "DRY audit and decisions E1–E20"; full results in the tag `research-2026-10` in `yr/plans/research/dry-audit/`).
+The worktree `../yrThinkPython-research` that held the branch was removed on 2026-10-11. The agents' scratch folder was
 `../yrThinkPython-work/`. Next: the Colab tests (Part A2 plus the DRY tests), then rewrite sections 2–5 for E1–E20. Don't change
 the live review pages before Prof. Rosenthal's go-ahead.
 
 
 The research was done by a multi-agent workflow in a cloud session on 2026-10-08. While it ran, a
-background script pushed each finished agent's result to the branch **`yr-runall-research`**, in
+background script pushed each finished agent's result to the branch **`yr-runall-research`** (now the tag `research-2026-10`), in
 `yr/plans/research/`: one markdown file per agent (research, verify, plan, judge, synthesize, critic,
 revise) plus the prototype's files in `prototype/` (converted chapter 5 notebook, modified
-`prep_notebooks.py`, conversion scripts). Start there: `git fetch origin yr-runall-research`. The final
+`prep_notebooks.py`, conversion scripts). Start there: `git fetch origin tag research-2026-10`, then `git switch --detach research-2026-10`. The final
 plan (`revise.md`) is copied into this file. Prototype v2 is in the same folder: `prototype-v2/` holds the two Part A2 notebooks, and `v2-workflow/` holds its scripts (`files/scripts/`: `review_v2.py`, `sync_v2.py`, `check_v2.py`, `selftest_v2.py`, `convert_v2.py`, `verify_removed.py`, …), the three reviews, logs, and `fix-v2.md` (the plan delta and the A2 checklist). Before implementing, ask Prof. Rosenthal for the decisions in section 9.
 Originally, if the plan had been missing, the instructions were to redo only the missing parts: map every question on the six pages and every tool that
 would change, build a prototype of the chapter 5 conversion in a scratch folder (convert the page,
