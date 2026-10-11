@@ -7,7 +7,8 @@ Usage:
   upstream_diff.py --all                # full diff for every notebook that differs
   upstream_diff.py --ref origin/v3      # compare against another ref (default upstream/v3)
 
-Cells are matched by cell id, so a cell that moved is not reported as removed+added.
+Cells are matched by cell id, so a cell that moved is not reported as removed+added. Links that differ only in
+the repository name (Colab links rewritten to the fork, see sync-upstream) are not differences.
 Cells tagged "course" are course-specific additions/edits (see notebook-conventions);
 they are counted separately from untagged changes, which are candidates to report upstream.
 Stdlib + git only. Run `git fetch upstream` first for a current comparison.
@@ -20,6 +21,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 COURSE_TAG = "course"
+sys.path.insert(0, str(ROOT / ".claude" / "skills" / "sync-upstream"))
+from fork_colab_links import same_repo  # noqa: E402  (Colab links rewritten to the fork are not differences)
 
 
 def cells_of(text):
@@ -50,7 +53,7 @@ def compare(rel, ref):
     by_id = {c["id"]: c for c in theirs}
     our_ids = {c["id"] for c in ours}
     added = [c for c in ours if c["id"] not in by_id]
-    changed = [(by_id[c["id"]], c) for c in ours if c["id"] in by_id and by_id[c["id"]]["src"] != c["src"]]
+    changed = [(by_id[c["id"]], c) for c in ours if c["id"] in by_id and same_repo(by_id[c["id"]]["src"]) != same_repo(c["src"])]
     removed = [c for c in theirs if c["id"] not in our_ids]
     return {"rel": rel, "new_file": False, "added": added, "changed": changed, "removed": removed}
 

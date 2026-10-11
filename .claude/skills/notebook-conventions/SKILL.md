@@ -51,6 +51,9 @@ stay out of the committed file.
   Exactly one exception name. The magic is defined in `thinkpython.py`; the build strips
   the first line so the site shows plain code.
 - **Adding methods to a class across cells** uses `%%add_method_to ClassName` (chap 15-17).
+- **Colab links** in the notebooks (Downey's "Run this notebook on Colab" link at the top of each chapter, links to
+  the Jupyter introduction) point to this fork. After editing or syncing, run
+  `python3 .claude/skills/sync-upstream/fork_colab_links.py`; `check_notebooks.py` fails if one points to Downey.
 - **Setup cells**: each chapter starts with the `download()` cell that fetches
   `thinkpython.py`, `diagram.py`, sometimes `jupyturtle.py`/`words.txt` from
   `https://github.com/AllenDowney/ThinkPython/raw/v3/…`. Those URLs point at the

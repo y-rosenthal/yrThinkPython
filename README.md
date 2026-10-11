@@ -61,9 +61,14 @@ rerun it after merging upstream changes.
 
 ## Keeping up with the original
 
-The `upstream` remote points at the original repository:
+The `upstream` remote points at the original repository. The fork takes all of Downey's changes, and keeps its
+own edits to his pages, its own pages (`yr/`, `solutions/`, `author-guide/`) and its own Colab links. Use the
+`sync-upstream` skill of Claude Code, which follows this procedure on a topic branch:
 
 ```bash
 git fetch upstream
-git merge upstream/v3
+git switch -c sync-upstream-YYYY-MM v3
+git merge --no-ff --no-commit upstream/v3       # resolve conflicts: see .claude/skills/sync-upstream/SKILL.md
+python3 .claude/skills/sync-upstream/fork_colab_links.py    # his Colab links -> the fork's
+python3 .claude/skills/sync-upstream/check_sync.py          # proves that nothing was lost; must print OK
 ```

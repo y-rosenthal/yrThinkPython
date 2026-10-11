@@ -80,6 +80,18 @@ finds a problem, the website does not change.
 **Corrections to the book itself** go to Allen Downey as a GitHub issue, not as a pull request.
 The `contribute-upstream` skill writes the issue text.
 
+#### Updates from Allen Downey
+
+Downey keeps the book up to date. The fork takes all of his changes, and keeps:
+
+- each change that you made to his pages (cells tagged `course`, and corrections);
+- your own pages: the review pages in `yr/`, `solutions/`, and this guide;
+- your Colab links: each link in the notebooks opens your fork, not his.
+
+Use the `sync-upstream` skill of Claude Code. It merges his changes on a topic branch, points his new Colab links
+to your fork, and runs `check_sync.py`, which fails if any of your work is lost or any of his changes did not
+arrive. Publish only after the checks pass.
+
 ## Part 2: the chapter notebooks
 
 The book's chapters are in `chapters/`. The website shows them, and Colab opens them. Keep your

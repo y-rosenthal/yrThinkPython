@@ -30,6 +30,16 @@ RUN_IN_BLANK = re.compile(r'(\[Run this notebook on Colab\]\(https://colab\.rese
                           r'y-rosenthal/yrThinkPython/blob/v3/)chapters/(chap\d\d\.ipynb\))')
 
 
+REPO_NAME = re.compile(r'(AllenDowney/ThinkPython|y-rosenthal/yrThinkPython)(Solutions)?')
+RUN_LINK = re.compile(r'(\[Run this notebook on Colab\]\(\S*?/blob/v3/)(?:blank|chapters)/')
+
+
+def same_repo(text):
+    """Text with the two repositories' names made the same: compare with this so that a link rewritten to the fork
+    is not a difference (used by check_sync.py, upstream_diff.py and issue_body.py)."""
+    return RUN_LINK.sub(r'\1', REPO_NAME.sub(r'REPO\2', text))
+
+
 def fix_text(text, in_blank=False, missing=None):
     """The text with its Colab links pointed at the fork (missing: a list that gets the targets the fork lacks)."""
     def repl(m):

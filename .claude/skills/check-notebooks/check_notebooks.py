@@ -17,6 +17,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "yr" / "tools"))
 import review_format  # noqa: E402  (stdlib only)
+sys.path.insert(0, str(ROOT / ".claude" / "skills" / "sync-upstream"))
+import fork_colab_links  # noqa: E402  (stdlib only)
 KNOWN_MAGICS = {"%%expect", "%%add_method_to", "%%expect_error"}
 SOLUTION_MARK = "# Solution goes here"
 
@@ -117,6 +119,12 @@ def check_toc_and_links():
                 problems.append(f"jb/{page}: Colab link points at {repo}@{branch}, not the fork's v3: {rel}")
             if not (ROOT / rel).exists():
                 problems.append(f"jb/{page}: Colab link target does not exist: {rel}")
+
+    changed, colab_problems = fork_colab_links.run(check=True)
+    for rel in changed:
+        problems.append(f"{rel}: has Colab links to AllenDowney/ThinkPython; run "
+                        ".claude/skills/sync-upstream/fork_colab_links.py")
+    problems.extend(colab_problems)
 
     for p in sorted((ROOT / "yr").glob("*.ipynb")):
         if f"yr/{p.stem}" not in toc_files:

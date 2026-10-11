@@ -16,6 +16,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(ROOT / ".claude" / "skills" / "sync-upstream"))
+from fork_colab_links import same_repo  # noqa: E402  (the fork's Colab links are not corrections)
 SITE = "https://allendowney.github.io/ThinkPython"
 
 
@@ -67,7 +69,7 @@ def main(argv):
         up = by_id.get(cid)
         if up is None:
             changed.append((i, kind, None, src))
-        elif up[1] != src:
+        elif same_repo(up[1]) != same_repo(src):
             changed.append((i, kind, up[1], src))
     if not changed:
         print(f"{rel}: no cells differ from upstream/v3" + (f" (cell {only})" if only is not None else "")

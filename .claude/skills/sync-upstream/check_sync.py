@@ -6,8 +6,9 @@ changes arrived. Stdlib + git only.
 
 Compares three versions with the working tree (the merge result):
   BASE      the last common commit of the fork and upstream (git merge-base BEFORE UPSTREAM)
-  BEFORE    the fork before the merge (default: the first parent of HEAD if HEAD is the merge, else HEAD while a
-            merge is in progress, else v3)
+  BEFORE    the fork before the merge (default: HEAD while a merge is in progress; else the first parent of the
+            newest merge of UPSTREAM on this branch; else v3)
+Files edited after that merge commit are checked as the merge left them, and listed as notes.
   UPSTREAM  Downey's version (default upstream/v3)
 
 Rules (the fork's sync policy, .claude/skills/sync-upstream/SKILL.md):
@@ -36,8 +37,6 @@ sys.path.insert(0, str(HERE))
 import fork_colab_links  # noqa: E402
 
 FORK_PAGES = ('yr/', 'solutions/', 'author-guide/')
-REPO = re.compile(r'(AllenDowney/ThinkPython|y-rosenthal/yrThinkPython)(Solutions)?')
-RUN_LINK = re.compile(r'(\[Run this notebook on Colab\]\(\S*?/blob/v3/)(?:blank|chapters)/')
 BINARY = ('.zip', '.png', '.jpg', '.jpeg', '.gif', '.pdf', '.svg')
 
 
@@ -54,7 +53,7 @@ def files_at(ref):
 
 def norm(text):
     """Text with repository names made the same, so a link rewritten to the fork is not a difference."""
-    return RUN_LINK.sub(r'\1', REPO.sub(r'REPO\2', text))
+    return fork_colab_links.same_repo(text)
 
 
 def cells(text):
@@ -79,11 +78,19 @@ def worktree(path, binary=False):
     return data if binary else data.decode('utf-8', 'replace')
 
 
-def default_before():
+def find_merge(upstream):
+    """The newest merge commit on HEAD's first-parent line whose second parent is in UPSTREAM, or None."""
+    for line in (git('rev-list', '--first-parent', '--parents', '-n', '50', 'HEAD') or '').split('\n'):
+        ids = line.split()
+        if len(ids) > 2 and git('merge-base', '--is-ancestor', ids[2], upstream) is not None:
+            return ids[0]
+    return None
+
+
+def default_before(merge):
     if (ROOT / '.git' / 'MERGE_HEAD').exists():
         return 'HEAD'
-    parents = (git('rev-list', '--parents', '-n', '1', 'HEAD') or '').split()
-    return 'HEAD^1' if len(parents) > 2 else 'v3'
+    return f'{merge}^1' if merge else 'v3'
 
 
 def check_notebook(path, b, f, u, a, problems, notes):
@@ -123,12 +130,18 @@ def added_lines(old, new):
 
 def main(argv):
     opt = lambda name, default: argv[argv.index(name) + 1] if name in argv else default  # noqa: E731
-    before, upstream = opt('--before', default_before()), opt('--upstream', 'upstream/v3')
+    upstream = opt('--upstream', 'upstream/v3')
+    merge = None if (ROOT / '.git' / 'MERGE_HEAD').exists() else find_merge(upstream)
+    before = opt('--before', default_before(merge))
+    # Files edited after the merge commit (on purpose, on the sync branch) are checked as the merge left them; the
+    # edits are listed for a person to read.
+    later = set((git('diff', '--name-only', merge) or '').split('\n')) - {''} if merge else set()
     base = (git('merge-base', before, upstream) or '').strip()
     if not base:
         sys.exit(f'no common commit for {before} and {upstream}')
     print(f'base {base[:7]}, before {before} ({(git("rev-parse", "--short", before) or "").strip()}), '
-          f'upstream {upstream}, after = the working tree')
+          f'upstream {upstream}, after = ' + (f'the merge commit {merge[:7]} and the working tree' if merge
+                                               else 'the working tree'))
     fb, ff, fu = files_at(base), files_at(before), files_at(upstream)
     problems, notes = [], []
     for path in sorted(fb | ff | fu):
@@ -137,7 +150,11 @@ def main(argv):
         b = git('show', f'{base}:{path}', binary=binary) if b_has else None
         f = git('show', f'{before}:{path}', binary=binary) if f_has else None
         u = git('show', f'{upstream}:{path}', binary=binary) if u_has else None
-        a = worktree(path, binary)
+        if path in later:
+            a = git('show', f'{merge}:{path}', binary=binary)
+            notes.append(f'{path}: changed after the merge commit (checked as the merge left it; read the later edit)')
+        else:
+            a = worktree(path, binary)
         fork_changed = f_has != b_has or (f_has and b_has and f != b)
         up_changed = u_has != b_has or (u_has and b_has and u != b)
         if fork_changed and f_has and a is None:
