@@ -25,7 +25,7 @@ Current state:
    whether to commit them; never commit files you did not create or review.
 2. Static checks: `python3 .claude/skills/check-notebooks/check_notebooks.py` must print `OK`.
 3. Review pages: `yr/tools/review.sh selftest` must print `SELFTEST OK` (the tools work), and
-   `yr/tools/review.sh check yr/*.ipynb` must print `OK` for each page.
+   `yr/tools/review.sh check yr/chap*_review.ipynb` must print `OK` for each page.
 4. Unless `--skip-build`: `.claude/skills/build-book/build_book.sh` must end with
    "no new warnings" and no `WARNING: ... not executed` lines (same steps as the workflow,
    including running the chapters).
@@ -74,7 +74,8 @@ python3 ${CLAUDE_SKILL_DIR}/verify_live.py
 
 It fetches the home page, every chapter page and every yr/ review page in the TOC, and checks
 that each loads, that chapter pages show code outputs (and section 5.9's stack diagram), and
-that review pages have their concept lists, answers and pictures. It retries for a few minutes
+that review pages have their concept lists, answers and pictures, that additions pages have
+outputs and answers, and that `words.txt` can be downloaded. It retries for a few minutes
 while Pages catches up. To confirm a specific change, also grep for it:
 `curl -s https://y-rosenthal.github.io/yrThinkPython/<page>.html | grep -c "<changed text>"`.
 

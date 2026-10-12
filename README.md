@@ -25,7 +25,9 @@ Like the original, this work is licensed under a
   notebooks that Colab opens are unchanged.
 - `yr/` – Prof. Rosenthal's course additions, kept apart from the book: a review page per
   chapter (`yr/chap04_review.ipynb`, shown on the site as "4b. Prof. Rosenthal's Review" right
-  after chapter 4) with a concepts checklist and practice questions with collapsible answers.
+  after chapter 4) with a concepts checklist and practice questions with collapsible answers, and
+  for some chapters an additions page before it, with material that the chapter does not explain
+  (`yr/chap07_additions.ipynb`, "7b. Prof. Rosenthal's Additions"; the review is then "7c.").
   See [yr/README.md](yr/README.md) for the layout, conventions and how to add one.
 - `author-guide/` – the guide for content authors, a Quarto book (`CONTENT-AUTHOR-GUIDE.qmd`): how to
   work in this repository, and step by step how to write review-page questions. Build it with
@@ -74,3 +76,9 @@ git merge --no-ff --no-commit upstream/v3       # resolve conflicts: see .claude
 python3 .claude/skills/sync-upstream/fork_colab_links.py    # his Colab links -> the fork's
 python3 .claude/skills/sync-upstream/check_sync.py          # proves that nothing was lost; must print OK
 ```
+
+<!-- begin yrAiProject setup: written by yrAiProject.sh; "yrAiProject.sh update" replaces this block -->
+*Set up by `yrAiProject.sh` (yrAiProjectTemplates v0.4.0; parts: rules, pending-work). It installed the rules
+for AI agents, the skills and the settings, and it updates them. Before you change them, read
+`.yrAiProject/README.md`.*
+<!-- end yrAiProject setup -->

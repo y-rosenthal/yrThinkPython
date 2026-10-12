@@ -12,7 +12,9 @@ Reads jb/_toc.yml for the pages, then checks on the live site that:
   - chapter pages with code show outputs (chapter 5 must also show the stack diagram image in
     section 5.9, a page that only had outputs since the build started executing chapters);
   - yr/ review pages have both concept lists, Answer boxes and their turtle pictures, and show none of the
-    notebook machinery (@title, run_code, markers).
+    notebook machinery (@title, run_code, markers);
+  - yr/ additions pages show code outputs and Answer boxes, and no %%expect, <details> or '# Your code here';
+  - words.txt (linked from yr/chap07_additions) can be downloaded from the top of the site.
 Retries until --wait seconds have passed (GitHub Pages lags a minute or two behind the deploy).
 Exit status 1 if anything is still wrong.
 """
@@ -58,7 +60,17 @@ def check():
                 part = html.split(anchor, 1)[1][:6000]
                 if '<img' not in part:
                     problems.append('chap05: no stack diagram image in section 5.9')
-        if page.startswith('yr/'):
+        if page.startswith('yr/') and page.endswith('_additions'):
+            outputs = html.count('class="cell_output')
+            summary.append(f'{page}: {outputs} outputs')
+            if outputs == 0:
+                problems.append(f'{page}: no code outputs on the page')
+            if 'Answer' not in html:
+                problems.append(f'{page}: "Answer" not found')
+            for bad in ('%%expect', '&lt;details', '<summary>Answer', '# Your code here'):
+                if bad in html:
+                    problems.append(f'{page}: "{bad}" appears on the page')
+        elif page.startswith('yr/'):
             for needed in ('Python Syntax and Semantics', 'Definitions, etc.', 'Answer'):
                 if needed not in html:
                     problems.append(f'{page}: "{needed}" not found')
@@ -71,6 +83,11 @@ def check():
             summary.append(f'{page}: {found}/{expected} pictures')
             if found < expected:
                 problems.append(f'{page}: {found} turtle pictures on the page, {expected} in the notebook')
+    try:
+        if fetch(f'{BASE}words.txt').split('\n', 1)[0].strip() != 'aa':
+            problems.append('words.txt: the file on the site does not start with "aa"')
+    except urllib.error.URLError as e:
+        problems.append(f'words.txt: {e}')
     return problems, summary
 
 

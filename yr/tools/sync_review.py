@@ -178,7 +178,7 @@ def template_cells(nb, path, changes):
     cells = nb.cells
     m = rf.TITLE_CELL_PARSE.match(source(cells[0])) if cells else None
     if m:
-        set_source(cells[0], rf.title_cell(int(m.group('N')), m.group('TITLE')), changes, 'title cell rewritten')
+        set_source(cells[0], rf.title_cell(int(m.group('N')), m.group('TITLE'), rf.review_letter(path)), changes, 'title cell rewritten')
     helps = [c for c in cells if rf.is_help_note(c)]
     if not helps:
         at = next((i for i, c in enumerate(cells) if c.cell_type == 'markdown'

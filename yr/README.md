@@ -10,7 +10,8 @@ Allen Downey's *Think Python*. Keeping it here, instead of inside the chapter no
 ```
 yr/
   README.md                this file: layout, format, style rules, tools
-  chapNN_review.ipynb      one review page per chapter (so far: chapters 2, 3, 4, 5, 6, 7)
+  chapNN_additions.ipynb   material that a chapter uses but does not explain (so far: chapters 3, 7)
+  chapNN_review.ipynb      one review page per chapter (so far: chapters 2 to 9)
   plans/                   design notes (runall-collapsible-answers.md: the new page format)
   tools/
     review_cells.py        create a page skeleton; add, list, number, renumber questions
@@ -27,8 +28,83 @@ yr/
 For a step-by-step guide for people, see `author-guide/CONTENT-AUTHOR-GUIDE.qmd` (a Quarto book:
 `cd author-guide && quarto render`). Keep it in step with this file.
 
-Claude Code skills that use all this: `yr-review-page` (create a page or write its concept
-summary) and `yr-review-questions` (add or revise questions).
+Claude Code skills that use all this: `yr-additions-page` (create or change an additions page),
+`yr-review-page` (create a review page or write its concept summary) and `yr-review-questions` (add or
+revise review questions).
+
+## The pages of a chapter
+
+Do not change Downey's chapters to add material. A chapter can have two pages of the course after it,
+in this order:
+
+| Order | Title on the website | File | When |
+|---|---|---|---|
+| 1 | NN. (Downey's chapter title) | `chapters/chapNN.ipynb` | always |
+| 2 | NNb. Prof. Rosenthal's Additions | `yr/chapNN_additions.ipynb` | only if the chapter needs it |
+| 3 | NNb. Prof. Rosenthal's Review, or **NNc.** when the chapter has an additions page | `yr/chapNN_review.ipynb` | each chapter that has a review |
+
+- The additions page always comes before the review page.
+- `review.sh sync` writes the letter of the review page (`b` or `c`) in its title: it is `c` when
+  `yr/chapNN_additions.ipynb` exists. So after you add an additions page, run `review.sh sync` on the
+  chapter's review page, and change its line in `jb/index.md` (`NNb.` to `NNc.`).
+- `jb/_toc.yml` lists both pages in one unnumbered part after the chapter:
+  ```yaml
+      - file: chap07
+  - chapters:
+      - file: yr/chap07_additions
+      - file: yr/chap07_review
+  - numbered: True
+    chapters:
+      - file: chap08
+  ```
+- `jb/index.md` lists a Colab link for each page under the chapter, in the same order.
+- `check_notebooks.py` checks the titles and the order in the TOC.
+
+## Additions pages: `yr/chapNN_additions.ipynb`
+
+An additions page explains what the chapter uses but does not explain (for example, `range` with two or three
+arguments for chapter 3), or what a student needs to run the chapter's code on their own computer (for
+example, file paths for chapter 7). It is written like one of Downey's chapters: text, code cells that show
+each idea, and practice questions at the end.
+
+### Layout of a page
+
+1. **Title cell**: `# NNb. Prof. Rosenthal's Additions`, a link to the chapter, one sentence on how to use the
+   page, and the line `[Run this page on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chapNN_additions.ipynb)`.
+2. **Setup cell** (code), the same as the chapter's first cell: it downloads `thinkpython.py` (for
+   `%%expect`) and the files that the page uses (for example `words.txt`), then `import thinkpython`.
+3. **Sections** (`## ...`): text, and code cells that show each idea. Show an error with a cell that starts
+   with `%%expect ERROR_NAME`, as the chapters do, so that Run all in Colab does not stop.
+   Code that depends on the student's computer (a full path, `os.chdir`) goes in a ```` ```python ````
+   block in the text, not in a code cell: the build cannot run it.
+4. **Deeper dive** (optional): one markdown cell that is only a
+   `<details>` / `<summary>Deeper dive: TOPIC</summary>` block. It is closed in Colab and on the website.
+5. **`## Practice questions`**: `### Question N (easy|medium|hard): KIND`, ordered easy to hard. Then
+   each question has:
+   - **what is displayed**: a prompt cell, then the question's code in a code cell tagged `hide-output`
+     (the website shows the code, and the output only when the reader clicks), then the Answer;
+   - **write code**: a prompt cell with the function header and examples, a `# Your code here` cell, then
+     the Answer with the solution in a ```` ```python ```` block;
+   - other kinds (which calls work, find the error, relative paths): a prompt cell, then the Answer.
+
+   The Answer is one markdown cell that is only a `<details>` / `<summary>Answer</summary>` block (a blank
+   line after `</summary>`, so that Colab shows the markdown in it).
+6. **`## Credits`**: "*Additions by Prof. Y. Rosenthal, for* Think Python ..." and the text license.
+
+### Style rules
+
+- Each fact once, in plain English, with an example for each fact. Show the general form with UPPERCASE
+  placeholders, as on the review pages (`range(START, STOP, STEP)`).
+- Use only what the book has taught up to this chapter, and what the page itself explains. For example,
+  the chapter 7 page does not use lists or dictionaries.
+- The questions are about the page's own material. The same rules as for review questions apply: they make
+  sense without the book, write-code questions give the function header and at least two examples.
+- **Never type an output by hand in a code cell.** The build runs the code cells
+  (`jb/execute_notebooks.py`), so the website shows their real output. Text that states an output
+  (an Answer, a sentence after an example) must agree with it: run the page
+  (`.claude/skills/check-notebooks/run_notebooks.sh yr/chapNN_additions.ipynb`) and read each output.
+  Run each Answer's code with its examples too.
+- No stored outputs (`check_notebooks.py` fails on them), as in `chapters/`.
 
 ## Adding a question: a guide for people
 
@@ -154,12 +230,14 @@ have no example calls, no example inputs and no provided helpers; sync writes th
 
 ## Review pages: `yr/chapNN_review.ipynb`
 
-One notebook per chapter, titled `NNb. Prof. Rosenthal's Review` (e.g. `4b.` for chapter 4).
+One notebook per chapter, titled `NNb. Prof. Rosenthal's Review` (e.g. `4b.` for chapter 4), or
+`NNc. Prof. Rosenthal's Review` when the chapter has an additions page (e.g. `7c.`; see "The pages of a
+chapter").
 
 ### Where it appears
 
-- **Website:** right after its chapter in the sidebar, as "4b. Prof. Rosenthal's Review".
-  The previous/next buttons go 4 → 4b → 5. The book's chapter and section numbers do not change.
+- **Website:** right after its chapter (and after the chapter's additions page, if there is one) in the
+  sidebar, as "4b. Prof. Rosenthal's Review". The previous/next buttons go 4 → 4b → 5 (or 7 → 7b → 7c → 8). The book's chapter and section numbers do not change.
 - **Colab:** each page has a "Run this page on Colab" link at the top, and `jb/index.md` lists
   it under its chapter. (The links point at `v3`, so they work once the page is merged there.)
 
@@ -167,7 +245,7 @@ One notebook per chapter, titled `NNb. Prof. Rosenthal's Review` (e.g. `4b.` for
 
 Sync writes the cells marked *(template)*; do not edit them.
 
-1. **Title cell** *(template)*: `# NNb. Prof. Rosenthal's Review`, a link to the chapter, how to use
+1. **Title cell** *(template)*: `# NNb. Prof. Rosenthal's Review` (or `NNc.`), a link to the chapter, how to use
    the page, and the Colab link. Sync keeps the chapter title that is in the link.
 2. **`## Concepts covered`**, with two collapsible lists, shown by default:
    - **Python Syntax and Semantics**: what the chapter teaches about Python itself.
@@ -374,7 +452,8 @@ Use the `yr-review-page` skill, or by hand:
 
 1. `python3 yr/tools/review_cells.py new NN "Chapter title"` and fill it in, following the style rules.
 2. `jb/_toc.yml`: split the numbered "Chapters" list after `chapNN` and put the review page in
-   its own unnumbered part between the two halves (see how `yr/chap04_review` is listed).
+   its own unnumbered part between the two halves (see how `yr/chap04_review` is listed). If the chapter
+   has an additions page, the review page goes in the same part, after the additions page.
    Numbering continues across numbered parts, so chapter numbers stay the same; a page in an
    unnumbered part shows its own title (`NNb. …`) without an added number.
 3. `jb/index.md`: add a Colab line under the chapter.
@@ -385,17 +464,20 @@ Use the `yr-review-page` skill, or by hand:
 
 - `.github/workflows/deploy-book.yml` and `.claude/skills/build-book/build_book.sh` copy
   `yr/*.ipynb` into `jb/yr/` (gitignored) next to the chapter copies. Review pages are not run
-  by the build: the website shows the outputs that sync stored.
+  by the build: the website shows the outputs that sync stored. Additions pages are run like the chapters
+  (`jb/execute_notebooks.py`).
 - `jb/prep_notebooks.py` (`process_review`): each Answer (its text and its run cells' stored outputs,
   without their code) becomes one closed dropdown; the helper cell and the "Credits" heading are
   dropped; markers are removed (values stay); tracebacks are shortened; the concept lists stay open;
-  `# Your code here` cells are dropped. The notebooks in `yr/` are never modified by
-  the build.
+  `# Your code here` cells are dropped. `process_additions`: each `<details>` cell (an Answer, a Deeper
+  dive) becomes a closed dropdown, and `# Your code here` cells are dropped. The notebooks in `yr/` are never
+  modified by the build.
 - `yr/tools/verify_site.py jb/_build/html/yr/chapNN_review.html yr/chapNN_review.ipynb [BEFORE.html]`
   checks a page on the built site, and compares it with another build of the page (for example, before a
   big change).
-- `check_notebooks.py` lints `yr/*.ipynb` (outputs only on run cells, the stamp, the markers) and checks
-  that each one is in the TOC and that the workflow copies `yr/`. The deploy workflow runs it first, so a
+- `check_notebooks.py` lints `yr/*.ipynb` (review pages: outputs only on run cells, the stamp, the markers;
+  additions pages: no outputs) and checks that each one is in the TOC, in the right order and with the right
+  title, and that the workflow copies `yr/`. The deploy workflow runs it first, so a
   page with a problem is not published.
 
 ## Other course additions outside this folder

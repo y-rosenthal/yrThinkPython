@@ -35,7 +35,8 @@ For the third edition, the biggest changes are:
 **Chapter 3: Functions**
 
 * [Click here to run Chapter 3 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap03.ipynb)
-* [Click here to run 3b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap03_review.ipynb)
+* [Click here to run 3b. Prof. Rosenthal's Additions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap03_additions.ipynb)
+* [Click here to run 3c. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap03_review.ipynb)
 
 
 **Chapter 4: Functions and Interfaces**
@@ -57,15 +58,18 @@ For the third edition, the biggest changes are:
 **Chapter 7: Iteration and Search**
 
 * [Click here to run Chapter 7 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap07.ipynb)
-* [Click here to run 7b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_review.ipynb)
+* [Click here to run 7b. Prof. Rosenthal's Additions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_additions.ipynb)
+* [Click here to run 7c. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_review.ipynb)
 
 **Chapter 8: Strings and Regular Expressions**
 
 * [Click here to run Chapter 8 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap08.ipynb)
+* [Click here to run 8b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap08_review.ipynb)
 
 **Chapter 9: Lists**
 
 * [Click here to run Chapter 9 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap09.ipynb)
+* [Click here to run 9b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_review.ipynb)
 
 **Chapter 10: Dictionaries**
 

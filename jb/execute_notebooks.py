@@ -1,7 +1,10 @@
 """Run the chapter notebooks copied into jb/ so the website shows their outputs.
 
 The chapters/ notebooks are committed without outputs, and Jupyter Book's own execution is off
-(_config.yml), so this step produces the outputs, as Downey's site has them. For each jb/chapNN.ipynb:
+(_config.yml), so this step produces the outputs, as Downey's site has them. The additions pages
+(yr/chapNN_additions.ipynb, copied to jb/yr/) are committed without outputs too, and this step runs them
+the same way. (The review pages, yr/chapNN_review.ipynb, store their own outputs: this step does not run
+them.) For each jb/chapNN.ipynb and jb/yr/chapNN_additions.ipynb:
 
 1. Make a scratch copy in which each '# Solution goes here' cell holds a solution: ours from
    solutions/chapNN.ipynb if there is one, otherwise Downey's from soln_overlay.json. Then the
@@ -17,7 +20,8 @@ The chapters/ notebooks are committed without outputs, and Jupyter Book's own ex
 If a notebook cannot be executed at all, it is left without outputs and a warning is printed;
 the build goes on. Run from jb/, after copying the chapters and before prep_notebooks.py:
 
-    python execute_notebooks.py [chapNN.ipynb ...]      (default: every chap*.ipynb in jb/)
+    python execute_notebooks.py [chapNN.ipynb ...]
+    (default: every chap*.ipynb in jb/ and every chap*_additions.ipynb in jb/yr/)
 """
 import copy
 import json
@@ -138,4 +142,4 @@ if __name__ == '__main__':
     if '-h' in sys.argv or '--help' in sys.argv:
         sys.exit(print(__doc__))
     os.chdir(JB)
-    main(sys.argv[1:] or sorted(glob('chap*.ipynb')))
+    main(sys.argv[1:] or sorted(glob('chap*.ipynb')) + sorted(glob('yr/chap*_additions.ipynb')))
