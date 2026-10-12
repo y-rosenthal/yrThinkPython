@@ -77,8 +77,10 @@ each idea, and practice questions at the end.
    with `%%expect ERROR_NAME`, as the chapters do, so that Run all in Colab does not stop.
    Code that depends on the student's computer (a full path, `os.chdir`) goes in a ```` ```python ````
    block in the text, not in a code cell: the build cannot run it.
-4. **Deeper dive** (optional): one markdown cell that is only a
-   `<details>` / `<summary>Deeper dive: TOPIC</summary>` block. It is closed in Colab and on the website.
+4. **Diving deeper** boxes (optional): each is one markdown cell that is only a `<details>` block, with
+   `<summary>Diving deeper: TOPIC</summary>` (or `Diving deeper (for Windows users): TOPIC` for material that
+   only Windows users need). It is closed in Colab and on the website. Put details that most students can
+   skip in such a box.
 5. **`## Practice questions`**: `### Question N (easy|medium|hard): KIND`, ordered easy to hard. Then
    each question has:
    - **what is displayed**: a prompt cell, then the question's code in a code cell tagged `hide-output`
@@ -95,6 +97,8 @@ each idea, and practice questions at the end.
 
 - Each fact once, in plain English, with an example for each fact. Show the general form with UPPERCASE
   placeholders, as on the review pages (`range(START, STOP, STEP)`).
+- Write file paths with forward slashes, also Windows paths (`C:/Users/YOUR_NAME/Downloads/words.txt`):
+  Python accepts them on every system. Explain backslashes only in a "Diving deeper (for Windows users)" box.
 - Use only what the book has taught up to this chapter, and what the page itself explains. For example,
   the chapter 7 page does not use lists or dictionaries.
 - The questions are about the page's own material. The same rules as for review questions apply: they make
@@ -469,7 +473,7 @@ Use the `yr-review-page` skill, or by hand:
 - `jb/prep_notebooks.py` (`process_review`): each Answer (its text and its run cells' stored outputs,
   without their code) becomes one closed dropdown; the helper cell and the "Credits" heading are
   dropped; markers are removed (values stay); tracebacks are shortened; the concept lists stay open;
-  `# Your code here` cells are dropped. `process_additions`: each `<details>` cell (an Answer, a Deeper
+  `# Your code here` cells are dropped. `process_additions`: each `<details>` cell (an Answer, a Diving deeper
   dive) becomes a closed dropdown, and `# Your code here` cells are dropped. The notebooks in `yr/` are never
   modified by the build.
 - `yr/tools/verify_site.py jb/_build/html/yr/chapNN_review.html yr/chapNN_review.ipynb [BEFORE.html]`

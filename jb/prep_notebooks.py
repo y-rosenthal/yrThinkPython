@@ -16,7 +16,7 @@
   the reader's own code in Colab), the helper cell and the "Credits" heading are dropped; sync's
   markers are removed (values stay).
 - prepares the additions pages (yr/chapNN_additions.ipynb, see yr/README.md) like a chapter: each
-  markdown cell that is one <details> block (an Answer, a "Deeper dive") becomes a closed dropdown,
+  markdown cell that is one <details> block (an Answer, a "Diving deeper") becomes a closed dropdown,
   and the '# Your code here' cells are dropped. The outputs come from execute_notebooks.py.
 """
 import json

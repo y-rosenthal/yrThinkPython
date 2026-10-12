@@ -8,7 +8,7 @@ argument-hint: [chapter number] [topics]
 # Create an additions page
 
 Read `yr/README.md` first: "The pages of a chapter" and "Additions pages". `yr/chap07_additions.ipynb` is the
-reference example (sections, a Deeper dive, practice questions); `yr/chap03_additions.ipynb` is a short one.
+reference example (sections, a Diving deeper, practice questions); `yr/chap03_additions.ipynb` is a short one.
 
 Do not change Downey's chapter (`chapters/chapNN.ipynb`). Work on a topic branch, not `v3`. Leave committing
 and pushing to the user unless asked.
@@ -35,8 +35,9 @@ on each cell, no outputs, `execution_count: null`. Follow the layout in `yr/READ
 3. Sections: one idea at a time, the general form with UPPERCASE placeholders, a code cell for each example.
    Errors: a code cell that starts with `%%expect ERROR_NAME`. Code that depends on the student's computer
    (a full path, `os.chdir`) goes in a ```` ```python ```` block in the text.
-4. An optional Deeper dive: one markdown cell that is only a `<details>` block, with
-   `<summary>Deeper dive: TOPIC</summary>` and a blank line after it.
+4. Optional Diving deeper boxes: each is one markdown cell that is only a `<details>` block, with
+   `<summary>Diving deeper: TOPIC</summary>` (or `Diving deeper (for Windows users): TOPIC`) and a blank line
+   after it. Write paths with forward slashes, also on Windows; backslashes go only in the Windows box.
 5. `## Practice questions`, easy to hard: what is displayed (code cell tagged `hide-output`), write code
    (header, two examples, a `# Your code here` cell), and other kinds. Each question ends with an Answer cell
    that is only a `<details>` block with `<summary>Answer</summary>`.
@@ -68,7 +69,7 @@ python3 .claude/skills/check-notebooks/check_notebooks.py                    # m
   Each sentence that states an output must agree with it.
 - Run the code of each Answer with the question's examples, and compare with what the question says.
 - Look at `jb/_build/html/yr/chapNN_additions.html`: the sidebar order (NN, NNb, NNc, NN+1), the outputs, the
-  closed Answers and Deeper dive, the hidden outputs of the "what is displayed" questions.
+  closed Answers and Diving deeper, the hidden outputs of the "what is displayed" questions.
 
 Report to the user what was added, what was verified, and what was not verified (for example, how the page
 looks in Colab, which needs the notebook on GitHub).
