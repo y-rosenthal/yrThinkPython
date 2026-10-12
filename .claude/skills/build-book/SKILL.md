@@ -2,7 +2,7 @@
 name: build-book
 description: Build the Jupyter Book HTML locally (same steps as the GitHub Actions deploy) and preview a chapter. Use when asked to build, preview, render, or check how the book/site looks, or to reproduce a deploy failure locally.
 user-invocable: true
-argument-hint: [--clean] [--open] [--update-baseline] [--no-exec]
+argument-hint: [--clean] [--open] [--update-baseline] [--no-exec] [--help]
 ---
 
 # Build the book locally
@@ -37,7 +37,7 @@ What it does, mirroring `.github/workflows/deploy-book.yml` exactly:
 Flags: `--clean` runs `jb clean` first (use after changing `_toc.yml` or `_config.yml`, since
 Sphinx caches aggressively); `--open` opens the index in the browser; `--update-baseline`
 rewrites `known_warnings.txt` (see below); `--no-exec` skips step 3 for a quick text-only
-preview (pages then have no outputs and the warning list differs).
+preview (pages then have no outputs and the warning list differs); `--help` lists the flags.
 
 ## Checking the result
 
