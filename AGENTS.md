@@ -35,6 +35,16 @@ These rules are for every collaborator and every coding agent (Claude Code, Code
 - Before you push, run `python3 .claude/skills/check-notebooks/check_notebooks.py` (it must print `OK`) and the
   checks that the skill for the task names.
 
+## Pending work
+
+- Work to do later is GitHub issues labeled `pending-work` on y-rosenthal/yrThinkPython (this fork), not on
+  AllenDowney/ThinkPython. Add, list, work on and close them with the `pending-work` skill. A SessionStart hook
+  shows how many are open.
+- `PROJECT_BOARD.md` was retired on 2026-10-12: its Task N is issue #N. Its build notes are in
+  `planning/upstream_build_notes.md`. Do not start another to-do file or task board.
+- Corrections for Allen Downey's book are a different thing: they go to AllenDowney/ThinkPython with the
+  `contribute-upstream` skill.
+
 ## Allen Downey's content and the fork's own content
 
 - Take all of Downey's changes: he keeps the book up to date. Never lose anything of the fork when you merge them:
@@ -75,7 +85,7 @@ The shared rule "Scripts have --help" (below) applies. In this repository:
   Downey's own scripts go in its `NO_HELP` list. Do not change Downey's scripts.
 - `review.sh COMMAND --help` also shows the options of that command.
 
-<!-- begin shared rules: copied by agents-init from yrAiProjectTemplates/rules/AGENTS.md; edit there -->
+<!-- begin shared rules: copied by yrAiProject from yrAiProjectTemplates/rules/AGENTS.md; edit there -->
 
 ## Scripts have --help
 
@@ -98,7 +108,17 @@ files and installs nothing.
 - Put a project's rules in its `AGENTS.md`, so that every collaborator's coding agent reads them. Most agents read
   `AGENTS.md` (Codex, Cursor, GitHub Copilot, Claude Code). Keep `CLAUDE.md` as one import line, `@AGENTS.md`, plus
   rules that apply only to Claude Code. Do not use a symlink for `CLAUDE.md` (Windows clones and Dropbox can break it).
-- If a project's `AGENTS.md` does not have the block `<!-- begin shared rules -->`, tell the user and offer to run
-  `agents-init.sh` in the project. `agents-init.sh --help` explains it.
+- If a project's `AGENTS.md` does not have the block `<!-- begin shared rules -->`, tell the user and offer to set
+  the project up with `yrAiProject.sh update`. `yrAiProject.sh status` shows the project's state, and
+  `yrAiProject.sh --help` explains both. An agent has no terminal to answer `update`'s question in: run
+  `yrAiProject.sh update --dry-run`, show the user the plan, and run `yrAiProject.sh update -y` only after the user
+  approves it.
+
+## Work to do later is GitHub issues
+
+- Record work to do later as GitHub issues in the project's own repository, not in a to-do file, a task board or a
+  TODO document. If the project has the `pending-work` skill (`.claude/skills/pending-work/`), use it: the issues
+  have the label `pending-work`, and a SessionStart hook shows the user how many are open.
+- If a project keeps such a list in a file, tell the user and offer to move it into issues.
 
 <!-- end shared rules -->

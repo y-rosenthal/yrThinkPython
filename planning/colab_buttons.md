@@ -1,7 +1,7 @@
 # Plan: Colab links on every chapter
 
 **Created:** 2026-09-29
-**Board:** Task 11 in `PROJECT_BOARD.md`
+**Issue:** [#11](https://github.com/y-rosenthal/yrThinkPython/issues/11) (was Task 11 in the retired `PROJECT_BOARD.md`)
 **Status:** Propagated to `soln/` 2026-09-29; not yet built or published
 
 ## Goal
