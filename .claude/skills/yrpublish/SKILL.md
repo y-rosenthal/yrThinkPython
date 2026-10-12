@@ -74,7 +74,8 @@ python3 ${CLAUDE_SKILL_DIR}/verify_live.py
 
 It fetches the home page, every chapter page and every yr/ review page in the TOC, and checks
 that each loads, that chapter pages show code outputs (and section 5.9's stack diagram), and
-that review pages have their concept lists, answers and pictures. It retries for a few minutes
+that review pages have their concept lists, answers and pictures, that additions pages have
+outputs and answers, and that `words.txt` can be downloaded. It retries for a few minutes
 while Pages catches up. To confirm a specific change, also grep for it:
 `curl -s https://y-rosenthal.github.io/yrThinkPython/<page>.html | grep -c "<changed text>"`.
 
