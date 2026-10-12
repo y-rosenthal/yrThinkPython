@@ -2,7 +2,8 @@
 """Regenerate blank/chapNN.ipynb ("fill in the blanks" versions) from chapters/chapNN.ipynb.
 
 Every code cell is emptied except setup cells (download(), %xmode, diagram imports),
-which students need to run as-is. Markdown is copied unchanged.
+which students need to run as-is. Markdown is copied unchanged, except that Colab links open this fork's notebooks
+(the "Run this notebook on Colab" link opens the blank notebook itself; see sync-upstream/fork_colab_links.py).
 
 Usage:
   make_blank.py 03 07          # rewrite blank/chap03.ipynb and blank/chap07.ipynb
@@ -15,6 +16,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(ROOT / ".claude" / "skills" / "sync-upstream"))
+from fork_colab_links import fix_notebook  # noqa: E402
 
 # Code cells whose source starts with one of these are kept verbatim in the blank version.
 KEEP_PREFIXES = (
@@ -42,6 +45,7 @@ def make_blank(num, write=True):
     dst = ROOT / "blank" / f"chap{num}.ipynb"
     nb = json.loads(src.read_text(encoding="utf-8"))
     nb["cells"] = [blank_cell(c) for c in nb["cells"]]
+    fix_notebook(nb, in_blank=True)       # "Run this notebook on Colab" opens the fork's blank/chapNN.ipynb
     out = json.dumps(nb, indent=1, ensure_ascii=False) + "\n"
     changed = (not dst.exists()) or dst.read_text(encoding="utf-8") != out
     kept = sum(1 for c in nb["cells"] if c["cell_type"] == "code" and c["source"])
@@ -54,6 +58,9 @@ def make_blank(num, write=True):
 
 
 def main(argv):
+    if "-h" in argv or "--help" in argv:
+        print(__doc__)
+        return 0
     write = True
     if "--diff" in argv:
         write = False

@@ -1,12 +1,6 @@
-# Notes for Claude
+@AGENTS.md
 
-## Where things are
+## Claude Code only
 
-- `yr/README.md`: the course's review pages (`yr/chapNN_review.ipynb`), their style rules and tools.
-- `yr/tools/`: the review-page tools. `review.sh sync` writes outputs, pictures and values by running
-  the code on the pinned Colab-like kernel; `review.sh check` verifies a page; `review.sh selftest`
-  tests the tools; `review_format.py` defines the page format.
-- `author-guide/CONTENT-AUTHOR-GUIDE.qmd`: the guide for content authors (Quarto book). Update it in the same
-  change as `yr/README.md` and the review skills.
-- `.claude/skills/`: skills for building, checking, publishing and syncing the book
-  (for example `yrpublish`, `yr-review-page`, `yr-review-questions`).
+The rules for every coding agent are in `AGENTS.md` (imported above). Put new rules there, so that collaborators
+who use other agents get them too. Put a rule here only if it applies to Claude Code alone.

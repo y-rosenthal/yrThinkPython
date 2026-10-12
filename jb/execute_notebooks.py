@@ -135,5 +135,7 @@ def main(paths):
 
 
 if __name__ == '__main__':
+    if '-h' in sys.argv or '--help' in sys.argv:
+        sys.exit(print(__doc__))
     os.chdir(JB)
     main(sys.argv[1:] or sorted(glob('chap*.ipynb')))

@@ -1,10 +1,27 @@
 #!/usr/bin/env bash
 # Build the Jupyter Book locally, mirroring .github/workflows/deploy-book.yml.
-# Usage: build_book.sh [--clean] [--open] [--update-baseline] [--no-exec]
+# Usage: build_book.sh [--clean] [--open] [--update-baseline] [--no-exec] [--help]
 set -euo pipefail
-ROOT="$(git -C "$(dirname "$0")" rev-parse --show-toplevel 2>/dev/null || (cd "$(dirname "$0")/../../.." && pwd))"
-cd "$ROOT"
-source "$ROOT/.claude/skills/build-book/ensure_venv.sh"
+
+usage() {
+  cat <<'USAGE'
+Usage: build_book.sh [OPTION]...
+
+Build the website (Jupyter Book) locally, with the same steps as the deploy on GitHub.
+The result is in jb/_build/html. Options can be used together.
+
+  --clean            delete the old build first (use after changing _toc.yml or
+                     _config.yml, or when a page looks stale); restart any web
+                     server that shows jb/_build/html after a clean build
+  --no-exec          do not run the chapters: faster, but chapter pages have no outputs
+  --open             open the result in the browser
+  --update-baseline  record the current warnings as known (known_warnings.txt)
+  -h, --help         show this help and stop
+
+To view the built book:
+  python3 -m http.server 8000 --directory jb/_build/html    # then open http://localhost:8000
+USAGE
+}
 
 CLEAN=0; OPEN=0; UPDATE=0; NOEXEC=0
 for a in "$@"; do
@@ -13,9 +30,14 @@ for a in "$@"; do
     --open) OPEN=1 ;;
     --update-baseline) UPDATE=1 ;;
     --no-exec) NOEXEC=1 ;;
-    *) echo "unknown option: $a" >&2; exit 2 ;;
+    -h|--help) usage; exit 0 ;;
+    *) echo "unknown option: $a (see build_book.sh --help)" >&2; exit 2 ;;
   esac
 done
+
+ROOT="$(git -C "$(dirname "$0")" rev-parse --show-toplevel 2>/dev/null || (cd "$(dirname "$0")/../../.." && pwd))"
+cd "$ROOT"
+source "$ROOT/.claude/skills/build-book/ensure_venv.sh"
 
 if [ "$CLEAN" = 1 ]; then
   echo ">> jb clean"; (cd jb && jb clean . >/dev/null)

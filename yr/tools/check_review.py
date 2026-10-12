@@ -2,6 +2,13 @@
 
     python check_review.py NB [--kernel colablike] [--static] [--renumbered] [--cache DIR]
 
+Options:
+  --kernel NAME   the Jupyter kernel for the runtime checks (default colablike, the pinned Colab-like kernel)
+  --static        run only the static checks (no kernel; fast)
+  --renumbered    skip the stable-number check (rule 2): the page was renumbered on purpose, between semesters
+  --cache DIR     where downloads (jupyturtle.py, helper files) are kept (default: next to the book's venv)
+  -h, --help      show this help and stop
+
 The rules are in yr/README.md, "Format rules"; the numbers are the rule numbers there.
 Static (no kernel; --static runs only these):
   1  question headings "### Question N (level): kind"; N is digits and an optional letter, unique on the page
@@ -369,6 +376,9 @@ def check(path, kernel='colablike', static_only=False, renumbered=False, cache=s
 
 
 def main(argv):
+    if '-h' in argv or '--help' in argv:
+        print(__doc__)
+        return 0
     if not argv or argv[0].startswith('-'):
         sys.exit(__doc__)
     path = Path(argv[0])

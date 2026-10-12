@@ -3,6 +3,10 @@
 find the right cell index for NotebookEdit or a targeted JSON edit.
 
 Usage: nb_cells.py chapters/chap03.ipynb [--grep PATTERN] [--full INDEX]
+
+  --grep PATTERN   list only the cells whose text matches PATTERN (a regular expression, case ignored)
+  --full INDEX     print the whole text of cell INDEX
+  -h, --help       show this help and stop
 """
 import json
 import re
@@ -10,6 +14,9 @@ import sys
 
 
 def main(argv):
+    if "-h" in argv or "--help" in argv:
+        print(__doc__)
+        return 0
     if not argv:
         print(__doc__); return 2
     path = argv[0]

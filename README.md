@@ -10,7 +10,7 @@ by Allen B. Downey. The original online version is at
 [Green Tea Press](http://thinkpython.com).
 You can order print and electronic versions of *Think Python 3e* from
 [Bookshop.org](https://bookshop.org/a/98697/9781098155438) and
-[Amazon](https://www.amazon.com/_/dp/1098155432?smid=ATVPDKIKX0DER&_encoding=UTF8&tag=oreilly20-20&_encoding=UTF8&tag=greenteapre01-20&linkCode=ur2&linkId=e2a529f94920295d27ec8a06e757dc7c&camp=1789&creative=9325).
+[Amazon](https://www.amazon.com/_/dp/1098155432?smid=ATVPDKIKX0DER&_encoding=UTF8&tag=greenteapre01-20&linkCode=ur2&linkId=e2a529f94920295d27ec8a06e757dc7c&camp=1789&creative=9325).
 
 Like the original, this work is licensed under a
 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
@@ -30,6 +30,8 @@ Like the original, this work is licensed under a
 - `author-guide/` – the guide for content authors, a Quarto book (`CONTENT-AUTHOR-GUIDE.qmd`): how to
   work in this repository, and step by step how to write review-page questions. Build it with
   `cd author-guide && quarto render`.
+- `AGENTS.md` – the rules for AI coding agents (Claude Code, Codex, Cursor, Copilot and others); `CLAUDE.md` imports
+  it. `.claude/skills/` – step-by-step procedures (Claude Code skills) for building, checking, syncing and publishing.
 - `jb/` – Jupyter Book configuration (`_config.yml`, `_toc.yml`), the landing pages
   (`index.md`, `blank.md`), `execute_notebooks.py` (runs the chapters at build time so the
   pages show outputs), `prep_notebooks.py` (applies display tags, strips `%%expect` magics,
@@ -61,9 +63,14 @@ rerun it after merging upstream changes.
 
 ## Keeping up with the original
 
-The `upstream` remote points at the original repository:
+The `upstream` remote points at the original repository. The fork takes all of Downey's changes, and keeps its
+own edits to his pages, its own pages (`yr/`, `solutions/`, `author-guide/`) and its own Colab links. Use the
+`sync-upstream` skill of Claude Code, which follows this procedure on a topic branch:
 
 ```bash
 git fetch upstream
-git merge upstream/v3
+git switch -c sync-upstream-YYYY-MM v3
+git merge --no-ff --no-commit upstream/v3       # resolve conflicts: see .claude/skills/sync-upstream/SKILL.md
+python3 .claude/skills/sync-upstream/fork_colab_links.py    # his Colab links -> the fork's
+python3 .claude/skills/sync-upstream/check_sync.py          # proves that nothing was lost; must print OK
 ```

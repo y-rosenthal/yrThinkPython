@@ -3,11 +3,13 @@
 
 Usage: check_notebooks.py [notebook.ipynb ...]
 Default: every chap*.ipynb in chapters/, blank/ and solutions/ and every yr/*.ipynb, plus TOC / Colab-link / workflow
-consistency and a check that each solutions/chapNN.ipynb matches its chapter.
+consistency, a check that each solutions/chapNN.ipynb matches its chapter, and a check that every script of the fork
+(.claude/skills/, yr/, jb/) has a docstring or header comment and a -h/--help option that prints it.
 (chapters/jupyter_intro.ipynb is skipped by default: it is an older nbformat 4.4 file that
 keeps its outputs on purpose and is only shipped in the zip, not in the book.)
 Exit status 1 if any problem is found.
 """
+import ast
 import json
 import re
 import sys
@@ -17,6 +19,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "yr" / "tools"))
 import review_format  # noqa: E402  (stdlib only)
+sys.path.insert(0, str(ROOT / ".claude" / "skills" / "sync-upstream"))
+import fork_colab_links  # noqa: E402  (stdlib only)
 KNOWN_MAGICS = {"%%expect", "%%add_method_to", "%%expect_error"}
 SOLUTION_MARK = "# Solution goes here"
 
@@ -118,6 +122,12 @@ def check_toc_and_links():
             if not (ROOT / rel).exists():
                 problems.append(f"jb/{page}: Colab link target does not exist: {rel}")
 
+    changed, colab_problems = fork_colab_links.run(check=True)
+    for rel in changed:
+        problems.append(f"{rel}: has Colab links to AllenDowney/ThinkPython; run "
+                        ".claude/skills/sync-upstream/fork_colab_links.py")
+    problems.extend(colab_problems)
+
     for p in sorted((ROOT / "yr").glob("*.ipynb")):
         if f"yr/{p.stem}" not in toc_files:
             problems.append(f"jb/_toc.yml: yr/{p.name} is not listed in the TOC")
@@ -175,7 +185,37 @@ def check_solutions():
                   f"empty (rendered as blank cells on the site): {', '.join(sorted(missing))}")
 
 
+# Scripts that are not run from the command line, and Downey's own scripts (kept as his: sync-upstream)
+NO_HELP = {
+    "yr/tools/review_format.py": "a module, imported by the review tools",
+    ".claude/skills/build-book/ensure_venv.sh": "sourced by other scripts",
+    "jb/prep_notebooks.py": "Downey's file",
+    "jb/build.sh": "Downey's file",
+}
+
+
+def check_script_help():
+    """Every script of the fork says what it does and takes -h/--help (AGENTS.md, "Scripts")."""
+    scripts = [p for pat in (".claude/skills/**/*.py", ".claude/skills/**/*.sh", "yr/**/*.py", "yr/**/*.sh",
+                             "jb/*.py", "jb/*.sh") for p in ROOT.glob(pat)]
+    for p in sorted(set(scripts)):
+        rel = p.relative_to(ROOT).as_posix()
+        if rel in NO_HELP:
+            continue
+        text = p.read_text(encoding="utf-8")
+        if p.suffix == ".py":
+            if not ast.get_docstring(ast.parse(text)):
+                problems.append(f"{rel}: no docstring (say what the script does and list its options)")
+            if "'--help'" not in text and '"--help"' not in text and "argparse" not in text:
+                problems.append(f"{rel}: no -h/--help option (print the docstring; see AGENTS.md)")
+        elif "--help)" not in text:
+            problems.append(f"{rel}: no -h/--help option (print the header comment; see AGENTS.md)")
+
+
 def main(argv):
+    if "-h" in argv or "--help" in argv:
+        print(__doc__)
+        return 0
     paths = [Path(a) for a in argv] or sorted(
         [*map(Path, glob(str(ROOT / "chapters" / "chap*.ipynb"))),
          *map(Path, glob(str(ROOT / "blank" / "chap*.ipynb"))),
@@ -187,12 +227,13 @@ def main(argv):
     if not argv:
         check_toc_and_links()
         check_solutions()
+        check_script_help()
     if problems:
         print(f"{len(problems)} problem(s):")
         for p in problems:
             print("  -", p)
         return 1
-    print(f"OK: {len(paths)} notebook(s) checked" + ("" if argv else ", TOC and Colab links consistent"))
+    print(f"OK: {len(paths)} notebook(s) checked" + ("" if argv else ", TOC, Colab links and script help consistent"))
     return 0
 
 

@@ -16,6 +16,7 @@ skill), from the repo root or jb/:
     python jb/update_overlay.py
 """
 import json
+import sys
 import urllib.request
 from pathlib import Path
 
@@ -56,4 +57,6 @@ def main():
 
 
 if __name__ == '__main__':
+    if '-h' in sys.argv or '--help' in sys.argv:
+        sys.exit(print(__doc__))
     main()

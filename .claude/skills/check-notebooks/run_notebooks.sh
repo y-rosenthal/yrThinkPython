@@ -14,7 +14,9 @@
 #     the chapter 5 input() cells and the "%%expect ValueError / int(speed)" cell behave as in the book.
 # download() cells fetch files from upstream GitHub into the scratch dir, never into the repo.
 # Review pages (yr/) are skipped: `yr/tools/review.sh check` runs them on the pinned Colab-like kernel.
+# -h, --help: show this help and stop.
 set -euo pipefail
+case "${1:-}" in -h|--help) sed -n '2,/^[^#]/{/^#/s/^# \{0,1\}//p}' "$0"; exit 0 ;; esac
 ROOT="$(git -C "$(dirname "$0")" rev-parse --show-toplevel 2>/dev/null || (cd "$(dirname "$0")/../../.." && pwd))"
 cd "$ROOT"
 source "$ROOT/.claude/skills/build-book/ensure_venv.sh"

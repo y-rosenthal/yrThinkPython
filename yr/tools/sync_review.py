@@ -2,6 +2,15 @@
 
     python sync_review.py NB [--kernel colablike] [--out OUT] [--accept] [--force] [--static] [--cache DIR]
 
+Options:
+  --kernel NAME   the Jupyter kernel that runs the code (default colablike, the pinned Colab-like kernel)
+  --out OUT       write the result to OUT (default: NB itself)
+  --accept        write changed outputs, generated regions and values (without it they are shown, not written)
+  --force         write outputs even if the kernel's packages are not the pinned ones (not for published pages)
+  --static        only step 1 below: no kernel (this is `review.sh normalize`)
+  --cache DIR     where downloads (jupyturtle.py, helper files) are kept (default: next to the book's venv)
+  -h, --help      show this help and stop
+
 The author types each fact once (question code, helpers, solutions, example calls, fixes, prose values as
 expressions); sync writes the rest (yr/README.md, "What sync writes"):
 
@@ -1013,6 +1022,9 @@ def sync(nb, path, kernel='colablike', accept=False, force=False, cache=DEFAULT_
 
 
 def main(argv):
+    if '-h' in argv or '--help' in argv:
+        print(__doc__)
+        return 0
     if not argv or argv[0].startswith('-'):
         sys.exit(__doc__)
     path = Path(argv[0])

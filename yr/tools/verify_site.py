@@ -43,6 +43,9 @@ def lines(el):
 
 
 def main(argv):
+    if '-h' in argv or '--help' in argv:
+        print(__doc__)
+        return 0
     if len(argv) < 2:
         sys.exit(__doc__)
     html_path, nb_path = argv[0], argv[1]

@@ -3,6 +3,10 @@
 
 Usage: verify_live.py [--base URL] [--wait SECONDS]
 
+  --base URL       the site to check (default https://y-rosenthal.github.io/yrThinkPython/)
+  --wait SECONDS   how long to retry while GitHub Pages catches up (default 300)
+  -h, --help       show this help and stop
+
 Reads jb/_toc.yml for the pages, then checks on the live site that:
   - the home page and every page in the TOC load (HTTP 200);
   - chapter pages with code show outputs (chapter 5 must also show the stack diagram image in
@@ -21,6 +25,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 args = sys.argv[1:]
+if '-h' in args or '--help' in args:
+    sys.exit(print(__doc__))
 BASE = args[args.index('--base') + 1] if '--base' in args else 'https://y-rosenthal.github.io/yrThinkPython/'
 WAIT = int(args[args.index('--wait') + 1]) if '--wait' in args else 300
 

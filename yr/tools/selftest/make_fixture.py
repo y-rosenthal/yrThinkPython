@@ -4,7 +4,11 @@ of question in yr/README.md. selftest_review.py syncs a copy, checks it, then br
     python make_fixture.py        (rewrites fixture.ipynb next to this file)
 """
 import json
+import sys
 from pathlib import Path
+
+if '-h' in sys.argv or '--help' in sys.argv:
+    sys.exit(print(__doc__))
 
 CELLS = []
 

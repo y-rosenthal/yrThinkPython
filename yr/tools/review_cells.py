@@ -252,6 +252,8 @@ def cmd_new(nn, title):
 
 if __name__ == '__main__':
     a = sys.argv[1:]
+    if '-h' in a or '--help' in a:
+        sys.exit(print(__doc__))
     before = a[a.index('--before') + 1] if '--before' in a else None
     if a[:1] == ['new'] and len(a) == 3:
         cmd_new(a[1], a[2])
