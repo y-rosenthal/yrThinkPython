@@ -75,7 +75,7 @@ The shared rule "Scripts have --help" (below) applies. In this repository:
   Downey's own scripts go in its `NO_HELP` list. Do not change Downey's scripts.
 - `review.sh COMMAND --help` also shows the options of that command.
 
-<!-- begin shared rules: copied from the owner's ~/.config/agents/AGENTS.md by agents-init; edit there -->
+<!-- begin shared rules: copied by agents-init from yrAiProjectTemplates/rules/AGENTS.md; edit there -->
 
 ## Scripts have --help
 
@@ -99,6 +99,6 @@ files and installs nothing.
   `AGENTS.md` (Codex, Cursor, GitHub Copilot, Claude Code). Keep `CLAUDE.md` as one import line, `@AGENTS.md`, plus
   rules that apply only to Claude Code. Do not use a symlink for `CLAUDE.md` (Windows clones and Dropbox can break it).
 - If a project's `AGENTS.md` does not have the block `<!-- begin shared rules -->`, tell the user and offer to run
-  `agents-init` in the project. `agents-init --help` explains it.
+  `agents-init.sh` in the project. `agents-init.sh --help` explains it.
 
 <!-- end shared rules -->
