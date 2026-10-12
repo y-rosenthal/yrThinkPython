@@ -77,7 +77,7 @@ hand if it is a correction you want.
    Downey's repository (it calls `fork_colab_links.py --check`).
 2. `python3 jb/update_overlay.py`: regenerate the display-tag overlay from his ThinkPythonSolutions notebooks, so new or
    changed cells get his tags; commit `jb/soln_overlay.json` if it changed. Every cell should be "matched".
-3. `yr/tools/review.sh check yr/*.ipynb`: the review pages still pass (the merge must not change them).
+3. `yr/tools/review.sh check yr/chap*_review.ipynb`: the review pages still pass (the merge must not change them).
 4. Build with the `build-book` skill (it runs the chapters): no new warnings, no chapter that fails to run.
 5. Push the topic branch. Publish with the `yrpublish` skill only when the user says so (a push to `v3` deploys).
 

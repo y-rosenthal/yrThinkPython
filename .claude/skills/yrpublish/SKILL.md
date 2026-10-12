@@ -25,7 +25,7 @@ Current state:
    whether to commit them; never commit files you did not create or review.
 2. Static checks: `python3 .claude/skills/check-notebooks/check_notebooks.py` must print `OK`.
 3. Review pages: `yr/tools/review.sh selftest` must print `SELFTEST OK` (the tools work), and
-   `yr/tools/review.sh check yr/*.ipynb` must print `OK` for each page.
+   `yr/tools/review.sh check yr/chap*_review.ipynb` must print `OK` for each page.
 4. Unless `--skip-build`: `.claude/skills/build-book/build_book.sh` must end with
    "no new warnings" and no `WARNING: ... not executed` lines (same steps as the workflow,
    including running the chapters).

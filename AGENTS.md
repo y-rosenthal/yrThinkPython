@@ -26,13 +26,15 @@ These rules are for every collaborator and every coding agent (Claude Code, Code
 
 ## Where things are
 
-- `yr/README.md`: the course's review pages (`yr/chapNN_review.ipynb`), their style rules and tools.
+- `yr/README.md`: the course's own pages, the additions pages (`yr/chapNN_additions.ipynb`) and the review pages
+  (`yr/chapNN_review.ipynb`), their style rules and tools.
 - `yr/tools/`: the review-page tools. `review.sh sync` writes outputs, pictures and values by running
   the code on the pinned Colab-like kernel; `review.sh check` verifies a page; `review.sh selftest`
   tests the tools; `review_format.py` defines the page format.
 - `author-guide/CONTENT-AUTHOR-GUIDE.qmd`: the guide for content authors (Quarto book).
 - `.claude/skills/NAME/SKILL.md`: step-by-step procedures, with their scripts next to them. Claude Code loads them
   as skills; with another agent, read the `SKILL.md` for the task and follow it. The main ones:
+  - `yr-additions-page`: write an additions page (material that Downey's chapter does not explain);
   - `yr-review-page`, `yr-review-questions`: write review pages and questions;
   - `sync-upstream`: take Allen Downey's changes; `upstream-diff`, `contribute-upstream`: compare with his book and
     report corrections to him;
@@ -74,6 +76,21 @@ These rules are for every collaborator and every coding agent (Claude Code, Code
 - Do not add `%load_ext autoreload` or `%autoreload` to any notebook. Colab runs Python 3.12 or later with IPython
   7.34, whose autoreload imports the removed module `imp`, so the cell fails for students.
 
+## The course's pages of a chapter (`yr/`)
+
+Do not change Downey's chapters to add material. Put it in the course's pages, which follow the chapter on the
+website and in `jb/index.md`, in this order:
+
+1. Chapter NN: Downey's chapter (`chapters/chapNN.ipynb`).
+2. NNb. Prof. Rosenthal's Additions (`yr/chapNN_additions.ipynb`), only if the chapter needs one: what the
+   chapter uses but does not explain, with examples and practice questions on the same page. Use the
+   `yr-additions-page` skill.
+3. NNb. Prof. Rosenthal's Review (`yr/chapNN_review.ipynb`): a review of the chapter. When the chapter has an
+   additions page, the review is **NNc**: `review.sh sync` writes the letter in the title.
+
+The additions page always comes before the review page. `jb/_toc.yml` lists both in one unnumbered part after the
+chapter; `check_notebooks.py` checks the titles and the order. `yr/README.md` gives the details.
+
 ## Review pages (`yr/`)
 
 - The style and format rules are in `yr/README.md`. Read it before you change a review page.
@@ -87,8 +104,9 @@ These rules are for every collaborator and every coding agent (Claude Code, Code
 
 - Write documentation, skills, comments and commit messages in ASD-STE100 Simplified Technical English: short
   sentences, active voice, the imperative for procedures, simple words with one meaning, the same term each time.
-- When a design or a tool changes, update `yr/README.md`, the review skills (`.claude/skills/yr-review-page`,
-  `yr-review-questions`) and `author-guide/CONTENT-AUTHOR-GUIDE.qmd` in the same change.
+- When a design or a tool changes, update `yr/README.md`, the skills for the course's pages
+  (`.claude/skills/yr-additions-page`, `yr-review-page`, `yr-review-questions`) and
+  `author-guide/CONTENT-AUTHOR-GUIDE.qmd` in the same change.
 
 ## Scripts
 

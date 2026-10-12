@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Execute chapter notebooks top to bottom in a scratch directory and report errors.
 # Usage: run_notebooks.sh chapters/chap03.ipynb [chapters/chap04.ipynb ...]   or   run_notebooks.sh all
+# (all: every chapter and every additions page)
 #
 # Cells are run with errors allowed, then the executed copy is inspected:
 #   - an error in a cell BEFORE the "## Exercises" heading fails the notebook (real bug);
@@ -13,7 +14,8 @@
 #   - input() is replaced by a stub returning a non-numeric string (IPython startup file), so
 #     the chapter 5 input() cells and the "%%expect ValueError / int(speed)" cell behave as in the book.
 # download() cells fetch files from upstream GitHub into the scratch dir, never into the repo.
-# Review pages (yr/) are skipped: `yr/tools/review.sh check` runs them on the pinned Colab-like kernel.
+# Review pages (yr/chapNN_review.ipynb) are skipped: `yr/tools/review.sh check` runs them on the pinned
+# Colab-like kernel. Additions pages (yr/chapNN_additions.ipynb) run like chapters.
 # -h, --help: show this help and stop.
 set -euo pipefail
 case "${1:-}" in -h|--help) sed -n '2,/^[^#]/{/^#/s/^# \{0,1\}//p}' "$0"; exit 0 ;; esac
@@ -22,7 +24,7 @@ cd "$ROOT"
 source "$ROOT/.claude/skills/build-book/ensure_venv.sh"
 
 if [ $# -eq 0 ]; then echo "usage: $0 <notebook.ipynb ...|all>" >&2; exit 2; fi
-if [ "$1" = "all" ]; then set -- chapters/chap[01][0-9].ipynb; fi
+if [ "$1" = "all" ]; then set -- chapters/chap[01][0-9].ipynb; set -- "$@" $(ls yr/chap*_additions.ipynb 2>/dev/null); fi
 
 WORK="${THINKPYTHON_RUN_DIR:-${TMPDIR:-/tmp}/yrThinkPython-run}"
 mkdir -p "$WORK"
@@ -43,7 +45,7 @@ PY
 
 fail=0
 for nb in "$@"; do
-  case "$nb" in yr/*|*/yr/*) echo ">> skipping $nb (review page: use yr/tools/review.sh check)"; continue ;; esac
+  case "$nb" in *_additions.ipynb) ;; yr/*|*/yr/*) echo ">> skipping $nb (review page: use yr/tools/review.sh check)"; continue ;; esac
   name="$(basename "$nb")"
   cp "$nb" "$WORK/$name"
   printf '>> running %s ... ' "$nb"

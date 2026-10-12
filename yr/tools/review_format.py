@@ -24,6 +24,7 @@ import hashlib
 import json
 import re
 import struct
+from pathlib import Path
 
 # ---------------------------------------------------------------- constants
 
@@ -90,7 +91,7 @@ CREDITS = '''## Credits
 [Think Python: 3rd Edition](https://allendowney.github.io/ThinkPython/index.html) *by Allen B. Downey.*
 *Text license:* [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/)'''
 
-TITLE_CELL = '''# {N}b. Prof. Rosenthal's Review
+TITLE_CELL = '''# {N}{L}. Prof. Rosenthal's Review
 
 A review of [Chapter {N}: {TITLE}](https://y-rosenthal.github.io/yrThinkPython/chap{NN}.html),
 for students who have already studied the chapter.
@@ -98,11 +99,19 @@ Use the two lists under **Concepts covered** as a checklist (click a list's titl
 Each question has a suggested answer under **Answer**. Try the question first, then open the Answer.
 
 [Run this page on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap{NN}_review.ipynb)'''
-TITLE_CELL_PARSE = re.compile(r'^# (?P<N>\d+)b\. Prof\. Rosenthal\'s Review\n\nA review of \[Chapter \d+: (?P<TITLE>[^\]]*)\]')
+TITLE_CELL_PARSE = re.compile(r'^# (?P<N>\d+)[bc]\. Prof\. Rosenthal\'s Review\n\nA review of \[Chapter \d+: (?P<TITLE>[^\]]*)\]')
 
 
-def title_cell(n, title):
-    return TITLE_CELL.replace('{NN}', f'{n:02d}').replace('{N}', str(n)).replace('{TITLE}', title)
+def review_letter(path):
+    """The letter of a review page's number: 'c' if its chapter has an additions page
+    (yr/chapNN_additions.ipynb, "NNb. Prof. Rosenthal's Additions"), else 'b'."""
+    p = Path(path)
+    return 'c' if p.with_name(p.name.replace('_review', '_additions')).exists() else 'b'
+
+
+def title_cell(n, title, letter='b'):
+    return (TITLE_CELL.replace('{NN}', f'{n:02d}').replace('{N}', str(n)).replace('{L}', letter)
+            .replace('{TITLE}', title))
 
 
 # ---------------------------------------------------------------- small helpers

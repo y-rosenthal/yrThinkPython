@@ -4,7 +4,8 @@ title: "Content Author Guide"
 
 This chapter tells a content author what to know to work in this repository. Part 1 gives the
 overview, the setup and the workflow. Part 2 is about the book's chapter notebooks. Part 3, the
-largest part, is about the **Prof. Rosenthal's Review** pages.
+largest part, is about the **Prof. Rosenthal's Review** pages. Part 4 is about the
+**Prof. Rosenthal's Additions** pages.
 
 ## Part 1: the repository
 
@@ -18,8 +19,9 @@ material, and keeps it apart from the book.
 | `chapters/chapNN.ipynb` | The book's chapters, 0 to 19 | Yes, carefully (Part 2) |
 | `blank/chapNN.ipynb` | "Fill in the blanks" copies of the chapters | No: a tool writes them |
 | `solutions/chapNN.ipynb` | Suggested solutions to the book's exercises | Yes (Part 2) |
-| `yr/chapNN_review.ipynb` | The review pages, one per chapter (2 to 7 so far) | Yes (Part 3) |
-| `yr/README.md` | The rules for the review pages | Yes, when a rule changes |
+| `yr/chapNN_additions.ipynb` | The additions pages: what a chapter uses but does not explain (3 and 7 so far) | Yes (Part 4) |
+| `yr/chapNN_review.ipynb` | The review pages, one per chapter (2 to 9 so far) | Yes (Part 3) |
+| `yr/README.md` | The rules for the additions pages and the review pages | Yes, when a rule changes |
 | `yr/tools/` | The review-page tools | Only to change a tool |
 | `jb/` | The website build (Jupyter Book) | Rarely |
 | `.claude/skills/` | Instructions that Claude Code follows | When a rule changes |
@@ -28,6 +30,19 @@ material, and keeps it apart from the book.
 The website is <https://y-rosenthal.github.io/yrThinkPython/>. Each review page shows on the
 website right after its chapter, as "4b. Prof. Rosenthal's Review" (for chapter 4). Each page also
 has a "Run this page on Colab" link.
+
+### The pages of a chapter
+
+Do not change Allen Downey's chapters to add material. A chapter can have two pages of the course
+after it, always in this order:
+
+1. **NNb. Prof. Rosenthal's Additions** (`yr/chapNN_additions.ipynb`), only if the chapter needs it
+   (Part 4).
+2. **NNb. Prof. Rosenthal's Review** (`yr/chapNN_review.ipynb`, Part 3). When the chapter has an
+   additions page, the review is **NNc**. For example, chapter 7 has "7b. Prof. Rosenthal's
+   Additions" and then "7c. Prof. Rosenthal's Review". `review.sh sync` writes the letter.
+
+`jb/_toc.yml` and `jb/index.md` list the pages in this order, and `check_notebooks.py` checks it.
 
 ### Set up your computer
 
@@ -120,7 +135,8 @@ changes small, because the fork must stay close to Downey's version.
 - **Blank versions.** If the chapter has a `blank/` copy, make it again with the `make-blank`
   skill.
 
-New course material does not go in `chapters/`. It goes in a review page (Part 3).
+New course material does not go in `chapters/`. It goes in an additions page (Part 4) or in a
+review page (Part 3).
 
 ## Part 3: the review pages
 
@@ -557,6 +573,55 @@ The website build does not run the review pages. `jb/prep_notebooks.py` changes 
 - The help note, the helper cell, and the `# Your code here` cells go.
 - Tracebacks are shorter.
 
+## Part 4: the additions pages
+
+### What an additions page is
+
+An additions page (`yr/chapNN_additions.ipynb`) explains what its chapter uses but does not
+explain. For example, "3b. Prof. Rosenthal's Additions" explains `range` with two and three
+arguments, and "7b. Prof. Rosenthal's Additions" explains file paths, the working directory and
+iterables. The page is written like a chapter of the book: text, code cells that show each idea,
+and practice questions at the end, each with a closed **Answer**.
+
+`yr/README.md` ("Additions pages") gives the layout and the style rules. The `yr-additions-page`
+skill gives the steps.
+
+### How it differs from a review page
+
+- You write the page as a normal notebook. There is no `review.sh sync` for it, and no stored
+  outputs: the website build runs the code cells, as it runs the chapters.
+- An Answer is one markdown cell with a `<details>` block:
+
+  ```
+  <details>
+  <summary>Answer</summary>
+
+  The text of the answer.
+
+  </details>
+  ```
+
+- For a "what is displayed" question, put the question's code in a code cell with the tag
+  `hide-output`. The website shows the code, and shows the output when the reader clicks.
+- Show an error with a code cell that starts with `%%expect ERROR_NAME`, so that Run all does not stop.
+
+### Check an additions page
+
+```bash
+.claude/skills/check-notebooks/run_notebooks.sh yr/chap07_additions.ipynb
+python3 .claude/skills/check-notebooks/check_notebooks.py
+.claude/skills/build-book/build_book.sh
+```
+
+Read each output in the run, and make sure that the text agrees with it. Run the code of each
+Answer too.
+
+### A new additions page
+
+Use the `yr-additions-page` skill. After you add the page, list it in `jb/_toc.yml` before the
+chapter's review page, add its Colab line to `jb/index.md`, change the review line there to `NNc.`,
+and run `review.sh sync` on the review page (it writes `NNc.` in the title).
+
 ## Tools reference
 
 Every tool takes `-h` or `--help`, which prints what the tool does and its options. For example,
@@ -592,6 +657,7 @@ skill name:
 
 | Skill | Use it to |
 |---|---|
+| `yr-additions-page` | Make or change an additions page |
 | `yr-review-questions` | Add, change or check questions on a review page |
 | `yr-review-page` | Make a review page, or write its Concepts lists |
 | `notebook-conventions` | Edit a chapter notebook |

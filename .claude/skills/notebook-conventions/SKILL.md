@@ -82,15 +82,17 @@ the built site. For a new exercise, tag the `### Exercise` markdown cell and its
 
 ## Course additions go in `yr/`
 
-New course material (chapter summaries, extra questions) goes in `yr/`, not in `chapters/`:
-one review notebook per chapter, `yr/chapNN_review.ipynb`, shown on the site as
-"NNb. Prof. Rosenthal's Review" right after the chapter. Read `yr/README.md` before creating or
+New course material goes in `yr/`, not in `chapters/`. A chapter can have an additions page,
+`yr/chapNN_additions.ipynb` ("NNb. Prof. Rosenthal's Additions": what the chapter uses but does not explain;
+`yr-additions-page` skill), and a review page, `yr/chapNN_review.ipynb` ("NNb. Prof. Rosenthal's Review", or
+"NNc." after an additions page), shown in that order right after the chapter. Read `yr/README.md` before creating or
 editing one: it has the page layout (concepts checklist, then easy → hard questions), how to write
 each kind of question (run blocks, `#### Answer` headings, markers), and the TOC / index.md steps.
 `CONTENT-AUTHOR-GUIDE.qmd` (in `author-guide/`) explains the same for a person, step by step. The `yr-review-page` and `yr-review-questions` skills cover creating
 pages and adding questions, with tools in `yr/tools/` that write outputs and pictures (`review.sh sync`)
 and verify answers (`review.sh check`). Review pages follow their own format (`yr/README.md`): they
 store outputs on their hidden run cells, so the "no stored outputs" rule above does not apply to them.
+Additions pages follow the chapter rules: no stored outputs; the build runs them.
 
 ## Suggested solutions: `solutions/chapNN.ipynb`
 

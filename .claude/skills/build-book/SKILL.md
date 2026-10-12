@@ -24,7 +24,8 @@ What it does, mirroring `.github/workflows/deploy-book.yml` exactly:
    errors are dropped and reported as warnings; a chapter that cannot run is left without outputs.
    About 45 seconds; needs network (Gutenberg texts, jupyturtle). The yr/ review pages are
    not executed: converted pages show the outputs that `yr/tools/review.sh sync` stored in their
-   hidden run cells, inside the closed Answer dropdowns.
+   hidden run cells, inside the closed Answer dropdowns. The yr/ additions pages
+   (`yr/chapNN_additions.ipynb`) are executed like the chapters.
 4. `python jb/prep_notebooks.py`: adds Downey's display tags from `jb/soln_overlay.json`
    (`remove-input`, `remove-cell`, `section_*` labels: same shown/hidden cells as his site),
    strips `%%expect` lines, adds section labels, turns `# Solution…` cells into collapsed

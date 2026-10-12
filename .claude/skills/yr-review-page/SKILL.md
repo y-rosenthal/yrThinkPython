@@ -1,6 +1,6 @@
 ---
 name: yr-review-page
-description: Create a "NNb. Prof. Rosenthal's Review" page for a Think Python chapter (yr/chapNN_review.ipynb, a concepts checklist plus practice questions with collapsible answers) and add it to the site, or write/revise the "Concepts covered" summary of an existing review page. Use when asked for a review page, chapter summary, fact list, concepts checklist or study guide for a chapter.
+description: Create a "NNb. Prof. Rosenthal's Review" page (NNc when the chapter has an additions page) for a Think Python chapter (yr/chapNN_review.ipynb, a concepts checklist plus practice questions with collapsible answers) and add it to the site, or write/revise the "Concepts covered" summary of an existing review page. Use when asked for a review page, chapter summary, fact list, concepts checklist or study guide for a chapter.
 user-invocable: true
 argument-hint: [chapter number] [concepts-only]
 ---
@@ -85,7 +85,9 @@ questions use at the top of the Questions section.
       - file: chap(NN+1)
   ```
   (The comment above `yr/chap04_review` in the TOC explains why; keep it only once.)
-- `jb/index.md`: under the chapter's Colab line add
+  If the chapter has an additions page (`yr/chapNN_additions.ipynb`), the review page goes in the same part,
+  after it, and its title is `NNc.` (sync writes the letter; see "The pages of a chapter" in `yr/README.md`).
+- `jb/index.md`: under the chapter's Colab line (and under its additions line, if any) add
   `* [Click here to run NNb. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chapNN_review.ipynb)`
 - `yr/README.md`: update "so far: chapter ..." in the folder listing.
 

@@ -15,6 +15,9 @@
   become the same collapsible box the solutions use, shown; '# Your code here' cells (space for
   the reader's own code in Colab), the helper cell and the "Credits" heading are dropped; sync's
   markers are removed (values stay).
+- prepares the additions pages (yr/chapNN_additions.ipynb, see yr/README.md) like a chapter: each
+  markdown cell that is one <details> block (an Answer, a "Deeper dive") becomes a closed dropdown,
+  and the '# Your code here' cells are dropped. The outputs come from execute_notebooks.py.
 """
 import json
 import re
@@ -226,6 +229,22 @@ for path in sorted(paths):
     print('prepping', path)
     process_notebook(path)
 
+def process_additions(path):
+    ntbk = nbf.read(path, nbf.NO_CONVERT)
+    out = []
+    for c in ntbk.cells:
+        if c['cell_type'] == 'code' and c['source'].strip() == YOUR_CODE:
+            continue
+        details_to_dropdown(c)
+        process_cell(c)
+        out.append(c)
+    ntbk.cells = out
+    nbf.write(ntbk, path)
+
+
 for path in sorted(glob("yr/*.ipynb")):
     print('prepping', path)
-    process_review(path)
+    if path.endswith('_additions.ipynb'):
+        process_additions(path)
+    else:
+        process_review(path)
