@@ -30,6 +30,8 @@ Like the original, this work is licensed under a
 - `author-guide/` – the guide for content authors, a Quarto book (`CONTENT-AUTHOR-GUIDE.qmd`): how to
   work in this repository, and step by step how to write review-page questions. Build it with
   `cd author-guide && quarto render`.
+- `AGENTS.md` – the rules for AI coding agents (Claude Code, Codex, Cursor, Copilot and others); `CLAUDE.md` imports
+  it. `.claude/skills/` – step-by-step procedures (Claude Code skills) for building, checking, syncing and publishing.
 - `jb/` – Jupyter Book configuration (`_config.yml`, `_toc.yml`), the landing pages
   (`index.md`, `blank.md`), `execute_notebooks.py` (runs the chapters at build time so the
   pages show outputs), `prep_notebooks.py` (applies display tags, strips `%%expect` magics,

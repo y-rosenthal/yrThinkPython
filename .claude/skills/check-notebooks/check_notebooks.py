@@ -195,7 +195,7 @@ NO_HELP = {
 
 
 def check_script_help():
-    """Every script of the fork says what it does and takes -h/--help (CLAUDE.md, "Scripts")."""
+    """Every script of the fork says what it does and takes -h/--help (AGENTS.md, "Scripts")."""
     scripts = [p for pat in (".claude/skills/**/*.py", ".claude/skills/**/*.sh", "yr/**/*.py", "yr/**/*.sh",
                              "jb/*.py", "jb/*.sh") for p in ROOT.glob(pat)]
     for p in sorted(set(scripts)):
@@ -207,9 +207,9 @@ def check_script_help():
             if not ast.get_docstring(ast.parse(text)):
                 problems.append(f"{rel}: no docstring (say what the script does and list its options)")
             if "'--help'" not in text and '"--help"' not in text and "argparse" not in text:
-                problems.append(f"{rel}: no -h/--help option (print the docstring; see CLAUDE.md)")
+                problems.append(f"{rel}: no -h/--help option (print the docstring; see AGENTS.md)")
         elif "--help)" not in text:
-            problems.append(f"{rel}: no -h/--help option (print the header comment; see CLAUDE.md)")
+            problems.append(f"{rel}: no -h/--help option (print the header comment; see AGENTS.md)")
 
 
 def main(argv):

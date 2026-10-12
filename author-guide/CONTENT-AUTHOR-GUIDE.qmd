@@ -579,7 +579,13 @@ Every tool takes `-h` or `--help`, which prints what the tool does and its optio
 | `.claude/skills/build-book/build_book.sh` | Builds the website on your computer |
 | `python3 .claude/skills/yrpublish/verify_live.py` | Checks the live website |
 
-## Working with Claude Code
+## Working with Claude Code and other AI agents
+
+`AGENTS.md` holds the rules for every AI coding agent (Claude Code, Codex, Cursor, Copilot and others), so all
+collaborators work by the same rules. `CLAUDE.md` only imports it. Put a new rule in `AGENTS.md`. Do not edit the
+block between `<!-- begin shared rules -->` and `<!-- end shared rules -->`: `agents-init` copies it from
+Prof. Rosenthal's personal rules. An agent other than Claude Code can follow a skill: tell it to read
+`.claude/skills/NAME/SKILL.md`.
 
 Claude Code follows the skills in `.claude/skills/`. You can ask in your own words, or type the
 skill name:

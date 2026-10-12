@@ -16,7 +16,7 @@ AllenDowney/ThinkPython. Downey keeps the book up to date; the fork takes all of
 2. **Keep every fork change to his pages**: cells the fork added or changed in `chapters/` (tagged `course`, or
    corrections such as chapter 4's `%autoreload` fix), and the fork's lines in `README.md`, `.gitignore`, `jb/`.
 3. **Keep the fork's own pages untouched**: `yr/` (the review pages), `solutions/`, `author-guide/`, `.claude/`,
-   `.github/`, `CLAUDE.md`.
+   `.github/`, `AGENTS.md`, `CLAUDE.md`.
 4. **Colab opens the fork**: every Colab link in `chapters/`, `blank/`, `jb/index.md` and `jb/blank.md` points to
    `y-rosenthal/yrThinkPython`, so students get the fork's notebooks. In `blank/`, "Run this notebook on Colab" opens
    the blank notebook itself.
