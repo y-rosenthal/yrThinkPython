@@ -74,3 +74,9 @@ git merge --no-ff --no-commit upstream/v3       # resolve conflicts: see .claude
 python3 .claude/skills/sync-upstream/fork_colab_links.py    # his Colab links -> the fork's
 python3 .claude/skills/sync-upstream/check_sync.py          # proves that nothing was lost; must print OK
 ```
+
+<!-- begin yrAiProject setup: written by yrAiProject.sh; "yrAiProject.sh update" replaces this block -->
+*Set up by `yrAiProject.sh` (yrAiProjectTemplates v0.4.0; parts: rules, pending-work). It installed the rules
+for AI agents, the skills and the settings, and it updates them. Before you change them, read
+`.yrAiProject/README.md`.*
+<!-- end yrAiProject setup -->

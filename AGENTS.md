@@ -1,5 +1,19 @@
 # Rules for AI coding agents (yrThinkPython)
 
+<!-- begin yrAiProject setup: written by yrAiProject.sh; "yrAiProject.sh update" replaces this block -->
+## Set up by yrAiProject.sh
+
+`yrAiProject.sh` (yrAiProjectTemplates v0.4.0; parts: rules, pending-work) set up this project. It installed
+files here, and `yrAiProject.sh update` keeps them up to date.
+
+- Before you change a file that it installed, read `.yrAiProject/README.md`. It lists the files, and tells who
+  changes each one.
+- Do not edit this block, the shared-rules block, or the files in `.yrAiProject/`. `yrAiProject.sh update`
+  writes them again.
+- At the start of a session, tell the user in one line that `yrAiProject.sh` set up this project, unless a
+  SessionStart message already told them.
+<!-- end yrAiProject setup -->
+
 These rules are for every collaborator and every coding agent (Claude Code, Codex, Cursor, Copilot and others).
 `CLAUDE.md` imports this file. Put new project rules here, not in `CLAUDE.md` or in one agent's private memory.
 
