@@ -102,6 +102,9 @@ def print_full(r):
 
 
 def main(argv):
+    if "-h" in argv or "--help" in argv:
+        print(__doc__)
+        return 0
     ref = "upstream/v3"
     if "--ref" in argv:
         k = argv.index("--ref"); ref = argv[k + 1]; argv = argv[:k] + argv[k + 2:]

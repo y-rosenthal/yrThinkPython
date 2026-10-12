@@ -58,6 +58,9 @@ def make_blank(num, write=True):
 
 
 def main(argv):
+    if "-h" in argv or "--help" in argv:
+        print(__doc__)
+        return 0
     write = True
     if "--diff" in argv:
         write = False

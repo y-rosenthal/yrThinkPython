@@ -6,7 +6,9 @@
 # Colab's kernel has Python's default recursion limit, 1000 (seen 2026-10-09); here jedi, which IPython's completer
 # imports, raises it to 3000, so the kernel sets it back (RecursionError tracebacks count the frames).
 # Needs uv (https://docs.astral.sh/uv/); review.sh installs it into the book venv if it is missing.
+#   ensure_colab_venv.sh -h|--help        show this help and stop
 set -euo pipefail
+case "${1:-}" in -h|--help) sed -n '2,/^[^#]/{/^#/s/^# \{0,1\}//p}' "$0"; exit 0 ;; esac
 HERE="$(cd "$(dirname "$0")" && pwd)"
 VENV="${1:-$HOME/.venvs/colablike}"
 KDIR="${2:-$HOME/.local/share/jupyter}"

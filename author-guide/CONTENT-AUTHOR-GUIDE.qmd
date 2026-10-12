@@ -559,6 +559,9 @@ The website build does not run the review pages. `jb/prep_notebooks.py` changes 
 
 ## Tools reference
 
+Every tool takes `-h` or `--help`, which prints what the tool does and its options. For example,
+`yr/tools/review.sh sync --help` or `.claude/skills/build-book/build_book.sh --help`.
+
 | Command | What it does |
 |---|---|
 | `python3 yr/tools/review_cells.py list PAGE` | Lists the questions |

@@ -1,5 +1,7 @@
 """`review.sh selftest`: prove that sync and check work, on selftest/fixture.ipynb (every kind of question).
 
+    python selftest_review.py        (no options; -h or --help shows this help)
+
 1. sync a copy of the fixture: it must succeed, and a second sync must change nothing;
 2. check the synced copy: it must pass;
 3. break the synced copy in many ways (one at a time): check must fail each time, naming the rule that the
@@ -275,4 +277,6 @@ def main():
 
 
 if __name__ == '__main__':
+    if '-h' in sys.argv or '--help' in sys.argv:
+        sys.exit(print(__doc__))
     sys.exit(main())

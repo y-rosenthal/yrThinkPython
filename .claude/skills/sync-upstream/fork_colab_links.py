@@ -102,6 +102,9 @@ def run(check=False):
 
 
 def main(argv):
+    if '-h' in argv or '--help' in argv:
+        print(__doc__)
+        return 0
     check = '--check' in argv
     changed, problems = run(check)
     for p in problems:

@@ -129,6 +129,9 @@ def added_lines(old, new):
 
 
 def main(argv):
+    if '-h' in argv or '--help' in argv:
+        print(__doc__)
+        return 0
     opt = lambda name, default: argv[argv.index(name) + 1] if name in argv else default  # noqa: E731
     upstream = opt('--upstream', 'upstream/v3')
     merge = None if (ROOT / '.git' / 'MERGE_HEAD').exists() else find_merge(upstream)

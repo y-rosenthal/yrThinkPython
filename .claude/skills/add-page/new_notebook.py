@@ -32,6 +32,9 @@ def code(text):
 
 
 def main(argv):
+    if "-h" in argv or "--help" in argv:
+        print(__doc__)
+        return 0
     if len(argv) != 2:
         print(__doc__); return 2
     dst = ROOT / argv[0]

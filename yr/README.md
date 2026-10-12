@@ -358,7 +358,9 @@ yr/tools/review.sh normalize yr/chap04_review.ipynb
 yr/tools/review.sh selftest
 ```
 
-`review_cells.py add` takes a small text file of cells; run it without arguments for the format.
+Every tool takes `-h` or `--help`, which prints what it does and its options (`review.sh sync --help` also
+shows the options of sync). `review_cells.py add` takes a small text file of cells; `review_cells.py --help`
+shows the format.
 `review.sh check --static` runs only the rules that need no kernel (fast). `review.sh selftest`
 syncs `tools/selftest/fixture.ipynb` (a page with every kind of question), checks it, and makes
 sure that check catches 27 kinds of broken page; run it after any change to the tools.

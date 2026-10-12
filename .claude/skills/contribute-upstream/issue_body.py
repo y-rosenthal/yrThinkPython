@@ -43,6 +43,9 @@ def section_for(cells, i):
 
 
 def main(argv):
+    if "-h" in argv or "--help" in argv:
+        print(__doc__)
+        return 0
     if not argv:
         print(__doc__); return 2
     path = Path(argv[0])
