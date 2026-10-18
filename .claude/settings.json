@@ -7,7 +7,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cat \"$CLAUDE_PROJECT_DIR/.yrAiProject/session-start.json\" 2>/dev/null || true",
+            "command": "cat \"$CLAUDE_PROJECT_DIR/.yrProject/session-start.json\" 2>/dev/null || true",
             "timeout": 10
           }
         ]
@@ -17,7 +17,20 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/skills/pending-work/scripts/pending.sh\" session-start",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/skills/yrIssues/scripts/yrIssues.sh\" session-start",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(gh issue *)",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/skills/yrIssues/scripts/yrIssues.sh\" hook-sync",
             "timeout": 30
           }
         ]

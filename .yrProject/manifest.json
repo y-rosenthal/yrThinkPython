@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 3,
+  "createdAt": "2026-10-12T15:54:40Z",
+  "projectType": null,
+  "version": "v0.5.1",
+  "parts": [
+    "rules",
+    "yrIssues"
+  ],
+  "skippedParts": [],
+  "values": {
+    "PROJECT_NAME": "yrThinkPython",
+    "PROJECT_TITLE": "yrThinkPython",
+    "PROJECT_DESCRIPTION": "TODO: one sentence that says what this project is for.",
+    "PROJECT_TYPE": "work",
+    "CREATED_DATE": "2026-10-12",
+    "TEMPLATE_VERSION": "v0.5.1"
+  },
+  "files": {
+    ".claude/skills/yrIssues/SKILL.md": "fc6e9a387c18c43af170f674b94bdee148511c1fc72f72894a4cac1139756731",
+    ".claude/skills/yrIssues/scripts/yrIssues.sh": "6eca82fafa39b5bd9df39934dcda42f1847b950a5e4d4068c6c671b27d10182f",
+    ".claude/skills/yrProject/SKILL.md": "5d2dfc077459af58c97ac3c1a4511eacfdda3eb6494752204f4de77ab25ba6f0",
+    "README.md": "8bf1b5a569ae71a9656d6da832682d00f1c33396ac2083710f2c074c28435d4c",
+    "_yrIssues/config.sh": "e88eb0025fa0d0bbba90468331b8fca23b6c5ce2faccb8c5a42015018f9077f0"
+  },
+  "updatedAt": "2026-10-18T17:50:51Z",
+  "tool": {
+    "name": "yrProject",
+    "version": "0.5.1",
+    "templatesCommit": "425790e"
+  },
+  "history": [
+    {
+      "date": "2026-10-12",
+      "command": "set up (no history before v0.4.0)",
+      "version": null,
+      "parts": []
+    },
+    {
+      "date": "2026-10-12",
+      "command": "update",
+      "version": "v0.4.0",
+      "parts": [
+        "pending-work",
+        "rules"
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "command": "update",
+      "version": "v0.5.0",
+      "parts": [
+        "rules",
+        "yrIssues"
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "command": "update",
+      "version": "v0.5.0",
+      "parts": [
+        "rules",
+        "yrIssues"
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "command": "update",
+      "version": "v0.5.1",
+      "parts": [
+        "rules",
+        "yrIssues"
+      ]
+    }
+  ]
+}

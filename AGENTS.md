@@ -1,18 +1,21 @@
 # Rules for AI coding agents (yrThinkPython)
 
-<!-- begin yrAiProject setup: written by yrAiProject.sh; "yrAiProject.sh update" replaces this block -->
-## Set up by yrAiProject.sh
+<!-- begin yrProject setup: written by yrProject.sh; "yrProject.sh update" replaces this block -->
+## Set up by yrProject.sh
 
-`yrAiProject.sh` (yrAiProjectTemplates v0.4.0; parts: rules, pending-work) set up this project. It installed
-files here, and `yrAiProject.sh update` keeps them up to date.
+`yrProject.sh` (yrProject v0.5.1; parts: rules, yrIssues) set up this project. It installed
+files here, and `yrProject.sh update` keeps them up to date.
 
-- Before you change a file that it installed, read `.yrAiProject/README.md`. It lists the files, and tells who
+- Before you change a file that it installed, read `.yrProject/README.md`. It lists the files, and tells who
   changes each one.
-- Do not edit this block, the shared-rules block, or the files in `.yrAiProject/`. `yrAiProject.sh update`
+- Do not edit this block, the shared-rules block, or the files in `.yrProject/`. `yrProject.sh update`
   writes them again.
-- At the start of a session, tell the user in one line that `yrAiProject.sh` set up this project, unless a
+- At the start of a session, tell the user in one line that `yrProject.sh` set up this project, unless a
   SessionStart message already told them.
-<!-- end yrAiProject setup -->
+- The user does not need to know the tool. To check, update or migrate this setup, or to list or make yrProjects,
+  follow the `yrProject` skill (`.claude/skills/yrProject/SKILL.md`).
+- "Project" alone does not mean the yrProject setup. Unless the user says yrProject or it is obvious, ask.
+<!-- end yrProject setup -->
 
 These rules are for every collaborator and every coding agent (Claude Code, Codex, Cursor, Copilot and others).
 `CLAUDE.md` imports this file. Put new project rules here, not in `CLAUDE.md` or in one agent's private memory.
@@ -117,7 +120,7 @@ The shared rule "Scripts have --help" (below) applies. In this repository:
   Downey's own scripts go in its `NO_HELP` list. Do not change Downey's scripts.
 - `review.sh COMMAND --help` also shows the options of that command.
 
-<!-- begin shared rules: copied by yrAiProject from yrAiProjectTemplates/rules/AGENTS.md; edit there -->
+<!-- begin shared rules: copied by yrProject from yrProject/rules/AGENTS.md; edit there -->
 
 ## Scripts have --help
 
@@ -141,16 +144,26 @@ files and installs nothing.
   `AGENTS.md` (Codex, Cursor, GitHub Copilot, Claude Code). Keep `CLAUDE.md` as one import line, `@AGENTS.md`, plus
   rules that apply only to Claude Code. Do not use a symlink for `CLAUDE.md` (Windows clones and Dropbox can break it).
 - If a project's `AGENTS.md` does not have the block `<!-- begin shared rules -->`, tell the user and offer to set
-  the project up with `yrAiProject.sh update`. `yrAiProject.sh status` shows the project's state, and
-  `yrAiProject.sh --help` explains both. An agent has no terminal to answer `update`'s question in: run
-  `yrAiProject.sh update --dry-run`, show the user the plan, and run `yrAiProject.sh update -y` only after the user
-  approves it.
+  it up as a yrProject with `yrProject.sh update`. `yrProject.sh status` shows the project's state,
+  `yrProject.sh check` whether it is set up correctly, and `yrProject.sh --help` explains them. An agent has no
+  terminal to answer `update`'s question in: run `yrProject.sh update --dry-run`, show the user the plan, and run
+  `yrProject.sh update -y` only after the user approves it. In a yrProject, the `yrProject` skill does all this.
+
+## "Project" does not mean yrProject
+
+- A yrProject is a project that `yrProject.sh` set up: its shared rules, skills and hooks, and its record in
+  `.yrProject/`. Do not assume that the word "project" means a yrProject, or its yrProject setup. Unless the user
+  says yrProject (or the yrProject setup, the tool, its shared rules or its skills), or it is otherwise obvious,
+  ask what they mean before you act. For example, "update the project" or "make a new project" may mean the code,
+  the book, or something else.
 
 ## Work to do later is GitHub issues
 
 - Record work to do later as GitHub issues in the project's own repository, not in a to-do file, a task board or a
-  TODO document. If the project has the `pending-work` skill (`.claude/skills/pending-work/`), use it: the issues
-  have the label `pending-work`, and a SessionStart hook shows the user how many are open.
+  TODO document. Call them "issues", as GitHub does. If the project has the `yrIssues` skill
+  (`.claude/skills/yrIssues/`), use it: a SessionStart hook shows the user how many issues are open, and the issues
+  that it creates get the label `yrIssue`. (Projects set up before yrProject v0.5.0 have the `pending-work` skill
+  instead; `yrProject.sh update` replaces it.)
 - If a project keeps such a list in a file, tell the user and offer to move it into issues.
 
 <!-- end shared rules -->

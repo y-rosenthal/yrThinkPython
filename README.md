@@ -77,8 +77,8 @@ python3 .claude/skills/sync-upstream/fork_colab_links.py    # his Colab links ->
 python3 .claude/skills/sync-upstream/check_sync.py          # proves that nothing was lost; must print OK
 ```
 
-<!-- begin yrAiProject setup: written by yrAiProject.sh; "yrAiProject.sh update" replaces this block -->
-*Set up by `yrAiProject.sh` (yrAiProjectTemplates v0.4.0; parts: rules, pending-work). It installed the rules
+<!-- begin yrProject setup: written by yrProject.sh; "yrProject.sh update" replaces this block -->
+*Set up by `yrProject.sh` (yrProject v0.5.1; parts: rules, yrIssues). It installed the rules
 for AI agents, the skills and the settings, and it updates them. Before you change them, read
-`.yrAiProject/README.md`.*
-<!-- end yrAiProject setup -->
+`.yrProject/README.md`.*
+<!-- end yrProject setup -->
