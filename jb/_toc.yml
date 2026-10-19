@@ -46,6 +46,7 @@ parts:
   chapters:
     - file: chap08
 - chapters:
+    - file: yr/chap08_additions
     - file: yr/chap08_review
 - numbered: True
   chapters:
