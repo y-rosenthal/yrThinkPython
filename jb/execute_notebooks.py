@@ -12,7 +12,10 @@ them.) For each jb/chapNN.ipynb and jb/yr/chapNN_additions.ipynb:
    only outputs of the other cells are kept.
 2. Execute it in a scratch folder that holds this repo's helper files (thinkpython.py,
    diagram.py, ...), a copy of jupyturtle.py that does not pause between steps, and an input()
-   stub, so the download() cells find their files and nothing waits.
+   stub, so the download() cells find their files and nothing waits. A code cell can give the
+   replies that a pretend user types, in its metadata: "input_replies": ["mary smith"]. Each
+   input() call in that cell then shows its prompt and the next reply, as if a person typed it,
+   and returns the reply. Without replies, input() returns a fixed string.
 3. Copy the outputs back into jb/chapNN.ipynb, cell by cell (matched by id). An error output is
    kept only where it is meant to be (%%expect cells and cells tagged raises-exception);
    other errors are dropped and reported.
@@ -45,9 +48,15 @@ GITHUB = os.environ.get('GITHUB_ACTIONS') == 'true'
 
 FAKE_INPUT = '''
 # ipykernel re-binds builtins.input to Kernel.raw_input before every cell, so patch the method.
+import builtins
 from ipykernel.kernelbase import Kernel
+builtins._input_replies = []  # set before a cell that has "input_replies" in its metadata
 def _fake_raw_input(self, prompt=""):
     print(prompt, end="")
+    if builtins._input_replies:
+        reply = builtins._input_replies.pop(0)
+        print(reply)  # show the reply, as the screen shows what a person types
+        return reply
     return "an African or a European swallow?"
 Kernel.raw_input = _fake_raw_input
 Kernel.getpass = _fake_raw_input
@@ -95,6 +104,14 @@ def execute(path, work, overlay):
     for cell in run.cells:
         if is_placeholder(cell) and cell.get('id') in solutions:
             cell.source = solutions[cell['id']]
+    # before each cell that has input replies, a cell that gives them to the input() stub
+    cells = []
+    for cell in run.cells:
+        replies = cell.metadata.get('input_replies')
+        if cell.cell_type == 'code' and replies:
+            cells.append(nbf.v4.new_code_cell(f'import builtins; builtins._input_replies = {list(replies)!r}'))
+        cells.append(cell)
+    run.cells = cells
 
     start = time.time()
     try:

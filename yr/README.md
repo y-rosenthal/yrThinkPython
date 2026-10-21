@@ -10,7 +10,7 @@ Allen Downey's *Think Python*. Keeping it here, instead of inside the chapter no
 ```
 yr/
   README.md                this file: layout, format, style rules, tools
-  chapNN_additions.ipynb   material that a chapter uses but does not explain (so far: chapters 3, 7)
+  chapNN_additions.ipynb   material that a chapter uses but does not explain (so far: chapters 3, 7, 8, 9)
   chapNN_review.ipynb      one review page per chapter (so far: chapters 2 to 9)
   plans/                   design notes (runall-collapsible-answers.md: the new page format)
   tools/
@@ -62,6 +62,11 @@ in this order:
 
 ## Additions pages: `yr/chapNN_additions.ipynb`
 
+A chapter usually has one additions page. A second additions page is permitted only when it is necessary,
+and only after Prof. Rosenthal agrees: the tools (`check_notebooks.py`, `review.sh sync`, the build) expect one
+page, so they must change too. A topic that needs material from a later chapter goes on that chapter's
+additions page: nested loops are on 9b, not 8b, so that their examples can use lists.
+
 An additions page explains what the chapter uses but does not explain (for example, `range` with two or three
 arguments for chapter 3), or what a student needs to run the chapter's code on their own computer (for
 example, file paths for chapter 7). It is written like one of Downey's chapters: text, code cells that show
@@ -77,6 +82,36 @@ each idea, and practice questions at the end.
    with `%%expect ERROR_NAME`, as the chapters do, so that Run all in Colab does not stop.
    Code that depends on the student's computer (a full path, `os.chdir`) goes in a ```` ```python ````
    block in the text, not in a code cell: the build cannot run it.
+   - **Code that calls `input()`** is a code cell. In Colab, the student types the reply. The website
+     cannot wait for a person, so give the replies of a pretend user in the cell's metadata:
+     `"input_replies": ["mary smith"]`. The build (`jb/execute_notebooks.py`) shows each prompt with the
+     next reply after it, as if a person typed it, and `input()` returns the reply. One reply for each
+     `input()` call in the cell. Show a function that calls `input()` in one cell, and call it in
+     other cells with different replies, so that the student sees that the result depends on what the user types.
+   - **Method boxes** (as in `yr/chap08_additions.ipynb`): to separate the description of each method,
+     give it a `### ` heading, and put its text in a box in the same markdown cell:
+     ```
+     ### [`upper()`](https://docs.python.org/3/library/stdtypes.html#str.upper)
+
+     <div class="yr-method" style="border-left: 6px solid #3b82f6; background: rgba(59,130,246,0.08); padding: 0.5em 1em; margin: 0.5em 0;">
+
+     The text (no headings in the box).
+
+     </div>
+     ```
+     The example code cells follow the box. In Colab, the inline style draws the box around the text. On
+     the website, `jb/_static/yr.css` draws the box around the whole section: the heading, the text and
+     the example code cells, up to the next heading.
+   - **A quick summary with hidden code** (as in `yr/chap08_additions.ipynb`): a code cell that only shows
+     results. Start it with `# @title TITLE`, give it the metadata `"cellView": "form"` (Colab then shows
+     the title and the output, and hides the code), and the tag `remove-input` (the website shows only
+     the output).
+   - **A collapsible section:** a markdown cell that starts with a heading and has
+     `<div class="yr-collapse">` with a short text in it. In Colab, the reader can collapse any heading
+     with the arrow next to it. On the website, `jb/_static/yr.js` puts the heading and its section in a
+     `<details>` block, open at the start; a click on the heading hides or shows the section. In
+     `yr/chap08_additions.ipynb`, each method section has an introduction and a quick summary, then a
+     collapsible "Details: ..." section (`###`) with one method box (`####`) for each method.
 4. **Diving deeper** boxes (optional): each is one markdown cell that is only a `<details>` block, with
    `<summary>Diving deeper: TOPIC</summary>` (or `Diving deeper (for Windows users): TOPIC` for material that
    only Windows users need). It is closed in Colab and on the website. Put details that most students can
@@ -97,6 +132,9 @@ each idea, and practice questions at the end.
 
 - Each fact once, in plain English, with an example for each fact. Show the general form with UPPERCASE
   placeholders, as on the review pages (`range(START, STOP, STEP)`).
+- Each code cell has all the data that it uses: it assigns each variable itself, and does not use a variable
+  that an earlier cell assigns (write `text = 'the cAT in THE hat'` in each cell that uses `text`). A
+  function can be defined in one cell and called in the cells right after it.
 - Write file paths with forward slashes, also Windows paths (`C:/Users/YOUR_NAME/Downloads/words.txt`):
   Python accepts them on every system. Explain backslashes only in a "Diving deeper (for Windows users)" box.
 - Use only what the book has taught up to this chapter, and what the page itself explains. For example,
