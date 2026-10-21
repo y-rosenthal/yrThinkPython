@@ -622,7 +622,7 @@ Prof. Rosenthal first: the tools expect one page for each chapter.
 - To let the reader collapse a section, put `<div class="yr-collapse">` with a short text in the cell
   of its heading. On the website, a click on the heading then hides or shows the section.
 - To make all the sections of a page collapsible, put `<div class="yr-collapse-all"></div>` in the title
-  cell. Each heading then also has the buttons "Collapse all" and "Expand all" (8b does this).
+  cell. Each heading then also has the buttons "Focus here", "Collapse all" and "Expand all" (8b does this).
 
 ### Check an additions page
 

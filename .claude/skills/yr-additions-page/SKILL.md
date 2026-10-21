@@ -45,8 +45,8 @@ on each cell, no outputs, `execution_count: null`. Follow the layout in `yr/READ
    (`"input_replies": [...]`), so that the website shows a real interaction. To box each method's
    description, use a "method box" (`<div class="yr-method" ...>`). For results without code, use a quick
    summary cell (`# @title`, `"cellView": "form"`, tag `remove-input`). To let the reader collapse a section,
-   put `<div class="yr-collapse">` in its heading cell; to make all the sections collapsible, with "Collapse
-   all" and "Expand all" buttons, put `<div class="yr-collapse-all"></div>` in the title cell.
+   put `<div class="yr-collapse">` in its heading cell; to make all the sections collapsible, with "Focus
+   here", "Collapse all" and "Expand all" buttons, put `<div class="yr-collapse-all"></div>` in the title cell.
    `yr/README.md` gives all of them.
 4. Optional Diving deeper boxes: each is one markdown cell that is only a `<details>` block, with
    `<summary>Diving deeper: TOPIC</summary>` (or `Diving deeper (for Windows users): TOPIC`) and a blank line
