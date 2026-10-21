@@ -10,7 +10,7 @@ Allen Downey's *Think Python*. Keeping it here, instead of inside the chapter no
 ```
 yr/
   README.md                this file: layout, format, style rules, tools
-  chapNN_additions.ipynb   material that a chapter uses but does not explain (so far: chapters 3, 7, 8)
+  chapNN_additions.ipynb   material that a chapter uses but does not explain (so far: chapters 3, 7, 8, 9)
   chapNN_review.ipynb      one review page per chapter (so far: chapters 2 to 9)
   plans/                   design notes (runall-collapsible-answers.md: the new page format)
   tools/
@@ -61,6 +61,11 @@ in this order:
 - `check_notebooks.py` checks the titles and the order in the TOC.
 
 ## Additions pages: `yr/chapNN_additions.ipynb`
+
+A chapter usually has one additions page. A second additions page is permitted only when it is necessary,
+and only after Prof. Rosenthal agrees: the tools (`check_notebooks.py`, `review.sh sync`, the build) expect one
+page, so they must change too. A topic that needs material from a later chapter goes on that chapter's
+additions page: nested loops are on 9b, not 8b, so that their examples can use lists.
 
 An additions page explains what the chapter uses but does not explain (for example, `range` with two or three
 arguments for chapter 3), or what a student needs to run the chapter's code on their own computer (for

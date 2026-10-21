@@ -52,6 +52,7 @@ parts:
   chapters:
     - file: chap09
 - chapters:
+    - file: yr/chap09_additions
     - file: yr/chap09_review
 - numbered: True
   chapters:

@@ -70,7 +70,8 @@ For the third edition, the biggest changes are:
 **Chapter 9: Lists**
 
 * [Click here to run Chapter 9 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap09.ipynb)
-* [Click here to run 9b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_review.ipynb)
+* [Click here to run 9b. Prof. Rosenthal's Additions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_additions.ipynb)
+* [Click here to run 9c. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_review.ipynb)
 
 **Chapter 10: Dictionaries**
 

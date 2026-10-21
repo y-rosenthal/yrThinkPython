@@ -13,7 +13,11 @@ reference example (sections, a Diving deeper, practice questions); `yr/chap03_ad
 Do not change Downey's chapter (`chapters/chapNN.ipynb`). Work on a topic branch, not `v3`. Leave committing
 and pushing to the user unless asked.
 
-If the chapter already has an additions page, add the new material to it. A chapter has one additions page.
+If the chapter already has an additions page, add the new material to it. A chapter usually has one additions
+page. A second additions page is permitted only when it is necessary (for example, two large topics that do
+not belong together). Ask Prof. Rosenthal before you make one: the tools (`check_notebooks.py`,
+`review.sh sync`, the build) expect one page, so they must change too. A topic that needs material from a
+later chapter goes on that chapter's additions page (nested loops are on 9b, because they use lists).
 
 ## 1. Study the chapter
 

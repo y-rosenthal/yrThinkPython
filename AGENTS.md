@@ -87,7 +87,8 @@ website and in `jb/index.md`, in this order:
 1. Chapter NN: Downey's chapter (`chapters/chapNN.ipynb`).
 2. NNb. Prof. Rosenthal's Additions (`yr/chapNN_additions.ipynb`), only if the chapter needs one: what the
    chapter uses but does not explain, with examples and practice questions on the same page. Use the
-   `yr-additions-page` skill.
+   `yr-additions-page` skill. A chapter usually has one additions page. Make a second one only when it is
+   necessary, and ask Prof. Rosenthal first.
 3. NNb. Prof. Rosenthal's Review (`yr/chapNN_review.ipynb`): a review of the chapter. When the chapter has an
    additions page, the review is **NNc**: `review.sh sync` writes the letter in the title.
 
