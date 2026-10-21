@@ -115,8 +115,9 @@ each idea, and practice questions at the end.
    - **All the sections collapsible, with "Collapse all" and "Expand all" buttons** (as in
      `yr/chap08_additions.ipynb`): put `<div class="yr-collapse-all"></div>` in the title cell. On the
      website, every section with a `##`, `###` or `####` heading is then collapsible, and each of these
-     headings has the two buttons. The buttons change only the sections: the Answers and the Diving
-     deeper boxes stay closed. In Colab, the reader collapses the headings with the arrows next to them.
+     headings has three buttons: "Focus here" (show only this section: the other sections close, and the
+     sections that contain it show only their headings and the path to it), "Collapse all" and "Expand all". The buttons change only the
+     sections: the Answers and the Diving deeper boxes stay closed. In Colab, the reader collapses the headings with the arrows next to them.
 4. **Diving deeper** boxes (optional): each is one markdown cell that is only a `<details>` block, with
    `<summary>Diving deeper: TOPIC</summary>` (or `Diving deeper (for Windows users): TOPIC` for material that
    only Windows users need). It is closed in Colab and on the website. Put details that most students can

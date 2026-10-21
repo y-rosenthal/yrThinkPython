@@ -5,7 +5,8 @@
    as the description of one method. The inline style draws the box in Colab, around the text only.
    On the website, the box goes around the whole section, so the inline style of the div is removed. */
 
-section:has(> div.yr-method) {
+section:has(> div.yr-method),
+section:has(> details.yr-collapse > div.yr-method) {  /* the second: when yr.js made the section collapsible */
   border: 1px solid var(--pst-color-border, #d0d7de);
   border-left: 6px solid var(--pst-color-primary, #3b82f6);
   border-radius: 6px;
@@ -21,20 +22,60 @@ div.yr-method {
   margin: 0 !important;
 }
 
-/* Collapsible sections: jb/_static/yr.js puts the heading in the <summary> of a <details> block. */
+/* Collapsible sections: jb/_static/yr.js puts the heading in the <summary> of a <details> block.
+   The summary is one row: a triangle, the heading (which can wrap), and the buttons at the right. On a
+   narrow screen, the buttons go under the heading, together. */
+details.yr-collapse {
+  margin-top: 0.6em;
+}
+
 details.yr-collapse > summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2em 0.6em;
+  padding: 0.25em 0;
+  list-style: none;
   cursor: pointer;
+}
+
+details.yr-collapse > summary::-webkit-details-marker {
+  display: none;
+}
+
+details.yr-collapse > summary::before {
+  content: "\25B8";  /* a small triangle that points right; it turns down when the section is open */
+  flex: none;
+  color: var(--pst-color-text-muted, #6b7280);
+  transition: transform 0.15s;
+}
+
+details.yr-collapse[open] > summary::before {
+  transform: rotate(90deg);
 }
 
 details.yr-collapse > summary > h2,
 details.yr-collapse > summary > h3,
 details.yr-collapse > summary > h4 {
-  display: inline;
+  flex: 1 1 12em;
+  min-width: 0;
+  margin: 0;
 }
 
-/* The buttons "Collapse all" and "Expand all" at the end of each heading (pages with div.yr-collapse-all). */
-button.yr-toggle-all {
+/* A closed section: a thin line under its heading, so that the closed headings do not run together. */
+details.yr-collapse:not([open]) > summary {
+  border-bottom: 1px solid var(--pst-color-border, #d0d7de);
+}
+
+/* The buttons "Focus here", "Collapse all" and "Expand all" at the end of each heading (pages with
+   div.yr-collapse-all). */
+span.yr-toggle-group {
+  flex: none;
+  white-space: nowrap;
   margin-left: 0.75em;
+}
+
+button.yr-toggle-all {
   padding: 0.15em 0.6em;
   font-size: 0.75rem;
   font-weight: 600;
@@ -52,4 +93,16 @@ button.yr-toggle-all + button.yr-toggle-all {
 
 button.yr-toggle-all:hover {
   filter: brightness(1.15);
+}
+
+/* After "Focus here": an outer section shows only its heading and its sections (the one in focus is open,
+   the others are closed). Its own text and code cells are hidden. */
+details.yr-focus-path > :not(summary):not(section) {
+  display: none;
+}
+
+/* "Focus here": a darker shade of the same color, so that it looks different from the other two. */
+button.yr-toggle-all.yr-focus {
+  background: #1e3a8a;
+  background: color-mix(in srgb, var(--pst-color-primary, #3b82f6) 60%, black);
 }
