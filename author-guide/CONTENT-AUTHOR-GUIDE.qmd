@@ -92,6 +92,21 @@ Every push to the branch `v3` publishes the website. Thus:
 The deploy workflow (`.github/workflows/deploy-book.yml`) runs `check_notebooks.py` first. If it
 finds a problem, the website does not change.
 
+#### Students see the new version without a reload
+
+After you publish, students do not need to reload a page to see the new version. `jb/_static/yr.js`,
+which every page of the website loads (also pages that you add later), checks for a new version 3
+seconds after a page opens, every 5 minutes while the page is on the screen, and each time the student
+comes back to its tab:
+
+- When the student comes back to a tab with an old version, the page reloads, at the same place.
+- While the student looks at a page, a bar at the top says "A new version of this website was
+  published", with a **Reload** button.
+
+GitHub Pages gives each page a new date on every publish. So after a publish, the bar can also come on
+a page that did not change. A notebook that a student saved in Google Drive (**File > Save a copy in
+Drive**) does not change: to get the new version, the student opens the page again from the website.
+
 **Corrections to the book itself** go to Allen Downey as a GitHub issue, not as a pull request.
 The `contribute-upstream` skill writes the issue text.
 

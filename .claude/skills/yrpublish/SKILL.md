@@ -83,3 +83,5 @@ while Pages catches up. To confirm a specific change, also grep for it:
 
 The merge commit, the run URL and result, any execution warnings, the verify_live.py result,
 and the links to the changed pages. Leave the topic branch in place (the user can delete it).
+Students do not need to reload: `jb/_static/yr.js` reloads an old page when the student comes back to its
+tab, or shows a "Reload" bar (author guide, "Students see the new version without a reload").
