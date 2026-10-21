@@ -18,7 +18,9 @@ them.) For each jb/chapNN.ipynb and jb/yr/chapNN_additions.ipynb:
    and returns the reply. Without replies, input() returns a fixed string.
 3. Copy the outputs back into jb/chapNN.ipynb, cell by cell (matched by id). An error output is
    kept only where it is meant to be (%%expect cells and cells tagged raises-exception);
-   other errors are dropped and reported.
+   other errors are dropped and reported. A cell whose code is hidden (tag remove-input) and that
+   draws a picture shows only the picture: its text value is dropped (for example, the list of
+   numbers that adjust() returns in a diagram cell of chapter 9).
 
 If a notebook cannot be executed at all, it is left without outputs and a warning is printed;
 the build goes on. Run from jb/, after copying the chapters and before prep_notebooks.py:
@@ -126,8 +128,8 @@ def execute(path, work, overlay):
     for cell in nb.cells:
         if cell.cell_type != 'code' or is_placeholder(cell) or cell.get('id') not in ran:
             continue
-        expected = cell.source.startswith('%%expect') or 'raises-exception' in (
-            cell.metadata.get('tags', []) + tags.get(cell.get('id'), []))
+        cell_tags = cell.metadata.get('tags', []) + tags.get(cell.get('id'), [])
+        expected = cell.source.startswith('%%expect') or 'raises-exception' in cell_tags
         outputs = []
         for o in ran[cell['id']].get('outputs', []):
             if o.output_type == 'error' and not expected:
@@ -136,6 +138,10 @@ def execute(path, work, overlay):
             outputs.append(o)
         if '%xmode' in cell.source:
             outputs = []  # "Exception reporting mode: ..." is noise on a web page
+        if 'remove-input' in cell_tags and any('image/png' in o.get('data', {}) for o in outputs):
+            # a hidden drawing cell: its last value (as adjust()'s list of numbers) is not for the reader
+            outputs = [o for o in outputs
+                       if not (o.output_type == 'execute_result' and 'image/png' not in o.get('data', {}))]
         cell.outputs = outputs
         cell.execution_count = ran[cell['id']].get('execution_count')
     nbf.write(nb, path)
