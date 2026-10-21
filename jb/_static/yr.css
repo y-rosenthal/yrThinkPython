@@ -1,4 +1,4 @@
-/* Styles for the course's pages (yr/). Jupyter Book adds each CSS file in _static/ to every page.
+/* Styles for the website. Jupyter Book adds each CSS file in _static/ to every page of the book.
 
    Method boxes (yr/chap08_additions.ipynb): a markdown cell that starts with
    <div class="yr-method" style="..."> marks its section (the heading, the text and the example code cells)
@@ -105,4 +105,39 @@ details.yr-focus-path > :not(summary):not(section) {
 button.yr-toggle-all.yr-focus {
   background: #1e3a8a;
   background: color-mix(in srgb, var(--pst-color-primary, #3b82f6) 60%, black);
+}
+
+/* The update bar (yr.js, "Update check"): at the top of the screen, over the page. */
+#yr-update-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em 0.75em;
+  padding: 0.6em 1em;
+  font-size: 0.95rem;
+  color: #fff;
+  background: #1e3a8a;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#yr-update-bar button {
+  padding: 0.2em 0.9em;
+  font-weight: 600;
+  color: #1e3a8a;
+  background: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#yr-update-bar button.yr-update-later {
+  color: #fff;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.7);
 }

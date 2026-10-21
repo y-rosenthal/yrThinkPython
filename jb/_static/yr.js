@@ -1,4 +1,5 @@
-// Scripts for the course's pages (yr/). Jupyter Book adds each JS file in _static/ to every page.
+// Scripts for the website. Jupyter Book adds each JS file in _static/ to every page of the book, also to pages
+// that are added later. Two parts: collapsible sections (below), and the update check (at the end).
 //
 // Collapsible sections. In Colab, the reader can collapse any heading. On the website, this script puts a
 // heading and the rest of its section in a <details> block, open at the start: a click on the heading hides or
@@ -96,3 +97,75 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('hashchange', openTarget);
   openTarget();
 });
+
+// Update check (every page). A browser can show a copy of a page that it saved before (GitHub Pages lets it keep a
+// copy for 10 minutes), and a tab that stays open keeps the old version. So the page asks the server, without
+// any saved copy, for the date when the page was published (the Last-Modified header), and compares it with the
+// date of the copy on the screen (document.lastModified). A newer date means that a new version was published:
+// - when the reader comes back to the tab (from another tab or window), the page reloads at once: the reader
+//   was away, so a reload does not interrupt the reading;
+// - while the reader looks at the page, a bar at the top offers "Reload".
+// After a reload, the page goes back to the same place. The check runs 3 seconds after the page loads, every
+// 5 minutes while the page is on the screen, and each time that the reader comes back to the tab.
+(() => {
+  if (!/^https?:$/.test(location.protocol)) return;  // not for a page opened from a file
+  const SCROLL_KEY = 'yr-scroll:' + location.pathname;
+  const shown = new Date(document.lastModified).getTime();
+  let newer = false;
+
+  const reload = () => {
+    try { sessionStorage.setItem(SCROLL_KEY, String(window.scrollY)); } catch (e) { /* no storage: reload anyway */ }
+    location.reload();
+  };
+
+  const showBar = () => {
+    if (document.getElementById('yr-update-bar')) return;
+    const bar = document.createElement('div');
+    bar.id = 'yr-update-bar';
+    bar.setAttribute('role', 'status');
+    const text = document.createElement('span');
+    text.textContent = 'A new version of this website was published.';
+    const now = document.createElement('button');
+    now.type = 'button';
+    now.textContent = 'Reload';
+    now.addEventListener('click', reload);
+    const later = document.createElement('button');
+    later.type = 'button';
+    later.className = 'yr-update-later';
+    later.textContent = 'Later';
+    later.addEventListener('click', () => bar.remove());
+    bar.append(text, now, later);
+    document.body.prepend(bar);
+  };
+
+  const check = async (comingBack) => {
+    if (newer) {
+      if (comingBack) reload();
+      return;
+    }
+    try {
+      const url = location.pathname + '?yr-update-check=' + Date.now();  // a new URL: no saved copy can answer
+      const response = await fetch(url, { method: 'HEAD', cache: 'no-store' });
+      const published = new Date(response.headers.get('Last-Modified')).getTime();
+      if (!(published > shown + 1000)) return;  // the same version (or no date)
+      newer = true;
+      if (comingBack) reload();
+      else if (!document.hidden) showBar();  // a hidden tab reloads when the reader comes back to it
+    } catch (e) {
+      // no network: try again at the next check
+    }
+  };
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) check(true);
+  });
+  setTimeout(() => check(false), 3000);
+  setInterval(() => { if (!document.hidden) check(false); }, 5 * 60 * 1000);
+
+  // After a reload by the update check: go back to the same place on the page.
+  window.addEventListener('load', () => {
+    let y = null;
+    try { y = sessionStorage.getItem(SCROLL_KEY); sessionStorage.removeItem(SCROLL_KEY); } catch (e) { /* none */ }
+    if (y !== null) window.scrollTo(0, Number(y));
+  });
+})();

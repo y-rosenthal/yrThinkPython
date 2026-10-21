@@ -88,6 +88,10 @@ each idea, and practice questions at the end.
      next reply after it, as if a person typed it, and `input()` returns the reply. One reply for each
      `input()` call in the cell. Show a function that calls `input()` in one cell, and call it in
      other cells with different replies, so that the student sees that the result depends on what the user types.
+   - **The website's own files:** `jb/_static/yr.js` and `jb/_static/yr.css` are loaded on every page
+     of the website. They hold the method boxes and the collapsible sections below, and the update check
+     (a page that is older than the website reloads, or shows a "Reload" bar: see the author guide,
+     "Students see the new version without a reload").
    - **Method boxes** (as in `yr/chap08_additions.ipynb`): to separate the description of each method,
      give it a `### ` heading, and put its text in a box in the same markdown cell:
      ```
