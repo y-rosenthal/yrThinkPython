@@ -64,7 +64,8 @@ For the third edition, the biggest changes are:
 **Chapter 8: Strings and Regular Expressions**
 
 * [Click here to run Chapter 8 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap08.ipynb)
-* [Click here to run 8b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap08_review.ipynb)
+* [Click here to run 8b. Prof. Rosenthal's Additions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap08_additions.ipynb)
+* [Click here to run 8c. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap08_review.ipynb)
 
 **Chapter 9: Lists**
 

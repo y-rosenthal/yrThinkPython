@@ -1,0 +1,33 @@
+/* Styles for the course's pages (yr/). Jupyter Book adds each CSS file in _static/ to every page.
+
+   Method boxes (yr/chap08_additions.ipynb): a markdown cell that starts with
+   <div class="yr-method" style="..."> marks its section (the heading, the text and the example code cells)
+   as the description of one method. The inline style draws the box in Colab, around the text only.
+   On the website, the box goes around the whole section, so the inline style of the div is removed. */
+
+section:has(> div.yr-method) {
+  border: 1px solid var(--pst-color-border, #d0d7de);
+  border-left: 6px solid var(--pst-color-primary, #3b82f6);
+  border-radius: 6px;
+  background: rgba(59, 130, 246, 0.05);
+  padding: 0.2em 1em 0.6em 1em;
+  margin: 1.2em 0;
+}
+
+div.yr-method {
+  border: none !important;
+  background: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Collapsible sections: jb/_static/yr.js puts the heading in the <summary> of a <details> block. */
+details.yr-collapse > summary {
+  cursor: pointer;
+}
+
+details.yr-collapse > summary > h2,
+details.yr-collapse > summary > h3,
+details.yr-collapse > summary > h4 {
+  display: inline;
+}

@@ -19,7 +19,7 @@ material, and keeps it apart from the book.
 | `chapters/chapNN.ipynb` | The book's chapters, 0 to 19 | Yes, carefully (Part 2) |
 | `blank/chapNN.ipynb` | "Fill in the blanks" copies of the chapters | No: a tool writes them |
 | `solutions/chapNN.ipynb` | Suggested solutions to the book's exercises | Yes (Part 2) |
-| `yr/chapNN_additions.ipynb` | The additions pages: what a chapter uses but does not explain (3 and 7 so far) | Yes (Part 4) |
+| `yr/chapNN_additions.ipynb` | The additions pages: what a chapter uses but does not explain (3, 7 and 8 so far) | Yes (Part 4) |
 | `yr/chapNN_review.ipynb` | The review pages, one per chapter (2 to 9 so far) | Yes (Part 3) |
 | `yr/README.md` | The rules for the additions pages and the review pages | Yes, when a rule changes |
 | `yr/tools/` | The review-page tools | Only to change a tool |
@@ -580,7 +580,8 @@ The website build does not run the review pages. `jb/prep_notebooks.py` changes 
 An additions page (`yr/chapNN_additions.ipynb`) explains what its chapter uses but does not
 explain. For example, "3b. Prof. Rosenthal's Additions" explains `range` with two and three
 arguments, and "7b. Prof. Rosenthal's Additions" explains file paths, the working directory and
-iterables. The page is written like a chapter of the book: text, code cells that show each idea,
+iterables, and "8b. Prof. Rosenthal's Additions" explains
+more string methods. The page is written like a chapter of the book: text, code cells that show each idea,
 and practice questions at the end, each with a closed **Answer**.
 
 `yr/README.md` ("Additions pages") gives the layout and the style rules. The `yr-additions-page`
@@ -604,6 +605,19 @@ skill gives the steps.
 - For a "what is displayed" question, put the question's code in a code cell with the tag
   `hide-output`. The website shows the code, and shows the output when the reader clicks.
 - Show an error with a code cell that starts with `%%expect ERROR_NAME`, so that Run all does not stop.
+- Each code cell has all the data that it uses. Do not use a variable that an earlier cell assigns: assign
+  it again in the cell. A function can be defined in one cell and called in the cells right after it.
+- Code that calls `input()` is a code cell. In Colab, the student types the reply. For the website, put
+  the replies of a pretend user in the cell's metadata, `"input_replies": ["mary smith"]`: the build shows
+  each prompt with its reply, as if a person typed it. In Jupyter, edit the metadata with
+  **Property Inspector** (the gear icon at the right).
+- To put the description of each method in a box, use a "method box": a `### ` heading, then a
+  `<div class="yr-method" style="...">` block in the same markdown cell (`yr/README.md` gives it).
+  On the website, the box goes around the method's whole section, its example code cells too.
+- To show only the results of a code cell (as the quick summaries of 8b do), start the cell with
+  `# @title TITLE`, give it the metadata `"cellView": "form"` and the tag `remove-input`.
+- To let the reader collapse a section, put `<div class="yr-collapse">` with a short text in the cell
+  of its heading. On the website, a click on the heading then hides or shows the section.
 
 ### Check an additions page
 

@@ -33,8 +33,15 @@ on each cell, no outputs, `execution_count: null`. Follow the layout in `yr/READ
 2. Setup cell: a copy of the chapter's first code cell (the `download` function, `thinkpython.py`, the files
    that the page uses, `import thinkpython`).
 3. Sections: one idea at a time, the general form with UPPERCASE placeholders, a code cell for each example.
+   Each code cell assigns all the data that it uses: no variables from earlier cells (a function can be
+   defined in one cell and called in the cells right after it).
    Errors: a code cell that starts with `%%expect ERROR_NAME`. Code that depends on the student's computer
    (a full path, `os.chdir`) goes in a ```` ```python ```` block in the text.
+   Code that calls `input()` is a code cell with the replies of a pretend user in its metadata
+   (`"input_replies": [...]`), so that the website shows a real interaction. To box each method's
+   description, use a "method box" (`<div class="yr-method" ...>`). For results without code, use a quick
+   summary cell (`# @title`, `"cellView": "form"`, tag `remove-input`). To let the reader collapse a section,
+   put `<div class="yr-collapse">` in its heading cell. `yr/README.md` gives all of them.
 4. Optional Diving deeper boxes: each is one markdown cell that is only a `<details>` block, with
    `<summary>Diving deeper: TOPIC</summary>` (or `Diving deeper (for Windows users): TOPIC`) and a blank line
    after it. Write paths with forward slashes, also on Windows; backslashes go only in the Windows box.
