@@ -31,3 +31,25 @@ details.yr-collapse > summary > h3,
 details.yr-collapse > summary > h4 {
   display: inline;
 }
+
+/* The buttons "Collapse all" and "Expand all" at the end of each heading (pages with div.yr-collapse-all). */
+button.yr-toggle-all {
+  margin-left: 0.75em;
+  padding: 0.15em 0.6em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  vertical-align: middle;
+  color: #fff;
+  background: var(--pst-color-primary, #3b82f6);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.yr-toggle-all + button.yr-toggle-all {
+  margin-left: 0.35em;
+}
+
+button.yr-toggle-all:hover {
+  filter: brightness(1.15);
+}
