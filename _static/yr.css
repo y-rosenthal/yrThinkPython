@@ -1,0 +1,143 @@
+/* Styles for the website. Jupyter Book adds each CSS file in _static/ to every page of the book.
+
+   Method boxes (yr/chap08_additions.ipynb): a markdown cell that starts with
+   <div class="yr-method" style="..."> marks its section (the heading, the text and the example code cells)
+   as the description of one method. The inline style draws the box in Colab, around the text only.
+   On the website, the box goes around the whole section, so the inline style of the div is removed. */
+
+section:has(> div.yr-method),
+section:has(> details.yr-collapse > div.yr-method) {  /* the second: when yr.js made the section collapsible */
+  border: 1px solid var(--pst-color-border, #d0d7de);
+  border-left: 6px solid var(--pst-color-primary, #3b82f6);
+  border-radius: 6px;
+  background: rgba(59, 130, 246, 0.05);
+  padding: 0.2em 1em 0.6em 1em;
+  margin: 1.2em 0;
+}
+
+div.yr-method {
+  border: none !important;
+  background: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Collapsible sections: jb/_static/yr.js puts the heading in the <summary> of a <details> block.
+   The summary is one row: a triangle, the heading (which can wrap), and the buttons at the right. On a
+   narrow screen, the buttons go under the heading, together. */
+details.yr-collapse {
+  margin-top: 0.6em;
+}
+
+details.yr-collapse > summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2em 0.6em;
+  padding: 0.25em 0;
+  list-style: none;
+  cursor: pointer;
+}
+
+details.yr-collapse > summary::-webkit-details-marker {
+  display: none;
+}
+
+details.yr-collapse > summary::before {
+  content: "\25B8";  /* a small triangle that points right; it turns down when the section is open */
+  flex: none;
+  color: var(--pst-color-text-muted, #6b7280);
+  transition: transform 0.15s;
+}
+
+details.yr-collapse[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+details.yr-collapse > summary > h2,
+details.yr-collapse > summary > h3,
+details.yr-collapse > summary > h4 {
+  flex: 1 1 12em;
+  min-width: 0;
+  margin: 0;
+}
+
+/* A closed section: a thin line under its heading, so that the closed headings do not run together. */
+details.yr-collapse:not([open]) > summary {
+  border-bottom: 1px solid var(--pst-color-border, #d0d7de);
+}
+
+/* The buttons "Focus here", "Collapse all" and "Expand all" at the end of each heading (pages with
+   div.yr-collapse-all). */
+span.yr-toggle-group {
+  flex: none;
+  white-space: nowrap;
+  margin-left: 0.75em;
+}
+
+button.yr-toggle-all {
+  padding: 0.15em 0.6em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  vertical-align: middle;
+  color: #fff;
+  background: var(--pst-color-primary, #3b82f6);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.yr-toggle-all + button.yr-toggle-all {
+  margin-left: 0.35em;
+}
+
+button.yr-toggle-all:hover {
+  filter: brightness(1.15);
+}
+
+/* After "Focus here": an outer section shows only its heading and its sections (the one in focus is open,
+   the others are closed). Its own text and code cells are hidden. */
+details.yr-focus-path > :not(summary):not(section) {
+  display: none;
+}
+
+/* "Focus here": a darker shade of the same color, so that it looks different from the other two. */
+button.yr-toggle-all.yr-focus {
+  background: #1e3a8a;
+  background: color-mix(in srgb, var(--pst-color-primary, #3b82f6) 60%, black);
+}
+
+/* The update bar (yr.js, "Update check"): at the top of the screen, over the page. */
+#yr-update-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em 0.75em;
+  padding: 0.6em 1em;
+  font-size: 0.95rem;
+  color: #fff;
+  background: #1e3a8a;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#yr-update-bar button {
+  padding: 0.2em 0.9em;
+  font-weight: 600;
+  color: #1e3a8a;
+  background: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#yr-update-bar button.yr-update-later {
+  color: #fff;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}

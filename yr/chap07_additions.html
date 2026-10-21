@@ -1,0 +1,1153 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>7b. Prof. Rosenthal’s Additions &#8212; Think Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/yr.css?v=bc5bffc8" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'yr/chap07_additions';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/yr.js?v=df9f7c87"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7c. Prof. Rosenthal’s Review" href="chap07_review.html" />
+    <link rel="prev" title="7. Iteration and Search" href="../chap07.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Think Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap00.html">Preface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap01.html">1. Programming as a way of thinking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap02.html">2. Variables and Statements</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap02_review.html">2b. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap03.html">3. Functions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap03_additions.html">3b. Prof. Rosenthal’s Additions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03_review.html">3c. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap04.html">4. Functions and Interfaces</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap04_review.html">4b. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap05.html">5. Conditionals and Recursion</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap05_review.html">5b. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap06.html">6. Return Values</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap06_review.html">6b. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap07.html">7. Iteration and Search</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">7b. Prof. Rosenthal’s Additions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07_review.html">7c. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap08.html">8. Strings and Regular Expressions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap08_additions.html">8b. Prof. Rosenthal’s Additions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08_review.html">8c. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap09.html">9. Lists</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap09_additions.html">9b. Prof. Rosenthal’s Additions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_review.html">9c. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap10.html">10. Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap11.html">11. Tuples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap12.html">12. Text Analysis and Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap13.html">13. Files and Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap14.html">14. Classes and Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap15.html">15. Classes and Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap16.html">16. Classes and Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap17.html">17. Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap18.html">18. Python Extras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap19.html">19. Final thoughts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../blank.html">Blank Notebooks</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/y-rosenthal/yrThinkPython" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/yr/chap07_additions.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>7b. Prof. Rosenthal’s Additions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-a-file-on-your-own-computer">Opening a file on your own computer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-paths">Full paths</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-the-full-path-of-the-downloads-folder">Windows: the full path of the Downloads folder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mac-the-full-path-of-the-downloads-folder">Mac: the full path of the Downloads folder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-the-file-with-its-full-path">Reading the file with its full path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loops-and-iterables"><code class="docutils literal notranslate"><span class="pre">for</span></code> loops and iterables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-questions">Practice questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-easy-what-is-displayed">Question 1 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-easy-open-a-file-on-windows">Question 2 (easy): open a file on Windows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-medium-what-happens">Question 3 (medium): what happens?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-medium-relative-paths">Question 4 (medium): relative paths</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-medium-write-a-function">Question 5 (medium): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-hard-what-is-displayed">Question 6 (hard): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-7-hard-write-a-function">Question 7 (hard): write a function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#credits">Credits</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="b-prof-rosenthals-additions">
+<h1>7b. Prof. Rosenthal’s Additions<a class="headerlink" href="#b-prof-rosenthals-additions" title="Link to this heading">#</a></h1>
+<p>Additions to <a class="reference external" href="https://y-rosenthal.github.io/yrThinkPython/chap07.html">Chapter 7: Iteration and Search</a>:
+topics that the chapter uses, but does not explain. Read this page after the chapter.
+The practice questions at the end have answers: try each question first, then open its <strong>Answer</strong>.</p>
+<p><a class="reference external" href="https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_additions.ipynb">Run this page on Colab</a></p>
+<p>Run the setup cell below first. In Colab, it downloads the file <code class="docutils literal notranslate"><span class="pre">words.txt</span></code> (the word list that
+Chapter 7 uses), and <code class="docutils literal notranslate"><span class="pre">thinkpython.py</span></code>, which lets this page show the errors of some examples without
+stopping the page.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlretrieve</span>
+
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Downloaded "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">local</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">filename</span>
+
+<span class="n">download</span><span class="p">(</span><span class="s1">'https://github.com/AllenDowney/ThinkPython/raw/v3/thinkpython.py'</span><span class="p">);</span>
+<span class="n">download</span><span class="p">(</span><span class="s1">'https://raw.githubusercontent.com/AllenDowney/ThinkPython/v3/words.txt'</span><span class="p">);</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">thinkpython</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="opening-a-file-on-your-own-computer">
+<h2>Opening a file on your own computer<a class="headerlink" href="#opening-a-file-on-your-own-computer" title="Link to this heading">#</a></h2>
+<p>Chapter 7 opens the word list with <code class="docutils literal notranslate"><span class="pre">open('words.txt')</span></code>. In Colab, this works because the chapter’s setup cell
+downloads <code class="docutils literal notranslate"><span class="pre">words.txt</span></code> first. If you run Python on your own computer (for example, in Jupyter, VS Code or
+Spyder), you must download the file yourself:</p>
+<p><a href="https://y-rosenthal.github.io/yrThinkPython/words.txt" download="words.txt">Click here to download <code>words.txt</code></a></p>
+<p>Most browsers save the file in your <strong>Downloads</strong> folder. If the browser shows the words instead of saving
+the file, right-click the link and choose <strong>Save Link As…</strong> (or <strong>Download Linked File</strong>).</p>
+<p>After the download, <code class="docutils literal notranslate"><span class="pre">open('words.txt')</span></code> can still fail on your computer, with an error like this one:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">file_object</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'a_file_that_is_not_here.txt'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: 'a_file_that_is_not_here.txt'
+</pre></div>
+</div>
+</div>
+</div>
+<p>The reason: when you give <code class="docutils literal notranslate"><span class="pre">open</span></code> only a file name, Python looks for the file in one folder only, the
+<em>working directory</em> (see “Diving deeper: relative paths and the working directory” below). On your computer, the working
+directory is usually not your Downloads folder.</p>
+<p>The sure way to open the file is to give <code class="docutils literal notranslate"><span class="pre">open</span></code> the <strong>full path</strong> of the file.</p>
+</section>
+<section id="full-paths">
+<h2>Full paths<a class="headerlink" href="#full-paths" title="Link to this heading">#</a></h2>
+<p>A <strong>full path</strong> (also called an <em>absolute path</em>) names the file and every folder that contains it, from the
+top folder of the disk down to the file. In Python, separate the folders with forward slashes (<code class="docutils literal notranslate"><span class="pre">/</span></code>).</p>
+<ul class="simple">
+<li><p>On <strong>Windows</strong>, a full path starts with a drive letter and a colon:
+<code class="docutils literal notranslate"><span class="pre">C:/Users/YOUR_NAME/Downloads/words.txt</span></code></p></li>
+<li><p>On a <strong>Mac</strong> (and on Linux), a full path starts with a slash:
+<code class="docutils literal notranslate"><span class="pre">/Users/YOUR_NAME/Downloads/words.txt</span></code></p></li>
+</ul>
+<p>YOUR_NAME is your user name on the computer. To open the file, put its full path in a string and give the
+string to <code class="docutils literal notranslate"><span class="pre">open</span></code>. The sections below show how to find the full path of your Downloads folder.</p>
+</section>
+<section id="windows-the-full-path-of-the-downloads-folder">
+<h2>Windows: the full path of the Downloads folder<a class="headerlink" href="#windows-the-full-path-of-the-downloads-folder" title="Link to this heading">#</a></h2>
+<p><strong>Find the path:</strong></p>
+<ol class="arabic simple">
+<li><p>Open <strong>File Explorer</strong> (press the Windows key and <strong>E</strong> together).</p></li>
+<li><p>In the list on the left, click <strong>Downloads</strong>.</p></li>
+<li><p>Click an empty part of the <strong>address bar</strong> at the top of the window (to the right of the folder names).
+The address bar now shows the full path of the folder, for example <code class="docutils literal notranslate"><span class="pre">C:\Users\alice\Downloads</span></code>.</p></li>
+</ol>
+<p><strong>Use the path in Python.</strong> Windows shows the path with backslashes (<code class="docutils literal notranslate"><span class="pre">\</span></code>). When you type the path in
+Python, type a forward slash (<code class="docutils literal notranslate"><span class="pre">/</span></code>) for each backslash, and add the file name at the end:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">file_object</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'C:/Users/alice/Downloads/words.txt'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">alice</span></code> with your own user name. Python on Windows accepts forward slashes, so this opens the file
+<code class="docutils literal notranslate"><span class="pre">words.txt</span></code> in your Downloads folder.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Diving deeper (for Windows users): backslashes in paths</p>
+<p><strong>Windows uses backslashes, and Python accepts forward slashes.</strong> Windows separates the folders of a path with
+backslashes: <code class="docutils literal notranslate"><span class="pre">C:\Users\alice\Downloads\words.txt</span></code>. When a Python program on Windows opens a file, Python
+accepts forward slashes too, and the operating system finds the same file. That is why this page uses forward
+slashes: they work the same way on Windows, on a Mac and on Linux.</p>
+<p><strong>Why not type the backslashes?</strong> In a Python string, a backslash starts a special character. For example,
+<code class="docutils literal notranslate"><span class="pre">\n</span></code> is a newline and <code class="docutils literal notranslate"><span class="pre">\t</span></code> is a tab. So this line does not display the path:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'C:</span><span class="se">\n</span><span class="s1">ew</span><span class="se">\t</span><span class="s1">able.txt'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It displays <code class="docutils literal notranslate"><span class="pre">C:</span></code>, then a new line (from <code class="docutils literal notranslate"><span class="pre">\n</span></code>), then <code class="docutils literal notranslate"><span class="pre">ew</span></code>, a tab (from <code class="docutils literal notranslate"><span class="pre">\t</span></code>) and <code class="docutils literal notranslate"><span class="pre">able.txt</span></code>. And a string that
+has <code class="docutils literal notranslate"><span class="pre">\U</span></code> in it, like every path that starts with <code class="docutils literal notranslate"><span class="pre">C:\Users</span></code>, is a <code class="docutils literal notranslate"><span class="pre">SyntaxError</span></code>
+(<code class="docutils literal notranslate"><span class="pre">(unicode</span> <span class="pre">error)</span> <span class="pre">'unicodeescape'</span> <span class="pre">codec</span> <span class="pre">can't</span> <span class="pre">decode</span> <span class="pre">bytes</span> <span class="pre">...</span></code>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">file_object</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'C:\Users</span><span class="se">\a</span><span class="s1">lice\Downloads\words.txt'</span><span class="p">)</span>     <span class="c1"># SyntaxError</span>
+</pre></div>
+</div>
+<p><strong>Two other ways to write backslashes.</strong> You can also keep the backslashes in one of these ways. Both open the
+same file as <code class="docutils literal notranslate"><span class="pre">'C:/Users/alice/Downloads/words.txt'</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># A "raw string": an r before the quote tells Python to keep each backslash as it is</span>
+<span class="n">file_object</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa">r</span><span class="s1">'C:\Users\alice\Downloads\words.txt'</span><span class="p">)</span>
+
+<span class="c1"># Two backslashes for each backslash (in a normal string, \\ is one backslash)</span>
+<span class="n">file_object</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'C:</span><span class="se">\\</span><span class="s1">Users</span><span class="se">\\</span><span class="s1">alice</span><span class="se">\\</span><span class="s1">Downloads</span><span class="se">\\</span><span class="s1">words.txt'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Copy as path.</strong> Right-click a file in File Explorer and choose <strong>Copy as path</strong> (on Windows 10, hold down
+<strong>Shift</strong> while you right-click). This copies the full path of the file with backslashes and in double quotes,
+for example <code class="docutils literal notranslate"><span class="pre">&quot;C:\Users\alice\Downloads\words.txt&quot;</span></code>. To use it in Python, paste it and put an <code class="docutils literal notranslate"><span class="pre">r</span></code> before it:
+<code class="docutils literal notranslate"><span class="pre">open(r&quot;C:\Users\alice\Downloads\words.txt&quot;)</span></code>. Or change each backslash to a forward slash.</p>
+<p><strong>Python shows backslashes.</strong> Some functions return Windows paths with backslashes, for example
+<code class="docutils literal notranslate"><span class="pre">os.getcwd()</span></code> (see “Diving deeper: relative paths and the working directory”). Python displays such a string
+with two backslashes for each one, like <code class="docutils literal notranslate"><span class="pre">'C:\\Users\\alice'</span></code>, because that is how you type it in a normal
+string.</p>
+</div>
+</section>
+<section id="mac-the-full-path-of-the-downloads-folder">
+<h2>Mac: the full path of the Downloads folder<a class="headerlink" href="#mac-the-full-path-of-the-downloads-folder" title="Link to this heading">#</a></h2>
+<p><strong>Find the path:</strong></p>
+<ol class="arabic simple">
+<li><p>Open <strong>Finder</strong>, and click <strong>Downloads</strong> in the sidebar on the left.</p></li>
+<li><p>Hold down the <strong>Control</strong> key and click the file <code class="docutils literal notranslate"><span class="pre">words.txt</span></code> (or right-click it).</p></li>
+<li><p>While the menu is open, hold down the <strong>Option</strong> key. The menu item <strong>Copy “words.txt”</strong> changes to
+<strong>Copy “words.txt” as Pathname</strong>. Click it.</p></li>
+</ol>
+<p>This copies the full path of the file, for example <code class="docutils literal notranslate"><span class="pre">/Users/alice/Downloads/words.txt</span></code>.
+The Downloads folder is always <code class="docutils literal notranslate"><span class="pre">/Users/YOUR_NAME/Downloads</span></code>. To see YOUR_NAME, open <strong>Terminal</strong>
+(in <strong>Applications &gt; Utilities</strong>), type <code class="docutils literal notranslate"><span class="pre">whoami</span></code> and press <strong>Return</strong>.</p>
+<p><strong>Use the path in Python.</strong> A Mac path has forward slashes only, so you can paste it into a string as it is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">file_object</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'/Users/alice/Downloads/words.txt'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">alice</span></code> with your own user name.</p>
+</section>
+<section id="reading-the-file-with-its-full-path">
+<h2>Reading the file with its full path<a class="headerlink" href="#reading-the-file-with-its-full-path" title="Link to this heading">#</a></h2>
+<p>When <code class="docutils literal notranslate"><span class="pre">open</span></code> has the full path, the rest of the code is the same as in Chapter 7. For example, this code
+counts the words in the file. Use the path for your computer:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'C:/Users/alice/Downloads/words.txt'</span><span class="p">):</span>     <span class="c1"># Windows</span>
+<span class="c1"># for line in open('/Users/alice/Downloads/words.txt'):     # Mac</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Diving deeper: relative paths and the working directory</p>
+<p><strong>The working directory.</strong> Every running Python program has one folder that is its <em>working directory</em>
+(also called the <em>current directory</em>). A file name or a path that does not start at the top of the disk is
+a <strong>relative path</strong>: Python looks for it starting from the working directory. So <code class="docutils literal notranslate"><span class="pre">open('words.txt')</span></code> opens
+the file <code class="docutils literal notranslate"><span class="pre">words.txt</span></code> in the working directory.</p>
+<p><strong>See the working directory.</strong> The function <code class="docutils literal notranslate"><span class="pre">getcwd</span></code> (“get current working directory”) of the module <code class="docutils literal notranslate"><span class="pre">os</span></code>
+returns the working directory as a string:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>In Colab, this displays <code class="docutils literal notranslate"><span class="pre">/content</span></code>. On your computer, it depends on how you started Python. Jupyter usually
+uses the folder of the notebook; a script that runs from a terminal uses the terminal’s current folder.</p>
+<p><strong>See the files in the working directory.</strong> <code class="docutils literal notranslate"><span class="pre">os.listdir()</span></code> returns the names of the files and folders in the
+working directory. If <code class="docutils literal notranslate"><span class="pre">words.txt</span></code> is not in it, <code class="docutils literal notranslate"><span class="pre">open('words.txt')</span></code> causes a <code class="docutils literal notranslate"><span class="pre">FileNotFoundError</span></code>.</p>
+<p><strong>Set the working directory.</strong> <code class="docutils literal notranslate"><span class="pre">os.chdir</span></code> (“change directory”) makes another folder the working directory.
+After that, relative paths start from the new folder:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">'C:/Users/alice/Downloads'</span><span class="p">)</span>       <span class="c1"># Windows</span>
+<span class="c1"># os.chdir('/Users/alice/Downloads')       # Mac</span>
+<span class="n">file_object</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'words.txt'</span><span class="p">)</span>            <span class="c1"># opens C:/Users/alice/Downloads/words.txt</span>
+</pre></div>
+</div>
+<p>In Jupyter and Colab, you can also type <code class="docutils literal notranslate"><span class="pre">%pwd</span></code> (show the working directory) and <code class="docutils literal notranslate"><span class="pre">%cd</span> <span class="pre">FOLDER</span></code> (change it)
+in a cell.</p>
+<p><strong>Relative paths with folders.</strong> A relative path can name folders too. If the working directory is
+<code class="docutils literal notranslate"><span class="pre">C:/Users/alice</span></code>, then:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">'Downloads/words.txt'</span></code> is the file <code class="docutils literal notranslate"><span class="pre">C:/Users/alice/Downloads/words.txt</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'..'</span></code> is the folder above the working directory, so <code class="docutils literal notranslate"><span class="pre">'../bob/notes.txt'</span></code> is the file
+<code class="docutils literal notranslate"><span class="pre">C:/Users/bob/notes.txt</span></code>.</p></li>
+</ul>
+<p><strong>Your home folder, on any computer.</strong> <code class="docutils literal notranslate"><span class="pre">os.path.expanduser('~')</span></code> returns the full path of your home folder
+(for example <code class="docutils literal notranslate"><span class="pre">/Users/alice</span></code> on a Mac). <code class="docutils literal notranslate"><span class="pre">os.path.join</span></code> joins folder names and a file name
+with the correct separator. So this code opens <code class="docutils literal notranslate"><span class="pre">words.txt</span></code> in the Downloads folder on Windows <em>and</em> on a Mac,
+without typing your user name:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">'~'</span><span class="p">),</span> <span class="s1">'Downloads'</span><span class="p">,</span> <span class="s1">'words.txt'</span><span class="p">)</span>
+<span class="n">file_object</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">os.path.exists(path)</span></code> returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if a file or folder with that path exists, and <code class="docutils literal notranslate"><span class="pre">False</span></code> if not.
+Use it to test a path before you open it.</p>
+</div>
+</section>
+<section id="for-loops-and-iterables">
+<h2><code class="docutils literal notranslate"><span class="pre">for</span></code> loops and iterables<a class="headerlink" href="#for-loops-and-iterables" title="Link to this heading">#</a></h2>
+<p>Chapter 7 uses a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop with a range, with a string and with a file. These are three examples of the
+same idea. A <code class="docutils literal notranslate"><span class="pre">for</span></code> loop works with any <strong>iterable</strong>: a value that can give its items one at a time.
+The general form of a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">VARIABLE</span> <span class="ow">in</span> <span class="n">ITERABLE</span><span class="p">:</span>
+    <span class="n">SOME_CODE</span>
+</pre></div>
+</div>
+<p>The loop assigns the first item of ITERABLE to VARIABLE and runs the body, then assigns the next item and
+runs the body again, until there are no more items. What an “item” is depends on the type of the iterable:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Iterable</p></th>
+<th class="head"><p>Its items</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>a range</p></td>
+<td><p>integers</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">in</span> <span class="pre">range(1,</span> <span class="pre">4):</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>a string</p></td>
+<td><p>the characters of the string, one at a time</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">letter</span> <span class="pre">in</span> <span class="pre">'Gadsby':</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>a file object</p></td>
+<td><p>the lines of the file, one at a time (as strings, each with a newline at the end)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">line</span> <span class="pre">in</span> <span class="pre">open('words.txt'):</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>A range is an iterable of integers:</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+2
+3
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>A string is an iterable of characters.</strong> Spaces and punctuation are characters too:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s1">'Hi, Bob'</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H
+i
+,
+ 
+B
+o
+b
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>A file object is an iterable of lines.</strong> This loop counts the lines of <code class="docutils literal notranslate"><span class="pre">words.txt</span></code>, and displays
+the first 3 of them (without the newline at the end of each line):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'words.txt'</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">count</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>aa
+aah
+aahed
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong><code class="docutils literal notranslate"><span class="pre">reversed</span></code> makes an iterable that gives the items of another iterable in the opposite order.</strong>
+It works with strings and ranges:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="s1">'stop'</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">letter</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">' '</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">' '</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p o t s 
+3 2 1 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Later chapters show more iterables. For example, a <em>list</em> (Chapter 9) is an iterable of the values in
+the list.</p>
+<p><strong>Not every value is an iterable.</strong> An integer or a float has no items, so a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop over it causes a
+<code class="docutils literal notranslate"><span class="pre">TypeError</span></code>. To repeat something 5 times, loop over <code class="docutils literal notranslate"><span class="pre">range(5)</span></code>, not over <code class="docutils literal notranslate"><span class="pre">5</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="mi">5</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">TypeError</span>: 'int' object is not iterable
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>A file object gives its lines only once.</strong> A file object remembers how far it has read. When a
+loop gets to the end of the file, the file object has no more lines, so a second loop over the same file object
+does not run its body. Here, the second loop counts nothing:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">file_object</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'words.txt'</span><span class="p">)</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file_object</span><span class="p">:</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'first loop:'</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file_object</span><span class="p">:</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'second loop:'</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>first loop: 113783
+second loop: 0
+</pre></div>
+</div>
+</div>
+</div>
+<p>To read the file again, call <code class="docutils literal notranslate"><span class="pre">open</span></code> again: it makes a new file object that starts at the beginning
+of the file. A range and a string do not have this problem: you can loop over them again and again.</p>
+</section>
+<section id="practice-questions">
+<h2>Practice questions<a class="headerlink" href="#practice-questions" title="Link to this heading">#</a></h2>
+<section id="question-1-easy-what-is-displayed">
+<h3>Question 1 (easy): what is displayed?<a class="headerlink" href="#question-1-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays. Then run the cell to check (on the website, click <strong>Show code cell output</strong>).</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="s1">'Yes!'</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">'-'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="admonition hide below-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Y-e-s-!-
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>The loop displays <code class="docutils literal notranslate"><span class="pre">Y-e-s-!-</span></code>. A string is an iterable of its characters, so the loop runs once for each
+of the 4 characters. Because of <code class="docutils literal notranslate"><span class="pre">end='-'</span></code>, <code class="docutils literal notranslate"><span class="pre">print</span></code> puts a dash after each character instead of a newline,
+also after the last one.</p>
+</div>
+</section>
+<section id="question-2-easy-open-a-file-on-windows">
+<h3>Question 2 (easy): open a file on Windows<a class="headerlink" href="#question-2-easy-open-a-file-on-windows" title="Link to this heading">#</a></h3>
+<p>On a Windows computer, the address bar of File Explorer shows that the file <code class="docutils literal notranslate"><span class="pre">scores.txt</span></code> is in the folder
+<code class="docutils literal notranslate"><span class="pre">C:\Users\maria\Documents\class</span></code>. Write the call to <code class="docutils literal notranslate"><span class="pre">open</span></code> that opens the file. Use forward slashes.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">open</span><span class="p">(</span><span class="s1">'C:/Users/maria/Documents/class/scores.txt'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Type a forward slash for each backslash in the path that Windows shows, and add a slash and the file name at
+the end. (The box “Diving deeper (for Windows users)” shows other ways to write a Windows path.)</p>
+</div>
+</section>
+<section id="question-3-medium-what-happens">
+<h3>Question 3 (medium): what happens?<a class="headerlink" href="#question-3-medium-what-happens" title="Link to this heading">#</a></h3>
+<p>Predict what happens when this code runs:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">digit</span> <span class="ow">in</span> <span class="mi">2024</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">digit</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>: <code class="docutils literal notranslate"><span class="pre">'int'</span> <span class="pre">object</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">iterable</span></code>. An integer has no items, so a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop cannot loop over it.
+To loop over the digits, loop over the string <code class="docutils literal notranslate"><span class="pre">'2024'</span></code>, which is an iterable of 4 characters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">digit</span> <span class="ow">in</span> <span class="s1">'2024'</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">digit</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To loop over the integers from <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">2023</span></code>, loop over <code class="docutils literal notranslate"><span class="pre">range(2024)</span></code>.</p>
+</div>
+</section>
+<section id="question-4-medium-relative-paths">
+<h3>Question 4 (medium): relative paths<a class="headerlink" href="#question-4-medium-relative-paths" title="Link to this heading">#</a></h3>
+<p>The working directory is <code class="docutils literal notranslate"><span class="pre">C:/Users/alice/Documents</span></code>. Give the full path of the file that each call opens.</p>
+<ul class="simple">
+<li><p><strong>Part a:</strong> <code class="docutils literal notranslate"><span class="pre">open('words.txt')</span></code></p></li>
+<li><p><strong>Part b:</strong> <code class="docutils literal notranslate"><span class="pre">open('python/words.txt')</span></code></p></li>
+<li><p><strong>Part c:</strong> <code class="docutils literal notranslate"><span class="pre">open('../Downloads/words.txt')</span></code></p></li>
+<li><p><strong>Part d:</strong> <code class="docutils literal notranslate"><span class="pre">open('C:/Users/alice/Downloads/words.txt')</span></code></p></li>
+</ul>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<ul class="simple">
+<li><p><strong>Part a:</strong> <code class="docutils literal notranslate"><span class="pre">C:/Users/alice/Documents/words.txt</span></code>. A file name alone is in the working directory.</p></li>
+<li><p><strong>Part b:</strong> <code class="docutils literal notranslate"><span class="pre">C:/Users/alice/Documents/python/words.txt</span></code>. The relative path starts at the working directory.</p></li>
+<li><p><strong>Part c:</strong> <code class="docutils literal notranslate"><span class="pre">C:/Users/alice/Downloads/words.txt</span></code>. <code class="docutils literal notranslate"><span class="pre">..</span></code> is the folder above the working directory,
+<code class="docutils literal notranslate"><span class="pre">C:/Users/alice</span></code>.</p></li>
+<li><p><strong>Part d:</strong> <code class="docutils literal notranslate"><span class="pre">C:/Users/alice/Downloads/words.txt</span></code>. A full path does not depend on the working directory.</p></li>
+</ul>
+</div>
+</section>
+<section id="question-5-medium-write-a-function">
+<h3>Question 5 (medium): write a function<a class="headerlink" href="#question-5-medium-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">count_lines</span></code> that takes the path of a file (a string) and returns the number of
+lines in the file. For example, <code class="docutils literal notranslate"><span class="pre">count_lines('words.txt')</span></code> returns the number of words in the word list.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">count_lines</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">count_lines</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">count</span>
+</pre></div>
+</div>
+<p>The parameter can be a file name, a relative path or a full path: <code class="docutils literal notranslate"><span class="pre">open</span></code> accepts all of them. For example,
+<code class="docutils literal notranslate"><span class="pre">count_lines('C:/Users/alice/Downloads/words.txt')</span></code> counts the lines of the file in alice’s Downloads folder.</p>
+</div>
+</section>
+<section id="question-6-hard-what-is-displayed">
+<h3>Question 6 (hard): what is displayed?<a class="headerlink" href="#question-6-hard-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays. Then run the cell to check (on the website, click <strong>Show code cell output</strong>).</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">file_object</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'words.txt'</span><span class="p">)</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file_object</span><span class="p">:</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file_object</span><span class="p">:</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="admonition hide below-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>113783
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><code class="docutils literal notranslate"><span class="pre">113783</span></code>, the number of lines in the file, and not two times that number. The first loop counts all the lines. When the first loop ends, the
+file object is at the end of the file, so the second loop does not run its body, and <code class="docutils literal notranslate"><span class="pre">count</span></code> stays
+<code class="docutils literal notranslate"><span class="pre">113783</span></code>. To count the lines twice, call <code class="docutils literal notranslate"><span class="pre">open</span></code> again before the second loop.</p>
+</div>
+</section>
+<section id="question-7-hard-write-a-function">
+<h3>Question 7 (hard): write a function<a class="headerlink" href="#question-7-hard-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">count_letter</span></code> that takes a string <code class="docutils literal notranslate"><span class="pre">text</span></code> and a one-character string <code class="docutils literal notranslate"><span class="pre">letter</span></code>, and
+returns the number of times that <code class="docutils literal notranslate"><span class="pre">letter</span></code> is in <code class="docutils literal notranslate"><span class="pre">text</span></code>. Upper and lower case count as the same letter.
+For example, <code class="docutils literal notranslate"><span class="pre">count_letter('Banana',</span> <span class="pre">'a')</span></code> returns <code class="docutils literal notranslate"><span class="pre">3</span></code>, and <code class="docutils literal notranslate"><span class="pre">count_letter('Banana',</span> <span class="pre">'B')</span></code> returns <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">count_letter</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">letter</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">count_letter</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">letter</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">ch</span> <span class="o">==</span> <span class="n">letter</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">count</span>
+</pre></div>
+</div>
+<p>The loop goes over the characters of <code class="docutils literal notranslate"><span class="pre">text</span></code> (a string is an iterable). <code class="docutils literal notranslate"><span class="pre">lower</span></code> makes both strings lower
+case, so that <code class="docutils literal notranslate"><span class="pre">'B'</span></code> and <code class="docutils literal notranslate"><span class="pre">'b'</span></code> count as the same letter.</p>
+</div>
+</section>
+</section>
+<section id="credits">
+<h2>Credits<a class="headerlink" href="#credits" title="Link to this heading">#</a></h2>
+<p><em>Additions by Prof. Y. Rosenthal, for</em> <a class="reference external" href="https://allendowney.github.io/ThinkPython/index.html">Think Python: 3rd Edition</a> <em>by Allen B. Downey.</em>
+<em>Text license:</em> <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./yr"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../chap07.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Iteration and Search</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap07_review.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">7c. Prof. Rosenthal’s Review</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-a-file-on-your-own-computer">Opening a file on your own computer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-paths">Full paths</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-the-full-path-of-the-downloads-folder">Windows: the full path of the Downloads folder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mac-the-full-path-of-the-downloads-folder">Mac: the full path of the Downloads folder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-the-file-with-its-full-path">Reading the file with its full path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loops-and-iterables"><code class="docutils literal notranslate"><span class="pre">for</span></code> loops and iterables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-questions">Practice questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-easy-what-is-displayed">Question 1 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-easy-open-a-file-on-windows">Question 2 (easy): open a file on Windows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-medium-what-happens">Question 3 (medium): what happens?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-medium-relative-paths">Question 4 (medium): relative paths</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-medium-write-a-function">Question 5 (medium): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-hard-what-is-displayed">Question 6 (hard): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-7-hard-write-a-function">Question 7 (hard): write a function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#credits">Credits</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
