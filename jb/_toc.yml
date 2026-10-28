@@ -1,6 +1,10 @@
 format: jb-book
 root: index
 parts:
+# subjexts: the table of contents by label, filled in by the overlay at view time.
+- caption: Table of contents by label
+  chapters:
+  - file: subjexts-labels
 - caption: Front Matter
   chapters:
   - file: chap00

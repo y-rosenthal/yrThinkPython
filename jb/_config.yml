@@ -56,3 +56,9 @@ sphinx:
     # files copied as they are to the top of the website: yr/chap07_additions.ipynb links to
     # https://y-rosenthal.github.io/yrThinkPython/words.txt, so students can download the word list
     html_extra_path: ['../words.txt']
+    # subjexts (yrS4) teaching overlay: coverage marks, notes and the panel on every page of the published
+    # book. TWO LINES: uncomment the next two lines to turn it on, comment them out again to remove it
+    # completely. The script comes from https://subjexts.github.io/, holds no key, fails silently, and does
+    # nothing if the package is disabled on the platform.
+    html_js_files:
+      - ["https://subjexts.github.io/overlay/v1/yrS4.js", {"data-package": "y-rosenthal/thinkpython", "defer": "defer"}]
