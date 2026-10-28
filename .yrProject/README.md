@@ -5,15 +5,16 @@ docs/PROJECT-SETUP.qmd includes this file, and gives the title. -->
 
 | | |
 |---|---|
-| Template version | v0.5.1 |
-| Parts | rules, yrIssues |
+| Template version | v0.5.2 |
+| Parts | rules, yrIssues, subjexts |
 | Set up by | `yrProject.sh update` (an existing folder) |
-| Last change | 2026-10-18 |
+| Last change | 2026-10-28 |
 
 ## The parts
 
 - **rules**: the rules for every AI agent: `AGENTS.md`, with a copy of the shared rules (their source is `rules/AGENTS.md` in yrProject), and `CLAUDE.md`, which imports it; and the `yrProject` skill, which checks and updates this setup for you (ask the agent). A SessionStart hook shows a one-line notice about this setup at the start of each Claude Code session.
 - **yrIssues**: work to do later is the GitHub issues of the project. The `yrIssues` skill manages them (its settings: `_yrIssues/config.sh`; the issues that it creates get the label `yrIssue`), a SessionStart hook shows how many are open, and a PostToolUse hook keeps the saved copy `_yrIssues/issues.md` up to date.
+- **subjexts**: the subjexts teaching overlay for this book (labels, a table of contents by label, in-place edits, the tutor): its include file `subjexts-v001.html`, its page `subjexts-labels-v001.qmd`, and the `subjexts` skill, which explains them and, through its script `yrS4-skill.sh`, refers to the subjexts procedures in the yrS4 repository (apply a note packet, mark the book, register it) instead of carrying copies.
 
 ## The files
 
@@ -23,6 +24,8 @@ docs/PROJECT-SETUP.qmd includes this file, and gives the title. -->
 | `CLAUDE.md` | rules | You. The tool only keeps the line `@AGENTS.md` |
 | `.claude/settings.json` | rules, yrIssues | You. The tool only adds its hooks, and removes the hooks of older versions |
 | `README.md` |  | You. The tool only writes its block "yrProject setup" at the end |
+| `.claude/skills/subjexts/SKILL.md` | subjexts | The tool: `update` replaces it with each new version. If you change it, `update` leaves it alone |
+| `.claude/skills/subjexts/scripts/yrS4-skill.sh` | subjexts | The tool: `update` replaces it with each new version. If you change it, `update` leaves it alone |
 | `.claude/skills/yrIssues/SKILL.md` | yrIssues | The tool: `update` replaces it with each new version. If you change it, `update` leaves it alone |
 | `.claude/skills/yrIssues/scripts/yrIssues.sh` | yrIssues | The tool: `update` replaces it with each new version. If you change it, `update` leaves it alone |
 | `.claude/skills/yrProject/SKILL.md` | rules | The tool: `update` replaces it with each new version. If you change it, `update` leaves it alone |
@@ -58,3 +61,4 @@ yrProject.sh update             # update the project (shows the changes, then as
 | 2026-10-18 | update | v0.5.0 | rules, yrIssues |
 | 2026-10-18 | update | v0.5.0 | rules, yrIssues |
 | 2026-10-18 | update | v0.5.1 | rules, yrIssues |
+| 2026-10-28 | update | v0.5.2 | rules, yrIssues, subjexts |

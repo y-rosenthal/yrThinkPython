@@ -2,9 +2,10 @@
   "schemaVersion": 3,
   "createdAt": "2026-10-12T15:54:40Z",
   "projectType": null,
-  "version": "v0.5.1",
+  "version": "v0.5.2",
   "parts": [
     "rules",
+    "subjexts",
     "yrIssues"
   ],
   "skippedParts": [],
@@ -14,20 +15,23 @@
     "PROJECT_DESCRIPTION": "TODO: one sentence that says what this project is for.",
     "PROJECT_TYPE": "work",
     "CREATED_DATE": "2026-10-12",
-    "TEMPLATE_VERSION": "v0.5.1"
+    "SUBJEXTS_PACKAGE": "y-rosenthal/thinkpython",
+    "TEMPLATE_VERSION": "v0.5.2"
   },
   "files": {
+    ".claude/skills/subjexts/SKILL.md": "cd727d25e89b15ff8ddb71111dde1ea7da775a1a38c4018e0617f432a7dda3bb",
+    ".claude/skills/subjexts/scripts/yrS4-skill.sh": "54298e5f05b91ca55b444352e99094593409d35a2012500aa5e4cd1a0abbf041",
     ".claude/skills/yrIssues/SKILL.md": "fc6e9a387c18c43af170f674b94bdee148511c1fc72f72894a4cac1139756731",
     ".claude/skills/yrIssues/scripts/yrIssues.sh": "6eca82fafa39b5bd9df39934dcda42f1847b950a5e4d4068c6c671b27d10182f",
     ".claude/skills/yrProject/SKILL.md": "5d2dfc077459af58c97ac3c1a4511eacfdda3eb6494752204f4de77ab25ba6f0",
-    "README.md": "8bf1b5a569ae71a9656d6da832682d00f1c33396ac2083710f2c074c28435d4c",
+    "README.md": "089e65684de3d4b92617a446eca52abc8e2602264ca2becfb5e8a477c128d69c",
     "_yrIssues/config.sh": "e88eb0025fa0d0bbba90468331b8fca23b6c5ce2faccb8c5a42015018f9077f0"
   },
-  "updatedAt": "2026-10-18T17:50:51Z",
+  "updatedAt": "2026-10-28T17:59:54Z",
   "tool": {
     "name": "yrProject",
-    "version": "0.5.1",
-    "templatesCommit": "425790e"
+    "version": "0.5.2",
+    "templatesCommit": "189f7de"
   },
   "history": [
     {
@@ -69,6 +73,16 @@
       "version": "v0.5.1",
       "parts": [
         "rules",
+        "yrIssues"
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "command": "update",
+      "version": "v0.5.2",
+      "parts": [
+        "rules",
+        "subjexts",
         "yrIssues"
       ]
     }

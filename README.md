@@ -78,7 +78,7 @@ python3 .claude/skills/sync-upstream/check_sync.py          # proves that nothin
 ```
 
 <!-- begin yrProject setup: written by yrProject.sh; "yrProject.sh update" replaces this block -->
-*Set up by `yrProject.sh` (yrProject v0.5.1; parts: rules, yrIssues). It installed the rules
+*Set up by `yrProject.sh` (yrProject v0.5.2; parts: rules, yrIssues, subjexts). It installed the rules
 for AI agents, the skills and the settings, and it updates them. Before you change them, read
 `.yrProject/README.md`.*
 <!-- end yrProject setup -->

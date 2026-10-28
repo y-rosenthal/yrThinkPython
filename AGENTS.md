@@ -3,7 +3,7 @@
 <!-- begin yrProject setup: written by yrProject.sh; "yrProject.sh update" replaces this block -->
 ## Set up by yrProject.sh
 
-`yrProject.sh` (yrProject v0.5.1; parts: rules, yrIssues) set up this project. It installed
+`yrProject.sh` (yrProject v0.5.2; parts: rules, yrIssues, subjexts) set up this project. It installed
 files here, and `yrProject.sh update` keeps them up to date.
 
 - Before you change a file that it installed, read `.yrProject/README.md`. It lists the files, and tells who
