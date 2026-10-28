@@ -244,7 +244,9 @@ def process_additions(path):
 
 for path in sorted(glob("yr/*.ipynb")):
     print('prepping', path)
-    if path.endswith('_additions.ipynb'):
+    if path.endswith('_additions.ipynb') or path.endswith('_more_review.ipynb'):
+        # More Review pages use the additions format: <details> Answers and
+        # '# Your code here' cells, not the review v3 format.
         process_additions(path)
     else:
         process_review(path)
