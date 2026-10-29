@@ -163,5 +163,11 @@ files and installs nothing.
   that it creates get the label `yrIssue`. (Projects set up before yrProject v0.5.0 have the `pending-work` skill
   instead; `yrProject.sh update` replaces it.)
 - If a project keeps such a list in a file, tell the user and offer to move it into issues.
+- `_yrIssues/issues.md` (the saved copy of the open issues) and `_yrIssues/queue.md` (issues written while GitHub
+  could not be reached) are written by the yrIssues skill, and git ignores them (yrProject v0.6.0 and later). Do
+  not edit, commit or restore them. In a project from before v0.6.0, a staged deletion of `issues.md` is the
+  migration (`git rm --cached`: the file stays on disk), not an accident: leave it, and commit it with a plain
+  `git commit`, not one limited to paths. A path-limited commit rebuilds those paths from the working tree, where
+  the ignored file still exists, and silently drops the untracking.
 
 <!-- end shared rules -->

@@ -28,11 +28,11 @@
     "README.md": "522dffdab316f958c07c9e5b91a3b4cf101b6722570d2f6d5e86e28b1be9f0a9",
     "_yrIssues/config.sh": "e88eb0025fa0d0bbba90468331b8fca23b6c5ce2faccb8c5a42015018f9077f0"
   },
-  "updatedAt": "2026-10-29T16:30:00Z",
+  "updatedAt": "2026-10-29T16:48:35Z",
   "tool": {
     "name": "yrProject",
     "version": "0.6.0",
-    "templatesCommit": "754c3c6"
+    "templatesCommit": "4521d3a"
   },
   "history": [
     {
@@ -81,6 +81,16 @@
       "date": "2026-10-28",
       "command": "update",
       "version": "v0.5.2",
+      "parts": [
+        "rules",
+        "subjexts",
+        "yrIssues"
+      ]
+    },
+    {
+      "date": "2026-10-29",
+      "command": "update",
+      "version": "v0.6.0",
       "parts": [
         "rules",
         "subjexts",

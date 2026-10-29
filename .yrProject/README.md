@@ -69,3 +69,4 @@ yrProject.sh projects           # the list of projects that use yrProject, from 
 | 2026-10-18 | update | v0.5.1 | rules, yrIssues |
 | 2026-10-28 | update | v0.5.2 | rules, yrIssues, subjexts |
 | 2026-10-29 | update | v0.6.0 | rules, yrIssues, subjexts |
+| 2026-10-29 | update | v0.6.0 | rules, yrIssues, subjexts |
