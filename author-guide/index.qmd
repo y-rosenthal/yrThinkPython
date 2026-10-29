@@ -1,12 +1,24 @@
-# About this guide {.unnumbered}
+# Working in this repository {.unnumbered}
 
 This book is for people who write content for the course fork of *Think Python* (3rd edition) at
 <https://github.com/y-rosenthal/yrThinkPython>. The fork's website is
 <https://y-rosenthal.github.io/yrThinkPython/>.
 
-Read the next chapter, **Content Author Guide**, before you edit anything. Most of it is about the
-"Prof. Rosenthal's Review" pages: how to add a question, which parts you type, and which parts the
-tools write for you.
+**Each rule has one place in the repository, and this book shows those places.** This page holds what is not
+in the repository's files: how to set up your computer, and the workflow of a content author. The next
+chapters are the rule files themselves, included as they are, so this book is never out of step with them:
+
+| Chapter | The file it includes | What it holds |
+|---|---|---|
+| The repository | `README.md` | The layout, how the website is published, how the fork follows Downey's book |
+| Editing the Think Python notebooks | `.claude/skills/notebook-conventions/SKILL.md` | The rules for the chapter notebooks and the suggested solutions |
+| Add a page to the book | `.claude/skills/add-page/SKILL.md` | How a new chapter or page gets into the book |
+| Prof. Rosenthal's course additions | `yr/README.md` | The rules for the course's pages: the additions pages, the review pages, their format, style, tools and procedures |
+
+Links in these chapters are relative to the repository, not to this book: open the file on GitHub when a
+link does not work here. `AGENTS.md` holds the rules for AI coding agents (Claude Code, Codex, Cursor, Copilot
+and others) and lists the skills in `.claude/skills/`; you can ask Claude Code in your own words, or type a skill's
+name. An agent other than Claude Code can follow a skill: tell it to read `.claude/skills/NAME/SKILL.md`.
 
 To build this book:
 
@@ -16,6 +28,85 @@ quarto render          # the HTML goes to author-guide/_book/ (not committed)
 quarto preview         # or: open a live preview in the browser
 ```
 
-The source of each rule is the repository itself. If this guide and the repository disagree, the
-repository is correct: `yr/README.md` for the review pages, and the files in `.claude/skills/` for
-the other tasks.
+## Set up your computer
+
+You need Linux or macOS, `git`, and Python 3.12 at `/usr/bin/python3`. The tools create the rest:
+
+- **The book's venv**, `~/.venvs/yrThinkPython`. The build scripts create it the first time.
+  The repository is in Dropbox, so the venv is outside it.
+- **The Colab-like kernel**, `~/.venvs/colablike`. `yr/tools/review.sh` creates it the first
+  time you run `sync` or `check`. It has the same Python, IPython and ipykernel versions as Colab.
+  The tools write the stored outputs of the review pages with this kernel only, so the pages look the same as
+  in Colab.
+- **`uv`**, the tool that builds the Colab-like kernel. `review.sh` installs it into the book's
+  venv if it is missing.
+- **Quarto**, only to build this book.
+
+Run all commands from the root folder of the repository.
+
+## The workflow: branch, check, publish
+
+Every push to the branch `v3` publishes the website. Thus:
+
+1. Make a topic branch before you change anything:
+
+   ```bash
+   git switch v3
+   git pull
+   git switch -c my-topic
+   ```
+
+2. Make your changes, and run the checks that the rule file for your task names (for a review page:
+   `review.sh sync` and `review.sh check`; for a chapter or an additions page: `run_notebooks.sh`).
+3. Always run the fast check of all notebooks:
+
+   ```bash
+   python3 .claude/skills/check-notebooks/check_notebooks.py
+   ```
+
+4. Build the website on your computer, and look at the pages you changed:
+
+   ```bash
+   .claude/skills/build-book/build_book.sh
+   ```
+
+   The output is in `jb/_build/html/`. The script must say "no new warnings".
+5. Commit, and push your branch.
+6. To publish, merge the branch into `v3` and push `v3`. The `yrpublish` skill of Claude Code does
+   all the checks, the merge, the push and a check of the live site.
+
+The deploy workflow (`.github/workflows/deploy-book.yml`) runs `check_notebooks.py` first. If it
+finds a problem, the website does not change.
+
+**Corrections to the book itself** go to Allen Downey as a GitHub issue, not as a pull request.
+The `contribute-upstream` skill writes the issue text. **Updates from Allen Downey** come in with the
+`sync-upstream` skill (the chapter "The repository", "Keeping up with the original").
+
+### Students see the new version without a reload
+
+After you publish, students do not need to reload a page to see the new version. `jb/_static/yr.js`,
+which every page of the website loads (also pages that you add later), checks for a new version 3
+seconds after a page opens, every 5 minutes while the page is on the screen, and each time the student
+comes back to its tab:
+
+- When the student comes back to a tab with an old version, the page reloads, at the same place.
+- While the student looks at a page, a bar at the top says "A new version of this website was
+  published", with a **Reload** button.
+
+GitHub Pages gives each page a new date on every publish. So after a publish, the bar can also come on
+a page that did not change. A notebook that a student saved in Google Drive (**File > Save a copy in
+Drive**) does not change: to get the new version, the student opens the page again from the website.
+
+## Tools reference
+
+Every tool takes `-h` or `--help`, which prints what the tool does and its options. For example,
+`yr/tools/review.sh sync --help` or `.claude/skills/build-book/build_book.sh --help`. The review-page tools are
+listed in the chapter "Prof. Rosenthal's course additions", "Tools"; the others:
+
+| Command | What it does |
+|---|---|
+| `python3 .claude/skills/check-notebooks/check_notebooks.py` | Fast check of all notebooks (its `--help` lists the checks) |
+| `.claude/skills/check-notebooks/run_notebooks.sh chapters/chapNN.ipynb` | Runs a chapter or an additions page |
+| `.claude/skills/build-book/build_book.sh` | Builds the website on your computer |
+| `python3 .claude/skills/yrpublish/verify_live.py` | Checks the live website |
+| `python3 .claude/skills/notebook-conventions/nb_cells.py NOTEBOOK` | Lists the cells of a notebook |

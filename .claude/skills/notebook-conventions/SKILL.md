@@ -19,7 +19,7 @@ python3 ${CLAUDE_SKILL_DIR}/nb_cells.py chapters/chap03.ipynb --grep "Exercise|e
 python3 ${CLAUDE_SKILL_DIR}/nb_cells.py chapters/chap03.ipynb --full 65      # print one cell in full
 ```
 
-Then edit with the NotebookEdit tool (cell index or cell id) or a small stdlib `json` script.
+Then edit in Jupyter, with the NotebookEdit tool (cell index or cell id) or with a small stdlib `json` script.
 Do not hand-edit the raw JSON with sed. Do not run the notebook in place: outputs must
 stay out of the committed file.
 
@@ -28,8 +28,9 @@ stay out of the committed file.
 - `source` is a list of lines, each ending in `\n` except the last. Match the existing style.
 - Every cell has an 8-hex-char `id` (e.g. `"1331faa1"`); new cells need a fresh unique one.
 - Code cells: `"metadata": {"tags": []}`, `"outputs": []`, `"execution_count": null` (or an int).
-  **No outputs are committed.** The site is built with `execute_notebooks: 'off'`, so what
-  readers see online is exactly the source text.
+  **No outputs are committed.** Colab opens the clean notebook. The website build runs the chapters
+  (`jb/execute_notebooks.py`; Jupyter Book's own execution is off) and shows their outputs, so an output
+  typed by hand would be overwritten, and the committed text is the only source.
 - Markdown cells: `"metadata": {}`.
 
 ## Content conventions
@@ -82,17 +83,12 @@ the built site. For a new exercise, tag the `### Exercise` markdown cell and its
 
 ## Course additions go in `yr/`
 
-New course material goes in `yr/`, not in `chapters/`. A chapter can have an additions page,
-`yr/chapNN_additions.ipynb` ("NNb. Prof. Rosenthal's Additions": what the chapter uses but does not explain;
-`yr-additions-page` skill), and a review page, `yr/chapNN_review.ipynb` ("NNb. Prof. Rosenthal's Review", or
-"NNc." after an additions page), shown in that order right after the chapter. Read `yr/README.md` before creating or
-editing one: it has the page layout (concepts checklist, then easy → hard questions), how to write
-each kind of question (run blocks, `#### Answer` headings, markers), and the TOC / index.md steps.
-`CONTENT-AUTHOR-GUIDE.qmd` (in `author-guide/`) explains the same for a person, step by step. The `yr-review-page` and `yr-review-questions` skills cover creating
-pages and adding questions, with tools in `yr/tools/` that write outputs and pictures (`review.sh sync`)
-and verify answers (`review.sh check`). Review pages follow their own format (`yr/README.md`): they
-store outputs on their hidden run cells, so the "no stored outputs" rule above does not apply to them.
-Additions pages follow the chapter rules: no stored outputs; the build runs them.
+New course material goes in `yr/`, not in `chapters/`: an additions page, a review page, or a markdown page.
+The rules for these pages are in `yr/README.md` (the one place), and the skills `yr-additions-page`,
+`yr-review-page`, `yr-review-questions` and `add-page` give the steps. Two differences from the chapters:
+review pages store the outputs of their hidden run cells (`review.sh sync` writes them), so the "no stored
+outputs" rule above does not apply to them; additions pages follow the chapter rules (no stored outputs; the
+build runs them).
 
 ## Suggested solutions: `solutions/chapNN.ipynb`
 
@@ -102,8 +98,7 @@ They live in `solutions/chapNN.ipynb`, a copy of the chapter notebook in which t
 time `jb/prep_notebooks.py` matches those cells by id and shows each one on the website inside
 a collapsed "Suggested solution" dropdown (readers click to reveal it); consecutive solution
 cells become one dropdown, and a note is inserted after the `## Exercises` heading. Chapters
-without a solutions notebook keep the old behaviour (blank cells). Chapters 4 and 5 have
-one (added 2026-09-09); add more chapter by chapter as the user asks.
+without a solutions notebook keep the old behaviour (blank cells). Add more chapter by chapter as the user asks.
 
 Rules: only fill in placeholder cells, do not add or edit other cells there (the checker flags
 it, and the site ignores it). Leave a placeholder as `# Solution goes here` to keep it blank.

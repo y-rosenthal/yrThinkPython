@@ -1,0 +1,1 @@
+{{< include ../.claude/skills/add-page/SKILL.md >}}

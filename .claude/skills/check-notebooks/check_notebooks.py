@@ -3,9 +3,10 @@
 
 Usage: check_notebooks.py [notebook.ipynb ...]
 Default: every chap*.ipynb in chapters/, blank/ and solutions/ and every yr/*.ipynb, plus TOC / Colab-link / workflow
-consistency, a check that each solutions/chapNN.ipynb matches its chapter, a check of the yr/ page titles and their
-order in the TOC (chapter, then NNb. Additions, then NNb or NNc. Review), and a check that every script of the fork
-(.claude/skills/, yr/, jb/) has a docstring or header comment and a -h/--help option that prints it.
+consistency (every yr/ page, also a markdown page yr/NAME.md, is in the TOC and copied by the deploy workflow), a
+check that each solutions/chapNN.ipynb matches its chapter, a check of the yr/ page titles and their order in the TOC
+(any number, lettered b, c, d, ... in the order of the TOC; chapter, then additions, review, more review), and a check that every script of the fork (.claude/skills/,
+yr/, jb/) has a docstring or header comment and a -h/--help option that prints it.
 (chapters/jupyter_intro.ipynb is skipped by default: it is an older nbformat 4.4 file that
 keeps its outputs on purpose and is only shipped in the zip, not in the book.)
 Exit status 1 if any problem is found.
@@ -108,8 +109,8 @@ def check_toc_and_links():
         if f in ("index", "blank"):
             continue
         if f.startswith("yr/"):
-            if not (ROOT / f"{f}.ipynb").exists():
-                problems.append(f"jb/_toc.yml: entry '{f}' has no {f}.ipynb")
+            if not (ROOT / f"{f}.ipynb").exists() and not (ROOT / f"{f}.md").exists():
+                problems.append(f"jb/_toc.yml: entry '{f}' has no {f}.ipynb or {f}.md")
             continue
         if not (ROOT / "chapters" / f"{f}.ipynb").exists() and not (ROOT / "jb" / f"{f}.md").exists():
             problems.append(f"jb/_toc.yml: entry '{f}' has no chapters/{f}.ipynb or jb/{f}.md")
@@ -129,13 +130,17 @@ def check_toc_and_links():
                         ".claude/skills/sync-upstream/fork_colab_links.py")
     problems.extend(colab_problems)
 
-    for p in sorted((ROOT / "yr").glob("*.ipynb")):
+    # every page in yr/ (a notebook, or a markdown page yr/NAME.md; yr/README.md is not a page) is in the TOC
+    yr_pages = [p for p in (ROOT / "yr").glob("*.ipynb")] + [p for p in (ROOT / "yr").glob("*.md") if p.name != "README.md"]
+    for p in sorted(yr_pages):
         if f"yr/{p.stem}" not in toc_files:
             problems.append(f"jb/_toc.yml: yr/{p.name} is not listed in the TOC")
 
     wf = (ROOT / ".github" / "workflows" / "deploy-book.yml").read_text()
     if "cp yr/*.ipynb jb/yr/" not in wf:
         problems.append("deploy-book.yml: does not copy yr/*.ipynb into jb/yr/")
+    if "yr/*.md" not in wf:
+        problems.append("deploy-book.yml: does not copy the markdown pages yr/*.md into jb/yr/")
     m = re.search(r"cp\s+(\S+)\s+jb/", wf)
     if m:
         import fnmatch
@@ -186,48 +191,42 @@ def check_solutions():
                   f"empty (rendered as blank cells on the site): {', '.join(sorted(missing))}")
 
 
-YR_PAGE = re.compile(r"chap(\d\d)_(additions|review|more_review)")
-
-
 def check_yr_pages():
-    """The yr/ pages of a chapter: "NNb. Prof. Rosenthal's Additions" (yr/chapNN_additions.ipynb), if there is one,
-    and then "NNb. Prof. Rosenthal's Review" (yr/chapNN_review.ipynb), which is "NNc." when the chapter has an
-    additions page, and then "NNd. Prof. Rosenthal's More Review Questions" (yr/chapNN_more_review.ipynb), if
-    there is one. The TOC lists them in that order, right after the chapter (yr/README.md)."""
+    """The pages of the course after a chapter (yr/chapNN_KIND.ipynb): any number, lettered b, c, d, ... (then aa,
+    ab, ...) in the order of the TOC, which lists them one after the other right after the chapter. The title of a
+    page is "# N<letter>. Prof. Rosenthal's ..." (the known kinds, additions / review / more_review, have fixed
+    titles and keep that relative order). yr/README.md, "The pages of a chapter"."""
     toc = re.findall(r"^\s*-\s*file:\s*(\S+)", (ROOT / "jb" / "_toc.yml").read_text(), re.M)
+    chapters = set()
     for p in sorted((ROOT / "yr").glob("*.ipynb")):
-        m = YR_PAGE.fullmatch(p.stem)
+        m = review_format.PAGE_STEM.fullmatch(p.stem)
         if not m:
-            problems.append(f"yr/{p.name}: a yr/ page is chapNN_additions.ipynb or chapNN_review.ipynb")
+            problems.append(f"yr/{p.name}: a page of a chapter is yr/chapNN_KIND.ipynb (yr/README.md)")
             continue
-        nn, kind = m.groups()
+        nn, kind = m.group("nn"), m.group("kind")
+        chapters.add(nn)
         try:
             first = review_format.source(json.loads(p.read_text(encoding="utf-8"))["cells"][0])
         except (json.JSONDecodeError, IndexError, KeyError):
             continue  # reported by check_notebook
-        if kind == "additions":
-            want = f"# {int(nn)}b. Prof. Rosenthal's Additions"
-            order = [f"chap{nn}", f"yr/chap{nn}_additions"]
-            if (ROOT / "yr" / f"chap{nn}_review.ipynb").exists():
-                order.append(f"yr/chap{nn}_review")
-        elif kind == "more_review":
-            want = f"# {int(nn)}d. Prof. Rosenthal's More Review Questions"
-            order = [f"chap{nn}"]
-            if (ROOT / "yr" / f"chap{nn}_additions.ipynb").exists():
-                order.append(f"yr/chap{nn}_additions")
-            if (ROOT / "yr" / f"chap{nn}_review.ipynb").exists():
-                order.append(f"yr/chap{nn}_review")
-            order.append(f"yr/chap{nn}_more_review")
-        else:
-            want = f"# {int(nn)}{review_format.review_letter(p)}. Prof. Rosenthal's Review"
-            order = None
-        if not first.startswith(want + "\n"):
+        prefix = f"# {int(nn)}{review_format.page_letter(p)}. Prof. Rosenthal's "
+        want = prefix + review_format.KIND_TITLES[kind][len("Prof. Rosenthal's "):] if kind in review_format.KIND_TITLES else None
+        if want and not first.startswith(want + "\n"):
             problems.append(f"yr/{p.name}: the title must be {want!r}"
                             + (" (run yr/tools/review.sh sync)" if kind == "review" else ""))
-        if order and all(f in toc for f in order):
-            at = toc.index(order[0])
-            if toc[at:at + len(order)] != order:
-                problems.append(f"jb/_toc.yml: list {', '.join(order)} in this order, one after the other")
+        elif not want and not first.startswith(prefix):
+            problems.append(f"yr/{p.name}: the title must start with {prefix!r}")
+    for nn in sorted(chapters):
+        pages = [f for f in toc if f.startswith(f"yr/chap{nn}_")]
+        if not pages or f"chap{nn}" not in toc:
+            continue  # a page that is not in the TOC is reported by check_toc_and_links
+        at = toc.index(f"chap{nn}")
+        if toc[at + 1:at + 1 + len(pages)] != pages:
+            problems.append(f"jb/_toc.yml: list {', '.join(pages)} right after chap{nn}, one after the other")
+        kinds = [f.split("_", 1)[1] for f in pages if f.split("_", 1)[1] in review_format.KIND_ORDER]
+        if kinds != sorted(kinds, key=review_format.KIND_ORDER.index):
+            problems.append(f"jb/_toc.yml: chapter {int(nn)}: list the additions page, then the review page, then the "
+                            "more-review page")
 
 
 # Scripts that are not run from the command line, and Downey's own scripts (kept as his: sync-upstream)

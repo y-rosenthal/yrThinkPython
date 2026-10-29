@@ -34,6 +34,7 @@ jobs:
         run: |
           cp chapters/chap[01][0-9].ipynb jb/
           mkdir -p jb/yr && cp yr/*.ipynb jb/yr/
+          for f in yr/*.md; do [ "$f" = yr/README.md ] || cp "$f" jb/yr/; done
 
       - name: Run the chapters so the pages show their outputs
         working-directory: jb

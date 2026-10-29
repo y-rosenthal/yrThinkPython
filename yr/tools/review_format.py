@@ -99,14 +99,49 @@ Use the two lists under **Concepts covered** as a checklist (click a list's titl
 Each question has a suggested answer under **Answer**. Try the question first, then open the Answer.
 
 [Run this page on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap{NN}_review.ipynb)'''
-TITLE_CELL_PARSE = re.compile(r'^# (?P<N>\d+)[bc]\. Prof\. Rosenthal\'s Review\n\nA review of \[Chapter \d+: (?P<TITLE>[^\]]*)\]')
+TITLE_CELL_PARSE = re.compile(r'^# (?P<N>\d+)[a-z]+\. Prof\. Rosenthal\'s Review\n\nA review of \[Chapter \d+: (?P<TITLE>[^\]]*)\]')
 
 
-def review_letter(path):
-    """The letter of a review page's number: 'c' if its chapter has an additions page
-    (yr/chapNN_additions.ipynb, "NNb. Prof. Rosenthal's Additions"), else 'b'."""
-    p = Path(path)
-    return 'c' if p.with_name(p.name.replace('_review', '_additions')).exists() else 'b'
+PAGE_STEM = re.compile(r'chap(?P<nn>\d\d)_(?P<kind>[a-z0-9_]+)')
+KIND_ORDER = ('additions', 'review', 'more_review')      # the known kinds, in their order after the chapter
+KIND_TITLES = {'additions': "Prof. Rosenthal's Additions", 'review': "Prof. Rosenthal's Review",
+               'more_review': "Prof. Rosenthal's More Review Questions"}
+
+
+def letter(i):
+    """The letter of the i-th page of the course after a chapter (0 -> 'b', 24 -> 'z', 25 -> 'aa', ...)."""
+    n, s = i + 1, ''
+    while n >= 0:
+        s, n = chr(97 + n % 26) + s, n // 26 - 1
+    return s
+
+
+def chapter_pages(path):
+    """The pages of the course of this page's chapter, in order: the TOC entries yr/chapNN_* (jb/_toc.yml), then
+    the files in yr/ that the TOC does not list yet, by kind (KIND_ORDER, then the others by name)."""
+    p = Path(path).resolve()
+    m = PAGE_STEM.fullmatch(p.stem)
+    if not m:
+        return []
+    nn, root = m.group('nn'), p.parent.parent
+    toc = root / 'jb' / '_toc.yml'
+    listed = [f for f in re.findall(r'^\s*-\s*file:\s*(\S+)', toc.read_text(), re.M)
+              if f.startswith(f'yr/chap{nn}_')] if toc.exists() else []
+    files = sorted({f'yr/{q.stem}' for q in p.parent.glob(f'chap{nn}_*') if q.suffix in ('.ipynb', '.md')} - set(listed),
+                   key=lambda f: (KIND_ORDER.index(k) if (k := f.split('_', 1)[1]) in KIND_ORDER else len(KIND_ORDER), f))
+    return listed + files
+
+
+def page_letter(path):
+    """The letter of a page's number ("7c." in "7c. Prof. Rosenthal's Review"): its position among the pages of the
+    course after its chapter, in the order of the TOC (see chapter_pages): b, c, d, ... A page that is not a
+    chapter page (the selftest fixture) is 'b'."""
+    pages = chapter_pages(path)
+    stem = f'yr/{Path(path).stem}'
+    return letter(pages.index(stem)) if stem in pages else 'b'
+
+
+review_letter = page_letter      # the old name
 
 
 def title_cell(n, title, letter='b'):

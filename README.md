@@ -19,18 +19,17 @@ Like the original, this work is licensed under a
 
 - `chapters/` – the chapter notebooks (`chap00.ipynb` … `chap19.ipynb`). Edit these.
 - `blank/` – "fill in the blanks" versions of each chapter with most code removed.
-- `solutions/` – suggested solutions to the exercises (chapters 4 and 5 so far). Each file is
+- `solutions/` – suggested solutions to the exercises, for some chapters. Each file is
   a copy of the chapter notebook with the `# Solution goes here` cells filled in. The website
   shows these behind a collapsed "Suggested solution" dropdown under each exercise; the
   notebooks that Colab opens are unchanged.
-- `yr/` – Prof. Rosenthal's course additions, kept apart from the book: a review page per
-  chapter (`yr/chap04_review.ipynb`, shown on the site as "4b. Prof. Rosenthal's Review" right
-  after chapter 4) with a concepts checklist and practice questions with collapsible answers, and
-  for some chapters an additions page before it, with material that the chapter does not explain
-  (`yr/chap07_additions.ipynb`, "7b. Prof. Rosenthal's Additions"; the review is then "7c.").
-  See [yr/README.md](yr/README.md) for the layout, conventions and how to add one.
-- `author-guide/` – the guide for content authors, a Quarto book (`CONTENT-AUTHOR-GUIDE.qmd`): how to
-  work in this repository, and step by step how to write review-page questions. Build it with
+- `yr/` – Prof. Rosenthal's course additions, kept apart from the book: for each chapter a review page
+  (`yr/chapNN_review.ipynb`, "NNb. Prof. Rosenthal's Review", right after the chapter on the site), for some
+  chapters an additions page before it (`yr/chapNN_additions.ipynb`, "NNb. Prof. Rosenthal's Additions"; the
+  review is then "NNc."), and pages without code (`yr/NAME.md`). [yr/README.md](yr/README.md) is the one place
+  for their rules and tools.
+- `author-guide/` – the guide for content authors, a Quarto book: the setup and the workflow for people, and the
+  rule files of the repository (this README, `yr/README.md`, the skills) included as chapters. Build it with
   `cd author-guide && quarto render`.
 - `AGENTS.md` – the rules for AI coding agents (Claude Code, Codex, Cursor, Copilot and others); `CLAUDE.md` imports
   it. `.claude/skills/` – step-by-step procedures (Claude Code skills) for building, checking, syncing and publishing.

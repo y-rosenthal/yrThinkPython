@@ -45,8 +45,9 @@ fi
 
 echo ">> copying chapters/chap[01][0-9].ipynb -> jb/"
 cp chapters/chap[01][0-9].ipynb jb/
-echo ">> copying yr/*.ipynb (review pages) -> jb/yr/"
+echo ">> copying yr/*.ipynb and yr/*.md (the course's pages; not yr/README.md) -> jb/yr/"
 mkdir -p jb/yr && cp yr/*.ipynb jb/yr/
+for f in yr/*.md; do [ "$f" = yr/README.md ] || cp "$f" jb/yr/; done
 
 if [ "$NOEXEC" = 1 ]; then
   echo ">> skipping execute_notebooks.py (--no-exec): pages will have no outputs"

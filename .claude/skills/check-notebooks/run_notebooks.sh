@@ -14,7 +14,7 @@
 #   - input() is replaced by a stub returning a non-numeric string (IPython startup file), so
 #     the chapter 5 input() cells and the "%%expect ValueError / int(speed)" cell behave as in the book.
 # download() cells fetch files from upstream GitHub into the scratch dir, never into the repo.
-# Review pages (yr/chapNN_review.ipynb) are skipped: `yr/tools/review.sh check` runs them on the pinned
+# Additions and more-review pages run like chapters. Review pages (yr/chapNN_review.ipynb) are skipped: `yr/tools/review.sh check` runs them on the pinned
 # Colab-like kernel. Additions pages (yr/chapNN_additions.ipynb) run like chapters.
 # -h, --help: show this help and stop.
 set -euo pipefail
@@ -45,7 +45,7 @@ PY
 
 fail=0
 for nb in "$@"; do
-  case "$nb" in *_additions.ipynb) ;; yr/*|*/yr/*) echo ">> skipping $nb (review page: use yr/tools/review.sh check)"; continue ;; esac
+  case "$nb" in *_additions.ipynb|*_more_review.ipynb) ;; yr/*|*/yr/*) echo ">> skipping $nb (review page: use yr/tools/review.sh check)"; continue ;; esac
   name="$(basename "$nb")"
   cp "$nb" "$WORK/$name"
   printf '>> running %s ... ' "$nb"
