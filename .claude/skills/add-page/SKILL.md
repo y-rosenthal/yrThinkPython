@@ -12,7 +12,7 @@ The book is assembled from `jb/_toc.yml`; a file that is not listed there is not
 | Kind of page | Where | Rules |
 |---|---|---|
 | A chapter notebook of the book | `chapters/chapNN.ipynb` | below, and the `notebook-conventions` skill |
-| The course's pages of a chapter (additions, review) | `yr/chapNN_additions.ipynb`, `yr/chapNN_review.ipynb` | `yr/README.md`; the `yr-additions-page` and `yr-review-page` skills |
+| The course's pages of a chapter (additions, review, more review) | `yr/chapNN_additions.ipynb`, `yr/chapNN_review.ipynb`, `yr/chapNN_more_review.ipynb` | `yr/README.md`; the `yr-additions-page` and `yr-review-page` skills |
 | A page of the course without code (an introduction, a note) | `yr/NAME.md` | `yr/README.md`, "Other pages of the course" |
 | A page of the book's own front or end matter (no code) | `jb/NAME.md` | below |
 

@@ -12,6 +12,7 @@ yr/
   README.md                this file: the rules for the course's pages (layout, format, style, tools)
   chapNN_additions.ipynb   material that a chapter uses but does not explain (only the chapters that need one)
   chapNN_review.ipynb      a review page of a chapter
+  chapNN_more_review.ipynb more review questions, after the review page (only the chapters that need one)
   NAME.md                  a page of the course without code (an introduction, a note)
   plans/                   design notes (runall-collapsible-answers.md: the review-page format)
   tools/
@@ -35,7 +36,7 @@ section here.
 
 ## The pages of a chapter
 
-Do not change Downey's chapters to add material. A chapter can have two pages of the course after it,
+Do not change Downey's chapters to add material. A chapter can have up to three pages of the course after it,
 in this order:
 
 | Order | Title on the website | File | When |
@@ -43,12 +44,14 @@ in this order:
 | 1 | NN. (Downey's chapter title) | `chapters/chapNN.ipynb` | always |
 | 2 | NNb. Prof. Rosenthal's Additions | `yr/chapNN_additions.ipynb` | only if the chapter needs it |
 | 3 | NNb. Prof. Rosenthal's Review, or **NNc.** when the chapter has an additions page | `yr/chapNN_review.ipynb` | each chapter that has a review |
+| 4 | NNd. Prof. Rosenthal's More Review Questions | `yr/chapNN_more_review.ipynb` | only if the chapter needs it |
 
-- The additions page always comes before the review page.
+- The additions page always comes before the review page, and the more-review page comes last. The more-review
+  page is always `d`, also when the chapter has no additions page.
 - `review.sh sync` writes the letter of the review page (`b` or `c`) in its title: it is `c` when
   `yr/chapNN_additions.ipynb` exists. So after you add an additions page, run `review.sh sync` on the
   chapter's review page, and change its line in `jb/index.md` (`NNb.` to `NNc.`).
-- `jb/_toc.yml` lists both pages in one unnumbered part after the chapter. Numbering continues across the
+- `jb/_toc.yml` lists the pages in one unnumbered part after the chapter. Numbering continues across the
   numbered parts, so the chapter numbers stay the same, and a page in an unnumbered part shows its own
   title (`NNb. …`) without an added number:
   ```yaml
@@ -56,6 +59,7 @@ in this order:
   - chapters:
       - file: yr/chap07_additions
       - file: yr/chap07_review
+      - file: yr/chap07_more_review
   - numbered: True
     chapters:
       - file: chap08
@@ -63,6 +67,22 @@ in this order:
 - `jb/index.md` lists a Colab link for each page under the chapter, in the same order:
   `* [Click here to run 7b. Prof. Rosenthal's Additions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_additions.ipynb)`.
 - `check_notebooks.py` checks the titles and the order in the TOC.
+
+## More review pages: `yr/chapNN_more_review.ipynb`
+
+A more-review page, "NNd. Prof. Rosenthal's More Review Questions", holds extra practice questions for a chapter
+when its review page is full or when a topic needs more practice. It is a normal notebook in the format of an
+additions page, not of a review page: `## Practice questions` with `### Question N (easy|medium|hard): KIND`
+headings, each question's code and examples as text, a `# Your code here` cell, and an Answer that is one
+markdown cell with a `<details>` / `<summary>Answer</summary>` block; then `## Credits`. The rules of
+"Additions pages" apply: the style rules, no stored outputs, the build runs its code cells
+(`jb/execute_notebooks.py`) and `jb/prep_notebooks.py` turns each `<details>` cell into a closed dropdown.
+`yr/chap07_more_review.ipynb` is the reference example. The questions follow the same rules as review questions
+("Review pages", "Style rules": Questions and Answers), and their numbers are stable in the same way.
+
+To add one: write the notebook with the title `# NNd. Prof. Rosenthal's More Review Questions`, list it in
+`jb/_toc.yml` after the chapter's review page, add its Colab line in `jb/index.md` after the review line, and
+verify it as an additions page ("Adding an additions page", step 4).
 
 ## Other pages of the course: `yr/NAME.md`
 
@@ -697,7 +717,7 @@ Use the `yr-review-page` skill, or by hand:
 - `.github/workflows/deploy-book.yml` and `.claude/skills/build-book/build_book.sh` copy
   `yr/*.ipynb` and the markdown pages `yr/*.md` (not this README) into `jb/yr/` (gitignored) next to the
   chapter copies. Review pages are not run by the build: the website shows the outputs that sync stored.
-  Additions pages are run like the chapters (`jb/execute_notebooks.py`).
+  Additions pages and more-review pages are run like the chapters (`jb/execute_notebooks.py`).
 - `jb/prep_notebooks.py` (`process_review`): each Answer (its text and its run cells' stored outputs,
   without their code) becomes one closed dropdown; the help note, the helper cell and the "Credits" heading
   are dropped; markers are removed (values stay); tracebacks are shortened; the concept lists stay open;
@@ -708,7 +728,7 @@ Use the `yr-review-page` skill, or by hand:
   checks a page on the built site (one closed Answer per question, no hidden code or markers on the page),
   and compares it with another build of the page (for example, before a big change).
 - `check_notebooks.py` lints `yr/*.ipynb` (review pages: outputs only on run cells, the stamp, the markers;
-  additions pages: no outputs) and checks that each page in `yr/` is in the TOC, in the right order and with
+  additions and more-review pages: no outputs) and checks that each page in `yr/` is in the TOC, in the right order and with
   the right title, and that the workflow copies `yr/`. The deploy workflow runs it first, so a
   page with a problem is not published.
 
