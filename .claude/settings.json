@@ -7,8 +7,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cat \"$CLAUDE_PROJECT_DIR/.yrProject/session-start.json\" 2>/dev/null || true",
-            "timeout": 10
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/skills/yrProject/scripts/yrProject-notice.sh\" session-start || true",
+            "timeout": 20
           }
         ]
       },
@@ -32,6 +32,17 @@
             "if": "Bash(gh issue *)",
             "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/skills/yrIssues/scripts/yrIssues.sh\" hook-sync",
             "timeout": 30
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/skills/yrProject/scripts/yrProject-notice.sh\" prompt || true",
+            "timeout": 10
           }
         ]
       }

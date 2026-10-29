@@ -3,6 +3,13 @@ name: subjexts
 description: The subjexts teaching overlay in this book (labels on passages, a table of contents by label, in-place edits, the AI tutor) - what the two subjexts files are, how to switch the overlay on and off, and where the subjexts procedures are (apply a note packet of the author's notes and edits to the source, mark the book from a list, register the book). Use when the user mentions subjexts, labels, the overlay, "Table of contents by label", a note packet ("apply the notes in ..."), or asks to switch it on or off or to plug the book in.
 ---
 
+<!-- Installed by yrProject v0.6.0 (https://github.com/y-rosenthal/yrProject): the templates
+     and the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub
+     issues for work to do later, project docs). This file belongs to the tool: do not edit it by hand, and do
+     not change it without the tool. "yrProject.sh update" replaces it with each new version (if you change it,
+     update leaves it alone, and it gets no newer versions); "yrProject.sh remove" removes it.
+     .yrProject/README.md lists every file that yrProject installed, and tells who changes each one. -->
+
 # subjexts in this book
 
 [subjexts](https://subjexts.github.io/) adds a teaching layer to this published book without changing its

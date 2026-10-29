@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+# Installed by yrProject v0.6.0 (https://github.com/y-rosenthal/yrProject): the templates and
+# the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub issues
+# for work to do later, project docs). This file belongs to the tool: do not edit it by hand, and do not change
+# it without the tool. "yrProject.sh update" replaces it with each new version (if you change it, update leaves
+# it alone, and it gets no newer versions); "yrProject.sh remove" removes it. .yrProject/README.md lists every
+# file that yrProject installed, and tells who changes each one.
+#
 # yrIssues.sh - helper for the yrIssues skill of yrProject: work to do later, kept as GitHub issues.
 #
 # The project's work to do later is the open GitHub issues of its repository (the "origin" remote). The user
@@ -178,10 +185,10 @@ case "$cmd" in
     fi
     count="$(saved_list | count_line)"
     if [ "$count" = "no open issues" ]; then
-      user_msg="No open issues."
+      user_msg="yrProject: no open issues."
       context="Issues of this project: none open.$note If the user mentions something to do later, offer to add it as an issue (yrIssues skill)."
     else
-      user_msg="$count. Say \"list issues\" to see them."
+      user_msg="yrProject: $count. Say \"list issues\" to see them."
       context="ISSUES: this project has $count (GitHub issues${repo:+ in $repo}).$note ${INSTRUCTIONS//COUNT/$count}"
     fi
     printf '{"systemMessage": %s, "hookSpecificOutput": {"hookEventName": "SessionStart", "additionalContext": %s}}\n' \

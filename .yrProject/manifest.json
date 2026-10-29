@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "createdAt": "2026-10-12T15:54:40Z",
   "projectType": null,
-  "version": "v0.5.2",
+  "version": "v0.6.0",
   "parts": [
     "rules",
     "subjexts",
@@ -16,22 +16,23 @@
     "PROJECT_TYPE": "work",
     "CREATED_DATE": "2026-10-12",
     "SUBJEXTS_PACKAGE": "y-rosenthal/thinkpython",
-    "TEMPLATE_VERSION": "v0.5.2"
+    "TEMPLATE_VERSION": "v0.6.0"
   },
   "files": {
-    ".claude/skills/subjexts/SKILL.md": "cd727d25e89b15ff8ddb71111dde1ea7da775a1a38c4018e0617f432a7dda3bb",
-    ".claude/skills/subjexts/scripts/yrS4-skill.sh": "54298e5f05b91ca55b444352e99094593409d35a2012500aa5e4cd1a0abbf041",
-    ".claude/skills/yrIssues/SKILL.md": "fc6e9a387c18c43af170f674b94bdee148511c1fc72f72894a4cac1139756731",
-    ".claude/skills/yrIssues/scripts/yrIssues.sh": "6eca82fafa39b5bd9df39934dcda42f1847b950a5e4d4068c6c671b27d10182f",
-    ".claude/skills/yrProject/SKILL.md": "5d2dfc077459af58c97ac3c1a4511eacfdda3eb6494752204f4de77ab25ba6f0",
-    "README.md": "089e65684de3d4b92617a446eca52abc8e2602264ca2becfb5e8a477c128d69c",
+    ".claude/skills/subjexts/SKILL.md": "4ffc14ec33771d18cd3fc521b0253deca0832ff62075ad2155faf210d4b63b45",
+    ".claude/skills/subjexts/scripts/yrS4-skill.sh": "887056dc4b9bae1116a5e58542bbc9854fe6616e0b48afca39c0b4e7ddd2d536",
+    ".claude/skills/yrIssues/SKILL.md": "94e5c4ccb2f21e815667a787131453b1dc4f65be0d2f55493c62958e4d3f6be2",
+    ".claude/skills/yrIssues/scripts/yrIssues.sh": "db0ffb8f26ad9fd845d0469c0854af78aebac47ef9cd93d547f23abec8b295c9",
+    ".claude/skills/yrProject/SKILL.md": "eab036f4727a8dc874a42a29e9cdda8e4bf34e88a14a476532735d5dc04536aa",
+    ".claude/skills/yrProject/scripts/yrProject-notice.sh": "9e2d071337465e85c3d48e2b5db08956940c22ce3121c36a1300e127f023bbe4",
+    "README.md": "522dffdab316f958c07c9e5b91a3b4cf101b6722570d2f6d5e86e28b1be9f0a9",
     "_yrIssues/config.sh": "e88eb0025fa0d0bbba90468331b8fca23b6c5ce2faccb8c5a42015018f9077f0"
   },
-  "updatedAt": "2026-10-28T17:59:54Z",
+  "updatedAt": "2026-10-29T16:30:00Z",
   "tool": {
     "name": "yrProject",
-    "version": "0.5.2",
-    "templatesCommit": "189f7de"
+    "version": "0.6.0",
+    "templatesCommit": "754c3c6"
   },
   "history": [
     {
@@ -85,6 +86,17 @@
         "subjexts",
         "yrIssues"
       ]
+    },
+    {
+      "date": "2026-10-29",
+      "command": "update",
+      "version": "v0.6.0",
+      "parts": [
+        "rules",
+        "subjexts",
+        "yrIssues"
+      ]
     }
-  ]
+  ],
+  "about": "Written by yrProject v0.6.0 (https://github.com/y-rosenthal/yrProject), the record of this project's yrProject setup. Do not edit: \"yrProject.sh update\" writes it again."
 }
