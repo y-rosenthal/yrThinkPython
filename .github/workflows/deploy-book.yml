@@ -28,7 +28,7 @@ jobs:
         run: python .claude/skills/check-notebooks/check_notebooks.py
 
       - name: Install Jupyter Book and the packages the chapters use
-        run: pip install "jupyter-book<2" ghp-import ipykernel nbclient matplotlib pyyaml
+        run: pip install "jupyter-book<2" ghp-import ipykernel nbclient matplotlib pyyaml sphinx-sitemap sphinxext-opengraph
 
       - name: Copy notebooks into the book folder
         run: |

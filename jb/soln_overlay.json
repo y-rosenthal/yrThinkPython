@@ -20,9 +20,6 @@
    "213f9d96": [
     "remove-cell"
    ],
-   "333a6fc9": [
-    "chapter_programming"
-   ],
    "3b4a1f57": [
     "remove-cell"
    ],
@@ -38,6 +35,9 @@
    "a705b980": [
     "raises-exception",
     "remove-cell"
+   ],
+   "b77f75fd": [
+    "chapter_programming"
    ],
    "e3f65f19": [
     "raises-exception"
@@ -426,6 +426,9 @@
    "36a45674-7f41-4850-98f1-2548574ce958": [
     "remove-input"
    ],
+   "3c4a5bda": [
+    "chapter_search"
+   ],
    "4a0c46b9": [
     "raises-exception"
    ],
@@ -444,9 +447,6 @@
    ],
    "a7b7ac52-64a6-4dd9-98f5-b772a5e0f161": [
     "remove-cell"
-   ],
-   "a81d9ad2-9a47-4872-bf65-5a8dfb09c32f": [
-    "chapter_search"
    ],
    "ab66c777": [
     "remove-cell"
@@ -473,11 +473,11 @@
  },
  "chap08": {
   "solutions": {
-   "08294921": "# Solution\n\ndef count_matches(pattern):\n    count = 0\n    for line in open('pg1184_cleaned.txt'):\n        result = re.search(pattern, line)\n        if result != None:\n            count += 1\n    return count",
+   "08294921": "# Solution\n\ndef count_matches(pattern):\n    count = 0\n    for line in open('pg1184_cleaned.txt', encoding='utf-8'):\n        result = re.search(pattern, line)\n        if result != None:\n            count += 1\n    return count",
    "2a37092e": "# Solution\n\ndef check_word(word):\n    if 'e' not in word:\n        return False\n    \n    if word[2] == 'e' or word[4] == 'e':\n        return False\n    \n    if uses_any(word, 'spadclrk'):\n        return False\n    \n    return True",
    "3eb8f83f": "# Solution\n\n# This solution uses only features we've seen in the chapter,\n# but it also matches words that contain these string, like \"impale\".\n\npattern = '(pale|pales|paled|paleness|pallor)'\ncount_matches(pattern)",
    "3f658f3a": "# Solution\n\nfor line in open('words.txt'):\n    word = line.strip()\n    if len(word) == 5 and check_word2(word):\n        print(word)",
-   "75b12538": "# Solution\n\ndef head(input_file, num_lines=10, output_file=None):\n    reader = open(input_file, 'r')\n\n    if output_file is not None:\n        writer = open(output_file, 'w')\n        \n    for i in range(num_lines):\n        line = reader.readline()\n        \n        if output_file is not None:\n            writer.write(line)\n        else:\n            print(line, end='')\n            \n    reader.close()\n    if output_file is not None:\n        writer.close()",
+   "75b12538": "# Solution\n\ndef head(input_file, num_lines=10, output_file=None):\n    reader = open(input_file, 'r', encoding='utf-8')\n\n    if output_file is not None:\n        writer = open(output_file, 'w', encoding='utf-8')\n        \n    for i in range(num_lines):\n        line = reader.readline()\n        \n        if output_file is not None:\n            writer.write(line)\n        else:\n            print(line, end='')\n            \n    reader.close()\n    if output_file is not None:\n        writer.close()",
    "925c7aa9": "# Solution\n\ndef check_word2(word):\n    if not check_word(word):\n        return False\n    \n    if word[3] == 'e':\n        return False\n    \n    if word[4] != 'm':\n        return False\n    \n    return True",
    "b6bffe8a": "# Solution\n\n# This solution uses the special sequence \\b to match a word boundary,\n# which can be any kind of white space or punctuation.\n# The `r` before the quotation mark indicates that the pattern is\n# a raw string, which is needed because the pattern contains a\n# special sequence.\n\npattern = r'\\b(pale|pales|paled|paleness|pallor)\\b'\ncount_matches(pattern)"
   },
@@ -811,6 +811,9 @@
    "4309d0b5": [
     "remove-cell"
    ],
+   "4a88d178": [
+    "remove-cell"
+   ],
    "4b9ed2a8": [
     "remove-cell"
    ],
@@ -819,9 +822,6 @@
    ],
    "55435050": [
     "remove-cell"
-   ],
-   "5705b2a6": [
-    "chapter_tuples"
    ],
    "5814999d": [
     "remove-cell"
@@ -865,6 +865,9 @@
    ],
    "991810bc": [
     "raises-exception"
+   ],
+   "9fac4af5": [
+    "chapter_tuples"
    ],
    "b4970fe0": [
     "raises-exception"
@@ -1426,9 +1429,6 @@
    "c91e3bdb": [
     "remove-cell"
    ],
-   "ced31782": [
-    "chapter_inheritance"
-   ],
    "d2e576bf": [
     "remove-cell"
    ],
@@ -1449,6 +1449,9 @@
    ],
    "fdec7276": [
     "remove-cell"
+   ],
+   "ff17915e": [
+    "chapter_inheritance"
    ]
   }
  },
