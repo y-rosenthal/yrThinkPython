@@ -15,7 +15,7 @@ allowed-tools:
   - Bash(bash ${CLAUDE_SKILL_DIR}/scripts/yrProject-notice.sh *)
 ---
 
-<!-- Installed by yrProject v0.6.1 (https://github.com/y-rosenthal/yrProject): the templates
+<!-- Installed by yrProject v0.7.0 (https://github.com/y-rosenthal/yrProject): the templates
      and the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub
      issues for work to do later, project docs). This file belongs to the tool: do not edit it by hand, and do
      not change it without the tool. "yrProject.sh update" replaces it with each new version (if you change it,
@@ -25,7 +25,8 @@ allowed-tools:
 # The yrProject setup of this project (yrProject skill)
 
 `yrProject.sh` set up this project: the rules for AI agents (`AGENTS.md`, `CLAUDE.md`), the skills in
-`.claude/skills/`, the hooks in `.claude/settings.json`, the block in `.gitignore`, and the record in
+`.claude/skills/`, the hooks in `.claude/settings.json`, the block in `.gitignore`, the daily workflow of the
+renewals (`.github/workflows/yrRenewals.yml`, if the project has the yrRenewals part), and the record in
 `.yrProject/`. Every file that it installed starts with a comment that names yrProject and its version. The user
 does not need to know the tool: they ask you, and you run it, explain the result in plain words, and ask before
 you change anything.
@@ -105,15 +106,17 @@ with that Dropbox, can check, update or remove the setup; everything else in the
    the project's entry in its own list of projects, in the yrProject repository.
 
 Other options, only when the user asks for them: `--with-docs` (also add the project-docs book in `docs/`),
-`--no-yrIssues` (no issues skill), `--version VER` (a version other than the newest).
+`--with-yrRenewals` (also add the yrRenewals part: reminders for the things that expire or renew, as issues
+opened by a daily GitHub workflow), `--no-yrIssues` (no issues skill), `--version VER` (a version other than the
+newest).
 
 ## Remove yrProject from this project ("remove yrProject", "I don't want yrProject here any more")
 
 1. Run `yrProject.sh remove --dry-run`. It lists what would go: the tool's files that nobody changed (the skills
-   and their scripts, `docs/PROJECT-SETUP.qmd`), its blocks in `AGENTS.md`, `README.md` and `.gitignore` (the
+   and their scripts, `docs/PROJECT-SETUP.qmd`, the workflow `.github/workflows/yrRenewals.yml`), its blocks in `AGENTS.md`, `README.md` and `.gitignore` (the
    shared rules too), its hooks in `.claude/settings.json`, `.yrProject/`, and the `_yrIssues/` folder; and what
-   stays: the project's own files, the docs book and its guides, files of the tool that were changed by hand, and
-   everything on GitHub (the issues and the labels).
+   stays: the project's own files, the docs book and its guides, the list of renewals `_yrRenewals/renewals.yml`,
+   files of the tool that were changed by hand, and everything on GitHub (the issues and the labels).
 2. **If it refuses** because `_yrIssues/queue.md` has issues that are not yet on GitHub, tell the user which ones
    (the output lists them), and offer to create them on GitHub first (the yrIssues skill), then run the dry run
    again. Run `remove --force` only if the user says, in so many words, to delete those issues anyway.
