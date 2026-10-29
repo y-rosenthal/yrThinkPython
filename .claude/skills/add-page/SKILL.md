@@ -1,6 +1,6 @@
 ---
 name: add-page
-description: Add a new chapter, notebook, or markdown page to the Think Python book so it builds, appears in the table of contents, and gets a Colab link. Use when asked to add a chapter/appendix/page/section to the book or to include an existing notebook in the site.
+description: Add a new chapter, notebook, or markdown page to the Think Python book so it builds, appears in the table of contents, and gets a Colab link. Use when asked to add a chapter/appendix/page/section to the book, a page of the course without code (yr/NAME.md), or to include an existing notebook in the site.
 user-invocable: true
 argument-hint: [chapters/chapNN.ipynb "Title"]
 ---
@@ -8,7 +8,13 @@ argument-hint: [chapters/chapNN.ipynb "Title"]
 # Add a page to the book
 
 The book is assembled from `jb/_toc.yml`; a file that is not listed there is not built.
-Chapter notebooks live in `chapters/`; standalone markdown pages live in `jb/`.
+
+| Kind of page | Where | Rules |
+|---|---|---|
+| A chapter notebook of the book | `chapters/chapNN.ipynb` | below, and the `notebook-conventions` skill |
+| The course's pages of a chapter (additions, review) | `yr/chapNN_additions.ipynb`, `yr/chapNN_review.ipynb` | `yr/README.md`; the `yr-additions-page` and `yr-review-page` skills |
+| A page of the course without code (an introduction, a note) | `yr/NAME.md` | `yr/README.md`, "Other pages of the course" |
+| A page of the book's own front or end matter (no code) | `jb/NAME.md` | below |
 
 ## New chapter notebook
 
@@ -32,9 +38,12 @@ Chapter notebooks live in `chapters/`; standalone markdown pages live in `jb/`.
 
 ## Markdown page (no code)
 
-Create `jb/<name>.md`, list it in `jb/_toc.yml` (unnumbered `Front Matter` / `End Matter` parts
-are for non-chapters), build. MyST extensions enabled in `_config.yml` include `colon_fence`,
-`dollarmath`, `deflist`, `tasklist`, so `:::{note}` admonitions and `$x^2$` math work.
+A page of the course goes in `yr/NAME.md` (`yr/README.md`, "Other pages of the course"); a page of the book's
+own front or end matter goes in `jb/NAME.md`. List it in `jb/_toc.yml` in the part where it belongs (the
+unnumbered `Front Matter` / `End Matter` parts are for non-chapters), then build. The build copies `yr/*.md`
+into `jb/yr/`; `check_notebooks.py` fails if a `yr/` page is not in the TOC. MyST extensions enabled in
+`_config.yml` include `colon_fence`, `dollarmath`, `deflist`, `tasklist`, so `:::{note}` admonitions and
+`$x^2$` math work.
 
 ## Removing or reordering
 

@@ -3,9 +3,10 @@
 
 Usage: check_notebooks.py [notebook.ipynb ...]
 Default: every chap*.ipynb in chapters/, blank/ and solutions/ and every yr/*.ipynb, plus TOC / Colab-link / workflow
-consistency, a check that each solutions/chapNN.ipynb matches its chapter, a check of the yr/ page titles and their
-order in the TOC (chapter, then NNb. Additions, then NNb or NNc. Review), and a check that every script of the fork
-(.claude/skills/, yr/, jb/) has a docstring or header comment and a -h/--help option that prints it.
+consistency (every yr/ page, also a markdown page yr/NAME.md, is in the TOC and copied by the deploy workflow), a
+check that each solutions/chapNN.ipynb matches its chapter, a check of the yr/ page titles and their order in the TOC
+(chapter, then NNb. Additions, then NNb or NNc. Review), and a check that every script of the fork (.claude/skills/,
+yr/, jb/) has a docstring or header comment and a -h/--help option that prints it.
 (chapters/jupyter_intro.ipynb is skipped by default: it is an older nbformat 4.4 file that
 keeps its outputs on purpose and is only shipped in the zip, not in the book.)
 Exit status 1 if any problem is found.
@@ -108,8 +109,8 @@ def check_toc_and_links():
         if f in ("index", "blank"):
             continue
         if f.startswith("yr/"):
-            if not (ROOT / f"{f}.ipynb").exists():
-                problems.append(f"jb/_toc.yml: entry '{f}' has no {f}.ipynb")
+            if not (ROOT / f"{f}.ipynb").exists() and not (ROOT / f"{f}.md").exists():
+                problems.append(f"jb/_toc.yml: entry '{f}' has no {f}.ipynb or {f}.md")
             continue
         if not (ROOT / "chapters" / f"{f}.ipynb").exists() and not (ROOT / "jb" / f"{f}.md").exists():
             problems.append(f"jb/_toc.yml: entry '{f}' has no chapters/{f}.ipynb or jb/{f}.md")
@@ -129,13 +130,17 @@ def check_toc_and_links():
                         ".claude/skills/sync-upstream/fork_colab_links.py")
     problems.extend(colab_problems)
 
-    for p in sorted((ROOT / "yr").glob("*.ipynb")):
+    # every page in yr/ (a notebook, or a markdown page yr/NAME.md; yr/README.md is not a page) is in the TOC
+    yr_pages = [p for p in (ROOT / "yr").glob("*.ipynb")] + [p for p in (ROOT / "yr").glob("*.md") if p.name != "README.md"]
+    for p in sorted(yr_pages):
         if f"yr/{p.stem}" not in toc_files:
             problems.append(f"jb/_toc.yml: yr/{p.name} is not listed in the TOC")
 
     wf = (ROOT / ".github" / "workflows" / "deploy-book.yml").read_text()
     if "cp yr/*.ipynb jb/yr/" not in wf:
         problems.append("deploy-book.yml: does not copy yr/*.ipynb into jb/yr/")
+    if "yr/*.md" not in wf:
+        problems.append("deploy-book.yml: does not copy the markdown pages yr/*.md into jb/yr/")
     m = re.search(r"cp\s+(\S+)\s+jb/", wf)
     if m:
         import fnmatch

@@ -10,7 +10,10 @@ book:
   repo-subdir: author-guide
   chapters:
     - index.qmd
-    - CONTENT-AUTHOR-GUIDE.qmd
+    - repository.qmd
+    - notebooks.qmd
+    - pages.qmd
+    - yr.qmd
 
 format:
   html:

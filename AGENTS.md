@@ -25,18 +25,20 @@ These rules are for every collaborator and every coding agent (Claude Code, Code
 - A fork of Allen Downey's *Think Python*, 3rd edition, for Prof. Rosenthal's course. Remotes: `origin` =
   y-rosenthal/yrThinkPython (branch `v3`), `upstream` = AllenDowney/ThinkPython.
 - Every push to `v3` builds and publishes the website (`.github/workflows/deploy-book.yml`), which students use.
-- `README.md` gives the layout. `author-guide/CONTENT-AUTHOR-GUIDE.qmd` is the guide for content authors.
+- `README.md` gives the layout. `author-guide/` is the guide for content authors: a Quarto book that includes
+  `README.md`, `yr/README.md` and the skills, plus the setup and the workflow for people (`author-guide/index.qmd`).
 
 ## Where things are
 
-- `yr/README.md`: the course's own pages, the additions pages (`yr/chapNN_additions.ipynb`) and the review pages
-  (`yr/chapNN_review.ipynb`), their style rules and tools.
+- `yr/README.md`: **the one place for the rules of the course's pages** (`yr/`): the pages of a chapter and their
+  order, the additions pages, the review pages, the markdown pages, their layout, style rules, format rules, tools
+  and procedures. Read it before you change anything in `yr/`.
 - `yr/tools/`: the review-page tools. `review.sh sync` writes outputs, pictures and values by running
   the code on the pinned Colab-like kernel; `review.sh check` verifies a page; `review.sh selftest`
   tests the tools; `review_format.py` defines the page format.
-- `author-guide/CONTENT-AUTHOR-GUIDE.qmd`: the guide for content authors (Quarto book).
 - `.claude/skills/NAME/SKILL.md`: step-by-step procedures, with their scripts next to them. Claude Code loads them
-  as skills; with another agent, read the `SKILL.md` for the task and follow it. The main ones:
+  as skills; with another agent, read the `SKILL.md` for the task and follow it. A skill holds steps and points to
+  the rules; it does not repeat them. The main ones:
   - `yr-additions-page`: write an additions page (material that Downey's chapter does not explain);
   - `yr-review-page`, `yr-review-questions`: write review pages and questions;
   - `sync-upstream`: take Allen Downey's changes; `upstream-diff`, `contribute-upstream`: compare with his book and
@@ -56,9 +58,9 @@ These rules are for every collaborator and every coding agent (Claude Code, Code
 
 ## Pending work
 
-- Work to do later is GitHub issues labeled `pending-work` on y-rosenthal/yrThinkPython (this fork), not on
-  AllenDowney/ThinkPython. Add, list, work on and close them with the `pending-work` skill. A SessionStart hook
-  shows how many are open.
+- Work to do later is the GitHub issues of this fork (y-rosenthal/yrThinkPython), not of AllenDowney/ThinkPython.
+  Add, list, work on and close them with the `yrIssues` skill (the shared rule "Work to do later is GitHub issues"
+  below).
 - `PROJECT_BOARD.md` was retired on 2026-10-12: its Task N is issue #N. Its build notes are in
   `planning/upstream_build_notes.md`. Do not start another to-do file or task board.
 - Corrections for Allen Downey's book are a different thing: they go to AllenDowney/ThinkPython with the
@@ -79,38 +81,24 @@ These rules are for every collaborator and every coding agent (Claude Code, Code
 - Do not add `%load_ext autoreload` or `%autoreload` to any notebook. Colab runs Python 3.12 or later with IPython
   7.34, whose autoreload imports the removed module `imp`, so the cell fails for students.
 
-## The course's pages of a chapter (`yr/`)
+## The course's pages (`yr/`)
 
-Do not change Downey's chapters to add material. Put it in the course's pages, which follow the chapter on the
-website and in `jb/index.md`, in this order:
-
-1. Chapter NN: Downey's chapter (`chapters/chapNN.ipynb`).
-2. NNb. Prof. Rosenthal's Additions (`yr/chapNN_additions.ipynb`), only if the chapter needs one: what the
-   chapter uses but does not explain, with examples and practice questions on the same page. Use the
-   `yr-additions-page` skill. A chapter usually has one additions page. Make a second one only when it is
-   necessary, and ask Prof. Rosenthal first.
-3. NNb. Prof. Rosenthal's Review (`yr/chapNN_review.ipynb`): a review of the chapter. When the chapter has an
-   additions page, the review is **NNc**: `review.sh sync` writes the letter in the title.
-
-The additions page always comes before the review page. `jb/_toc.yml` lists both in one unnumbered part after the
-chapter; `check_notebooks.py` checks the titles and the order. `yr/README.md` gives the details.
-
-## Review pages (`yr/`)
-
-- The style and format rules are in `yr/README.md`. Read it before you change a review page.
-- Question numbers do not change during a semester, because homework is assigned by number. A question inserted
-  between Questions 3 and 4 is Question 3b. Never reuse a deleted question's number, and never renumber
-  automatically. Prof. Rosenthal renumbers only between semesters (`review_cells.py renumber`).
-- Never type an output, a value or a picture by hand. `yr/tools/review.sh sync` writes them by running the code,
-  and `yr/tools/review.sh check` must print `OK`.
+- Do not change Downey's chapters to add material. Put it in the course's pages in `yr/`: an additions page
+  (`yr/chapNN_additions.ipynb`), a review page (`yr/chapNN_review.ipynb`) or a markdown page (`yr/NAME.md`).
+- `yr/README.md` holds every rule for these pages: read the sections for your task before you change a page, and
+  follow them. Two of its rules are easy to break and costly: question numbers stay fixed during a semester
+  ("Question numbers between semesters"), and nothing that `review.sh sync` writes is typed by hand ("Adding a
+  question"). `review.sh check` and `check_notebooks.py` must print `OK`.
 
 ## Documentation
 
 - Write documentation, skills, comments and commit messages in ASD-STE100 Simplified Technical English: short
   sentences, active voice, the imperative for procedures, simple words with one meaning, the same term each time.
-- When a design or a tool changes, update `yr/README.md`, the skills for the course's pages
-  (`.claude/skills/yr-additions-page`, `yr-review-page`, `yr-review-questions`) and
-  `author-guide/CONTENT-AUTHOR-GUIDE.qmd` in the same change.
+- **One place for each rule.** A rule for the course's pages lives in `yr/README.md`; a rule for the chapter
+  notebooks in the `notebook-conventions` skill; what a check does in the docstring of its script. Every other
+  file (a skill, `AGENTS.md`, `README.md`) points to the section instead of repeating the rule. When a design or
+  a tool changes, change the rule in its one place, and a skill only if its steps change. The author guide
+  (`author-guide/`) includes these files, so it needs no change.
 
 ## Scripts
 
