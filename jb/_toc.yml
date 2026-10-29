@@ -8,6 +8,7 @@ parts:
 - caption: Front Matter
   chapters:
   - file: chap00
+  - file: yr/prof_r_intro
 - caption: Chapters
   numbered: True
   chapters:
