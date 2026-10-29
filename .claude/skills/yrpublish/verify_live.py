@@ -13,7 +13,8 @@ Reads jb/_toc.yml for the pages, then checks on the live site that:
     section 5.9, a page that only had outputs since the build started executing chapters);
   - yr/ review pages have both concept lists, Answer boxes and their turtle pictures, and show none of the
     notebook machinery (@title, run_code, markers);
-  - yr/ additions pages show code outputs and Answer boxes, and no %%expect, <details> or '# Your code here';
+  - yr/ additions and more-review pages show Answer boxes (additions: code outputs too), and no %%expect,
+    <details> or '# Your code here'; a markdown page yr/NAME.md loads with its title;
   - words.txt (linked from yr/chap07_additions) can be downloaded from the top of the site.
 Retries until --wait seconds have passed (GitHub Pages lags a minute or two behind the deploy).
 Exit status 1 if anything is still wrong.
@@ -60,10 +61,17 @@ def check():
                 part = html.split(anchor, 1)[1][:6000]
                 if '<img' not in part:
                     problems.append('chap05: no stack diagram image in section 5.9')
-        if page.startswith('yr/') and page.endswith('_additions'):
+        if page.startswith('yr/') and (ROOT / f'{page}.md').exists():
+            # a markdown page of the course (yr/NAME.md): it loads, with its title
+            title = (ROOT / f'{page}.md').read_text().splitlines()[0].lstrip('# ').strip()
+            summary.append(f'{page}: markdown page')
+            if title not in html:
+                problems.append(f'{page}: the title {title!r} is not on the page')
+        elif page.startswith('yr/') and (page.endswith('_additions') or page.endswith('_more_review')):
+            # additions-format pages: the build runs their code cells (a more-review page may have none)
             outputs = html.count('class="cell_output')
             summary.append(f'{page}: {outputs} outputs')
-            if outputs == 0:
+            if outputs == 0 and page.endswith('_additions'):
                 problems.append(f'{page}: no code outputs on the page')
             if 'Answer' not in html:
                 problems.append(f'{page}: "Answer" not found')
