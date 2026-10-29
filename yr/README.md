@@ -36,21 +36,28 @@ section here.
 
 ## The pages of a chapter
 
-Do not change Downey's chapters to add material. A chapter can have up to three pages of the course after it,
-in this order:
+Do not change Downey's chapters to add material. A chapter can have any number of pages of the course after it.
+They are lettered in the order of the table of contents: `b`, `c`, `d`, ... `z`, then `aa`, `ab`, ... (Downey's
+chapter is the "a" page, without a letter). The letter is not in the file name: it comes from the position, so a
+page inserted before another changes the letters after it, and `review.sh sync` and `check_notebooks.py` follow.
+The three kinds so far, in their order:
 
 | Order | Title on the website | File | When |
 |---|---|---|---|
 | 1 | NN. (Downey's chapter title) | `chapters/chapNN.ipynb` | always |
 | 2 | NNb. Prof. Rosenthal's Additions | `yr/chapNN_additions.ipynb` | only if the chapter needs it |
 | 3 | NNb. Prof. Rosenthal's Review, or **NNc.** when the chapter has an additions page | `yr/chapNN_review.ipynb` | each chapter that has a review |
-| 4 | NNd. Prof. Rosenthal's More Review Questions | `yr/chapNN_more_review.ipynb` | only if the chapter needs it |
+| 4 | NNc. or NNd. Prof. Rosenthal's More Review Questions | `yr/chapNN_more_review.ipynb` | only if the chapter needs it |
+| ... | NN<letter>. Prof. Rosenthal's ... | `yr/chapNN_KIND.ipynb` | a new kind, when one is needed |
 
-- The additions page always comes before the review page, and the more-review page comes last. The more-review
-  page is always `d`, also when the chapter has no additions page.
-- `review.sh sync` writes the letter of the review page (`b` or `c`) in its title: it is `c` when
-  `yr/chapNN_additions.ipynb` exists. So after you add an additions page, run `review.sh sync` on the
-  chapter's review page, and change its line in `jb/index.md` (`NNb.` to `NNc.`).
+- The additions page comes before the review page, and the review page before the more-review page. A new kind
+  of page is `yr/chapNN_KIND.ipynb` (KIND: lowercase letters, digits and `_`); its title starts with
+  `# NN<letter>. Prof. Rosenthal's `. Add the kind to `KIND_ORDER` and `KIND_TITLES` in `yr/tools/review_format.py`
+  if its title and position are fixed.
+- `review.sh sync` writes the letter of a review page in its title (`review_format.page_letter`: the page's
+  position in the TOC). So after you add a page before a review page, run `review.sh sync` on the review page,
+  and change its line in `jb/index.md` (`NNb.` to `NNc.`). The letter of every other kind is typed in its
+  title cell; `check_notebooks.py` reports the right one.
 - `jb/_toc.yml` lists the pages in one unnumbered part after the chapter. Numbering continues across the
   numbered parts, so the chapter numbers stay the same, and a page in an unnumbered part shows its own
   title (`NNb. …`) without an added number:
@@ -66,11 +73,12 @@ in this order:
   ```
 - `jb/index.md` lists a Colab link for each page under the chapter, in the same order:
   `* [Click here to run 7b. Prof. Rosenthal's Additions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_additions.ipynb)`.
-- `check_notebooks.py` checks the titles and the order in the TOC.
+- `check_notebooks.py` checks the titles, and that the TOC lists the pages right after the chapter, in the
+  order of the kinds.
 
 ## More review pages: `yr/chapNN_more_review.ipynb`
 
-A more-review page, "NNd. Prof. Rosenthal's More Review Questions", holds extra practice questions for a chapter
+A more-review page, "NNd. Prof. Rosenthal's More Review Questions" (`NNc.` without an additions page), holds extra practice questions for a chapter
 when its review page is full or when a topic needs more practice. It is a normal notebook in the format of an
 additions page, not of a review page: `## Practice questions` with `### Question N (easy|medium|hard): KIND`
 headings, each question's code and examples as text, a `# Your code here` cell, and an Answer that is one
@@ -80,7 +88,7 @@ markdown cell with a `<details>` / `<summary>Answer</summary>` block; then `## C
 `yr/chap07_more_review.ipynb` is the reference example. The questions follow the same rules as review questions
 ("Review pages", "Style rules": Questions and Answers), and their numbers are stable in the same way.
 
-To add one: write the notebook with the title `# NNd. Prof. Rosenthal's More Review Questions`, list it in
+To add one: write the notebook with the title `# NN<letter>. Prof. Rosenthal's More Review Questions`, list it in
 `jb/_toc.yml` after the chapter's review page, add its Colab line in `jb/index.md` after the review line, and
 verify it as an additions page ("Adding an additions page", step 4).
 

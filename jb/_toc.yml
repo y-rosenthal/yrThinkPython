@@ -14,7 +14,8 @@ parts:
   chapters:
     - file: chap01
     - file: chap02
-# The yr/ pages of a chapter (NNb. Additions, if any, then NNb or NNc. Review, then NNd. More Review Questions, if any) sit in their own
+# The yr/ pages of a chapter (any number: Additions, Review, More Review Questions, lettered b, c, d, ... in
+# this order) sit in their own
 # unnumbered part right after the chapter, so they show up in the sidebar under that chapter
 # without changing the book's chapter numbers (numbering continues across the numbered parts).
 # See yr/README.md.

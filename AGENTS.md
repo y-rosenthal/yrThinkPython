@@ -83,8 +83,9 @@ These rules are for every collaborator and every coding agent (Claude Code, Code
 
 ## The course's pages (`yr/`)
 
-- Do not change Downey's chapters to add material. Put it in the course's pages in `yr/`: an additions page
-  (`yr/chapNN_additions.ipynb`), a review page (`yr/chapNN_review.ipynb`) or a markdown page (`yr/NAME.md`).
+- Do not change Downey's chapters to add material. Put it in the course's pages in `yr/`: any number of pages after a
+  chapter, lettered b, c, d, ... in the order of the TOC (`yr/chapNN_additions.ipynb`, `yr/chapNN_review.ipynb`,
+  `yr/chapNN_more_review.ipynb`), or a markdown page (`yr/NAME.md`).
 - `yr/README.md` holds every rule for these pages: read the sections for your task before you change a page, and
   follow them. Two of its rules are easy to break and costly: question numbers stay fixed during a semester
   ("Question numbers between semesters"), and nothing that `review.sh sync` writes is typed by hand ("Adding a
