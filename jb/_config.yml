@@ -65,8 +65,8 @@ sphinx:
     ogp_image: https://raw.githubusercontent.com/AllenDowney/ThinkPython/v3/think_python_3e.jpg
     ogp_image_alt: Cover of Think Python, 3rd edition, by Allen B. Downey
     ogp_enable_meta_description: false
-    # Downey's site also has an end-of-chapter support note, an EthicalAds slot and a sponsor slot
-    # (jb/_templates/, jb/_static/); the course site does not switch them on.
+    # Downey's site also has a page-view counter, an end-of-chapter support note, an EthicalAds slot and a
+    # sponsor slot; the course site does not take them (sync-upstream skill, check_sync.py NOT_TAKEN).
     mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
     mathjax_config:
       tex2jax:

@@ -16,7 +16,8 @@ Rules (the fork's sync policy, .claude/skills/sync-upstream/SKILL.md):
   2. Fork edits stay: in each notebook, every cell the fork added or changed (BEFORE differs from BASE) has the fork's
      text and tags; a cell the fork removed stays removed. In other text files, every line the fork added is there.
   3. Downey's changes arrive: every cell he added or changed (and the fork did not) has his text; a cell he removed is
-     gone; every file he added exists; a file the fork never changed equals his version; binary files equal his.
+     gone; every file he added exists (except the files of his site in NOT_TAKEN: a note); a file the fork never
+     changed equals his version; binary files equal his.
   4. Colab links are the fork's (fork_colab_links.py --check): links are compared with both repositories' names made
      the same, so a rewritten link is not a difference.
   5. The fork's own pages are untouched by the merge: yr/, solutions/, author-guide/ equal BEFORE.
@@ -37,6 +38,16 @@ sys.path.insert(0, str(HERE))
 import fork_colab_links  # noqa: E402
 
 FORK_PAGES = ('yr/', 'solutions/', 'author-guide/')
+# Files of Downey's site that the course site does not take (rule 3 lists them as notes, not problems): the reason.
+# Jupyter Book links every css file in jb/_static on every page, so a stylesheet of his cannot stay unused.
+NOT_TAKEN = {
+    'jb/_templates/support-ask.html': 'his end-of-chapter support footer',
+    'jb/_static/support-ask.css': 'his end-of-chapter support footer',
+    'jb/_templates/ethicalads.html': 'his EthicalAds slot',
+    'jb/_static/ethicalads.css': 'his EthicalAds slot',
+    'jb/_templates/sponsor.html': 'his sponsor slot',
+    'jb/_static/sponsor.css': 'his sponsor slot',
+}
 BINARY = ('.zip', '.png', '.jpg', '.jpeg', '.gif', '.pdf', '.svg')
 
 
@@ -176,7 +187,10 @@ def main(argv):
                     notes.append(f'{path}: Downey deleted it; it is still here')
                 continue
             if up_changed and a is None:
-                problems.append(f'3: {path}: Downey\'s file did not arrive')
+                if path in NOT_TAKEN:
+                    notes.append(f'{path}: not taken ({NOT_TAKEN[path]}; check_sync.py NOT_TAKEN)')
+                else:
+                    problems.append(f'3: {path}: Downey\'s file did not arrive')
                 continue
             if a is None:
                 continue
