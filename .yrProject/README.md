@@ -5,7 +5,7 @@ docs/PROJECT-SETUP.qmd includes this file, and gives the title. -->
 
 | | |
 |---|---|
-| Template version | v0.7.0 |
+| Template version | v0.7.1 |
 | Parts | rules, yrIssues, subjexts |
 | Set up by | `yrProject.sh update` (an existing folder) |
 | Last change | 2026-10-29 |
@@ -73,3 +73,4 @@ yrProject.sh projects           # the list of projects that use yrProject, from 
 | 2026-10-29 | update | v0.6.0 | rules, yrIssues, subjexts |
 | 2026-10-29 | update | v0.6.1 | rules, yrIssues, subjexts |
 | 2026-10-29 | update | v0.7.0 | rules, yrIssues, subjexts |
+| 2026-10-29 | update | v0.7.1 | rules, yrIssues, subjexts |
