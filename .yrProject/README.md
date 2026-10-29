@@ -5,7 +5,7 @@ docs/PROJECT-SETUP.qmd includes this file, and gives the title. -->
 
 | | |
 |---|---|
-| Template version | v0.6.0 |
+| Template version | v0.6.1 |
 | Parts | rules, yrIssues, subjexts |
 | Set up by | `yrProject.sh update` (an existing folder) |
 | Last change | 2026-10-29 |
@@ -14,7 +14,7 @@ docs/PROJECT-SETUP.qmd includes this file, and gives the title. -->
 
 - **rules**: the rules for every AI agent: `AGENTS.md`, with a copy of the shared rules (their source is `rules/AGENTS.md` in yrProject), and `CLAUDE.md`, which imports it; and the `yrProject` skill, which checks, updates and removes this setup for you (ask the agent), with the notice script `yrProject-notice.sh`. Two hooks run it: SessionStart shows the facts of this setup at the start of each Claude Code session, and UserPromptSubmit gives the agent the version line `(yrProject VERSION [latest ...])` that every reply starts with.
 - **yrIssues**: work to do later is the GitHub issues of the project. The `yrIssues` skill manages them (its settings: `_yrIssues/config.sh`; the issues that it creates get the label `yrIssue`), a SessionStart hook shows how many are open, and a PostToolUse hook keeps the saved copy `_yrIssues/issues.md` up to date.
-- **subjexts**: the subjexts teaching overlay for this book (labels, a table of contents by label, in-place edits, the tutor): its include file `subjexts-v001.html`, its page `subjexts-labels-v001.qmd`, and the `subjexts` skill, which explains them and, through its script `yrS4-skill.sh`, refers to the subjexts procedures in the yrS4 repository (apply a note packet, mark the book, register it) instead of carrying copies.
+- **subjexts**: the subjexts teaching overlay for this book (labels, a table of contents by label, in-place edits, the tutor): its include file `subjexts-v001.html` and its page `subjexts-labels-v001.qmd` in a Quarto book, or the page `jb/subjexts-labels.md` in a Jupyter Book (their content is the platform's, from `book-files/` in the yrS4 repository; only the package name is this book's), and the `subjexts` skill, which explains them and, through its script `yrS4-skill.sh`, refers to the subjexts procedures in the yrS4 repository (apply a note packet, mark the book, register it) instead of carrying copies.
 
 ## The files
 
@@ -32,6 +32,7 @@ docs/PROJECT-SETUP.qmd includes this file, and gives the title. -->
 | `.claude/skills/yrProject/SKILL.md` | rules | The tool: `update` replaces it with each new version. If you change it, `update` leaves it alone |
 | `.claude/skills/yrProject/scripts/yrProject-notice.sh` | rules | The tool: `update` replaces it with each new version. If you change it, `update` leaves it alone |
 | `_yrIssues/config.sh` | yrIssues | You. The tool added it once, and does not change it |
+| `jb/subjexts-labels.md` | subjexts | The tool: `update` replaces it with each new version. If you change it, `update` leaves it alone |
 | `.yrProject/` |  | The tool only: `manifest.json` (the record), `README.md` (this page), `setup.env` (the facts, for the scripts). Do not edit |
 
 ## How to change things
@@ -70,3 +71,4 @@ yrProject.sh projects           # the list of projects that use yrProject, from 
 | 2026-10-28 | update | v0.5.2 | rules, yrIssues, subjexts |
 | 2026-10-29 | update | v0.6.0 | rules, yrIssues, subjexts |
 | 2026-10-29 | update | v0.6.0 | rules, yrIssues, subjexts |
+| 2026-10-29 | update | v0.6.1 | rules, yrIssues, subjexts |
