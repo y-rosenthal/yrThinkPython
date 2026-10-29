@@ -191,13 +191,14 @@ def check_solutions():
                   f"empty (rendered as blank cells on the site): {', '.join(sorted(missing))}")
 
 
-YR_PAGE = re.compile(r"chap(\d\d)_(additions|review)")
+YR_PAGE = re.compile(r"chap(\d\d)_(additions|review|more_review)")
 
 
 def check_yr_pages():
     """The yr/ pages of a chapter: "NNb. Prof. Rosenthal's Additions" (yr/chapNN_additions.ipynb), if there is one,
     and then "NNb. Prof. Rosenthal's Review" (yr/chapNN_review.ipynb), which is "NNc." when the chapter has an
-    additions page. The TOC lists them in that order, right after the chapter (yr/README.md)."""
+    additions page, and then "NNd. Prof. Rosenthal's More Review Questions" (yr/chapNN_more_review.ipynb), if
+    there is one. The TOC lists them in that order, right after the chapter (yr/README.md)."""
     toc = re.findall(r"^\s*-\s*file:\s*(\S+)", (ROOT / "jb" / "_toc.yml").read_text(), re.M)
     for p in sorted((ROOT / "yr").glob("*.ipynb")):
         m = YR_PAGE.fullmatch(p.stem)
@@ -214,6 +215,14 @@ def check_yr_pages():
             order = [f"chap{nn}", f"yr/chap{nn}_additions"]
             if (ROOT / "yr" / f"chap{nn}_review.ipynb").exists():
                 order.append(f"yr/chap{nn}_review")
+        elif kind == "more_review":
+            want = f"# {int(nn)}d. Prof. Rosenthal's More Review Questions"
+            order = [f"chap{nn}"]
+            if (ROOT / "yr" / f"chap{nn}_additions.ipynb").exists():
+                order.append(f"yr/chap{nn}_additions")
+            if (ROOT / "yr" / f"chap{nn}_review.ipynb").exists():
+                order.append(f"yr/chap{nn}_review")
+            order.append(f"yr/chap{nn}_more_review")
         else:
             want = f"# {int(nn)}{review_format.review_letter(p)}. Prof. Rosenthal's Review"
             order = None

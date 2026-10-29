@@ -60,6 +60,7 @@ For the third edition, the biggest changes are:
 * [Click here to run Chapter 7 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap07.ipynb)
 * [Click here to run 7b. Prof. Rosenthal's Additions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_additions.ipynb)
 * [Click here to run 7c. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_review.ipynb)
+* [Click here to run 7d. Prof. Rosenthal's More Review Questions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_more_review.ipynb)
 
 **Chapter 8: Strings and Regular Expressions**
 
@@ -72,6 +73,7 @@ For the third edition, the biggest changes are:
 * [Click here to run Chapter 9 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap09.ipynb)
 * [Click here to run 9b. Prof. Rosenthal's Additions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_additions.ipynb)
 * [Click here to run 9c. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_review.ipynb)
+* [Click here to run 9d. Prof. Rosenthal's More Review Questions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_more_review.ipynb)
 
 **Chapter 10: Dictionaries**
 
