@@ -13,7 +13,7 @@ allowed-tools:
   - Bash(gh issue reopen *)
 ---
 
-<!-- Installed by yrProject v0.7.1 (https://github.com/y-rosenthal/yrProject): the templates
+<!-- Installed by yrProject v0.7.2 (https://github.com/y-rosenthal/yrProject): the templates
      and the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub
      issues for work to do later, project docs). This file belongs to the tool: do not edit it by hand, and do
      not change it without the tool. "yrProject.sh update" replaces it with each new version (if you change it,
@@ -93,7 +93,9 @@ When the user asks you to remember something for later, or you find a problem yo
 
 ## Working on an issue
 
-1. Run `gh issue view <N>` and read the body and comments.
+1. Run `gh issue view <N>` and read the body and comments. An issue titled `Renewal: ...` (category `renewal`)
+   is a reminder that something expires or renews, opened by the yrRenewals workflow: follow
+   `.claude/skills/yrRenewals/SKILL.md` for it (do the action, close the issue, fix the item's date).
 2. Do the work, following the project's other skills and rules. Verify the result.
 3. Tell the user what changed and ask whether to close the issue. Close it once they agree, or right away if they
    asked you to finish it:
