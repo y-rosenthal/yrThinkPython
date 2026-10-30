@@ -8,6 +8,8 @@ allowed-tools:
   - Bash(yrProject.sh projects)
   - Bash(yrProject.sh projects --check)
   - Bash(yrProject.sh update --dry-run*)
+  - Bash(yrProject.sh update-all --dry-run*)
+  - Bash(yrProject.sh release --dry-run*)
   - Bash(yrProject.sh remove --dry-run*)
   - Bash(yrProject.sh new * --dry-run*)
   - Bash(yrProject.sh list)
@@ -15,7 +17,7 @@ allowed-tools:
   - Bash(bash ${CLAUDE_SKILL_DIR}/scripts/yrProject-notice.sh *)
 ---
 
-<!-- Installed by yrProject v0.7.3 (https://github.com/y-rosenthal/yrProject): the templates
+<!-- Installed by yrProject v0.7.4 (https://github.com/y-rosenthal/yrProject): the templates
      and the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub
      issues for work to do later, project docs). This file belongs to the tool: do not edit it by hand, and do
      not change it without the tool. "yrProject.sh update" replaces it with each new version (if you change it,
@@ -52,9 +54,9 @@ installed (and, in the yrProject repository itself, the projects that use yrProj
 
 - **Commands that change nothing** (`check`, `status`, `projects`, `list`, `update --dry-run`, `remove --dry-run`,
   `new ... --dry-run`, the notice script) you can run at any time.
-- **Commands that change files or GitHub** (`update -y`, `remove -y`, `new -y`, `projects --scan`, `yrIssues.sh
-  setup-labels`, a commit): first show the user what will happen, in plain words, and run them only after the user
-  agrees. The tool cannot ask the user itself (you have no terminal for its question), so always run
+- **Commands that change files or GitHub** (`update -y`, `update-all -y`, `remove -y`, `new -y`, `release`,
+  `projects --scan`, `yrIssues.sh setup-labels`, a commit): first show the user what will happen, in plain words,
+  and run them only after the user agrees. The tool cannot ask the user itself (you have no terminal for its question), so always run
   `--dry-run` first, then `-y` after the user agrees.
 - Never edit the tool's blocks in `AGENTS.md`, `README.md` and `.gitignore` (between a `begin yrProject` line and
   its `end yrProject` line, or `begin shared rules` and `end shared rules`), or the files in `.yrProject/`: the
@@ -124,6 +126,24 @@ newest).
    `yrProject.sh remove -y` (with `--force` only as in step 2).
 4. Tell the user what was removed, what was left (the output says), and that nothing was committed. Offer to
    commit. The project's entry in the list of projects is kept, marked as removed on that date.
+
+## Update all the projects ("update all my projects to the latest yrProject", "roll out the new version")
+
+The script does the work: `update-all` runs `update` in every listed project on this computer, then `check` in
+each, and prints a summary; it installs only a **released** version (a tag `templates-vX.Y.Z` whose folder is
+unchanged), so a version that is still being edited never reaches a project.
+
+1. Run `yrProject.sh update-all --dry-run`. It prints each project's plan (as `update --dry-run` does) and a
+   summary table. If it refuses because the newest version is not released yet, say so: in the yrProject
+   repository, `yrProject.sh release --dry-run` shows what releasing it would do (the tag), and `release --push`
+   does it, after the selftest passed and everything is committed; run it only when the user agrees.
+2. Tell the user, in plain words: which projects would change, from which version to which, and which are up to
+   date or not on this computer.
+3. After the user agrees, run `yrProject.sh update-all -y --commit --push`: in each project it commits only the
+   files that the update changed and the record (`yrProject vX.Y.Z`), and pushes. Without `--commit`, the
+   changes stay uncommitted for the user to look at; `--push` needs `--commit`.
+4. Report the summary table: each project, its old version, the result, and whether it was committed and pushed.
+   A project with a check problem: open it and follow "After an update" above.
 
 ## The list of yrProjects ("which of my projects use yrProject?", "which ones are out of date?")
 

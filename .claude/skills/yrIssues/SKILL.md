@@ -13,7 +13,7 @@ allowed-tools:
   - Bash(gh issue reopen *)
 ---
 
-<!-- Installed by yrProject v0.7.3 (https://github.com/y-rosenthal/yrProject): the templates
+<!-- Installed by yrProject v0.7.4 (https://github.com/y-rosenthal/yrProject): the templates
      and the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub
      issues for work to do later, project docs). This file belongs to the tool: do not edit it by hand, and do
      not change it without the tool. "yrProject.sh update" replaces it with each new version (if you change it,

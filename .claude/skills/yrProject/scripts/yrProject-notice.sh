@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Installed by yrProject v0.7.3 (https://github.com/y-rosenthal/yrProject): the templates and
+# Installed by yrProject v0.7.4 (https://github.com/y-rosenthal/yrProject): the templates and
 # the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub issues
 # for work to do later, project docs). This file belongs to the tool: do not edit it by hand, and do not change
 # it without the tool. "yrProject.sh update" replaces it with each new version (if you change it, update leaves
@@ -23,9 +23,10 @@
 #   prompt         the JSON for the UserPromptSubmit hook: the version line, for the user and for the agent
 #   -h, --help     show this help and stop
 #
-# The newest version is the newest version folder in templates/ of the yrProject repository on this computer:
-# $YRPROJECT_DIR, else _yrAiCoding/yrProject in the Dropbox folder above this project, else
-# ~/Dropbox/_yrAiCoding/yrProject. Without that repository, it is the newest tag templates-vX.Y.Z of the GitHub
+# The newest version is the newest released version (git tag templates-vX.Y.Z; a version folder without a tag is
+# still in development) of the yrProject repository on this computer: $YRPROJECT_DIR, else _yrAiCoding/yrProject
+# in the Dropbox folder above this project, else ~/Dropbox/_yrAiCoding/yrProject (with YRPROJECT_UNRELEASED=1, or
+# without git, the newest folder in its templates/). Without that repository, it is the newest tag templates-vX.Y.Z of the GitHub
 # repository (git ls-remote, at most 8 seconds, never a password prompt), kept for a day in
 # ~/.cache/yrProject/latest (an hour after a failure). "prompt" runs at every prompt, so it never goes to the
 # network: it uses the repository on this computer, or the kept answer, else UNKNOWN.
@@ -76,9 +77,13 @@ yrproject_dir() {
 newest_of() { grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n 1; }
 
 local_latest() {
-  local d
+  local d v=""
   d="$(yrproject_dir)" || return 1
-  ls "$d/templates" 2>/dev/null | newest_of
+  if [ "${YRPROJECT_UNRELEASED:-}" != 1 ]; then
+    v="$(git -C "$d" tag -l 'templates-v*' 2>/dev/null | sed 's/^templates-//' | newest_of)"
+  fi
+  [ -n "$v" ] || v="$(ls "$d/templates" 2>/dev/null | newest_of)"
+  printf '%s\n' "$v"
 }
 
 # The newest tag on GitHub, from the kept answer if it is younger than $1 seconds ("cached": only the kept
