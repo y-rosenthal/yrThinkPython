@@ -1,0 +1,1482 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="9c. Prof. Rosenthal’s Review" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://y-rosenthal.github.io/yrThinkPython/yr/chap09_review.html" />
+<meta property="og:site_name" content="Think Python, 3rd edition" />
+<meta property="og:description" content="A review of Chapter 9: Lists, for students who have already studied the chapter. Use the two lists under Concepts covered as a checklist (click a list’s title to hide it), then work through the Que..." />
+<meta property="og:image" content="https://raw.githubusercontent.com/AllenDowney/ThinkPython/v3/think_python_3e.jpg" />
+<meta property="og:image:alt" content="Cover of Think Python, 3rd edition, by Allen B. Downey" />
+
+    <title>9c. Prof. Rosenthal’s Review &#8212; Think Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/yr.css?v=bc5bffc8" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'yr/chap09_review';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script data-package="y-rosenthal/thinkpython" defer="defer" src="https://subjexts.github.io/overlay/v1/yrS4.js"></script>
+    <script src="../_static/yr.js?v=df9f7c87"></script>
+    <link rel="canonical" href="https://y-rosenthal.github.io/yrThinkPython/yr/chap09_review.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="9d. Prof. Rosenthal’s More Review Questions" href="chap09_more_review.html" />
+    <link rel="prev" title="9b. Prof. Rosenthal’s Additions" href="chap09_additions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Think Python, 3rd edition
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Table of contents by label</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../subjexts-labels.html">Table of contents by label</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap00.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prof_r_intro.html">A Note From Prof. Rosenthal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap01.html">1. Programming as a way of thinking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap02.html">2. Variables and Statements</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap02_review.html">2b. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap03.html">3. Functions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap03_additions.html">3b. Prof. Rosenthal’s Additions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03_review.html">3c. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap04.html">4. Functions and Interfaces</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap04_review.html">4b. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap05.html">5. Conditionals and Recursion</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap05_review.html">5b. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap06.html">6. Return Values</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap06_review.html">6b. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap07.html">7. Iteration and Search</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap07_additions.html">7b. Prof. Rosenthal’s Additions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07_review.html">7c. Prof. Rosenthal’s Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07_more_review.html">7d. Prof. Rosenthal’s More Review Questions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap08.html">8. Strings and Regular Expressions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap08_additions.html">8b. Prof. Rosenthal’s Additions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08_review.html">8c. Prof. Rosenthal’s Review</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap09.html">9. Lists</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap09_additions.html">9b. Prof. Rosenthal’s Additions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">9c. Prof. Rosenthal’s Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_more_review.html">9d. Prof. Rosenthal’s More Review Questions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap10.html">10. Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap11.html">11. Tuples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap12.html">12. Text Analysis and Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap13.html">13. Files and Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap14.html">14. Classes and Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap15.html">15. Classes and Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap16.html">16. Classes and Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap17.html">17. Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap18.html">18. Python Extras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap19.html">19. Final thoughts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../blank.html">Blank Notebooks</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/y-rosenthal/yrThinkPython" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/yr/chap09_review.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>9c. Prof. Rosenthal’s Review</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concepts-covered">Concepts covered</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">Questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-easy-what-is-displayed">Question 1 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-easy-what-is-displayed">Question 2 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-easy-what-is-displayed">Question 3 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-easy-what-is-displayed">Question 4 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-easy-write-a-function">Question 5 (easy): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-easy-what-is-displayed">Question 6 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-7-medium-what-is-displayed">Question 7 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-8-medium-what-is-displayed">Question 8 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-9-medium-what-is-displayed">Question 9 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-10-medium-what-is-displayed">Question 10 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-11-medium-what-happens">Question 11 (medium): what happens?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-12-medium-what-is-displayed">Question 12 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-13-medium-write-a-function">Question 13 (medium): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-14-medium-write-a-function">Question 14 (medium): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-15-medium-what-is-displayed">Question 15 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-16-hard-what-is-displayed">Question 16 (hard): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-17-hard-what-is-displayed">Question 17 (hard): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-18-hard-write-a-function">Question 18 (hard): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-19-hard-write-a-function">Question 19 (hard): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-20-hard-write-a-function">Question 20 (hard): write a function</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="c-prof-rosenthals-review">
+<h1>9c. Prof. Rosenthal’s Review<a class="headerlink" href="#c-prof-rosenthals-review" title="Link to this heading">#</a></h1>
+<p>A review of <a class="reference external" href="https://y-rosenthal.github.io/yrThinkPython/chap09.html">Chapter 9: Lists</a>,
+for students who have already studied the chapter.
+Use the two lists under <strong>Concepts covered</strong> as a checklist (click a list’s title to hide it), then work through the <strong>Questions</strong>, which go from easy to hard.
+Each question has a suggested answer under <strong>Answer</strong>. Try the question first, then open the Answer.</p>
+<p><a class="reference external" href="https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_review.ipynb">Run this page on Colab</a></p>
+<section id="concepts-covered">
+<h2>Concepts covered<a class="headerlink" href="#concepts-covered" title="Link to this heading">#</a></h2>
+<div class="dropdown toggle-shown admonition">
+<p class="admonition-title">Python Syntax and Semantics</p>
+<p><strong>Creating lists</strong></p>
+<ul>
+<li><p>This creates a list of the values in the brackets, in order:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">VALUE1</span><span class="p">,</span> <span class="n">VALUE2</span><span class="p">,</span> <span class="n">VALUE3</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For example, this makes <code class="docutils literal notranslate"><span class="pre">cheeses</span></code> refer to a list of three strings:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cheeses</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Cheddar'</span><span class="p">,</span> <span class="s1">'Edam'</span><span class="p">,</span> <span class="s1">'Gouda'</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>The elements of a list can have any type, and different types in one list. A list can be an element of another list: <code class="docutils literal notranslate"><span class="pre">['spam',</span> <span class="pre">2.0,</span> <span class="pre">5,</span> <span class="pre">[10,</span> <span class="pre">20]]</span></code> has a string, a float, an integer and a list.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[]</span></code> is an empty list.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">len(LIST)</span></code> returns the number of elements in the list. A nested list counts as one element: <code class="docutils literal notranslate"><span class="pre">len(['spam',</span> <span class="pre">2.0,</span> <span class="pre">5,</span> <span class="pre">[10,</span> <span class="pre">20]])</span></code> is <code class="docutils literal notranslate"><span class="pre">4</span></code>, and <code class="docutils literal notranslate"><span class="pre">len([])</span></code> is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list(SEQUENCE)</span></code> returns a new list with the elements of the sequence. The elements of a string are its characters: <code class="docutils literal notranslate"><span class="pre">list('spam')</span></code> is <code class="docutils literal notranslate"><span class="pre">['s',</span> <span class="pre">'p',</span> <span class="pre">'a',</span> <span class="pre">'m']</span></code>.</p></li>
+</ul>
+<p><strong>Indexes and slices</strong></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">LIST[INDEX]</span></code> is the element at that index. The first element has index <code class="docutils literal notranslate"><span class="pre">0</span></code>, and a negative index counts back from the end: <code class="docutils literal notranslate"><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c'][0]</span></code> is <code class="docutils literal notranslate"><span class="pre">'a'</span></code>, and <code class="docutils literal notranslate"><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c'][-1]</span></code> is <code class="docutils literal notranslate"><span class="pre">'c'</span></code>. Any integer expression can be an index.</p></li>
+<li><p>Reading or writing an element that does not exist, such as <code class="docutils literal notranslate"><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c'][3]</span></code>, is an <code class="docutils literal notranslate"><span class="pre">IndexError</span></code>.</p></li>
+<li><p>Lists are mutable. This replaces the element at INDEX with VALUE:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LIST</span><span class="p">[</span><span class="n">INDEX</span><span class="p">]</span> <span class="o">=</span> <span class="n">VALUE</span>
+</pre></div>
+</div>
+<p>For example, this changes the second element of <code class="docutils literal notranslate"><span class="pre">numbers</span></code> from <code class="docutils literal notranslate"><span class="pre">123</span></code> to <code class="docutils literal notranslate"><span class="pre">17</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">42</span><span class="p">,</span> <span class="mi">123</span><span class="p">]</span>
+<span class="n">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">17</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LIST[START:END]</span></code> returns a new list with the elements from index START up to END minus 1: <code class="docutils literal notranslate"><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c',</span> <span class="pre">'d'][1:3]</span></code> is <code class="docutils literal notranslate"><span class="pre">['b',</span> <span class="pre">'c']</span></code>. Without START the slice starts at the beginning, and without END it goes to the end: <code class="docutils literal notranslate"><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c',</span> <span class="pre">'d'][2:]</span></code> is <code class="docutils literal notranslate"><span class="pre">['c',</span> <span class="pre">'d']</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LIST[:]</span></code> and <code class="docutils literal notranslate"><span class="pre">list(LIST)</span></code> return a copy of the list: a new list with the same elements.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VALUE</span> <span class="pre">in</span> <span class="pre">LIST</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> if the value is an element of the list. It does not look inside nested lists: <code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">in</span> <span class="pre">['spam',</span> <span class="pre">[10,</span> <span class="pre">20]]</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+</ul>
+<p><strong>Operators and built-in functions</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">LIST1</span> <span class="pre">+</span> <span class="pre">LIST2</span></code> returns a new list with the elements of both lists: <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2]</span> <span class="pre">+</span> <span class="pre">[3,</span> <span class="pre">4]</span></code> is <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4]</span></code>. Neither list changes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LIST</span> <span class="pre">*</span> <span class="pre">SOME_INTEGER</span></code> returns a new list with the elements repeated: <code class="docutils literal notranslate"><span class="pre">['spam']</span> <span class="pre">*</span> <span class="pre">3</span></code> is <code class="docutils literal notranslate"><span class="pre">['spam',</span> <span class="pre">'spam',</span> <span class="pre">'spam']</span></code>.</p></li>
+<li><p>No other arithmetic operators work with lists.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sum(LIST)</span></code> adds up the elements, and <code class="docutils literal notranslate"><span class="pre">min(LIST)</span></code> and <code class="docutils literal notranslate"><span class="pre">max(LIST)</span></code> return the smallest and the largest element: <code class="docutils literal notranslate"><span class="pre">sum([3,</span> <span class="pre">1,</span> <span class="pre">4])</span></code> is <code class="docutils literal notranslate"><span class="pre">8</span></code>, and <code class="docutils literal notranslate"><span class="pre">max([3,</span> <span class="pre">1,</span> <span class="pre">4])</span></code> is <code class="docutils literal notranslate"><span class="pre">4</span></code>.</p></li>
+</ul>
+<p><strong>List methods</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">LIST.append(VALUE)</span></code> adds the value to the end of the list.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LIST.extend(OTHER_LIST)</span></code> adds all the elements of OTHER_LIST to the end of the list.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LIST.pop(INDEX)</span></code> removes the element at that index, and returns it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LIST.remove(VALUE)</span></code> removes the first element that is equal to the value. If the value is not in the list, it is a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p></li>
+<li><p>These methods change the list. <code class="docutils literal notranslate"><span class="pre">append</span></code>, <code class="docutils literal notranslate"><span class="pre">extend</span></code> and <code class="docutils literal notranslate"><span class="pre">remove</span></code> return <code class="docutils literal notranslate"><span class="pre">None</span></code>. String methods are the opposite: they return a new string and do not change the original.</p></li>
+<li><p>So <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">=</span> <span class="pre">t.remove(3)</span></code> is a mistake: it makes <code class="docutils literal notranslate"><span class="pre">t</span></code> refer to <code class="docutils literal notranslate"><span class="pre">None</span></code>. After it, <code class="docutils literal notranslate"><span class="pre">t.remove(2)</span></code> is an <code class="docutils literal notranslate"><span class="pre">AttributeError</span></code>, because <code class="docutils literal notranslate"><span class="pre">None</span></code> has no attribute <code class="docutils literal notranslate"><span class="pre">remove</span></code>.</p></li>
+</ul>
+<p><strong>Lists and strings</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">STRING.split()</span></code> returns a list of the words in the string (the parts between whitespace: spaces, tabs and newlines): <code class="docutils literal notranslate"><span class="pre">'pining</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">fjords'.split()</span></code> is <code class="docutils literal notranslate"><span class="pre">['pining',</span> <span class="pre">'for',</span> <span class="pre">'the',</span> <span class="pre">'fjords']</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">STRING.split(DELIMITER)</span></code> splits the string at each DELIMITER instead: <code class="docutils literal notranslate"><span class="pre">'ex-parrot'.split('-')</span></code> is <code class="docutils literal notranslate"><span class="pre">['ex',</span> <span class="pre">'parrot']</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DELIMITER.join(LIST_OF_STRINGS)</span></code> returns one string with the elements of the list, with DELIMITER between them: <code class="docutils literal notranslate"><span class="pre">'</span> <span class="pre">'.join(['pining',</span> <span class="pre">'for',</span> <span class="pre">'the',</span> <span class="pre">'fjords'])</span></code> is <code class="docutils literal notranslate"><span class="pre">'pining</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">fjords'</span></code>. With the empty string as the delimiter, nothing goes between them: <code class="docutils literal notranslate"><span class="pre">''.join(['a',</span> <span class="pre">'b',</span> <span class="pre">'c'])</span></code> is <code class="docutils literal notranslate"><span class="pre">'abc'</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">STRING.strip(CHARACTERS)</span></code> returns a new string without those characters at its beginning and end: <code class="docutils literal notranslate"><span class="pre">'plumage!'.strip('!')</span></code> is <code class="docutils literal notranslate"><span class="pre">'plumage'</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">open(FILE_NAME).read()</span></code> returns the whole file as one string. <code class="docutils literal notranslate"><span class="pre">open(FILE_NAME).read().split()</span></code> is a list of the words in the file.</p></li>
+</ul>
+<p><strong>Looping through a list</strong></p>
+<ul>
+<li><p>This runs the body once for each element of the list, in order, with the loop variable referring to that element:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">LOOP_VARIABLE</span> <span class="ow">in</span> <span class="n">LIST</span><span class="p">:</span>
+    <span class="n">BODY</span>
+</pre></div>
+</div>
+<p>For example, this displays <code class="docutils literal notranslate"><span class="pre">Cheddar</span></code>, <code class="docutils literal notranslate"><span class="pre">Edam</span></code> and <code class="docutils literal notranslate"><span class="pre">Gouda</span></code> on separate lines:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">cheese</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'Cheddar'</span><span class="p">,</span> <span class="s1">'Edam'</span><span class="p">,</span> <span class="s1">'Gouda'</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cheese</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>A loop through an empty list never runs the body.</p></li>
+<li><p>To make a list in a loop, start with an empty list and append to it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NEW_LIST</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">LOOP_VARIABLE</span> <span class="ow">in</span> <span class="n">SEQUENCE</span><span class="p">:</span>
+    <span class="n">NEW_LIST</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">VALUE</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p><strong>Sorting and reversing</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sorted(SEQUENCE)</span></code> returns a new list with the elements in increasing order. The original does not change. It works with any sequence, also a string: <code class="docutils literal notranslate"><span class="pre">sorted('cab')</span></code> is <code class="docutils literal notranslate"><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c']</span></code>, and <code class="docutils literal notranslate"><span class="pre">''.join(sorted('cab'))</span></code> is <code class="docutils literal notranslate"><span class="pre">'abc'</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reversed(SEQUENCE)</span></code> returns the elements in reverse order, as a <code class="docutils literal notranslate"><span class="pre">reversed</span></code> object. Use <code class="docutils literal notranslate"><span class="pre">list</span></code> or <code class="docutils literal notranslate"><span class="pre">join</span></code> to get a list or a string: <code class="docutils literal notranslate"><span class="pre">list(reversed([1,</span> <span class="pre">2,</span> <span class="pre">3]))</span></code> is <code class="docutils literal notranslate"><span class="pre">[3,</span> <span class="pre">2,</span> <span class="pre">1]</span></code>, and <code class="docutils literal notranslate"><span class="pre">''.join(reversed('parrot'))</span></code> is <code class="docutils literal notranslate"><span class="pre">'torrap'</span></code>.</p></li>
+</ul>
+<p><strong>Objects, equality and aliasing</strong></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">==</span> <span class="pre">B</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> if A and B have the same value. <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">is</span> <span class="pre">B</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> if A and B refer to the same object.</p></li>
+<li><p>Each list display (<code class="docutils literal notranslate"><span class="pre">[...]</span></code>) makes a new list object: <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span> <span class="pre">==</span> <span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, but <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span> <span class="pre">is</span> <span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">a</span></code> does not copy the object: it makes <code class="docutils literal notranslate"><span class="pre">b</span></code> refer to the same object as <code class="docutils literal notranslate"><span class="pre">a</span></code>. If the object is a list, a change made with one name is seen with the other name. For example, after this code <code class="docutils literal notranslate"><span class="pre">a</span></code> is <code class="docutils literal notranslate"><span class="pre">[5,</span> <span class="pre">2,</span> <span class="pre">3]</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
+<span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</li>
+<li><p>When a list is passed to a function, the parameter refers to the same list. If the function changes the list, the caller sees the change after the function returns.</p></li>
+</ul>
+</div>
+<div class="dropdown toggle-shown admonition">
+<p class="admonition-title">Definitions, etc.</p>
+<p><strong>Definitions</strong></p>
+<ul class="simple">
+<li><p>DEFINITION: A <strong>list</strong> is an object that contains a sequence of values.</p></li>
+<li><p>DEFINITION: An <strong>element</strong> is one of the values in a list or another sequence.</p></li>
+<li><p>DEFINITION: A <strong>nested list</strong> is a list that is an element of another list.</p></li>
+<li><p>DEFINITION: An <strong>empty list</strong> is a list with no elements, <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p></li>
+<li><p>DEFINITION: A <strong>mutable</strong> object can be changed; an <strong>immutable</strong> object, such as a string, cannot. Lists are mutable.</p></li>
+<li><p>DEFINITION: A <strong>delimiter</strong> is a character or string that shows where a string is split, or what goes between the strings that <code class="docutils literal notranslate"><span class="pre">join</span></code> joins.</p></li>
+<li><p>DEFINITION: Two objects are <strong>equivalent</strong> if they have the same value (<code class="docutils literal notranslate"><span class="pre">==</span></code>).</p></li>
+<li><p>DEFINITION: Two objects are <strong>identical</strong> if they are the same object (<code class="docutils literal notranslate"><span class="pre">is</span></code>). Identical objects are always equivalent; equivalent objects are not always identical.</p></li>
+<li><p>DEFINITION: A <strong>reference</strong> is the association between a variable and its value (an object).</p></li>
+<li><p>DEFINITION: An object is <strong>aliased</strong> if more than one variable refers to it.</p></li>
+<li><p>DEFINITION: An <strong>attribute</strong> is one of the named values (variables or methods) associated with an object.</p></li>
+</ul>
+<p><strong>Other ideas</strong></p>
+<ul class="simple">
+<li><p>Do not use <code class="docutils literal notranslate"><span class="pre">list</span></code> as a variable name, because it is the name of a built-in function.</p></li>
+<li><p>Read a file once and keep its words in a list, instead of reading the file each time you search it.</p></li>
+<li><p>Aliasing is useful, but it causes errors that are difficult to find. When you work with mutable objects, it is safer to avoid aliasing (for example, make a copy with <code class="docutils literal notranslate"><span class="pre">[:]</span></code>). For immutable objects such as strings, aliasing is almost never a problem.</p></li>
+<li><p>Passing a list to a function makes an alias: the parameter and the caller’s variable refer to the same list.</p></li>
+<li><p>Most list methods change the list and return <code class="docutils literal notranslate"><span class="pre">None</span></code>. Do not assign their result to the list variable.</p></li>
+<li><p>If you see an <code class="docutils literal notranslate"><span class="pre">AttributeError</span></code> that says <code class="docutils literal notranslate"><span class="pre">'NoneType'</span> <span class="pre">object</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">attribute</span></code>, look back through the program for a list method whose result was assigned.</p></li>
+</ul>
+</div>
+</section>
+<section id="questions">
+<h2>Questions<a class="headerlink" href="#questions" title="Link to this heading">#</a></h2>
+<p>The questions use lists, list methods, <code class="docutils literal notranslate"><span class="pre">split</span></code> and <code class="docutils literal notranslate"><span class="pre">join</span></code>, <code class="docutils literal notranslate"><span class="pre">sorted</span></code>, and aliasing. One question reads <code class="docutils literal notranslate"><span class="pre">words.txt</span></code>, a list of about 114,000 English words, one per line, in alphabetical order (the first two are <code class="docutils literal notranslate"><span class="pre">aa</span></code> and <code class="docutils literal notranslate"><span class="pre">aah</span></code>).</p>
+<p>The setup cell below downloads <code class="docutils literal notranslate"><span class="pre">words.txt</span></code>.</p>
+<div class="cell tag_setup docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlretrieve</span>
+
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Downloaded "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">local</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">filename</span>
+
+<span class="n">download</span><span class="p">(</span><span class="s1">'https://raw.githubusercontent.com/AllenDowney/ThinkPython/v3/words.txt'</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>Summary and questions by Prof. Y. Rosenthal, based on</em>
+<a class="reference external" href="https://allendowney.github.io/ThinkPython/index.html">Think Python: 3rd Edition</a> <em>by Allen B. Downey.</em>
+<em>Text license:</em> <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
+<section id="question-1-easy-what-is-displayed">
+<h3>Question 1 (easy): what is displayed?<a class="headerlink" href="#question-1-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays, then open the Answer to check.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'spam'</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="mi">10</span> <span class="ow">in</span> <span class="n">t</span><span class="p">,</span> <span class="mi">5</span> <span class="ow">in</span> <span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>4 spam [10, 20]
+20 False True
+</pre></div>
+</div>
+<p>The nested list <code class="docutils literal notranslate"><span class="pre">[10,</span> <span class="pre">20]</span></code> counts as one element, so <code class="docutils literal notranslate"><span class="pre">len(t)</span></code> is <code class="docutils literal notranslate"><span class="pre">4</span></code>.
+<code class="docutils literal notranslate"><span class="pre">t[0]</span></code> is the first element, and <code class="docutils literal notranslate"><span class="pre">t[-1]</span></code> is the last element, which is the nested list.
+<code class="docutils literal notranslate"><span class="pre">t[3]</span></code> is the nested list, so <code class="docutils literal notranslate"><span class="pre">t[3][1]</span></code> is the element at index 1 of the nested list: <code class="docutils literal notranslate"><span class="pre">20</span></code>.
+<code class="docutils literal notranslate"><span class="pre">in</span></code> does not look inside the nested list: <code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">in</span> <span class="pre">t</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>, but <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">in</span> <span class="pre">t</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</div>
+</section>
+<section id="question-2-easy-what-is-displayed">
+<h3>Question 2 (easy): what is displayed?<a class="headerlink" href="#question-2-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">letters</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">,</span> <span class="s1">'d'</span><span class="p">,</span> <span class="s1">'e'</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">letters</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">letters</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">letters</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span>
+<span class="nb">print</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="nb">min</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="nb">max</span><span class="p">([</span><span class="s1">'pear'</span><span class="p">,</span> <span class="s1">'apple'</span><span class="p">,</span> <span class="s1">'fig'</span><span class="p">]))</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>['b', 'c'] ['a', 'b'] ['d', 'e']
+[1, 2, 3] [0, 0, 0]
+8 1 pear
+</pre></div>
+</div>
+<p>A slice includes the element at the first index, but not the element at the second index: <code class="docutils literal notranslate"><span class="pre">letters[1:3]</span></code> has the elements at indexes 1 and 2.
+Without the first index, a slice starts at the beginning; without the second, it goes to the end.
+<code class="docutils literal notranslate"><span class="pre">+</span></code> joins two lists into a new list, and <code class="docutils literal notranslate"><span class="pre">*</span></code> repeats the elements of a list.
+<code class="docutils literal notranslate"><span class="pre">max</span></code> of a list of strings is the string that comes last in alphabetical order: <code class="docutils literal notranslate"><span class="pre">max(['pear',</span> <span class="pre">'apple',</span> <span class="pre">'fig'])</span></code> is <code class="docutils literal notranslate"><span class="pre">'pear'</span></code>.</p>
+</div>
+</section>
+<section id="question-3-easy-what-is-displayed">
+<h3>Question 3 (easy): what is displayed?<a class="headerlink" href="#question-3-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">]</span>
+<span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'d'</span><span class="p">)</span>
+<span class="n">t</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">'e'</span><span class="p">,</span> <span class="s1">'f'</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">t</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">'e'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>['a', 'b', 'c', 'd', 'e', 'f']
+b ['a', 'c', 'd', 'f']
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">append</span></code> adds one element to the end of the list, and <code class="docutils literal notranslate"><span class="pre">extend</span></code> adds each element of its argument.
+<code class="docutils literal notranslate"><span class="pre">pop(1)</span></code> removes the element at index 1 and returns it, so <code class="docutils literal notranslate"><span class="pre">x</span></code> is <code class="docutils literal notranslate"><span class="pre">'b'</span></code>.
+<code class="docutils literal notranslate"><span class="pre">remove('e')</span></code> removes the element <code class="docutils literal notranslate"><span class="pre">'e'</span></code>, wherever it is.
+All four methods change the list <code class="docutils literal notranslate"><span class="pre">t</span></code> itself.</p>
+</div>
+</section>
+<section id="question-4-easy-what-is-displayed">
+<h3>Question 4 (easy): what is displayed?<a class="headerlink" href="#question-4-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s1">'pining for the fjords'</span>
+<span class="n">words</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'-'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s1">'abc'</span><span class="p">),</span> <span class="s1">'ex-parrot'</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'-'</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>['pining', 'for', 'the', 'fjords'] 4
+pining-for-the-fjords
+['a', 'b', 'c'] ['ex', 'parrot']
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">split</span></code> with no argument splits the string at the spaces, so <code class="docutils literal notranslate"><span class="pre">words</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">4</span></code> strings.
+<code class="docutils literal notranslate"><span class="pre">join</span></code> is a string method: it is called on the delimiter (<code class="docutils literal notranslate"><span class="pre">'-'</span></code>), and it puts the delimiter between the elements of the list.
+<code class="docutils literal notranslate"><span class="pre">list</span></code> makes a list of the characters of a string, and <code class="docutils literal notranslate"><span class="pre">split('-')</span></code> splits at each hyphen instead of at the spaces.
+A list is displayed with the quotes around its strings.</p>
+</div>
+</section>
+<section id="question-5-easy-write-a-function">
+<h3>Question 5 (easy): write a function<a class="headerlink" href="#question-5-easy-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">squares</span></code> that takes a non-negative integer <code class="docutils literal notranslate"><span class="pre">n</span></code> and returns a list of the squares of the integers from 1 to <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">squares</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">squares</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[1, 4, 9, 16]
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">squares</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">squares</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[1] []
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>Start with an empty list, and append one square each time through the loop:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">squares</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(squares(4))</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">range(n)</span></code> produces <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">-</span> <span class="pre">1</span></code>, so add 1 to <code class="docutils literal notranslate"><span class="pre">i</span></code> before squaring it.
+With <code class="docutils literal notranslate"><span class="pre">n</span></code> equal to <code class="docutils literal notranslate"><span class="pre">0</span></code>, the loop body never runs, and the function returns the empty list.</p>
+</div>
+</section>
+<section id="question-6-easy-what-is-displayed">
+<h3>Question 6 (easy): what is displayed?<a class="headerlink" href="#question-6-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="p">[]]</span>
+<span class="k">for</span> <span class="n">inner</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">inner</span><span class="p">),</span> <span class="nb">sum</span><span class="p">(</span><span class="n">inner</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'never'</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>2 3
+1 3
+0 0
+3
+</pre></div>
+</div>
+<p>The loop variable <code class="docutils literal notranslate"><span class="pre">inner</span></code> refers to each element of <code class="docutils literal notranslate"><span class="pre">t</span></code> in turn, and each element is a list.
+The sum of an empty list is <code class="docutils literal notranslate"><span class="pre">0</span></code>.
+<code class="docutils literal notranslate"><span class="pre">t</span></code> has <code class="docutils literal notranslate"><span class="pre">3</span></code> elements: the empty list is an element too.
+The last loop goes through an empty list, so its body never runs.</p>
+</div>
+</section>
+<section id="question-7-medium-what-is-displayed">
+<h3>Question 7 (medium): what is displayed?<a class="headerlink" href="#question-7-medium-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scramble</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'c'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">scramble</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">scramble</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="s1">'banana'</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="s1">'banana'</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="nb">sorted</span><span class="p">([</span><span class="s1">'3'</span><span class="p">,</span> <span class="s1">'10'</span><span class="p">,</span> <span class="s1">'2'</span><span class="p">]))</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>['a', 'b', 'c'] ['c', 'a', 'b']
+['a', 'a', 'a', 'b', 'n', 'n']
+aaabnn
+[2, 3, 10] ['10', '2', '3']
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">sorted</span></code> returns a new list; the original list <code class="docutils literal notranslate"><span class="pre">scramble</span></code> does not change.
+<code class="docutils literal notranslate"><span class="pre">sorted</span></code> works with any sequence: for a string, it returns a list of the characters in order. <code class="docutils literal notranslate"><span class="pre">join</span></code> with the empty string as the delimiter makes one string of them again.
+Numbers are sorted by their value, but strings are sorted in alphabetical order, character by character: <code class="docutils literal notranslate"><span class="pre">'10'</span> <span class="pre">&lt;</span> <span class="pre">'2'</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, because <code class="docutils literal notranslate"><span class="pre">'1'</span></code> comes before <code class="docutils literal notranslate"><span class="pre">'2'</span></code>.</p>
+</div>
+</section>
+<section id="question-8-medium-what-is-displayed">
+<h3>Question 8 (medium): what is displayed?<a class="headerlink" href="#question-8-medium-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">a</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="ow">is</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">c</span><span class="p">,</span> <span class="n">a</span> <span class="ow">is</span> <span class="n">c</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">d</span><span class="p">,</span> <span class="n">a</span> <span class="ow">is</span> <span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>True False
+True True
+True False
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">==</span></code> checks whether two lists have the same elements (they are equivalent), and <code class="docutils literal notranslate"><span class="pre">is</span></code> checks whether they are the same object (identical).</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> were made by two list displays, so they are two different objects with the same elements.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">=</span> <span class="pre">a</span></code> does not make a new list: <code class="docutils literal notranslate"><span class="pre">c</span></code> refers to the same object as <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">a[:]</span></code> is a copy: a new list with the same elements.</p></li>
+</ul>
+</div>
+</section>
+<section id="question-9-medium-what-is-displayed">
+<h3>Question 9 (medium): what is displayed?<a class="headerlink" href="#question-9-medium-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
+<span class="n">c</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">b</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[5, 2, 3, 4]
+[5, 2, 3, 4]
+[1, 7, 3]
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> refer to the same list (it is aliased), so the changes made with <code class="docutils literal notranslate"><span class="pre">b</span></code> are seen with <code class="docutils literal notranslate"><span class="pre">a</span></code> too.
+<code class="docutils literal notranslate"><span class="pre">list(a)</span></code> makes a new list, so <code class="docutils literal notranslate"><span class="pre">c</span></code> is a copy: changing <code class="docutils literal notranslate"><span class="pre">c</span></code> does not change <code class="docutils literal notranslate"><span class="pre">a</span></code>, and changing <code class="docutils literal notranslate"><span class="pre">a</span></code> does not change <code class="docutils literal notranslate"><span class="pre">c</span></code>.</p>
+</div>
+</section>
+<section id="question-10-medium-what-is-displayed">
+<h3>Question 10 (medium): what is displayed?<a class="headerlink" href="#question-10-medium-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="s1">'plumage!'</span>
+<span class="n">new_word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">'!'</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">new_t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">new_word</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">new_t</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>plumage! plumage
+[1, 2] None
+</pre></div>
+</div>
+<p>String methods and list methods work in opposite ways:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">strip</span></code> does not change <code class="docutils literal notranslate"><span class="pre">word</span></code> (strings are immutable): it returns a new string, <code class="docutils literal notranslate"><span class="pre">new_word</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">remove</span></code> changes the list <code class="docutils literal notranslate"><span class="pre">t</span></code> itself, and returns <code class="docutils literal notranslate"><span class="pre">None</span></code>. So <code class="docutils literal notranslate"><span class="pre">new_t</span></code> refers to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+<p>So <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">=</span> <span class="pre">t.remove(3)</span></code> would be a mistake: it would make <code class="docutils literal notranslate"><span class="pre">t</span></code> refer to <code class="docutils literal notranslate"><span class="pre">None</span></code>. To remove the element, call <code class="docutils literal notranslate"><span class="pre">remove</span></code> without an assignment:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">t</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[1, 2]
+</pre></div>
+</div>
+</div>
+</section>
+<section id="question-11-medium-what-happens">
+<h3>Question 11 (medium): what happens?<a class="headerlink" href="#question-11-medium-what-happens" title="Link to this heading">#</a></h3>
+<p>Each part has one mistake. Predict the error for each, then open the Answer to check.</p>
+<p><strong>Part a</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">t</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Part b</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">]</span>
+<span class="n">t</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">'d'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Part c</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><strong>Part d</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><strong>Part a:</strong> <code class="docutils literal notranslate"><span class="pre">remove</span></code> returns <code class="docutils literal notranslate"><span class="pre">None</span></code>, so after the second line <code class="docutils literal notranslate"><span class="pre">t</span></code> refers to <code class="docutils literal notranslate"><span class="pre">None</span></code>, not to a list. <code class="docutils literal notranslate"><span class="pre">None</span></code> has no method <code class="docutils literal notranslate"><span class="pre">remove</span></code>, so the third line is an <code class="docutils literal notranslate"><span class="pre">AttributeError</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>      1 t = [1, 2, 3]
+      2 t = t.remove(3)
+----&gt; 3 t.remove(2)
+
+AttributeError: 'NoneType' object has no attribute 'remove'
+</pre></div>
+</div>
+<p><strong>Part b:</strong> <code class="docutils literal notranslate"><span class="pre">'d'</span></code> is not in the list, so <code class="docutils literal notranslate"><span class="pre">remove</span></code> gives a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>      1 t = ['a', 'b', 'c']
+----&gt; 2 t.remove('d')
+
+ValueError: list.remove(x): x not in list
+</pre></div>
+</div>
+<p><strong>Part c:</strong> The list has 3 elements, at indexes 0, 1 and 2. There is no element at index 3, so this is an <code class="docutils literal notranslate"><span class="pre">IndexError</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>      1 t = ['a', 'b', 'c']
+----&gt; 2 print(t[3])
+
+IndexError: list index out of range
+</pre></div>
+</div>
+<p><strong>Part d:</strong> <code class="docutils literal notranslate"><span class="pre">+</span></code> joins a list only to another list, not to an integer, so this is a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>. To add the number 3 to the end of <code class="docutils literal notranslate"><span class="pre">t</span></code>, write <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">=</span> <span class="pre">t</span> <span class="pre">+</span> <span class="pre">[3]</span></code> or <code class="docutils literal notranslate"><span class="pre">t.append(3)</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>      1 t = [1, 2]
+----&gt; 2 t = t + 3
+
+TypeError: can only concatenate list (not "int") to list
+</pre></div>
+</div>
+</div>
+</section>
+<section id="question-12-medium-what-is-displayed">
+<h3>Question 12 (medium): what is displayed?<a class="headerlink" href="#question-12-medium-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pop_first</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">lst</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">letters</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">,</span> <span class="s1">'d'</span><span class="p">]</span>
+<span class="n">first</span> <span class="o">=</span> <span class="n">pop_first</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span>
+<span class="n">second</span> <span class="o">=</span> <span class="n">pop_first</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>a b
+['c', 'd']
+</pre></div>
+</div>
+<p>When <code class="docutils literal notranslate"><span class="pre">letters</span></code> is passed to <code class="docutils literal notranslate"><span class="pre">pop_first</span></code>, the parameter <code class="docutils literal notranslate"><span class="pre">lst</span></code> refers to the same list as <code class="docutils literal notranslate"><span class="pre">letters</span></code>.
+Each call removes the first element of that list and returns it.
+So after the two calls the list has lost its first two elements, and <code class="docutils literal notranslate"><span class="pre">letters</span></code> shows the change.</p>
+</div>
+</section>
+<section id="question-13-medium-write-a-function">
+<h3>Question 13 (medium): write a function<a class="headerlink" href="#question-13-medium-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">acronym</span></code> that takes a string of words separated by spaces and returns a string of the first letters of the words, in uppercase.
+Strings have an <code class="docutils literal notranslate"><span class="pre">upper</span></code> method: <code class="docutils literal notranslate"><span class="pre">'png'.upper()</span></code> is <code class="docutils literal notranslate"><span class="pre">'PNG'</span></code>.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">acronym</span><span class="p">(</span><span class="n">phrase</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">acronym</span><span class="p">(</span><span class="s1">'portable network graphics'</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>PNG
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">acronym</span><span class="p">(</span><span class="s1">'as soon as possible'</span><span class="p">),</span> <span class="n">acronym</span><span class="p">(</span><span class="s1">'Python'</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ASAP P
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">split</span></code> to get a list of the words, then take the first letter of each word:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">acronym</span><span class="p">(</span><span class="n">phrase</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s1">''</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">phrase</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(acronym('portable</span> <span class="pre">network</span> <span class="pre">graphics'))</span></code>.</p>
+<p>Another way: make a list of the letters, then use <code class="docutils literal notranslate"><span class="pre">join</span></code> with the empty string as the delimiter:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">acronym</span><span class="p">(</span><span class="n">phrase</span><span class="p">):</span>
+    <span class="n">letters</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">phrase</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+        <span class="n">letters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="question-14-medium-write-a-function">
+<h3>Question 14 (medium): write a function<a class="headerlink" href="#question-14-medium-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">running_totals</span></code> that takes a list of numbers and returns a new list in which each element is the sum of the numbers up to and including that position.
+The function must not change the list it gets.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">running_totals</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">running_totals</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[1, 3, 6, 10]
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">running_totals</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="n">running_totals</span><span class="p">([]))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[5, 0, 2] []
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>Keep a total, and append it to the new list after each number:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">running_totals</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">x</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(running_totals([1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4]))</span></code>.</p>
+<p>Another way: for each index <code class="docutils literal notranslate"><span class="pre">i</span></code>, the element is the sum of the slice from the beginning up to index <code class="docutils literal notranslate"><span class="pre">i</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">running_totals</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)):</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">[:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>The second way adds up the numbers again for each element, so it is slower for long lists.</p>
+</div>
+</section>
+<section id="question-15-medium-what-is-displayed">
+<h3>Question 15 (medium): what is displayed?<a class="headerlink" href="#question-15-medium-what-is-displayed" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">words.txt</span></code> has one English word per line, in lowercase. Predict what this code displays (you cannot know the number of words, but predict the rest).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">word_list</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'words.txt'</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word_list</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word_list</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">word_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'python'</span> <span class="ow">in</span> <span class="n">word_list</span><span class="p">,</span> <span class="s1">'Python'</span> <span class="ow">in</span> <span class="n">word_list</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>113783
+['aa', 'aah', 'aahed'] zymurgy
+True False
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">read</span></code> returns the whole file as one string, with a newline after each word.
+<code class="docutils literal notranslate"><span class="pre">split</span></code> with no argument splits at any whitespace, newlines too, so <code class="docutils literal notranslate"><span class="pre">word_list</span></code> is a list of the words, without the newlines.
+The words are in alphabetical order, so <code class="docutils literal notranslate"><span class="pre">word_list[:3]</span></code> is the first three words and <code class="docutils literal notranslate"><span class="pre">word_list[-1]</span></code> is the last word.
+The words in the file are in lowercase, so <code class="docutils literal notranslate"><span class="pre">'Python'</span></code> is not in the list.</p>
+<p>This is faster than reading the file each time you need to search it: read it once, and keep the list.</p>
+</div>
+</section>
+<section id="question-16-hard-what-is-displayed">
+<h3>Question 16 (hard): what is displayed?<a class="headerlink" href="#question-16-hard-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">add_zero</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">add_one</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="n">lst</span> <span class="o">=</span> <span class="n">lst</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">add_zero</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+<span class="n">add_one</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[5, 0]
+</pre></div>
+</div>
+<p>In both functions, the parameter <code class="docutils literal notranslate"><span class="pre">lst</span></code> first refers to the same list as <code class="docutils literal notranslate"><span class="pre">numbers</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">add_zero</span></code> changes that list with <code class="docutils literal notranslate"><span class="pre">append</span></code>, so <code class="docutils literal notranslate"><span class="pre">numbers</span></code> shows the change.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">add_one</span></code>, <code class="docutils literal notranslate"><span class="pre">lst</span> <span class="pre">+</span> <span class="pre">[1]</span></code> makes a <em>new</em> list, and the assignment makes the local variable <code class="docutils literal notranslate"><span class="pre">lst</span></code> refer to it. The list that <code class="docutils literal notranslate"><span class="pre">numbers</span></code> refers to does not change, and the new list is lost when the function returns.</p></li>
+</ul>
+<p>To use <code class="docutils literal notranslate"><span class="pre">+</span></code>, return the new list and assign the result:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">add_one</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">lst</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="n">add_one</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[5, 1]
+</pre></div>
+</div>
+</div>
+</section>
+<section id="question-17-hard-what-is-displayed">
+<h3>Question 17 (hard): what is displayed?<a class="headerlink" href="#question-17-hard-what-is-displayed" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">row</span><span class="p">]</span>
+<span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="n">copies</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[:],</span> <span class="n">row</span><span class="p">[:]]</span>
+<span class="n">copies</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">copies</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[[0, 5], [0, 5]]
+[0, 5]
+[[7, 5], [0, 5]]
+</pre></div>
+</div>
+<p>Both elements of <code class="docutils literal notranslate"><span class="pre">grid</span></code> refer to the same list, <code class="docutils literal notranslate"><span class="pre">row</span></code>: the list is aliased three times.
+So <code class="docutils literal notranslate"><span class="pre">grid[0][1]</span> <span class="pre">=</span> <span class="pre">5</span></code> changes <code class="docutils literal notranslate"><span class="pre">row</span></code>, and the change is seen in both elements of <code class="docutils literal notranslate"><span class="pre">grid</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">row[:]</span></code> makes a copy each time, so the two elements of <code class="docutils literal notranslate"><span class="pre">copies</span></code> are two different lists. Changing one of them does not change the other or <code class="docutils literal notranslate"><span class="pre">row</span></code>.</p>
+</div>
+</section>
+<section id="question-18-hard-write-a-function">
+<h3>Question 18 (hard): write a function<a class="headerlink" href="#question-18-hard-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">flatten</span></code> that takes a list of lists and returns a new list with all the elements of the inner lists, in order.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">flatten</span><span class="p">(</span><span class="n">nested</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">flatten</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="p">[],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 4, 5]
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">flatten</span><span class="p">([[</span><span class="s1">'a'</span><span class="p">],</span> <span class="p">[</span><span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">]]),</span> <span class="n">flatten</span><span class="p">([]))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>['a', 'b', 'c'] []
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><code class="docutils literal notranslate"><span class="pre">extend</span></code> adds all the elements of a list to the end of another list:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">flatten</span><span class="p">(</span><span class="n">nested</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">inner</span> <span class="ow">in</span> <span class="n">nested</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">inner</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(flatten([[1,</span> <span class="pre">2],</span> <span class="pre">[3],</span> <span class="pre">[],</span> <span class="pre">[4,</span> <span class="pre">5]]))</span></code>.</p>
+<p>Another way, with a loop inside a loop:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">flatten</span><span class="p">(</span><span class="n">nested</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">inner</span> <span class="ow">in</span> <span class="n">nested</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">inner</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">result.append(inner)</span></code> would be a mistake: <code class="docutils literal notranslate"><span class="pre">append</span></code> adds its argument as one element, so the result would be a copy of the list of lists.</p>
+</div>
+</section>
+<section id="question-19-hard-write-a-function">
+<h3>Question 19 (hard): write a function<a class="headerlink" href="#question-19-hard-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">remove_all</span></code> that takes a list <code class="docutils literal notranslate"><span class="pre">t</span></code> and a value, and removes every element of <code class="docutils literal notranslate"><span class="pre">t</span></code> that is equal to the value.
+The function changes the list <code class="docutils literal notranslate"><span class="pre">t</span></code> and returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">remove_all</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">remove_all</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[2]
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">letters</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">]</span>
+<span class="n">remove_all</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>['b']
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><code class="docutils literal notranslate"><span class="pre">remove</span></code> removes only the first element that is equal to its argument, so call it once for each element that is equal to the value.
+Loop through a copy of the list (<code class="docutils literal notranslate"><span class="pre">t[:]</span></code>), because the loop must not skip elements when <code class="docutils literal notranslate"><span class="pre">remove</span></code> changes <code class="docutils literal notranslate"><span class="pre">t</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">remove_all</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">t</span><span class="p">[:]:</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">value</span><span class="p">:</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">numbers</span> <span class="pre">=</span> <span class="pre">[1,</span> <span class="pre">1,</span> <span class="pre">2]</span></code>, <code class="docutils literal notranslate"><span class="pre">remove_all(numbers,</span> <span class="pre">1)</span></code> and <code class="docutils literal notranslate"><span class="pre">print(numbers)</span></code>.</p>
+<p>Another way: the list has at most <code class="docutils literal notranslate"><span class="pre">len(t)</span></code> elements equal to the value, so call <code class="docutils literal notranslate"><span class="pre">remove</span></code> up to <code class="docutils literal notranslate"><span class="pre">len(t)</span></code> times, as long as the value is in the list:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">remove_all</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A loop through <code class="docutils literal notranslate"><span class="pre">t</span></code> itself skips elements: after <code class="docutils literal notranslate"><span class="pre">remove</span></code>, each later element moves back one position, so the loop never sees the element just after the one it removed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">remove_all_wrong</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">value</span><span class="p">:</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">letters</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">]</span>
+<span class="n">remove_all_wrong</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>['b', 'a']
+</pre></div>
+</div>
+<p>Making a new list of the other elements and assigning it to <code class="docutils literal notranslate"><span class="pre">t</span></code> in the function would not work either: it changes only the local variable <code class="docutils literal notranslate"><span class="pre">t</span></code>, not the caller’s list.</p>
+</div>
+</section>
+<section id="question-20-hard-write-a-function">
+<h3>Question 20 (hard): write a function<a class="headerlink" href="#question-20-hard-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">has_duplicates</span></code> that takes a list and returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if any element appears in it more than once, and <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">has_duplicates</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">has_duplicates</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="n">has_duplicates</span><span class="p">([</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">]))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>True False
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">has_duplicates</span><span class="p">([]),</span> <span class="n">has_duplicates</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s1">'banana'</span><span class="p">)))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>False True
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>For each index <code class="docutils literal notranslate"><span class="pre">i</span></code>, check whether the element at <code class="docutils literal notranslate"><span class="pre">i</span></code> is also in the rest of the list, after <code class="docutils literal notranslate"><span class="pre">i</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">has_duplicates</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(has_duplicates([1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">2]),</span> <span class="pre">has_duplicates(['a',</span> <span class="pre">'b']))</span></code>.</p>
+<p>Another way: after sorting, equal elements are next to each other, so compare each element with the next one:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">has_duplicates</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>Both are linear searches: they return <code class="docutils literal notranslate"><span class="pre">True</span></code> as soon as they find a duplicate, and <code class="docutils literal notranslate"><span class="pre">False</span></code> only after the loop. For an empty list, <code class="docutils literal notranslate"><span class="pre">range(len(s)</span> <span class="pre">-</span> <span class="pre">1)</span></code> is <code class="docutils literal notranslate"><span class="pre">range(-1)</span></code>, which produces no values.</p>
+</div>
+<p><em>Summary and questions by Prof. Y. Rosenthal, based on</em>
+<a class="reference external" href="https://allendowney.github.io/ThinkPython/index.html">Think Python: 3rd Edition</a> <em>by Allen B. Downey.</em>
+<em>Text license:</em> <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./yr"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap09_additions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">9b. Prof. Rosenthal’s Additions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap09_more_review.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">9d. Prof. Rosenthal’s More Review Questions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concepts-covered">Concepts covered</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">Questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-easy-what-is-displayed">Question 1 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-easy-what-is-displayed">Question 2 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-easy-what-is-displayed">Question 3 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-easy-what-is-displayed">Question 4 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-easy-write-a-function">Question 5 (easy): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-easy-what-is-displayed">Question 6 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-7-medium-what-is-displayed">Question 7 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-8-medium-what-is-displayed">Question 8 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-9-medium-what-is-displayed">Question 9 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-10-medium-what-is-displayed">Question 10 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-11-medium-what-happens">Question 11 (medium): what happens?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-12-medium-what-is-displayed">Question 12 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-13-medium-write-a-function">Question 13 (medium): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-14-medium-write-a-function">Question 14 (medium): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-15-medium-what-is-displayed">Question 15 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-16-hard-what-is-displayed">Question 16 (hard): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-17-hard-what-is-displayed">Question 17 (hard): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-18-hard-write-a-function">Question 18 (hard): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-19-hard-write-a-function">Question 19 (hard): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-20-hard-write-a-function">Question 20 (hard): write a function</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
