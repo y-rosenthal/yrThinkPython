@@ -166,9 +166,11 @@ def main(argv):
         b = git('show', f'{base}:{path}', binary=binary) if b_has else None
         f = git('show', f'{before}:{path}', binary=binary) if f_has else None
         u = git('show', f'{upstream}:{path}', binary=binary) if u_has else None
-        if path in later and (ROOT / path).exists():
+        if path in later:
+            # edited or deleted by a later commit on this branch: check the file as the merge left it
             a = git('show', f'{merge}:{path}', binary=binary)
-            notes.append(f'{path}: changed after the merge commit (checked as the merge left it; read the later edit)')
+            what = 'changed' if (ROOT / path).exists() else 'deleted'
+            notes.append(f'{path}: {what} after the merge commit (checked as the merge left it; read the later edit)')
         else:
             a = worktree(path, binary)
         fork_changed = f_has != b_has or (f_has and b_has and f != b)
