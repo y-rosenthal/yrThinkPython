@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Installed by yrProject v0.7.2 (https://github.com/y-rosenthal/yrProject): the templates and
+# Installed by yrProject v0.7.3 (https://github.com/y-rosenthal/yrProject): the templates and
 # the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub issues
 # for work to do later, project docs). This file belongs to the tool: do not edit it by hand, and do not change
 # it without the tool. "yrProject.sh update" replaces it with each new version (if you change it, update leaves
@@ -18,6 +18,11 @@
 #                   issues are open (by priority), and tells the agent to offer to list them. The list itself is
 #                   not loaded, to save context
 #   list            the open issues, one per line, highest priority first (the default command)
+#   add             create an issue with its labels: --title TEXT, --body TEXT (or --body-file FILE),
+#                   --category NAME (one of CATEGORIES), --priority high|medium|low (default medium). It adds
+#                   the labels yrIssue and LABEL, makes the labels once if one is missing, refreshes the saved
+#                   copy, and prints the issue's URL. If GitHub can't be reached, or there is no GitHub
+#                   repository, it writes the issue to QUEUE instead and says so
 #   sync            refresh the saved copy (COPY) from GitHub. It writes the file only if an issue changed
 #   hook-sync       for the PostToolUse hook: reads the hook's JSON on stdin, and runs sync if the command was a
 #                   gh command that changes issues (create, edit, close, reopen, delete, transfer). Prints nothing
@@ -95,6 +100,13 @@ ensure_gh_default() {
 
 # A jq string literal for a shell string (gh's --jq has no --arg option).
 jq_lit() { printf '"%s"' "$(printf '%s' "$1" | sed 's/\\/\\\\/g; s/"/\\"/g')"; }
+
+# Append an issue to the queue (written while GitHub could not be reached): "### [priority] Title", the category,
+# the body.
+queue_issue() {   # $1 priority, $2 title, $3 category, $4 body
+  mkdir -p "$(dirname "$queue")"
+  { [ -s "$queue" ] && [ -n "$(tail -c 1 "$queue")" ] && echo; printf '### [%s] %s\n\nCategory: %s\n\n%s\n\n' "$1" "$2" "$3" "$4"; } >> "$queue"
+}
 
 # Which issues count: every open issue, or only those with LABEL.
 filter=(--state open --limit 200)
@@ -211,6 +223,52 @@ case "$cmd" in
     fi
     ;;
 
+  add)
+    shift
+    title=""; ibody=""; category=""; priority="medium"
+    while [ $# -gt 0 ]; do
+      case "$1" in
+        --title) title="${2:-}"; shift ;;
+        --body) ibody="${2:-}"; shift ;;
+        --body-file) ibody="$(cat "${2:-/dev/null}")"; shift ;;
+        --category) category="${2:-}"; shift ;;
+        --priority) priority="${2:-}"; shift ;;
+        *) echo "yrIssues.sh add: unknown argument '$1' (see --help)" >&2; exit 2 ;;
+      esac
+      shift
+    done
+    names=(); for c in "${CATEGORIES[@]}"; do names+=("${c%%|*}"); done
+    bad_args=0
+    [ -n "$title" ] || { echo "yrIssues.sh add: --title is needed" >&2; bad_args=1; }
+    [ -n "$ibody" ] || { echo "yrIssues.sh add: --body (or --body-file) is needed: what, where, why it matters, suggested fix, done when" >&2; bad_args=1; }
+    if ! printf '%s\n' "${names[@]}" | grep -qxF -- "$category"; then
+      echo "yrIssues.sh add: --category must be one of: ${names[*]} (CATEGORIES in $CONFIG), not '${category:-}'" >&2; bad_args=1; fi
+    case "$priority" in high|medium|low) ;; *) echo "yrIssues.sh add: --priority must be high, medium or low, not '$priority'" >&2; bad_args=1 ;; esac
+    [ "$bad_args" -eq 0 ] || exit 2
+    labels=(--label "$MARK" --label "$category" --label "priority: $priority")
+    [ -n "$LABEL" ] && [ "$LABEL" != "$MARK" ] && labels+=(--label "$LABEL")
+    if [ -n "$gh_bin" ] && [ -n "$repo" ]; then
+      ensure_gh_default
+      out="$(run_gh issue create --repo "$repo" --title "$title" --body "$ibody" "${labels[@]}" 2>&1)"
+      status=$?
+      if [ $status -ne 0 ] && printf '%s' "$out" | grep -qi 'label'; then      # a label is missing: make them once
+        bash "$0" setup-labels >/dev/null 2>&1
+        out="$(run_gh issue create --repo "$repo" --title "$title" --body "$ibody" "${labels[@]}" 2>&1)"
+        status=$?
+      fi
+      if [ $status -eq 0 ]; then
+        sync_copy >/dev/null 2>&1 || true
+        printf '%s\n' "$out" | grep -E '^https?://' || printf '%s\n' "$out"
+        exit 0
+      fi
+      echo "GitHub could not be reached ($(printf '%s' "$out" | head -n 1)); the issue is queued in $QUEUE: create it when gh works." >&2
+    else
+      echo "No GitHub repository or no gh here; the issue is queued in $QUEUE: create it when the project has both." >&2
+    fi
+    queue_issue "$priority" "$title" "$category" "$ibody"
+    echo "queued in $QUEUE: [$priority] $title"
+    ;;
+
   sync)
     if ! sync_copy; then
       echo "sync: could not read the issues from GitHub; $copy was not changed." >&2
@@ -252,7 +310,7 @@ case "$cmd" in
     ;;
 
   *)
-    echo "usage: bash yrIssues.sh {session-start|list|sync|hook-sync|setup-labels|--help}" >&2
+    echo "usage: bash yrIssues.sh {session-start|list|add|sync|hook-sync|setup-labels|--help}" >&2
     exit 2
     ;;
 esac

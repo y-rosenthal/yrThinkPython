@@ -13,7 +13,7 @@ allowed-tools:
   - Bash(gh issue reopen *)
 ---
 
-<!-- Installed by yrProject v0.7.2 (https://github.com/y-rosenthal/yrProject): the templates
+<!-- Installed by yrProject v0.7.3 (https://github.com/y-rosenthal/yrProject): the templates
      and the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub
      issues for work to do later, project docs). This file belongs to the tool: do not edit it by hand, and do
      not change it without the tool. "yrProject.sh update" replaces it with each new version (if you change it,
@@ -81,15 +81,18 @@ When the user asks you to remember something for later, or you find a problem yo
    **Done when:** how to verify (e.g. tests pass, command works, page renders).
    ```
 
-3. Create the issue (add `--label "$LABEL"` too if `_yrIssues/config.sh` sets another `LABEL`):
+3. Create the issue with the script, which adds the labels (`yrIssue`, the category, the priority, and `LABEL`
+   if `_yrIssues/config.sh` sets one), makes a missing label once, refreshes the saved copy, and prints the URL:
 
    ```bash
-   gh issue create --title "..." --body "..." --label yrIssue --label <category> --label "priority: <level>"
+   bash ${CLAUDE_SKILL_DIR}/scripts/yrIssues.sh add --title "..." --body "..." --category <category> --priority <level>
    ```
 
-   Default to `priority: medium` unless the user says otherwise or the issue breaks something (`high`). If `gh`
-   says that a label is not found, run `bash ${CLAUDE_SKILL_DIR}/scripts/yrIssues.sh setup-labels` once, then retry.
-4. Confirm in one line: "Added issue #N: title".
+   (`--body-file FILE` for a long body.) Default to `priority: medium` unless the user says otherwise or the issue
+   breaks something (`high`). If GitHub cannot be reached, or the project has no GitHub repository yet, the script
+   writes the issue to `_yrIssues/queue.md` and says so. Without bash (another agent on another system), the
+   equivalent is `gh issue create --title "..." --body "..." --label yrIssue --label <category> --label "priority: <level>"`.
+4. Confirm in one line: "Added issue #N: title" (or "queued", with the reason).
 
 ## Working on an issue
 
@@ -119,8 +122,10 @@ When the user asks you to remember something for later, or you find a problem yo
 If `gh` isn't installed or logged in, there's no network, or the project has no GitHub remote:
 
 - `yrIssues.sh` falls back to the saved copy in `_yrIssues/issues.md`, and to the queue.
-- Record new issues in `_yrIssues/queue.md`, each as a `### [priority] Title` heading followed by the body.
-- The next time `gh` works, create those issues and empty the queue file.
+- `yrIssues.sh add` records a new issue in `_yrIssues/queue.md` (a `### [priority] Title` heading, the category,
+  the body). Write there by hand only if the script cannot run.
+- The next time `gh` works, create those issues (`yrIssues.sh add` for each, from the queue's headings and
+  bodies) and empty the queue file.
 - If `gh` isn't logged in, ask the user to run `! gh auth login`. You can't log in for them.
 - If there is no GitHub repository, offer to make a private one: `gh repo create --private --source . --push`, then
   `yrIssues.sh setup-labels`. Don't make it without the user's approval.
