@@ -3,17 +3,24 @@
 <!-- begin yrProject setup: written by yrProject.sh; "yrProject.sh update" replaces this block -->
 ## Set up by yrProject.sh
 
-`yrProject.sh` (yrProject v0.5.2; parts: rules, yrIssues, subjexts) set up this project. It installed
-files here, and `yrProject.sh update` keeps them up to date.
+`yrProject.sh` (yrProject v0.7.2; parts: rules, yrIssues, subjexts) set up this project. yrProject
+(https://github.com/y-rosenthal/yrProject) is the templates and the tool that give a project one base for
+AI-assisted work: rules for AI agents, skills, hooks, GitHub issues for work to do later, project docs. The tool
+installed files here, and `yrProject.sh update` keeps them up to date. Every file that it installed starts with
+a comment that names yrProject and its version, and says whether the file belongs to the tool or to the project.
 
-- Before you change a file that it installed, read `.yrProject/README.md`. It lists the files, and tells who
+- Start every reply with the version line `(yrProject v0.7.2 [latest])`, or `[latest vA.B.C]` if a newer
+  version exists, or `[latest UNKNOWN]`. In Claude Code a hook gives you the exact line at each prompt; in another
+  agent, run `bash .claude/skills/yrProject/scripts/yrProject-notice.sh version` once at the start of a session.
+  In the first reply of a session, add one line with the facts of the setup (the type, the installed parts and the
+  parts not installed: `bash .claude/skills/yrProject/scripts/yrProject-notice.sh facts`), unless a SessionStart
+  message already showed them to the user; then answer.
+- Before you change a file that the tool installed, read `.yrProject/README.md`. It lists the files, and tells who
   changes each one.
-- Do not edit this block, the shared-rules block, or the files in `.yrProject/`. `yrProject.sh update`
-  writes them again.
-- At the start of a session, tell the user in one line that `yrProject.sh` set up this project, unless a
-  SessionStart message already told them.
-- The user does not need to know the tool. To check, update or migrate this setup, or to list or make yrProjects,
-  follow the `yrProject` skill (`.claude/skills/yrProject/SKILL.md`).
+- Do not edit this block, the shared-rules block, the `yrProject` block in `.gitignore`, or the files in
+  `.yrProject/`. `yrProject.sh update` writes them again.
+- The user does not need to know the tool. To check, update, migrate or remove this setup, or to list or make
+  yrProjects, follow the `yrProject` skill (`.claude/skills/yrProject/SKILL.md`).
 - "Project" alone does not mean the yrProject setup. Unless the user says yrProject or it is obvious, ask.
 <!-- end yrProject setup -->
 
@@ -135,7 +142,8 @@ files and installs nothing.
   rules that apply only to Claude Code. Do not use a symlink for `CLAUDE.md` (Windows clones and Dropbox can break it).
 - If a project's `AGENTS.md` does not have the block `<!-- begin shared rules -->`, tell the user and offer to set
   it up as a yrProject with `yrProject.sh update`. `yrProject.sh status` shows the project's state,
-  `yrProject.sh check` whether it is set up correctly, and `yrProject.sh --help` explains them. An agent has no
+  `yrProject.sh check` whether it is set up correctly, `yrProject.sh remove` takes the setup out again, and
+  `yrProject.sh --help` explains them. An agent has no
   terminal to answer `update`'s question in: run `yrProject.sh update --dry-run`, show the user the plan, and run
   `yrProject.sh update -y` only after the user approves it. In a yrProject, the `yrProject` skill does all this.
 
@@ -155,5 +163,15 @@ files and installs nothing.
   that it creates get the label `yrIssue`. (Projects set up before yrProject v0.5.0 have the `pending-work` skill
   instead; `yrProject.sh update` replaces it.)
 - If a project keeps such a list in a file, tell the user and offer to move it into issues.
+- Things that expire or renew on a date (API keys, access tokens, domains, certificates, subscriptions, periodic
+  checks) go in `_yrRenewals/renewals.yml` if the project has the `yrRenewals` skill
+  (`.claude/skills/yrRenewals/`): a daily GitHub workflow opens a reminder issue before each date, and closing
+  it is the acknowledgement. Never write a key, a token or a password there, or in an issue.
+- `_yrIssues/issues.md` (the saved copy of the open issues) and `_yrIssues/queue.md` (issues written while GitHub
+  could not be reached) are written by the yrIssues skill, and git ignores them (yrProject v0.6.0 and later). Do
+  not edit, commit or restore them. In a project from before v0.6.0, a staged deletion of `issues.md` is the
+  migration (`git rm --cached`: the file stays on disk), not an accident: leave it, and commit it with a plain
+  `git commit`, not one limited to paths. A path-limited commit rebuilds those paths from the working tree, where
+  the ignored file still exists, and silently drops the untracking.
 
 <!-- end shared rules -->

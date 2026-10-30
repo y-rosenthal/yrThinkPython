@@ -26,6 +26,7 @@ from pathlib import Path
 from glob import glob
 
 import nbformat as nbf
+import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'yr' / 'tools'))
 import review_format  # noqa: E402
@@ -66,6 +67,10 @@ def solution_cell(sources):
     blocks = '\n\n'.join(f'```python\n{src}\n```' for src in sources)
     md = f':::{{admonition}} Suggested solution\n:class: dropdown\n\n{blocks}\n:::\n'
     return nbf.v4.new_markdown_cell(md, metadata={'tags': ['solution']})
+
+# Page descriptions for search results and link previews (descriptions.yml, from Downey's site)
+with open(Path(__file__).resolve().parent / 'descriptions.yml') as f:
+    DESCRIPTIONS = yaml.safe_load(f)
 
 
 def process_cell(cell):
@@ -141,6 +146,14 @@ def process_notebook(path):
 
     for cell in ntbk.cells:
         process_cell(cell)
+
+    # myst-nb passes notebook metadata through as front matter:
+    # html_meta becomes <meta name="description">; og:description overrides
+    # the link-preview text, which would otherwise be the ordering paragraph
+    desc = DESCRIPTIONS.get(path.removesuffix('.ipynb'))
+    if desc:
+        ntbk.metadata['myst'] = {'html_meta': {'description': desc}}
+        ntbk.metadata['og:description'] = desc
 
     nbf.write(ntbk, path)
 

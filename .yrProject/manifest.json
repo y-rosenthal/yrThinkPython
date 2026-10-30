@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "createdAt": "2026-10-12T15:54:40Z",
   "projectType": null,
-  "version": "v0.5.2",
+  "version": "v0.7.2",
   "parts": [
     "rules",
     "subjexts",
@@ -16,22 +16,24 @@
     "PROJECT_TYPE": "work",
     "CREATED_DATE": "2026-10-12",
     "SUBJEXTS_PACKAGE": "y-rosenthal/thinkpython",
-    "TEMPLATE_VERSION": "v0.5.2"
+    "TEMPLATE_VERSION": "v0.7.2"
   },
   "files": {
-    ".claude/skills/subjexts/SKILL.md": "cd727d25e89b15ff8ddb71111dde1ea7da775a1a38c4018e0617f432a7dda3bb",
-    ".claude/skills/subjexts/scripts/yrS4-skill.sh": "54298e5f05b91ca55b444352e99094593409d35a2012500aa5e4cd1a0abbf041",
-    ".claude/skills/yrIssues/SKILL.md": "fc6e9a387c18c43af170f674b94bdee148511c1fc72f72894a4cac1139756731",
-    ".claude/skills/yrIssues/scripts/yrIssues.sh": "6eca82fafa39b5bd9df39934dcda42f1847b950a5e4d4068c6c671b27d10182f",
-    ".claude/skills/yrProject/SKILL.md": "5d2dfc077459af58c97ac3c1a4511eacfdda3eb6494752204f4de77ab25ba6f0",
-    "README.md": "089e65684de3d4b92617a446eca52abc8e2602264ca2becfb5e8a477c128d69c",
-    "_yrIssues/config.sh": "e88eb0025fa0d0bbba90468331b8fca23b6c5ce2faccb8c5a42015018f9077f0"
+    ".claude/skills/subjexts/SKILL.md": "fc72e005cf8393291ce28c37c20b40d2d1e0d9fe837b7bdf4f0bbf2b22cc2810",
+    ".claude/skills/subjexts/scripts/yrS4-skill.sh": "87bb65624752db8ea7fce84053bfdfd3297f6af6e78f0fe3bc71dc8e02a94290",
+    ".claude/skills/yrIssues/SKILL.md": "962c12a5e4041e9b7c8481d062440a6c26ad761909161ea7e0849f298b2a8af7",
+    ".claude/skills/yrIssues/scripts/yrIssues.sh": "dd192778a1155b744429133ddbdf573ad6e3768c4e3f81f06eebe65da2cb2706",
+    ".claude/skills/yrProject/SKILL.md": "1d66a63c97d031a6c8ef2e10edd596c6534eb29b06ffff3c9f11b634a3533052",
+    ".claude/skills/yrProject/scripts/yrProject-notice.sh": "dba11dac2285c924f5d0bbb50e115a6e5c7805ed6ee16bee100a4ae9b9511700",
+    "README.md": "d46a55adf343e14d3993a3319ac96b534791af66463b7b664a70719fb0efa85c",
+    "_yrIssues/config.sh": "e88eb0025fa0d0bbba90468331b8fca23b6c5ce2faccb8c5a42015018f9077f0",
+    "jb/subjexts-labels.md": "c787c788f9192ebdc0029123e0428d0b7b567d081abf2f507408f8fabf98f38f"
   },
-  "updatedAt": "2026-10-28T17:59:54Z",
+  "updatedAt": "2026-10-30T17:42:57Z",
   "tool": {
     "name": "yrProject",
-    "version": "0.5.2",
-    "templatesCommit": "189f7de"
+    "version": "0.7.2",
+    "templatesCommit": "64a3cd1"
   },
   "history": [
     {
@@ -85,6 +87,67 @@
         "subjexts",
         "yrIssues"
       ]
+    },
+    {
+      "date": "2026-10-29",
+      "command": "update",
+      "version": "v0.6.0",
+      "parts": [
+        "rules",
+        "subjexts",
+        "yrIssues"
+      ]
+    },
+    {
+      "date": "2026-10-29",
+      "command": "update",
+      "version": "v0.6.0",
+      "parts": [
+        "rules",
+        "subjexts",
+        "yrIssues"
+      ]
+    },
+    {
+      "date": "2026-10-29",
+      "command": "update",
+      "version": "v0.6.1",
+      "parts": [
+        "rules",
+        "subjexts",
+        "yrIssues"
+      ]
+    },
+    {
+      "date": "2026-10-29",
+      "command": "update",
+      "version": "v0.7.0",
+      "parts": [
+        "rules",
+        "subjexts",
+        "yrIssues"
+      ]
+    },
+    {
+      "date": "2026-10-29",
+      "command": "update",
+      "version": "v0.7.1",
+      "parts": [
+        "rules",
+        "subjexts",
+        "yrIssues"
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "command": "update",
+      "version": "v0.7.2",
+      "parts": [
+        "rules",
+        "subjexts",
+        "yrIssues"
+      ]
     }
-  ]
+  ],
+  "about": "Written by yrProject v0.7.2 (https://github.com/y-rosenthal/yrProject), the record of this project's yrProject setup. Do not edit: \"yrProject.sh update\" writes it again."
 }

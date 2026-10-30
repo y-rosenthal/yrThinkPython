@@ -13,6 +13,7 @@ repository:
   url: https://github.com/y-rosenthal/yrThinkPython
   branch: v3
 html:
+  baseurl: https://y-rosenthal.github.io/yrThinkPython/
   use_repository_button: true
 
   extra_footer: |
@@ -47,7 +48,25 @@ parse:
     - tasklist
 
 sphinx:
+  # Merge html_theme_options below into the ones JB sets (repository button, search text)
+  # instead of replacing them.
+  recursive_update: true
+  # Sitemap and link previews (from Downey's site); page descriptions are in
+  # descriptions.yml (notebooks) and the front matter of index.md and blank.md
+  extra_extensions:
+    - sphinx_sitemap
+    - sphinxext.opengraph
   config:
+    html_baseurl: https://y-rosenthal.github.io/yrThinkPython/
+    sitemap_url_scheme: "{link}"
+    sitemap_excludes: [genindex.html, search.html]
+    ogp_site_url: https://y-rosenthal.github.io/yrThinkPython/
+    ogp_site_name: Think Python, 3rd edition
+    ogp_image: https://raw.githubusercontent.com/AllenDowney/ThinkPython/v3/think_python_3e.jpg
+    ogp_image_alt: Cover of Think Python, 3rd edition, by Allen B. Downey
+    ogp_enable_meta_description: false
+    # Downey's site also has a page-view counter, an end-of-chapter support note, an EthicalAds slot and a
+    # sponsor slot; the course site does not take them (sync-upstream skill, check_sync.py NOT_TAKEN).
     mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
     mathjax_config:
       tex2jax:
