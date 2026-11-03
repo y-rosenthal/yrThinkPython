@@ -243,7 +243,7 @@ def cmd_new(nn, title):
     cells = []
     for kind, s in SKELETON:
         s = (s.replace('{NN}', nn).replace('{N}', str(int(nn))).replace('{L}', rf.review_letter(path))
-             .replace('{TITLE}', title))
+             .replace('{TOPIC}', title).replace('{TITLE}', title))
         cells.append(code_cell(s, used, ['setup']) if kind == 'setup' else md_cell(s, used))
     meta = {'kernelspec': {'display_name': 'Python 3 (ipykernel)', 'language': 'python', 'name': 'python3'},
             'language_info': {'name': 'python'}}

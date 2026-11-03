@@ -194,8 +194,9 @@ def check_solutions():
 def check_yr_pages():
     """The pages of the course after a chapter (yr/chapNN_KIND.ipynb): any number, lettered b, c, d, ... (then aa,
     ab, ...) in the order of the TOC, which lists them one after the other right after the chapter. The title of a
-    page is "# N<letter>. Prof. Rosenthal's ..." (the known kinds, additions / review / more_review, have fixed
-    titles and keep that relative order). yr/README.md, "The pages of a chapter"."""
+    page is "# N<letter>. Additions: TOPIC" (kind additions or additions_TOPIC) or "# N<letter>. Review: TOPIC" (any
+    other kind). The usual kinds (additions, review, more_review) keep that relative order. yr/README.md, "The pages
+    of a chapter"."""
     toc = re.findall(r"^\s*-\s*file:\s*(\S+)", (ROOT / "jb" / "_toc.yml").read_text(), re.M)
     chapters = set()
     for p in sorted((ROOT / "yr").glob("*.ipynb")):
@@ -209,13 +210,11 @@ def check_yr_pages():
             first = review_format.source(json.loads(p.read_text(encoding="utf-8"))["cells"][0])
         except (json.JSONDecodeError, IndexError, KeyError):
             continue  # reported by check_notebook
-        prefix = f"# {int(nn)}{review_format.page_letter(p)}. Prof. Rosenthal's "
-        want = prefix + review_format.KIND_TITLES[kind][len("Prof. Rosenthal's "):] if kind in review_format.KIND_TITLES else None
-        if want and not first.startswith(want + "\n"):
-            problems.append(f"yr/{p.name}: the title must be {want!r}"
+        prefix = f"# {int(nn)}{review_format.page_letter(p)}. {review_format.page_label(kind)}: "
+        m = review_format.TITLE.fullmatch(first.split("\n", 1)[0])
+        if not (m and first.startswith(prefix)):
+            problems.append(f"yr/{p.name}: the title must be {prefix + 'TOPIC'!r} (yr/README.md, \"The pages of a chapter\")"
                             + (" (run yr/tools/review.sh sync)" if kind == "review" else ""))
-        elif not want and not first.startswith(prefix):
-            problems.append(f"yr/{p.name}: the title must start with {prefix!r}")
     for nn in sorted(chapters):
         pages = [f for f in toc if f.startswith(f"yr/chap{nn}_")]
         if not pages or f"chap{nn}" not in toc:

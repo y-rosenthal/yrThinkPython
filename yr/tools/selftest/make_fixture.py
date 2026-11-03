@@ -22,7 +22,7 @@ def code(text, cid, tags=None):
                   'metadata': {'tags': tags} if tags else {}, 'outputs': [], 'source': text})
 
 
-md("""# 99b. Prof. Rosenthal's Review
+md("""# 99b. Review: Self-test
 
 A review of [Chapter 99: Self-test](https://y-rosenthal.github.io/yrThinkPython/chap99.html),
 for students who have already studied the chapter.""", 'title000')

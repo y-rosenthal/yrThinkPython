@@ -1,6 +1,6 @@
 ---
 name: yr-review-page
-description: Create a "NNb. Prof. Rosenthal's Review" page (NNc when the chapter has an additions page) for a Think Python chapter (yr/chapNN_review.ipynb, a concepts checklist plus practice questions with collapsible answers) and add it to the site, or write/revise the "Concepts covered" summary of an existing review page. Use when asked for a review page, chapter summary, fact list, concepts checklist or study guide for a chapter.
+description: Create an "NNb. Review: TOPIC" page (NNc when the chapter has an additions page) for a Think Python chapter (yr/chapNN_review.ipynb, a concepts checklist plus practice questions with collapsible answers) and add it to the site, or write/revise the "Concepts covered" summary of an existing review page. Use when asked for a review page, chapter summary, fact list, concepts checklist or study guide for a chapter.
 user-invocable: true
 argument-hint: [chapter number] [concepts-only]
 ---
