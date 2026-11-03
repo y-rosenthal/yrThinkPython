@@ -13,7 +13,7 @@ Reads jb/_toc.yml for the pages, then checks on the live site that:
     section 5.9, a page that only had outputs since the build started executing chapters);
   - yr/ review pages have both concept lists, Answer boxes and their turtle pictures, and show none of the
     notebook machinery (@title, run_code, markers);
-  - yr/ additions and more-review pages show Answer boxes (additions: code outputs too), and no %%expect,
+  - the other yr/ pages of a chapter (additions, more review, other kinds) show Answer boxes (additions: code outputs too), and no %%expect,
     <details> or '# Your code here'; a markdown page yr/NAME.md loads with its title;
   - words.txt (linked from yr/chap07_additions) can be downloaded from the top of the site.
 Retries until --wait seconds have passed (GitHub Pages lags a minute or two behind the deploy).
@@ -68,7 +68,7 @@ def check():
             if title not in html:
                 problems.append(f'{page}: the title {title!r} is not on the page')
         elif page.startswith('yr/') and not re.fullmatch(r'yr/chap\d\d_review', page):
-            # additions-format pages: the build runs their code cells (a more-review page may have none)
+            # additions-format pages (all but chapNN_review): the build runs their code cells (a review-question page may have none)
             outputs = html.count('class="cell_output')
             summary.append(f'{page}: {outputs} outputs')
             if outputs == 0 and page.endswith('_additions'):

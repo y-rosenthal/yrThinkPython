@@ -12,7 +12,10 @@ The rules are in `yr/README.md`, "Review pages": the **style rules** (Questions,
 question" and "Troubleshooting". Read them first, and follow them. Do not repeat a rule here: if a rule is
 missing or wrong, change `yr/README.md`.
 
-If the chapter has no review page yet, use the `yr-review-page` skill instead. Work on a topic branch, not `v3`.
+If the chapter has no review page yet, use the `yr-review-page` skill instead. For a separate page of review
+questions on one topic (a more-review page, or a page such as `yr/chap09_palindromes.ipynb`, "9e. Review:
+Palindromes"), follow `yr/README.md`, "More review pages", instead: such a page uses the additions format, not
+`review.sh`. Work on a topic branch, not `v3`.
 
 ## Steps for the agent
 

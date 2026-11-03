@@ -57,7 +57,7 @@ Every push to the branch `v3` publishes the website. Thus:
    ```
 
 2. Make your changes, and run the checks that the rule file for your task names (for a review page:
-   `review.sh sync` and `review.sh check`; for a chapter or an additions page: `run_notebooks.sh`).
+   `review.sh sync` and `review.sh check`; for a chapter or any other page of a chapter: `run_notebooks.sh`).
 3. Always run the fast check of all notebooks:
 
    ```bash
@@ -106,7 +106,7 @@ listed in the chapter "Prof. Rosenthal's course additions", "Tools"; the others:
 | Command | What it does |
 |---|---|
 | `python3 .claude/skills/check-notebooks/check_notebooks.py` | Fast check of all notebooks (its `--help` lists the checks) |
-| `.claude/skills/check-notebooks/run_notebooks.sh chapters/chapNN.ipynb` | Runs a chapter or an additions page |
+| `.claude/skills/check-notebooks/run_notebooks.sh chapters/chapNN.ipynb` | Runs a chapter, or a page of a chapter in `yr/` that is not a review page |
 | `.claude/skills/build-book/build_book.sh` | Builds the website on your computer |
 | `python3 .claude/skills/yrpublish/verify_live.py` | Checks the live website |
 | `python3 .claude/skills/notebook-conventions/nb_cells.py NOTEBOOK` | Lists the cells of a notebook |
