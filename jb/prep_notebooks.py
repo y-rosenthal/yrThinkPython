@@ -15,7 +15,8 @@
   become the same collapsible box the solutions use, shown; '# Your code here' cells (space for
   the reader's own code in Colab), the helper cell and the "Credits" heading are dropped; sync's
   markers are removed (values stay).
-- prepares the additions pages (yr/chapNN_additions.ipynb, see yr/README.md) like a chapter: each
+- prepares every other page of a chapter (additions, more_review and any other kind: all but
+  yr/chapNN_review.ipynb, see yr/README.md) like a chapter: each
   markdown cell that is one <details> block (an Answer, a "Diving deeper") becomes a closed dropdown,
   and the '# Your code here' cells are dropped. The outputs come from execute_notebooks.py.
 """

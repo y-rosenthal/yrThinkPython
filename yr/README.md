@@ -10,9 +10,11 @@ Allen Downey's *Think Python*. Keeping it here, instead of inside the chapter no
 ```
 yr/
   README.md                this file: the rules for the course's pages (layout, format, style, tools)
-  chapNN_additions.ipynb   material that a chapter uses but does not explain (only the chapters that need one)
+  chapNN_additions.ipynb   material that a chapter uses but does not explain (only the chapters that need one;
+                           more additions pages are chapNN_additions_TOPIC.ipynb)
   chapNN_review.ipynb      a review page of a chapter
-  chapNN_more_review.ipynb more review questions, after the review page (only the chapters that need one)
+  chapNN_more_review.ipynb more review questions, after the review page (only the chapters that need one; other
+                           pages of review questions have their own KIND, for example chap09_palindromes.ipynb)
   NAME.md                  a page of the course without code (an introduction, a note)
   plans/                   design notes (runall-collapsible-answers.md: the review-page format)
   tools/
@@ -274,7 +276,7 @@ On the website, each Answer is a closed box with the explanation and the stored 
 
 ### Where it appears
 
-- **Website:** right after its chapter (and after the chapter's additions page, if there is one) in the
+- **Website:** right after its chapter (and after the chapter's additions pages, if there are any) in the
   sidebar, as "4b. Review: Functions and Interfaces". The previous/next buttons go 4 → 4b → 5 (or 7 → 7b → 7c → 8). The book's chapter and section numbers do not change.
 - **Colab:** each page has a "Run this page on Colab" link at the top, and `jb/index.md` lists
   it under its chapter. (The links point at `v3`, so they work once the page is merged there.)
@@ -717,9 +719,10 @@ Use the `yr-review-page` skill, or by hand:
    questions use at the top of the Questions section.
 4. `jb/_toc.yml`: split the numbered "Chapters" list after `chapNN` and put the review page in
    its own unnumbered part between the two halves ("The pages of a chapter"; the comment above
-   `yr/chap02_review` in the TOC explains why, keep it only once). If the chapter has an additions page, the
-   review page goes in the same part, after the additions page.
-5. `jb/index.md`: add the Colab line under the chapter (and under its additions line, if any).
+   `yr/chap02_review` in the TOC explains why, keep it only once). If the chapter has additions pages, the
+   review page goes in the same part, after them.
+5. `jb/index.md`: add the Colab line under the chapter (and under its additions lines, if any), with the page's
+   title (`NNb. Review: TOPIC`).
 6. Verify:
    ```bash
    yr/tools/review.sh sync  yr/chapNN_review.ipynb       # writes outputs, pictures, values; read its report
@@ -737,7 +740,8 @@ Use the `yr-review-page` skill, or by hand:
 - `.github/workflows/deploy-book.yml` and `.claude/skills/build-book/build_book.sh` copy
   `yr/*.ipynb` and the markdown pages `yr/*.md` (not this README) into `jb/yr/` (gitignored) next to the
   chapter copies. Review pages are not run by the build: the website shows the outputs that sync stored.
-  Additions pages and more-review pages are run like the chapters (`jb/execute_notebooks.py`).
+  Every other page of a chapter (additions, more-review and the other kinds) is run like the chapters
+  (`jb/execute_notebooks.py`); `review_format.uses_review_format` decides which pages are review pages.
 - `jb/prep_notebooks.py` (`process_review`): each Answer (its text and its run cells' stored outputs,
   without their code) becomes one closed dropdown; the help note, the helper cell and the "Credits" heading
   are dropped; markers are removed (values stay); tracebacks are shortened; the concept lists stay open;
@@ -748,7 +752,7 @@ Use the `yr-review-page` skill, or by hand:
   checks a page on the built site (one closed Answer per question, no hidden code or markers on the page),
   and compares it with another build of the page (for example, before a big change).
 - `check_notebooks.py` lints `yr/*.ipynb` (review pages: outputs only on run cells, the stamp, the markers;
-  additions and more-review pages: no outputs) and checks that each page in `yr/` is in the TOC, in the right order and with
+  the other pages of a chapter: no outputs) and checks that each page in `yr/` is in the TOC, in the right order and with
   the right title, and that the workflow copies `yr/`. The deploy workflow runs it first, so a
   page with a problem is not published.
 

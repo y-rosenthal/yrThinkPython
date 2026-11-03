@@ -5,7 +5,8 @@ Usage: check_notebooks.py [notebook.ipynb ...]
 Default: every chap*.ipynb in chapters/, blank/ and solutions/ and every yr/*.ipynb, plus TOC / Colab-link / workflow
 consistency (every yr/ page, also a markdown page yr/NAME.md, is in the TOC and copied by the deploy workflow), a
 check that each solutions/chapNN.ipynb matches its chapter, a check of the yr/ page titles and their order in the TOC
-(any number, lettered b, c, d, ... in the order of the TOC; chapter, then additions, review, more review), and a check that every script of the fork (.claude/skills/,
+(any number, lettered b, c, d, ... in the order of the TOC; chapter, then additions, review, more review; titles
+"NN<letter>. Additions: TOPIC" or "NN<letter>. Review: TOPIC"), and a check that every script of the fork (.claude/skills/,
 yr/, jb/) has a docstring or header comment and a -h/--help option that prints it.
 (chapters/jupyter_intro.ipynb is skipped by default: it is an older nbformat 4.4 file that
 keeps its outputs on purpose and is only shipped in the zip, not in the book.)
