@@ -3,7 +3,7 @@
     python verify_site.py jb/_build/html/yr/chapNN_review.html yr/chapNN_review.ipynb [BEFORE.html]
 
 Run after build_book.sh (needs bs4, which jupyter-book installs). Checks that:
-  - there is one "Answer" dropdown per question, and every one is closed (the concept lists stay open);
+  - there is one "Answer" dropdown per question, and every one is closed;
   - no h4 headings, and no "Answer" or "Credits" entries in the page's contents;
   - none of the notebook machinery reaches the page: run_code, @title, the help note, markers, region
     delimiters, traceback paths and banners, ANSI codes, unrendered fences;

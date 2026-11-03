@@ -289,7 +289,8 @@ Sync writes the cells marked *(template)*; do not edit them.
    the page, and the Colab link. Sync keeps the topic that is in the title and the chapter title that is in the link.
    `review_cells.py new` uses the chapter's title as the topic; to change the topic, edit the title line, then run
    sync.
-2. **`## Concepts covered`**, with two collapsible lists, shown by default:
+2. **`## Concepts covered`**, with two collapsible lists, written as `<details open>` (open in Colab; closed
+   at the start on the website):
    - **Python Syntax and Semantics**: what the chapter teaches about Python itself.
    - **Definitions, etc.**: the definitions (each bullet starts with `DEFINITION:`), then
      "Other ideas" (programming practices and other concepts that are not syntax).
@@ -732,8 +733,8 @@ Use the `yr-review-page` skill, or by hand:
    python3 yr/tools/verify_site.py jb/_build/html/yr/chapNN_review.html yr/chapNN_review.ipynb
    ```
    Look at `jb/_build/html/yr/chapNN_review.html` (or serve `jb/_build/html` with `python3 -m http.server`):
-   sidebar position, numbering of the neighbouring chapters, the two concept lists open, answers
-   collapsed, outputs and pictures shown.
+   sidebar position, numbering of the neighbouring chapters, the two concept lists and the answers
+   collapsed, the buttons on their titles, outputs and pictures shown.
 
 ### How the build handles `yr/`
 
@@ -744,10 +745,12 @@ Use the `yr-review-page` skill, or by hand:
   (`jb/execute_notebooks.py`); `review_format.uses_review_format` decides which pages are review pages.
 - `jb/prep_notebooks.py` (`process_review`): each Answer (its text and its run cells' stored outputs,
   without their code) becomes one closed dropdown; the help note, the helper cell and the "Credits" heading
-  are dropped; markers are removed (values stay); tracebacks are shortened; the concept lists stay open;
+  are dropped; markers are removed (values stay); tracebacks are shortened; the concept lists become closed dropdowns;
   `# Your code here` cells are dropped. `process_additions`: each `<details>` cell (an Answer, a Diving deeper
   dive) becomes a closed dropdown, and `# Your code here` cells are dropped. The notebooks in `yr/` are never
   modified by the build.
+- `jb/_static/yr.js` adds buttons to the title of each dropdown on these pages: "Expand/Collapse" on every
+  dropdown, and also "Expand all" and "Collapse all" (all the Answers of the page) on each Answer.
 - `yr/tools/verify_site.py jb/_build/html/yr/chapNN_review.html yr/chapNN_review.ipynb [BEFORE.html]`
   checks a page on the built site (one closed Answer per question, no hidden code or markers on the page),
   and compares it with another build of the page (for example, before a big change).

@@ -2,6 +2,9 @@
 
 - adds Downey's display tags from soln_overlay.json (remove-input, remove-cell, section_*
   labels, ...; see update_overlay.py), so pages show and hide the same cells as his site
+- drops Downey's note at the top of each chapter (his book's sales links, a request for support and
+  his other book: the cell that starts with PROMO); the course site does not show it. The notebooks in
+  chapters/ keep it, so that a sync with his repository has no conflict there.
 - strips the %%expect cell magic so the site shows plain code (outputs, produced by
   execute_notebooks.py, are kept)
 - turns 'chapter*' / 'section*' cell tags into MyST cross-reference labels
@@ -12,7 +15,7 @@
 - prepares the review pages copied from yr/ into jb/yr/ (see yr/README.md): each Answer (its
   explanation and the stored outputs of its run cells, without their code) becomes one closed
   dropdown; the concept lists, written as <details open><summary>Title</summary> ... </details>,
-  become the same collapsible box the solutions use, shown; '# Your code here' cells (space for
+  become the same collapsible box the solutions use, closed; '# Your code here' cells (space for
   the reader's own code in Colab), the helper cell and the "Credits" heading are dropped; sync's
   markers are removed (values stay).
 - prepares every other page of a chapter (additions, more_review and any other kind: all but
@@ -35,6 +38,7 @@ import review_format  # noqa: E402
 SOLUTIONS_DIR = Path(__file__).resolve().parent.parent / 'solutions'
 OVERLAY = Path(__file__).resolve().parent / 'soln_overlay.json'
 PLACEHOLDER = '# Solution goes here'
+PROMO = 'You can order print and ebook versions of *Think Python 3e*'
 
 SOLUTIONS_NOTE = (
     'Suggested solutions are available on this page: below each exercise, '
@@ -137,6 +141,7 @@ def add_overlay_tags(cells, path):
 
 def process_notebook(path):
     ntbk = nbf.read(path, nbf.NO_CONVERT)
+    ntbk.cells = [c for c in ntbk.cells if not (c['cell_type'] == 'markdown' and c['source'].startswith(PROMO))]
     add_overlay_tags(ntbk.cells, path)
 
     solutions = load_solutions(path)
@@ -163,11 +168,13 @@ DETAILS = re.compile(r'\s*<details( open)?>\s*<summary>(.*?)</summary>(.*)</deta
 YOUR_CODE = '# Your code here'
 
 
-def details_to_dropdown(cell):
-    """Turn a markdown <details> answer into a collapsed MyST admonition (same look as solutions)."""
+def details_to_dropdown(cell, closed=False):
+    """Turn a markdown <details> answer into a collapsed MyST admonition (same look as solutions).
+    A <details open> block is shown at the start, unless closed is true."""
     m = DETAILS.fullmatch(cell['source'])
     if cell['cell_type'] == 'markdown' and m:
-        shown, title, body = m.group(1), re.sub(r'<[^>]+>', '', m.group(2)).strip(), m.group(3).strip()
+        shown = m.group(1) and not closed
+        title, body = re.sub(r'<[^>]+>', '', m.group(2)).strip(), m.group(3).strip()
         classes = 'dropdown toggle-shown' if shown else 'dropdown'  # toggle-shown: open by default
         cell['source'] = f':::{{admonition}} {title}\n:class: {classes}\n\n{body}\n:::\n'
 
@@ -215,7 +222,7 @@ def process_review_v3(ntbk, path):
             if c['source'].startswith(review_format.CREDITS_HEADING):
                 c['source'] = c['source'][len(review_format.CREDITS_HEADING):].lstrip('\n')
             raw_pictures(c)
-            details_to_dropdown(c)
+            details_to_dropdown(c, closed=True)  # the concept lists: closed at the start
         process_cell(c)
         out.append(c)
     ntbk.cells = out
