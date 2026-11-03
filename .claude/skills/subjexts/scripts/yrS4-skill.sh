@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Installed by yrProject v0.7.4 (https://github.com/y-rosenthal/yrProject): the templates and
+# Installed by yrProject v0.7.5 (https://github.com/y-rosenthal/yrProject): the templates and
 # the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub issues
 # for work to do later, project docs). This file belongs to the tool: do not edit it by hand, and do not change
 # it without the tool. "yrProject.sh update" replaces it with each new version (if you change it, update leaves
@@ -11,7 +11,7 @@
 #
 # Usage: bash .claude/skills/subjexts/scripts/yrS4-skill.sh [-h|--help] [--cat] [--dir] [NAME]
 #
-#   NAME     The skill: apply-notes, mark-book, plug-in-book, dev-test or release (the "subjexts-" prefix may be
+#   NAME     The skill: apply-notes, mark-book, teach-book, plug-in-book, dev-test, release or demo-book (the "subjexts-" prefix may be
 #            left out). Prints the full path of its SKILL.md; with --cat, prints the file itself.
 #   --dir    Print the yrS4 repository's folder and stop.
 #   (none)   List the skills that yrS4 has.

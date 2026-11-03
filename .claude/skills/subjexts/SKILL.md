@@ -1,9 +1,9 @@
 ---
 name: subjexts
-description: The subjexts teaching overlay in this book (labels on passages, a table of contents by label, in-place edits, the AI tutor) - what the two subjexts files are, how to switch the overlay on and off, and where the subjexts procedures are (apply a note packet of the author's notes and edits to the source, mark the book from a list, register the book). Use when the user mentions subjexts, labels, the overlay, "Table of contents by label", a note packet ("apply the notes in ..."), or asks to switch it on or off or to plug the book in.
+description: The subjexts teaching overlay in this book (labels on passages, a table of contents by label, in-place edits, the AI tutor) - what the two subjexts files are, how to switch the overlay on and off, and where the subjexts procedures are (apply a note packet of the author's notes and edits to the source, mark the book from a list, do anything the teacher does in the panel from the command line - labels, marks, notes, edits, replies, the switches - register the book). Use when the user mentions subjexts, labels, the overlay, "Table of contents by label", a note packet ("apply the notes in ..."), or asks to switch it on or off or to plug the book in.
 ---
 
-<!-- Installed by yrProject v0.7.4 (https://github.com/y-rosenthal/yrProject): the templates
+<!-- Installed by yrProject v0.7.5 (https://github.com/y-rosenthal/yrProject): the templates
      and the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub
      issues for work to do later, project docs). This file belongs to the tool: do not edit it by hand, and do
      not change it without the tool. "yrProject.sh update" replaces it with each new version (if you change it,
@@ -55,6 +55,11 @@ nothing, with only a console warning. The default name is `y-rosenthal/` plus th
   page keeps working; the script fails silently when absent.
 - **Off without a re-render:** the instructor's Teach bar in the panel has "Students see subjexts" per
   section and for the whole book, and "subjexts for me". These need no change to the book.
+- **Feature by feature:** under those switches, with Teach on, the "What students see" table has one checkbox
+  per feature per section (the subjexts button and panel, labels and margin lines, the table of contents by
+  label, comments, Ask my instructor, reactions, highlights and private notes, What we covered); "→ all" copies
+  one section's choices to the others. The table of contents by label is off for students by default. From the
+  command line: `yrS4 teach features` (the `teach-book` procedure below).
 - The line is safe to leave in place: the script holds no key and does nothing if the package is disabled on
   the platform.
 
@@ -90,6 +95,7 @@ bash .claude/skills/subjexts/scripts/yrS4-skill.sh --cat apply-notes
 |---|---|
 | "apply the notes in …", a file whose front matter says `yrS4-packet: author-notes` (the author's private notes and in-place edits, exported from the platform) | `apply-notes` |
 | label or mark many passages of the book from a list | `mark-book` (run from yrS4, which has the platform's keys) |
+| anything else a teacher does in the panel: make or publish a label, mark one passage, list a page's marks and find orphaned ones, remove a mark, an editorial note, an in-place edit, reply to a student, a join code, the tutor's settings, what students see | `teach-book` (`yrS4 teach`, one verb per panel action, or a teach packet; run from yrS4) |
 | plug the book in, register it, scan it (this book: `--manifest-only`) | `plug-in-book` |
 
 The script finds yrS4 through `$YRS4_DIR`, else the Dropbox tree this project is in (`…/_yrAiCoding/yrS4`),
