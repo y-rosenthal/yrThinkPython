@@ -1,5 +1,6 @@
 // Scripts for the website. Jupyter Book adds each JS file in _static/ to every page of the book, also to pages
-// that are added later. Two parts: collapsible sections (below), and the update check (at the end).
+// that are added later. Three parts: collapsible sections (below), the buttons of the dropdowns of the course's
+// pages, and the update check (at the end).
 //
 // Collapsible sections. In Colab, the reader can collapse any heading. On the website, this script puts a
 // heading and the rest of its section in a <details> block, open at the start: a click on the heading hides or
@@ -96,6 +97,50 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   window.addEventListener('hashchange', openTarget);
   openTarget();
+});
+
+// The buttons of the dropdowns of the course's pages (pages in yr/). The build makes each Answer, each concept
+// list ("Python Syntax and Semantics", "Definitions, etc.") and each "Diving deeper" box a dropdown: an
+// admonition with the class "dropdown" (jb/prep_notebooks.py). sphinx-togglebutton adds a click handler to its
+// title, and a hint "Click to show" (yr.css hides this hint on these pages). This script adds to the title:
+// - of every dropdown: the button "Expand/Collapse", which opens or closes this dropdown;
+// - of each Answer: also "Expand all" and "Collapse all", which open or close all the Answers of the page.
+document.addEventListener('DOMContentLoaded', () => {
+  if (!location.pathname.includes('/yr/') || typeof toggleHidden !== 'function') return;
+  const answers = [];
+  const isOpen = (box) => !box.classList.contains('toggle-hidden');
+  const setOpen = (box, open) => {
+    const toggle = box.querySelector(':scope > .admonition-title > button.toggle-button');
+    if (toggle && isOpen(box) !== open) toggleHidden(toggle);  // sphinx-togglebutton's function
+  };
+  const button = (text, className, action) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'yr-dd-button ' + className;
+    b.textContent = text;
+    b.addEventListener('click', (event) => {
+      event.stopPropagation();  // the click handler of the title would also open or close the dropdown
+      action();
+    });
+    return b;
+  };
+
+  document.querySelectorAll('.admonition.dropdown').forEach((box) => {
+    const title = box.querySelector(':scope > .admonition-title');
+    if (!title || !title.querySelector('button.toggle-button')) return;
+    box.classList.add('yr-dd');
+    const group = document.createElement('span');
+    group.className = 'yr-dd-group';
+    group.append(button('Expand/Collapse', 'yr-dd-main', () => setOpen(box, !isOpen(box))));
+    if (title.textContent.trim() === 'Answer') {
+      answers.push(box);
+      group.append(
+        button('Expand all', 'yr-dd-all', () => answers.forEach((a) => setOpen(a, true))),
+        button('Collapse all', 'yr-dd-all', () => answers.forEach((a) => setOpen(a, false))),
+      );
+    }
+    title.querySelector('button.toggle-button').before(group);
+  });
 });
 
 // Update check (every page). A browser can show a copy of a page that it saved before (GitHub Pages lets it keep a
