@@ -1,6 +1,6 @@
 ---
 name: yr-review-questions
-description: Add, revise or check practice questions (with collapsible answers, examples and turtle pictures) on a "Prof. Rosenthal's Review" page in yr/chapNN_review.ipynb, and verify every answer by running it. Use when asked to add/write/change/fix review questions, exercises, quiz or practice problems for a chapter's review page, or to check a review page's answers.
+description: Add, revise or check practice questions (with collapsible answers, examples and turtle pictures) on a review page ("NNb. Review: TOPIC", yr/chapNN_review.ipynb), and verify every answer by running it. Use when asked to add/write/change/fix review questions, exercises, quiz or practice problems for a chapter's review page, or to check a review page's answers.
 user-invocable: true
 argument-hint: [chapter number] [how many / what topics]
 ---

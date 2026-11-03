@@ -67,7 +67,7 @@ def check():
             summary.append(f'{page}: markdown page')
             if title not in html:
                 problems.append(f'{page}: the title {title!r} is not on the page')
-        elif page.startswith('yr/') and (page.endswith('_additions') or page.endswith('_more_review')):
+        elif page.startswith('yr/') and not re.fullmatch(r'yr/chap\d\d_review', page):
             # additions-format pages: the build runs their code cells (a more-review page may have none)
             outputs = html.count('class="cell_output')
             summary.append(f'{page}: {outputs} outputs')

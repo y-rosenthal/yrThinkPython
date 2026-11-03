@@ -36,51 +36,52 @@ For the third edition, the biggest changes are:
 **Chapter 2: Variables and Statements**
 
 * [Click here to run Chapter 2 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap02.ipynb)
-* [Click here to run 2b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap02_review.ipynb)
+* [Click here to run 2b. Review: Variables and Statements on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap02_review.ipynb)
 
 
 **Chapter 3: Functions**
 
 * [Click here to run Chapter 3 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap03.ipynb)
-* [Click here to run 3b. Prof. Rosenthal's Additions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap03_additions.ipynb)
-* [Click here to run 3c. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap03_review.ipynb)
+* [Click here to run 3b. Additions: The Three Forms of range on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap03_additions.ipynb)
+* [Click here to run 3c. Review: Functions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap03_review.ipynb)
 
 
 **Chapter 4: Functions and Interfaces**
 
 * [Click here to run Chapter 4 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap04.ipynb)
-* [Click here to run 4b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap04_review.ipynb)
+* [Click here to run 4b. Review: Functions and Interfaces on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap04_review.ipynb)
 
 
 **Chapter 5: Conditionals and Recursion**
 
 * [Click here to run Chapter 5 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap05.ipynb)
-* [Click here to run 5b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap05_review.ipynb)
+* [Click here to run 5b. Review: Conditionals and Recursion on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap05_review.ipynb)
 
 **Chapter 6: Return Values**
 
 * [Click here to run Chapter 6 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap06.ipynb)
-* [Click here to run 6b. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap06_review.ipynb)
+* [Click here to run 6b. Review: Return Values on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap06_review.ipynb)
 
 **Chapter 7: Iteration and Search**
 
 * [Click here to run Chapter 7 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap07.ipynb)
-* [Click here to run 7b. Prof. Rosenthal's Additions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_additions.ipynb)
-* [Click here to run 7c. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_review.ipynb)
-* [Click here to run 7d. Prof. Rosenthal's More Review Questions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_more_review.ipynb)
+* [Click here to run 7b. Additions: File Paths and for Loops on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_additions.ipynb)
+* [Click here to run 7c. Review: Iteration and Search on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_review.ipynb)
+* [Click here to run 7d. Review: Loops with Decisions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_more_review.ipynb)
 
 **Chapter 8: Strings and Regular Expressions**
 
 * [Click here to run Chapter 8 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap08.ipynb)
-* [Click here to run 8b. Prof. Rosenthal's Additions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap08_additions.ipynb)
-* [Click here to run 8c. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap08_review.ipynb)
+* [Click here to run 8b. Additions: String Methods on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap08_additions.ipynb)
+* [Click here to run 8c. Review: Strings and Regular Expressions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap08_review.ipynb)
 
 **Chapter 9: Lists**
 
 * [Click here to run Chapter 9 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap09.ipynb)
-* [Click here to run 9b. Prof. Rosenthal's Additions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_additions.ipynb)
-* [Click here to run 9c. Prof. Rosenthal's Review on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_review.ipynb)
-* [Click here to run 9d. Prof. Rosenthal's More Review Questions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_more_review.ipynb)
+* [Click here to run 9b. Additions: Nested Loops on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_additions.ipynb)
+* [Click here to run 9c. Review: Lists on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_review.ipynb)
+* [Click here to run 9d. Review: Sentences, Nested Loops and Tables on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_more_review.ipynb)
+* [Click here to run 9e. Review: Palindromes on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_palindromes.ipynb)
 
 **Chapter 10: Dictionaries**
 

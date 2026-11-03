@@ -24,9 +24,9 @@ Like the original, this work is licensed under a
   shows these behind a collapsed "Suggested solution" dropdown under each exercise; the
   notebooks that Colab opens are unchanged.
 - `yr/` – Prof. Rosenthal's course additions, kept apart from the book: for each chapter a review page
-  (`yr/chapNN_review.ipynb`, "NNb. Prof. Rosenthal's Review", right after the chapter on the site), for some
-  chapters an additions page before it (`yr/chapNN_additions.ipynb`, "NNb. Prof. Rosenthal's Additions"; the
-  review is then "NNc."), and pages without code (`yr/NAME.md`). [yr/README.md](yr/README.md) is the one place
+  (`yr/chapNN_review.ipynb`, "NNb. Review: TOPIC", right after the chapter on the site), for some chapters
+  additions pages before it (`yr/chapNN_additions.ipynb`, "NNb. Additions: TOPIC"; the review is then "NNc.")
+  and more review pages after it, and pages without code (`yr/NAME.md`). [yr/README.md](yr/README.md) is the one place
   for their rules and tools.
 - `author-guide/` – the guide for content authors, a Quarto book: the setup and the workflow for people, and the
   rule files of the repository (this README, `yr/README.md`, the skills) included as chapters. Build it with

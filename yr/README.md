@@ -40,20 +40,27 @@ Do not change Downey's chapters to add material. A chapter can have any number o
 They are lettered in the order of the table of contents: `b`, `c`, `d`, ... `z`, then `aa`, `ab`, ... (Downey's
 chapter is the "a" page, without a letter). The letter is not in the file name: it comes from the position, so a
 page inserted before another changes the letters after it, and `review.sh sync` and `check_notebooks.py` follow.
-The three kinds so far, in their order:
+A page is `yr/chapNN_KIND.ipynb` (KIND: lowercase letters, digits and `_`). The usual kinds, in their order:
 
 | Order | Title on the website | File | When |
 |---|---|---|---|
 | 1 | NN. (Downey's chapter title) | `chapters/chapNN.ipynb` | always |
-| 2 | NNb. Prof. Rosenthal's Additions | `yr/chapNN_additions.ipynb` | only if the chapter needs it |
-| 3 | NNb. Prof. Rosenthal's Review, or **NNc.** when the chapter has an additions page | `yr/chapNN_review.ipynb` | each chapter that has a review |
-| 4 | NNc. or NNd. Prof. Rosenthal's More Review Questions | `yr/chapNN_more_review.ipynb` | only if the chapter needs it |
-| ... | NN<letter>. Prof. Rosenthal's ... | `yr/chapNN_KIND.ipynb` | a new kind, when one is needed |
+| 2 | NNb. Additions: TOPIC | `yr/chapNN_additions.ipynb`, and more additions pages `yr/chapNN_additions_TOPIC.ipynb` | only if the chapter needs it |
+| 3 | NNb. Review: TOPIC, or **NNc.** after one additions page | `yr/chapNN_review.ipynb` | each chapter that has a review |
+| 4 | NN<letter>. Review: TOPIC | `yr/chapNN_more_review.ipynb`, or another KIND (`yr/chapNN_palindromes.ipynb`) | more review questions, when needed |
 
-- The additions page comes before the review page, and the review page before the more-review page. A new kind
-  of page is `yr/chapNN_KIND.ipynb` (KIND: lowercase letters, digits and `_`); its title starts with
-  `# NN<letter>. Prof. Rosenthal's `. Add the kind to `KIND_ORDER` and `KIND_TITLES` in `yr/tools/review_format.py`
-  if its title and position are fixed.
+- **The title** of every page of a chapter is `# NN<letter>. Additions: TOPIC` or `# NN<letter>. Review: TOPIC`.
+  TOPIC says what is on the page, in title case, in a few words: for example `9b. Additions: Nested Loops`,
+  `9e. Review: Palindromes`. The label is `Additions` for the kinds `additions` and `additions_TOPIC`, and
+  `Review` for every other kind (`review_format.page_label`). The topic of the review page
+  (`chapNN_review.ipynb`) is usually the chapter's title (`9c. Review: Lists`); `review.sh sync` keeps the topic
+  that is in the title cell. `check_notebooks.py` checks the letter and the label, and that there is a topic.
+- The additions pages come before the review page, and the review page before the more-review page.
+- Only `yr/chapNN_review.ipynb` uses the format of a review page (`review.sh sync` and `check`;
+  `review_format.uses_review_format`). Every other page (additions, more_review, any other kind) uses the format
+  of an additions page ("Additions pages"): the build runs its code cells, and turns its `<details>` Answers into
+  closed dropdowns. Write another page of review questions in the format of a more-review page
+  (`yr/chap09_palindromes.ipynb` is an example).
 - `review.sh sync` writes the letter of a review page in its title (`review_format.page_letter`: the page's
   position in the TOC). So after you add a page before a review page, run `review.sh sync` on the review page,
   and change its line in `jb/index.md` (`NNb.` to `NNc.`). The letter of every other kind is typed in its
@@ -72,13 +79,13 @@ The three kinds so far, in their order:
       - file: chap08
   ```
 - `jb/index.md` lists a Colab link for each page under the chapter, in the same order:
-  `* [Click here to run 7b. Prof. Rosenthal's Additions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_additions.ipynb)`.
+  `* [Click here to run 7b. Additions: File Paths and for Loops on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_additions.ipynb)`.
 - `check_notebooks.py` checks the titles, and that the TOC lists the pages right after the chapter, in the
   order of the kinds.
 
 ## More review pages: `yr/chapNN_more_review.ipynb`
 
-A more-review page, "NNd. Prof. Rosenthal's More Review Questions" (`NNc.` without an additions page), holds extra practice questions for a chapter
+A more-review page, "NN<letter>. Review: TOPIC" (for example "9d. Review: Sentences, Nested Loops and Tables"), holds extra practice questions for a chapter
 when its review page is full or when a topic needs more practice. It is a normal notebook in the format of an
 additions page, not of a review page: `## Practice questions` with `### Question N (easy|medium|hard): KIND`
 headings, each question's code and examples as text, a `# Your code here` cell, and an Answer that is one
@@ -88,7 +95,7 @@ markdown cell with a `<details>` / `<summary>Answer</summary>` block; then `## C
 `yr/chap07_more_review.ipynb` is the reference example. The questions follow the same rules as review questions
 ("Review pages", "Style rules": Questions and Answers), and their numbers are stable in the same way.
 
-To add one: write the notebook with the title `# NN<letter>. Prof. Rosenthal's More Review Questions`, list it in
+To add one: write the notebook with the title `# NN<letter>. Review: TOPIC`, list it in
 `jb/_toc.yml` after the chapter's review page, add its Colab line in `jb/index.md` after the review line, and
 verify it as an additions page ("Adding an additions page", step 4).
 
@@ -102,10 +109,11 @@ enables (`colon_fence`, `dollarmath`, `deflist`, `tasklist`) work: `:::{note}` a
 
 ## Additions pages: `yr/chapNN_additions.ipynb`
 
-A chapter usually has one additions page. A second additions page is permitted only when it is necessary,
-and only after Prof. Rosenthal agrees: the tools (`check_notebooks.py`, `review.sh sync`, the build) expect one
-page, so they must change too. A topic that needs material from a later chapter goes on that chapter's
-additions page: nested loops are on 9b, not 8b, so that their examples can use lists.
+A chapter can have more than one additions page: one for each topic. The first is `yr/chapNN_additions.ipynb`;
+the others are `yr/chapNN_additions_TOPIC.ipynb` (for example `chap09_additions_while.ipynb`). Each has its own
+title, `# NN<letter>. Additions: TOPIC` ("The pages of a chapter"). A topic that needs material from a later
+chapter goes on an additions page of that chapter: nested loops are on 9b, not 8b, so that their examples can use
+lists.
 
 An additions page explains what the chapter uses but does not explain (for example, `range` with two or three
 arguments for chapter 3), or what a student needs to run the chapter's code on their own computer (for
@@ -117,7 +125,7 @@ Reference examples: `yr/chap07_additions.ipynb` (sections, Diving deeper boxes, 
 
 ### Layout of a page
 
-1. **Title cell**: `# NNb. Prof. Rosenthal's Additions`, a link to the chapter, one sentence on how to use the
+1. **Title cell**: `# NNb. Additions: TOPIC` (for example `# 9b. Additions: Nested Loops`), a link to the chapter, one sentence on how to use the
    page, and the line `[Run this page on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chapNN_additions.ipynb)`.
 2. **Setup cell** (code), the same as the chapter's first cell: it downloads `thinkpython.py` (for
    `%%expect`) and the files that the page uses (for example `words.txt`), then `import thinkpython`.
@@ -217,15 +225,17 @@ Cell conventions: nbformat 4.5, a unique 8-character `id` on each cell, `executi
 ### Adding an additions page
 
 1. Read every cell of `chapters/chapNN.ipynb`, and note what earlier chapters teach. Find what the chapter uses
-   but does not explain. If the chapter already has an additions page, add the new material to it.
+   but does not explain. If the chapter already has an additions page on the same topic, add the new material to
+   it; for a new topic, make another additions page (`yr/chapNN_additions_TOPIC.ipynb`).
 2. Write the notebook (the layout and the style rules above).
 3. Add the page to the site:
-   - `jb/_toc.yml`: list `yr/chapNN_additions` in the unnumbered part after `chapNN`, before
-     `yr/chapNN_review`. If the chapter has no such part yet, make one ("The pages of a chapter").
+   - `jb/_toc.yml`: list the page in the unnumbered part after `chapNN`, after the other additions pages and
+     before `yr/chapNN_review`. If the chapter has no such part yet, make one ("The pages of a chapter").
    - `jb/index.md`: under the chapter, add the Colab line of the additions page before the review line, and
-     change the review line from `NNb.` to `NNc.`.
-   - The review page: `yr/tools/review.sh sync yr/chapNN_review.ipynb` writes `NNc.` in its title, and
-     `yr/tools/review.sh check yr/chapNN_review.ipynb` must print `OK`.
+     change the letters of the lines after it (`NNb.` to `NNc.`, ...).
+   - The pages after it: `yr/tools/review.sh sync yr/chapNN_review.ipynb` writes the new letter in the title of
+     the review page; type the new letter in the title of each other page after it (`check_notebooks.py` reports
+     it). `yr/tools/review.sh check yr/chapNN_review.ipynb` must print `OK`.
    - A file that students must download from the website (as `words.txt` for chapter 7): add it to
      `html_extra_path` in `jb/_config.yml`, and link to `https://y-rosenthal.github.io/yrThinkPython/FILE`.
 4. Verify:
@@ -241,9 +251,9 @@ Cell conventions: nbformat 4.5, a unique 8-character `id` on each cell, `executi
 
 ## Review pages: `yr/chapNN_review.ipynb`
 
-One notebook per chapter, titled `NNb. Prof. Rosenthal's Review` (e.g. `4b.` for chapter 4), or
-`NNc. Prof. Rosenthal's Review` when the chapter has an additions page (e.g. `7c.`; see "The pages of a
-chapter"). It helps students review one chapter. It has **Concepts covered**, two lists of facts as a checklist,
+One notebook per chapter, titled `NNb. Review: TOPIC` (e.g. `4b. Review: Functions and Interfaces`), or
+`NNc. Review: TOPIC` when the chapter has an additions page (e.g. `7c. Review: Iteration and Search`; see "The
+pages of a chapter"). The topic is usually the chapter's title. It helps students review one chapter. It has **Concepts covered**, two lists of facts as a checklist,
 and **Questions**, practice questions from easy to hard, each with an **Answer** that is closed until the
 student opens it. `yr/chap04_review.ipynb` is the reference example.
 
@@ -265,7 +275,7 @@ On the website, each Answer is a closed box with the explanation and the stored 
 ### Where it appears
 
 - **Website:** right after its chapter (and after the chapter's additions page, if there is one) in the
-  sidebar, as "4b. Prof. Rosenthal's Review". The previous/next buttons go 4 → 4b → 5 (or 7 → 7b → 7c → 8). The book's chapter and section numbers do not change.
+  sidebar, as "4b. Review: Functions and Interfaces". The previous/next buttons go 4 → 4b → 5 (or 7 → 7b → 7c → 8). The book's chapter and section numbers do not change.
 - **Colab:** each page has a "Run this page on Colab" link at the top, and `jb/index.md` lists
   it under its chapter. (The links point at `v3`, so they work once the page is merged there.)
 
@@ -273,8 +283,10 @@ On the website, each Answer is a closed box with the explanation and the stored 
 
 Sync writes the cells marked *(template)*; do not edit them.
 
-1. **Title cell** *(template)*: `# NNb. Prof. Rosenthal's Review` (or `NNc.`), a link to the chapter, how to use
-   the page, and the Colab link. Sync keeps the chapter title that is in the link.
+1. **Title cell** *(template)*: `# NNb. Review: TOPIC` (or `NNc.`), a link to the chapter, how to use
+   the page, and the Colab link. Sync keeps the topic that is in the title and the chapter title that is in the link.
+   `review_cells.py new` uses the chapter's title as the topic; to change the topic, edit the title line, then run
+   sync.
 2. **`## Concepts covered`**, with two collapsible lists, shown by default:
    - **Python Syntax and Semantics**: what the chapter teaches about Python itself.
    - **Definitions, etc.**: the definitions (each bullet starts with `DEFINITION:`), then

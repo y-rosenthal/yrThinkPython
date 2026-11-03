@@ -2,10 +2,10 @@
 
 The chapters/ notebooks are committed without outputs, and Jupyter Book's own execution is off
 (_config.yml), so this step produces the outputs, as Downey's site has them. The additions pages
-(yr/chapNN_additions.ipynb, copied to jb/yr/) and the more-review pages (yr/chapNN_more_review.ipynb) are
-committed without outputs too, and this step runs them
+(yr/chapNN_additions.ipynb, copied to jb/yr/) and every other page of a chapter in the additions format
+(yr/chapNN_KIND.ipynb: more_review, or any new kind) are committed without outputs too, and this step runs them
 the same way. (The review pages, yr/chapNN_review.ipynb, store their own outputs: this step does not run
-them.) For each jb/chapNN.ipynb, jb/yr/chapNN_additions.ipynb and jb/yr/chapNN_more_review.ipynb:
+them.) For each jb/chapNN.ipynb and each jb/yr/chapNN_KIND.ipynb that is not a review page:
 
 1. Make a scratch copy in which each '# Solution goes here' cell holds a solution: ours from
    solutions/chapNN.ipynb if there is one, otherwise Downey's from soln_overlay.json. Then the
@@ -27,11 +27,12 @@ If a notebook cannot be executed at all, it is left without outputs and a warnin
 the build goes on. Run from jb/, after copying the chapters and before prep_notebooks.py:
 
     python execute_notebooks.py [chapNN.ipynb ...]
-    (default: every chap*.ipynb in jb/ and every chap*_additions.ipynb and chap*_more_review.ipynb in jb/yr/)
+    (default: every chap*.ipynb in jb/ and every chap*_KIND.ipynb in jb/yr/ except chap*_review.ipynb)
 """
 import copy
 import json
 import os
+import re
 import shutil
 import sys
 import tempfile
@@ -166,5 +167,5 @@ if __name__ == '__main__':
     if '-h' in sys.argv or '--help' in sys.argv:
         sys.exit(print(__doc__))
     os.chdir(JB)
-    main(sys.argv[1:] or sorted(glob('chap*.ipynb')) + sorted(glob('yr/chap*_additions.ipynb'))
-         + sorted(glob('yr/chap*_more_review.ipynb')))
+    main(sys.argv[1:] or sorted(glob('chap*.ipynb'))
+         + sorted(p for p in glob('yr/chap*_*.ipynb') if not re.fullmatch(r'yr/chap\d\d_review\.ipynb', p)))

@@ -91,7 +91,7 @@ CREDITS = '''## Credits
 [Think Python: 3rd Edition](https://allendowney.github.io/ThinkPython/index.html) *by Allen B. Downey.*
 *Text license:* [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/)'''
 
-TITLE_CELL = '''# {N}{L}. Prof. Rosenthal's Review
+TITLE_CELL = '''# {N}{L}. Review: {TOPIC}
 
 A review of [Chapter {N}: {TITLE}](https://y-rosenthal.github.io/yrThinkPython/chap{NN}.html),
 for students who have already studied the chapter.
@@ -99,13 +99,28 @@ Use the two lists under **Concepts covered** as a checklist (click a list's titl
 Each question has a suggested answer under **Answer**. Try the question first, then open the Answer.
 
 [Run this page on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap{NN}_review.ipynb)'''
-TITLE_CELL_PARSE = re.compile(r'^# (?P<N>\d+)[a-z]+\. Prof\. Rosenthal\'s Review\n\nA review of \[Chapter \d+: (?P<TITLE>[^\]]*)\]')
+# The title cell of a review page: "# NN<letter>. Review: TOPIC" (TOPIC: the chapter's title, or another topic). The old
+# title, "# NN<letter>. Prof. Rosenthal's Review", is read too: its topic is the chapter's title.
+TITLE_CELL_PARSE = re.compile(r'^# (?P<N>\d+)[a-z]+\. (?:Prof\. Rosenthal\'s Review|Review: (?P<TOPIC>[^\n]*\S))\n\n'
+                              r'A review of \[Chapter \d+: (?P<TITLE>[^\]]*)\]')
 
 
 PAGE_STEM = re.compile(r'chap(?P<nn>\d\d)_(?P<kind>[a-z0-9_]+)')
-KIND_ORDER = ('additions', 'review', 'more_review')      # the known kinds, in their order after the chapter
-KIND_TITLES = {'additions': "Prof. Rosenthal's Additions", 'review': "Prof. Rosenthal's Review",
-               'more_review': "Prof. Rosenthal's More Review Questions"}
+KIND_ORDER = ('additions', 'review', 'more_review')      # the usual kinds, in their order after the chapter
+TITLE = re.compile(r'# (?P<N>\d+)(?P<L>[a-z]+)\. (?P<label>Additions|Review): (?P<topic>\S.*)')  # "# 9b. Additions: Nested Loops"
+
+
+def page_label(kind):
+    """The label in the title of a page of kind KIND (yr/chapNN_KIND.ipynb): "Additions" for additions and
+    additions_TOPIC, "Review" for every other kind (review, more_review, palindromes, ...)."""
+    return 'Additions' if kind == 'additions' or kind.startswith('additions_') else 'Review'
+
+
+def uses_review_format(path):
+    """True for yr/chapNN_review.ipynb, the one page of a chapter in the review format (review.sh sync and check).
+    Every other page of a chapter uses the additions format: the build runs it, and its Answers are <details>."""
+    m = PAGE_STEM.fullmatch(Path(path).stem)
+    return bool(m) and m.group('kind') == 'review'
 
 
 def letter(i):
@@ -133,7 +148,7 @@ def chapter_pages(path):
 
 
 def page_letter(path):
-    """The letter of a page's number ("7c." in "7c. Prof. Rosenthal's Review"): its position among the pages of the
+    """The letter of a page's number ("7c." in "7c. Review: Iteration and Search"): its position among the pages of the
     course after its chapter, in the order of the TOC (see chapter_pages): b, c, d, ... A page that is not a
     chapter page (the selftest fixture) is 'b'."""
     pages = chapter_pages(path)
@@ -144,9 +159,10 @@ def page_letter(path):
 review_letter = page_letter      # the old name
 
 
-def title_cell(n, title, letter='b'):
+def title_cell(n, title, letter='b', topic=None):
+    """The title cell of a review page; the topic is the chapter's title unless another one is given."""
     return (TITLE_CELL.replace('{NN}', f'{n:02d}').replace('{N}', str(n)).replace('{L}', letter)
-            .replace('{TITLE}', title))
+            .replace('{TOPIC}', topic or title).replace('{TITLE}', title))
 
 
 # ---------------------------------------------------------------- small helpers
