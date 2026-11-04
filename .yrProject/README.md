@@ -5,14 +5,26 @@ docs/PROJECT-SETUP.qmd includes this file, and gives the title. -->
 
 | | |
 |---|---|
-| Template version | v0.8.1 |
+| Template version | v0.9.1 |
 | Parts | rules, yrIssues, subjexts |
 | Set up by | `yrProject.sh update` (an existing folder) |
 | Last change | 2026-11-04 |
 
+## If you do not know yrProject
+
+This repository uses yrProject. Some files here come from yrProject; the rest belong to this repository. How to tell them apart:
+
+- **What yrProject is:** the templates and the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub issues for work to do later, project docs). Its repository: https://github.com/y-rosenthal/yrProject. If the link does not open, the repository is private: ask the owner of this project.
+- **The version and the parts installed here:** run `bash .claude/skills/yrProject/scripts/yrProject-notice.sh facts` (bash and git only; the tool is not needed).
+- **Whole files from yrProject:** the table "The files" below. Every file that yrProject installed starts with a comment that names yrProject and its version: "Installed by yrProject" for a file of the tool, "Added by yrProject" for a starting file that this project now owns.
+- **Blocks inside files of this repository:** in `AGENTS.md`, `README.md` and `.gitignore`, the text from a line that starts with `<!-- begin yrProject`, `# begin yrProject` or `<!-- begin shared rules` to its end line comes from yrProject. Everything outside those blocks belongs to this repository.
+- **Hooks in `.claude/settings.json`:** JSON has no comments. A hook whose command runs a script under `.claude/skills/yrProject/`, `.claude/skills/yrIssues/` or `.claude/skills/yrUpdateDocsSkillsRulesEtc/` comes from yrProject; the other settings belong to this repository.
+- **`.yrProject/`:** the record of the setup (this page, `manifest.json`, `setup.env`), written by the tool.
+- **The tool** `yrProject.sh` runs on the owner's computer. Without it, all these files are ordinary files: see "How to change things" below.
+
 ## The parts
 
-- **rules**: the rules for every AI agent: `AGENTS.md`, with a copy of the shared rules (their source is `rules/AGENTS.md` in yrProject), and `CLAUDE.md`, which imports it; and the `yrProject` skill, which checks, updates and removes this setup for you (ask the agent), with the notice script `yrProject-notice.sh`. A SessionStart hook runs it: it shows the facts of this setup at the start of each Claude Code session, and the agent gives them in its first reply. The Claude Code status line can show the version `yrProject VERSION [latest ...]` (`yrProject.sh statusline-setup`, once on each computer). Also the `yrUpdateDocsSkillsRulesEtc` skill: before a push, and before you leave a chat, the agent updates the docs, the skills and the rules to reflect what was done and decided in the chat, and records the review (a marker in `.git/`); a PreToolUse hook refuses `git push` until it did, and a SessionStart hook names the earlier chat to read after `/clear`.
+- **rules**: the rules for every AI agent: `AGENTS.md`, with a copy of the shared rules (their source is `templates/v0.9.1/AGENTS-shared-rules.md` in yrProject: the shared rules of this template version), and `CLAUDE.md`, which imports it; and the `yrProject` skill, which checks, updates and removes this setup for you (ask the agent), with the notice script `yrProject-notice.sh`. A SessionStart hook runs it: it shows the facts of this setup at the start of each Claude Code session, and the agent gives them in its first reply. The Claude Code status line can show the version `yrProject VERSION [latest ...]` (`yrProject.sh statusline-setup`, once on each computer). Also the `yrUpdateDocsSkillsRulesEtc` skill: before a push, and before you leave a chat, the agent updates the docs, the skills and the rules to reflect what was done and decided in the chat, and records the review (a marker in `.git/`); a PreToolUse hook refuses `git push` until it did, and a SessionStart hook names the earlier chat to read after `/clear`.
 - **yrIssues**: work to do later is the GitHub issues of the project. The `yrIssues` skill manages them (its settings: `_yrIssues/config.sh`; the issues that it creates get the label `yrIssue`), a SessionStart hook shows how many are open, and a PostToolUse hook keeps the saved copy `_yrIssues/issues.md` up to date.
 - **subjexts**: the subjexts teaching overlay for this book (labels, a table of contents by label, in-place edits, the tutor): its include file `subjexts-v001.html` and its page `subjexts-labels-v001.qmd` in a Quarto book, or the page `jb/subjexts-labels.md` in a Jupyter Book (their content is the platform's, from `book-files/` in the yrS4 repository; only the package name is this book's), and the `subjexts` skill, which explains them and, through its script `yrS4-skill.sh`, refers to the subjexts procedures in the yrS4 repository (apply a note packet, mark the book, register it) instead of carrying copies.
 
@@ -40,9 +52,9 @@ docs/PROJECT-SETUP.qmd includes this file, and gives the title. -->
 ## How to change things
 
 - **Project rules:** edit `AGENTS.md`, outside the two blocks of the tool.
-- **Shared rules:** edit `rules/AGENTS.md` in yrProject and commit it. Then run `yrProject.sh update` in this project.
+- **Shared rules:** they belong to the template version. A change to them comes in a new yrProject version: `yrProject.sh update` brings it to this project.
 - **A file of the tool** (a skill, a guide): you can change it. Then `update` leaves it alone, and the file gets no newer versions. `yrProject.sh status` lists such files.
-- **The blocks of the tool** (in `AGENTS.md`, `README.md` and `.gitignore`): do not edit them. `yrProject.sh update` writes them again, with the current version.
+- **The blocks of the tool** (in `AGENTS.md`, `README.md` and `.gitignore`): do not edit them. `yrProject.sh update` writes them again, with the current version. If you change a block, `update` leaves that block alone and reports it. To get the new block: move your text out of the block, delete the block (from its begin line to its end line), and run `update` again.
 - **To take yrProject out of this project:** ask the agent, or run `yrProject.sh remove` (it shows what would go, and asks).
 - **Without `yrProject.sh`** (for example, a collaborator): all these files are ordinary files. Change the files of the tool only if you must, and tell the project owner.
 
@@ -81,3 +93,4 @@ yrProject.sh projects           # the list of projects that use yrProject, from 
 | 2026-11-03 | update | v0.7.5 | rules, yrIssues, subjexts |
 | 2026-11-04 | update | v0.8.0 | rules, yrIssues, subjexts |
 | 2026-11-04 | update | v0.8.1 | rules, yrIssues, subjexts |
+| 2026-11-04 | update | v0.9.1 | rules, yrIssues, subjexts |

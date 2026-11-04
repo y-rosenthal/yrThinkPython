@@ -3,20 +3,21 @@
 <!-- begin yrProject setup: written by yrProject.sh; "yrProject.sh update" replaces this block -->
 ## Set up by yrProject.sh
 
-`yrProject.sh` (yrProject v0.8.1; parts: rules, yrIssues, subjexts) set up this project. yrProject
+`yrProject.sh` (yrProject v0.9.1; parts: rules, yrIssues, subjexts) set up this project. yrProject
 (https://github.com/y-rosenthal/yrProject) is the templates and the tool that give a project one base for
 AI-assisted work: rules for AI agents, skills, hooks, GitHub issues for work to do later, project docs. The tool
 installed files here, and `yrProject.sh update` keeps them up to date. Every file that it installed starts with
 a comment that names yrProject and its version, and says whether the file belongs to the tool or to the project.
 
-- In the first reply of a session, give one line with the version line `(yrProject v0.8.1 [latest])` (or
+- In the first reply of a session, give one line with the version line `(yrProject v0.9.1 [latest])` (or
   `[latest vA.B.C]` if a newer version exists, or `[latest UNKNOWN]`), the type, the installed parts and the parts
   not installed (`bash .claude/skills/yrProject/scripts/yrProject-notice.sh facts`); then answer. Do not repeat the
   version line in later replies: the Claude Code status line can show it (`yrProject.sh statusline-setup`).
 - Before you change a file that the tool installed, read `.yrProject/README.md`. It lists the files, and tells who
   changes each one.
 - Do not edit this block, the shared-rules block, the `yrProject` block in `.gitignore`, or the files in
-  `.yrProject/`. `yrProject.sh update` writes them again.
+  `.yrProject/`. `yrProject.sh update` writes them again. It does not replace a block that was changed by hand: it
+  leaves the block alone and reports it. Put the project's own rules outside the blocks.
 - The user does not need to know the tool. To check, update, migrate or remove this setup, or to list or make
   yrProjects, follow the `yrProject` skill (`.claude/skills/yrProject/SKILL.md`).
 - "Project" alone does not mean the yrProject setup. Unless the user says yrProject or it is obvious, ask.
@@ -116,7 +117,21 @@ The shared rule "Scripts have --help" (below) applies. In this repository:
   Downey's own scripts go in its `NO_HELP` list. Do not change Downey's scripts.
 - `review.sh COMMAND --help` also shows the options of that command.
 
-<!-- begin shared rules: copied by yrProject from yrProject/rules/AGENTS.md; edit there -->
+<!-- begin shared rules: yrProject v0.9.1, from templates/v0.9.1/AGENTS-shared-rules.md in yrProject; "yrProject.sh update" replaces this block, unless it was changed by hand -->
+
+## Write in plain English
+
+- Write in plain English in replies, docs, commit messages, pull requests, code comments, logs and UI text.
+  Follow the main rules of ASD-STE100 (Simplified Technical English) as a guide, not strictly.
+- Say directly what a thing does and what it does not do.
+- Do not use metaphors or figurative phrasing. Not: "this is a curtain at view time, not a lock". Instead: "the
+  overlay hides the text when the page is viewed; the text is still in the page's HTML".
+- Use short sentences, 20 words or fewer when you can. Put one instruction or one idea in each sentence.
+- Use the active voice: "the script deletes the file", not "the file is deleted".
+- Use one word for one meaning. After you give a thing a name, use that same name every time.
+- Do not start with filler such as "Sure, I can help with that". Do not hedge without a reason. Say what you
+  know, and say clearly what you do not know.
+- Do not change code, names (of variables, files, commands, APIs) or technical terms to make the text simpler.
 
 ## Scripts have --help
 

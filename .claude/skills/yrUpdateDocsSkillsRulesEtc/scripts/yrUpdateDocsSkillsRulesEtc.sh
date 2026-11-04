@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
-# Installed by yrProject v0.8.1 (https://github.com/y-rosenthal/yrProject): the templates and
+# Installed by yrProject v0.9.1 (https://github.com/y-rosenthal/yrProject): the templates and
 # the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub issues
 # for work to do later, project docs). This file belongs to the tool: do not edit it by hand, and do not change
 # it without the tool. "yrProject.sh update" replaces it with each new version (if you change it, update leaves
-# it alone, and it gets no newer versions); "yrProject.sh remove" removes it. .yrProject/README.md lists every
-# file that yrProject installed, and tells who changes each one.
+# it alone, and it gets no newer versions); "yrProject.sh remove" removes it.
+# This repository uses yrProject. What yrProject is, which files come from it and which belong to this repository:
+# .yrProject/README.md. The yrProject version and the installed parts, with bash and git only:
+#   bash .claude/skills/yrProject/scripts/yrProject-notice.sh facts
 #
 # yrUpdateDocsSkillsRulesEtc.sh - the hooks of the yrUpdateDocsSkillsRulesEtc skill: the agent updates the
 # project's docs, skills and rules before a push and before the user leaves a chat (see SKILL.md). The review is

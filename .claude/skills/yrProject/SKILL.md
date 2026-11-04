@@ -18,12 +18,14 @@ allowed-tools:
   - Bash(bash ${CLAUDE_SKILL_DIR}/scripts/yrProject-notice.sh *)
 ---
 
-<!-- Installed by yrProject v0.8.1 (https://github.com/y-rosenthal/yrProject): the templates
+<!-- Installed by yrProject v0.9.1 (https://github.com/y-rosenthal/yrProject): the templates
      and the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub
      issues for work to do later, project docs). This file belongs to the tool: do not edit it by hand, and do
      not change it without the tool. "yrProject.sh update" replaces it with each new version (if you change it,
      update leaves it alone, and it gets no newer versions); "yrProject.sh remove" removes it.
-     .yrProject/README.md lists every file that yrProject installed, and tells who changes each one. -->
+     This repository uses yrProject. What yrProject is, which files come from it and which belong to this repository:
+     .yrProject/README.md. The yrProject version and the installed parts, with bash and git only:
+       bash .claude/skills/yrProject/scripts/yrProject-notice.sh facts -->
 
 # The yrProject setup of this project (yrProject skill)
 
@@ -72,9 +74,18 @@ You may offer this once, when the user asks about the version or says the versio
   `projects --scan`, `yrIssues.sh setup-labels`, a commit): first show the user what will happen, in plain words,
   and run them only after the user agrees. The tool cannot ask the user itself (you have no terminal for its question), so always run
   `--dry-run` first, then `-y` after the user agrees.
+- **Only this project.** Run `update`, `update-all` or `remove` only in the project that the user is working in,
+  and only when the user asks. Never run them in another project, even if `projects` or a notice says that it is
+  behind: someone may be working there now. The owner updates each project from a session in that project.
+  `update-all` is a last resort, for when the user asks for it in so many words.
+- **Work that is not saved.** `update` prints the facts and refuses (exit 7) when the repository has uncommitted
+  changes, untracked files or commits that are not pushed. Tell the user those facts, and offer to commit and
+  push first (only with their agreement). Run `update --allow-uncommitted-or-unpushed` only when the user says
+  to update anyway.
 - Never edit the tool's blocks in `AGENTS.md`, `README.md` and `.gitignore` (between a `begin yrProject` line and
   its `end yrProject` line, or `begin shared rules` and `end shared rules`), or the files in `.yrProject/`: the
-  tool writes them.
+  tool writes them. `update` does not replace a block that was changed by hand: it leaves the block alone and
+  reports it (`= keep`).
 - Before you change a file that the tool installed, read `.yrProject/README.md`: it says who changes each file.
 - Don't commit or push unless the user asks.
 - Speak of "the yrProject setup", "the shared rules", "the yrIssues skill"; give the commands only if the user asks
@@ -99,12 +110,20 @@ with that Dropbox, can check, update or remove the setup; everything else in the
 
 ## Update or migrate the yrProject ("update yrProject", "a new yrProject version came out", "the shared rules changed")
 
+The shared rules belong to the template version (from v0.9.0): a change to them comes with a new yrProject
+version, and an update to that version brings it.
+
 1. Run `yrProject.sh update --dry-run`. Read the plan:
    - `+ add`, `~ change`, `- remove`: the files that it would add, replace or delete;
-   - `= keep`: files that it leaves alone, because someone changed them;
+   - `= keep`: files, or blocks of the tool in `AGENTS.md`, `README.md` or `.gitignore`, that it leaves alone,
+     because someone changed them. For a block, offer to move the user's text out of the block and to delete the
+     block, so that the next update writes the new block;
    - `note:` lines: things to do by hand;
    - the diffs of `AGENTS.md`, `CLAUDE.md`, `.gitignore`, `.claude/settings.json` and `README.md`.
-   If it says "Nothing to do", tell the user that the project is up to date, and stop.
+   If it says "Nothing to do", tell the user that the project is up to date, and stop. If it says that the
+   repository has work that is not committed or not pushed, tell the user the facts (the files, the commits) and
+   offer to commit and push first; `update -y` refuses until then, or until the user says to update anyway
+   (`--allow-uncommitted-or-unpushed`).
 2. Summarize the plan for the user in plain words: the version now and after; what is new for them (for example a
    new or renamed skill); what goes away; what they must decide or do by hand. If it lists files with uncommitted
    changes, say so, and offer to commit them first, so that the update can be undone.
