@@ -28,7 +28,8 @@ What it does, mirroring `.github/workflows/deploy-book.yml` exactly:
    (additions, more review, other kinds) is executed like the chapters.
 4. `python jb/prep_notebooks.py`: adds Downey's display tags from `jb/soln_overlay.json`
    (`remove-input`, `remove-cell`, `section_*` labels: same shown/hidden cells as his site),
-   strips `%%expect` lines, adds section labels, turns `# Solution…` cells into collapsed
+   drops Downey's promo note at the top of each chapter (his sales links, support request and other
+   book; `chapters/` keep it), strips `%%expect` lines, adds section labels, turns `# Solution…` cells into collapsed
    "Suggested solution" dropdowns when `solutions/chapNN.ipynb` has a matching cell id (see the
    notebook-conventions skill), otherwise blanks them, and prepares the yr/ review pages
    (`yr/README.md`, "How the build handles yr/"; on a converted page it stops the build if an

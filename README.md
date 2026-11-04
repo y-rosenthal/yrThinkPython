@@ -35,8 +35,8 @@ Like the original, this work is licensed under a
   it. `.claude/skills/` – step-by-step procedures (Claude Code skills) for building, checking, syncing and publishing.
 - `jb/` – Jupyter Book configuration (`_config.yml`, `_toc.yml`), the landing pages
   (`index.md`, `blank.md`), `execute_notebooks.py` (runs the chapters at build time so the
-  pages show outputs), `prep_notebooks.py` (applies display tags, strips `%%expect` magics,
-  adds section labels and merges in the solutions) and `soln_overlay.json` / `update_overlay.py`
+  pages show outputs), `prep_notebooks.py` (applies display tags, drops Downey's promo note at the top of each chapter,
+  strips `%%expect` magics, adds section labels, merges in the solutions and prepares the `yr/` pages) and `soln_overlay.json` / `update_overlay.py`
   (display tags and solutions taken from Downey's ThinkPythonSolutions notebooks).
 - `thinkpython.py`, `diagram.py`, `structshape.py`, `words.txt`, `photos.zip` – helper
   modules and data files used by the notebooks.

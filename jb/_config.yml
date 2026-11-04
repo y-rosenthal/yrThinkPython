@@ -66,7 +66,8 @@ sphinx:
     ogp_image_alt: Cover of Think Python, 3rd edition, by Allen B. Downey
     ogp_enable_meta_description: false
     # Downey's site also has a page-view counter, an end-of-chapter support note, an EthicalAds slot and a
-    # sponsor slot; the course site does not take them (sync-upstream skill, check_sync.py NOT_TAKEN).
+    # sponsor slot; the course site does not take them (sync-upstream skill, check_sync.py NOT_TAKEN). The
+    # promo note at the top of each of his chapters is dropped at build time (prep_notebooks.py, PROMO).
     mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
     mathjax_config:
       tex2jax:
