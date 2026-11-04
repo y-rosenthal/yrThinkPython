@@ -1,6 +1,6 @@
 ---
 name: yrProject
-description: Look after this project's yrProject setup for the user (a yrProject is a project set up with the yrProject.sh tool), so that they never need to learn the tool - check that the yrProject setup is correct, show its version and whether a newer one exists, update or migrate it (with the user's approval), remove it, list all the yrProjects, and make a new yrProject. Also the version line "(yrProject vX.Y.Z [latest ...])" that every reply starts with.
+description: Look after this project's yrProject setup for the user (a yrProject is a project set up with the yrProject.sh tool), so that they never need to learn the tool - check that the yrProject setup is correct, show its version and whether a newer one exists, update or migrate it (with the user's approval), remove it, list all the yrProjects, and make a new yrProject. Also the version line "(yrProject vX.Y.Z [latest ...])" in the first reply of a session, and the yrProject version in the Claude Code status line ("yrProject.sh statusline-setup").
 when_to_use: Use when the user clearly means yrProject - they say "yrProject", the yrProject setup, its shared rules, skills, hooks or template version - for example "check the yrProject setup", "is this yrProject up to date?", "update yrProject", "migrate to the newest yrProject version", "remove yrProject", "the shared rules changed", "which of my projects use yrProject?", "make a new yrProject", or "set up this folder with yrProject". Also use when a session-start notice or "yrProject.sh check" reports a problem, or before you change a file that yrProject installed. If the user only says "project" (for example "update the project", "make a new project"), do not assume that they mean a yrProject: ask first.
 allowed-tools:
   - Bash(yrProject.sh check*)
@@ -13,11 +13,12 @@ allowed-tools:
   - Bash(yrProject.sh remove --dry-run*)
   - Bash(yrProject.sh new * --dry-run*)
   - Bash(yrProject.sh list)
+  - Bash(yrProject.sh statusline-setup --dry-run)
   - Bash(yrProject.sh --help)
   - Bash(bash ${CLAUDE_SKILL_DIR}/scripts/yrProject-notice.sh *)
 ---
 
-<!-- Installed by yrProject v0.8.0 (https://github.com/y-rosenthal/yrProject): the templates
+<!-- Installed by yrProject v0.8.1 (https://github.com/y-rosenthal/yrProject): the templates
      and the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub
      issues for work to do later, project docs). This file belongs to the tool: do not edit it by hand, and do
      not change it without the tool. "yrProject.sh update" replaces it with each new version (if you change it,
@@ -33,15 +34,28 @@ renewals (`.github/workflows/yrRenewals.yml`, if the project has the yrRenewals 
 does not need to know the tool: they ask you, and you run it, explain the result in plain words, and ask before
 you change anything.
 
-## The version line at the start of every reply
+## The version line in the first reply of a session
 
-Every reply of yours starts with the line `(yrProject vX.Y.Z [latest])`, `(yrProject vX.Y.Z [latest vA.B.C])` or
-`(yrProject vX.Y.Z [latest UNKNOWN])`: the version of yrProject in this project, and whether a newer one exists.
-In Claude Code, a hook gives you the exact line at every prompt. In another agent, run
-`bash ${CLAUDE_SKILL_DIR}/scripts/yrProject-notice.sh version` once at the start of a session and use its
-output. In the first reply of a session, add one more line, from
-`bash ${CLAUDE_SKILL_DIR}/scripts/yrProject-notice.sh facts`: the type, the installed parts and the parts not
-installed (and, in the yrProject repository itself, the projects that use yrProject). Both lines, then the answer.
+In the first reply of a session, give one line with the version of yrProject in this project, whether a newer
+one exists (`[latest]`, `[latest vA.B.C]` or `[latest UNKNOWN]`), the type, the installed parts and the parts not
+installed (and, in the yrProject repository itself, the projects that use yrProject). In Claude Code, the
+SessionStart hook gives you these facts; in another agent, run
+`bash ${CLAUDE_SKILL_DIR}/scripts/yrProject-notice.sh facts` once at the start of a session. Do not repeat the
+version line in later replies.
+
+## The version in the status line ("show the yrProject version in my status line")
+
+The Claude Code status line can show `yrProject vX.Y.Z [latest]` at the bottom of the screen in every yrProject,
+and nothing in other folders. It is set up once on each computer, for the user, never by a project (a project's
+status line would replace the user's own one):
+
+1. Run `yrProject.sh statusline-setup --dry-run`, and tell the user what it would do: if they have no status line,
+   it sets one that shows the yrProject version; if they have their own, it changes nothing in it and prints
+   three lines to paste into their status line script.
+2. After the user agrees, run `yrProject.sh statusline-setup -y`. If it printed lines to paste, offer to add them
+   to the user's status line script (show the script, and change it only after the user agrees).
+
+You may offer this once, when the user asks about the version or says the version line is in the way.
 
 ## Rules
 
@@ -170,5 +184,5 @@ To set up an existing folder that was never set up, use the update steps above w
 
 ## The state, in short ("what yrProject version is this on?")
 
-`yrProject.sh status` prints the version and, for each part, what an update would do. `.yrProject/README.md`
+The Claude Code status line may show it already (above). `yrProject.sh status` prints the version and, for each part, what an update would do. `.yrProject/README.md`
 has the version, the parts, the files and the history. `.yrProject/setup.env` has the same facts for scripts.

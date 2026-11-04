@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "createdAt": "2026-10-12T15:54:40Z",
   "projectType": null,
-  "version": "v0.8.0",
+  "version": "v0.8.1",
   "parts": [
     "rules",
     "subjexts",
@@ -16,26 +16,26 @@
     "PROJECT_TYPE": "work",
     "CREATED_DATE": "2026-10-12",
     "SUBJEXTS_PACKAGE": "y-rosenthal/thinkpython",
-    "TEMPLATE_VERSION": "v0.8.0"
+    "TEMPLATE_VERSION": "v0.8.1"
   },
   "files": {
-    ".claude/skills/subjexts/SKILL.md": "9c385a5d0020ef68c4363bd76be2534646d5f5e86156c5877c3beb98a1c3f027",
-    ".claude/skills/subjexts/scripts/yrS4-skill.sh": "0ffa9b5533d303087a4d5f1bdf842da973a9ac39994024e0198e6e5aa1196616",
-    ".claude/skills/yrIssues/SKILL.md": "3544215545485e2864fb97438fb69a29082875736982623951661c417c16f8db",
-    ".claude/skills/yrIssues/scripts/yrIssues.sh": "ee2799def03410076a925de4afcda4f861203e64b6d32cd439029fef74c7d46f",
-    ".claude/skills/yrProject/SKILL.md": "4d9ae563d1466198c17ae803e5b5876ae224c2b5470238fdd085266902d7f496",
-    ".claude/skills/yrProject/scripts/yrProject-notice.sh": "fd65927d8df3b680e4308cbd2d8ac819f96b8582e7c5b2aa82d0781f92f525b5",
-    ".claude/skills/yrUpdateDocsSkillsRulesEtc/SKILL.md": "000502f3e0431534f1292739448b1ac6a1c7c3dcc153ffd8cc9bb0095846cf49",
-    ".claude/skills/yrUpdateDocsSkillsRulesEtc/scripts/yrUpdateDocsSkillsRulesEtc.sh": "e002b0d97158b46c9d8d342c4e6f22899adeca4fb285f246dd2fa16a7e9ae790",
-    "README.md": "df6875bebf4102505c583be310bff41c728517acd080e3e7c5823f45e1117266",
+    ".claude/skills/subjexts/SKILL.md": "902404eb1158b46e200afd1300fb9f38378bb25c7dde0f5c412717ce139ee60f",
+    ".claude/skills/subjexts/scripts/yrS4-skill.sh": "5efeb03eabeb4853deb75a920766e55fb77473eaa25bea232b8455be2dd20e8a",
+    ".claude/skills/yrIssues/SKILL.md": "6d51cc9aac09bb56862680df281ca4157ee43bd33b0412a8d39e6b9ea4da3e1d",
+    ".claude/skills/yrIssues/scripts/yrIssues.sh": "3049d8e1f8607ae03c1be004e2498ae6c756bdb314d181152f36704d49055740",
+    ".claude/skills/yrProject/SKILL.md": "24bac55d77d2e616b0e69e8fed053aa5b7abcca3ed9156210ac8d5a7fd65bb74",
+    ".claude/skills/yrProject/scripts/yrProject-notice.sh": "f1532ed5002752ed724e54a21030a2a0d4f9c84cb5f4a9cdaadeb0b718de42ed",
+    ".claude/skills/yrUpdateDocsSkillsRulesEtc/SKILL.md": "be5103479ea8ebaf8649575c5a715eaee26f5c59d950dc06fc2fc142d8cdec92",
+    ".claude/skills/yrUpdateDocsSkillsRulesEtc/scripts/yrUpdateDocsSkillsRulesEtc.sh": "95ec86dd282d8420a6b0fb13c86dfc6fa41c773a6670065eefbf74250433a13c",
+    "README.md": "9c230faa542a5abeddb0b622521a93b7b6e8eda35c730de4837c0554281100e6",
     "_yrIssues/config.sh": "e88eb0025fa0d0bbba90468331b8fca23b6c5ce2faccb8c5a42015018f9077f0",
-    "jb/subjexts-labels.md": "4ac445e4feea639c086a488bc4273730e53082129b5363d8d1114bfd3986f58a"
+    "jb/subjexts-labels.md": "98700fe757c8efbba39b8d500a35ed90f1463966caad7e451dbfd3edcfa1003d"
   },
-  "updatedAt": "2026-11-04T06:11:36Z",
+  "updatedAt": "2026-11-04T06:41:25Z",
   "tool": {
     "name": "yrProject",
-    "version": "0.8.0",
-    "templatesCommit": "75f955d"
+    "version": "0.8.1",
+    "templatesCommit": "cf45de7"
   },
   "history": [
     {
@@ -179,7 +179,17 @@
         "subjexts",
         "yrIssues"
       ]
+    },
+    {
+      "date": "2026-11-04",
+      "command": "update",
+      "version": "v0.8.1",
+      "parts": [
+        "rules",
+        "subjexts",
+        "yrIssues"
+      ]
     }
   ],
-  "about": "Written by yrProject v0.8.0 (https://github.com/y-rosenthal/yrProject), the record of this project's yrProject setup. Do not edit: \"yrProject.sh update\" writes it again."
+  "about": "Written by yrProject v0.8.1 (https://github.com/y-rosenthal/yrProject), the record of this project's yrProject setup. Do not edit: \"yrProject.sh update\" writes it again."
 }

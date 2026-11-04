@@ -3,18 +3,16 @@
 <!-- begin yrProject setup: written by yrProject.sh; "yrProject.sh update" replaces this block -->
 ## Set up by yrProject.sh
 
-`yrProject.sh` (yrProject v0.8.0; parts: rules, yrIssues, subjexts) set up this project. yrProject
+`yrProject.sh` (yrProject v0.8.1; parts: rules, yrIssues, subjexts) set up this project. yrProject
 (https://github.com/y-rosenthal/yrProject) is the templates and the tool that give a project one base for
 AI-assisted work: rules for AI agents, skills, hooks, GitHub issues for work to do later, project docs. The tool
 installed files here, and `yrProject.sh update` keeps them up to date. Every file that it installed starts with
 a comment that names yrProject and its version, and says whether the file belongs to the tool or to the project.
 
-- Start every reply with the version line `(yrProject v0.8.0 [latest])`, or `[latest vA.B.C]` if a newer
-  version exists, or `[latest UNKNOWN]`. In Claude Code a hook gives you the exact line at each prompt; in another
-  agent, run `bash .claude/skills/yrProject/scripts/yrProject-notice.sh version` once at the start of a session.
-  In the first reply of a session, add one line with the facts of the setup (the type, the installed parts and the
-  parts not installed: `bash .claude/skills/yrProject/scripts/yrProject-notice.sh facts`), unless a SessionStart
-  message already showed them to the user; then answer.
+- In the first reply of a session, give one line with the version line `(yrProject v0.8.1 [latest])` (or
+  `[latest vA.B.C]` if a newer version exists, or `[latest UNKNOWN]`), the type, the installed parts and the parts
+  not installed (`bash .claude/skills/yrProject/scripts/yrProject-notice.sh facts`); then answer. Do not repeat the
+  version line in later replies: the Claude Code status line can show it (`yrProject.sh statusline-setup`).
 - Before you change a file that the tool installed, read `.yrProject/README.md`. It lists the files, and tells who
   changes each one.
 - Do not edit this block, the shared-rules block, the `yrProject` block in `.gitignore`, or the files in
