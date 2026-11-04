@@ -52,6 +52,7 @@ Resolve conflicts with these rules:
 | `jb/index.md`, `jb/blank.md` | Keep ours (`--ours`), then apply every change of his that is not a link (compare with `diff <(git show upstream/v3:jb/index.md) jb/index.md`) |
 | `README.md`, `jb/_config.yml`, `jb/_toc.yml`, `.github/` | Keep ours; apply his text corrections by hand. In `jb/_config.yml`, take his build settings (SEO: sitemap, Open Graph, page descriptions) with the fork's site URL; leave out his revenue and analytics (page-view counter, ads, sponsor, support footer). The promo note at the top of his chapters stays in `chapters/` (take his changes to it); `jb/prep_notebooks.py` drops it from the site by its first words (`PROMO`): if he changes those words, change `PROMO` |
 | Files of his site that the course site does not use (`jb/_templates/`, `jb/_static/*.css` of the counter, ads, sponsor, support footer) | Delete them, and list each in `NOT_TAKEN` in `check_sync.py` with the reason. Jupyter Book links every css file in `jb/_static` on every page, so an unused stylesheet of his would still load. He changes them rarely; when he does, the merge reports a modify/delete conflict: delete again |
+| `PROJECT_BOARD.md`, `planning/` | Take his (his task board and plans; `AGENTS.md`, "Pending work") |
 | `.gitignore` | Keep both sides' rules |
 | `*.zip`, `thinkpython.py`, `diagram.py`, `structshape.py`, `words.txt` | Take his, unless the fork changed them |
 
