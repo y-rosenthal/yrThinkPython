@@ -67,8 +67,11 @@ These rules are for every collaborator and every coding agent (Claude Code, Code
 - Work to do later is the GitHub issues of this fork (y-rosenthal/yrThinkPython), not of AllenDowney/ThinkPython.
   Add, list, work on and close them with the `yrIssues` skill (the shared rule "Work to do later is GitHub issues"
   below).
-- `PROJECT_BOARD.md` was retired on 2026-10-12: its Task N is issue #N. Its build notes are in
-  `planning/upstream_build_notes.md`. Do not start another to-do file or task board.
+- `PROJECT_BOARD.md` and `planning/` are Allen Downey's files: his task board and his plans, which come with a sync.
+  His tasks are not tasks of this fork. Do not copy them into issues of this fork, and do not edit his files.
+  (On 2026-10-12 the fork deleted his board and copied his tasks into issues #3-#11. On 2026-11-04 those issues
+  were closed as "not planned", with the label `upstreamIssue`, and his files were restored.)
+- Do not start a to-do file or task board of the fork.
 - Corrections for Allen Downey's book are a different thing: they go to AllenDowney/ThinkPython with the
   `contribute-upstream` skill.
 
