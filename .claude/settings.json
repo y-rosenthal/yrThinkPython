@@ -21,6 +21,16 @@
             "timeout": 30
           }
         ]
+      },
+      {
+        "matcher": "startup|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/skills/yrUpdateDocsSkillsRulesEtc/scripts/yrUpdateDocsSkillsRulesEtc.sh\" session-start || true",
+            "timeout": 20
+          }
+        ]
       }
     ],
     "PostToolUse": [
@@ -36,12 +46,13 @@
         ]
       }
     ],
-    "UserPromptSubmit": [
+    "PreToolUse": [
       {
+        "matcher": "Bash",
         "hooks": [
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/skills/yrProject/scripts/yrProject-notice.sh\" prompt || true",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/skills/yrUpdateDocsSkillsRulesEtc/scripts/yrUpdateDocsSkillsRulesEtc.sh\" check",
             "timeout": 10
           }
         ]

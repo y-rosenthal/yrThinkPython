@@ -1,26 +1,27 @@
 #!/usr/bin/env bash
-# Installed by yrProject v0.7.5 (https://github.com/y-rosenthal/yrProject): the templates and
+# Installed by yrProject v0.8.1 (https://github.com/y-rosenthal/yrProject): the templates and
 # the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub issues
 # for work to do later, project docs). This file belongs to the tool: do not edit it by hand, and do not change
 # it without the tool. "yrProject.sh update" replaces it with each new version (if you change it, update leaves
 # it alone, and it gets no newer versions); "yrProject.sh remove" removes it. .yrProject/README.md lists every
 # file that yrProject installed, and tells who changes each one.
 #
-# yrProject-notice.sh - the notice of this project's yrProject setup: the version line that every reply of an
-# agent starts with, the facts for the first reply of a session (the type, the installed parts, the parts not
-# installed), and the JSON of the two Claude Code hooks (SessionStart and UserPromptSubmit). It reads
-# .yrProject/setup.env, which yrProject.sh writes.
+# yrProject-notice.sh - the notice of this project's yrProject setup: the version line, the facts for the first
+# reply of a session (the version, the type, the installed parts, the parts not installed), the JSON of the
+# Claude Code SessionStart hook, and the text for the Claude Code status line. It reads .yrProject/setup.env,
+# which yrProject.sh writes.
 #
 # Usage: bash yrProject-notice.sh [COMMAND]
-#   version        (the default) the line that every reply of an agent starts with, for example
-#                  "(yrProject v0.6.0 [latest])", "(yrProject v0.5.2 [latest v0.6.0])" or
-#                  "(yrProject v0.5.2 [latest UNKNOWN])"
+#   version        (the default) the version line, for example "(yrProject v0.6.0 [latest])",
+#                  "(yrProject v0.5.2 [latest v0.6.0])" or "(yrProject v0.5.2 [latest UNKNOWN])"
 #   facts          the facts for the first reply of a session, one per line, each starting with "yrProject: ":
 #                  the version line, the type with the installed parts and the parts not installed, and how to
 #                  look after the setup. In the yrProject repository itself: also the projects that use yrProject
 #   latest         the newest version of yrProject, or UNKNOWN (how it is found: below)
 #   session-start  the JSON for the SessionStart hook: the facts for the user, the instructions for the agent
-#   prompt         the JSON for the UserPromptSubmit hook: the version line, for the user and for the agent
+#   statusline     the text for the Claude Code status line, for example "yrProject v0.8.1 [latest]" (no
+#                  network). ~/.claude/yrProject-statusline.sh runs it; "yrProject.sh statusline-setup" sets that
+#                  up, once on each computer
 #   -h, --help     show this help and stop
 #
 # The newest version is the newest released version (git tag templates-vX.Y.Z; a version folder without a tag is
@@ -28,9 +29,9 @@
 # in the Dropbox folder above this project, else ~/Dropbox/_yrAiCoding/yrProject (with YRPROJECT_UNRELEASED=1, or
 # without git, the newest folder in its templates/). Without that repository, it is the newest tag templates-vX.Y.Z of the GitHub
 # repository (git ls-remote, at most 8 seconds, never a password prompt), kept for a day in
-# ~/.cache/yrProject/latest (an hour after a failure). "prompt" runs at every prompt, so it never goes to the
-# network: it uses the repository on this computer, or the kept answer, else UNKNOWN.
-# Without .yrProject/setup.env (no yrProject setup), session-start and prompt print nothing and exit 0; the other
+# ~/.cache/yrProject/latest (an hour after a failure). "statusline" runs after every message, so it never goes
+# to the network: it uses the repository on this computer, or the kept answer, else UNKNOWN.
+# Without .yrProject/setup.env (no yrProject setup), session-start and statusline print nothing and exit 0; the other
 # commands say so and exit 1. Only bash, git and the usual commands are needed, so this also works in Git Bash on
 # Windows.
 
@@ -51,7 +52,7 @@ YRPROJECT_VERSION=""; YRPROJECT_TYPE=""; YRPROJECT_PARTS=""; YRPROJECT_PARTS_NOT
 # shellcheck source=/dev/null
 [ -f "$env_file" ] && . "$env_file"
 if [ -z "$YRPROJECT_VERSION" ]; then
-  case "$cmd" in session-start|prompt) exit 0 ;; esac
+  case "$cmd" in session-start|statusline) exit 0 ;; esac
   echo "yrProject-notice.sh: $env_file not found: this folder has no yrProject setup (yrProject.sh update sets one up)" >&2
   exit 1
 fi
@@ -177,7 +178,7 @@ case "$cmd" in
   session-start)
     line="$(version_line 86400)"
     user_msg="$(facts cached)"
-    context="This project was set up by yrProject.sh (yrProject $YRPROJECT_VERSION; type: $YRPROJECT_TYPE; installed parts: $YRPROJECT_PARTS; not installed: ${YRPROJECT_PARTS_NOT:-none}; the newest version of yrProject: $(latest cached)). The user saw these facts in a notice, but Claude Code does not always show it, so: start EVERY reply with the line \"$line\" (a UserPromptSubmit hook repeats it to you at each prompt), and in your FIRST reply of the session also give, right after that line, one line that starts with \"yrProject:\" with the type, the installed parts and the parts not installed, as the notice has it. .yrProject/README.md lists the files that the tool installed, and tells who changes each one; every such file starts with a comment that names yrProject and its version. Read it before you change AGENTS.md, CLAUDE.md, .gitignore, .claude/settings.json, a file in .claude/skills/, or the docs guides. Do not edit the tool's blocks in AGENTS.md, README.md and .gitignore, or the files in .yrProject/: \"yrProject.sh update\" writes them again. When the user asks to check, update, migrate or remove the yrProject setup, or about the list of yrProjects, follow the yrProject skill ($SKILL); the user does not need to know the commands. The word \"project\" alone does not mean the yrProject setup: unless the user says yrProject or it is obvious, ask what they mean."
+    context="This project was set up by yrProject.sh (yrProject $YRPROJECT_VERSION; type: $YRPROJECT_TYPE; installed parts: $YRPROJECT_PARTS; not installed: ${YRPROJECT_PARTS_NOT:-none}; the newest version of yrProject: $(latest cached)). The user saw these facts in a notice, but Claude Code does not always show it, so: in your FIRST reply of the session give one line that starts with \"yrProject:\" with the version line \"$line\", the type, the installed parts and the parts not installed, as the notice has it. Do not repeat the version line in later replies (the Claude Code status line can show it: \"yrProject.sh statusline-setup\", once on each computer). .yrProject/README.md lists the files that the tool installed, and tells who changes each one; every such file starts with a comment that names yrProject and its version. Read it before you change AGENTS.md, CLAUDE.md, .gitignore, .claude/settings.json, a file in .claude/skills/, or the docs guides. Do not edit the tool's blocks in AGENTS.md, README.md and .gitignore, or the files in .yrProject/: \"yrProject.sh update\" writes them again. When the user asks to check, update, migrate or remove the yrProject setup, or about the list of yrProjects, follow the yrProject skill ($SKILL); the user does not need to know the commands. The word \"project\" alone does not mean the yrProject setup: unless the user says yrProject or it is obvious, ask what they mean."
     if is_yrproject_repo; then
       context="$context This is the yrProject repository itself. $(projects_line | sed 's/^yrProject: //'). In your first reply, also say which of them are older than the newest version."
     fi
@@ -185,13 +186,10 @@ case "$cmd" in
       "$(json_str "$user_msg")" "$(json_str "$context")"
     ;;
 
-  prompt)
+  statusline)
     line="$(version_line cached)"
-    user_msg="yrProject: ${line#(yrProject }"
-    user_msg="${user_msg%)}"
-    context="Start your reply with the line \"$line\" (the yrProject setup of this project; its skill: $SKILL)."
-    printf '{"systemMessage": %s, "hookSpecificOutput": {"hookEventName": "UserPromptSubmit", "additionalContext": %s}}\n' \
-      "$(json_str "$user_msg")" "$(json_str "$context")"
+    line="${line#(}"
+    printf '%s\n' "${line%)}"
     ;;
 
   *)

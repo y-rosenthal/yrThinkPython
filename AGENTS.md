@@ -3,18 +3,16 @@
 <!-- begin yrProject setup: written by yrProject.sh; "yrProject.sh update" replaces this block -->
 ## Set up by yrProject.sh
 
-`yrProject.sh` (yrProject v0.7.5; parts: rules, yrIssues, subjexts) set up this project. yrProject
+`yrProject.sh` (yrProject v0.8.1; parts: rules, yrIssues, subjexts) set up this project. yrProject
 (https://github.com/y-rosenthal/yrProject) is the templates and the tool that give a project one base for
 AI-assisted work: rules for AI agents, skills, hooks, GitHub issues for work to do later, project docs. The tool
 installed files here, and `yrProject.sh update` keeps them up to date. Every file that it installed starts with
 a comment that names yrProject and its version, and says whether the file belongs to the tool or to the project.
 
-- Start every reply with the version line `(yrProject v0.7.5 [latest])`, or `[latest vA.B.C]` if a newer
-  version exists, or `[latest UNKNOWN]`. In Claude Code a hook gives you the exact line at each prompt; in another
-  agent, run `bash .claude/skills/yrProject/scripts/yrProject-notice.sh version` once at the start of a session.
-  In the first reply of a session, add one line with the facts of the setup (the type, the installed parts and the
-  parts not installed: `bash .claude/skills/yrProject/scripts/yrProject-notice.sh facts`), unless a SessionStart
-  message already showed them to the user; then answer.
+- In the first reply of a session, give one line with the version line `(yrProject v0.8.1 [latest])` (or
+  `[latest vA.B.C]` if a newer version exists, or `[latest UNKNOWN]`), the type, the installed parts and the parts
+  not installed (`bash .claude/skills/yrProject/scripts/yrProject-notice.sh facts`); then answer. Do not repeat the
+  version line in later replies: the Claude Code status line can show it (`yrProject.sh statusline-setup`).
 - Before you change a file that the tool installed, read `.yrProject/README.md`. It lists the files, and tells who
   changes each one.
 - Do not edit this block, the shared-rules block, the `yrProject` block in `.gitignore`, or the files in
@@ -155,6 +153,16 @@ files and installs nothing.
   says yrProject (or the yrProject setup, the tool, its shared rules or its skills), or it is otherwise obvious,
   ask what they mean before you act. For example, "update the project" or "make a new project" may mean the code,
   the book, or something else.
+
+## The docs, skills and rules reflect the chat
+
+- Before a push, and when the user says they are done or is about to clear or leave the chat, do what a careful
+  developer does before handing work over: bring everything in the repository that describes or depends on the
+  changes into line with them (the docs, the skills, a script's `--help`, a comment, a test, whatever the change
+  touched; what that is depends on the change), and put what the user decided or asked for from now on into
+  the project's rules (`AGENTS.md`, `CLAUDE.md`): a chat is cleared, a rule stays. If the project has the
+  `yrUpdateDocsSkillsRulesEtc` skill (`.claude/skills/yrUpdateDocsSkillsRulesEtc/`), follow it; its hook refuses
+  `git push` until the skill recorded its review, and after `/clear` a hook names the chat to read.
 
 ## Work to do later is GitHub issues
 
