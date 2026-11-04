@@ -77,7 +77,7 @@ python3 .claude/skills/sync-upstream/check_sync.py          # proves that nothin
 ```
 
 <!-- begin yrProject setup: written by yrProject.sh; "yrProject.sh update" replaces this block -->
-**This repository uses yrProject** (yrProject v0.9.1; parts: rules, yrIssues, subjexts). yrProject is the templates and the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub issues for work to do later, project docs).
+**This repository uses yrProject** (yrProject v0.9.2; parts: rules, yrIssues, subjexts). yrProject is the templates and the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub issues for work to do later, project docs).
 Its repository: https://github.com/y-rosenthal/yrProject (if the link does not open, the repository is private: ask the owner of this project).
 
 - What yrProject is, which files come from it and which belong to this repository: `.yrProject/README.md`. Every

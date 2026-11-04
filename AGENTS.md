@@ -3,13 +3,13 @@
 <!-- begin yrProject setup: written by yrProject.sh; "yrProject.sh update" replaces this block -->
 ## Set up by yrProject.sh
 
-`yrProject.sh` (yrProject v0.9.1; parts: rules, yrIssues, subjexts) set up this project. yrProject
+`yrProject.sh` (yrProject v0.9.2; parts: rules, yrIssues, subjexts) set up this project. yrProject
 (https://github.com/y-rosenthal/yrProject) is the templates and the tool that give a project one base for
 AI-assisted work: rules for AI agents, skills, hooks, GitHub issues for work to do later, project docs. The tool
 installed files here, and `yrProject.sh update` keeps them up to date. Every file that it installed starts with
 a comment that names yrProject and its version, and says whether the file belongs to the tool or to the project.
 
-- In the first reply of a session, give one line with the version line `(yrProject v0.9.1 [latest])` (or
+- In the first reply of a session, give one line with the version line `(yrProject v0.9.2 [latest])` (or
   `[latest vA.B.C]` if a newer version exists, or `[latest UNKNOWN]`), the type, the installed parts and the parts
   not installed (`bash .claude/skills/yrProject/scripts/yrProject-notice.sh facts`); then answer. Do not repeat the
   version line in later replies: the Claude Code status line can show it (`yrProject.sh statusline-setup`).
@@ -120,7 +120,7 @@ The shared rule "Scripts have --help" (below) applies. In this repository:
   Downey's own scripts go in its `NO_HELP` list. Do not change Downey's scripts.
 - `review.sh COMMAND --help` also shows the options of that command.
 
-<!-- begin shared rules: yrProject v0.9.1, from templates/v0.9.1/AGENTS-shared-rules.md in yrProject; "yrProject.sh update" replaces this block, unless it was changed by hand -->
+<!-- begin shared rules: yrProject v0.9.2, from templates/v0.9.2/AGENTS-shared-rules.md in yrProject; "yrProject.sh update" replaces this block, unless it was changed by hand -->
 
 ## Write in plain English
 

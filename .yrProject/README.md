@@ -5,7 +5,7 @@ docs/PROJECT-SETUP.qmd includes this file, and gives the title. -->
 
 | | |
 |---|---|
-| Template version | v0.9.1 |
+| Template version | v0.9.2 |
 | Parts | rules, yrIssues, subjexts |
 | Set up by | `yrProject.sh update` (an existing folder) |
 | Last change | 2026-11-04 |
@@ -24,7 +24,7 @@ This repository uses yrProject. Some files here come from yrProject; the rest be
 
 ## The parts
 
-- **rules**: the rules for every AI agent: `AGENTS.md`, with a copy of the shared rules (their source is `templates/v0.9.1/AGENTS-shared-rules.md` in yrProject: the shared rules of this template version), and `CLAUDE.md`, which imports it; and the `yrProject` skill, which checks, updates and removes this setup for you (ask the agent), with the notice script `yrProject-notice.sh`. A SessionStart hook runs it: it shows the facts of this setup at the start of each Claude Code session, and the agent gives them in its first reply. The Claude Code status line can show the version `yrProject VERSION [latest ...]` (`yrProject.sh statusline-setup`, once on each computer). Also the `yrUpdateDocsSkillsRulesEtc` skill: before a push, and before you leave a chat, the agent updates the docs, the skills and the rules to reflect what was done and decided in the chat, and records the review (a marker in `.git/`); a PreToolUse hook refuses `git push` until it did, and a SessionStart hook names the earlier chat to read after `/clear`.
+- **rules**: the rules for every AI agent: `AGENTS.md`, with a copy of the shared rules (their source is `templates/v0.9.2/AGENTS-shared-rules.md` in yrProject: the shared rules of this template version), and `CLAUDE.md`, which imports it; and the `yrProject` skill, which checks, updates and removes this setup for you (ask the agent), with the notice script `yrProject-notice.sh`. A SessionStart hook runs it: it shows the facts of this setup at the start of each Claude Code session, and the agent gives them in its first reply. The Claude Code status line can show the version `yrProject VERSION [latest ...]` (`yrProject.sh statusline-setup`, once on each computer). Also the `yrUpdateDocsSkillsRulesEtc` skill: before a push, and before you leave a chat, the agent updates the docs, the skills and the rules to reflect what was done and decided in the chat, and records the review (a marker in `.git/`); a PreToolUse hook refuses `git push` until it did, and a SessionStart hook names the earlier chat to read after `/clear`.
 - **yrIssues**: work to do later is the GitHub issues of the project. The `yrIssues` skill manages them (its settings: `_yrIssues/config.sh`; the issues that it creates get the label `yrIssue`), a SessionStart hook shows how many are open, and a PostToolUse hook keeps the saved copy `_yrIssues/issues.md` up to date.
 - **subjexts**: the subjexts teaching overlay for this book (labels, a table of contents by label, in-place edits, the tutor): its include file `subjexts-v001.html` and its page `subjexts-labels-v001.qmd` in a Quarto book, or the page `jb/subjexts-labels.md` in a Jupyter Book (their content is the platform's, from `book-files/` in the yrS4 repository; only the package name is this book's), and the `subjexts` skill, which explains them and, through its script `yrS4-skill.sh`, refers to the subjexts procedures in the yrS4 repository (apply a note packet, mark the book, register it) instead of carrying copies.
 
@@ -94,3 +94,4 @@ yrProject.sh projects           # the list of projects that use yrProject, from 
 | 2026-11-04 | update | v0.8.0 | rules, yrIssues, subjexts |
 | 2026-11-04 | update | v0.8.1 | rules, yrIssues, subjexts |
 | 2026-11-04 | update | v0.9.1 | rules, yrIssues, subjexts |
+| 2026-11-04 | update | v0.9.2 | rules, yrIssues, subjexts |
