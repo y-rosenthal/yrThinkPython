@@ -107,9 +107,10 @@ button.yr-toggle-all.yr-focus {
   background: color-mix(in srgb, var(--pst-color-primary, #3b82f6) 60%, black);
 }
 
-/* The buttons of the dropdowns of the course's pages (yr.js): "Expand/Collapse" (filled) on every dropdown,
-   and "Expand all" and "Collapse all" (outlined) on each Answer. The hint "Click to show" of
-   sphinx-togglebutton is not shown on these dropdowns; the chevron at the right stays. */
+/* The buttons of the dropdowns of the course's pages (yr.js), in the primary color of the site (the color of
+   the dropdown's title bar and of the links): "Expand/Collapse" filled, on every dropdown; "Expand all" and
+   "Collapse all" outlined, on each Answer. The hint "Click to show" of sphinx-togglebutton is not shown on
+   these dropdowns; the chevron at the right stays. */
 .admonition.yr-dd button.toggle-button::before {
   content: none;
 }
@@ -123,28 +124,24 @@ span.yr-dd-group {
 }
 
 button.yr-dd-button {
-  padding: 0.1em 0.55em;
+  padding: 0.1em 0.6em;
   font-size: 0.7rem;
   font-weight: 600;
   line-height: 1.5;
-  border-radius: 3px;
+  color: var(--pst-color-primary, #3b82f6);
+  background: var(--pst-color-background, #fff);
+  border: 1px solid var(--pst-color-primary, #3b82f6);
+  border-radius: 4px;
   cursor: pointer;
 }
 
-button.yr-dd-main {
+button.yr-dd-button.yr-dd-main {
   color: #fff;
-  background: #16a34a;
-  border: 1px solid #16a34a;
-}
-
-button.yr-dd-all {
-  color: var(--pst-color-text-muted, #6b7280);
-  background: transparent;
-  border: 1px solid var(--pst-color-border, #d0d7de);
+  background: var(--pst-color-primary, #3b82f6);
 }
 
 button.yr-dd-button:hover {
-  filter: brightness(1.1);
+  filter: brightness(1.15);
 }
 
 /* The update bar (yr.js, "Update check"): at the top of the screen, over the page. */
