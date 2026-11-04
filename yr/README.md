@@ -749,8 +749,10 @@ Use the `yr-review-page` skill, or by hand:
   `# Your code here` cells are dropped. `process_additions`: each `<details>` cell (an Answer, a Diving deeper
   dive) becomes a closed dropdown, and `# Your code here` cells are dropped. The notebooks in `yr/` are never
   modified by the build.
-- `jb/_static/yr.js` adds buttons to the title of each dropdown on these pages: "Expand/Collapse" on every
-  dropdown, and also "Expand all" and "Collapse all" (all the Answers of the page) on each Answer.
+- `jb/_static/yr.js` adds buttons to the title of each dropdown on these pages (Answers, concept lists,
+  Diving deeper boxes): "Expand/Collapse" on every dropdown, and also "Expand all" and "Collapse all" (all
+  the Answers of the page) on each Answer. `jb/_static/yr.css` styles them in the site's primary color:
+  "Expand/Collapse" filled, the other two outlined. It also hides the hint "Click to show" of these dropdowns.
 - `yr/tools/verify_site.py jb/_build/html/yr/chapNN_review.html yr/chapNN_review.ipynb [BEFORE.html]`
   checks a page on the built site (one closed Answer per question, no hidden code or markers on the page),
   and compares it with another build of the page (for example, before a big change).
