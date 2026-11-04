@@ -77,7 +77,11 @@ python3 .claude/skills/sync-upstream/check_sync.py          # proves that nothin
 ```
 
 <!-- begin yrProject setup: written by yrProject.sh; "yrProject.sh update" replaces this block -->
-*Set up by `yrProject.sh` (yrProject v0.8.1; parts: rules, yrIssues, subjexts; https://github.com/y-rosenthal/yrProject). It
-installed the rules for AI agents, the skills, the hooks and the settings, and it updates them. Every file that it
-installed starts with a comment that says so. Before you change one, read `.yrProject/README.md`.*
+**This repository uses yrProject** (yrProject v0.9.1; parts: rules, yrIssues, subjexts). yrProject is the templates and the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub issues for work to do later, project docs).
+Its repository: https://github.com/y-rosenthal/yrProject (if the link does not open, the repository is private: ask the owner of this project).
+
+- What yrProject is, which files come from it and which belong to this repository: `.yrProject/README.md`. Every
+  file that yrProject installed starts with a comment that names yrProject. The tool `yrProject.sh` runs on the
+  owner's computer; without it, all these files are ordinary files.
+- The yrProject version and the installed parts (bash and git only): `bash .claude/skills/yrProject/scripts/yrProject-notice.sh facts`
 <!-- end yrProject setup -->

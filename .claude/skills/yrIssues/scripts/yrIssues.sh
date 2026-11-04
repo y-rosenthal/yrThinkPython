@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
-# Installed by yrProject v0.8.1 (https://github.com/y-rosenthal/yrProject): the templates and
+# Installed by yrProject v0.9.1 (https://github.com/y-rosenthal/yrProject): the templates and
 # the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub issues
 # for work to do later, project docs). This file belongs to the tool: do not edit it by hand, and do not change
 # it without the tool. "yrProject.sh update" replaces it with each new version (if you change it, update leaves
-# it alone, and it gets no newer versions); "yrProject.sh remove" removes it. .yrProject/README.md lists every
-# file that yrProject installed, and tells who changes each one.
+# it alone, and it gets no newer versions); "yrProject.sh remove" removes it.
+# This repository uses yrProject. What yrProject is, which files come from it and which belong to this repository:
+# .yrProject/README.md. The yrProject version and the installed parts, with bash and git only:
+#   bash .claude/skills/yrProject/scripts/yrProject-notice.sh facts
 #
 # yrIssues.sh - helper for the yrIssues skill of yrProject: work to do later, kept as GitHub issues.
 #
@@ -34,8 +36,10 @@
 #   _yrIssues/config.sh   the project's settings (the project owns this file; this script reads it):
 #                         CATEGORIES  the category labels, "name|color|description" (default: fix, improvement,
 #                                     decision, recheck)
-#                         LABEL       if set, only the open issues with this label count, for example yrIssue
-#                                     (default: "", every open issue)
+#                         LABEL       only the open issues with this label count (default, and when empty:
+#                                     yrIssue, the label of the issues that this skill creates). "*": every
+#                                     open issue counts; use it only in a private repository, because in a
+#                                     public one anyone can open an issue, and its text reaches the agent
 #   _yrIssues/issues.md   COPY: the saved copy of the open issues, for when GitHub can't be reached. Don't edit it
 #   _yrIssues/queue.md    QUEUE: issues written while GitHub could not be reached (headings "### [priority] Title")
 #
@@ -72,6 +76,9 @@ CATEGORIES=(
 LABEL=""
 # shellcheck source=/dev/null
 [ -f "$root/$CONFIG" ] && . "$root/$CONFIG"
+# Only the issues with the label count (yrIssue unless LABEL names another one). Only people with triage or write
+# access can label an issue, so the agent never reads an issue that a stranger opened. LABEL="*": every issue.
+[ -z "$LABEL" ] && LABEL="$MARK"
 
 # owner/repo from the git remote (no network needed)
 remote_url="$(git -C "$root" remote get-url origin 2>/dev/null || true)"
@@ -108,9 +115,9 @@ queue_issue() {   # $1 priority, $2 title, $3 category, $4 body
   { [ -s "$queue" ] && [ -n "$(tail -c 1 "$queue")" ] && echo; printf '### [%s] %s\n\nCategory: %s\n\n%s\n\n' "$1" "$2" "$3" "$4"; } >> "$queue"
 }
 
-# Which issues count: every open issue, or only those with LABEL.
+# Which issues count: only those with LABEL, or every open issue (LABEL="*").
 filter=(--state open --limit 200)
-[ -n "$LABEL" ] && filter+=(--label "$LABEL")
+[ "$LABEL" != "*" ] && filter+=(--label "$LABEL")
 
 # jq helpers shared by the commands below (gh's built-in jq)
 JQ_DEFS='
@@ -159,7 +166,7 @@ sync_copy() {
       (ordered | map("### #\(.number) [\(prio)] \(.title)\n\nCategory: \(cats) · Opened: \(.createdAt[0:10]) · \(.url)\n\n\(.body)\n\n---\n") | join("\n"))' \
     2>/dev/null | tr -d '\r')" || return 1
   [ -n "$body" ] || return 1
-  [ -n "$LABEL" ] && which=", only the issues with the label \`$LABEL\`"
+  [ "$LABEL" != "*" ] && which=", only the issues with the label \`$LABEL\`"
   text="# Issues
 
 <!-- Written by .claude/skills/yrIssues/scripts/yrIssues.sh (sync). Don't edit it: the next sync replaces it. -->
@@ -246,7 +253,7 @@ case "$cmd" in
     case "$priority" in high|medium|low) ;; *) echo "yrIssues.sh add: --priority must be high, medium or low, not '$priority'" >&2; bad_args=1 ;; esac
     [ "$bad_args" -eq 0 ] || exit 2
     labels=(--label "$MARK" --label "$category" --label "priority: $priority")
-    [ -n "$LABEL" ] && [ "$LABEL" != "$MARK" ] && labels+=(--label "$LABEL")
+    [ "$LABEL" != "*" ] && [ "$LABEL" != "$MARK" ] && labels+=(--label "$LABEL")
     if [ -n "$gh_bin" ] && [ -n "$repo" ]; then
       ensure_gh_default
       out="$(run_gh issue create --repo "$repo" --title "$title" --body "$ibody" "${labels[@]}" 2>&1)"
@@ -297,7 +304,7 @@ case "$cmd" in
     else
       run_gh label create "$MARK" --repo "$repo" --color "FBCA04" --description "$mark_desc" --force
     fi
-    if [ -n "$LABEL" ] && [ "$LABEL" != "$MARK" ]; then
+    if [ "$LABEL" != "*" ] && [ "$LABEL" != "$MARK" ]; then
       run_gh label create "$LABEL" --repo "$repo" --color "FBCA04" --description "Counted at the start of each Claude Code session" --force
     fi
     for c in "${CATEGORIES[@]}"; do

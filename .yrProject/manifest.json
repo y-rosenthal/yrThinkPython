@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "createdAt": "2026-10-12T15:54:40Z",
   "projectType": null,
-  "version": "v0.8.1",
+  "version": "v0.9.1",
   "parts": [
     "rules",
     "subjexts",
@@ -16,26 +16,26 @@
     "PROJECT_TYPE": "work",
     "CREATED_DATE": "2026-10-12",
     "SUBJEXTS_PACKAGE": "y-rosenthal/thinkpython",
-    "TEMPLATE_VERSION": "v0.8.1"
+    "TEMPLATE_VERSION": "v0.9.1"
   },
   "files": {
-    ".claude/skills/subjexts/SKILL.md": "902404eb1158b46e200afd1300fb9f38378bb25c7dde0f5c412717ce139ee60f",
-    ".claude/skills/subjexts/scripts/yrS4-skill.sh": "5efeb03eabeb4853deb75a920766e55fb77473eaa25bea232b8455be2dd20e8a",
-    ".claude/skills/yrIssues/SKILL.md": "6d51cc9aac09bb56862680df281ca4157ee43bd33b0412a8d39e6b9ea4da3e1d",
-    ".claude/skills/yrIssues/scripts/yrIssues.sh": "3049d8e1f8607ae03c1be004e2498ae6c756bdb314d181152f36704d49055740",
-    ".claude/skills/yrProject/SKILL.md": "24bac55d77d2e616b0e69e8fed053aa5b7abcca3ed9156210ac8d5a7fd65bb74",
-    ".claude/skills/yrProject/scripts/yrProject-notice.sh": "f1532ed5002752ed724e54a21030a2a0d4f9c84cb5f4a9cdaadeb0b718de42ed",
-    ".claude/skills/yrUpdateDocsSkillsRulesEtc/SKILL.md": "be5103479ea8ebaf8649575c5a715eaee26f5c59d950dc06fc2fc142d8cdec92",
-    ".claude/skills/yrUpdateDocsSkillsRulesEtc/scripts/yrUpdateDocsSkillsRulesEtc.sh": "95ec86dd282d8420a6b0fb13c86dfc6fa41c773a6670065eefbf74250433a13c",
-    "README.md": "9c230faa542a5abeddb0b622521a93b7b6e8eda35c730de4837c0554281100e6",
+    ".claude/skills/subjexts/SKILL.md": "8553711e61a7d21c14bfd20ea2c300b9ddc4e20d9172abd5f541eb59134fc4f0",
+    ".claude/skills/subjexts/scripts/yrS4-skill.sh": "f8e89894a401ad564f21ce21ef46557db40e0bb7e27b52a4255430e0e78c594a",
+    ".claude/skills/yrIssues/SKILL.md": "97ad5415bcb147a2e14c11de18cf5f07278e0cf1a17e5234779cfa8e3e7b23ff",
+    ".claude/skills/yrIssues/scripts/yrIssues.sh": "dcaa53f5790d49d20ef6f8af9f103483ea313fca3a83279748462d834fb48302",
+    ".claude/skills/yrProject/SKILL.md": "ed8cf4e21b27fd87b2fe61d6c271c2ba3e72961f406100f657eda39c378a65a1",
+    ".claude/skills/yrProject/scripts/yrProject-notice.sh": "5481e3b950e7e64990ef6f08576f1fe9157a4e1702d658715b848750d50eb97b",
+    ".claude/skills/yrUpdateDocsSkillsRulesEtc/SKILL.md": "09d22bfd82a48f2a3985090b1109da64d4e2067f70a70b70e47dce514c0db3ba",
+    ".claude/skills/yrUpdateDocsSkillsRulesEtc/scripts/yrUpdateDocsSkillsRulesEtc.sh": "b5c123d9596b46196ecd36894843240c1c90dba9479d7db100e3a5dfedb38b3b",
+    "README.md": "aa13fedfb85f158846f9b8263c7634007c441fc96a1cf93432295469b9d95034",
     "_yrIssues/config.sh": "e88eb0025fa0d0bbba90468331b8fca23b6c5ce2faccb8c5a42015018f9077f0",
-    "jb/subjexts-labels.md": "98700fe757c8efbba39b8d500a35ed90f1463966caad7e451dbfd3edcfa1003d"
+    "jb/subjexts-labels.md": "1a3e3ea47e15e57804ca3a98958d128d64383a6c7d8f123796cd891b0c3204ad"
   },
-  "updatedAt": "2026-11-04T06:41:25Z",
+  "updatedAt": "2026-11-04T18:01:02Z",
   "tool": {
     "name": "yrProject",
-    "version": "0.8.1",
-    "templatesCommit": "cf45de7"
+    "version": "0.9.1",
+    "templatesCommit": "46d8327"
   },
   "history": [
     {
@@ -189,7 +189,23 @@
         "subjexts",
         "yrIssues"
       ]
+    },
+    {
+      "date": "2026-11-04",
+      "command": "update",
+      "version": "v0.9.1",
+      "parts": [
+        "rules",
+        "subjexts",
+        "yrIssues"
+      ]
     }
   ],
-  "about": "Written by yrProject v0.8.1 (https://github.com/y-rosenthal/yrProject), the record of this project's yrProject setup. Do not edit: \"yrProject.sh update\" writes it again."
+  "about": "Written by yrProject v0.9.1 (https://github.com/y-rosenthal/yrProject), the record of this project's yrProject setup. Do not edit: \"yrProject.sh update\" writes it again.",
+  "blocks": {
+    ".gitignore: yrProject": "c743a3d30be57e239ecb9ec71f0dcdb9e3f9b39a431a62f740c4171e580c6625",
+    "AGENTS.md: setup": "c486f4c06006f6bcc91d77c85d50a78ecbec34f87631e80baf0d57eb9d960982",
+    "AGENTS.md: shared rules": "97975b4a407022cf820865ca2d2eea5d5b5c0b99def1e451a125dda46a134e97",
+    "README.md: setup": "6910ea59cefc5658f0e8cb54a917367596d2647cc41893ec97c06b717899da62"
+  }
 }
