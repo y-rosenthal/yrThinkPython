@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 # Tools for the yr/ review notebooks. See yr/README.md.
-#   review.sh sync      yr/chapNN_review.ipynb [--accept]  write everything derivable (outputs, examples, values, ...)
-#   review.sh check     yr/chapNN_review.ipynb [--static]  verify the page (fails if sync would change anything)
-#   review.sh normalize yr/chapNN_review.ipynb             repair a page saved in Colab (no kernel), then sync it
-#   review.sh selftest                                     prove that sync and check catch broken pages
-#   review.sh [COMMAND] --help                             this help; with sync, check or selftest, also its options
+#   review.sh sync      PAGE... [--accept]   write everything derivable (outputs, examples, values, ...)
+#   review.sh check     PAGE... [--static]   verify the page (fails if sync would change anything)
+#   review.sh normalize PAGE...              repair a page saved in Colab (no kernel), then sync it
+#   review.sh selftest                       prove that sync and check catch broken pages
+#   review.sh pages                          list the pages in the review format
+#   review.sh [COMMAND] --help               this help; with sync, check or selftest, also its options
+# PAGE is a page in the review format (yr/chapNN_review.ipynb, or another page of a chapter written in that
+# format: review_format.uses_review_format), or "all" for every such page (review.sh pages lists them).
 # Uses the book's venv (outside the repo) and the pinned Colab-like kernel "colablike" (ensure_colab_venv.sh);
 # caches jupyturtle.py and other downloads next to the book's venv.
 set -euo pipefail
@@ -33,8 +36,21 @@ if [ ! -f "$CACHE/jupyturtle.py" ]; then
 fi
 colab_kernel() { "$HERE/ensure_colab_venv.sh" >/dev/null; }
 
+review_pages() { python - <<'PY'
+import sys
+from pathlib import Path
+sys.path.insert(0, 'yr/tools')
+import review_format
+for p in sorted(Path('yr').glob('chap*_*.ipynb')):
+    if review_format.uses_review_format(p):
+        print(p)
+PY
+}
+
 cmd="${1:-}"; [ $# -gt 0 ] && shift
+if [ "${1:-}" = all ]; then shift; set -- $(review_pages) "$@"; fi
 case "$cmd" in
+  pages)     review_pages ;;
   sync)      colab_kernel; status=0
              args=(); nbs=(); for a in "$@"; do case "$a" in -*) args+=("$a");; *) nbs+=("$a");; esac; done
              for nb in "${nbs[@]}"; do python "$HERE/sync_review.py" "$nb" "${args[@]}" || status=$?; done

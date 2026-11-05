@@ -4,8 +4,9 @@ The chapters/ notebooks are committed without outputs, and Jupyter Book's own ex
 (_config.yml), so this step produces the outputs, as Downey's site has them. The additions pages
 (yr/chapNN_additions.ipynb, copied to jb/yr/) and every other page of a chapter in the additions format
 (yr/chapNN_KIND.ipynb: more_review, or any new kind) are committed without outputs too, and this step runs them
-the same way. (The review pages, yr/chapNN_review.ipynb, store their own outputs: this step does not run
-them.) For each jb/chapNN.ipynb and each jb/yr/chapNN_KIND.ipynb that is not a review page:
+the same way. (The pages in the review format, yr/chapNN_review.ipynb and any other page written in that format
+(review_format.uses_review_format), store their own outputs: this step does not run them.) For each
+jb/chapNN.ipynb and each jb/yr/chapNN_KIND.ipynb that is not in the review format:
 
 1. Make a scratch copy in which each '# Solution goes here' cell holds a solution: ours from
    solutions/chapNN.ipynb if there is one, otherwise Downey's from soln_overlay.json. Then the
@@ -27,7 +28,7 @@ If a notebook cannot be executed at all, it is left without outputs and a warnin
 the build goes on. Run from jb/, after copying the chapters and before prep_notebooks.py:
 
     python execute_notebooks.py [chapNN.ipynb ...]
-    (default: every chap*.ipynb in jb/ and every chap*_KIND.ipynb in jb/yr/ except chap*_review.ipynb)
+    (default: every chap*.ipynb in jb/ and every chap*_KIND.ipynb in jb/yr/ that is not in the review format)
 """
 import copy
 import json
@@ -46,6 +47,8 @@ from nbclient import NotebookClient
 
 JB = Path(__file__).resolve().parent
 ROOT = JB.parent
+sys.path.insert(0, str(ROOT / 'yr' / 'tools'))
+import review_format  # noqa: E402  (stdlib only)
 HELPERS = ['thinkpython.py', 'diagram.py', 'structshape.py', 'words.txt', 'photos.zip']
 JUPYTURTLE = 'https://github.com/ramalho/jupyturtle/releases/download/2024-03/jupyturtle.py'
 GITHUB = os.environ.get('GITHUB_ACTIONS') == 'true'
@@ -168,4 +171,4 @@ if __name__ == '__main__':
         sys.exit(print(__doc__))
     os.chdir(JB)
     main(sys.argv[1:] or sorted(glob('chap*.ipynb'))
-         + sorted(p for p in glob('yr/chap*_*.ipynb') if not re.fullmatch(r'yr/chap\d\d_review\.ipynb', p)))
+         + sorted(p for p in glob('yr/chap*_*.ipynb') if not review_format.uses_review_format(p)))

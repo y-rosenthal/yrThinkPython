@@ -178,7 +178,8 @@ def template_cells(nb, path, changes):
     cells = nb.cells
     m = rf.TITLE_CELL_PARSE.match(source(cells[0])) if cells else None
     if m:
-        set_source(cells[0], rf.title_cell(int(m.group('N')), m.group('TITLE'), rf.review_letter(path), m.group('TOPIC')),
+        set_source(cells[0], rf.title_cell(int(m.group('N')), m.group('TITLE'), rf.review_letter(path), m.group('TOPIC'),
+                                   Path(path).stem),
                    changes, 'title cell rewritten')
     helps = [c for c in cells if rf.is_help_note(c)]
     if not helps:
@@ -845,6 +846,7 @@ def fill(nb, qs, sinks, results, errors, report, not_accepted):
                     agree[jid] = (sink, res)
             except Refused as e:
                 errors.append(f'{t}: {sink[0]} {"value" if sink[0] == "value" else "block"}: {e}')
+        added = []                                          # token indexes after which a region was inserted
         for k, kind, body in sorted(inserts, reverse=True):
             nxt = toks[k + 1] if k + 1 < len(toks) else None
             if nxt is not None and nxt.kind == 'region' and nxt.name == kind:
@@ -856,6 +858,7 @@ def fill(nb, qs, sinks, results, errors, report, not_accepted):
                     toks[k + 1] = region_tok(kind, body)
             else:
                 toks.insert(k + 1, region_tok(kind, body))
+                added.append(k)
                 report.append(f'{t}: new {kind} output:\n{indent(body)}')
         text = md_join(toks)
         if values:
@@ -874,6 +877,8 @@ def fill(nb, qs, sinks, results, errors, report, not_accepted):
         for jid, (sink, res) in agree.items():
             _, ei, ek, ci, ck = sink
             ex_toks = md_tokens(source(nb.cells[ei]))
+            if ei == i:                                     # regions inserted above moved the later tokens
+                ek += sum(1 for a in added if a < ek)
             want = ex_toks[ek + 1].code if ek + 1 < len(ex_toks) and ex_toks[ek + 1].kind == 'region' else None
             got = rf.snippet_markdown(res, rf.IMG_TAG.findall(want or ''))
             if want is not None and got != want:

@@ -12,9 +12,10 @@ yr/
   README.md                this file: the rules for the course's pages (layout, format, style, tools)
   chapNN_additions.ipynb   material that a chapter uses but does not explain (only the chapters that need one;
                            more additions pages are chapNN_additions_TOPIC.ipynb)
-  chapNN_review.ipynb      a review page of a chapter
+  chapNN_review.ipynb      a review page of a chapter (the review format: review.sh sync writes its outputs)
   chapNN_more_review.ipynb more review questions, after the review page (only the chapters that need one; other
-                           pages of review questions have their own KIND, for example chap09_palindromes.ipynb)
+                           pages of review questions have their own KIND, for example chap09_palindromes.ipynb;
+                           a new one is written in the review format too)
   NAME.md                  a page of the course without code (an introduction, a note)
   plans/                   design notes (runall-collapsible-answers.md: the review-page format)
   tools/
@@ -58,11 +59,13 @@ A page is `yr/chapNN_KIND.ipynb` (KIND: lowercase letters, digits and `_`). The 
   (`chapNN_review.ipynb`) is usually the chapter's title (`9c. Review: Lists`); `review.sh sync` keeps the topic
   that is in the title cell. `check_notebooks.py` checks the letter and the label, and that there is a topic.
 - The additions pages come before the review page, and the review page before the more-review page.
-- Only `yr/chapNN_review.ipynb` uses the format of a review page (`review.sh sync` and `check`;
-  `review_format.uses_review_format`). Every other page (additions, more_review, any other kind) uses the format
-  of an additions page ("Additions pages"): the build runs its code cells, and turns its `<details>` Answers into
-  closed dropdowns. Write another page of review questions in the format of a more-review page
-  (`yr/chap09_palindromes.ipynb` is an example).
+- A page uses the format of a review page (`review.sh sync` and `check`) when its Answers are `#### Answer`
+  headings (`review_format.uses_review_format`): `yr/chapNN_review.ipynb` always, and every page of review
+  questions written since November 2026 (`yr/chap09_palindromes.ipynb`, `yr/chap09_practice.ipynb`). The
+  additions pages, and the two older more-review pages (`yr/chap07_more_review.ipynb`,
+  `yr/chap09_more_review.ipynb`), use the format of an additions page ("Additions pages"): the build runs their
+  code cells, and turns their `<details>` Answers into closed dropdowns. Write a new page of review questions in
+  the review format ("More review pages").
 - `review.sh sync` writes the letter of a review page in its title (`review_format.page_letter`: the page's
   position in the TOC). So after you add a page before a review page, run `review.sh sync` on the review page,
   and change its line in `jb/index.md` (`NNb.` to `NNc.`). The letter of every other kind is typed in its
@@ -85,21 +88,38 @@ A page is `yr/chapNN_KIND.ipynb` (KIND: lowercase letters, digits and `_`). The 
 - `check_notebooks.py` checks the titles, and that the TOC lists the pages right after the chapter, in the
   order of the kinds.
 
-## More review pages: `yr/chapNN_more_review.ipynb`
+## More review pages: `yr/chapNN_more_review.ipynb` and other kinds
 
-A more-review page, "NN<letter>. Review: TOPIC" (for example "9d. Review: Sentences, Nested Loops and Tables"), holds extra practice questions for a chapter
-when its review page is full or when a topic needs more practice. It is a normal notebook in the format of an
-additions page, not of a review page: `## Practice questions` with `### Question N (easy|medium|hard): KIND`
-headings, each question's code and examples as text, a `# Your code here` cell, and an Answer that is one
-markdown cell with a `<details>` / `<summary>Answer</summary>` block; then `## Credits`. The rules of
-"Additions pages" apply: the style rules, no stored outputs, the build runs its code cells
-(`jb/execute_notebooks.py`) and `jb/prep_notebooks.py` turns each `<details>` cell into a closed dropdown.
-`yr/chap07_more_review.ipynb` is the reference example. The questions follow the same rules as review questions
-("Review pages", "Style rules": Questions and Answers), and their numbers are stable in the same way.
+A page of more review questions, "NN<letter>. Review: TOPIC" (for example "9e. Review: Palindromes"), holds
+extra practice questions for a chapter when its review page is full or when a topic needs more practice. Write
+it in the review format, as the review page ("Review pages"): `review.sh sync` writes every output and value by
+running the code, and `review.sh check` verifies the page. **No output on a page of questions is typed by
+hand**: a typed output is not checked, and a wrong one teaches the student something false. The differences
+from the review page:
 
-To add one: write the notebook with the title `# NN<letter>. Review: TOPIC`, list it in
-`jb/_toc.yml` after the chapter's review page, add its Colab line in `jb/index.md` after the review line, and
-verify it as an additions page ("Adding an additions page", step 4).
+- `python3 yr/tools/review_cells.py new NN "TOPIC" --kind KIND` makes the skeleton `yr/chapNN_KIND.ipynb`
+  (KIND: `more_review`, or a name for the topic, for example `palindromes`).
+- The title cell may hold the page's own introduction in place of the template text: sync rewrites only a title
+  cell in the template form ("A review of [Chapter ..."). Keep the title `# NN<letter>. Review: TOPIC` and the
+  Colab link to the page's own file, and type the letter (`check_notebooks.py` reports the right one).
+- `## Concepts covered` is optional. A page of questions only has `## Questions` (then the help note, the setup
+  cell and the helper cell, which sync writes), the questions, and `## Credits`.
+- A later question may call a function that an earlier question's Answer wrote (`isPalindrome` from Question 1
+  in `findPalindromes`). The Answer block of the later question repeats that function, because a block runs on
+  its own after Run all, and a note under the block says so. Put `<!-- header: NAME -->` in the prompt, so that
+  the header block shows only the function to write; the prompt says which question wrote the helper.
+
+`yr/chap09_palindromes.ipynb` is the reference example (`yr/chap09_practice.ipynb` is a long one). The
+questions follow the rules of review questions ("Style rules": Questions and Answers), and their numbers are
+stable in the same way ("Adding a question", "Question numbers between semesters").
+
+Two older pages, `yr/chap07_more_review.ipynb` and `yr/chap09_more_review.ipynb`, are still in the additions
+format: `## Practice questions`, `<details>` Answers with typed outputs, no stored outputs; the build runs their
+code cells. Do not write a new page in that format. Converting them is issue #13.
+
+To add a page: write the notebook, list it in `jb/_toc.yml` after the chapter's review page (and after the
+other pages of review questions), add its Colab line in `jb/index.md` in the same place, then verify it as a
+review page ("Adding a review page for another chapter", step 6).
 
 ## Other pages of the course: `yr/NAME.md`
 
@@ -367,6 +387,12 @@ These come from Prof. Rosenthal's instructions; follow them for every page.
   or a pointer to the question that defines it); introduce any module the page uses (e.g.
   `jupyturtle`) at the top of the Questions section.
 - Only use Python taught up to this chapter, or explain the extra bit in the question.
+- **A question that reimplements a Python function, method or operator** (`my_count` for `count`, `my_find`
+  for `find`, `my_contains` for `in`) says in the prompt what the function must do, so that a student who
+  does not know the built-in can write it. Its Answers never use the built-in that the question
+  reimplements (not even a close relative: no `in` in an Answer for `my_contains`, no `index` for
+  `my_find`). The point is practice in writing what Python already provides. A later question may call
+  the function that an earlier question wrote.
 - **Write-code questions give the function header** of each function to write. Sync writes it ("Start from this header (replace `...` with the body):"). Exception: a question
   whose point is writing the header itself; tag its `# Your code here` cell `no-signature`.
 - **Write-code questions show at least two examples**, each with its output (sync writes it).
@@ -685,6 +711,7 @@ All run from the repository root.
 
 ```bash
 python3 yr/tools/review_cells.py new 5 "Conditionals and Recursion"   # skeleton yr/chap05_review.ipynb
+python3 yr/tools/review_cells.py new 9 "Palindromes" --kind palindromes  # another page in the review format
 python3 yr/tools/review_cells.py list yr/chap04_review.ipynb
 python3 yr/tools/review_cells.py next yr/chap04_review.ipynb [--before 7]  # the number for a new question
 python3 yr/tools/review_cells.py add yr/chap04_review.ipynb spec.txt [--before 7]
@@ -692,6 +719,8 @@ python3 yr/tools/review_cells.py renumber yr/chap04_review.ipynb   # only betwee
 yr/tools/review.sh sync yr/chap04_review.ipynb [--accept]
 yr/tools/review.sh check yr/chap04_review.ipynb [--static]
 yr/tools/review.sh normalize yr/chap04_review.ipynb
+yr/tools/review.sh pages                                   # the pages in the review format
+yr/tools/review.sh check all                               # check (or sync) every one of them
 yr/tools/review.sh selftest
 python3 yr/tools/verify_site.py jb/_build/html/yr/chap04_review.html yr/chap04_review.ipynb [BEFORE.html]
 ```
@@ -740,9 +769,9 @@ Use the `yr-review-page` skill, or by hand:
 
 - `.github/workflows/deploy-book.yml` and `.claude/skills/build-book/build_book.sh` copy
   `yr/*.ipynb` and the markdown pages `yr/*.md` (not this README) into `jb/yr/` (gitignored) next to the
-  chapter copies. Review pages are not run by the build: the website shows the outputs that sync stored.
-  Every other page of a chapter (additions, more-review and the other kinds) is run like the chapters
-  (`jb/execute_notebooks.py`); `review_format.uses_review_format` decides which pages are review pages.
+  chapter copies. The pages in the review format are not run by the build: the website shows the outputs that
+  sync stored. Every page in the additions format is run like the chapters (`jb/execute_notebooks.py`);
+  `review_format.uses_review_format` decides which pages are in the review format.
 - `jb/prep_notebooks.py` (`process_review`): each Answer (its text and its run cells' stored outputs,
   without their code) becomes one closed dropdown; the help note, the helper cell and the "Credits" heading
   are dropped; markers are removed (values stay); tracebacks are shortened; the concept lists become closed dropdowns;

@@ -27,6 +27,8 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(ROOT / 'yr' / 'tools'))
+import review_format  # noqa: E402  (stdlib only)
 args = sys.argv[1:]
 if '-h' in args or '--help' in args:
     sys.exit(print(__doc__))
@@ -67,8 +69,8 @@ def check():
             summary.append(f'{page}: markdown page')
             if title not in html:
                 problems.append(f'{page}: the title {title!r} is not on the page')
-        elif page.startswith('yr/') and not re.fullmatch(r'yr/chap\d\d_review', page):
-            # additions-format pages (all but chapNN_review): the build runs their code cells (a review-question page may have none)
+        elif page.startswith('yr/') and not review_format.uses_review_format(ROOT / f'{page}.ipynb'):
+            # additions-format pages: the build runs their code cells (a review-question page may have none)
             outputs = html.count('class="cell_output')
             summary.append(f'{page}: {outputs} outputs')
             if outputs == 0 and page.endswith('_additions'):
@@ -79,10 +81,12 @@ def check():
                 if bad in html:
                     problems.append(f'{page}: "{bad}" appears on the page')
         elif page.startswith('yr/'):
-            for needed in ('Python Syntax and Semantics', 'Definitions, etc.', 'Answer'):
-                if needed not in html:
-                    problems.append(f'{page}: "{needed}" not found')
+            # pages in the review format: the concept lists (if the page has them), the Answers, the pictures
             src = (ROOT / f'{page}.ipynb').read_text()
+            needed = ['Answer'] + (['Python Syntax and Semantics', 'Definitions, etc.'] if 'Concepts covered' in src else [])
+            for text in needed:
+                if text not in html:
+                    problems.append(f'{page}: "{text}" not found')
             expected = src.count('<img data-turtle') + src.count('"review_drawing"')   # examples + stored drawings
             found = html.count('alt="Turtle drawing"')
             for bad in ('@title', 'run_code', '&lt;!--', '<!--=', 'generated imports', 'Using this page in Colab'):
