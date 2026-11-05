@@ -14,8 +14,9 @@
 #   - input() is replaced by a stub returning a non-numeric string (IPython startup file), so
 #     the chapter 5 input() cells and the "%%expect ValueError / int(speed)" cell behave as in the book.
 # download() cells fetch files from upstream GitHub into the scratch dir, never into the repo.
-# Additions, more-review and the other pages in the additions format run like chapters. Review pages
-# (yr/chapNN_review.ipynb) are skipped: `yr/tools/review.sh check` runs them on the pinned Colab-like kernel.
+# Additions, more-review and the other pages in the additions format run like chapters. The pages in the review
+# format (yr/chapNN_review.ipynb, and any other page written in that format: `yr/tools/review.sh pages` lists
+# them) are skipped: `yr/tools/review.sh check` runs them on the pinned Colab-like kernel.
 # -h, --help: show this help and stop.
 set -euo pipefail
 case "${1:-}" in -h|--help) sed -n '2,/^[^#]/{/^#/s/^# \{0,1\}//p}' "$0"; exit 0 ;; esac
@@ -24,7 +25,8 @@ cd "$ROOT"
 source "$ROOT/.claude/skills/build-book/ensure_venv.sh"
 
 if [ $# -eq 0 ]; then echo "usage: $0 <notebook.ipynb ...|all>" >&2; exit 2; fi
-if [ "$1" = "all" ]; then set -- chapters/chap[01][0-9].ipynb; set -- "$@" $(ls yr/chap*_*.ipynb 2>/dev/null | grep -v '/chap[0-9][0-9]_review\.ipynb$'); fi
+review_format_page() { python3 -c 'import sys; sys.path.insert(0, "yr/tools"); import review_format; sys.exit(0 if review_format.uses_review_format(sys.argv[1]) else 1)' "$1"; }
+if [ "$1" = "all" ]; then set -- chapters/chap[01][0-9].ipynb; for nb in yr/chap*_*.ipynb; do review_format_page "$nb" || set -- "$@" "$nb"; done; fi
 
 WORK="${THINKPYTHON_RUN_DIR:-${TMPDIR:-/tmp}/yrThinkPython-run}"
 mkdir -p "$WORK"
@@ -45,7 +47,7 @@ PY
 
 fail=0
 for nb in "$@"; do
-  case "$(basename "$nb")" in chap[0-9][0-9]_review.ipynb) echo ">> skipping $nb (review page: use yr/tools/review.sh check)"; continue ;; esac
+  if [[ "$nb" == */chap[0-9][0-9]_*.ipynb ]] && review_format_page "$nb"; then echo ">> skipping $nb (review format: use yr/tools/review.sh check)"; continue; fi
   name="$(basename "$nb")"
   cp "$nb" "$WORK/$name"
   printf '>> running %s ... ' "$nb"

@@ -1,4 +1,5 @@
-"""The format of the review pages (yr/chapNN_review.ipynb): the one place that defines it. Stdlib only;
+"""The format of the review pages (yr/chapNN_review.ipynb, and any other page of a chapter whose Answers are
+"#### Answer" headings: uses_review_format): the one place that defines it. Stdlib only;
 works on raw JSON dicts and on nbformat nodes (cairosvg is imported only to render a drawing).
 
 See yr/README.md for the rules a person follows, and yr/plans/runall-collapsible-answers.md section 2 for the
@@ -98,7 +99,7 @@ for students who have already studied the chapter.
 Use the two lists under **Concepts covered** as a checklist (click a list's title to hide it), then work through the **Questions**, which go from easy to hard.
 Each question has a suggested answer under **Answer**. Try the question first, then open the Answer.
 
-[Run this page on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap{NN}_review.ipynb)'''
+[Run this page on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/{STEM}.ipynb)'''
 # The title cell of a review page: "# NN<letter>. Review: TOPIC" (TOPIC: the chapter's title, or another topic). The old
 # title, "# NN<letter>. Prof. Rosenthal's Review", is read too: its topic is the chapter's title.
 TITLE_CELL_PARSE = re.compile(r'^# (?P<N>\d+)[a-z]+\. (?:Prof\. Rosenthal\'s Review|Review: (?P<TOPIC>[^\n]*\S))\n\n'
@@ -117,10 +118,14 @@ def page_label(kind):
 
 
 def uses_review_format(path):
-    """True for yr/chapNN_review.ipynb, the one page of a chapter in the review format (review.sh sync and check).
-    Every other page of a chapter uses the additions format: the build runs it, and its Answers are <details>."""
-    m = PAGE_STEM.fullmatch(Path(path).stem)
-    return bool(m) and m.group('kind') == 'review'
+    """True for a page of a chapter (yr/chapNN_KIND.ipynb) in the review format: its Answers are "#### Answer"
+    headings (page_format 'v3'), so review.sh sync writes its outputs and review.sh check verifies it. The review
+    page (chapNN_review.ipynb) is always in this format; another page is when it is written in it. Every other page
+    of a chapter uses the additions format: the build runs it, and its Answers are <details>."""
+    p = Path(path)
+    if not PAGE_STEM.fullmatch(p.stem) or not p.exists():
+        return False
+    return page_format(json.loads(p.read_text(encoding='utf-8'))) == 'v3'
 
 
 def letter(i):
@@ -159,9 +164,11 @@ def page_letter(path):
 review_letter = page_letter      # the old name
 
 
-def title_cell(n, title, letter='b', topic=None):
-    """The title cell of a review page; the topic is the chapter's title unless another one is given."""
+def title_cell(n, title, letter='b', topic=None, stem=None):
+    """The title cell of a review page; the topic is the chapter's title unless another one is given; the Colab link
+    names the page's file (stem, default chapNN_review)."""
     return (TITLE_CELL.replace('{NN}', f'{n:02d}').replace('{N}', str(n)).replace('{L}', letter)
+            .replace('{STEM}', stem or f'chap{n:02d}_review')
             .replace('{TOPIC}', topic or title).replace('{TITLE}', title))
 
 

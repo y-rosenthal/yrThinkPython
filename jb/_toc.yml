@@ -63,6 +63,7 @@ parts:
     - file: yr/chap09_review
     - file: yr/chap09_more_review
     - file: yr/chap09_palindromes
+    - file: yr/chap09_practice
 - numbered: True
   chapters:
     - file: chap10

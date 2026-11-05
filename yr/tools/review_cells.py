@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Create review notebooks and add, list or renumber their questions. Stdlib only.
 
-  review_cells.py new NN "Chapter title"            create yr/chapNN_review.ipynb (skeleton; then review.sh sync)
+  review_cells.py new NN "Chapter title" [--kind K] create yr/chapNN_review.ipynb (skeleton; then review.sh sync);
+                                                     --kind K: another page of the chapter in the review format,
+                                                     yr/chapNN_K.ipynb (for example --kind palindromes)
   review_cells.py list NOTEBOOK                      list the questions
   review_cells.py next NOTEBOOK [--before N]         print the number for a new question (at the end, or before
                                                      Question N: e.g. 3b between Questions 3 and 4)
@@ -234,16 +236,16 @@ import math'''),
 ]
 
 
-def cmd_new(nn, title):
+def cmd_new(nn, title, kind='review'):
     nn = f'{int(nn):02d}'
-    path = ROOT / 'yr' / f'chap{nn}_review.ipynb'
+    path = ROOT / 'yr' / f'chap{nn}_{kind}.ipynb'
     if path.exists():
         sys.exit(f'{path} already exists')
     used = set()
     cells = []
     for kind, s in SKELETON:
         s = (s.replace('{NN}', nn).replace('{N}', str(int(nn))).replace('{L}', rf.review_letter(path))
-             .replace('{TOPIC}', title).replace('{TITLE}', title))
+             .replace('{STEM}', path.stem).replace('{TOPIC}', title).replace('{TITLE}', title))
         cells.append(code_cell(s, used, ['setup']) if kind == 'setup' else md_cell(s, used))
     meta = {'kernelspec': {'display_name': 'Python 3 (ipykernel)', 'language': 'python', 'name': 'python3'},
             'language_info': {'name': 'python'}}
@@ -256,8 +258,11 @@ if __name__ == '__main__':
     if '-h' in a or '--help' in a:
         sys.exit(print(__doc__))
     before = a[a.index('--before') + 1] if '--before' in a else None
+    kind = a[a.index('--kind') + 1] if '--kind' in a else 'review'
+    if '--kind' in a:
+        del a[a.index('--kind'):a.index('--kind') + 2]
     if a[:1] == ['new'] and len(a) == 3:
-        cmd_new(a[1], a[2])
+        cmd_new(a[1], a[2], kind)
     elif a[:1] == ['list'] and len(a) == 2:
         cmd_list(a[1])
     elif a[:1] == ['next'] and len(a) in (2, 4):

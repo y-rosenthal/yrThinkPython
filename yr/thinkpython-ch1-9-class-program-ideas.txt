@@ -1,0 +1,647 @@
+# NOT USED BY THE BOOK. This file is the source material of yr/chap09_practice.ipynb ("9f. Review:
+# Practice Programs"). Meta Muse generated it (November 2026). The questions and answers were reviewed,
+# corrected and rewritten for the page; the page is the version to read and to change. This file is kept
+# as a record of where the material came from. The build and the checks ignore it.
+
+In-class program ideas: Think Python chapters 1-9
+Prepared for Prof. Rosenthal's class test review.
+Every answer uses only concepts from Chapters 1-9 of the YR Think Python book
+(for loops, if/elif/else, range, len, append, indexing, two-part slicing,
+string concatenation, the in operator, nested for loops from 9b).
+No while loops, no slice-step [::-1], no comprehensions, no dictionaries, no tuples.
+Questions marked (A/B) ask Part A first, then a Part B that needs a nested loop.
+
+1. Pig Latin
+
+QUESTION: Write a function pig_latin that converts an English word to Pig Latin, using these rules: (1) if the word begins with a consonant, move the first letter to the end of the word and add 'ay'; (2) if the word begins with a vowel (a, e, i, o, u), just add 'ay' to the end of the word. Assume the word is lowercase with no spaces. For example, pig_latin('hello') should return 'ellohay', pig_latin('python') should return 'ythonpay', and pig_latin('apple') should return 'appleay'. This exercises string indexing, slicing, concatenation, and the in operator.
+
+######################################################################
+# ANSWER
+######################################################################
+def pig_latin(word):
+    if word[0] in 'aeiou':
+        return word + 'ay'
+    return word[1:] + word[0] + 'ay'
+
+
+2. Remove all of one or more characters (string version)
+
+QUESTION: Write a function remove_chars that takes a string text and a string chars, and returns a new string with every character that appears in chars removed. For example, remove_chars('hello world', 'aeiou') should return 'hll wrld'. This exercises for loops, the not in operator, and building a string one piece at a time. Note: unlike str.replace, which already removes all occurrences, there is no built-in for this on strings with several characters at once.
+
+######################################################################
+# ANSWER
+######################################################################
+def remove_chars(text, chars):
+    result = ''
+    for ch in text:
+        if ch not in chars:
+            result = result + ch
+    return result
+
+
+3. Remove all of one or more items (list version)
+
+QUESTION: Write a function remove_items that takes a list items and a list bad, and returns a NEW list with every item that appears in bad removed. For example, remove_items([1, 2, 3, 2, 4, 2], [2]) should return [1, 3, 4]. This exercises for loops, the not in operator, and list append. Note: the built-in list.remove only removes the FIRST occurrence (and raises ValueError if the item is missing), so this function fills a real gap. Also note we return a new list instead of mutating the input -- mutating the caller's list behind their back is the Chapter 9 aliasing trap.
+
+######################################################################
+# ANSWER
+######################################################################
+def remove_items(items, bad):
+    result = []
+    for x in items:
+        if x not in bad:
+            result.append(x)
+    return result
+
+
+4. Reimplement list.count, then find the most frequent item (A/B)
+
+QUESTION: Part A: Write a function my_count that takes a list lst and a value x, and returns how many times x appears in lst -- doing what the built-in list.count does, but using only a loop and an if. For example, my_count([1, 2, 3, 2, 4, 2], 2) should return 3. This exercises the accumulator pattern. Part B: Write a function most_frequent that takes a non-empty list lst and returns the item that appears most often (if several tie, return the one that appears first in the list). For example, most_frequent([1, 2, 1, 3, 2, 4, 2]) should return 2. Part B must use a NESTED for loop: for each item, count its occurrences with an inner loop -- the same counting idea as Part A, repeated once per item. Class discussion: compare with a version that calls my_count inside the loop (Chapter 6: building on functions you already wrote).
+
+######################################################################
+# ANSWER
+######################################################################
+def my_count(lst, x):
+    count = 0
+    for item in lst:
+        if item == x:
+            count = count + 1
+    return count
+
+
+def most_frequent(lst):
+    best = lst[0]
+    best_count = 0
+    for x in lst:
+        count = 0
+        for y in lst:
+            if y == x:
+                count = count + 1
+        if count > best_count:
+            best_count = count
+            best = x
+    return best
+
+
+5. Reimplement the in operator, then find common items (A/B)
+
+QUESTION: Part A: Write a function my_contains that takes a list lst and a value x, and returns True if x appears in lst and False otherwise -- doing what the in operator does, but written out with a loop. For example, my_contains([1, 2, 3], 9) should return False. This exercises early return from inside a loop. Part B: Write a function common_items that takes two lists a and b, and returns a new list of the items that appear in BOTH lists, with no repeats, in the order they first appear in a. For example, common_items([1, 2, 3], [2, 3, 4]) should return [2, 3]. Part B must use a NESTED for loop: for each item in a, scan b with an inner loop. Class discussion: compare with a version that calls my_contains inside the loop.
+
+######################################################################
+# ANSWER
+######################################################################
+def my_contains(lst, x):
+    for item in lst:
+        if item == x:
+            return True
+    return False
+
+
+def common_items(a, b):
+    result = []
+    for x in a:
+        for y in b:
+            if x == y and x not in result:
+                result.append(x)
+    return result
+
+
+6. Reimplement list.index
+
+QUESTION: Write a function my_index that takes a list lst and a value x, and returns the index of the FIRST occurrence of x in lst, or -1 if x is not there -- like the built-in list.index, except the real one raises ValueError instead of returning -1 (a design decision worth discussing in class). For example, my_index([10, 20, 30], 20) should return 1. This exercises range, len, and indexing.
+
+######################################################################
+# ANSWER
+######################################################################
+def my_index(lst, x):
+    for i in range(len(lst)):
+        if lst[i] == x:
+            return i
+    return -1
+
+
+7. Reimplement str.replace
+
+QUESTION: Write a function my_replace that takes a string s, a string old, and a string new, and returns a new string with EVERY occurrence of old replaced by new -- doing what the built-in str.replace does (assume old is not empty). For example, my_replace('hello', 'l', 'L') should return 'heLLo'. This exercises two-part slicing and keeping track of position while building a string.
+
+######################################################################
+# ANSWER
+######################################################################
+def my_replace(s, old, new):
+    m = len(old)
+    result = ''
+    skip = 0
+    for i in range(len(s)):
+        if skip > 0:
+            skip = skip - 1
+        elif s[i:i + m] == old:
+            result = result + new
+            skip = m - 1
+        else:
+            result = result + s[i]
+    return result
+
+
+8. Reimplement str.find, then find every occurrence (A/B)
+
+QUESTION: Part A: Write a function my_find that takes a string s and a string sub, and returns the index where sub FIRST appears in s, or -1 if it never appears -- like the built-in str.find. For example, my_find('hello', 'll') should return 2. This needs a NESTED for loop (Chapter 9b): the outer loop tries each starting position, the inner loop checks the characters one by one. Part B: Write a function find_all that takes s and sub and returns a LIST of every starting index where sub appears. For example, find_all('hello', 'l') should return [2, 3], and find_all('hello', 'z') should return []. Part B uses the same nested loop as Part A, but collects every match instead of returning the first.
+
+######################################################################
+# ANSWER
+######################################################################
+def my_find(s, sub):
+    for i in range(len(s) - len(sub) + 1):
+        match = True
+        for j in range(len(sub)):
+            if s[i + j] != sub[j]:
+                match = False
+        if match:
+            return i
+    return -1
+
+
+def find_all(s, sub):
+    result = []
+    for i in range(len(s) - len(sub) + 1):
+        match = True
+        for j in range(len(sub)):
+            if s[i + j] != sub[j]:
+                match = False
+        if match:
+            result.append(i)
+    return result
+
+
+9. Reimplement str.split
+
+QUESTION: Write a function my_split that takes a string s and returns a list of its words, splitting on spaces (treat any run of spaces as one separator, and ignore leading/trailing spaces) -- like the built-in str.split() with no arguments. For example, my_split('  too   many   spaces  ') should return ['too', 'many', 'spaces']. This exercises building words character by character and list append.
+
+######################################################################
+# ANSWER
+######################################################################
+def my_split(s):
+    words = []
+    word = ''
+    for ch in s:
+        if ch == ' ':
+            if word != '':
+                words.append(word)
+                word = ''
+        else:
+            word = word + ch
+    if word != '':
+        words.append(word)
+    return words
+
+
+10. Reimplement str.join
+
+QUESTION: Write a function my_join that takes a list of strings words and returns one string with a single space between them -- doing what ' '.join(words) does. For example, my_join(['hello', 'world']) should return 'hello world'. This exercises range/len indexing and careful separator handling (no trailing space).
+
+######################################################################
+# ANSWER
+######################################################################
+def my_join(words):
+    result = ''
+    for i in range(len(words)):
+        if i > 0:
+            result = result + ' '
+        result = result + words[i]
+    return result
+
+
+11. Reimplement list.reverse (as a new list)
+
+QUESTION: Write a function my_reverse that takes a list lst and returns a NEW list with the items in reverse order -- without using the [::-1] slice-step form, which the book never teaches. For example, my_reverse([1, 2, 3]) should return [3, 2, 1]. This exercises range with three arguments (Chapter 3b) and append. Note the contrast with the built-in list.reverse(), which reverses in place and returns None.
+
+######################################################################
+# ANSWER
+######################################################################
+def my_reverse(lst):
+    result = []
+    for i in range(len(lst) - 1, -1, -1):
+        result.append(lst[i])
+    return result
+
+
+12. Reimplement min, max, and sum
+
+QUESTION: Write three functions my_min, my_max, and my_sum that do what the built-ins min, max, and sum do for a non-empty list of numbers (assume the list is not empty). For example, my_min([4, 2, 8, 1]) is 1, my_max([4, 2, 8, 1]) is 8, my_sum([1, 2, 3, 4]) is 10. These exercise the accumulator pattern and comparisons.
+
+######################################################################
+# ANSWER
+######################################################################
+def my_min(numbers):
+    smallest = numbers[0]
+    for n in numbers:
+        if n < smallest:
+            smallest = n
+    return smallest
+
+
+def my_max(numbers):
+    biggest = numbers[0]
+    for n in numbers:
+        if n > biggest:
+            biggest = n
+    return biggest
+
+
+def my_sum(numbers):
+    total = 0
+    for n in numbers:
+        total = total + n
+    return total
+
+
+13. Remove duplicates
+
+QUESTION: Write a function remove_duplicates that takes a list lst and returns a new list with duplicates removed, keeping only the FIRST occurrence of each item, in the original order. For example, remove_duplicates([1, 2, 1, 3, 2, 4]) should return [1, 2, 3, 4]. This exercises the not in operator on the list being built.
+
+######################################################################
+# ANSWER
+######################################################################
+def remove_duplicates(lst):
+    result = []
+    for x in lst:
+        if x not in result:
+            result.append(x)
+    return result
+
+
+14. Check for duplicates, then list them (A/B)
+
+QUESTION: Part A: Write a function has_duplicates that takes a list lst and returns True if any value appears more than once, False otherwise. For example, has_duplicates([1, 2, 3, 2]) is True. This exercises the NESTED for loop from Chapter 9b: compare every pair of positions. Part B: Write a function find_duplicates that takes a list lst and returns a NEW list of the items that appear more than once, each listed once, in the order of their first repeat. For example, find_duplicates([1, 2, 1, 3, 2, 1]) should return [1, 2]. Part B uses the same nested pair-loop as Part A, but collects the repeated items instead of just answering True/False.
+
+######################################################################
+# ANSWER
+######################################################################
+def has_duplicates(lst):
+    for i in range(len(lst)):
+        for j in range(i + 1, len(lst)):
+            if lst[i] == lst[j]:
+                return True
+    return False
+
+
+def find_duplicates(lst):
+    result = []
+    for i in range(len(lst)):
+        for j in range(i + 1, len(lst)):
+            if lst[i] == lst[j] and lst[i] not in result:
+                result.append(lst[i])
+    return result
+
+
+15. Rotate a list
+
+QUESTION: Write a function rotate_list that takes a list items and an integer k, and returns a new list with the first k items moved to the end. For example, rotate_list([1, 2, 3, 4, 5], 2) should return [3, 4, 5, 1, 2] (assume 0 <= k <= len(items)). This exercises two-part slicing and list concatenation.
+
+######################################################################
+# ANSWER
+######################################################################
+def rotate_list(items, k):
+    return items[k:] + items[:k]
+
+
+16. Cumulative sums
+
+QUESTION: Write a function cumulative_sum that takes a list of numbers and returns a list of their running totals. For example, cumulative_sum([1, 2, 3, 4]) should return [1, 3, 6, 10]. This is the accumulator pattern with a list as the accumulator, plus arithmetic from Chapter 1.
+
+######################################################################
+# ANSWER
+######################################################################
+def cumulative_sum(numbers):
+    total = 0
+    result = []
+    for n in numbers:
+        total = total + n
+        result.append(total)
+    return result
+
+
+17. Add two lists element by element
+
+QUESTION: Write a function add_lists that takes two lists of numbers a and b of the SAME length, and returns a new list where each item is the sum of the items at that position. For example, add_lists([1, 2, 3], [10, 20, 30]) should return [11, 22, 33]. This exercises parallel lists and indexing with range/len.
+
+######################################################################
+# ANSWER
+######################################################################
+def add_lists(a, b):
+    result = []
+    for i in range(len(a)):
+        result.append(a[i] + b[i])
+    return result
+
+
+18. Acronym builder, then acronyms for many phrases (A/B)
+
+QUESTION: Part A: Write a function acronym that takes a phrase (a string of capitalized words separated by single spaces) and returns its acronym: the first letter of each word. For example, acronym('North Atlantic Treaty Organization') should return 'NATO'. This exercises str.split (Chapter 9), indexing, and string building. Part B: Write a function acronyms that takes a LIST of phrases and returns a list of their acronyms. For example, acronyms(['North Atlantic Treaty Organization', 'As Soon As Possible']) should return ['NATO', 'ASAP']. Part B needs a NESTED for loop: the outer loop walks the phrases, the inner loop walks the words of one phrase.
+
+######################################################################
+# ANSWER
+######################################################################
+def acronym(phrase):
+    words = phrase.split()
+    result = ''
+    for w in words:
+        result = result + w[0]
+    return result
+
+
+def acronyms(phrases):
+    result = []
+    for phrase in phrases:
+        words = phrase.split()
+        short = ''
+        for w in words:
+            short = short + w[0]
+        result.append(short)
+    return result
+
+
+19. Word lengths
+
+QUESTION: Write a function word_lengths that takes a list of strings words and returns a list of their lengths. For example, word_lengths(['hello', 'world']) should return [5, 5]. A gentle warm-up exercising len and append.
+
+######################################################################
+# ANSWER
+######################################################################
+def word_lengths(words):
+    result = []
+    for w in words:
+        result.append(len(w))
+    return result
+
+
+20. Reimplement str.strip (stretch)
+
+QUESTION: Write a function my_strip that takes a string s and returns it with leading and trailing spaces removed -- like the built-in str.strip(). For example, my_strip('   hello   ') should return 'hello', and my_strip('   ') should return ''. This is a stretch exercise: find the first and last non-space positions with loops, then take one two-part slice. No while loop needed.
+
+######################################################################
+# ANSWER
+######################################################################
+def my_strip(s):
+    start = len(s)
+    end = -1
+    for i in range(len(s)):
+        if s[i] != ' ':
+            if start == len(s):
+                start = i
+            end = i
+    if end == -1:
+        return ''
+    return s[start:end + 1]
+
+
+21. Multiplication table (nested loops)
+
+QUESTION: Write a function multiplication_table that takes an integer n and returns a list of n lists: the n-by-n multiplication table. For example, multiplication_table(3) should return [[1, 2, 3], [2, 4, 6], [3, 6, 9]]. This exercises NESTED for loops with the range forms from Chapter 3b, plus nested lists (a list of lists) from Chapter 9.
+
+######################################################################
+# ANSWER
+######################################################################
+def multiplication_table(n):
+    table = []
+    for i in range(1, n + 1):
+        row = []
+        for j in range(1, n + 1):
+            row.append(i * j)
+        table.append(row)
+    return table
+
+
+22. All pairs (nested loops)
+
+QUESTION: Write a function all_pairs that takes a list lst and returns a list of every unordered pair of its items, where each pair is a two-item list [lst[i], lst[j]] with i < j. For example, all_pairs([1, 2, 3]) should return [[1, 2], [1, 3], [2, 3]]. This exercises the NESTED for loop pattern where the inner loop starts after the outer position (Chapter 9b).
+
+######################################################################
+# ANSWER
+######################################################################
+def all_pairs(lst):
+    result = []
+    for i in range(len(lst)):
+        for j in range(i + 1, len(lst)):
+            result.append([lst[i], lst[j]])
+    return result
+
+
+23. Vowel counts per word (nested loops)
+
+QUESTION: Write a function count_vowels_words that takes a list of lowercase words and returns a list with the vowel count (a, e, i, o, u) of each word. For example, count_vowels_words(['hello', 'sky', 'aeiou']) should return [2, 0, 5]. This exercises NESTED for loops across two topics at once: the outer loop walks a list (Chapter 9), the inner loop walks a string (Chapter 8).
+
+######################################################################
+# ANSWER
+######################################################################
+def count_vowels_words(words):
+    result = []
+    for w in words:
+        count = 0
+        for ch in w:
+            if ch in 'aeiou':
+                count = count + 1
+        result.append(count)
+    return result
+
+
+24. Add two grids (nested loops)
+
+QUESTION: Write a function add_grids that takes two grids (lists of lists of numbers, both the same shape) and returns a new grid where each cell is the sum of the two input cells. For example, add_grids([[1, 2], [3, 4]], [[10, 20], [30, 40]]) should return [[11, 22], [33, 44]]. This exercises NESTED for loops over rows and columns, combining the parallel-lists idea from question 17 with nested lists.
+
+######################################################################
+# ANSWER
+######################################################################
+def add_grids(a, b):
+    result = []
+    for i in range(len(a)):
+        row = []
+        for j in range(len(a[i])):
+            row.append(a[i][j] + b[i][j])
+        result.append(row)
+    return result
+
+
+25. Selection sort (stretch, nested loops)
+
+QUESTION: Write a function selection_sort that takes a list of numbers lst and sorts it in place from smallest to largest, then returns it. For example, after selection_sort([4, 2, 8, 1]) the list should be [1, 2, 4, 8]. This is a stretch exercise combining NESTED for loops (Chapter 9b) with swapping two variables through a temporary (Chapter 2). Note: this one changes the caller's list -- the Chapter 9 aliasing lesson again. Class discussion: how would you change it to return a NEW sorted list and leave the input alone?
+
+######################################################################
+# ANSWER
+######################################################################
+def selection_sort(lst):
+    for i in range(len(lst)):
+        for j in range(i + 1, len(lst)):
+            if lst[j] < lst[i]:
+                temp = lst[i]
+                lst[i] = lst[j]
+                lst[j] = temp
+    return lst
+
+
+26. Run-length encoding (nested loops)
+
+QUESTION: Write a function run_length that takes a list lst (assume all items are the same type, for example all strings) and returns a NEW list that alternates between each distinct item, in sorted order, and its count. For example, run_length(['c', 'a', 'a', 'b', 'c', 'a']) should return ['a', 3, 'b', 1, 'c', 2]: three a's, one b, two c's. Hint: collect the unique items first (the question 13 idea), sort them with sorted (Chapter 9), then use a NESTED for loop to count each one. This combines Chapter 7 (counting), Chapter 9 (sorting), and Chapter 9b (nested loops) -- and it needs no dictionaries.
+
+######################################################################
+# ANSWER
+######################################################################
+def run_length(lst):
+    uniques = []
+    for x in lst:
+        if x not in uniques:
+            uniques.append(x)
+    result = []
+    for x in sorted(uniques):
+        count = 0
+        for y in lst:
+            if y == x:
+                count = count + 1
+        result.append(x)
+        result.append(count)
+    return result
+
+
+27. Letter grade (elif ladder)
+
+QUESTION: Write a function letter_grade that takes a number score from 0 to 100 and returns the letter grade: 'A' for 90 or above, 'B' for 80 or above, 'C' for 70 or above, 'D' for 60 or above, and 'F' below 60. For example, letter_grade(85) should return 'B' and letter_grade(59) should return 'F'. This exercises if with MULTIPLE elifs plus a final else -- the classic ladder. Class discussion: why must the tests go in this order? What breaks if you test >= 60 first?
+
+######################################################################
+# ANSWER
+######################################################################
+def letter_grade(score):
+    if score >= 90:
+        return 'A'
+    elif score >= 80:
+        return 'B'
+    elif score >= 70:
+        return 'C'
+    elif score >= 60:
+        return 'D'
+    else:
+        return 'F'
+
+
+28. Movie ticket price (elif with and)
+
+QUESTION: Write a function movie_ticket that takes an age and returns the ticket price: 8 dollars for children under 13, 12 dollars for ages 13 through 64, and 8 dollars for seniors 65 and over. For example, movie_ticket(10) should return 8 and movie_ticket(30) should return 12. This exercises elif together with the and operator in conditions (Chapter 5 booleans).
+
+######################################################################
+# ANSWER
+######################################################################
+def movie_ticket(age):
+    if age < 13:
+        return 8
+    elif age < 65:
+        return 12
+    else:
+        return 8
+
+
+29. Describe the temperature (elif WITHOUT else)
+
+QUESTION: Write a function describe_temp that takes a temperature in Celsius and returns 'hot' for 30 or above, 'warm' for 20 or above, 'cool' for 10 or above -- and has NO else branch at all. For example, describe_temp(25) should return 'warm'. This exercises an elif chain with no else. Class discussion: what does describe_temp(5) return, and why? (A function that hits no return gives back None -- Chapter 6.)
+
+######################################################################
+# ANSWER
+######################################################################
+def describe_temp(celsius):
+    if celsius >= 30:
+        return 'hot'
+    elif celsius >= 20:
+        return 'warm'
+    elif celsius >= 10:
+        return 'cool'
+
+
+30. Store discount (nested if/else)
+
+QUESTION: Write a function final_price that takes a price, a boolean member (True if the customer is a club member), and a coupon code string, and returns the price after discounts: members with the coupon 'SAVE10' get 10 percent off; members without the coupon pay full price; non-members with the coupon get 5 percent off; non-members without the coupon pay full price. For example, final_price(100, True, 'SAVE10') should return 90.0. This exercises NESTED if/else: an if/else inside each branch of an outer if/else. Easy to trace on the board with four cases.
+
+######################################################################
+# ANSWER
+######################################################################
+def final_price(price, member, coupon):
+    if member:
+        if coupon == 'SAVE10':
+            return price * 0.9
+        else:
+            return price
+    else:
+        if coupon == 'SAVE10':
+            return price * 0.95
+        else:
+            return price
+
+
+31. Triangle type (nested if containing elifs)
+
+QUESTION: Write a function triangle_type that takes three side lengths a, b, c and returns 'equilateral' if all three sides are equal, 'isosceles' if exactly two are equal, 'scalene' if all are different, and 'not a triangle' if the sides cannot form a triangle at all (each pair must sum to more than the third side). For example, triangle_type(5, 5, 5) is 'equilateral', triangle_type(3, 4, 5) is 'scalene', and triangle_type(1, 2, 10) is 'not a triangle'. This exercises a NESTED if whose inner part is itself an if/elif/else -- nested ifs with else-ifs, exactly. Everyone already knows what the words mean, so the logic is the whole lesson.
+
+######################################################################
+# ANSWER
+######################################################################
+def triangle_type(a, b, c):
+    if a + b > c and a + c > b and b + c > a:
+        if a == b and b == c:
+            return 'equilateral'
+        elif a == b or b == c or a == c:
+            return 'isosceles'
+        else:
+            return 'scalene'
+    else:
+        return 'not a triangle'
+
+
+32. Biggest of three (nested if/else)
+
+QUESTION: Write a function max_of_three that takes three numbers a, b, c and returns the largest -- WITHOUT using the built-in max. For example, max_of_three(3, 7, 5) should return 7. This exercises pure NESTED if/else and is perfect for tracing by hand: every path through the code returns exactly one value.
+
+######################################################################
+# ANSWER
+######################################################################
+def max_of_three(a, b, c):
+    if a >= b:
+        if a >= c:
+            return a
+        else:
+            return c
+    else:
+        if b >= c:
+            return b
+        else:
+            return c
+
+
+33. Leap year (triple-nested if/else)
+
+QUESTION: Write a function is_leap_year that takes a year and returns True if it is a leap year, False otherwise. The rules: a year divisible by 4 is a leap year, EXCEPT years divisible by 100 are not, EXCEPT years divisible by 400 are. For example, is_leap_year(2024) is True, is_leap_year(1900) is False, and is_leap_year(2000) is True. This exercises TRIPLE-NESTED if/else -- the classic example where each exception lives one level deeper. Uses % from Chapter 7.
+
+######################################################################
+# ANSWER
+######################################################################
+def is_leap_year(year):
+    if year % 4 == 0:
+        if year % 100 == 0:
+            if year % 400 == 0:
+                return True
+            else:
+                return False
+        else:
+            return True
+    else:
+        return False
+
+
+TOPIC COVERAGE (chapters 1-9 of the YR Think Python book)
+Ch 1 (programs, values, arithmetic): 16, 21
+Ch 2 (variables, statements; swap via a temporary): 25
+Ch 3 (functions; 3b range forms): every question defines functions; 11, 20, 21 use range forms
+Ch 5 (conditionals): 1, 7, 20; dedicated conditional questions: 27 (elif ladder + else), 28 (elif with and), 29 (elif without else), 30 (nested if/else), 31 (nested if with elifs), 32 (nested if/else), 33 (triple-nested if/else)
+Ch 6 (fruitful functions; incremental development): every question returns a value; the A/B pairs (4, 5, 8, 14, 18) build Part B on Part A
+Ch 7 (iteration, search, the in operator): 4, 5, 6, 13, 26
+Ch 8 (strings, two-part slices): 1, 2, 7, 8, 9, 18, 23
+8b (string methods; split/join/strip reimplemented or used): 9, 10, 18, 20
+Ch 9 (lists; aliasing; sorted): 3 (new list vs mutation), 11, 14, 15, 17, 19, 26 (sorted); nested lists: 21, 24
+9b (nested for loops): 8A, 14A, 21, 22, 23, 24, 25, 26 and every Part B (4, 5, 8, 14, 18)
+Not represented here: Ch 4 turtle graphics (needs a display) and 7b file reading (needs a data file);
+regex (Ch 8) is left out as beyond the test.
