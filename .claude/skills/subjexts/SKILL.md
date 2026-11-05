@@ -1,9 +1,9 @@
 ---
 name: subjexts
-description: The subjexts teaching overlay in this book (labels on passages, a table of contents by label, in-place edits, the AI tutor) - what the two subjexts files are, how to switch the overlay on and off, and where the subjexts procedures are (apply a note packet of the author's notes and edits to the source, mark the book from a list, do anything the teacher does in the panel from the command line - labels, marks, notes, edits, replies, the switches - register the book). Use when the user mentions subjexts, labels, the overlay, "Table of contents by label", a note packet ("apply the notes in ..."), or asks to switch it on or off or to plug the book in.
+description: The subjexts teaching overlay in this book (labels on passages, a table of contents by label, in-place edits, the AI tutor) - what the two subjexts files are, how to switch the overlay on and off, and where the subjexts procedures are (apply a note packet of the author's notes and edits to the source, mark the book from a list, do anything the teacher does in the panel from the command line - labels, marks, notes, edits, replies, the switches - register the book). Use when the user mentions subjexts, labels, the overlay, "Table of contents by label", a note packet ("apply the notes in ..."), or asks to switch it on or off or to plug the book in, and right after the book was published (scan it: the scan reports orphaned marks).
 ---
 
-<!-- Installed by yrProject v0.9.1 (https://github.com/y-rosenthal/yrProject): the templates
+<!-- Installed by yrProject v0.9.2 (https://github.com/y-rosenthal/yrProject): the templates
      and the tool that give a project one base for AI-assisted work (rules for AI agents, skills, hooks, GitHub
      issues for work to do later, project docs). This file belongs to the tool: do not edit it by hand, and do
      not change it without the tool. "yrProject.sh update" replaces it with each new version (if you change it,
@@ -73,7 +73,7 @@ Done from the yrS4 repository, which has the platform's keys; this book repo nev
 cd "$(bash .claude/skills/subjexts/scripts/yrS4-skill.sh --dir)"      # the yrS4 repository on this computer
 scripts/plug-in-book.sh --manifest-only PROJECT_DIR NAME "TITLE" SITE_URL   # the manifest packages/NAME.yml
 node cli/bin/yrS4.mjs packages push NAME  # register the package (owner handle must have a profile)
-node cli/bin/yrS4.mjs scan OWNER/NAME     # after the book is published: learn its pages and headings
+node cli/bin/yrS4.mjs scan OWNER/NAME     # after each publish: learn its pages and headings, and report orphaned marks
 ```
 
 (`--manifest-only`, because this book's files come from yrProject; the script writes them only for books that
@@ -99,6 +99,7 @@ bash .claude/skills/subjexts/scripts/yrS4-skill.sh --cat apply-notes
 | label or mark many passages of the book from a list | `mark-book` (run from yrS4, which has the platform's keys) |
 | anything else a teacher does in the panel: make or publish a label, mark one passage, list a page's marks and find orphaned ones, remove a mark, an editorial note, an in-place edit, reply to a student, a join code, the tutor's settings, what students see | `teach-book` (`yrS4 teach`, one verb per panel action, or a teach packet; run from yrS4) |
 | plug the book in, register it, scan it (this book: `--manifest-only`) | `plug-in-book` |
+| the book was just published (its own publish skill ran), or "check for orphans" | `plug-in-book`: run `node cli/bin/yrS4.mjs scan OWNER/NAME` from yrS4. The scan ends with the orphan report: each mark whose passage is no longer in the book, with the reason, or the line "no orphaned marks" (`yrS4 teach marks OWNER/NAME --orphans` lists them again). `teach-book` says what to do with one |
 
 The script finds yrS4 through `$YRS4_DIR`, else the Dropbox tree this project is in (`…/_yrAiCoding/yrS4`),
 else `~/Dropbox/_yrAiCoding/yrS4`. If it says yrS4 is not on this computer, tell the user: the procedure needs
@@ -111,6 +112,7 @@ that repository (clone it and set `YRS4_DIR`); do not improvise the procedure fr
 - The package name in `data-package` must match the platform's package (`packages/NAME.yml` in yrS4); a wrong
   name makes the overlay do nothing. `yrProject.sh check` reports a name the platform does not know.
 - Publishing the book is the book's own procedure; subjexts never requires a re-render except to add or remove
-  its line.
+  its line. After each publish, scan the book from yrS4 (the row above): the scan learns the new pages and
+  headings, and reports the marks whose passage left the book.
 - Using it: the platform's user guide, `docs/20-using.qmd` in yrS4 (sign in, Teach, checkboxes, labels, the
   switches).

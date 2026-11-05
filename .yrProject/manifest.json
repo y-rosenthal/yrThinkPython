@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "createdAt": "2026-10-12T15:54:40Z",
   "projectType": null,
-  "version": "v0.9.1",
+  "version": "v0.9.2",
   "parts": [
     "rules",
     "subjexts",
@@ -16,26 +16,26 @@
     "PROJECT_TYPE": "work",
     "CREATED_DATE": "2026-10-12",
     "SUBJEXTS_PACKAGE": "y-rosenthal/thinkpython",
-    "TEMPLATE_VERSION": "v0.9.1"
+    "TEMPLATE_VERSION": "v0.9.2"
   },
   "files": {
-    ".claude/skills/subjexts/SKILL.md": "8553711e61a7d21c14bfd20ea2c300b9ddc4e20d9172abd5f541eb59134fc4f0",
-    ".claude/skills/subjexts/scripts/yrS4-skill.sh": "f8e89894a401ad564f21ce21ef46557db40e0bb7e27b52a4255430e0e78c594a",
-    ".claude/skills/yrIssues/SKILL.md": "97ad5415bcb147a2e14c11de18cf5f07278e0cf1a17e5234779cfa8e3e7b23ff",
-    ".claude/skills/yrIssues/scripts/yrIssues.sh": "dcaa53f5790d49d20ef6f8af9f103483ea313fca3a83279748462d834fb48302",
-    ".claude/skills/yrProject/SKILL.md": "ed8cf4e21b27fd87b2fe61d6c271c2ba3e72961f406100f657eda39c378a65a1",
-    ".claude/skills/yrProject/scripts/yrProject-notice.sh": "5481e3b950e7e64990ef6f08576f1fe9157a4e1702d658715b848750d50eb97b",
-    ".claude/skills/yrUpdateDocsSkillsRulesEtc/SKILL.md": "09d22bfd82a48f2a3985090b1109da64d4e2067f70a70b70e47dce514c0db3ba",
-    ".claude/skills/yrUpdateDocsSkillsRulesEtc/scripts/yrUpdateDocsSkillsRulesEtc.sh": "b5c123d9596b46196ecd36894843240c1c90dba9479d7db100e3a5dfedb38b3b",
-    "README.md": "aa13fedfb85f158846f9b8263c7634007c441fc96a1cf93432295469b9d95034",
+    ".claude/skills/subjexts/SKILL.md": "8369fdb1925c343809bb8aa6266df6eab7521a4ba35162973ff57ac483082e9d",
+    ".claude/skills/subjexts/scripts/yrS4-skill.sh": "ee5e7ec63357f9c2c6984eefe72b6d3880c98c945abad10b665f66e8d7de2853",
+    ".claude/skills/yrIssues/SKILL.md": "1eaad13338f6591c8c4c2de89243b29c68a238e400df7764aeb705ca016a262f",
+    ".claude/skills/yrIssues/scripts/yrIssues.sh": "f99b1c96d7dc2ffacf7d70fb9ca4246222d5ba023cc3ef9fc4c12dabe71bfeb6",
+    ".claude/skills/yrProject/SKILL.md": "192b40ed7fe6df6bd05c6543f02a6bc69957164acbaee6159dccedc3f24502f4",
+    ".claude/skills/yrProject/scripts/yrProject-notice.sh": "8868c1fe9451b330ff2a2586bdc9b208d1769b0296399c0dfea80b3cca6eb83d",
+    ".claude/skills/yrUpdateDocsSkillsRulesEtc/SKILL.md": "9dfd37298ea3aec1ebd2880bc956d31d38cccc2377ce7e38a15c7206b42c92e6",
+    ".claude/skills/yrUpdateDocsSkillsRulesEtc/scripts/yrUpdateDocsSkillsRulesEtc.sh": "b9c2934a72ce82c85b266bb26dbcb7a70c88f052f0f21c58e3c75fb896b3b1d3",
+    "README.md": "9f811afac70028d6450e9ff3a91c1e39d466c6b82ed25ff0bf1aef3be68638e9",
     "_yrIssues/config.sh": "e88eb0025fa0d0bbba90468331b8fca23b6c5ce2faccb8c5a42015018f9077f0",
-    "jb/subjexts-labels.md": "1a3e3ea47e15e57804ca3a98958d128d64383a6c7d8f123796cd891b0c3204ad"
+    "jb/subjexts-labels.md": "608f07175b87f09f2e6d744d06e0e87fa27d01aeecc7a7aafa2fa5ec682eb37b"
   },
-  "updatedAt": "2026-11-04T18:01:02Z",
+  "updatedAt": "2026-11-04T23:56:17Z",
   "tool": {
     "name": "yrProject",
-    "version": "0.9.1",
-    "templatesCommit": "46d8327"
+    "version": "0.9.2",
+    "templatesCommit": "c4f34ae"
   },
   "history": [
     {
@@ -199,13 +199,23 @@
         "subjexts",
         "yrIssues"
       ]
+    },
+    {
+      "date": "2026-11-04",
+      "command": "update",
+      "version": "v0.9.2",
+      "parts": [
+        "rules",
+        "subjexts",
+        "yrIssues"
+      ]
     }
   ],
-  "about": "Written by yrProject v0.9.1 (https://github.com/y-rosenthal/yrProject), the record of this project's yrProject setup. Do not edit: \"yrProject.sh update\" writes it again.",
+  "about": "Written by yrProject v0.9.2 (https://github.com/y-rosenthal/yrProject), the record of this project's yrProject setup. Do not edit: \"yrProject.sh update\" writes it again.",
   "blocks": {
-    ".gitignore: yrProject": "c743a3d30be57e239ecb9ec71f0dcdb9e3f9b39a431a62f740c4171e580c6625",
-    "AGENTS.md: setup": "c486f4c06006f6bcc91d77c85d50a78ecbec34f87631e80baf0d57eb9d960982",
-    "AGENTS.md: shared rules": "97975b4a407022cf820865ca2d2eea5d5b5c0b99def1e451a125dda46a134e97",
-    "README.md: setup": "6910ea59cefc5658f0e8cb54a917367596d2647cc41893ec97c06b717899da62"
+    ".gitignore: yrProject": "40326c5323739c6dee3595b6c9281fc27b9e57ad1ee47628d0f5323e3d35499c",
+    "AGENTS.md: setup": "e38e767563bb3da43edd44e59278f853f1d3c3ca7854c633609c55eedae56197",
+    "AGENTS.md: shared rules": "58146f33b00cd4b0c69e9fa16a6beab91e98d5d3d2d3e8cec741dd82d79e8a23",
+    "README.md: setup": "048c4c2d2d1a73775a9d7d1f3cee67fa45af3f151b081e0016bd13552fbe88ad"
   }
 }
