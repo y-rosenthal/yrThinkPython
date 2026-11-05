@@ -80,9 +80,15 @@ that review pages have their concept lists, answers and pictures, that the other
 while Pages catches up. To confirm a specific change, also grep for it:
 `curl -s https://y-rosenthal.github.io/yrThinkPython/<page>.html | grep -c "<changed text>"`.
 
-## 5. Report
+## 5. Scan the book for subjexts
+
+After the live site is verified, scan the book from yrS4, as the `subjexts` skill says ("the book was just
+published"). The scan learns the new pages and headings, and reports the marks whose passage is no longer in
+the book.
+
+## 6. Report
 
 The merge commit, the run URL and result, any execution warnings, the verify_live.py result,
-and the links to the changed pages. Leave the topic branch in place (the user can delete it).
+the orphan report of the subjexts scan, and the links to the changed pages. Leave the topic branch in place (the user can delete it).
 Students do not need to reload: `jb/_static/yr.js` reloads an old page when the student comes back to its
 tab, or shows a "Reload" bar (author guide, "Students see the new version without a reload").
