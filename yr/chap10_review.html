@@ -1,0 +1,1344 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="10b. Review: Dictionaries" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://y-rosenthal.github.io/yrThinkPython/yr/chap10_review.html" />
+<meta property="og:site_name" content="Think Python, 3rd edition" />
+<meta property="og:description" content="A review of Chapter 10: Dictionaries, for students who have already studied the chapter. Use the two lists under Concepts covered as a checklist (click a list’s title to hide it), then work through..." />
+<meta property="og:image" content="https://raw.githubusercontent.com/AllenDowney/ThinkPython/v3/think_python_3e.jpg" />
+<meta property="og:image:alt" content="Cover of Think Python, 3rd edition, by Allen B. Downey" />
+
+    <title>10b. Review: Dictionaries &#8212; Think Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
+    <link rel="stylesheet" type="text/css" href="../_static/yr.css?v=45983323" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'yr/chap10_review';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script data-package="y-rosenthal/thinkpython" defer="defer" src="https://subjexts.github.io/overlay/v1/yrS4.js"></script>
+    <script src="../_static/yr.js?v=92e9eaef"></script>
+    <link rel="canonical" href="https://y-rosenthal.github.io/yrThinkPython/yr/chap10_review.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="11. Tuples" href="../chap11.html" />
+    <link rel="prev" title="10. Dictionaries" href="../chap10.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Think Python, 3rd edition
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Table of contents by label</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../subjexts-labels.html">Table of contents by label</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap00.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prof_r_intro.html">A Note From Prof. Rosenthal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap01.html">1. Programming as a way of thinking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap02.html">2. Variables and Statements</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap02_review.html">2b. Review: Variables and Statements</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap03.html">3. Functions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap03_additions.html">3b. Additions: The Three Forms of range</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03_review.html">3c. Review: Functions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap04.html">4. Functions and Interfaces</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap04_review.html">4b. Review: Functions and Interfaces</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap05.html">5. Conditionals and Recursion</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap05_review.html">5b. Review: Conditionals and Recursion</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap06.html">6. Return Values</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap06_review.html">6b. Review: Return Values</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap07.html">7. Iteration and Search</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap07_additions.html">7b. Additions: File Paths and for Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07_review.html">7c. Review: Iteration and Search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07_more_review.html">7d. Review: Loops with Decisions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap08.html">8. Strings and Regular Expressions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap08_additions.html">8b. Additions: String Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08_review.html">8c. Review: Strings and Regular Expressions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap09.html">9. Lists</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap09_additions.html">9b. Additions: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_review.html">9c. Review: Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_more_review.html">9d. Review: Sentences, Nested Loops and Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_palindromes.html">9e. Review: Palindromes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_practice.html">9f. Review: Practice Programs</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap10.html">10. Dictionaries</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10b. Review: Dictionaries</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap11.html">11. Tuples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap12.html">12. Text Analysis and Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap13.html">13. Files and Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap14.html">14. Classes and Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap15.html">15. Classes and Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap16.html">16. Classes and Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap17.html">17. Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap18.html">18. Python Extras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap19.html">19. Final thoughts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../blank.html">Blank Notebooks</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/y-rosenthal/yrThinkPython" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/yr/chap10_review.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>10b. Review: Dictionaries</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concepts-covered">Concepts covered</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">Questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-easy-what-is-displayed">Question 1 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-easy-what-is-displayed">Question 2 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-easy-what-is-displayed">Question 3 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-easy-what-is-displayed">Question 4 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-easy-what-happens">Question 5 (easy): what happens?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-easy-what-is-displayed">Question 6 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-7-easy-what-is-displayed">Question 7 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-8-easy-what-is-displayed">Question 8 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-9-easy-what-is-displayed">Question 9 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-10-easy-what-is-displayed">Question 10 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-11-easy-what-is-displayed">Question 11 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-12-easy-write-a-function">Question 12 (easy): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-13-easy-write-a-function">Question 13 (easy): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-14-medium-what-is-displayed">Question 14 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-15-medium-write-a-function">Question 15 (medium): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-16-medium-what-is-displayed">Question 16 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-17-hard-write-a-function">Question 17 (hard): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-18-hard-write-a-function">Question 18 (hard): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-19-hard-write-a-function">Question 19 (hard): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-20-hard-write-a-function">Question 20 (hard): write a function</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="b-review-dictionaries">
+<h1>10b. Review: Dictionaries<a class="headerlink" href="#b-review-dictionaries" title="Link to this heading">#</a></h1>
+<p>A review of <a class="reference external" href="https://y-rosenthal.github.io/yrThinkPython/chap10.html">Chapter 10: Dictionaries</a>,
+for students who have already studied the chapter.
+Use the two lists under <strong>Concepts covered</strong> as a checklist (click a list’s title to hide it), then work through the <strong>Questions</strong>, which go from easy to hard.
+Each question has a suggested answer under <strong>Answer</strong>. Try the question first, then open the Answer.</p>
+<p><a class="reference external" href="https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap10_review.ipynb">Run this page on Colab</a></p>
+<section id="concepts-covered">
+<h2>Concepts covered<a class="headerlink" href="#concepts-covered" title="Link to this heading">#</a></h2>
+<div class="dropdown admonition">
+<p class="admonition-title">Python Syntax and Semantics</p>
+<p><strong>Creating dictionaries</strong></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">{}</span></code> is an empty dictionary: <code class="docutils literal notranslate"><span class="pre">len({})</span></code> is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p>This creates a dictionary with three items:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">'zero'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'one'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'two'</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Each item is <code class="docutils literal notranslate"><span class="pre">KEY:</span> <span class="pre">VALUE</span></code>, and items are separated by commas. The keys can be almost any type, and the values can be any type.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dict()</span></code> makes an empty dictionary. <code class="docutils literal notranslate"><span class="pre">dict(DICT)</span></code> makes a copy of <code class="docutils literal notranslate"><span class="pre">DICT</span></code>: <code class="docutils literal notranslate"><span class="pre">dict({'a':</span> <span class="pre">1})</span></code> is <code class="docutils literal notranslate"><span class="pre">{'a':</span> <span class="pre">1}</span></code>.</p></li>
+</ul>
+<p><strong>Adding and changing items</strong></p>
+<ul>
+<li><p>This adds a new item to the dictionary:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DICT</span><span class="p">[</span><span class="n">KEY</span><span class="p">]</span> <span class="o">=</span> <span class="n">VALUE</span>
+</pre></div>
+</div>
+<p>For example, after this code <code class="docutils literal notranslate"><span class="pre">d</span></code> is <code class="docutils literal notranslate"><span class="pre">{'a':</span> <span class="pre">1}</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">d</span><span class="p">[</span><span class="s1">'a'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+<li><p>Assigning to a key that is already there replaces its value; it does not add a new item. After this code <code class="docutils literal notranslate"><span class="pre">d</span></code> is <code class="docutils literal notranslate"><span class="pre">{'a':</span> <span class="pre">99}</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="n">d</span><span class="p">[</span><span class="s1">'a'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">99</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p><strong>Looking up a value</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DICT[KEY]</span></code> returns the value for <code class="docutils literal notranslate"><span class="pre">KEY</span></code>: <code class="docutils literal notranslate"><span class="pre">{'a':</span> <span class="pre">1,</span> <span class="pre">'b':</span> <span class="pre">2}['b']</span></code> is <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
+<li><p>Looking up a key that is not in the dictionary is a <code class="docutils literal notranslate"><span class="pre">KeyError</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">len(DICT)</span></code> returns the number of items: <code class="docutils literal notranslate"><span class="pre">len({'a':</span> <span class="pre">1,</span> <span class="pre">'b':</span> <span class="pre">2})</span></code> is <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
+</ul>
+<p><strong>The <code class="docutils literal notranslate"><span class="pre">in</span></code> operator</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">KEY</span> <span class="pre">in</span> <span class="pre">DICT</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">KEY</span></code> is a key in the dictionary: <code class="docutils literal notranslate"><span class="pre">'a'</span> <span class="pre">in</span> <span class="pre">{'a':</span> <span class="pre">1}</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">in</span></code> checks keys only, not values: <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">in</span> <span class="pre">{'a':</span> <span class="pre">1}</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DICT.values()</span></code> gives the values, so <code class="docutils literal notranslate"><span class="pre">VALUE</span> <span class="pre">in</span> <span class="pre">DICT.values()</span></code> checks whether a value is in the dictionary: <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">in</span> <span class="pre">{'a':</span> <span class="pre">1}.values()</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+<p><strong>The <code class="docutils literal notranslate"><span class="pre">get</span></code> method</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DICT.get(KEY,</span> <span class="pre">DEFAULT)</span></code> returns the value for <code class="docutils literal notranslate"><span class="pre">KEY</span></code> if it is there, and <code class="docutils literal notranslate"><span class="pre">DEFAULT</span></code> if it is not: <code class="docutils literal notranslate"><span class="pre">{'a':</span> <span class="pre">1}.get('b',</span> <span class="pre">0)</span></code> is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+</ul>
+<p><strong>Looping through a dictionary</strong></p>
+<ul>
+<li><p>This runs the body once for each key in the dictionary, in the order the keys were added:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">KEY</span> <span class="ow">in</span> <span class="n">DICT</span><span class="p">:</span>
+    <span class="n">BODY</span>
+</pre></div>
+</div>
+</li>
+<li><p>This runs the body once for each value:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">VALUE</span> <span class="ow">in</span> <span class="n">DICT</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="n">BODY</span>
+</pre></div>
+</div>
+</li>
+<li><p>To get the keys and the values, loop through the keys and look up each value with <code class="docutils literal notranslate"><span class="pre">DICT[KEY]</span></code>.</p></li>
+</ul>
+<p><strong>Lists and dictionaries</strong></p>
+<ul class="simple">
+<li><p>A list can be a value: <code class="docutils literal notranslate"><span class="pre">{'a':</span> <span class="pre">[1,</span> <span class="pre">2]}</span></code> has a list as its value.</p></li>
+<li><p>A list cannot be a key, because a list is mutable and keys must be hashable. Using a list as a key is a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p></li>
+<li><p>A dictionary is mutable, so it can be a value but not a key.</p></li>
+<li><p>A value can itself be a dictionary: <code class="docutils literal notranslate"><span class="pre">{'ann':</span> <span class="pre">{'age':</span> <span class="pre">20}}</span></code> is a dictionary with a dictionary as its value. To look up a value in the inner dictionary, use two brackets: <code class="docutils literal notranslate"><span class="pre">{'ann':</span> <span class="pre">{'age':</span> <span class="pre">20}}['ann']['age']</span></code> is <code class="docutils literal notranslate"><span class="pre">20</span></code>.</p></li>
+</ul>
+<p><strong>The counter pattern</strong></p>
+<ul>
+<li><p>To count how many times each letter appears, use a dictionary that maps each letter to its count. The first time a letter appears, add it with a count of 1; after that, add 1 to its count:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">letter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">counter</span><span class="p">:</span>
+    <span class="n">counter</span><span class="p">[</span><span class="n">letter</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">counter</span><span class="p">[</span><span class="n">letter</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">COUNTER[KEY]</span> <span class="pre">+=</span> <span class="pre">1</span></code> adds 1 to the value for <code class="docutils literal notranslate"><span class="pre">KEY</span></code>.</p></li>
+</ul>
+<p><strong>A hash table</strong></p>
+<ul class="simple">
+<li><p>A dictionary is a hash table, so looking up a key takes about the same time no matter how many items the dictionary has. <code class="docutils literal notranslate"><span class="pre">in</span></code> on a list takes time proportional to the length of the list, so for a long list it is much slower.</p></li>
+</ul>
+<p><strong>Accumulating and filtering</strong></p>
+<ul class="simple">
+<li><p>The accumulator pattern: start with an empty list (or 0) and add to it each time through the loop.</p></li>
+<li><p>Filtering: loop through a sequence and select (or omit) some of its elements.</p></li>
+</ul>
+<p><strong>Memos</strong></p>
+<ul class="simple">
+<li><p>A memo is a computed value stored in a dictionary, so it does not have to be computed again. Before computing, check <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">N</span> <span class="pre">in</span> <span class="pre">KNOWN</span></code>.</p></li>
+</ul>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Definitions, etc.</p>
+<p><strong>Definitions</strong></p>
+<ul class="simple">
+<li><p>DEFINITION: A <strong>dictionary</strong> is an object that contains key-value pairs, also called items.</p></li>
+<li><p>DEFINITION: An <strong>item</strong> is, in a dictionary, another name for a key-value pair.</p></li>
+<li><p>DEFINITION: A <strong>key</strong> is an object that appears in a dictionary as the first part of a key-value pair.</p></li>
+<li><p>DEFINITION: A <strong>value</strong> is an object that appears in a dictionary as the second part of a key-value pair. This is more specific than our previous use of the word “value”.</p></li>
+<li><p>DEFINITION: A <strong>mapping</strong> is a relationship in which each element of one set corresponds to an element of another set.</p></li>
+<li><p>DEFINITION: A <strong>hash table</strong> is a collection of key-value pairs organized so that we can look up a key and find its value efficiently.</p></li>
+<li><p>DEFINITION: A <strong>hashable</strong> object is one that can be a key in a dictionary. Immutable types like integers, floats and strings are hashable. Mutable types like lists and dictionaries are not.</p></li>
+<li><p>DEFINITION: A <strong>hash function</strong> is a function that takes an object and computes an integer that is used to locate a key in a hash table.</p></li>
+<li><p>DEFINITION: An <strong>accumulator</strong> is a variable used in a loop to add up or accumulate a result.</p></li>
+<li><p>DEFINITION: <strong>Filtering</strong> is looping through a sequence and selecting or omitting elements.</p></li>
+<li><p>DEFINITION: A <strong>call graph</strong> is a diagram that shows every frame created during the execution of a program, with an arrow from each caller to each callee.</p></li>
+<li><p>DEFINITION: A <strong>memo</strong> is a computed value stored to avoid unnecessary future computation.</p></li>
+</ul>
+<p><strong>Other ideas</strong></p>
+<ul class="simple">
+<li><p>Do not use <code class="docutils literal notranslate"><span class="pre">dict</span></code> as a variable name, because it is the name of a built-in function.</p></li>
+<li><p>When you work with a dictionary, remember that <code class="docutils literal notranslate"><span class="pre">in</span></code> checks keys, not values.</p></li>
+<li><p>Debugging large data sets: scale down the input (start with the first 10 lines, or the smallest example you can find); check summaries and types (for example, the number of items in a dictionary, or the type of a value); write self-checks (a sanity check, which detects results that are “insane”, and a consistency check, which compares the results of two different computations); format the output.</p></li>
+</ul>
+</div>
+</section>
+<section id="questions">
+<h2>Questions<a class="headerlink" href="#questions" title="Link to this heading">#</a></h2>
+<p>All the questions use only dictionaries, lists, strings, loops, functions and <code class="docutils literal notranslate"><span class="pre">print</span></code>.</p>
+<p>The setup cell below imports <code class="docutils literal notranslate"><span class="pre">math</span></code>.</p>
+<div class="cell tag_setup docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup for the questions below (imports, downloads of helper files, ...)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>Summary and questions by Prof. Y. Rosenthal, based on</em>
+<a class="reference external" href="https://allendowney.github.io/ThinkPython/index.html">Think Python: 3rd Edition</a> <em>by Allen B. Downey.</em>
+<em>Text license:</em> <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
+<section id="question-1-easy-what-is-displayed">
+<h3>Question 1 (easy): what is displayed?<a class="headerlink" href="#question-1-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays, then open the Answer to check.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ages</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'ann'</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="s1">'bob'</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span> <span class="s1">'cy'</span><span class="p">:</span> <span class="mi">19</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ages</span><span class="p">[</span><span class="s1">'bob'</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ages</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>22
+3
+</pre></div>
+</div>
+</div>
+</section>
+<section id="question-2-easy-what-is-displayed">
+<h3>Question 2 (easy): what is displayed?<a class="headerlink" href="#question-2-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays, then open the Answer to check.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">scores</span><span class="p">[</span><span class="s1">'ann'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="n">scores</span><span class="p">[</span><span class="s1">'bob'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">85</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{'ann': 90, 'bob': 85}
+</pre></div>
+</div>
+<p>The empty dictionary <code class="docutils literal notranslate"><span class="pre">{}</span></code> has no items. Each assignment adds one item, so after the two assignments <code class="docutils literal notranslate"><span class="pre">scores</span></code> is <code class="docutils literal notranslate"><span class="pre">{'ann':</span> <span class="pre">90,</span> <span class="pre">'bob':</span> <span class="pre">85}</span></code>.</p>
+</div>
+</section>
+<section id="question-3-easy-what-is-displayed">
+<h3>Question 3 (easy): what is displayed?<a class="headerlink" href="#question-3-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays, then open the Answer to check.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prices</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'apple'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'banana'</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">prices</span><span class="p">[</span><span class="s1">'apple'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{'apple': 4, 'banana': 3}
+</pre></div>
+</div>
+<p>Assigning to a key that is already there does not add an item: it replaces the value. So after the assignment <code class="docutils literal notranslate"><span class="pre">prices</span></code> is <code class="docutils literal notranslate"><span class="pre">{'apple':</span> <span class="pre">4,</span> <span class="pre">'banana':</span> <span class="pre">3}</span></code>.</p>
+</div>
+</section>
+<section id="question-4-easy-what-is-displayed">
+<h3>Question 4 (easy): what is displayed?<a class="headerlink" href="#question-4-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays, then open the Answer to check.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">small</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'a'</span> <span class="ow">in</span> <span class="n">small</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">1</span> <span class="ow">in</span> <span class="n">small</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="ow">in</span> <span class="n">small</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>True
+False
+True
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">in</span></code> checks keys, not values. <code class="docutils literal notranslate"><span class="pre">'a'</span></code> is a key, so <code class="docutils literal notranslate"><span class="pre">'a'</span> <span class="pre">in</span> <span class="pre">small</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>. <code class="docutils literal notranslate"><span class="pre">1</span></code> is a value, not a key, so <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">in</span> <span class="pre">small</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>. <code class="docutils literal notranslate"><span class="pre">.values()</span></code> gives the values, so <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">in</span> <span class="pre">small.values()</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</div>
+</section>
+<section id="question-5-easy-what-happens">
+<h3>Question 5 (easy): what happens?<a class="headerlink" href="#question-5-easy-what-happens" title="Link to this heading">#</a></h3>
+<p>Predict what happens when this code runs, then open the Answer to check.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">one</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">one</span><span class="p">[</span><span class="s1">'b'</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>      1 one = {'a': 1}
+----&gt; 2 print(one['b'])
+
+KeyError: 'b'
+</pre></div>
+</div>
+<p>This is a <code class="docutils literal notranslate"><span class="pre">KeyError</span></code>: there is no key <code class="docutils literal notranslate"><span class="pre">'b'</span></code> in the dictionary.</p>
+</div>
+</section>
+<section id="question-6-easy-what-is-displayed">
+<h3>Question 6 (easy): what is displayed?<a class="headerlink" href="#question-6-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays, then open the Answer to check.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">original</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">copy</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">original</span><span class="p">)</span>
+<span class="n">copy</span><span class="p">[</span><span class="s1">'a'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">99</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">original</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">copy</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{'a': 1, 'b': 2}
+{'a': 99, 'b': 2}
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">dict(original)</span></code> makes a new dictionary with the same items, so changing <code class="docutils literal notranslate"><span class="pre">copy</span></code> does not change <code class="docutils literal notranslate"><span class="pre">original</span></code>. After the assignment, <code class="docutils literal notranslate"><span class="pre">original</span></code> is <code class="docutils literal notranslate"><span class="pre">{'a':</span> <span class="pre">1,</span> <span class="pre">'b':</span> <span class="pre">2}</span></code> and <code class="docutils literal notranslate"><span class="pre">copy</span></code> is <code class="docutils literal notranslate"><span class="pre">{'a':</span> <span class="pre">99,</span> <span class="pre">'b':</span> <span class="pre">2}</span></code>.</p>
+</div>
+</section>
+<section id="question-7-easy-what-is-displayed">
+<h3>Question 7 (easy): what is displayed?<a class="headerlink" href="#question-7-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays, then open the Answer to check.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">letters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">letters</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>a
+b
+c
+</pre></div>
+</div>
+<p>Looping through a dictionary gives its keys, in the order they were added. <code class="docutils literal notranslate"><span class="pre">list(letters)</span></code> is <code class="docutils literal notranslate"><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c']</span></code>, so the loop prints <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code> and <code class="docutils literal notranslate"><span class="pre">c</span></code>, each on its own line.</p>
+</div>
+</section>
+<section id="question-8-easy-what-is-displayed">
+<h3>Question 8 (easy): what is displayed?<a class="headerlink" href="#question-8-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays, then open the Answer to check.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">numbers</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>1
+2
+3
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">.values()</span></code> gives the values, so the loop prints them one per line. <code class="docutils literal notranslate"><span class="pre">list(numbers.values())</span></code> is <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code>.</p>
+</div>
+</section>
+<section id="question-9-easy-what-is-displayed">
+<h3>Question 9 (easy): what is displayed?<a class="headerlink" href="#question-9-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays, then open the Answer to check.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">points</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">points</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">points</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>a 1
+b 2
+</pre></div>
+</div>
+<p>The loop gives each key, and <code class="docutils literal notranslate"><span class="pre">points[key]</span></code> looks up its value. <code class="docutils literal notranslate"><span class="pre">points['a']</span></code> is <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">points['b']</span></code> is <code class="docutils literal notranslate"><span class="pre">2</span></code>, so the first line is <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">1</span></code> and the second is <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">2</span></code>.</p>
+</div>
+</section>
+<section id="question-10-easy-what-is-displayed">
+<h3>Question 10 (easy): what is displayed?<a class="headerlink" href="#question-10-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>A value in a dictionary can itself be a dictionary. <code class="docutils literal notranslate"><span class="pre">students</span></code> maps each name to another dictionary, with the student’s age and grade. Predict what this code displays, then open the Answer to check.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">students</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'ann'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'age'</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="s1">'grade'</span><span class="p">:</span> <span class="mi">90</span><span class="p">},</span> <span class="s1">'bob'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'age'</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span> <span class="s1">'grade'</span><span class="p">:</span> <span class="mi">85</span><span class="p">}}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">students</span><span class="p">[</span><span class="s1">'ann'</span><span class="p">][</span><span class="s1">'age'</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">students</span><span class="p">[</span><span class="s1">'bob'</span><span class="p">][</span><span class="s1">'grade'</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>20
+85
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">students['ann']</span></code> is the dictionary for Ann, so <code class="docutils literal notranslate"><span class="pre">students['ann']['age']</span></code> is <code class="docutils literal notranslate"><span class="pre">20</span></code>. <code class="docutils literal notranslate"><span class="pre">students['bob']['grade']</span></code> is <code class="docutils literal notranslate"><span class="pre">85</span></code>.</p>
+</div>
+</section>
+<section id="question-11-easy-what-is-displayed">
+<h3>Question 11 (easy): what is displayed?<a class="headerlink" href="#question-11-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">counts.get(key,</span> <span class="pre">0)</span></code> returns the value for <code class="docutils literal notranslate"><span class="pre">key</span></code> if the key is in the dictionary, and <code class="docutils literal notranslate"><span class="pre">0</span></code> if it is not. Predict what this code displays, then open the Answer to check.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">counts</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'a'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'c'</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>3
+0
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'a'</span></code> is in the dictionary, so <code class="docutils literal notranslate"><span class="pre">counts.get('a',</span> <span class="pre">0)</span></code> is <code class="docutils literal notranslate"><span class="pre">3</span></code>. <code class="docutils literal notranslate"><span class="pre">'c'</span></code> is not, so <code class="docutils literal notranslate"><span class="pre">counts.get('c',</span> <span class="pre">0)</span></code> is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</div>
+</section>
+<section id="question-12-easy-write-a-function">
+<h3>Question 12 (easy): write a function<a class="headerlink" href="#question-12-easy-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">lookup_or_zero</span></code> that takes a dictionary <code class="docutils literal notranslate"><span class="pre">d</span></code> and a key <code class="docutils literal notranslate"><span class="pre">key</span></code>, and returns the value for <code class="docutils literal notranslate"><span class="pre">key</span></code> if <code class="docutils literal notranslate"><span class="pre">key</span></code> is in the dictionary, and <code class="docutils literal notranslate"><span class="pre">0</span></code> if it is not.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">lookup_or_zero</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lookup_or_zero</span><span class="p">({</span><span class="s1">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span> <span class="s1">'b'</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lookup_or_zero</span><span class="p">({</span><span class="s1">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span> <span class="s1">'c'</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">get</span></code> with a default of <code class="docutils literal notranslate"><span class="pre">0</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">lookup_or_zero</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(lookup_or_zero({'a':</span> <span class="pre">1,</span> <span class="pre">'b':</span> <span class="pre">2},</span> <span class="pre">'b'))</span></code>.</p>
+<p>Or check with <code class="docutils literal notranslate"><span class="pre">in</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">lookup_or_zero</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="k">return</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="question-13-easy-write-a-function">
+<h3>Question 13 (easy): write a function<a class="headerlink" href="#question-13-easy-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">total_values</span></code> that takes a dictionary <code class="docutils literal notranslate"><span class="pre">d</span></code> and returns the sum of its values.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">total_values</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">total_values</span><span class="p">({</span><span class="s1">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">:</span> <span class="mi">3</span><span class="p">}))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">total_values</span><span class="p">({}))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>Start with a total of 0, and add each value to it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">total_values</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">value</span>
+    <span class="k">return</span> <span class="n">total</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(total_values({'a':</span> <span class="pre">1,</span> <span class="pre">'b':</span> <span class="pre">2,</span> <span class="pre">'c':</span> <span class="pre">3}))</span></code>.</p>
+</div>
+</section>
+<section id="question-14-medium-what-is-displayed">
+<h3>Question 14 (medium): what is displayed?<a class="headerlink" href="#question-14-medium-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Both parts count the letters in <code class="docutils literal notranslate"><span class="pre">'banana'</span></code>. Part a uses <code class="docutils literal notranslate"><span class="pre">if</span></code> and <code class="docutils literal notranslate"><span class="pre">else</span></code>. Part b does the same count with <code class="docutils literal notranslate"><span class="pre">get</span></code> (Question 11). Predict what each part displays, then open the Answer to check.</p>
+<p><strong>Part a</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">counter</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s1">'banana'</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">letter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">counter</span><span class="p">:</span>
+        <span class="n">counter</span><span class="p">[</span><span class="n">letter</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">counter</span><span class="p">[</span><span class="n">letter</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Part b</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">counter</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s1">'banana'</span><span class="p">:</span>
+    <span class="n">counter</span><span class="p">[</span><span class="n">letter</span><span class="p">]</span> <span class="o">=</span> <span class="n">counter</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">letter</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><strong>Part a:</strong> The <code class="docutils literal notranslate"><span class="pre">if</span></code> checks whether the letter is already a key. The first time a letter appears, it is not, so the code adds it with a count of 1. After that, it adds 1 to the count. So <code class="docutils literal notranslate"><span class="pre">counter</span></code> is <code class="docutils literal notranslate"><span class="pre">{'b':</span> <span class="pre">1,</span> <span class="pre">'a':</span> <span class="pre">3,</span> <span class="pre">'n':</span> <span class="pre">2}</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{'b': 1, 'a': 3, 'n': 2}
+</pre></div>
+</div>
+<p><strong>Part b:</strong> <code class="docutils literal notranslate"><span class="pre">counter.get(letter,</span> <span class="pre">0)</span></code> returns the count so far, or 0 the first time the letter appears. Adding 1 gives the new count. So <code class="docutils literal notranslate"><span class="pre">counter</span></code> is <code class="docutils literal notranslate"><span class="pre">{'b':</span> <span class="pre">1,</span> <span class="pre">'a':</span> <span class="pre">3,</span> <span class="pre">'n':</span> <span class="pre">2}</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{'b': 1, 'a': 3, 'n': 2}
+</pre></div>
+</div>
+<p>Both parts display the same dictionary. Line by line, Part b compared with Part a:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">counter</span> <span class="pre">=</span> <span class="pre">{}</span></code> — UNCHANGED</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">letter</span> <span class="pre">in</span> <span class="pre">'banana':</span></code> — UNCHANGED</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">counter[letter]</span> <span class="pre">=</span> <span class="pre">counter.get(letter,</span> <span class="pre">0)</span> <span class="pre">+</span> <span class="pre">1</span></code> — CHANGED: this one line replaces the four lines of the <code class="docutils literal notranslate"><span class="pre">if</span></code> and <code class="docutils literal notranslate"><span class="pre">else</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">letter</span> <span class="pre">not</span> <span class="pre">in</span> <span class="pre">counter:</span></code> — DELETED</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">counter[letter]</span> <span class="pre">=</span> <span class="pre">1</span></code> — DELETED</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">else:</span></code> — DELETED</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">counter[letter]</span> <span class="pre">+=</span> <span class="pre">1</span></code> — DELETED</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(counter)</span></code> — UNCHANGED</p></li>
+</ul>
+<p>What changed: the four lines of the <code class="docutils literal notranslate"><span class="pre">if</span></code> and <code class="docutils literal notranslate"><span class="pre">else</span></code> became one line that uses <code class="docutils literal notranslate"><span class="pre">get</span></code>. What did not change: the dictionary that is counted, the loop, and the output.</p>
+</div>
+</section>
+<section id="question-15-medium-write-a-function">
+<h3>Question 15 (medium): write a function<a class="headerlink" href="#question-15-medium-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">find_repeats</span></code> that takes a dictionary of counts — the kind of dictionary the code in Question 14 makes, where each key is a letter and each value is how many times it appears — and returns a list of the keys whose count is greater than 1, in the order they appear in the dictionary.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">find_repeats</span><span class="p">(</span><span class="n">counter</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">find_repeats</span><span class="p">({</span><span class="s1">'b'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">'n'</span><span class="p">:</span> <span class="mi">2</span><span class="p">}))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>['a', 'n']
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">find_repeats</span><span class="p">({</span><span class="s1">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">:</span> <span class="mi">1</span><span class="p">}))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[]
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>Loop through the keys, and keep the ones whose count is greater than 1:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">find_repeats</span><span class="p">(</span><span class="n">counter</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">counter</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">counter</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(find_repeats({'b':</span> <span class="pre">1,</span> <span class="pre">'a':</span> <span class="pre">3,</span> <span class="pre">'n':</span> <span class="pre">2}))</span></code>.</p>
+</div>
+</section>
+<section id="question-16-medium-what-is-displayed">
+<h3>Question 16 (medium): what is displayed?<a class="headerlink" href="#question-16-medium-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>The dictionary <code class="docutils literal notranslate"><span class="pre">known</span></code> stores Fibonacci numbers that have already been computed, so <code class="docutils literal notranslate"><span class="pre">fibonacci_memo</span></code> does not compute them again. The first two are already in the dictionary: <code class="docutils literal notranslate"><span class="pre">known[0]</span></code> is 0 and <code class="docutils literal notranslate"><span class="pre">known[1]</span></code> is 1. Predict what this code displays, then open the Answer to check.</p>
+<p>Run this cell to define <code class="docutils literal notranslate"><span class="pre">fibonacci_memo</span></code> and assign <code class="docutils literal notranslate"><span class="pre">known</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">known</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fibonacci_memo</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">known</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">known</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fibonacci_memo</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibonacci_memo</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">known</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">res</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">fibonacci_memo</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">known</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>5
+{0: 0, 1: 1, 2: 1, 3: 2, 4: 3, 5: 5}
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">fibonacci_memo(5)</span></code> is <code class="docutils literal notranslate"><span class="pre">5</span></code>. After the call, <code class="docutils literal notranslate"><span class="pre">known</span></code> holds every Fibonacci number up to 5: <code class="docutils literal notranslate"><span class="pre">known</span></code> is <code class="docutils literal notranslate"><span class="pre">{0:</span> <span class="pre">0,</span> <span class="pre">1:</span> <span class="pre">1,</span> <span class="pre">2:</span> <span class="pre">1,</span> <span class="pre">3:</span> <span class="pre">2,</span> <span class="pre">4:</span> <span class="pre">3,</span> <span class="pre">5:</span> <span class="pre">5}</span></code>.</p>
+</div>
+</section>
+<section id="question-17-hard-write-a-function">
+<h3>Question 17 (hard): write a function<a class="headerlink" href="#question-17-hard-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">merge_counters</span></code> that takes two dictionaries of counts and returns a new dictionary with the counts from both. For a key that is in both dictionaries, add the two counts.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">merge_counters</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">merge_counters</span><span class="p">({</span><span class="s1">'a'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="s1">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">:</span> <span class="mi">3</span><span class="p">}))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{'a': 3, 'b': 1, 'c': 3}
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">merge_counters</span><span class="p">({},</span> <span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="mi">5</span><span class="p">}))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{'x': 5}
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>Start with a copy of the first dictionary, then add each count from the second:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">merge_counters</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">c2</span><span class="p">:</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">c2</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(merge_counters({'a':</span> <span class="pre">2,</span> <span class="pre">'b':</span> <span class="pre">1},</span> <span class="pre">{'a':</span> <span class="pre">1,</span> <span class="pre">'c':</span> <span class="pre">3}))</span></code>.</p>
+</div>
+</section>
+<section id="question-18-hard-write-a-function">
+<h3>Question 18 (hard): write a function<a class="headerlink" href="#question-18-hard-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">invert</span></code> that takes a dictionary <code class="docutils literal notranslate"><span class="pre">d</span></code> and returns a new dictionary with the keys and values swapped: each value of <code class="docutils literal notranslate"><span class="pre">d</span></code> becomes a key, and each key of <code class="docutils literal notranslate"><span class="pre">d</span></code> becomes a value.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">invert</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">invert</span><span class="p">({</span><span class="s1">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">:</span> <span class="mi">2</span><span class="p">}))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{1: 'a', 2: 'b'}
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">invert</span><span class="p">({}))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{}
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>Loop through the keys, and put each value in as a key with the old key as its value:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">invert</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]]</span> <span class="o">=</span> <span class="n">key</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(invert({'a':</span> <span class="pre">1,</span> <span class="pre">'b':</span> <span class="pre">2}))</span></code>.</p>
+<p>If two keys have the same value, the second one overwrites the first, so one key is lost. The examples have no repeated values.</p>
+</div>
+</section>
+<section id="question-19-hard-write-a-function">
+<h3>Question 19 (hard): write a function<a class="headerlink" href="#question-19-hard-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">has_duplicates</span></code> that takes a sequence (a string or a list) and returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if any element appears more than once, and <code class="docutils literal notranslate"><span class="pre">False</span></code> if it does not. Use a dictionary to keep track of the elements you have seen.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">has_duplicates</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">has_duplicates</span><span class="p">(</span><span class="s1">'banana'</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">has_duplicates</span><span class="p">(</span><span class="s1">'abc'</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">has_duplicates</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>Keep a dictionary of the elements seen so far. If an element is already in the dictionary, it is a repeat:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">has_duplicates</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="n">seen</span><span class="p">[</span><span class="n">element</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">print(has_duplicates('banana'))</span></code>.</p>
+</div>
+</section>
+<section id="question-20-hard-write-a-function">
+<h3>Question 20 (hard): write a function<a class="headerlink" href="#question-20-hard-write-a-function" title="Link to this heading">#</a></h3>
+<p>The dictionary <code class="docutils literal notranslate"><span class="pre">grades</span></code> maps each student to another dictionary that maps each subject to a grade. Write a function called <code class="docutils literal notranslate"><span class="pre">add_grade</span></code> that takes <code class="docutils literal notranslate"><span class="pre">grades</span></code>, a student name, a subject and a grade, and adds the grade. If the student is not in <code class="docutils literal notranslate"><span class="pre">grades</span></code> yet, first add an empty dictionary for that student.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">add_grade</span><span class="p">(</span><span class="n">grades</span><span class="p">,</span> <span class="n">student</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">grade</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Examples</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">grades</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">add_grade</span><span class="p">(</span><span class="n">grades</span><span class="p">,</span> <span class="s1">'ann'</span><span class="p">,</span> <span class="s1">'math'</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+<span class="n">add_grade</span><span class="p">(</span><span class="n">grades</span><span class="p">,</span> <span class="s1">'ann'</span><span class="p">,</span> <span class="s1">'english'</span><span class="p">,</span> <span class="mi">85</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{'ann': {'math': 90, 'english': 85}}
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">grades</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">add_grade</span><span class="p">(</span><span class="n">grades</span><span class="p">,</span> <span class="s1">'bob'</span><span class="p">,</span> <span class="s1">'math'</span><span class="p">,</span> <span class="mi">78</span><span class="p">)</span>
+<span class="n">add_grade</span><span class="p">(</span><span class="n">grades</span><span class="p">,</span> <span class="s1">'ann'</span><span class="p">,</span> <span class="s1">'math'</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{'bob': {'math': 78}, 'ann': {'math': 90}}
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>If the student is not a key yet, add an empty dictionary for that student first; then the subject and grade go into that inner dictionary:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">add_grade</span><span class="p">(</span><span class="n">grades</span><span class="p">,</span> <span class="n">student</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">grade</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">student</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">grades</span><span class="p">:</span>
+        <span class="n">grades</span><span class="p">[</span><span class="n">student</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">grades</span><span class="p">[</span><span class="n">student</span><span class="p">][</span><span class="n">subject</span><span class="p">]</span> <span class="o">=</span> <span class="n">grade</span>
+</pre></div>
+</div>
+<p>Then try: <code class="docutils literal notranslate"><span class="pre">grades</span> <span class="pre">=</span> <span class="pre">{}</span></code>, <code class="docutils literal notranslate"><span class="pre">add_grade(grades,</span> <span class="pre">'ann',</span> <span class="pre">'math',</span> <span class="pre">90)</span></code>, <code class="docutils literal notranslate"><span class="pre">add_grade(grades,</span> <span class="pre">'ann',</span> <span class="pre">'english',</span> <span class="pre">85)</span></code> and <code class="docutils literal notranslate"><span class="pre">print(grades)</span></code>.</p>
+<p>Looking up a key gives its value: <code class="docutils literal notranslate"><span class="pre">ages['bob']</span></code> is <code class="docutils literal notranslate"><span class="pre">22</span></code>, and <code class="docutils literal notranslate"><span class="pre">len(ages)</span></code> is <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p>
+</div>
+<p><em>Summary and questions by Prof. Y. Rosenthal, based on</em>
+<a class="reference external" href="https://allendowney.github.io/ThinkPython/index.html">Think Python: 3rd Edition</a> <em>by Allen B. Downey.</em>
+<em>Text license:</em> <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./yr"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../chap10.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Dictionaries</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../chap11.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Tuples</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concepts-covered">Concepts covered</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">Questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-easy-what-is-displayed">Question 1 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-easy-what-is-displayed">Question 2 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-easy-what-is-displayed">Question 3 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-easy-what-is-displayed">Question 4 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-easy-what-happens">Question 5 (easy): what happens?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-easy-what-is-displayed">Question 6 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-7-easy-what-is-displayed">Question 7 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-8-easy-what-is-displayed">Question 8 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-9-easy-what-is-displayed">Question 9 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-10-easy-what-is-displayed">Question 10 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-11-easy-what-is-displayed">Question 11 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-12-easy-write-a-function">Question 12 (easy): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-13-easy-write-a-function">Question 13 (easy): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-14-medium-what-is-displayed">Question 14 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-15-medium-write-a-function">Question 15 (medium): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-16-medium-what-is-displayed">Question 16 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-17-hard-write-a-function">Question 17 (hard): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-18-hard-write-a-function">Question 18 (hard): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-19-hard-write-a-function">Question 19 (hard): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-20-hard-write-a-function">Question 20 (hard): write a function</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
