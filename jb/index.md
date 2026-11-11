@@ -87,6 +87,7 @@ For the third edition, the biggest changes are:
 **Chapter 10: Dictionaries**
 
 * [Click here to run Chapter 10 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap10.ipynb)
+* [Click here to run 10b. Review: Dictionaries on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap10_review.ipynb)
 
 **Chapter 11: Tuples**
 
