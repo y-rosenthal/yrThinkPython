@@ -68,11 +68,13 @@ parts:
   chapters:
     - file: chap10
 - chapters:
+    - file: yr/chap10_additions
     - file: yr/chap10_review
 - numbered: True
   chapters:
     - file: chap11
 - chapters:
+    - file: yr/chap11_additions
     - file: yr/chap11_review
 - numbered: True
   chapters:
