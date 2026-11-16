@@ -87,12 +87,14 @@ For the third edition, the biggest changes are:
 **Chapter 10: Dictionaries**
 
 * [Click here to run Chapter 10 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap10.ipynb)
-* [Click here to run 10b. Review: Dictionaries on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap10_review.ipynb)
+* [Click here to run 10b. Additions: The get Method on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap10_additions.ipynb)
+* [Click here to run 10c. Review: Dictionaries on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap10_review.ipynb)
 
 **Chapter 11: Tuples**
 
 * [Click here to run Chapter 11 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap11.ipynb)
-* [Click here to run 11b. Review: Tuples on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap11_review.ipynb)
+* [Click here to run 11b. Additions: While Loops on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap11_additions.ipynb)
+* [Click here to run 11c. Review: Tuples on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap11_review.ipynb)
 
 **Chapter 12: Text Analysis and Generation**
 
