@@ -1,7 +1,106 @@
 // Scripts for the website. Jupyter Book adds each JS file in _static/ to every page of the book, also to pages
-// that are added later. Three parts: collapsible sections (below), the buttons of the dropdowns of the course's
-// pages, and the update check (at the end).
+// that are added later. Four parts: hidden parts of the book (below), collapsible sections, the buttons of the
+// dropdowns of the course's pages, and the update check (at the end).
 //
+// Hidden parts of the book (yr/README.md, "A hidden part of the book"). A part whose name is in YR_HIDDEN_PARTS
+// is in the book, but a reader does not see it: the menu, the "next" and "previous" links and every other link
+// do not show its pages, and a page of the part shows "This page is not available." The pages of the part NAME
+// are yr/NAME_*.md. The part shows when the address of any page of the book ends with ?show=NAME (several
+// names: ?show=NAME1,NAME2). The browser tab then keeps showing it, and the links of the book carry ?show=NAME
+// to the next page. ?show=none hides the part again. This hides the part from a reader of the website. It does
+// not protect it: the text is in the HTML of the pages and in the repository.
+// To make a part visible to everyone: yr/README.md, "A hidden part of the book".
+const YR_HIDDEN_PARTS = ['fall2026'];
+(() => {
+  const KEY = 'yr-show';
+  let shown = [];
+  try { shown = (sessionStorage.getItem(KEY) || '').split(',').filter(Boolean); } catch (e) { /* no storage */ }
+  const param = new URLSearchParams(location.search).get('show');
+  if (param !== null) {  // the address decides: ?show=NAME shows, ?show=none (or any other value) hides
+    shown = param.split(',').map((name) => name.trim()).filter((name) => YR_HIDDEN_PARTS.includes(name));
+    try { sessionStorage.setItem(KEY, shown.join(',')); } catch (e) { /* no storage: this page only */ }
+  }
+  shown = shown.filter((name) => YR_HIDDEN_PARTS.includes(name));
+  const hidden = YR_HIDDEN_PARTS.filter((name) => !shown.includes(name));
+  const partOfPage = YR_HIDDEN_PARTS.find((name) => new RegExp('/' + name + '_[^/]*$').test(location.pathname));
+  const blocked = partOfPage !== undefined && hidden.includes(partOfPage);
+  const linkTo = (name) => 'a[href*="' + name + '_"]';
+
+  // This script runs in <head>, before the page is drawn: a style hides the part at once, without a flash.
+  const rules = hidden.map((name) =>
+    'nav li:has(> ' + linkTo(name) + '), nav p.caption:has(+ ul > li > ' + linkTo(name) + '), ' + linkTo(name) +
+    ' { display: none !important; }');
+  if (blocked) {
+    document.documentElement.classList.add('yr-hidden-page');  // yr.css hides the content of the page
+    document.title = 'Think Python';
+  }
+  if (rules.length) {
+    const style = document.createElement('style');
+    style.textContent = rules.join('\n');
+    document.head.append(style);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Take the hidden parts out of the page (also for a browser without :has() in CSS).
+    hidden.forEach((name) => {
+      document.querySelectorAll(linkTo(name)).forEach((link) => {
+        const item = link.closest('nav li.toctree-l1, nav li.toctree-l2, nav li.toctree-l3');
+        const list = item && item.closest('ul.bd-sidenav');
+        (item || link).remove();
+        if (list && !list.querySelector('li')) {  // the part is empty now: remove its caption too
+          const caption = list.previousElementSibling;
+          if (caption && caption.matches('p.caption')) caption.remove();
+          list.remove();
+        }
+      });
+    });
+    if (blocked) {
+      // The menu marks the page that is open with href="#": remove the part that holds it, and say that the
+      // page is not available.
+      const list = document.querySelector('nav.bd-links ul.current.bd-sidenav');
+      if (list) {
+        const caption = list.previousElementSibling;
+        if (caption && caption.matches('p.caption')) caption.remove();
+        list.remove();
+      }
+      const main = document.getElementById('main-content');
+      if (main) {
+        const note = document.createElement('div');
+        note.className = 'yr-not-available';
+        const text = document.createElement('p');
+        text.textContent = 'This page is not available.';
+        const home = document.createElement('a');
+        home.href = document.querySelector('a.navbar-brand')?.href || '../index.html';
+        home.textContent = 'Go to the first page of the book';
+        note.append(text, home);
+        main.prepend(note);
+      }
+      return;
+    }
+    if (!shown.length) return;
+    // The part shows. Its pages say so at the top, and the links of the book keep ?show=NAME.
+    if (partOfPage !== undefined) {
+      const title = document.querySelector('article.bd-article h1');
+      if (title) {
+        const note = document.createElement('p');
+        note.className = 'yr-hidden-note';
+        note.textContent = 'A hidden page: readers of the website do not see it. It shows because the address ' +
+          'had ?show=' + partOfPage + '. To hide it again in this tab, add ?show=none to the address.';
+        title.before(note);
+      }
+    }
+    document.querySelectorAll('a[href]').forEach((link) => {
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || /^(mailto|javascript):/.test(href)) return;
+      let url;
+      try { url = new URL(link.href); } catch (e) { return; }
+      if (url.origin !== location.origin || !/(\.html|\/)$/.test(url.pathname)) return;  // pages of this book only
+      url.searchParams.set('show', shown.join(','));
+      link.href = url.href;
+    });
+  });
+})();
+
 // Collapsible sections. In Colab, the reader can collapse any heading. On the website, this script puts a
 // heading and the rest of its section in a <details> block, open at the start: a click on the heading hides or
 // shows the section.
