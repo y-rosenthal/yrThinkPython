@@ -65,7 +65,9 @@ def check():
                     problems.append('chap05: no stack diagram image in section 5.9')
         if page.startswith('yr/') and (ROOT / f'{page}.md').exists():
             # a markdown page of the course (yr/NAME.md): it loads, with its title
-            title = (ROOT / f'{page}.md').read_text().splitlines()[0].lstrip('# ').strip()
+            # the title is the first heading: a page can start with front matter (the pages of a hidden part)
+            lines = (ROOT / f'{page}.md').read_text().splitlines()
+            title = next((ln for ln in lines if ln.startswith('# ')), lines[0]).lstrip('# ').strip()
             summary.append(f'{page}: markdown page')
             if title not in html:
                 problems.append(f'{page}: the title {title!r} is not on the page')
