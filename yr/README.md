@@ -17,6 +17,8 @@ yr/
                            pages of review questions have their own KIND, for example chap09_palindromes.ipynb;
                            a new one is written in the review format too)
   NAME.md                  a page of the course without code (an introduction, a note)
+  NAME_SOMETHING.md        a page of a hidden part of the book (fall2026_midterm.md: the fall 2026 midterm);
+                           the website shows the part only with ?show=NAME in the address
   plans/                   design notes (runall-collapsible-answers.md: the review-page format)
   tools/
     review_cells.py        create a review page skeleton; add, list, number, renumber questions
@@ -128,6 +130,58 @@ List it in `jb/_toc.yml` in the part where it belongs (for example `Front Matter
 no Colab link. The build copies every `yr/*.md` except this README into `jb/yr/`; `check_notebooks.py` fails if a
 markdown page is not in the TOC. The `add-page` skill gives the steps. MyST extensions that `jb/_config.yml`
 enables (`colon_fence`, `dollarmath`, `deflist`, `tasklist`) work: `:::{note}` admonitions and `$x^2$` math.
+
+## A hidden part of the book: `yr/NAME_SOMETHING.md`
+
+A part of the book can be on the website before the students know that it exists, for example the pages of one
+semester (a test with its answers). The part is in the book, but the website shows it only when the address of
+a page ends with `?show=NAME`. The first hidden part is `fall2026` (the part "Fall 2026": the midterm of
+fall 2026, one page for each version of the test).
+
+**Make a hidden part.**
+
+1. Name each page of the part `yr/NAME_SOMETHING.md` (`yr/fall2026_midterm.md`). The script finds the pages of
+   the part by `NAME_` in their address, so no other page can have `NAME_` in its file name.
+2. Start each page with these lines. They keep the page out of the search of the website, and they tell search
+   engines not to list it:
+
+   ```
+   ---
+   nosearch: true
+   myst:
+     html_meta:
+       robots: noindex, nofollow
+   ---
+   ```
+3. List the pages in `jb/_toc.yml` in a part of their own, at the end, with a comment that names this section.
+4. Add `NAME` to `YR_HIDDEN_PARTS` at the top of `jb/_static/yr.js`.
+5. Add each page (`yr/NAME_SOMETHING.html`) to `sitemap_excludes` in `jb/_config.yml`.
+6. Build with `--clean`, and test in a browser with a web server (`python3 -m http.server` in
+   `jb/_build/html`; the script needs `http`, not a file): the three cases below.
+
+**What a reader sees.**
+
+- Without `?show=NAME`: the menu, the "next" and "previous" links, and the search do not show the part. A page
+  of the part shows only "This page is not available."
+- With `?show=NAME` at the end of the address of any page of the book (for example
+  `https://y-rosenthal.github.io/yrThinkPython/?show=fall2026`): the part is in the menu, and its pages show. A
+  line at the top of each of its pages says that the page is hidden. The browser tab keeps showing the part,
+  and the links of the book carry `?show=NAME` to the next page. Several parts: `?show=NAME1,NAME2`.
+- With `?show=none`: the tab hides the part again.
+
+**What hiding does not do.** It does not protect the pages. Their text is in the HTML of the website (and in
+`_sources/` there), the menu entries are in the HTML of every page, and the files are in this public
+repository. A person who looks there can read them. Do not put anything in a hidden part that must stay secret.
+After a publish, do not scan the book for subjexts (the `yrpublish` skill, step 5) while a part is hidden,
+unless Prof. Rosenthal says so: the scan gives the pages and headings of the book to the subjexts platform.
+
+**Make the part visible to everyone.** Remove `NAME` from `YR_HIDDEN_PARTS`, remove the lines of step 2 from the
+pages, remove the pages from `sitemap_excludes`, and remove the comment in `jb/_toc.yml`. Build with `--clean`,
+check that the menu shows the part without `?show=`, and publish.
+
+**The pages of fall 2026.** A script that Prof. Rosenthal keeps with the test, outside this repository, writes
+`yr/fall2026_midterm*.md` from the test and its answers. If you change one of these pages by hand, tell him:
+the next run of the script writes the page again.
 
 ## Additions pages: `yr/chapNN_additions.ipynb`
 

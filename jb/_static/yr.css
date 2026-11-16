@@ -178,3 +178,31 @@ button.yr-dd-button:hover {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.7);
 }
+
+/* Hidden parts of the book (jb/_static/yr.js, "Hidden parts of the book"; yr/README.md, "A hidden part of the
+   book"). yr.js puts the class yr-hidden-page on <html> when the page belongs to a part that does not show:
+   the content of the page is not shown, and yr.js adds the line "This page is not available." */
+html.yr-hidden-page main#main-content > :not(.yr-not-available),
+html.yr-hidden-page nav.bd-links ul.current.bd-sidenav,
+html.yr-hidden-page nav.bd-links p.caption:has(+ ul.current.bd-sidenav) {
+  display: none !important;
+}
+
+.yr-not-available {
+  padding: 3em 1.5em;
+  font-size: 1.1em;
+}
+
+/* The line at the top of a page of a hidden part, when the part shows (?show=NAME). */
+p.yr-hidden-note {
+  border-left: 4px solid var(--pst-color-warning, #f59e0b);
+  background: rgba(245, 158, 11, 0.10);
+  padding: 0.4em 0.8em;
+  font-size: 0.85em;
+  font-style: italic;
+}
+
+/* The picture of a turtle answer (yr/fall2026_midterm_version*.md): an inline SVG that takes the text color. */
+div.yr-turtle-answer {
+  margin: 0.5em 0 0.8em 1em;
+}

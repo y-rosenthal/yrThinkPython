@@ -14,6 +14,7 @@ The book is assembled from `jb/_toc.yml`; a file that is not listed there is not
 | A chapter notebook of the book | `chapters/chapNN.ipynb` | below, and the `notebook-conventions` skill |
 | The course's pages of a chapter ("Additions: TOPIC", "Review: TOPIC") | `yr/chapNN_additions.ipynb`, `yr/chapNN_review.ipynb`, `yr/chapNN_more_review.ipynb`, `yr/chapNN_KIND.ipynb` | `yr/README.md`; the `yr-additions-page` and `yr-review-page` skills |
 | A page of the course without code (an introduction, a note) | `yr/NAME.md` | `yr/README.md`, "Other pages of the course" |
+| A page of a part that the website hides until its time (shown only with `?show=NAME`) | `yr/NAME_SOMETHING.md` | `yr/README.md`, "A hidden part of the book" |
 | A page of the book's own front or end matter (no code) | `jb/NAME.md` | below |
 
 ## New chapter notebook

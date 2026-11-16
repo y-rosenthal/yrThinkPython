@@ -87,3 +87,11 @@ parts:
 - caption: End Matter
   chapters:
   - file: blank
+# A hidden part: the website shows it only when the address has ?show=fall2026 (yr/README.md, "A hidden part
+# of the book"; jb/_static/yr.js, YR_HIDDEN_PARTS). Its pages are yr/fall2026_*.md.
+- caption: Fall 2026
+  chapters:
+  - file: yr/fall2026_midterm
+    sections:
+    - file: yr/fall2026_midterm_version1
+    - file: yr/fall2026_midterm_version2
