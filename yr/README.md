@@ -262,7 +262,7 @@ Reference examples: `yr/chap07_additions.ipynb` (sections, Diving deeper boxes, 
    `<summary>Diving deeper: TOPIC</summary>` (or `Diving deeper (for Windows users): TOPIC` for material that
    only Windows users need), and a blank line after the `<summary>` line. It is closed in Colab and on the
    website. Put details that most students can skip in such a box.
-5. **`## Practice questions`**: `### Question N (easy|medium|hard): KIND`, ordered easy to hard. Then
+5. **`## Practice questions`**: `### Question N (very easy|easy|medium|hard): KIND`, ordered very easy to hard. Then
    each question has:
    - **what is displayed**: a prompt cell, then the question's code in a code cell tagged `hide-output`
      (the website shows the code, and the output only when the reader clicks), then the Answer;
@@ -338,7 +338,7 @@ Cell conventions: nbformat 4.5, a unique 8-character `id` on each cell, `executi
 One notebook per chapter, titled `NNb. Review: TOPIC` (e.g. `4b. Review: Functions and Interfaces`), or
 `NNc. Review: TOPIC` when the chapter has an additions page (e.g. `7c. Review: Iteration and Search`; see "The
 pages of a chapter"). The topic is usually the chapter's title. It helps students review one chapter. It has **Concepts covered**, two lists of facts as a checklist,
-and **Questions**, practice questions from easy to hard, each with an **Answer** that is closed until the
+and **Questions**, practice questions from very easy to hard, each with an **Answer** that is closed until the
 student opens it. `yr/chap04_review.ipynb` is the reference example.
 
 ### What a student sees
@@ -380,7 +380,7 @@ Sync writes the cells marked *(template)*; do not edit them.
 3. **`## Questions`**: a short introduction (e.g. what the turtle functions do). Then the help note
    *(template; not shown on the website)*, the setup code cell (tagged `setup`), and the helper cell
    "Helper for the Answers" *(template; tagged `setup`, code hidden; it defines `run_code`)*.
-4. The questions, `### Question N (easy|medium|hard): <kind>`, ordered easy → hard. Each has its
+4. The questions, `### Question N (very easy|easy|medium|hard): <kind>`, ordered very easy → hard. Each has its
    prompt, its run blocks or examples, its definition cells or `# Your code here` cell, and the
    `#### Answer` heading, saved closed. **Question numbers stay fixed during a semester**
    (homework is assigned by number): a question inserted between Questions 3 and 4 is numbered
@@ -441,8 +441,8 @@ These come from Prof. Rosenthal's instructions; follow them for every page.
   - **what is displayed / drawn / happens?**: code to predict, then the Answer shows its output;
   - **write code**: write a function, or refactor given code.
   A few other kinds are fine (find the bug, write a docstring, which call is wrong...).
-- A page has about 15 to 20 questions: a mix of easy, medium and hard, roughly a third each, ordered
-  easy → hard. The level is in the heading.
+- A page has about 15 to 20 questions: a mix of very easy, easy, medium and hard, ordered
+  very easy → hard. The level is in the heading.
 - **Each question must make sense to someone who never saw Think Python.** These questions may be
   reused in other materials. So: no references to the book, its sections or its examples
   ("like `circle` in the chapter"); give any helper function a question uses (a definition cell,
