@@ -17,8 +17,8 @@ The midterm had two versions. The two versions ask the same kinds of questions, 
 |---|---|---|
 | Question 1 starts with | `a = 7` | `a = 5` |
 | Question 10 starts with | `s = 'Python'` | `s = 'Sunday'` |
-| The small mark at the top of the question pages | K4 | R7 |
-| The page | [Fall 2026 midterm, version 1](fall2026_midterm_version1.md) | [Fall 2026 midterm, version 2](fall2026_midterm_version2.md) |
+| The questions, the answers and the steps | [Fall 2026 midterm, version 1](fall2026_midterm_version1.md) | [Fall 2026 midterm, version 2](fall2026_midterm_version2.md) |
+| The answer key (the answer sheet, filled in) | [Answer key, version 1](fall2026_midterm_key_version1.md) | [Answer key, version 2](fall2026_midterm_key_version2.md) |
 
 So: if question 1 of your test starts with `a = 7`, you had version 1. If it starts with `a = 5`, you had version 2.
 

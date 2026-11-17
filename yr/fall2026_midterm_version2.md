@@ -7,7 +7,7 @@ myst:
 
 # Fall 2026 midterm, version 2
 
-This is **version 2** of the midterm: its pages have the small mark **R7**, and question 1 starts with `a = 5`. The other version is on the page [Fall 2026 midterm, version 1](fall2026_midterm_version1.md). The page [Fall 2026 midterm](fall2026_midterm.md) tells you how to find your version.
+This is **version 2** of the midterm: question 1 starts with `a = 5`. The other version is on the page [Fall 2026 midterm, version 1](fall2026_midterm_version1.md). The page [Fall 2026 midterm](fall2026_midterm.md) tells you how to find your version. All the right answers on one sheet: [Fall 2026 midterm, version 2: answer key](fall2026_midterm_key_version2.md).
 
 Under each part is the right answer, and then the steps that lead to it. A full answer needs every one of its steps.
 

@@ -156,7 +156,11 @@ fall 2026, one page for each version of the test).
 3. List the pages in `jb/_toc.yml` in a part of their own, at the end, with a comment that names this section.
 4. Add `NAME` to `YR_HIDDEN_PARTS` at the top of `jb/_static/yr.js`.
 5. Add each page (`yr/NAME_SOMETHING.html`) to `sitemap_excludes` in `jb/_config.yml`.
-6. Build with `--clean`, and test in a browser with a web server (`python3 -m http.server` in
+6. Pictures and files to download of the part go in `jb/_static/NAME/` (the build copies only the `.md` and
+   `.ipynb` files of `yr/`). A page shows a picture with `![what it shows](../_static/NAME/file.png)` and offers
+   a file with ``{download}`the words of the link <../_static/NAME/file.pdf>` ``. These files are not hidden: a
+   person who knows the address of a file can open it.
+7. Build with `--clean`, and test in a browser with a web server (`python3 -m http.server` in
    `jb/_build/html`; the script needs `http`, not a file): the three cases below.
 
 **What a reader sees.**
@@ -180,7 +184,11 @@ pages, remove the pages from `sitemap_excludes`, and remove the comment in `jb/_
 check that the menu shows the part without `?show=`, and publish.
 
 **The pages of fall 2026.** A script that Prof. Rosenthal keeps with the test, outside this repository, writes
-`yr/fall2026_midterm*.md` from the test and its answers. If you change one of these pages by hand, tell him:
+`yr/fall2026_midterm*.md` from the test and its answers: the intro page, one page for each version (questions,
+answers, steps), and one answer key page for each version (`fall2026_midterm_key_versionN.md`: the answer sheet
+with the right answers filled in, as pictures, with the same pages as a PDF file; these pictures and files are
+in `jb/_static/fall2026/`, written by the same script). The pages do not name the small marks that were printed
+on the test papers (his decision of 2026-11-16). If you change one of these pages by hand, tell him:
 the next run of the script writes the page again.
 
 ## Additions pages: `yr/chapNN_additions.ipynb`

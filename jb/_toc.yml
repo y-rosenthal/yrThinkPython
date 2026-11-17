@@ -97,3 +97,5 @@ parts:
     sections:
     - file: yr/fall2026_midterm_version1
     - file: yr/fall2026_midterm_version2
+    - file: yr/fall2026_midterm_key_version1
+    - file: yr/fall2026_midterm_key_version2
