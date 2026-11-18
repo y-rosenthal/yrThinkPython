@@ -16,7 +16,8 @@ What it does, mirroring `.github/workflows/deploy-book.yml` exactly:
 1. Creates/activates the venv `~/.venvs/yrThinkPython` (system `/usr/bin/python3`, 3.12, with
    `jupyter-book<2`). The linuxbrew default `python3` is 3.14 and is not used. Override with
    `THINKPYTHON_VENV` / `THINKPYTHON_PYTHON` if needed.
-2. `cp chapters/chap[01][0-9].ipynb jb/` and `cp yr/*.ipynb jb/yr/` (these copies are gitignored).
+2. `cp chapters/chap[01][0-9].ipynb jb/` and `cp yr/*.ipynb jb/yr/` (these copies are gitignored). The script
+   empties `jb/yr/` first, so that a page that was removed from `yr/` is not built from an old copy.
 3. `python jb/execute_notebooks.py`: runs every chapter copy so the pages show code outputs
    (the committed notebooks have none, and Jupyter Book's own execution is off). Exercise
    placeholders are filled, in a scratch copy only, with our `solutions/` or Downey's solutions

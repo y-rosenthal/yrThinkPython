@@ -11,7 +11,8 @@ Options:
 
 The rules are in yr/README.md, "Format rules"; the numbers are the rule numbers there.
 Static (no kernel; --static runs only these):
-  1  question headings "### Question N (level): kind"; N is digits and an optional letter, unique on the page
+  1  question headings "### Question N (level): kind"; N is digits and an optional letter, unique on the page;
+     level is very easy, easy, medium, hard or very hard (review_format.LEVELS)
   2  stable numbers: every question number of the published page (git: v3) is still there, on the same question,
      unless the page was renumbered with `review_cells.py renumber`; no "Nb" while Question N has a part b
   3  one Answer heading per question, saved collapsed; no other heading inside a question
@@ -115,6 +116,9 @@ def static_checks(nb, path, problems, renumbered=False):
     for q in qs:
         if not rf.QUESTION_HEADING.match(q['title'].join(['### ', ''])):
             problems.append(f'1: heading "{q["title"][:50]}" is not "### Question N (level): kind"')
+        elif q['level'] not in rf.LEVELS:
+            problems.append(f'1: heading "{q["title"][:50]}": the level "{q["level"]}" is not one of: '
+                            + ', '.join(rf.LEVELS))
     for n in sorted({n for n in numbers if numbers.count(n) > 1}):
         problems.append(f'1: Question {n} appears {numbers.count(n)} times')
     for q in qs:

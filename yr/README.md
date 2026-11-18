@@ -17,8 +17,8 @@ yr/
                            pages of review questions have their own KIND, for example chap09_palindromes.ipynb;
                            a new one is written in the review format too)
   NAME.md                  a page of the course without code (an introduction, a note)
-  NAME_SOMETHING.md        a page of a hidden part of the book (fall2026_midterm.md: the fall 2026 midterm);
-                           the website shows the part only with ?show=NAME in the address
+  NAME_SOMETHING.md        a page of a hidden part of the book; the website shows the part only with
+                           ?show=NAME in the address (none now: "A hidden part of the book")
   plans/                   design notes (runall-collapsible-answers.md: the review-page format)
   tools/
     review_cells.py        create a review page skeleton; add, list, number, renumber questions
@@ -135,8 +135,17 @@ enables (`colon_fence`, `dollarmath`, `deflist`, `tasklist`) work: `:::{note}` a
 
 A part of the book can be on the website before the students know that it exists, for example the pages of one
 semester (a test with its answers). The part is in the book, but the website shows it only when the address of
-a page ends with `?show=NAME`. The first hidden part is `fall2026` (the part "Fall 2026": the midterm of
+a page ends with `?show=NAME`. The first hidden part was `fall2026` (the part "Fall 2026": the midterm of
 fall 2026, one page for each version of the test).
+
+**Not in use now.** On 2026-11-18 Prof. Rosenthal had the part `fall2026` taken out of the website and out of
+the files of this repository. He saw the part on the live website without `?show=fall2026`, and he does not
+trust this way of hiding. The cause was not found on that day. `YR_HIDDEN_PARTS` is empty, and the book has no
+hidden part. Do not make a hidden part, and do not put the midterm pages back, until he decides how to hide a
+part. The files that were removed (`yr/fall2026_midterm*.md` and `jb/_static/fall2026/`) are in the git
+history: `git ls-tree -r --name-only 40fff25 | grep fall2026` lists them. The script that he keeps with the
+test writes them again. The steps below say how the
+part was made; they stay here for his decision.
 
 **Make a hidden part.**
 
@@ -224,6 +233,11 @@ Reference examples: `yr/chap07_additions.ipynb` (sections, Diving deeper boxes, 
      `input()` call in the cell. Show a function that calls `input()` in one cell, and call it in
      other cells with different replies, so that the student sees that the result depends on what the user types.
      In Jupyter, edit the metadata with **Property Inspector** (the gear icon at the right).
+     Exception: a function whose right replies depend on a random value (the guessing game in
+     `yr/chap11_additions.ipynb`). No fixed list of replies fits it. Its definition is a code cell (the build
+     runs it; it calls nothing). The call is a ```` ```python ```` block in the text, with one typed run after
+     it. Before you publish, run the function with the random value fixed, and make sure that the typed run
+     agrees with what it shows.
    - **The website's own files:** `jb/_static/yr.js` and `jb/_static/yr.css` are loaded on every page
      of the website. They hold the method boxes and the collapsible sections below, and the update check
      (a page that is older than the website reloads, or shows a "Reload" bar: see the author guide,
@@ -262,8 +276,8 @@ Reference examples: `yr/chap07_additions.ipynb` (sections, Diving deeper boxes, 
    `<summary>Diving deeper: TOPIC</summary>` (or `Diving deeper (for Windows users): TOPIC` for material that
    only Windows users need), and a blank line after the `<summary>` line. It is closed in Colab and on the
    website. Put details that most students can skip in such a box.
-5. **`## Practice questions`**: `### Question N (very easy|easy|medium|hard): KIND`, ordered very easy to hard. Then
-   each question has:
+5. **`## Practice questions`**: `### Question N (very easy|easy|medium|hard|very hard): KIND`, ordered very easy
+   to very hard (a page does not need every level). Then each question has:
    - **what is displayed**: a prompt cell, then the question's code in a code cell tagged `hide-output`
      (the website shows the code, and the output only when the reader clicks), then the Answer;
    - **write code**: a prompt cell with the function header and examples, a `# Your code here` cell, then
@@ -338,7 +352,7 @@ Cell conventions: nbformat 4.5, a unique 8-character `id` on each cell, `executi
 One notebook per chapter, titled `NNb. Review: TOPIC` (e.g. `4b. Review: Functions and Interfaces`), or
 `NNc. Review: TOPIC` when the chapter has an additions page (e.g. `7c. Review: Iteration and Search`; see "The
 pages of a chapter"). The topic is usually the chapter's title. It helps students review one chapter. It has **Concepts covered**, two lists of facts as a checklist,
-and **Questions**, practice questions from very easy to hard, each with an **Answer** that is closed until the
+and **Questions**, practice questions from very easy to very hard, each with an **Answer** that is closed until the
 student opens it. `yr/chap04_review.ipynb` is the reference example.
 
 ### What a student sees
@@ -380,7 +394,7 @@ Sync writes the cells marked *(template)*; do not edit them.
 3. **`## Questions`**: a short introduction (e.g. what the turtle functions do). Then the help note
    *(template; not shown on the website)*, the setup code cell (tagged `setup`), and the helper cell
    "Helper for the Answers" *(template; tagged `setup`, code hidden; it defines `run_code`)*.
-4. The questions, `### Question N (very easy|easy|medium|hard): <kind>`, ordered very easy → hard. Each has its
+4. The questions, `### Question N (very easy|easy|medium|hard|very hard): <kind>`, ordered very easy → very hard. Each has its
    prompt, its run blocks or examples, its definition cells or `# Your code here` cell, and the
    `#### Answer` heading, saved closed. **Question numbers stay fixed during a semester**
    (homework is assigned by number): a question inserted between Questions 3 and 4 is numbered
@@ -441,8 +455,8 @@ These come from Prof. Rosenthal's instructions; follow them for every page.
   - **what is displayed / drawn / happens?**: code to predict, then the Answer shows its output;
   - **write code**: write a function, or refactor given code.
   A few other kinds are fine (find the bug, write a docstring, which call is wrong...).
-- A page has about 15 to 20 questions: a mix of very easy, easy, medium and hard, ordered
-  very easy → hard. The level is in the heading.
+- A page has about 15 to 20 questions: a mix of levels, ordered very easy → very hard. The levels are
+  very easy, easy, medium, hard and very hard; a page does not need every level. The level is in the heading.
 - **Each question must make sense to someone who never saw Think Python.** These questions may be
   reused in other materials. So: no references to the book, its sections or its examples
   ("like `circle` in the chapter"); give any helper function a question uses (a definition cell,
@@ -626,7 +640,9 @@ print(hours * 60 + minutes)
 **A helper the question provides.** Put it in a definition cell (`%%% code`): a code cell that only
 defines or assigns (`def`, `class`, `import`, assignments) and displays nothing. Sync writes "Run this cell to
 define `square`." above it. A later question that uses `square` gets "This question uses `square` from
-Question 11." Type a helper only once, where it is first provided.
+Question 11." Type a helper only once, where it is first provided. In a write-code question, put the cell
+before the `**Examples**` line (heading and first text, the cell, then a text cell with the task and the
+examples): a definition cell after that line is an example, and sync writes "(nothing is displayed)" under it.
 
 **Wrong calls (predict the error).** First show at least two correct calls in ```` ```python ```` blocks in the
 prompt; sync writes their outputs. Then give the wrong calls as run blocks, in parts.
@@ -703,7 +719,8 @@ calls), so that the stored outputs look like what students see.
 Check gives each problem its rule number.
 
 1. Question headings are `### Question N (level): kind`; N is digits and an optional letter (`3b`),
-   unique on the page.
+   unique on the page; level is `very easy`, `easy`, `medium`, `hard` or `very hard`
+   (`review_format.LEVELS`).
 2. Numbers are stable: every number of the published page (`v3`) stays on the same question, unless
    the page was renumbered between semesters. A question `Nb` may not exist while Question N has a
    part b.
@@ -791,7 +808,7 @@ Every tool takes `-h` or `--help`, which prints what it does and its options (`r
 shows the options of sync). `review_cells.py add` takes a small text file of cells; `review_cells.py --help`
 shows the format.
 `review.sh selftest` syncs `tools/selftest/fixture.ipynb` (a page with every kind of question), checks it, and
-makes sure that check catches 27 kinds of broken page; run it after any change to the tools.
+makes sure that check catches 28 kinds of broken page; run it after any change to the tools.
 
 The first `review.sh sync` or `check` creates the Colab-like kernel in `~/.venvs/colablike` (it
 needs `uv`, which `review.sh` installs into the book's venv, `~/.venvs/yrThinkPython`).
@@ -831,7 +848,8 @@ Use the `yr-review-page` skill, or by hand:
 
 - `.github/workflows/deploy-book.yml` and `.claude/skills/build-book/build_book.sh` copy
   `yr/*.ipynb` and the markdown pages `yr/*.md` (not this README) into `jb/yr/` (gitignored) next to the
-  chapter copies. The pages in the review format are not run by the build: the website shows the outputs that
+  chapter copies. `build_book.sh` empties `jb/yr/` first: a page that was removed from `yr/` must not be
+  built from an old copy (the deploy starts with no `jb/yr/`). The pages in the review format are not run by the build: the website shows the outputs that
   sync stored. Every page in the additions format is run like the chapters (`jb/execute_notebooks.py`);
   `review_format.uses_review_format` decides which pages are in the review format.
 - `jb/prep_notebooks.py` (`process_review`): each Answer (its text and its run cells' stored outputs,

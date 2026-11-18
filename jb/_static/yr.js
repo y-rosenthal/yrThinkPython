@@ -10,7 +10,8 @@
 // to the next page. ?show=none hides the part again. This hides the part from a reader of the website. It does
 // not protect it: the text is in the HTML of the pages and in the repository.
 // To make a part visible to everyone: yr/README.md, "A hidden part of the book".
-const YR_HIDDEN_PARTS = ['fall2026'];
+// No part is hidden now. Do not add a name here before you read yr/README.md, "A hidden part of the book".
+const YR_HIDDEN_PARTS = [];
 (() => {
   const KEY = 'yr-show';
   let shown = [];

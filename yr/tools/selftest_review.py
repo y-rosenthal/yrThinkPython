@@ -114,6 +114,10 @@ def m_duplicate_number(nb):
     edit(nb, 'q3bhead0', 'Question 3b', 'Question 3')
 
 
+def m_level(nb):
+    edit(nb, 'q3bhead0', '(easy)', '(simple)')
+
+
 def m_letter_clash(nb):
     edit(nb, 'q3bhead0', 'Question 3b', 'Question 2b')
 
@@ -187,6 +191,7 @@ MUTATIONS = [
     ('TODO left', '16', True, m_todo),
     ('tag not allowed', '14', True, m_tag),
     ('duplicate question number', '1', True, m_duplicate_number),
+    ('level that is not one of the levels', '1', True, m_level),
     ('Question 2b while Question 2 has a part b', '2', True, m_letter_clash),
     ('Answer block lost its import line', '12', True, m_missing_import),
     ('definition cell displays something', '5', True, m_definition_prints),
