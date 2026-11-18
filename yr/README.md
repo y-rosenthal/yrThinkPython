@@ -17,8 +17,8 @@ yr/
                            pages of review questions have their own KIND, for example chap09_palindromes.ipynb;
                            a new one is written in the review format too)
   NAME.md                  a page of the course without code (an introduction, a note)
-  NAME_SOMETHING.md        a page of a hidden part of the book (fall2026_midterm.md: the fall 2026 midterm);
-                           the website shows the part only with ?show=NAME in the address
+  NAME_SOMETHING.md        a page of a hidden part of the book; the website shows the part only with
+                           ?show=NAME in the address (none now: "A hidden part of the book")
   plans/                   design notes (runall-collapsible-answers.md: the review-page format)
   tools/
     review_cells.py        create a review page skeleton; add, list, number, renumber questions
@@ -135,8 +135,17 @@ enables (`colon_fence`, `dollarmath`, `deflist`, `tasklist`) work: `:::{note}` a
 
 A part of the book can be on the website before the students know that it exists, for example the pages of one
 semester (a test with its answers). The part is in the book, but the website shows it only when the address of
-a page ends with `?show=NAME`. The first hidden part is `fall2026` (the part "Fall 2026": the midterm of
+a page ends with `?show=NAME`. The first hidden part was `fall2026` (the part "Fall 2026": the midterm of
 fall 2026, one page for each version of the test).
+
+**Not in use now.** On 2026-11-18 Prof. Rosenthal had the part `fall2026` taken out of the website and out of
+the files of this repository. He saw the part on the live website without `?show=fall2026`, and he does not
+trust this way of hiding. The cause was not found on that day. `YR_HIDDEN_PARTS` is empty, and the book has no
+hidden part. Do not make a hidden part, and do not put the midterm pages back, until he decides how to hide a
+part. The files that were removed (`yr/fall2026_midterm*.md` and `jb/_static/fall2026/`) are in the git
+history: `git ls-tree -r --name-only 40fff25 | grep fall2026` lists them. The script that he keeps with the
+test writes them again. The steps below say how the
+part was made; they stay here for his decision.
 
 **Make a hidden part.**
 

@@ -101,6 +101,10 @@ These rules are for every collaborator and every coding agent (Claude Code, Code
   ("Question numbers between semesters"), and nothing that `review.sh sync` writes is typed by hand ("Adding a
   question"). `review.sh check` and `check_notebooks.py` must print `OK`.
 
+- The fall 2026 midterm is not on the website, and its pages are not in the files of this repository (Prof.
+  Rosenthal, 2026-11-18). Do not add its pages (`yr/fall2026_*.md`, `jb/_static/fall2026/`), or any other
+  hidden part, until he decides how to hide a part: `yr/README.md`, "A hidden part of the book".
+
 ## Documentation
 
 - Write documentation, skills, comments and commit messages in ASD-STE100 Simplified Technical English: short

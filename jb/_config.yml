@@ -59,10 +59,8 @@ sphinx:
   config:
     html_baseurl: https://y-rosenthal.github.io/yrThinkPython/
     sitemap_url_scheme: "{link}"
-    # The pages of a hidden part are not in the sitemap (yr/README.md, "A hidden part of the book").
-    sitemap_excludes: [genindex.html, search.html, yr/fall2026_midterm.html, yr/fall2026_midterm_version1.html,
-                       yr/fall2026_midterm_version2.html, yr/fall2026_midterm_key_version1.html,
-                       yr/fall2026_midterm_key_version2.html]
+    # The pages of a hidden part would be listed here too (yr/README.md, "A hidden part of the book"): none now.
+    sitemap_excludes: [genindex.html, search.html]
     ogp_site_url: https://y-rosenthal.github.io/yrThinkPython/
     ogp_site_name: Think Python, 3rd edition
     ogp_image: https://raw.githubusercontent.com/AllenDowney/ThinkPython/v3/think_python_3e.jpg
