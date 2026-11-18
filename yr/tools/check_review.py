@@ -25,8 +25,10 @@ Static (no kernel; --static runs only these):
   9  stored outputs only on run cells; the sync stamp matches (no hand edits); limits; drawings intact
   10 markers well formed: inline value markers never start a line; block markers alone on their line; no `?` left
   13 a NameError answer stays true: no other cell binds that name
-  14 the page ends with the credits; tags only setup, no-signature, and remove-cell on the help note
+  14 the page ends with the credits, and no other cell is a credits cell; tags only setup, no-signature, and
+     remove-cell on the help note
   16 no TODO left; no (c) (r) (tm) +- in prose (the website would turn them into symbols)
+  17 every Answer has an explanation or a solution: text or a code block that the author typed
 Runtime (a fresh sync on the pinned kernel, not written):
   11 sync would change nothing: run cells, stored outputs, generated regions, import lines, values, the stamp
   R1 Run all reaches the end (no cell replies "error")
@@ -86,6 +88,10 @@ def static_checks(nb, path, problems, renumbered=False):
             problems.append(f'14: cell {i} is tagged remove-cell (only the help note is)')
     if not cells or source(cells[-1]) != rf.CREDITS:
         problems.append('14: the page must end with the credits cell exactly (run sync)')
+    for i, c in enumerate(cells[:-1]):
+        if c['cell_type'] == 'markdown' and source(c).lstrip().startswith(rf.CREDITS_HEADING):
+            problems.append(f'14: cell {i} ({c.get("id")}) is a second credits cell: only the last cell of the page '
+                            f'is the credits (delete this one)')
     if [c for c in cells if rf.is_help_note(c) and source(c) == rf.HELP_NOTE] == []:
         problems.append('14: the help note is missing or edited (run sync)')
     if [c for c in cells if rf.is_helper_cell(c) and source(c) == rf.HELPER_CELL] == []:
@@ -157,6 +163,12 @@ def static_checks(nb, path, problems, renumbered=False):
                                         or cells[q['answer']].get('id') not in
                                         nb['metadata'].get('colab', {}).get('collapsed_sections', [])):
             problems.append(f'3: {t}: the Answer is not saved collapsed (run sync)')
+        # 17: the Answer has something that the author typed (text or a code block), not only what sync writes
+        if q['answer'] is not None and not any(
+                (tok.kind == 'text' and any(line.strip() for line in tok.lines)) or tok.kind == 'fence'
+                for i in q['answer_md'] for tok in rf.md_tokens(source(cells[i]))):
+            problems.append(f'17: {t}: the Answer has no explanation or solution (no text and no code block that the '
+                            f'author typed); look for its cell in another place on the page')
         for i in q['defs']:
             if not rf.definition_cell_ok(source(cells[i])):
                 problems.append(f'5: {t}: code cell {i} before the Answer is neither "# Your code here" nor a definition '

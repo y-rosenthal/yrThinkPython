@@ -23,6 +23,7 @@ import nbformat as nbf
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import check_review as cr  # noqa: E402
+import review_cells as rc  # noqa: E402
 import review_format as rf  # noqa: E402
 import sync_review as sr  # noqa: E402
 
@@ -154,6 +155,19 @@ def m_credits(nb):
     nb.cells[-1].source = rf.source(nb.cells[-1]).replace('Downey', 'Downy')
 
 
+def m_second_credits(nb):
+    extra = copy.deepcopy(nb.cells[-1])
+    extra.id = 'credits2'
+    first = next(i for i, c in enumerate(nb.cells) if rf.QUESTION_LINE.match(rf.source(c)))
+    nb.cells.insert(first, extra)
+
+
+def m_explanation_moved(nb):
+    c = cell(nb, 'q1expl00')              # the explanation of Question 1 goes to the end of the last Answer
+    nb.cells.remove(c)
+    nb.cells.insert(len(nb.cells) - 1, c)
+
+
 def m_wrong_example(nb):
     m_region_restamped(nb)
 
@@ -200,6 +214,8 @@ MUTATIONS = [
     ('drawing PNG edited', '9', True, m_drawing),
     ('(c) in prose', '16', True, m_hazard),
     ('credits edited', '14', True, m_credits),
+    ('a second credits cell before the first question', '14', True, m_second_credits),
+    ('the explanation of an Answer moved to the end of the page', '17', True, m_explanation_moved),
     ('help note edited', '14', True, m_help_note),
     ('fix lost its input line (E10)', '12', False, m_fix_needs_input),
     ('error run cell not wrapped', '11', False, m_unwrapped_error),
@@ -234,6 +250,24 @@ def unit_tests():
         failures.append('unit: well-formed markers reported')
     if not rf.marker_problems('Some <!-- remark --> text'):
         failures.append('unit: unknown comment not reported')
+    stacks = [{'python': v, 'ipython': '7.34.0', 'ipykernel': '6.17.1'} for v in ('3.13.16', '3.13.18', '3.13')]
+    if [rf.stamp_stack(s)['python'] for s in stacks] != ['3.13'] * 3 or not all(rf.stack_pinned(s) for s in stacks):
+        failures.append('unit: the stamp records Python 3.13 for every patch number')
+    if rf.stack_pinned(dict(stacks[0], python='3.12.3')) or rf.stack_pinned(dict(stacks[0], python='3.130.1')):
+        failures.append('unit: another Python version taken for the pinned one')
+    # review_cells.py add: the first question of a new page goes before the credits, not after them
+    with tempfile.TemporaryDirectory() as tmp:
+        page, spec, used = Path(tmp) / 'chap98_review.ipynb', Path(tmp) / 'spec.txt', set()
+        rc.save({'cells': [rc.md_cell('## Questions', used), rc.md_cell(rf.CREDITS, used)], 'metadata': {},
+                 'nbformat': 4, 'nbformat_minor': 5}, page)
+        spec.write_text('%%% markdown\n### Question 1 (easy): what is displayed?\n%%% run\nprint(1)\n'
+                        '%%% answer\nOne.\n', encoding='utf-8')
+        with redirect_stdout(io.StringIO()):
+            rc.cmd_add(page, spec)
+        added = [rc.text(c) for c in rc.load(page)['cells']]
+        if added[-1] != rf.CREDITS or not added[1].startswith('### Question 1') or len(added) != 6:
+            failures.append(f'unit: review_cells.py add put the first question of a new page in the wrong place: '
+                            f'{[a[:20] for a in added]}')
 
 
 def run_check(path, static):
