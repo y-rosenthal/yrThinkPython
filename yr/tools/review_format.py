@@ -35,6 +35,8 @@ CREDITS_HEADING = '## Credits'
 STAMP_KEY = 'yr_review'
 QUESTION_HEADING = re.compile(r'^### Question (?P<num>\d+[a-z]?) \((?P<level>[^)]*)\): *(?P<kind>.*)$')
 QUESTION_LINE = re.compile(r'^\s*### Question (?P<num>\d+[a-z]?)\b')
+# The levels of a question, from the easiest to the hardest (yr/README.md, "Format rules", rule 1).
+LEVELS = ('very easy', 'easy', 'medium', 'hard', 'very hard')
 RUN_FENCE = re.compile(r'^(?:\*\*Part (?P<part>[a-z])\*\*[ \t]*\n\n)?~~~python\n(?P<code>.*?)\n~~~[ \t]*$', re.S)
 PART_CELL = re.compile(r'^\*\*Part (?P<part>[a-z]):\*\*')
 TITLE_LINE = re.compile(r'^#\s*@title\b(?P<rest>.*)$')            # any form Colab may write
@@ -96,7 +98,7 @@ TITLE_CELL = '''# {N}{L}. Review: {TOPIC}
 
 A review of [Chapter {N}: {TITLE}](https://y-rosenthal.github.io/yrThinkPython/chap{NN}.html),
 for students who have already studied the chapter.
-Use the two lists under **Concepts covered** as a checklist (click a list's title to hide it), then work through the **Questions**, which go from easy to hard.
+Use the two lists under **Concepts covered** as a checklist (click a list's title to hide it), then work through the **Questions**, which go from the easiest to the hardest.
 Each question has a suggested answer under **Answer**. Try the question first, then open the Answer.
 
 [Run this page on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/{STEM}.ipynb)'''

@@ -224,6 +224,11 @@ Reference examples: `yr/chap07_additions.ipynb` (sections, Diving deeper boxes, 
      `input()` call in the cell. Show a function that calls `input()` in one cell, and call it in
      other cells with different replies, so that the student sees that the result depends on what the user types.
      In Jupyter, edit the metadata with **Property Inspector** (the gear icon at the right).
+     Exception: a function whose right replies depend on a random value (the guessing game in
+     `yr/chap11_additions.ipynb`). No fixed list of replies fits it. Its definition is a code cell (the build
+     runs it; it calls nothing). The call is a ```` ```python ```` block in the text, with one typed run after
+     it. Before you publish, run the function with the random value fixed, and make sure that the typed run
+     agrees with what it shows.
    - **The website's own files:** `jb/_static/yr.js` and `jb/_static/yr.css` are loaded on every page
      of the website. They hold the method boxes and the collapsible sections below, and the update check
      (a page that is older than the website reloads, or shows a "Reload" bar: see the author guide,
@@ -262,8 +267,8 @@ Reference examples: `yr/chap07_additions.ipynb` (sections, Diving deeper boxes, 
    `<summary>Diving deeper: TOPIC</summary>` (or `Diving deeper (for Windows users): TOPIC` for material that
    only Windows users need), and a blank line after the `<summary>` line. It is closed in Colab and on the
    website. Put details that most students can skip in such a box.
-5. **`## Practice questions`**: `### Question N (very easy|easy|medium|hard): KIND`, ordered very easy to hard. Then
-   each question has:
+5. **`## Practice questions`**: `### Question N (very easy|easy|medium|hard|very hard): KIND`, ordered very easy
+   to very hard (a page does not need every level). Then each question has:
    - **what is displayed**: a prompt cell, then the question's code in a code cell tagged `hide-output`
      (the website shows the code, and the output only when the reader clicks), then the Answer;
    - **write code**: a prompt cell with the function header and examples, a `# Your code here` cell, then
@@ -338,7 +343,7 @@ Cell conventions: nbformat 4.5, a unique 8-character `id` on each cell, `executi
 One notebook per chapter, titled `NNb. Review: TOPIC` (e.g. `4b. Review: Functions and Interfaces`), or
 `NNc. Review: TOPIC` when the chapter has an additions page (e.g. `7c. Review: Iteration and Search`; see "The
 pages of a chapter"). The topic is usually the chapter's title. It helps students review one chapter. It has **Concepts covered**, two lists of facts as a checklist,
-and **Questions**, practice questions from very easy to hard, each with an **Answer** that is closed until the
+and **Questions**, practice questions from very easy to very hard, each with an **Answer** that is closed until the
 student opens it. `yr/chap04_review.ipynb` is the reference example.
 
 ### What a student sees
@@ -380,7 +385,7 @@ Sync writes the cells marked *(template)*; do not edit them.
 3. **`## Questions`**: a short introduction (e.g. what the turtle functions do). Then the help note
    *(template; not shown on the website)*, the setup code cell (tagged `setup`), and the helper cell
    "Helper for the Answers" *(template; tagged `setup`, code hidden; it defines `run_code`)*.
-4. The questions, `### Question N (very easy|easy|medium|hard): <kind>`, ordered very easy → hard. Each has its
+4. The questions, `### Question N (very easy|easy|medium|hard|very hard): <kind>`, ordered very easy → very hard. Each has its
    prompt, its run blocks or examples, its definition cells or `# Your code here` cell, and the
    `#### Answer` heading, saved closed. **Question numbers stay fixed during a semester**
    (homework is assigned by number): a question inserted between Questions 3 and 4 is numbered
@@ -441,8 +446,8 @@ These come from Prof. Rosenthal's instructions; follow them for every page.
   - **what is displayed / drawn / happens?**: code to predict, then the Answer shows its output;
   - **write code**: write a function, or refactor given code.
   A few other kinds are fine (find the bug, write a docstring, which call is wrong...).
-- A page has about 15 to 20 questions: a mix of very easy, easy, medium and hard, ordered
-  very easy → hard. The level is in the heading.
+- A page has about 15 to 20 questions: a mix of levels, ordered very easy → very hard. The levels are
+  very easy, easy, medium, hard and very hard; a page does not need every level. The level is in the heading.
 - **Each question must make sense to someone who never saw Think Python.** These questions may be
   reused in other materials. So: no references to the book, its sections or its examples
   ("like `circle` in the chapter"); give any helper function a question uses (a definition cell,
@@ -703,7 +708,8 @@ calls), so that the stored outputs look like what students see.
 Check gives each problem its rule number.
 
 1. Question headings are `### Question N (level): kind`; N is digits and an optional letter (`3b`),
-   unique on the page.
+   unique on the page; level is `very easy`, `easy`, `medium`, `hard` or `very hard`
+   (`review_format.LEVELS`).
 2. Numbers are stable: every number of the published page (`v3`) stays on the same question, unless
    the page was renumbered between semesters. A question `Nb` may not exist while Question N has a
    part b.
@@ -791,7 +797,7 @@ Every tool takes `-h` or `--help`, which prints what it does and its options (`r
 shows the options of sync). `review_cells.py add` takes a small text file of cells; `review_cells.py --help`
 shows the format.
 `review.sh selftest` syncs `tools/selftest/fixture.ipynb` (a page with every kind of question), checks it, and
-makes sure that check catches 27 kinds of broken page; run it after any change to the tools.
+makes sure that check catches 28 kinds of broken page; run it after any change to the tools.
 
 The first `review.sh sync` or `check` creates the Colab-like kernel in `~/.venvs/colablike` (it
 needs `uv`, which `review.sh` installs into the book's venv, `~/.venvs/yrThinkPython`).
