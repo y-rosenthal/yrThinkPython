@@ -168,9 +168,12 @@ def cmd_add(path, spec, before=None):
         if at is None:
             sys.exit(f'no Question {before} in {path}')
     else:
-        # after the last question: just before the closing credit cell (the last cell), if any
+        # after the last question: just before the credits cell (the last cell), if the page has one. A new
+        # page has no question yet and ends with the credits: its first question goes before them too.
         at = len(nb['cells'])
-        if starts and nb['cells'][-1]['cell_type'] == 'markdown' and at - 1 > starts[-1]:
+        last = nb['cells'][-1] if nb['cells'] else None
+        if last is not None and last['cell_type'] == 'markdown' and text(last).lstrip().startswith(
+                (rf.CREDITS_HEADING, '*Summary and questions by')):
             at -= 1
     nb['cells'][at:at] = new
     save(nb, path)

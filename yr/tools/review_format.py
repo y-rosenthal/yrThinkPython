@@ -962,13 +962,25 @@ def generated_sha1(nb):
     return sha1(json.dumps(generated_parts(nb), ensure_ascii=False))
 
 
+def python_minor(version):
+    """'3.13.16' -> '3.13' (and '3.13' -> '3.13')."""
+    return '.'.join(version.split('.')[:2])
+
+
+def stamp_stack(stack):
+    """The stack as the stamp records it: Python without its patch number (3.13.16 is recorded as 3.13). The
+    kernel has the newest Python 3.13 of the day it was made, so the patch number differs between computers.
+    Without it, a page has the same stamp on every computer, and check passes on each of them."""
+    return dict(stack, python=python_minor(stack.get('python', '')))
+
+
 def make_stamp(nb, stack):
     return {'code_sha1': code_sha1(nb), 'outputs_sha1': outputs_sha1(nb), 'generated_sha1': generated_sha1(nb),
-            'stack': stack}
+            'stack': stamp_stack(stack)}
 
 
 def stack_pinned(stack):
-    return bool(stack) and stack.get('python', '').rsplit('.', 1)[0] == PINNED_STACK['python'] and all(
+    return bool(stack) and python_minor(stack.get('python', '')) == PINNED_STACK['python'] and all(
         stack.get(k) == v for k, v in PINNED_STACK.items() if k != 'python')
 
 

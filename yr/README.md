@@ -696,7 +696,9 @@ only), with the value shown as a notebook shows it (`'abc'` with quotes, `4.0`).
 - **The template cells**: the title cell, the help note "Using this page in Colab or Jupyter", the helper cell
   "Helper for the Answers", and the credits.
 - **The stamp** (notebook metadata `yr_review`): the stack that wrote the outputs, and checksums
-  that let check find hand edits.
+  that let check find hand edits. The stamp records Python as `3.13`, without the patch number. Each computer
+  makes its kernel with the newest Python 3.13 of that day, so the patch number differs between computers;
+  without it, a page has the same stamp on every computer.
 
 Never edit what sync writes. Sync runs the code only on the pinned Colab-like kernel (Python 3.13,
 IPython 7.34.0, ipykernel 6.17.1, as Colab; `yr/tools/ensure_colab_venv.sh`, which `review.sh`
@@ -739,11 +741,16 @@ Check gives each problem its rule number.
     (C4 in check's output: a student who copies the block into a new cell after Run all does not see what
     the page says.)
 13. A "NameError" answer stays true: no other cell assigns that name.
-14. The page ends with the credits; tags only `setup`, `no-signature`, and `remove-cell` (help note).
+14. The page ends with the credits, and no other cell is a credits cell; tags only `setup`, `no-signature`,
+    and `remove-cell` (help note).
 15. Do not edit what sync writes, and do not save a page from Colab back to GitHub. (A rule for you: check
     cannot test it directly. It finds the result through rules 9 and 11.)
 16. No `TODO` left. No `(c)`, `(r)`, `(tm)` or `+-` in the text: the website turns them into
     ©, ®, ™ and ±. For parts of a question write **Part a**, **Part b**, **Part c**.
+17. Every Answer has an explanation or a solution: text or a code block that you typed, not only what sync
+    writes. (The tools know by its position which question a cell belongs to. A cell that was moved to
+    another place leaves its Answer empty. Check cannot find an explanation that is under the wrong question:
+    read the page after you move cells.)
 
 Check also prints notes: names that more than one question assigns (a fix that uses one keeps its
 own input line). `review.sh check --static` runs only the rules that need no kernel (fast).
@@ -808,7 +815,7 @@ Every tool takes `-h` or `--help`, which prints what it does and its options (`r
 shows the options of sync). `review_cells.py add` takes a small text file of cells; `review_cells.py --help`
 shows the format.
 `review.sh selftest` syncs `tools/selftest/fixture.ipynb` (a page with every kind of question), checks it, and
-makes sure that check catches 28 kinds of broken page; run it after any change to the tools.
+makes sure that check catches 30 kinds of broken page; run it after any change to the tools.
 
 The first `review.sh sync` or `check` creates the Colab-like kernel in `~/.venvs/colablike` (it
 needs `uv`, which `review.sh` installs into the book's venv, `~/.venvs/yrThinkPython`).
@@ -880,6 +887,10 @@ Use the `yr-review-page` skill, or by hand:
   If the problem stays, the block needs its own input line, or the solution is wrong.
 - **`check` says rule 2 (a published number is gone).** You changed or removed a question number.
   Use its old number again, and give the new question a letter (3b).
+- **`check` says rule 17 (an Answer has no explanation or solution).** The cell is missing, or it is in
+  another place on the page (for example, at the end, under the last Answer). Move it back under its
+  `#### Answer` heading, after the run cell.
+- **`check` says rule 14 (a second credits cell).** Delete it: only the last cell of the page is the credits.
 - **A value marker shows as raw HTML in Colab.** The marker starts a line. Put some text before it.
 - **The build stops with "prep_notebooks: ... Answer dropdowns".** A page has a problem. Run
   `check` on the page.
