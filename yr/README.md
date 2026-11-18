@@ -142,10 +142,8 @@ fall 2026, one page for each version of the test).
 the files of this repository. He saw the part on the live website without `?show=fall2026`, and he does not
 trust this way of hiding. The cause was not found on that day. `YR_HIDDEN_PARTS` is empty, and the book has no
 hidden part. Do not make a hidden part, and do not put the midterm pages back, until he decides how to hide a
-part. The files that were removed (`yr/fall2026_midterm*.md` and `jb/_static/fall2026/`) are in the git
-history: `git ls-tree -r --name-only 40fff25 | grep fall2026` lists them. The script that he keeps with the
-test writes them again. The steps below say how the
-part was made; they stay here for his decision.
+part. The script that he keeps with the test writes the pages and their files again, when he wants them.
+The steps below say how the part was made; they stay here for his decision.
 
 **Make a hidden part.**
 
