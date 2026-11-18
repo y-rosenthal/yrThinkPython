@@ -640,7 +640,9 @@ print(hours * 60 + minutes)
 **A helper the question provides.** Put it in a definition cell (`%%% code`): a code cell that only
 defines or assigns (`def`, `class`, `import`, assignments) and displays nothing. Sync writes "Run this cell to
 define `square`." above it. A later question that uses `square` gets "This question uses `square` from
-Question 11." Type a helper only once, where it is first provided.
+Question 11." Type a helper only once, where it is first provided. In a write-code question, put the cell
+before the `**Examples**` line (heading and first text, the cell, then a text cell with the task and the
+examples): a definition cell after that line is an example, and sync writes "(nothing is displayed)" under it.
 
 **Wrong calls (predict the error).** First show at least two correct calls in ```` ```python ```` blocks in the
 prompt; sync writes their outputs. Then give the wrong calls as run blocks, in parts.
@@ -846,7 +848,8 @@ Use the `yr-review-page` skill, or by hand:
 
 - `.github/workflows/deploy-book.yml` and `.claude/skills/build-book/build_book.sh` copy
   `yr/*.ipynb` and the markdown pages `yr/*.md` (not this README) into `jb/yr/` (gitignored) next to the
-  chapter copies. The pages in the review format are not run by the build: the website shows the outputs that
+  chapter copies. `build_book.sh` empties `jb/yr/` first: a page that was removed from `yr/` must not be
+  built from an old copy (the deploy starts with no `jb/yr/`). The pages in the review format are not run by the build: the website shows the outputs that
   sync stored. Every page in the additions format is run like the chapters (`jb/execute_notebooks.py`);
   `review_format.uses_review_format` decides which pages are in the review format.
 - `jb/prep_notebooks.py` (`process_review`): each Answer (its text and its run cells' stored outputs,
