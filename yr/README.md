@@ -78,6 +78,7 @@ A page is `yr/chapNN_KIND.ipynb` (KIND: lowercase letters, digits and `_`). The 
   ```yaml
       - file: chap07
   - chapters:
+      - file: yr/chap07_additions_data
       - file: yr/chap07_additions
       - file: yr/chap07_review
       - file: yr/chap07_more_review
@@ -86,7 +87,7 @@ A page is `yr/chapNN_KIND.ipynb` (KIND: lowercase letters, digits and `_`). The 
       - file: chap08
   ```
 - `jb/index.md` lists a Colab link for each page under the chapter, in the same order:
-  `* [Click here to run 7b. Additions: File Paths and for Loops on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_additions.ipynb)`.
+  `* [Click here to run 7c. Additions: File Paths and for Loops on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_additions.ipynb)`.
 - `check_notebooks.py` checks the titles, and that the TOC lists the pages right after the chapter, in the
   order of the kinds.
 
@@ -130,6 +131,12 @@ List it in `jb/_toc.yml` in the part where it belongs (for example `Front Matter
 no Colab link. The build copies every `yr/*.md` except this README into `jb/yr/`; `check_notebooks.py` fails if a
 markdown page is not in the TOC. The `add-page` skill gives the steps. MyST extensions that `jb/_config.yml`
 enables (`colon_fence`, `dollarmath`, `deflist`, `tasklist`) work: `:::{note}` admonitions and `$x^2$` math.
+
+**Thonny.** The class uses Thonny to run programs on the students' computers. Three pages explain it:
+`yr/prof_r_thonny.md` (install Thonny, the editor and the Shell, `print` in a program), "3c. Additions: More
+About for Loops" (a first look at the debugger) and "11c. Additions: The Thonny Debugger". The menu names, keys
+and buttons on these pages are the ones of Thonny 4.0 (checked in its source code, 2026-11-23). When a new
+version of Thonny changes them, change the three pages.
 
 ## A hidden part of the book: `yr/NAME_SOMETHING.md`
 
@@ -257,7 +264,8 @@ Reference examples: `yr/chap07_additions.ipynb` (sections, Diving deeper boxes, 
    - **A quick summary with hidden code** (as in `yr/chap08_additions.ipynb`): a code cell that only shows
      results. Start it with `# @title TITLE`, give it the metadata `"cellView": "form"` (Colab then shows
      the title and the output, and hides the code), and the tag `remove-input` (the website shows only
-     the output).
+     the output). A hidden cell can also draw a picture with code that the chapter has not taught (for
+     example matplotlib and lists): the pixel grid and the sound samples in `yr/chap07_additions_data.ipynb`.
    - **A collapsible section:** a markdown cell that starts with a heading and has
      `<div class="yr-collapse">` with a short text in it. In Colab, the reader can collapse any heading
      with the arrow next to it. On the website, `jb/_static/yr.js` puts the heading and its section in a
@@ -348,8 +356,8 @@ Cell conventions: nbformat 4.5, a unique 8-character `id` on each cell, `executi
 ## Review pages: `yr/chapNN_review.ipynb`
 
 One notebook per chapter, titled `NNb. Review: TOPIC` (e.g. `4b. Review: Functions and Interfaces`), or
-`NNc. Review: TOPIC` when the chapter has an additions page (e.g. `7c. Review: Iteration and Search`; see "The
-pages of a chapter"). The topic is usually the chapter's title. It helps students review one chapter. It has **Concepts covered**, two lists of facts as a checklist,
+`NNc. Review: TOPIC` when the chapter has an additions page (e.g. `9c. Review: Lists`), or a later letter after
+more additions pages (`7d. Review: Iteration and Search`; see "The pages of a chapter"). The topic is usually the chapter's title. It helps students review one chapter. It has **Concepts covered**, two lists of facts as a checklist,
 and **Questions**, practice questions from very easy to very hard, each with an **Answer** that is closed until the
 student opens it. `yr/chap04_review.ipynb` is the reference example.
 
@@ -371,7 +379,7 @@ On the website, each Answer is a closed box with the explanation and the stored 
 ### Where it appears
 
 - **Website:** right after its chapter (and after the chapter's additions pages, if there are any) in the
-  sidebar, as "4b. Review: Functions and Interfaces". The previous/next buttons go 4 → 4b → 5 (or 7 → 7b → 7c → 8). The book's chapter and section numbers do not change.
+  sidebar, as "4b. Review: Functions and Interfaces". The previous/next buttons go 4 → 4b → 5 (or 7 → 7b → 7c → 7d → 7e → 8). The book's chapter and section numbers do not change.
 - **Colab:** each page has a "Run this page on Colab" link at the top, and `jb/index.md` lists
   it under its chapter. (The links point at `v3`, so they work once the page is merged there.)
 

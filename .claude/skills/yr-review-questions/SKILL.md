@@ -15,7 +15,7 @@ missing or wrong, change `yr/README.md`.
 If the chapter has no review page yet, use the `yr-review-page` skill instead. A separate page of review
 questions (a more-review page, or a page such as `yr/chap09_palindromes.ipynb`, "9e. Review: Palindromes") is
 written in the same review format, with the differences in `yr/README.md`, "More review pages"; the two older
-more-review pages (7d, 9d) are in the additions format until they are converted. Work on a topic branch, not
+more-review pages (7e, 9d) are in the additions format until they are converted. Work on a topic branch, not
 `v3`.
 
 ## Steps for the agent
