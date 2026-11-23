@@ -9,6 +9,7 @@ parts:
   chapters:
   - file: chap00
   - file: yr/prof_r_intro
+  - file: yr/prof_r_thonny
 - caption: Chapters
   numbered: True
   chapters:
@@ -26,6 +27,7 @@ parts:
     - file: chap03
 - chapters:
     - file: yr/chap03_additions
+    - file: yr/chap03_additions_for
     - file: yr/chap03_review
 - numbered: True
   chapters:
@@ -46,6 +48,7 @@ parts:
   chapters:
     - file: chap07
 - chapters:
+    - file: yr/chap07_additions_data
     - file: yr/chap07_additions
     - file: yr/chap07_review
     - file: yr/chap07_more_review
@@ -75,6 +78,7 @@ parts:
     - file: chap11
 - chapters:
     - file: yr/chap11_additions
+    - file: yr/chap11_additions_debugger
     - file: yr/chap11_review
 - numbered: True
   chapters:

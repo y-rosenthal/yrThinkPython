@@ -43,7 +43,8 @@ For the third edition, the biggest changes are:
 
 * [Click here to run Chapter 3 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap03.ipynb)
 * [Click here to run 3b. Additions: The Three Forms of range on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap03_additions.ipynb)
-* [Click here to run 3c. Review: Functions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap03_review.ipynb)
+* [Click here to run 3c. Additions: More About for Loops on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap03_additions_for.ipynb)
+* [Click here to run 3d. Review: Functions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap03_review.ipynb)
 
 
 **Chapter 4: Functions and Interfaces**
@@ -65,9 +66,10 @@ For the third edition, the biggest changes are:
 **Chapter 7: Iteration and Search**
 
 * [Click here to run Chapter 7 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap07.ipynb)
-* [Click here to run 7b. Additions: File Paths and for Loops on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_additions.ipynb)
-* [Click here to run 7c. Review: Iteration and Search on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_review.ipynb)
-* [Click here to run 7d. Review: Loops with Decisions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_more_review.ipynb)
+* [Click here to run 7b. Additions: How a Computer Stores Data on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_additions_data.ipynb)
+* [Click here to run 7c. Additions: File Paths and for Loops on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_additions.ipynb)
+* [Click here to run 7d. Review: Iteration and Search on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_review.ipynb)
+* [Click here to run 7e. Review: Loops with Decisions on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap07_more_review.ipynb)
 
 **Chapter 8: Strings and Regular Expressions**
 
@@ -94,7 +96,8 @@ For the third edition, the biggest changes are:
 
 * [Click here to run Chapter 11 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap11.ipynb)
 * [Click here to run 11b. Additions: While Loops on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap11_additions.ipynb)
-* [Click here to run 11c. Review: Tuples on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap11_review.ipynb)
+* [Click here to run 11c. Additions: The Thonny Debugger on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap11_additions_debugger.ipynb)
+* [Click here to run 11d. Review: Tuples on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap11_review.ipynb)
 
 **Chapter 12: Text Analysis and Generation**
 
