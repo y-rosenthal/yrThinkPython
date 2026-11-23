@@ -155,7 +155,7 @@ def chapter_pages(path):
 
 
 def page_letter(path):
-    """The letter of a page's number ("7c." in "7c. Review: Iteration and Search"): its position among the pages of the
+    """The letter of a page's number ("7d." in "7d. Review: Iteration and Search"): its position among the pages of the
     course after its chapter, in the order of the TOC (see chapter_pages): b, c, d, ... A page that is not a
     chapter page (the selftest fixture) is 'b'."""
     pages = chapter_pages(path)
