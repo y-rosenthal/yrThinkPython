@@ -19,6 +19,7 @@ yr/
   NAME.md                  a page of the course without code (an introduction, a note)
   NAME_SOMETHING.md        a page of a hidden part of the book; the website shows the part only with
                            ?show=NAME in the address (none now: "A hidden part of the book")
+  tiny_book.txt            a small "book" of 4 lines that 9b reads; the website serves it (html_extra_path)
   plans/                   design notes (runall-collapsible-answers.md: the review-page format)
   tools/
     review_cells.py        create a review page skeleton; add, list, number, renumber questions
@@ -55,10 +56,10 @@ A page is `yr/chapNN_KIND.ipynb` (KIND: lowercase letters, digits and `_`). The 
 | 4 | NN<letter>. Review: TOPIC | `yr/chapNN_more_review.ipynb`, or another KIND (`yr/chapNN_palindromes.ipynb`) | more review questions, when needed |
 
 - **The title** of every page of a chapter is `# NN<letter>. Additions: TOPIC` or `# NN<letter>. Review: TOPIC`.
-  TOPIC says what is on the page, in title case, in a few words: for example `9b. Additions: Nested Loops`,
-  `9e. Review: Palindromes`. The label is `Additions` for the kinds `additions` and `additions_TOPIC`, and
+  TOPIC says what is on the page, in title case, in a few words: for example `9c. Additions: Nested Loops`,
+  `9f. Review: Palindromes`. The label is `Additions` for the kinds `additions` and `additions_TOPIC`, and
   `Review` for every other kind (`review_format.page_label`). The topic of the review page
-  (`chapNN_review.ipynb`) is usually the chapter's title (`9c. Review: Lists`); `review.sh sync` keeps the topic
+  (`chapNN_review.ipynb`) is usually the chapter's title (`9d. Review: Lists`); `review.sh sync` keeps the topic
   that is in the title cell. `check_notebooks.py` checks the letter and the label, and that there is a topic.
 - The additions pages come before the review page, and the review page before the more-review page.
 - A page uses the format of a review page (`review.sh sync` and `check`) when its Answers are `#### Answer`
@@ -93,7 +94,7 @@ A page is `yr/chapNN_KIND.ipynb` (KIND: lowercase letters, digits and `_`). The 
 
 ## More review pages: `yr/chapNN_more_review.ipynb` and other kinds
 
-A page of more review questions, "NN<letter>. Review: TOPIC" (for example "9e. Review: Palindromes"), holds
+A page of more review questions, "NN<letter>. Review: TOPIC" (for example "9f. Review: Palindromes"), holds
 extra practice questions for a chapter when its review page is full or when a topic needs more practice. Write
 it in the review format, as the review page ("Review pages"): `review.sh sync` writes every output and value by
 running the code, and `review.sh check` verifies the page. **No output on a page of questions is typed by
@@ -210,7 +211,7 @@ the next run of the script writes the page again.
 A chapter can have more than one additions page: one for each topic. The first is `yr/chapNN_additions.ipynb`;
 the others are `yr/chapNN_additions_TOPIC.ipynb` (for example `chap09_additions_while.ipynb`). Each has its own
 title, `# NN<letter>. Additions: TOPIC` ("The pages of a chapter"). A topic that needs material from a later
-chapter goes on an additions page of that chapter: nested loops are on 9b, not 8b, so that their examples can use
+chapter goes on an additions page of that chapter: nested loops are on 9c, not 8b, so that their examples can use
 lists.
 
 An additions page explains what the chapter uses but does not explain (for example, `range` with two or three
@@ -223,7 +224,7 @@ Reference examples: `yr/chap07_additions.ipynb` (sections, Diving deeper boxes, 
 
 ### Layout of a page
 
-1. **Title cell**: `# NNb. Additions: TOPIC` (for example `# 9b. Additions: Nested Loops`), a link to the chapter, one sentence on how to use the
+1. **Title cell**: `# NNb. Additions: TOPIC` (for example `# 9c. Additions: Nested Loops`), a link to the chapter, one sentence on how to use the
    page, and the line `[Run this page on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chapNN_additions.ipynb)`.
 2. **Setup cell** (code), the same as the chapter's first cell: it downloads `thinkpython.py` (for
    `%%expect`) and the files that the page uses (for example `words.txt`), then `import thinkpython`.
@@ -340,8 +341,12 @@ Cell conventions: nbformat 4.5, a unique 8-character `id` on each cell, `executi
    - The pages after it: `yr/tools/review.sh sync yr/chapNN_review.ipynb` writes the new letter in the title of
      the review page; type the new letter in the title of each other page after it (`check_notebooks.py` reports
      it). `yr/tools/review.sh check yr/chapNN_review.ipynb` must print `OK`.
-   - A file that students must download from the website (as `words.txt` for chapter 7): add it to
-     `html_extra_path` in `jb/_config.yml`, and link to `https://y-rosenthal.github.io/yrThinkPython/FILE`.
+   - A file that students must download from the website (as `words.txt` for chapter 7, or
+     `yr/tiny_book.txt` for 9b): add it to `html_extra_path` in `jb/_config.yml`, and link to
+     `https://y-rosenthal.github.io/yrThinkPython/FILE`. The page's setup cell downloads it from that address.
+     The website does not have the file before the first publish, so the build gives a copy of it to the
+     page: add the file to `HELPERS` in `jb/execute_notebooks.py` and to the `cp` line of
+     `.claude/skills/check-notebooks/run_notebooks.sh`.
 4. Verify:
    ```bash
    .claude/skills/check-notebooks/run_notebooks.sh yr/chapNN_additions.ipynb   # must print ok
@@ -356,7 +361,7 @@ Cell conventions: nbformat 4.5, a unique 8-character `id` on each cell, `executi
 ## Review pages: `yr/chapNN_review.ipynb`
 
 One notebook per chapter, titled `NNb. Review: TOPIC` (e.g. `4b. Review: Functions and Interfaces`), or
-`NNc. Review: TOPIC` when the chapter has an additions page (e.g. `9c. Review: Lists`), or a later letter after
+`NNc. Review: TOPIC` when the chapter has an additions page (e.g. `10c. Review: Dictionaries`), or a later letter after
 more additions pages (`7d. Review: Iteration and Search`; see "The pages of a chapter"). The topic is usually the chapter's title. It helps students review one chapter. It has **Concepts covered**, two lists of facts as a checklist,
 and **Questions**, practice questions from very easy to very hard, each with an **Answer** that is closed until the
 student opens it. `yr/chap04_review.ipynb` is the reference example.

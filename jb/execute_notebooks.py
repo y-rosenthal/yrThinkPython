@@ -49,7 +49,7 @@ JB = Path(__file__).resolve().parent
 ROOT = JB.parent
 sys.path.insert(0, str(ROOT / 'yr' / 'tools'))
 import review_format  # noqa: E402  (stdlib only)
-HELPERS = ['thinkpython.py', 'diagram.py', 'structshape.py', 'words.txt', 'photos.zip']
+HELPERS = ['thinkpython.py', 'diagram.py', 'structshape.py', 'words.txt', 'photos.zip', 'yr/tiny_book.txt']
 JUPYTURTLE = 'https://github.com/ramalho/jupyturtle/releases/download/2024-03/jupyturtle.py'
 GITHUB = os.environ.get('GITHUB_ACTIONS') == 'true'
 

@@ -80,16 +80,17 @@ For the third edition, the biggest changes are:
 **Chapter 9: Lists**
 
 * [Click here to run Chapter 9 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap09.ipynb)
-* [Click here to run 9b. Additions: Nested Loops on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_additions.ipynb)
-* [Click here to run 9c. Review: Lists on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_review.ipynb)
-* [Click here to run 9d. Review: Sentences, Nested Loops and Tables on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_more_review.ipynb)
-* [Click here to run 9e. Review: Palindromes on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_palindromes.ipynb)
-* [Click here to run 9f. Review: Practice Programs on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_practice.ipynb)
+* [Click here to run 9b. Additions: Iterables, and Changing a List in a Loop on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_additions_iterables.ipynb)
+* [Click here to run 9c. Additions: Nested Loops on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_additions.ipynb)
+* [Click here to run 9d. Review: Lists on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_review.ipynb)
+* [Click here to run 9e. Review: Sentences, Nested Loops and Tables on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_more_review.ipynb)
+* [Click here to run 9f. Review: Palindromes on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_palindromes.ipynb)
+* [Click here to run 9g. Review: Practice Programs on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_practice.ipynb)
 
 **Chapter 10: Dictionaries**
 
 * [Click here to run Chapter 10 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap10.ipynb)
-* [Click here to run 10b. Additions: The get Method on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap10_additions.ipynb)
+* [Click here to run 10b. Additions: More About Dictionaries on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap10_additions.ipynb)
 * [Click here to run 10c. Review: Dictionaries on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap10_review.ipynb)
 
 **Chapter 11: Tuples**
