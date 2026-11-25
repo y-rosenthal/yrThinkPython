@@ -17,7 +17,11 @@ jb/chapNN.ipynb and each jb/yr/chapNN_KIND.ipynb that is not in the review forma
    stub, so the download() cells find their files and nothing waits. A code cell can give the
    replies that a pretend user types, in its metadata: "input_replies": ["mary smith"]. Each
    input() call in that cell then shows its prompt and the next reply, as if a person typed it,
-   and returns the reply. Without replies, input() returns a fixed string.
+   and returns the reply. Without replies, input() returns a fixed string. A code cell whose code
+   uses random numbers can also give "random_seed": 2 in its metadata: the build calls
+   random.seed(2) just before the cell, so the cell makes the same random choices at each build
+   and its input replies always fit (a game against the computer in yr/chap11_tictactoe.ipynb).
+   In Colab, the metadata does nothing.
 3. Copy the outputs back into jb/chapNN.ipynb, cell by cell (matched by id). An error output is
    kept only where it is meant to be (%%expect cells and cells tagged raises-exception);
    other errors are dropped and reported. A cell whose code is hidden (tag remove-input) and that
@@ -111,12 +115,16 @@ def execute(path, work, overlay):
     for cell in run.cells:
         if is_placeholder(cell) and cell.get('id') in solutions:
             cell.source = solutions[cell['id']]
-    # before each cell that has input replies, a cell that gives them to the input() stub
+    # before each cell that has input replies or a random seed, a cell that gives them to the input()
+    # stub and to the random module
     cells = []
     for cell in run.cells:
         replies = cell.metadata.get('input_replies')
+        seed = cell.metadata.get('random_seed')
         if cell.cell_type == 'code' and replies:
             cells.append(nbf.v4.new_code_cell(f'import builtins; builtins._input_replies = {list(replies)!r}'))
+        if cell.cell_type == 'code' and seed is not None:
+            cells.append(nbf.v4.new_code_cell(f'import random; random.seed({seed!r})'))
         cells.append(cell)
     run.cells = cells
 

@@ -122,6 +122,20 @@ Two older pages, `yr/chap07_more_review.ipynb` and `yr/chap09_more_review.ipynb`
 format: `## Practice questions`, `<details>` Answers with typed outputs, no stored outputs; the build runs their
 code cells. Do not write a new page in that format. Converting them is issue #13.
 
+**Exception: a project page.** A page with one large program that reads the user's input, such as
+"11f. Review: A Tic-Tac-Toe Game" (`yr/chap11_tictactoe.ipynb`) and "11g. Review: An Othello Game"
+(`yr/chap11_othello.ipynb`), is in the additions format: `review.sh sync` cannot type replies to `input()`,
+and the build can ("Code that calls `input()`", with `input_replies` and `random_seed`). Its layout: the problem
+(the rules, what the program must do, example runs), a `# Your code here` cell, and, if the page teaches the
+solution, a section that develops the program one step at a time. In that section, **Thoughts ...** boxes
+(blockquotes) show what a programmer thinks, **Stop and check** paragraphs make the student run and read each
+step, and **Thinking ... refactor** boxes improve the code without changing what it does (each refactored
+version runs with the same replies and seed, and gives the same output). A cell of that section may use the
+functions of the cells before it. An example run in the text is captured from a real run of the program, not
+typed: on 11f, the last cell runs the same game with the same replies and seed, so the build shows that the
+example is right. A page that gives the problem only (11g) gets its example runs from a solution that is not
+in the repository; keep the solution where you can run it again.
+
 To add a page: write the notebook, list it in `jb/_toc.yml` after the chapter's review page (and after the
 other pages of review questions), add its Colab line in `jb/index.md` in the same place, then verify it as a
 review page ("Adding a review page for another chapter", step 6).
@@ -245,6 +259,10 @@ Reference examples: `yr/chap07_additions.ipynb` (sections, Diving deeper boxes, 
      runs it; it calls nothing). The call is a ```` ```python ```` block in the text, with one typed run after
      it. Before you publish, run the function with the random value fixed, and make sure that the typed run
      agrees with what it shows.
+     Or give the cell a seed too: `"random_seed": 2` in its metadata makes the build call `random.seed(2)`
+     just before the cell, so the cell makes the same random choices at each build, and one list of replies
+     fits (the games of `yr/chap11_tictactoe.ipynb`). In Colab, the seed does nothing: the student plays a
+     random game. To find replies that fit a seed, play the cell once with that seed.
    - **The website's own files:** `jb/_static/yr.js` and `jb/_static/yr.css` are loaded on every page
      of the website. They hold the method boxes and the collapsible sections below, and the update check
      (a page that is older than the website reloads, or shows a "Reload" bar: see the author guide,
@@ -318,6 +336,10 @@ Cell conventions: nbformat 4.5, a unique 8-character `id` on each cell, `executi
 
 - Each fact once, in plain English, with an example for each fact. Show the general form with UPPERCASE
   placeholders, as on the review pages (`range(START, STOP, STEP)`).
+- **The values in a list or a tuple must not look like indexes** (Prof. Rosenthal, 2026-11-25). In
+  `[1, 2, 3]`, a student cannot tell the value `2` from the index `1`. Use values such as `[100, 200, 300]`,
+  `[12, 24, 36, 48]` or strings (`['apple', 'pear', 'plum']`). This rule is for the questions of every page
+  too. (The square numbers 1 to 9 of a tic-tac-toe board are names of squares, not list values.)
 - Each code cell has all the data that it uses: it assigns each variable itself, and does not use a variable
   that an earlier cell assigns (write `text = 'the cAT in THE hat'` in each cell that uses `text`). A
   function can be defined in one cell and called in the cells right after it.
@@ -482,6 +504,7 @@ These come from Prof. Rosenthal's instructions; follow them for every page.
   or a pointer to the question that defines it); introduce any module the page uses (e.g.
   `jupyturtle`) at the top of the Questions section.
 - Only use Python taught up to this chapter, or explain the extra bit in the question.
+- The values in a list or a tuple must not look like indexes (Additions pages, "Style rules").
 - **A question that reimplements a Python function, method or operator** (`my_count` for `count`, `my_find`
   for `find`, `my_contains` for `in`) says in the prompt what the function must do, so that a student who
   does not know the built-in can write it. Its Answers never use the built-in that the question

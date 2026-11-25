@@ -82,6 +82,8 @@ parts:
     - file: yr/chap11_additions_debugger
     - file: yr/chap11_additions_tuples
     - file: yr/chap11_review
+    - file: yr/chap11_tictactoe
+    - file: yr/chap11_othello
 - numbered: True
   chapters:
     - file: chap12
