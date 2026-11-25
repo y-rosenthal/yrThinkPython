@@ -232,6 +232,7 @@ def check_yr_pages():
 # Scripts that are not run from the command line, and Downey's own scripts (kept as his: sync-upstream)
 NO_HELP = {
     "yr/tools/review_format.py": "a module, imported by the review tools",
+    "yr/yrdiagram.py": "a module, imported by the course pages for their state diagrams",
     ".claude/skills/build-book/ensure_venv.sh": "sourced by other scripts",
     "jb/prep_notebooks.py": "Downey's file",
     "jb/build.sh": "Downey's file",
