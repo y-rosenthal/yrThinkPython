@@ -100,6 +100,8 @@ For the third edition, the biggest changes are:
 * [Click here to run 11c. Additions: The Thonny Debugger on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap11_additions_debugger.ipynb)
 * [Click here to run 11d. Additions: Tuples Are Immutable on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap11_additions_tuples.ipynb)
 * [Click here to run 11e. Review: Tuples on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap11_review.ipynb)
+* [Click here to run 11f. Review: A Tic-Tac-Toe Game on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap11_tictactoe.ipynb)
+* [Click here to run 11g. Review: An Othello Game on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap11_othello.ipynb)
 
 **Chapter 12: Text Analysis and Generation**
 
