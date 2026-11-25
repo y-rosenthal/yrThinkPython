@@ -13,7 +13,8 @@ Reads jb/_toc.yml for the pages, then checks on the live site that:
     section 5.9, a page that only had outputs since the build started executing chapters);
   - yr/ review pages have both concept lists, Answer boxes and their turtle pictures, and show none of the
     notebook machinery (@title, run_code, markers);
-  - the other yr/ pages of a chapter (additions, more review, other kinds) show Answer boxes (additions: code outputs too), and no %%expect,
+  - the other yr/ pages of a chapter (additions, more review, other kinds) show Answer boxes if the notebook has
+    them (additions: code outputs too), and no %%expect,
     <details> or '# Your code here'; a markdown page yr/NAME.md loads with its title;
   - words.txt (linked from yr/chap07_additions) and tiny_book.txt (linked from yr/chap09_additions_iterables)
     can be downloaded from the top of the site.
@@ -78,7 +79,10 @@ def check():
             summary.append(f'{page}: {outputs} outputs')
             if outputs == 0 and page.endswith('_additions'):
                 problems.append(f'{page}: no code outputs on the page')
-            if 'Answer' not in html:
+            # a project page (yr/chap11_tictactoe, yr/chap11_othello) has no Answer box: expect one only if the
+            # notebook has one
+            has_answers = '<summary>Answer</summary>' in (ROOT / f'{page}.ipynb').read_text()
+            if has_answers and 'Answer' not in html:
                 problems.append(f'{page}: "Answer" not found')
             for bad in ('%%expect', '&lt;details', '<summary>Answer', '# Your code here'):
                 if bad in html:
