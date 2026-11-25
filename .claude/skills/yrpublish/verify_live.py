@@ -104,8 +104,8 @@ def check():
     except urllib.error.URLError as e:
         problems.append(f'words.txt: {e}')
     try:
-        if fetch(f'{BASE}tiny_book.txt').split('\n', 1)[0].strip() != 'The Little Book of Loops':
-            problems.append('tiny_book.txt: the file on the site does not start with "The Little Book of Loops"')
+        if not fetch(f'{BASE}tiny_book.txt').startswith('Once upon a time'):
+            problems.append('tiny_book.txt: the file on the site does not start with "Once upon a time"')
     except urllib.error.URLError as e:
         problems.append(f'tiny_book.txt: {e}')
     return problems, summary
