@@ -1,0 +1,1193 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="3c. Additions: More About for Loops" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://y-rosenthal.github.io/yrThinkPython/yr/chap03_additions_for.html" />
+<meta property="og:site_name" content="Think Python, 3rd edition" />
+<meta property="og:description" content="Additions to Chapter 3: Functions: how a for loop runs, step by step, what happens to the loop variable, how to add up values in a loop, and a rule that you must never break: do not change the iter..." />
+<meta property="og:image" content="https://raw.githubusercontent.com/AllenDowney/ThinkPython/v3/think_python_3e.jpg" />
+<meta property="og:image:alt" content="Cover of Think Python, 3rd edition, by Allen B. Downey" />
+
+    <title>3c. Additions: More About for Loops &#8212; Think Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
+    <link rel="stylesheet" type="text/css" href="../_static/yr.css?v=3b647472" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'yr/chap03_additions_for';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script data-package="y-rosenthal/thinkpython" defer="defer" src="https://subjexts.github.io/overlay/v1/yrS4.js"></script>
+    <script src="../_static/yr.js?v=0d09bd84"></script>
+    <link rel="canonical" href="https://y-rosenthal.github.io/yrThinkPython/yr/chap03_additions_for.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3d. Review: Functions" href="chap03_review.html" />
+    <link rel="prev" title="3b. Additions: The Three Forms of range" href="chap03_additions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Think Python, 3rd edition
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Table of contents by label</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../subjexts-labels.html">Table of contents by label</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap00.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prof_r_intro.html">A Note From Prof. Rosenthal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prof_r_thonny.html">Another Note From Prof. Rosenthal: Using Thonny</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap01.html">1. Programming as a way of thinking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap02.html">2. Variables and Statements</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap02_review.html">2b. Review: Variables and Statements</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap03.html">3. Functions</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap03_additions.html">3b. Additions: The Three Forms of range</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3c. Additions: More About for Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03_review.html">3d. Review: Functions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap04.html">4. Functions and Interfaces</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap04_review.html">4b. Review: Functions and Interfaces</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap05.html">5. Conditionals and Recursion</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap05_review.html">5b. Review: Conditionals and Recursion</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap06.html">6. Return Values</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap06_review.html">6b. Review: Return Values</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap07.html">7. Iteration and Search</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap07_additions_data.html">7b. Additions: How a Computer Stores Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07_additions.html">7c. Additions: File Paths and for Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07_review.html">7d. Review: Iteration and Search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07_more_review.html">7e. Review: Loops with Decisions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap08.html">8. Strings and Regular Expressions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap08_additions.html">8b. Additions: String Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08_review.html">8c. Review: Strings and Regular Expressions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap09.html">9. Lists</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap09_additions_iterables.html">9b. Additions: Iterables, and Changing a List in a Loop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_additions.html">9c. Additions: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_review.html">9d. Review: Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_more_review.html">9e. Review: Sentences, Nested Loops and Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_palindromes.html">9f. Review: Palindromes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_practice.html">9g. Review: Practice Programs</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap10.html">10. Dictionaries</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap10_additions.html">10b. Additions: More About Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10_review.html">10c. Review: Dictionaries</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap11.html">11. Tuples</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap11_additions.html">11b. Additions: While Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11_additions_debugger.html">11c. Additions: The Thonny Debugger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11_additions_tuples.html">11d. Additions: Tuples Are Immutable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11_review.html">11e. Review: Tuples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11_tictactoe.html">11f. Review: A Tic-Tac-Toe Game</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11_othello.html">11g. Review: An Othello Game</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap12.html">12. Text Analysis and Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap13.html">13. Files and Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap14.html">14. Classes and Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap15.html">15. Classes and Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap16.html">16. Classes and Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap17.html">17. Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap18.html">18. Python Extras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap19.html">19. Final thoughts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../blank.html">Blank Notebooks</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/y-rosenthal/yrThinkPython" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/yr/chap03_additions_for.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3c. Additions: More About for Loops</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-a-for-loop-runs">How a for loop runs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-loop-variable">The loop variable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-up-values-in-a-loop">Adding up values in a loop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#never-change-the-iterable-in-the-body-of-a-loop">Never change the iterable in the body of a loop</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#do-not-assign-to-the-loop-variable">Do not assign to the loop variable</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watch-a-for-loop-in-thonny">Watch a for loop in Thonny</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-questions">Practice questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-very-easy-what-is-displayed">Question 1 (very easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-easy-what-is-displayed">Question 2 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-easy-what-is-displayed">Question 3 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-medium-what-is-displayed">Question 4 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-medium-what-is-displayed">Question 5 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-medium-what-is-wrong">Question 6 (medium): what is wrong?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-7-hard-write-a-function">Question 7 (hard): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-8-hard-write-a-function">Question 8 (hard): write a function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#credits">Credits</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="c-additions-more-about-for-loops">
+<h1>3c. Additions: More About for Loops<a class="headerlink" href="#c-additions-more-about-for-loops" title="Link to this heading">#</a></h1>
+<p>Additions to <a class="reference external" href="https://y-rosenthal.github.io/yrThinkPython/chap03.html">Chapter 3: Functions</a>: how a <code class="docutils literal notranslate"><span class="pre">for</span></code>
+loop runs, step by step, what happens to the loop variable, how to add up values in a loop, and a rule that
+you must never break: <strong>do not change the iterable of a loop in the body of the loop</strong>. The last section shows
+how to watch a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop run in the Thonny debugger. Read this page after the chapter and after
+“3b. Additions: The Three Forms of range”.
+The practice questions at the end have answers: try each question first, then open its <strong>Answer</strong>.</p>
+<p><a class="reference external" href="https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap03_additions_for.ipynb">Run this page on Colab</a></p>
+<p>Run the setup cell below first. It downloads <code class="docutils literal notranslate"><span class="pre">thinkpython.py</span></code>, which lets this page show the errors of some
+examples without stopping the page.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlretrieve</span>
+
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Downloaded "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">local</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">filename</span>
+
+<span class="n">download</span><span class="p">(</span><span class="s1">'https://github.com/AllenDowney/ThinkPython/raw/v3/thinkpython.py'</span><span class="p">);</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">thinkpython</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="how-a-for-loop-runs">
+<h2>How a for loop runs<a class="headerlink" href="#how-a-for-loop-runs" title="Link to this heading">#</a></h2>
+<p>The general form of a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">VARIABLE</span> <span class="ow">in</span> <span class="n">ITERABLE</span><span class="p">:</span>
+    <span class="n">BODY</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ITERABLE</span></code> is a value that gives other values, one at a time. In Chapter 3, the iterable is always a
+<code class="docutils literal notranslate"><span class="pre">range</span></code>. Later chapters loop over other iterables: the characters of a string and the lines of a file
+(Chapter 7), and the items of a list (Chapter 9).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VARIABLE</span></code> is the <strong>loop variable</strong>. Each time the loop runs, Python assigns the next value of the iterable
+to it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BODY</span></code> is the indented block after the colon. One run of the body is one <strong>iteration</strong>.</p></li>
+</ul>
+<p>Python runs a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop in these steps:</p>
+<ol class="arabic simple">
+<li><p>Get the next value from the iterable. If there are no more values, the loop ends: go on with the code
+after the loop.</p></li>
+<li><p>Assign the value to the loop variable.</p></li>
+<li><p>Run the body.</p></li>
+<li><p>Go back to step 1.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Iteration'</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'After the loop'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 0
+Iteration 1
+Iteration 2
+After the loop
+</pre></div>
+</div>
+</div>
+</div>
+<p>Step by step: <code class="docutils literal notranslate"><span class="pre">range(3)</span></code> gives the values <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span></code>. Python assigns <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">i</span></code> and runs the body,
+which displays <code class="docutils literal notranslate"><span class="pre">Iteration</span> <span class="pre">0</span></code>. Then it assigns <code class="docutils literal notranslate"><span class="pre">1</span></code> to <code class="docutils literal notranslate"><span class="pre">i</span></code> and runs the body, then <code class="docutils literal notranslate"><span class="pre">2</span></code>. There are no more
+values, so the loop ends, and Python runs the line after the loop. That line is not indented, so it is not
+part of the body: it runs once.</p>
+</section>
+<section id="the-loop-variable">
+<h2>The loop variable<a class="headerlink" href="#the-loop-variable" title="Link to this heading">#</a></h2>
+<p><strong>After the loop, the loop variable keeps its last value.</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'After the loop, i is'</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+2
+3
+After the loop, i is 3
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>A loop over an empty range does not run its body.</strong> <code class="docutils literal notranslate"><span class="pre">range(0)</span></code> gives no values, so the body runs zero
+times, and the loop variable gets no value:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'This line never runs'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Done'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Done
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Each function has its own loop variable.</strong> A loop variable is a variable like any other. When a loop is in
+a function, its variable is local to the function (“Variables and parameters are local” in Chapter 3). In this
+program, <code class="docutils literal notranslate"><span class="pre">print_row</span></code> and <code class="docutils literal notranslate"><span class="pre">print_box</span></code> each have a variable <code class="docutils literal notranslate"><span class="pre">i</span></code>. They are two different variables, so the loop
+in <code class="docutils literal notranslate"><span class="pre">print_row</span></code> does not change the <code class="docutils literal notranslate"><span class="pre">i</span></code> of <code class="docutils literal notranslate"><span class="pre">print_box</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">print_row</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="s1">''</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span> <span class="o">+</span> <span class="s1">'*'</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">print_box</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
+        <span class="n">print_row</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
+
+<span class="n">print_box</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>*****
+*****
+*****
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">print_row</span></code> makes a string of stars: it starts with the empty string <code class="docutils literal notranslate"><span class="pre">''</span></code>, and the body adds one <code class="docutils literal notranslate"><span class="pre">'*'</span></code> in
+each iteration. <code class="docutils literal notranslate"><span class="pre">print_box</span></code> calls <code class="docutils literal notranslate"><span class="pre">print_row</span></code> once in each iteration of its loop, so it displays 3 rows.
+The last section of this page shows how to watch this program run in Thonny.</p>
+</section>
+<section id="adding-up-values-in-a-loop">
+<h2>Adding up values in a loop<a class="headerlink" href="#adding-up-values-in-a-loop" title="Link to this heading">#</a></h2>
+<p>To add up values, make a variable for the total <strong>before</strong> the loop, with the value <code class="docutils literal notranslate"><span class="pre">0</span></code>. In the body, add
+the value of each iteration to it. After the loop, the variable has the sum:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">number</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'The sum of 1 to 5 is'</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The sum of 1 to 5 is 15
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">total</span> <span class="pre">=</span> <span class="pre">total</span> <span class="pre">+</span> <span class="pre">number</span></code> means: get the value of <code class="docutils literal notranslate"><span class="pre">total</span></code>, add <code class="docutils literal notranslate"><span class="pre">number</span></code>, and assign the result to <code class="docutils literal notranslate"><span class="pre">total</span></code>.
+The values of <code class="docutils literal notranslate"><span class="pre">total</span></code> after each iteration are 1, 3, 6, 10 and 15.</p>
+<p>The line <code class="docutils literal notranslate"><span class="pre">total</span> <span class="pre">=</span> <span class="pre">0</span></code> must be before the loop. In the body, it would set the total back to 0 in each
+iteration. Chapter 7 says more about updating a variable in a loop.</p>
+</section>
+<section id="never-change-the-iterable-in-the-body-of-a-loop">
+<h2>Never change the iterable in the body of a loop<a class="headerlink" href="#never-change-the-iterable-in-the-body-of-a-loop" title="Link to this heading">#</a></h2>
+<p><strong>The rule:</strong> in the body of a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, do not change the iterable that the loop goes through. Code that
+does this is <strong>very bad code</strong>. It can make the loop run more or fewer times than it seems to, give a wrong
+result without an error message, or never end, and a person who reads it cannot see what it does. Never write
+such code.</p>
+<p>In Chapter 3, the iterable is always a range, and a program cannot change a range: a range is
+<strong>immutable</strong>. The book teaches iterables that a program can change (they are <strong>mutable</strong>) later: lists in
+Chapter 9, and dictionaries in Chapter 10. “9b. Additions: Iterables, and Changing a List in a Loop” shows what
+goes wrong when a loop changes its list, and “10b. Additions: More About Dictionaries” what goes wrong when a
+loop changes its dictionary.</p>
+<section id="do-not-assign-to-the-loop-variable">
+<h3>Do not assign to the loop variable<a class="headerlink" href="#do-not-assign-to-the-loop-variable" title="Link to this heading">#</a></h3>
+<p>The same rule is true for the loop variable. At the start of each iteration, Python assigns the next value of
+the range to the loop variable. A value that the body assigns to the loop variable is lost at the next
+iteration:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">10</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+10
+20
+30
+</pre></div>
+</div>
+</div>
+</div>
+<p>The loop still runs 4 times, with <code class="docutils literal notranslate"><span class="pre">i</span></code> equal to 0, 1, 2 and 3 at the start of the iterations. A reader can
+think that the change to <code class="docutils literal notranslate"><span class="pre">i</span></code> changes the loop, and it does not. If you need a changed version of a value, make
+a <strong>new</strong> variable in the body, as <code class="docutils literal notranslate"><span class="pre">line</span></code> and <code class="docutils literal notranslate"><span class="pre">total</span></code> above: <code class="docutils literal notranslate"><span class="pre">ten_times</span> <span class="pre">=</span> <span class="pre">i</span> <span class="pre">*</span> <span class="pre">10</span></code>.</p>
+</section>
+</section>
+<section id="watch-a-for-loop-in-thonny">
+<h2>Watch a for loop in Thonny<a class="headerlink" href="#watch-a-for-loop-in-thonny" title="Link to this heading">#</a></h2>
+<p>Thonny is a program for writing and running Python on your own computer. Its <strong>debugger</strong> runs a program
+one step at a time and shows the value of each variable. To install Thonny, and to learn the two parts of its
+window, read <a class="reference external" href="https://y-rosenthal.github.io/yrThinkPython/yr/prof_r_thonny.html">Another Note From Prof. Rosenthal: Using Thonny</a>.</p>
+<ol class="arabic simple">
+<li><p>Start Thonny. Copy the <code class="docutils literal notranslate"><span class="pre">print_row</span></code> and <code class="docutils literal notranslate"><span class="pre">print_box</span></code> program from the section “The loop variable” into the
+editor (the top part of the window), and save it as <code class="docutils literal notranslate"><span class="pre">box.py</span></code>.</p></li>
+<li><p>Click <strong>View</strong>, then <strong>Variables</strong>, to see the values of the variables while the program runs.</p></li>
+<li><p>Start the debugger: click the <strong>Debug</strong> button (the picture of a bug), or press <strong>Ctrl+F5</strong>. Thonny puts a
+box around the part of the code that runs next.</p></li>
+<li><p>Press <strong>Step over</strong> (<strong>F6</strong>) many times. Each time, Thonny runs the part in the box, and moves the box to
+the next part. Look at the box when the program is in a loop: it goes from the body back to the <code class="docutils literal notranslate"><span class="pre">for</span></code>
+line, and the loop variable gets its next value.</p></li>
+<li><p>When the box is on the call <code class="docutils literal notranslate"><span class="pre">print_row(width)</span></code>, press <strong>Step into</strong> (<strong>F7</strong>) until Thonny opens a small
+window for the call of <code class="docutils literal notranslate"><span class="pre">print_row</span></code> (Step into first goes into the parts of the line, then into the
+function). It shows the code of the function and its <strong>local variables</strong>: <code class="docutils literal notranslate"><span class="pre">width</span></code>, <code class="docutils literal notranslate"><span class="pre">i</span></code> and
+<code class="docutils literal notranslate"><span class="pre">line</span></code>. This is the frame of the call, as in the stack diagrams of Chapter 3. Press <strong>Step over</strong> and
+watch <code class="docutils literal notranslate"><span class="pre">line</span></code> get one more star in each iteration. (If Thonny shows the call in the editor, not in a small
+window, click <strong>Tools</strong>, <strong>Options</strong>, <strong>Run &amp; Debug</strong>, and select “Show function calls (frames) in
+separate windows”.)</p></li>
+<li><p>Press <strong>Step out</strong> to run the rest of the call. The window of the call closes, and Thonny goes back to the
+loop of <code class="docutils literal notranslate"><span class="pre">print_box</span></code>. Its <code class="docutils literal notranslate"><span class="pre">i</span></code> did not change: each function has its own <code class="docutils literal notranslate"><span class="pre">i</span></code>.</p></li>
+<li><p>To stop the program before it ends, click the red <strong>Stop</strong> button (<strong>Ctrl+F2</strong>).</p></li>
+</ol>
+<p>Then try the example “Do not assign to the loop variable” in Thonny. With <strong>Step over</strong>, watch <code class="docutils literal notranslate"><span class="pre">i</span></code> in the
+Variables view: the body changes it to <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">10</span></code>, <code class="docutils literal notranslate"><span class="pre">20</span></code> and <code class="docutils literal notranslate"><span class="pre">30</span></code>, but at the start of each iteration the loop
+gives it the next value of the range, <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code> and <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p>
+<p>On a Mac, the keys <strong>F5</strong> to <strong>F8</strong> can control the screen or the sound. Hold down the <strong>fn</strong> key, or click
+the buttons of Thonny instead. “11c. Additions: The Thonny Debugger” tells more about the debugger.</p>
+</section>
+<section id="practice-questions">
+<h2>Practice questions<a class="headerlink" href="#practice-questions" title="Link to this heading">#</a></h2>
+<section id="question-1-very-easy-what-is-displayed">
+<h3>Question 1 (very easy): what is displayed?<a class="headerlink" href="#question-1-very-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays. Then run the cell to check (on the website, click <strong>Show code cell output</strong>).</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'hi'</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="admonition hide below-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>hi 0
+hi 1
+hi 2
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hi</span> <span class="mi">0</span>
+<span class="n">hi</span> <span class="mi">1</span>
+<span class="n">hi</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">range(3)</span></code> gives <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span></code>, so the body runs 3 times, with a different value of <code class="docutils literal notranslate"><span class="pre">i</span></code> each time.</p>
+</div>
+</section>
+<section id="question-2-easy-what-is-displayed">
+<h3>Question 2 (easy): what is displayed?<a class="headerlink" href="#question-2-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays. Then run the cell to check (on the website, click <strong>Show code cell output</strong>).</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'A'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'B'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'C'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="admonition hide below-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A
+B
+A
+B
+C
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span>
+<span class="n">B</span>
+<span class="n">A</span>
+<span class="n">B</span>
+<span class="n">C</span>
+</pre></div>
+</div>
+<p>The two indented lines are the body, so they run in each of the 2 iterations. <code class="docutils literal notranslate"><span class="pre">print('C')</span></code> is not indented:
+it runs once, after the loop.</p>
+</div>
+</section>
+<section id="question-3-easy-what-is-displayed">
+<h3>Question 3 (easy): what is displayed?<a class="headerlink" href="#question-3-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays. Then run the cell to check (on the website, click <strong>Show code cell output</strong>).</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">number</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="admonition hide below-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">30</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">range(2,</span> <span class="pre">11,</span> <span class="pre">2)</span></code> gives <code class="docutils literal notranslate"><span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">4</span></code>, <code class="docutils literal notranslate"><span class="pre">6</span></code>, <code class="docutils literal notranslate"><span class="pre">8</span></code> and <code class="docutils literal notranslate"><span class="pre">10</span></code> (“3b. Additions: The Three Forms of range”). The total
+is 2 + 4 + 6 + 8 + 10 = 30.</p>
+</div>
+</section>
+<section id="question-4-medium-what-is-displayed">
+<h3>Question 4 (medium): what is displayed?<a class="headerlink" href="#question-4-medium-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays. Then run the cell to check (on the website, click <strong>Show code cell output</strong>).</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">i</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="admonition hide below-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 6
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span> <span class="mi">6</span>
+</pre></div>
+</div>
+<p>After the loop, <code class="docutils literal notranslate"><span class="pre">i</span></code> keeps its last value, <code class="docutils literal notranslate"><span class="pre">3</span></code>. The total is 1 + 2 + 3 = 6.</p>
+</div>
+</section>
+<section id="question-5-medium-what-is-displayed">
+<h3>Question 5 (medium): what is displayed?<a class="headerlink" href="#question-5-medium-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays. Then run the cell to check (on the website, click <strong>Show code cell output</strong>).</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">show</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'show'</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">show</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'main'</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="admonition hide below-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>show 0
+show 1
+show 2
+main 0
+show 0
+show 1
+show 2
+main 1
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">show</span> <span class="mi">0</span>
+<span class="n">show</span> <span class="mi">1</span>
+<span class="n">show</span> <span class="mi">2</span>
+<span class="n">main</span> <span class="mi">0</span>
+<span class="n">show</span> <span class="mi">0</span>
+<span class="n">show</span> <span class="mi">1</span>
+<span class="n">show</span> <span class="mi">2</span>
+<span class="n">main</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>The loop at the bottom runs 2 times, and each iteration calls <code class="docutils literal notranslate"><span class="pre">show(3)</span></code>, whose loop runs 3 times. The <code class="docutils literal notranslate"><span class="pre">i</span></code> of
+<code class="docutils literal notranslate"><span class="pre">show</span></code> is a local variable of <code class="docutils literal notranslate"><span class="pre">show</span></code>. It is a different variable from the <code class="docutils literal notranslate"><span class="pre">i</span></code> of the loop at the bottom, so
+the loop in <code class="docutils literal notranslate"><span class="pre">show</span></code> does not change it: after each call, <code class="docutils literal notranslate"><span class="pre">print('main',</span> <span class="pre">i)</span></code> displays <code class="docutils literal notranslate"><span class="pre">main</span> <span class="pre">0</span></code>, then
+<code class="docutils literal notranslate"><span class="pre">main</span> <span class="pre">1</span></code>.</p>
+</div>
+</section>
+<section id="question-6-medium-what-is-wrong">
+<h3>Question 6 (medium): what is wrong?<a class="headerlink" href="#question-6-medium-what-is-wrong" title="Link to this heading">#</a></h3>
+<p>A student wants to display the numbers 0, 10, 20 and 30, and writes this code. It displays the right numbers.
+Why is it bad code anyway? Write a better version.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">10</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>The body assigns a new value to the loop variable <code class="docutils literal notranslate"><span class="pre">i</span></code>. A reader must know that the loop gives <code class="docutils literal notranslate"><span class="pre">i</span></code> its next
+value at the start of each iteration, so that the change is lost. It is easy to think that the change
+affects the loop. Use a new variable instead, or a <code class="docutils literal notranslate"><span class="pre">range</span></code> that gives the right values:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="question-7-hard-write-a-function">
+<h3>Question 7 (hard): write a function<a class="headerlink" href="#question-7-hard-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">print_sum</span></code> that takes a whole number <code class="docutils literal notranslate"><span class="pre">n</span></code>, 0 or more, and displays the sum
+1 + 2 + … + <code class="docutils literal notranslate"><span class="pre">n</span></code>. Use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">print_sum(4)</span></code> displays <code class="docutils literal notranslate"><span class="pre">10</span></code>, <code class="docutils literal notranslate"><span class="pre">print_sum(1)</span></code> displays <code class="docutils literal notranslate"><span class="pre">1</span></code>, and <code class="docutils literal notranslate"><span class="pre">print_sum(0)</span></code> displays <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">print_sum</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">print_sum</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">number</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The stop value of <code class="docutils literal notranslate"><span class="pre">range</span></code> is not included, so the range is <code class="docutils literal notranslate"><span class="pre">range(1,</span> <span class="pre">n</span> <span class="pre">+</span> <span class="pre">1)</span></code>. For <code class="docutils literal notranslate"><span class="pre">n</span></code> equal to <code class="docutils literal notranslate"><span class="pre">0</span></code>, the range
+is <code class="docutils literal notranslate"><span class="pre">range(1,</span> <span class="pre">1)</span></code>, which gives no values, so the function displays <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</div>
+</section>
+<section id="question-8-hard-write-a-function">
+<h3>Question 8 (hard): write a function<a class="headerlink" href="#question-8-hard-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">print_triangle</span></code> that takes a whole number <code class="docutils literal notranslate"><span class="pre">height</span></code> and displays a triangle of
+stars: the first row has 1 star, the second row 2 stars, and so on, up to <code class="docutils literal notranslate"><span class="pre">height</span></code> stars. Use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop,
+and call the function <code class="docutils literal notranslate"><span class="pre">print_row</span></code> from the section “The loop variable” in it.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">print_triangle(3)</span></code> displays:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>
+<span class="o">**</span>
+<span class="o">***</span>
+</pre></div>
+</div>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">print_triangle</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">print_row</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="s1">''</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span> <span class="o">+</span> <span class="s1">'*'</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">print_triangle</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">width</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">height</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">print_row</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The loop variable <code class="docutils literal notranslate"><span class="pre">width</span></code> goes from <code class="docutils literal notranslate"><span class="pre">1</span></code> to <code class="docutils literal notranslate"><span class="pre">height</span></code>, and each iteration displays a row of that width. The
+Answer repeats <code class="docutils literal notranslate"><span class="pre">print_row</span></code>, so that the block runs on its own.</p>
+</div>
+</section>
+</section>
+<section id="credits">
+<h2>Credits<a class="headerlink" href="#credits" title="Link to this heading">#</a></h2>
+<p><em>Additions by Prof. Y. Rosenthal, for</em> <a class="reference external" href="https://allendowney.github.io/ThinkPython/index.html">Think Python: 3rd Edition</a> <em>by Allen B. Downey.</em>
+<em>Text license:</em> <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./yr"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap03_additions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">3b. Additions: The Three Forms of range</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap03_review.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">3d. Review: Functions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-a-for-loop-runs">How a for loop runs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-loop-variable">The loop variable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-up-values-in-a-loop">Adding up values in a loop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#never-change-the-iterable-in-the-body-of-a-loop">Never change the iterable in the body of a loop</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#do-not-assign-to-the-loop-variable">Do not assign to the loop variable</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watch-a-for-loop-in-thonny">Watch a for loop in Thonny</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-questions">Practice questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-very-easy-what-is-displayed">Question 1 (very easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-easy-what-is-displayed">Question 2 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-easy-what-is-displayed">Question 3 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-medium-what-is-displayed">Question 4 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-medium-what-is-displayed">Question 5 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-medium-what-is-wrong">Question 6 (medium): what is wrong?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-7-hard-write-a-function">Question 7 (hard): write a function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-8-hard-write-a-function">Question 8 (hard): write a function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#credits">Credits</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

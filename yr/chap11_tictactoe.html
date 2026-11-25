@@ -1,0 +1,1992 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="11f. Review: A Tic-Tac-Toe Game" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://y-rosenthal.github.io/yrThinkPython/yr/chap11_tictactoe.html" />
+<meta property="og:site_name" content="Think Python, 3rd edition" />
+<meta property="og:description" content="A review of Chapters 1 to 11 (with “11b. Additions: While Loops”): one project, a tic-tac-toe game that a person plays against the computer. The first part of the page gives the problem and an exam..." />
+<meta property="og:image" content="https://raw.githubusercontent.com/AllenDowney/ThinkPython/v3/think_python_3e.jpg" />
+<meta property="og:image:alt" content="Cover of Think Python, 3rd edition, by Allen B. Downey" />
+
+    <title>11f. Review: A Tic-Tac-Toe Game &#8212; Think Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
+    <link rel="stylesheet" type="text/css" href="../_static/yr.css?v=3b647472" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'yr/chap11_tictactoe';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script data-package="y-rosenthal/thinkpython" defer="defer" src="https://subjexts.github.io/overlay/v1/yrS4.js"></script>
+    <script src="../_static/yr.js?v=0d09bd84"></script>
+    <link rel="canonical" href="https://y-rosenthal.github.io/yrThinkPython/yr/chap11_tictactoe.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="11g. Review: An Othello Game" href="chap11_othello.html" />
+    <link rel="prev" title="11e. Review: Tuples" href="chap11_review.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Think Python, 3rd edition
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Table of contents by label</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../subjexts-labels.html">Table of contents by label</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap00.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prof_r_intro.html">A Note From Prof. Rosenthal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prof_r_thonny.html">Another Note From Prof. Rosenthal: Using Thonny</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap01.html">1. Programming as a way of thinking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap02.html">2. Variables and Statements</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap02_review.html">2b. Review: Variables and Statements</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap03.html">3. Functions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap03_additions.html">3b. Additions: The Three Forms of range</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03_additions_for.html">3c. Additions: More About for Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03_review.html">3d. Review: Functions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap04.html">4. Functions and Interfaces</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap04_review.html">4b. Review: Functions and Interfaces</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap05.html">5. Conditionals and Recursion</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap05_review.html">5b. Review: Conditionals and Recursion</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap06.html">6. Return Values</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap06_review.html">6b. Review: Return Values</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap07.html">7. Iteration and Search</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap07_additions_data.html">7b. Additions: How a Computer Stores Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07_additions.html">7c. Additions: File Paths and for Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07_review.html">7d. Review: Iteration and Search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07_more_review.html">7e. Review: Loops with Decisions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap08.html">8. Strings and Regular Expressions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap08_additions.html">8b. Additions: String Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08_review.html">8c. Review: Strings and Regular Expressions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap09.html">9. Lists</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap09_additions_iterables.html">9b. Additions: Iterables, and Changing a List in a Loop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_additions.html">9c. Additions: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_review.html">9d. Review: Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_more_review.html">9e. Review: Sentences, Nested Loops and Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_palindromes.html">9f. Review: Palindromes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_practice.html">9g. Review: Practice Programs</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap10.html">10. Dictionaries</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap10_additions.html">10b. Additions: More About Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10_review.html">10c. Review: Dictionaries</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap11.html">11. Tuples</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap11_additions.html">11b. Additions: While Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11_additions_debugger.html">11c. Additions: The Thonny Debugger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11_additions_tuples.html">11d. Additions: Tuples Are Immutable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11_review.html">11e. Review: Tuples</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">11f. Review: A Tic-Tac-Toe Game</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11_othello.html">11g. Review: An Othello Game</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap12.html">12. Text Analysis and Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap13.html">13. Files and Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap14.html">14. Classes and Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap15.html">15. Classes and Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap16.html">16. Classes and Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap17.html">17. Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap18.html">18. Python Extras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap19.html">19. Final thoughts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../blank.html">Blank Notebooks</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/y-rosenthal/yrThinkPython" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/yr/chap11_tictactoe.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>11f. Review: A Tic-Tac-Toe Game</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem">The problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-very-hard-write-a-tic-tac-toe-game">Question 1 (very hard): write a tic-tac-toe game</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#developing-the-program-step-by-step">Developing the program step by step</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-the-board">Step 1: the board</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-from-the-number-of-a-square-to-a-row-and-a-column">Step 2: from the number of a square to a row and a column</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-a-first-game-function-the-user-makes-moves">Step 3: a first game function: the user makes moves</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-check-the-users-square">Step 4: check the user’s square</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-the-computers-move">Step 5: the computer’s move</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-who-won">Step 6: who won?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-7-the-game-loop">Step 7: the game loop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-8-the-user-chooses-x-or-o">Step 8: the user chooses x or o</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-9-the-menu">Step 9: the menu</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-10-the-whole-program">Step 10: the whole program</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#credits">Credits</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="f-review-a-tic-tac-toe-game">
+<h1>11f. Review: A Tic-Tac-Toe Game<a class="headerlink" href="#f-review-a-tic-tac-toe-game" title="Link to this heading">#</a></h1>
+<p>A review of Chapters 1 to 11 (with “11b. Additions: While Loops”): <strong>one project</strong>, a tic-tac-toe game
+that a person plays against the computer. The first part of the page gives the problem and an example of a
+person playing. The second part shows, one small step at a time, how a programmer can think while they write
+such a program. Try to write the program yourself first.</p>
+<p><a class="reference external" href="https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap11_tictactoe.ipynb">Run this page on Colab</a></p>
+<p>Run the setup cell below first. It downloads <code class="docutils literal notranslate"><span class="pre">thinkpython.py</span></code>, the helper module the chapters use.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlretrieve</span>
+
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Downloaded "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">local</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">filename</span>
+
+<span class="n">download</span><span class="p">(</span><span class="s1">'https://github.com/AllenDowney/ThinkPython/raw/v3/thinkpython.py'</span><span class="p">);</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">thinkpython</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="the-problem">
+<h2>The problem<a class="headerlink" href="#the-problem" title="Link to this heading">#</a></h2>
+<section id="question-1-very-hard-write-a-tic-tac-toe-game">
+<h3>Question 1 (very hard): write a tic-tac-toe game<a class="headerlink" href="#question-1-very-hard-write-a-tic-tac-toe-game" title="Link to this heading">#</a></h3>
+<p><strong>The game.</strong> Tic-tac-toe is played on a board of 3 rows and 3 columns: 9 squares. One player is <code class="docutils literal notranslate"><span class="pre">x</span></code> and the
+other player is <code class="docutils literal notranslate"><span class="pre">o</span></code>; <code class="docutils literal notranslate"><span class="pre">x</span></code> goes first. The players take turns. In each turn, a player puts their letter in an
+empty square. The first player with 3 of their letters in a line wins: a row, a column or a diagonal. If all
+9 squares are full and no one has 3 in a line, the game is a tie.</p>
+<p><strong>Write a program in which a person plays tic-tac-toe against the computer.</strong> The program must do these things:</p>
+<ol class="arabic">
+<li><p>Show a menu with two choices, <code class="docutils literal notranslate"><span class="pre">1.</span> <span class="pre">play</span> <span class="pre">tic</span> <span class="pre">tac</span> <span class="pre">toe</span></code> and <code class="docutils literal notranslate"><span class="pre">2.</span> <span class="pre">quit</span></code>, and ask for the choice. After each game,
+show the menu again. Choice <code class="docutils literal notranslate"><span class="pre">2</span></code> ends the program.</p></li>
+<li><p>At the start of a game, ask the user if they want to be <code class="docutils literal notranslate"><span class="pre">&quot;x&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;o&quot;</span></code>, until they type <code class="docutils literal notranslate"><span class="pre">x</span></code> or <code class="docutils literal notranslate"><span class="pre">o</span></code>. The
+computer gets the other letter. If the computer is <code class="docutils literal notranslate"><span class="pre">x</span></code>, it moves first.</p></li>
+<li><p>Show the board as 3 rows. A free square shows its number, <code class="docutils literal notranslate"><span class="pre">1</span></code> to <code class="docutils literal notranslate"><span class="pre">9</span></code>; a used square shows its letter:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>['1', '2', '3']
+['4', '5', '6']
+['7', '8', '9']
+</pre></div>
+</div>
+</li>
+<li><p>Ask the user for the number of a square. If the number is not 1 to 9, or the square is not free, ask again.</p></li>
+<li><p>The computer picks a free square at random (the <code class="docutils literal notranslate"><span class="pre">random</span></code> module: <code class="docutils literal notranslate"><span class="pre">random.randint(1,</span> <span class="pre">9)</span></code> gives a random
+whole number from 1 to 9).</p></li>
+<li><p>Show the board after each round. When a player wins, display <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">won.</span></code> or <code class="docutils literal notranslate"><span class="pre">o</span> <span class="pre">won.</span></code>; when the board is full
+with no winner, display <code class="docutils literal notranslate"><span class="pre">tie</span> <span class="pre">game</span></code>.</p></li>
+</ol>
+<p><strong>An example.</strong> Here a user plays two games and then quits. The text after each prompt (<code class="docutils literal notranslate"><span class="pre">choice:</span> <span class="pre">1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">choose</span> <span class="pre">position:</span> <span class="pre">5</span></code>, …) is what the user typed. In the first game, the user types <code class="docutils literal notranslate"><span class="pre">y</span></code> (not a letter of the
+game), <code class="docutils literal notranslate"><span class="pre">10</span></code> (not a square), and <code class="docutils literal notranslate"><span class="pre">1</span></code> (a square that the computer took): the program asks again each time.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>1. play tic tac toe
+2. quit
+choice: 1
+
+Would you like to be "x" or "o" ? y
+I said "x" or "o", choose: x
+['1', '2', '3']
+['4', '5', '6']
+['7', '8', '9']
+
+choose position: 5
+
+['o', '2', '3']
+['4', 'x', '6']
+['7', '8', '9']
+
+choose position: 10
+invalid, choose again: 1
+invalid, choose again: 9
+
+['o', 'o', '3']
+['4', 'x', '6']
+['7', '8', 'x']
+
+choose position: 3
+
+['o', 'o', 'x']
+['4', 'x', 'o']
+['7', '8', 'x']
+
+choose position: 7
+
+['o', 'o', 'x']
+['4', 'x', 'o']
+['x', '8', 'x']
+
+x won.
+
+1. play tic tac toe
+2. quit
+choice: 1
+
+Would you like to be "x" or "o" ? o
+['1', '2', 'x']
+['4', '5', '6']
+['7', '8', '9']
+
+choose position: 2
+
+['1', 'o', 'x']
+['4', 'x', '6']
+['7', '8', '9']
+
+choose position: 7
+
+['1', 'o', 'x']
+['x', 'x', '6']
+['o', '8', '9']
+
+choose position: 6
+
+['x', 'o', 'x']
+['x', 'x', 'o']
+['o', '8', '9']
+
+choose position: 9
+
+['x', 'o', 'x']
+['x', 'x', 'o']
+['o', 'x', 'o']
+
+tie game
+
+1. play tic tac toe
+2. quit
+choice: 2
+</pre></div>
+</div>
+<p><strong>What you need:</strong> lists, and lists of lists (Chapter 9); <code class="docutils literal notranslate"><span class="pre">while</span></code> loops (11b); <code class="docutils literal notranslate"><span class="pre">input</span></code> and <code class="docutils literal notranslate"><span class="pre">int</span></code> (11b);
+<code class="docutils literal notranslate"><span class="pre">if</span></code> statements (Chapter 5); functions that take arguments and return values (Chapters 3 and 6); <code class="docutils literal notranslate"><span class="pre">break</span></code>
+(Chapter 8); <code class="docutils literal notranslate"><span class="pre">//</span></code> and <code class="docutils literal notranslate"><span class="pre">%</span></code> (Chapter 2); the <code class="docutils literal notranslate"><span class="pre">random</span></code> module (11b).</p>
+<p>Write the program in the cell below (or in Thonny: “Another Note From Prof. Rosenthal: Using Thonny”). Try it
+before you read the next part. If you get stuck, read the next part one step at a time, and stop after each
+step to continue on your own. The next part is also the answer.</p>
+</section>
+</section>
+<section id="developing-the-program-step-by-step">
+<h2>Developing the program step by step<a class="headerlink" href="#developing-the-program-step-by-step" title="Link to this heading">#</a></h2>
+<p>A beginner often tries to write the whole program at once, and then gets many errors at the same time.
+Programmers do not work like that. They write a small piece, run it, check that it works, and only then write
+the next piece. This part shows that way of working.</p>
+<ul class="simple">
+<li><p>The <strong>Thoughts …</strong> boxes show what a programmer thinks while they write the code: the questions they ask
+themselves, and why they choose one way and not another.</p></li>
+<li><p>The <strong>Stop and check</strong> paragraphs are places where you stop: run the code, look at what it displays, and
+make sure that you understand it before you go on.</p></li>
+<li><p>The <strong>Thinking … refactor</strong> boxes show a step in which the code does not get new features, but gets
+clearer.</p></li>
+</ul>
+<p>Run the cells of this part in order: a later cell uses the functions of the cells before it. In Colab, the
+cells that play a game wait for you to type the replies. On the website, each of these cells shows a game with
+replies that a pretend user typed.</p>
+<section id="step-1-the-board">
+<h3>Step 1: the board<a class="headerlink" href="#step-1-the-board" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Thoughts …</strong></p>
+<p>What does the program need to remember? The 9 squares. The board has 3 rows of 3 squares, so I can store it
+as a <strong>list of 3 lists</strong>: one list for each row. <code class="docutils literal notranslate"><span class="pre">board[1]</span></code> is the second row, and <code class="docutils literal notranslate"><span class="pre">board[1][2]</span></code> is the third
+square in the second row.</p>
+<p>What is in a square? At the start, I put the <strong>number</strong> of each square in it, as a string: <code class="docutils literal notranslate"><span class="pre">'1'</span></code> to <code class="docutils literal notranslate"><span class="pre">'9'</span></code>. Then
+the user sees the numbers to type. When a player takes a square, the number changes to their letter, <code class="docutils literal notranslate"><span class="pre">'x'</span></code> or
+<code class="docutils literal notranslate"><span class="pre">'o'</span></code>. Every item is a string, so the board is easy to display.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">board</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">'1'</span><span class="p">,</span><span class="s1">'2'</span><span class="p">,</span><span class="s1">'3'</span><span class="p">],</span>
+          <span class="p">[</span><span class="s1">'4'</span><span class="p">,</span><span class="s1">'5'</span><span class="p">,</span><span class="s1">'6'</span><span class="p">],</span>
+          <span class="p">[</span><span class="s1">'7'</span><span class="p">,</span><span class="s1">'8'</span><span class="p">,</span><span class="s1">'9'</span><span class="p">]</span>  <span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
+['4', '5', '6']
+6
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Stop and check.</strong> <code class="docutils literal notranslate"><span class="pre">board[1]</span></code> is the second row, <code class="docutils literal notranslate"><span class="pre">['4',</span> <span class="pre">'5',</span> <span class="pre">'6']</span></code>, because indexes start at 0. <code class="docutils literal notranslate"><span class="pre">board[1][2]</span></code> is <code class="docutils literal notranslate"><span class="pre">'6'</span></code>.</p>
+<blockquote>
+<div><p><strong>Thoughts …</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">print(board)</span></code> shows the whole board on one line. That is hard to read. I want one row on each line, and an
+empty line after the board. I will need to show the board many times, so I write a <strong>function</strong> for it. I
+call its parameter <code class="docutils literal notranslate"><span class="pre">b</span></code> (for “board”).</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">print_board</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">b</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">board</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">'1'</span><span class="p">,</span><span class="s1">'2'</span><span class="p">,</span><span class="s1">'3'</span><span class="p">],</span>
+          <span class="p">[</span><span class="s1">'4'</span><span class="p">,</span><span class="s1">'5'</span><span class="p">,</span><span class="s1">'6'</span><span class="p">],</span>
+          <span class="p">[</span><span class="s1">'7'</span><span class="p">,</span><span class="s1">'8'</span><span class="p">,</span><span class="s1">'9'</span><span class="p">]</span>  <span class="p">]</span>
+<span class="n">print_board</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['1', '2', '3']
+['4', '5', '6']
+['7', '8', '9']
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Stop and check.</strong> The board shows 3 rows, and an empty line after them.</p>
+</section>
+<section id="step-2-from-the-number-of-a-square-to-a-row-and-a-column">
+<h3>Step 2: from the number of a square to a row and a column<a class="headerlink" href="#step-2-from-the-number-of-a-square-to-a-row-and-a-column" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Thoughts …</strong></p>
+<p>The user types a number from 1 to 9. To change the board, I need the <strong>row</strong> and the <strong>column</strong> of that
+square, as indexes from 0 to 2. Let me write them down:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Square</p></th>
+<th class="head"><p>1</p></th>
+<th class="head"><p>2</p></th>
+<th class="head"><p>3</p></th>
+<th class="head"><p>4</p></th>
+<th class="head"><p>5</p></th>
+<th class="head"><p>6</p></th>
+<th class="head"><p>7</p></th>
+<th class="head"><p>8</p></th>
+<th class="head"><p>9</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Row</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>Column</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>If I subtract 1 from the square, I get 0 to 8. Then the row is that number <code class="docutils literal notranslate"><span class="pre">//</span> <span class="pre">3</span></code> (every 3 squares, the row
+goes up by 1), and the column is that number <code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">3</span></code> (the remainder: 0, 1, 2, 0, 1, 2, …). I do not trust
+myself: I check the formulas with a loop before I use them.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="n">row_number</span> <span class="o">=</span> <span class="p">(</span><span class="n">position</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">3</span>
+    <span class="n">col_number</span> <span class="o">=</span> <span class="p">(</span><span class="n">position</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">3</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">row_number</span><span class="p">,</span> <span class="n">col_number</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 0 0
+2 0 1
+3 0 2
+4 1 0
+5 1 1
+6 1 2
+7 2 0
+8 2 1
+9 2 2
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Stop and check.</strong> Compare each line with the table. Then put an <code class="docutils literal notranslate"><span class="pre">'x'</span></code> in square 6:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">board</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">'1'</span><span class="p">,</span><span class="s1">'2'</span><span class="p">,</span><span class="s1">'3'</span><span class="p">],</span>
+          <span class="p">[</span><span class="s1">'4'</span><span class="p">,</span><span class="s1">'5'</span><span class="p">,</span><span class="s1">'6'</span><span class="p">],</span>
+          <span class="p">[</span><span class="s1">'7'</span><span class="p">,</span><span class="s1">'8'</span><span class="p">,</span><span class="s1">'9'</span><span class="p">]</span>  <span class="p">]</span>
+<span class="n">position</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">row_number</span> <span class="o">=</span> <span class="p">(</span><span class="n">position</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">3</span>
+<span class="n">col_number</span> <span class="o">=</span> <span class="p">(</span><span class="n">position</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">3</span>
+<span class="n">board</span><span class="p">[</span><span class="n">row_number</span><span class="p">][</span><span class="n">col_number</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'x'</span>
+<span class="n">print_board</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['1', '2', '3']
+['4', '5', 'x']
+['7', '8', '9']
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-a-first-game-function-the-user-makes-moves">
+<h3>Step 3: a first game function: the user makes moves<a class="headerlink" href="#step-3-a-first-game-function-the-user-makes-moves" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Thoughts …</strong></p>
+<p>Now I start the function for one game. I call it <code class="docutils literal notranslate"><span class="pre">ttt</span></code> (for “tic-tac-toe”). I do <strong>not</strong> write the whole game.
+I start with a small part that I can test: the user types a square 3 times, and the program puts an <code class="docutils literal notranslate"><span class="pre">x</span></code> there
+and shows the board. No computer, no winner yet. The <code class="docutils literal notranslate"><span class="pre">for</span></code> loop with <code class="docutils literal notranslate"><span class="pre">range(3)</span></code> is only for this test.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ttt</span><span class="p">():</span>
+    <span class="n">board</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">'1'</span><span class="p">,</span><span class="s1">'2'</span><span class="p">,</span><span class="s1">'3'</span><span class="p">],</span>
+              <span class="p">[</span><span class="s1">'4'</span><span class="p">,</span><span class="s1">'5'</span><span class="p">,</span><span class="s1">'6'</span><span class="p">],</span>
+              <span class="p">[</span><span class="s1">'7'</span><span class="p">,</span><span class="s1">'8'</span><span class="p">,</span><span class="s1">'9'</span><span class="p">]</span>  <span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">turn</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">users_position</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">'choose position: '</span><span class="p">))</span>
+        <span class="n">row_number</span> <span class="o">=</span> <span class="p">(</span><span class="n">users_position</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">3</span>
+        <span class="n">col_number</span> <span class="o">=</span> <span class="p">(</span><span class="n">users_position</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">3</span>
+        <span class="n">board</span><span class="p">[</span><span class="n">row_number</span><span class="p">][</span><span class="n">col_number</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'x'</span>
+        <span class="n">print_board</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ttt</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>choose position: 5
+['1', '2', '3']
+['4', 'x', '6']
+['7', '8', '9']
+
+choose position: 1
+['x', '2', '3']
+['4', 'x', '6']
+['7', '8', '9']
+
+choose position: 9
+['x', '2', '3']
+['4', 'x', '6']
+['7', '8', 'x']
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Stop and check.</strong> Run <code class="docutils literal notranslate"><span class="pre">ttt()</span></code> and type 3 squares. Then try a square that already has an <code class="docutils literal notranslate"><span class="pre">x</span></code>. What happens? And <code class="docutils literal notranslate"><span class="pre">10</span></code>?</p>
+<blockquote>
+<div><p><strong>Thoughts …</strong></p>
+<p>Two problems. If I type a square that is already taken, the program writes over it. If I type <code class="docutils literal notranslate"><span class="pre">10</span></code>, the row is
+<code class="docutils literal notranslate"><span class="pre">9</span> <span class="pre">//</span> <span class="pre">3</span></code>, which is 3, and <code class="docutils literal notranslate"><span class="pre">board[3]</span></code> raises an <code class="docutils literal notranslate"><span class="pre">IndexError</span></code>. The program must check the number, and ask again
+while the number is wrong. “While the number is wrong” sounds like a <code class="docutils literal notranslate"><span class="pre">while</span></code> loop.</p>
+<p>How do I know that a square is taken? I could look at the board: a taken square has a letter, not a number. I
+choose another way: I keep a list of the squares that were chosen, <code class="docutils literal notranslate"><span class="pre">chosen_positions</span></code>, and append each new
+square to it. Then <code class="docutils literal notranslate"><span class="pre">users_position</span> <span class="pre">in</span> <span class="pre">chosen_positions</span></code> tells me if a square is taken.</p>
+</div></blockquote>
+</section>
+<section id="step-4-check-the-users-square">
+<h3>Step 4: check the user’s square<a class="headerlink" href="#step-4-check-the-users-square" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ttt</span><span class="p">():</span>
+    <span class="n">board</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">'1'</span><span class="p">,</span><span class="s1">'2'</span><span class="p">,</span><span class="s1">'3'</span><span class="p">],</span>
+              <span class="p">[</span><span class="s1">'4'</span><span class="p">,</span><span class="s1">'5'</span><span class="p">,</span><span class="s1">'6'</span><span class="p">],</span>
+              <span class="p">[</span><span class="s1">'7'</span><span class="p">,</span><span class="s1">'8'</span><span class="p">,</span><span class="s1">'9'</span><span class="p">]</span>  <span class="p">]</span>
+    <span class="n">chosen_positions</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">turn</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">users_position</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">'choose position: '</span><span class="p">))</span>
+        <span class="k">while</span> <span class="n">users_position</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">users_position</span> <span class="o">&gt;</span> <span class="mi">9</span> <span class="ow">or</span> <span class="n">users_position</span> <span class="ow">in</span> <span class="n">chosen_positions</span><span class="p">:</span>
+            <span class="n">users_position</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">'invalid, choose again: '</span><span class="p">))</span>
+        <span class="n">row_number</span> <span class="o">=</span> <span class="p">(</span><span class="n">users_position</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">3</span>
+        <span class="n">col_number</span> <span class="o">=</span> <span class="p">(</span><span class="n">users_position</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">3</span>
+        <span class="n">board</span><span class="p">[</span><span class="n">row_number</span><span class="p">][</span><span class="n">col_number</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'x'</span>
+        <span class="n">chosen_positions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">users_position</span><span class="p">)</span>
+        <span class="n">print_board</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ttt</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>choose position: 5
+['1', '2', '3']
+['4', 'x', '6']
+['7', '8', '9']
+
+choose position: 10
+invalid, choose again: 5
+invalid, choose again: 1
+['x', '2', '3']
+['4', 'x', '6']
+['7', '8', '9']
+
+choose position: 9
+['x', '2', '3']
+['4', 'x', '6']
+['7', '8', 'x']
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Stop and check.</strong> Type <code class="docutils literal notranslate"><span class="pre">10</span></code>, and a square that you took before: the program asks again. The condition of the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop is
+true when the number is too small, too big, or already chosen.</p>
+</section>
+<section id="step-5-the-computers-move">
+<h3>Step 5: the computer’s move<a class="headerlink" href="#step-5-the-computers-move" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Thoughts …</strong></p>
+<p>The computer picks a random square: <code class="docutils literal notranslate"><span class="pre">random.randint(1,9)</span></code>. But the square may be taken. That is the same
+problem as in Step 4: while the square is taken, pick again. Then I put an <code class="docutils literal notranslate"><span class="pre">o</span></code> in it, and append it to
+<code class="docutils literal notranslate"><span class="pre">chosen_positions</span></code>. I add this to <code class="docutils literal notranslate"><span class="pre">ttt</span></code> after the user’s move.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ttt</span><span class="p">():</span>
+    <span class="n">board</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">'1'</span><span class="p">,</span><span class="s1">'2'</span><span class="p">,</span><span class="s1">'3'</span><span class="p">],</span>
+              <span class="p">[</span><span class="s1">'4'</span><span class="p">,</span><span class="s1">'5'</span><span class="p">,</span><span class="s1">'6'</span><span class="p">],</span>
+              <span class="p">[</span><span class="s1">'7'</span><span class="p">,</span><span class="s1">'8'</span><span class="p">,</span><span class="s1">'9'</span><span class="p">]</span>  <span class="p">]</span>
+    <span class="n">chosen_positions</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">turn</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="c1"># the user's move</span>
+        <span class="n">users_position</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">'choose position: '</span><span class="p">))</span>
+        <span class="k">while</span> <span class="n">users_position</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">users_position</span> <span class="o">&gt;</span> <span class="mi">9</span> <span class="ow">or</span> <span class="n">users_position</span> <span class="ow">in</span> <span class="n">chosen_positions</span><span class="p">:</span>
+            <span class="n">users_position</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">'invalid, choose again: '</span><span class="p">))</span>
+        <span class="n">row_number</span> <span class="o">=</span> <span class="p">(</span><span class="n">users_position</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">3</span>
+        <span class="n">col_number</span> <span class="o">=</span> <span class="p">(</span><span class="n">users_position</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">3</span>
+        <span class="n">board</span><span class="p">[</span><span class="n">row_number</span><span class="p">][</span><span class="n">col_number</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'x'</span>
+        <span class="n">chosen_positions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">users_position</span><span class="p">)</span>
+
+        <span class="c1"># the computer's move</span>
+        <span class="n">computers_position</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">computers_position</span> <span class="ow">in</span> <span class="n">chosen_positions</span><span class="p">:</span>
+            <span class="n">computers_position</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+        <span class="n">row_number</span> <span class="o">=</span> <span class="p">(</span><span class="n">computers_position</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">3</span>
+        <span class="n">col_number</span> <span class="o">=</span> <span class="p">(</span><span class="n">computers_position</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">3</span>
+        <span class="n">board</span><span class="p">[</span><span class="n">row_number</span><span class="p">][</span><span class="n">col_number</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'o'</span>
+        <span class="n">chosen_positions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">computers_position</span><span class="p">)</span>
+
+        <span class="n">print_board</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ttt</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>choose position: 5
+['1', '2', '3']
+['4', 'x', 'o']
+['7', '8', '9']
+
+choose position: 1
+['x', '2', '3']
+['4', 'x', 'o']
+['7', '8', 'o']
+
+choose position: 3
+['x', '2', 'x']
+['4', 'x', 'o']
+['7', 'o', 'o']
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Stop and check.</strong> Play a few times. The computer never takes a square that is already taken.</p>
+<blockquote>
+<div><p><strong>Thinking … refactor</strong></p>
+<p>It works, but <code class="docutils literal notranslate"><span class="pre">ttt</span></code> is getting long, and two parts of it are almost the same: the 4 lines that put a letter
+on the board (the row, the column, the assignment, and <code class="docutils literal notranslate"><span class="pre">append</span></code>). The only differences are the letter and
+the square. If I find a mistake in these lines later, I must correct it in two places, and I can forget one.</p>
+<p>This is the time to <strong>refactor</strong>. To <strong>refactor</strong> code means to change how the code is written, without
+changing what it does: the same input gives the same output. The goal is code that is easier to read, to
+test and to change. Here, I move the 4 lines into a function, <code class="docutils literal notranslate"><span class="pre">assign_position</span></code>, with parameters for what is
+different: the board, the letter, the square, and the list of chosen squares.</p>
+<p>The function changes the board and the list that it gets. That works because lists are <strong>mutable</strong>: the
+parameter <code class="docutils literal notranslate"><span class="pre">b</span></code> and the variable <code class="docutils literal notranslate"><span class="pre">board</span></code> refer to the same list, so a change through <code class="docutils literal notranslate"><span class="pre">b</span></code> is a change of <code class="docutils literal notranslate"><span class="pre">board</span></code>
+(“9b. Additions: Iterables, and Changing a List in a Loop”, “Lists are mutable”).</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">assign_position</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">letter</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">chosen</span><span class="p">):</span>
+        <span class="n">row_number</span> <span class="o">=</span> <span class="p">(</span><span class="n">position</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">3</span>
+        <span class="n">col_number</span> <span class="o">=</span> <span class="p">(</span><span class="n">position</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">3</span>
+        <span class="n">b</span><span class="p">[</span><span class="n">row_number</span><span class="p">][</span><span class="n">col_number</span><span class="p">]</span> <span class="o">=</span> <span class="n">letter</span>
+        <span class="n">chosen</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ttt</span><span class="p">():</span>
+    <span class="n">board</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">'1'</span><span class="p">,</span><span class="s1">'2'</span><span class="p">,</span><span class="s1">'3'</span><span class="p">],</span>
+              <span class="p">[</span><span class="s1">'4'</span><span class="p">,</span><span class="s1">'5'</span><span class="p">,</span><span class="s1">'6'</span><span class="p">],</span>
+              <span class="p">[</span><span class="s1">'7'</span><span class="p">,</span><span class="s1">'8'</span><span class="p">,</span><span class="s1">'9'</span><span class="p">]</span>  <span class="p">]</span>
+    <span class="n">chosen_positions</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">turn</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="c1"># the user's move</span>
+        <span class="n">users_position</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">'choose position: '</span><span class="p">))</span>
+        <span class="k">while</span> <span class="n">users_position</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">users_position</span> <span class="o">&gt;</span> <span class="mi">9</span> <span class="ow">or</span> <span class="n">users_position</span> <span class="ow">in</span> <span class="n">chosen_positions</span><span class="p">:</span>
+            <span class="n">users_position</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">'invalid, choose again: '</span><span class="p">))</span>
+        <span class="n">assign_position</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="s1">'x'</span><span class="p">,</span> <span class="n">users_position</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">)</span>
+
+        <span class="c1"># the computer's move</span>
+        <span class="n">computers_position</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">computers_position</span> <span class="ow">in</span> <span class="n">chosen_positions</span><span class="p">:</span>
+            <span class="n">computers_position</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+        <span class="n">assign_position</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="s1">'o'</span><span class="p">,</span> <span class="n">computers_position</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">)</span>
+
+        <span class="n">print_board</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ttt</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>choose position: 5
+['1', '2', '3']
+['4', 'x', 'o']
+['7', '8', '9']
+
+choose position: 1
+['x', '2', '3']
+['4', 'x', 'o']
+['7', '8', 'o']
+
+choose position: 3
+['x', '2', 'x']
+['4', 'x', 'o']
+['7', 'o', 'o']
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Stop and check.</strong> A refactoring must not change what the program does. On the website, this game has the same replies and the
+same random numbers as the game before it, and the output is the same. Compare them.</p>
+<blockquote>
+<div><p><strong>Thinking … refactor</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">ttt</span></code> is still about two jobs at a time. The comments <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">the</span> <span class="pre">user's</span> <span class="pre">move</span></code> and <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">the</span> <span class="pre">computer's</span> <span class="pre">move</span></code> tell me
+where the functions are: each comment names a part that can be a function. I move each part into its own
+function, <code class="docutils literal notranslate"><span class="pre">user_pick_move</span></code> and <code class="docutils literal notranslate"><span class="pre">computer_pick_move</span></code>. Each takes the board, the list of chosen squares, and the
+letter of the player, so that the user can also play <code class="docutils literal notranslate"><span class="pre">o</span></code> later.</p>
+<p><code class="docutils literal notranslate"><span class="pre">computer_pick_move</span></code> also returns the square that it chose. This program does not use the value, but a later
+version could display it (“The computer took square 7”).</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">user_pick_move</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">chosen</span><span class="p">,</span> <span class="n">letter</span><span class="p">):</span>
+    <span class="n">users_position</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">'choose position: '</span><span class="p">))</span>
+    <span class="k">while</span> <span class="n">users_position</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">users_position</span> <span class="o">&gt;</span> <span class="mi">9</span> <span class="ow">or</span> <span class="n">users_position</span> <span class="ow">in</span> <span class="n">chosen</span><span class="p">:</span>
+        <span class="n">users_position</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">'invalid, choose again: '</span><span class="p">))</span>
+    <span class="n">assign_position</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">letter</span><span class="p">,</span> <span class="n">users_position</span><span class="p">,</span> <span class="n">chosen</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">computer_pick_move</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">chosen</span><span class="p">,</span> <span class="n">letter</span><span class="p">):</span>
+    <span class="n">computers_position</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">computers_position</span> <span class="ow">in</span> <span class="n">chosen</span><span class="p">:</span>
+         <span class="n">computers_position</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+
+    <span class="n">assign_position</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">letter</span><span class="p">,</span> <span class="n">computers_position</span><span class="p">,</span> <span class="n">chosen</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">computers_position</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ttt</span><span class="p">():</span>
+    <span class="n">board</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">'1'</span><span class="p">,</span><span class="s1">'2'</span><span class="p">,</span><span class="s1">'3'</span><span class="p">],</span>
+              <span class="p">[</span><span class="s1">'4'</span><span class="p">,</span><span class="s1">'5'</span><span class="p">,</span><span class="s1">'6'</span><span class="p">],</span>
+              <span class="p">[</span><span class="s1">'7'</span><span class="p">,</span><span class="s1">'8'</span><span class="p">,</span><span class="s1">'9'</span><span class="p">]</span>  <span class="p">]</span>
+    <span class="n">chosen_positions</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">turn</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">user_pick_move</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">,</span> <span class="s1">'x'</span><span class="p">)</span>
+        <span class="n">computer_pick_move</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">,</span> <span class="s1">'o'</span><span class="p">)</span>
+        <span class="n">print_board</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ttt</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>choose position: 5
+['1', '2', '3']
+['4', 'x', 'o']
+['7', '8', '9']
+
+choose position: 1
+['x', '2', '3']
+['4', 'x', 'o']
+['7', '8', 'o']
+
+choose position: 3
+['x', '2', 'x']
+['4', 'x', 'o']
+['7', 'o', 'o']
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Stop and check.</strong> The same game again, with the same output. Read <code class="docutils literal notranslate"><span class="pre">ttt</span></code> now: it reads almost like a description of a round of
+the game. That is what refactoring is for.</p>
+</section>
+<section id="step-6-who-won">
+<h3>Step 6: who won?<a class="headerlink" href="#step-6-who-won" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Thoughts …</strong></p>
+<p>The loop of <code class="docutils literal notranslate"><span class="pre">ttt</span></code> runs 3 times only because I needed a test. A real game goes on until someone wins or the
+board is full. So I need a function that looks at the board and tells me the state of the game. What should it
+return? Four answers are possible: <code class="docutils literal notranslate"><span class="pre">'x'</span></code> (x won), <code class="docutils literal notranslate"><span class="pre">'o'</span></code> (o won), <code class="docutils literal notranslate"><span class="pre">'tie'</span></code>, or <code class="docutils literal notranslate"><span class="pre">'no</span> <span class="pre">winner</span> <span class="pre">yet'</span></code>. I call it
+<code class="docutils literal notranslate"><span class="pre">winner</span></code>. It takes the board and the list of chosen squares.</p>
+<p>This function has many parts: rows, columns, two diagonals, and a tie. I will <strong>not</strong> write it all at once.
+I start with the rows only, and I test it with boards that I make by hand. I do not need to play a game to
+test it.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">winner</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">chosen</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'o'</span><span class="p">]:</span>
+        <span class="c1"># check rows</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">b</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="p">[</span><span class="n">letter</span><span class="p">,</span><span class="n">letter</span><span class="p">,</span><span class="n">letter</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="n">letter</span>
+
+    <span class="k">return</span> <span class="s1">'no winner yet'</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">row_win</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'x'</span><span class="p">],</span>
+            <span class="p">[</span><span class="s1">'4'</span><span class="p">,</span><span class="s1">'o'</span><span class="p">,</span><span class="s1">'6'</span><span class="p">],</span>
+            <span class="p">[</span><span class="s1">'o'</span><span class="p">,</span><span class="s1">'8'</span><span class="p">,</span><span class="s1">'9'</span><span class="p">]</span>  <span class="p">]</span>
+<span class="n">column_win</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">'o'</span><span class="p">,</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'3'</span><span class="p">],</span>
+               <span class="p">[</span><span class="s1">'o'</span><span class="p">,</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'6'</span><span class="p">],</span>
+               <span class="p">[</span><span class="s1">'7'</span><span class="p">,</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'9'</span><span class="p">]</span>  <span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">winner</span><span class="p">(</span><span class="n">row_win</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">winner</span><span class="p">(</span><span class="n">column_win</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x
+no winner yet
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Stop and check.</strong> The first board has <code class="docutils literal notranslate"><span class="pre">x</span></code> in the top row: <code class="docutils literal notranslate"><span class="pre">winner</span></code> returns <code class="docutils literal notranslate"><span class="pre">'x'</span></code>. The second board has <code class="docutils literal notranslate"><span class="pre">x</span></code> in the middle column,
+but <code class="docutils literal notranslate"><span class="pre">winner</span></code> does not check the columns yet, so it returns <code class="docutils literal notranslate"><span class="pre">'no</span> <span class="pre">winner</span> <span class="pre">yet'</span></code>. That is what I expect now.</p>
+<blockquote>
+<div><p><strong>Thoughts …</strong></p>
+<p>A row is easy: it is a list, and I compare it with <code class="docutils literal notranslate"><span class="pre">[letter,letter,letter]</span></code>. A column is not a list in the
+board. Column <code class="docutils literal notranslate"><span class="pre">column</span></code> has the squares <code class="docutils literal notranslate"><span class="pre">b[0][column]</span></code>, <code class="docutils literal notranslate"><span class="pre">b[1][column]</span></code> and <code class="docutils literal notranslate"><span class="pre">b[2][column]</span></code>. I go down the rows
+with a loop. As soon as one square is not the letter, the column is not a win, and I can stop looking at this
+column: <code class="docutils literal notranslate"><span class="pre">break</span></code> ends the inner loop (Chapter 8). If the loop gets to the last row (<code class="docutils literal notranslate"><span class="pre">row</span> <span class="pre">==</span> <span class="pre">len(b)</span> <span class="pre">-</span> <span class="pre">1</span></code>)
+without a <code class="docutils literal notranslate"><span class="pre">break</span></code>, every square of the column had the letter.</p>
+<p>Why <code class="docutils literal notranslate"><span class="pre">len(b)</span></code> and not <code class="docutils literal notranslate"><span class="pre">3</span></code>? It is the number of rows; <code class="docutils literal notranslate"><span class="pre">3</span></code> would also work. The diagonals work in the same way:
+one diagonal has the squares <code class="docutils literal notranslate"><span class="pre">b[0][0]</span></code>, <code class="docutils literal notranslate"><span class="pre">b[1][1]</span></code>, <code class="docutils literal notranslate"><span class="pre">b[2][2]</span></code>; the other has <code class="docutils literal notranslate"><span class="pre">b[0][2]</span></code>, <code class="docutils literal notranslate"><span class="pre">b[1][1]</span></code>, <code class="docutils literal notranslate"><span class="pre">b[2][0]</span></code>, so
+its column is <code class="docutils literal notranslate"><span class="pre">len(b)</span> <span class="pre">-</span> <span class="pre">1</span> <span class="pre">-</span> <span class="pre">row</span></code>.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">winner</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">chosen</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'o'</span><span class="p">]:</span>
+        <span class="c1"># check rows</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">b</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="p">[</span><span class="n">letter</span><span class="p">,</span><span class="n">letter</span><span class="p">,</span><span class="n">letter</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="n">letter</span>
+
+        <span class="c1"># check columns</span>
+        <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">b</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">column</span><span class="p">]</span> <span class="o">!=</span> <span class="n">letter</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">letter</span>
+
+    <span class="k">return</span> <span class="s1">'no winner yet'</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">column_win</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">'o'</span><span class="p">,</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'3'</span><span class="p">],</span>
+               <span class="p">[</span><span class="s1">'o'</span><span class="p">,</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'6'</span><span class="p">],</span>
+               <span class="p">[</span><span class="s1">'7'</span><span class="p">,</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'9'</span><span class="p">]</span>  <span class="p">]</span>
+<span class="n">diagonal_win</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">'o'</span><span class="p">,</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'x'</span><span class="p">],</span>
+                 <span class="p">[</span><span class="s1">'4'</span><span class="p">,</span><span class="s1">'o'</span><span class="p">,</span><span class="s1">'6'</span><span class="p">],</span>
+                 <span class="p">[</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'8'</span><span class="p">,</span><span class="s1">'o'</span><span class="p">]</span>  <span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">winner</span><span class="p">(</span><span class="n">column_win</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">winner</span><span class="p">(</span><span class="n">diagonal_win</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x
+no winner yet
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Stop and check.</strong> The column board now gives <code class="docutils literal notranslate"><span class="pre">'x'</span></code>. The diagonal board gives <code class="docutils literal notranslate"><span class="pre">'no</span> <span class="pre">winner</span> <span class="pre">yet'</span></code>, because the diagonals come next.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">winner</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">chosen</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'o'</span><span class="p">]:</span>
+        <span class="c1"># check rows</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">b</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="p">[</span><span class="n">letter</span><span class="p">,</span><span class="n">letter</span><span class="p">,</span><span class="n">letter</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="n">letter</span>
+
+        <span class="c1"># check columns</span>
+        <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">b</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">column</span><span class="p">]</span> <span class="o">!=</span> <span class="n">letter</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">letter</span>
+
+        <span class="c1"># check upper left to lower right diagonal</span>
+        <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+            <span class="k">if</span> <span class="n">b</span><span class="p">[</span><span class="n">column</span><span class="p">][</span><span class="n">column</span><span class="p">]</span> <span class="o">!=</span> <span class="n">letter</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">column</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">letter</span>
+
+        <span class="c1"># check upper right to lower left diagonal</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">b</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">row</span><span class="p">]</span> <span class="o">!=</span> <span class="n">letter</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">letter</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chosen</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">return</span> <span class="s1">'tie'</span>
+
+    <span class="k">return</span> <span class="s1">'no winner yet'</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">diagonal_win</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">'o'</span><span class="p">,</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'x'</span><span class="p">],</span>
+                 <span class="p">[</span><span class="s1">'4'</span><span class="p">,</span><span class="s1">'o'</span><span class="p">,</span><span class="s1">'6'</span><span class="p">],</span>
+                 <span class="p">[</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'8'</span><span class="p">,</span><span class="s1">'o'</span><span class="p">]</span>  <span class="p">]</span>
+<span class="n">other_diagonal</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">'o'</span><span class="p">,</span><span class="s1">'o'</span><span class="p">,</span><span class="s1">'x'</span><span class="p">],</span>
+                   <span class="p">[</span><span class="s1">'4'</span><span class="p">,</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'6'</span><span class="p">],</span>
+                   <span class="p">[</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'8'</span><span class="p">,</span><span class="s1">'9'</span><span class="p">]</span>  <span class="p">]</span>
+<span class="n">full_board</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'o'</span><span class="p">,</span><span class="s1">'x'</span><span class="p">],</span>
+               <span class="p">[</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'o'</span><span class="p">,</span><span class="s1">'o'</span><span class="p">],</span>
+               <span class="p">[</span><span class="s1">'o'</span><span class="p">,</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'x'</span><span class="p">]</span>  <span class="p">]</span>
+<span class="n">not_finished</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'2'</span><span class="p">,</span><span class="s1">'3'</span><span class="p">],</span>
+                 <span class="p">[</span><span class="s1">'4'</span><span class="p">,</span><span class="s1">'o'</span><span class="p">,</span><span class="s1">'6'</span><span class="p">],</span>
+                 <span class="p">[</span><span class="s1">'7'</span><span class="p">,</span><span class="s1">'8'</span><span class="p">,</span><span class="s1">'9'</span><span class="p">]</span>  <span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">winner</span><span class="p">(</span><span class="n">diagonal_win</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">winner</span><span class="p">(</span><span class="n">other_diagonal</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">winner</span><span class="p">(</span><span class="n">full_board</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">winner</span><span class="p">(</span><span class="n">not_finished</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>o
+x
+tie
+no winner yet
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Stop and check.</strong> The four boards give <code class="docutils literal notranslate"><span class="pre">'o'</span></code>, <code class="docutils literal notranslate"><span class="pre">'x'</span></code>, <code class="docutils literal notranslate"><span class="pre">'tie'</span></code> and <code class="docutils literal notranslate"><span class="pre">'no</span> <span class="pre">winner</span> <span class="pre">yet'</span></code>. This is the final <code class="docutils literal notranslate"><span class="pre">winner</span></code>: it also
+checks the two diagonals, and it returns <code class="docutils literal notranslate"><span class="pre">'tie'</span></code> when all 9 squares are chosen.</p>
+<blockquote>
+<div><p><strong>Thoughts …</strong></p>
+<p>Why does the check for a tie come <strong>after</strong> the checks for a win? The last move of a game can fill the
+board <strong>and</strong> make 3 in a line. Then the game is a win, not a tie. If I checked for a full board first, I
+would report a tie by mistake. The order of the checks matters.</p>
+<p><code class="docutils literal notranslate"><span class="pre">winner</span></code> is long, but each part has a comment, and I tested each part on its own. I could refactor it into
+smaller functions (one for the rows, one for the columns, one for the diagonals). I keep it as one function
+with comments, because each part is short and the parts are tested.</p>
+</div></blockquote>
+</section>
+<section id="step-7-the-game-loop">
+<h3>Step 7: the game loop<a class="headerlink" href="#step-7-the-game-loop" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Thoughts …</strong></p>
+<p>Now <code class="docutils literal notranslate"><span class="pre">ttt</span></code> can repeat the rounds while <code class="docutils literal notranslate"><span class="pre">winner</span></code> returns <code class="docutils literal notranslate"><span class="pre">'no</span> <span class="pre">winner</span> <span class="pre">yet'</span></code>. One detail: after the user’s move,
+the game can be over (the user won, or filled the last square). Then the computer must not move. So I check
+<code class="docutils literal notranslate"><span class="pre">winner</span></code> again before the computer’s move. After the loop, I ask <code class="docutils literal notranslate"><span class="pre">winner</span></code> one more time, to display the
+result.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ttt</span><span class="p">():</span>
+    <span class="n">board</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">'1'</span><span class="p">,</span><span class="s1">'2'</span><span class="p">,</span><span class="s1">'3'</span><span class="p">],</span>
+              <span class="p">[</span><span class="s1">'4'</span><span class="p">,</span><span class="s1">'5'</span><span class="p">,</span><span class="s1">'6'</span><span class="p">],</span>
+              <span class="p">[</span><span class="s1">'7'</span><span class="p">,</span><span class="s1">'8'</span><span class="p">,</span><span class="s1">'9'</span><span class="p">]</span>  <span class="p">]</span>
+    <span class="n">chosen_positions</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">print_board</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="n">winner</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">)</span> <span class="o">==</span> <span class="s1">'no winner yet'</span><span class="p">:</span>
+        <span class="c1"># get the user's move</span>
+        <span class="n">user_pick_move</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">,</span> <span class="s1">'x'</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">winner</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">)</span> <span class="o">==</span> <span class="s1">'no winner yet'</span><span class="p">:</span>
+            <span class="c1"># computer picks a move</span>
+            <span class="n">computer_pick_move</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">,</span> <span class="s1">'o'</span><span class="p">)</span>
+
+        <span class="n">print_board</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+
+    <span class="n">who_won</span> <span class="o">=</span> <span class="n">winner</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">who_won</span> <span class="o">==</span> <span class="s1">'tie'</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'tie game'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">who_won</span><span class="p">,</span> <span class="s2">"won."</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ttt</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['1', '2', '3']
+['4', '5', '6']
+['7', '8', '9']
+
+choose position: 5
+
+['1', '2', '3']
+['4', 'x', 'o']
+['7', '8', '9']
+
+choose position: 1
+
+['x', '2', 'o']
+['4', 'x', 'o']
+['7', '8', '9']
+
+choose position: 9
+
+['x', '2', 'o']
+['4', 'x', 'o']
+['7', '8', 'x']
+
+x won.
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Stop and check.</strong> Play until the end several times: win, lose, and try to get a tie.</p>
+</section>
+<section id="step-8-the-user-chooses-x-or-o">
+<h3>Step 8: the user chooses x or o<a class="headerlink" href="#step-8-the-user-chooses-x-or-o" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Thoughts …</strong></p>
+<p>The user should choose the letter. I ask with <code class="docutils literal notranslate"><span class="pre">input</span></code>, and ask again while the reply is not <code class="docutils literal notranslate"><span class="pre">'x'</span></code> or
+<code class="docutils literal notranslate"><span class="pre">'o'</span></code> (the same pattern as Step 4: <code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">user_letter</span> <span class="pre">not</span> <span class="pre">in</span> <span class="pre">['x','o']</span></code>). The computer gets the other
+letter. And <code class="docutils literal notranslate"><span class="pre">x</span></code> goes first: if the computer is <code class="docutils literal notranslate"><span class="pre">x</span></code>, the computer moves once <strong>before</strong> the loop. After that,
+the rounds are the same as before: user, then computer. Now I pass the variables <code class="docutils literal notranslate"><span class="pre">user_letter</span></code> and
+<code class="docutils literal notranslate"><span class="pre">computer_letter</span></code> to the functions, not <code class="docutils literal notranslate"><span class="pre">'x'</span></code> and <code class="docutils literal notranslate"><span class="pre">'o'</span></code>: this is why the functions got a <code class="docutils literal notranslate"><span class="pre">letter</span></code> parameter in
+Step 5.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ttt</span><span class="p">():</span>
+    <span class="n">board</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">'1'</span><span class="p">,</span><span class="s1">'2'</span><span class="p">,</span><span class="s1">'3'</span><span class="p">],</span>
+              <span class="p">[</span><span class="s1">'4'</span><span class="p">,</span><span class="s1">'5'</span><span class="p">,</span><span class="s1">'6'</span><span class="p">],</span>
+              <span class="p">[</span><span class="s1">'7'</span><span class="p">,</span><span class="s1">'8'</span><span class="p">,</span><span class="s1">'9'</span><span class="p">]</span>  <span class="p">]</span>
+
+    <span class="n">chosen_positions</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># ask user to choose letter</span>
+    <span class="n">user_letter</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'Would you like to be "x" or "o" ? '</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">user_letter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'o'</span><span class="p">]:</span>
+        <span class="n">user_letter</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'I said "x" or "o", choose: '</span><span class="p">)</span>
+
+    <span class="c1"># computer is assigned the other letter</span>
+    <span class="k">if</span> <span class="n">user_letter</span> <span class="o">==</span> <span class="s1">'x'</span> <span class="p">:</span>
+        <span class="n">computer_letter</span> <span class="o">=</span> <span class="s1">'o'</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">computer_letter</span> <span class="o">=</span> <span class="s1">'x'</span>
+
+    <span class="c1"># If the computer is 'x' then the computer picks the first move</span>
+    <span class="k">if</span> <span class="n">computer_letter</span> <span class="o">==</span> <span class="s1">'x'</span><span class="p">:</span>
+        <span class="n">computer_pick_move</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">,</span> <span class="n">computer_letter</span><span class="p">)</span>
+
+    <span class="n">print_board</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="n">winner</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">)</span> <span class="o">==</span> <span class="s1">'no winner yet'</span><span class="p">:</span>
+        <span class="c1"># get the user's move</span>
+        <span class="n">user_pick_move</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">,</span> <span class="n">user_letter</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">winner</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">)</span> <span class="o">==</span> <span class="s1">'no winner yet'</span><span class="p">:</span>
+            <span class="c1"># computer picks a move</span>
+            <span class="n">computer_pick_move</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">,</span> <span class="n">computer_letter</span><span class="p">)</span>
+
+        <span class="n">print_board</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+
+    <span class="n">who_won</span> <span class="o">=</span> <span class="n">winner</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">who_won</span> <span class="o">==</span> <span class="s1">'tie'</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'tie game'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">who_won</span><span class="p">,</span> <span class="s2">"won."</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ttt</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Would you like to be "x" or "o" ? o
+['1', '2', '3']
+['4', '5', '6']
+['7', 'x', '9']
+
+choose position: 5
+
+['1', '2', '3']
+['4', 'o', '6']
+['7', 'x', 'x']
+
+choose position: 7
+
+['1', '2', '3']
+['x', 'o', '6']
+['o', 'x', 'x']
+
+choose position: 3
+
+['1', '2', 'o']
+['x', 'o', '6']
+['o', 'x', 'x']
+
+o won.
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Stop and check.</strong> Play once as <code class="docutils literal notranslate"><span class="pre">x</span></code> and once as <code class="docutils literal notranslate"><span class="pre">o</span></code>. As <code class="docutils literal notranslate"><span class="pre">o</span></code>, the computer’s <code class="docutils literal notranslate"><span class="pre">x</span></code> is on the board before your first move.</p>
+</section>
+<section id="step-9-the-menu">
+<h3>Step 9: the menu<a class="headerlink" href="#step-9-the-menu" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Thoughts …</strong></p>
+<p>The last part is the menu: play or quit. One function shows the menu and returns the choice:
+<code class="docutils literal notranslate"><span class="pre">displayInitialMenu</span></code>. (Python programmers usually write names with underscores, as <code class="docutils literal notranslate"><span class="pre">display_initial_menu</span></code>;
+this name is in the style of other languages. Both work.)</p>
+<p><code class="docutils literal notranslate"><span class="pre">main</span></code> repeats the games while the choice is not <code class="docutils literal notranslate"><span class="pre">2</span></code>. It is the same pattern as <code class="docutils literal notranslate"><span class="pre">add_numbers</span></code> in 11b: ask once
+<strong>before</strong> the loop, and again at the <strong>end</strong> of the body.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">displayInitialMenu</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'1. play tic tac toe'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'2. quit'</span><span class="p">)</span>
+    <span class="n">users_choice</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">'choice: '</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">users_choice</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">choice</span> <span class="o">=</span> <span class="n">displayInitialMenu</span><span class="p">()</span>
+
+    <span class="c1"># main loop to choose if the user wants to play or quit</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">choice</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">ttt</span><span class="p">()</span>
+        <span class="n">choice</span> <span class="o">=</span> <span class="n">displayInitialMenu</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1. play tic tac toe
+2. quit
+choice: 1
+
+Would you like to be "x" or "o" ? x
+['1', '2', '3']
+['4', '5', '6']
+['7', '8', '9']
+
+choose position: 5
+
+['1', '2', 'o']
+['4', 'x', '6']
+['7', '8', '9']
+
+choose position: 1
+
+['x', '2', 'o']
+['o', 'x', '6']
+['7', '8', '9']
+
+choose position: 9
+
+['x', '2', 'o']
+['o', 'x', '6']
+['7', '8', 'x']
+
+x won.
+
+1. play tic tac toe
+2. quit
+choice: 2
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Stop and check.</strong> Choose <code class="docutils literal notranslate"><span class="pre">1</span></code> to play a game, then <code class="docutils literal notranslate"><span class="pre">2</span></code> to quit.</p>
+</section>
+<section id="step-10-the-whole-program">
+<h3>Step 10: the whole program<a class="headerlink" href="#step-10-the-whole-program" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Thoughts …</strong></p>
+<p>The program is complete. This cell has the whole program, in the order of the file <code class="docutils literal notranslate"><span class="pre">tttGame.py</span></code>: the
+<code class="docutils literal notranslate"><span class="pre">import</span></code>, then each function. The last line, <code class="docutils literal notranslate"><span class="pre">main()</span></code>, starts the program: a file of functions does nothing
+until a line calls one of them. To run it in Thonny, copy the cell into a new file, save it as <code class="docutils literal notranslate"><span class="pre">ttt.py</span></code>, and
+press <strong>F5</strong>.</p>
+<p>On the website, this cell shows the game of “The problem” above: the same replies and the same random choices
+give the same output.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">displayInitialMenu</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'1. play tic tac toe'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'2. quit'</span><span class="p">)</span>
+    <span class="n">users_choice</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">'choice: '</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">users_choice</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">print_board</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">b</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">computer_pick_move</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">chosen</span><span class="p">,</span> <span class="n">letter</span><span class="p">):</span>
+    <span class="n">computers_position</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">computers_position</span> <span class="ow">in</span> <span class="n">chosen</span><span class="p">:</span>
+         <span class="n">computers_position</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+
+    <span class="n">assign_position</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">letter</span><span class="p">,</span> <span class="n">computers_position</span><span class="p">,</span> <span class="n">chosen</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">computers_position</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">user_pick_move</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">chosen</span><span class="p">,</span> <span class="n">letter</span><span class="p">):</span>
+    <span class="n">users_position</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">'choose position: '</span><span class="p">))</span>
+    <span class="k">while</span> <span class="n">users_position</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">users_position</span> <span class="o">&gt;</span> <span class="mi">9</span> <span class="ow">or</span> <span class="n">users_position</span> <span class="ow">in</span> <span class="n">chosen</span><span class="p">:</span>
+        <span class="n">users_position</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">'invalid, choose again: '</span><span class="p">))</span>
+    <span class="n">assign_position</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">letter</span><span class="p">,</span> <span class="n">users_position</span><span class="p">,</span> <span class="n">chosen</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">assign_position</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">letter</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">chosen</span><span class="p">):</span>
+        <span class="n">row_number</span> <span class="o">=</span> <span class="p">(</span><span class="n">position</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">3</span>
+        <span class="n">col_number</span> <span class="o">=</span> <span class="p">(</span><span class="n">position</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">3</span>
+        <span class="n">b</span><span class="p">[</span><span class="n">row_number</span><span class="p">][</span><span class="n">col_number</span><span class="p">]</span> <span class="o">=</span> <span class="n">letter</span>
+        <span class="n">chosen</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">winner</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">chosen</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'o'</span><span class="p">]:</span>
+        <span class="c1"># check rows</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">b</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="p">[</span><span class="n">letter</span><span class="p">,</span><span class="n">letter</span><span class="p">,</span><span class="n">letter</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="n">letter</span>
+
+        <span class="c1"># check columns</span>
+        <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">b</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">column</span><span class="p">]</span> <span class="o">!=</span> <span class="n">letter</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">letter</span>
+
+        <span class="c1"># check upper left to lower right diagonal</span>
+        <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+            <span class="k">if</span> <span class="n">b</span><span class="p">[</span><span class="n">column</span><span class="p">][</span><span class="n">column</span><span class="p">]</span> <span class="o">!=</span> <span class="n">letter</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">column</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">letter</span>
+
+        <span class="c1"># check upper right to lower left diagonal</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">b</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">row</span><span class="p">]</span> <span class="o">!=</span> <span class="n">letter</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">letter</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chosen</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">return</span> <span class="s1">'tie'</span>
+
+    <span class="k">return</span> <span class="s1">'no winner yet'</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ttt</span><span class="p">():</span>
+    <span class="n">board</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">'1'</span><span class="p">,</span><span class="s1">'2'</span><span class="p">,</span><span class="s1">'3'</span><span class="p">],</span>
+              <span class="p">[</span><span class="s1">'4'</span><span class="p">,</span><span class="s1">'5'</span><span class="p">,</span><span class="s1">'6'</span><span class="p">],</span>
+              <span class="p">[</span><span class="s1">'7'</span><span class="p">,</span><span class="s1">'8'</span><span class="p">,</span><span class="s1">'9'</span><span class="p">]</span>  <span class="p">]</span>
+
+    <span class="n">chosen_positions</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># ask user to choose letter</span>
+    <span class="n">user_letter</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'Would you like to be "x" or "o" ? '</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">user_letter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'x'</span><span class="p">,</span><span class="s1">'o'</span><span class="p">]:</span>
+        <span class="n">user_letter</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'I said "x" or "o", choose: '</span><span class="p">)</span>
+
+    <span class="c1"># computer is assigned the other letter</span>
+    <span class="k">if</span> <span class="n">user_letter</span> <span class="o">==</span> <span class="s1">'x'</span> <span class="p">:</span>
+        <span class="n">computer_letter</span> <span class="o">=</span> <span class="s1">'o'</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">computer_letter</span> <span class="o">=</span> <span class="s1">'x'</span>
+
+    <span class="c1"># If the computer is 'x' then the computer picks the first move</span>
+    <span class="k">if</span> <span class="n">computer_letter</span> <span class="o">==</span> <span class="s1">'x'</span><span class="p">:</span>
+        <span class="n">computer_pick_move</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">,</span> <span class="n">computer_letter</span><span class="p">)</span>
+
+    <span class="n">print_board</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="n">winner</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">)</span> <span class="o">==</span> <span class="s1">'no winner yet'</span><span class="p">:</span>
+        <span class="c1"># get the user's move</span>
+        <span class="n">user_pick_move</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">,</span> <span class="n">user_letter</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">winner</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">)</span> <span class="o">==</span> <span class="s1">'no winner yet'</span><span class="p">:</span>
+            <span class="c1"># computer picks a move</span>
+            <span class="n">computer_pick_move</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">,</span> <span class="n">computer_letter</span><span class="p">)</span>
+
+        <span class="n">print_board</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+
+    <span class="n">who_won</span> <span class="o">=</span> <span class="n">winner</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">chosen_positions</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">who_won</span> <span class="o">==</span> <span class="s1">'tie'</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'tie game'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">who_won</span><span class="p">,</span> <span class="s2">"won."</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">choice</span> <span class="o">=</span> <span class="n">displayInitialMenu</span><span class="p">()</span>
+
+    <span class="c1"># main loop to choose if the user wants to play or quit</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">choice</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">ttt</span><span class="p">()</span>
+        <span class="n">choice</span> <span class="o">=</span> <span class="n">displayInitialMenu</span><span class="p">()</span>
+
+<span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1. play tic tac toe
+2. quit
+choice: 1
+
+Would you like to be "x" or "o" ? y
+I said "x" or "o", choose: x
+['1', '2', '3']
+['4', '5', '6']
+['7', '8', '9']
+
+choose position: 5
+
+['o', '2', '3']
+['4', 'x', '6']
+['7', '8', '9']
+
+choose position: 10
+invalid, choose again: 1
+invalid, choose again: 9
+
+['o', 'o', '3']
+['4', 'x', '6']
+['7', '8', 'x']
+
+choose position: 3
+
+['o', 'o', 'x']
+['4', 'x', 'o']
+['7', '8', 'x']
+
+choose position: 7
+
+['o', 'o', 'x']
+['4', 'x', 'o']
+['x', '8', 'x']
+
+x won.
+
+1. play tic tac toe
+2. quit
+choice: 1
+
+Would you like to be "x" or "o" ? o
+['1', '2', 'x']
+['4', '5', '6']
+['7', '8', '9']
+
+choose position: 2
+
+['1', 'o', 'x']
+['4', 'x', '6']
+['7', '8', '9']
+
+choose position: 7
+
+['1', 'o', 'x']
+['x', 'x', '6']
+['o', '8', '9']
+
+choose position: 6
+
+['x', 'o', 'x']
+['x', 'x', 'o']
+['o', '8', '9']
+
+choose position: 9
+
+['x', 'o', 'x']
+['x', 'x', 'o']
+['o', 'x', 'o']
+
+tie game
+
+1. play tic tac toe
+2. quit
+choice: 2
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Thoughts … what next?</strong></p>
+<p>The program works, but a programmer always sees more to do. Some ideas, to try on your own:</p>
+<ul class="simple">
+<li><p>If the user types something that is not a number (<code class="docutils literal notranslate"><span class="pre">five</span></code>), <code class="docutils literal notranslate"><span class="pre">int</span></code> raises a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>, and the program
+stops. Check the reply with <code class="docutils literal notranslate"><span class="pre">isdigit</span></code> (“8b. Additions: String Methods”) before you call <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p></li>
+<li><p>In the menu, any choice that is not <code class="docutils literal notranslate"><span class="pre">2</span></code> (for example <code class="docutils literal notranslate"><span class="pre">3</span></code>) starts a game. Ask again until the choice is <code class="docutils literal notranslate"><span class="pre">1</span></code>
+or <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
+<li><p>The computer plays at random. Make it smarter: first take a square that wins, then block a square where the
+user would win.</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+<section id="credits">
+<h2>Credits<a class="headerlink" href="#credits" title="Link to this heading">#</a></h2>
+<p><em>Additions by Prof. Y. Rosenthal, for</em> <a class="reference external" href="https://allendowney.github.io/ThinkPython/index.html">Think Python: 3rd Edition</a> <em>by Allen B. Downey.</em>
+<em>Text license:</em> <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./yr"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap11_review.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">11e. Review: Tuples</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap11_othello.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">11g. Review: An Othello Game</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem">The problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-very-hard-write-a-tic-tac-toe-game">Question 1 (very hard): write a tic-tac-toe game</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#developing-the-program-step-by-step">Developing the program step by step</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-the-board">Step 1: the board</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-from-the-number-of-a-square-to-a-row-and-a-column">Step 2: from the number of a square to a row and a column</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-a-first-game-function-the-user-makes-moves">Step 3: a first game function: the user makes moves</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-check-the-users-square">Step 4: check the user’s square</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-the-computers-move">Step 5: the computer’s move</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-who-won">Step 6: who won?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-7-the-game-loop">Step 7: the game loop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-8-the-user-chooses-x-or-o">Step 8: the user chooses x or o</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-9-the-menu">Step 9: the menu</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-10-the-whole-program">Step 10: the whole program</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#credits">Credits</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

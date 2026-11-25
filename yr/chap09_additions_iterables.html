@@ -1,0 +1,1365 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="9b. Additions: Iterables, and Changing a List in a Loop" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://y-rosenthal.github.io/yrThinkPython/yr/chap09_additions_iterables.html" />
+<meta property="og:site_name" content="Think Python, 3rd edition" />
+<meta property="og:description" content="Additions to Chapter 9: Lists: a review of the iterables that a for loop can go through, and a rule that you must never break: do not change a list in the body of a loop that goes through that list..." />
+<meta property="og:image" content="https://raw.githubusercontent.com/AllenDowney/ThinkPython/v3/think_python_3e.jpg" />
+<meta property="og:image:alt" content="Cover of Think Python, 3rd edition, by Allen B. Downey" />
+
+    <title>9b. Additions: Iterables, and Changing a List in a Loop &#8212; Think Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
+    <link rel="stylesheet" type="text/css" href="../_static/yr.css?v=3b647472" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'yr/chap09_additions_iterables';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script data-package="y-rosenthal/thinkpython" defer="defer" src="https://subjexts.github.io/overlay/v1/yrS4.js"></script>
+    <script src="../_static/yr.js?v=0d09bd84"></script>
+    <link rel="canonical" href="https://y-rosenthal.github.io/yrThinkPython/yr/chap09_additions_iterables.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="9c. Additions: Nested Loops" href="chap09_additions.html" />
+    <link rel="prev" title="9. Lists" href="../chap09.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Think Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Think Python, 3rd edition
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Table of contents by label</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../subjexts-labels.html">Table of contents by label</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Front Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap00.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prof_r_intro.html">A Note From Prof. Rosenthal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prof_r_thonny.html">Another Note From Prof. Rosenthal: Using Thonny</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap01.html">1. Programming as a way of thinking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap02.html">2. Variables and Statements</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap02_review.html">2b. Review: Variables and Statements</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap03.html">3. Functions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap03_additions.html">3b. Additions: The Three Forms of range</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03_additions_for.html">3c. Additions: More About for Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03_review.html">3d. Review: Functions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap04.html">4. Functions and Interfaces</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap04_review.html">4b. Review: Functions and Interfaces</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap05.html">5. Conditionals and Recursion</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap05_review.html">5b. Review: Conditionals and Recursion</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap06.html">6. Return Values</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap06_review.html">6b. Review: Return Values</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap07.html">7. Iteration and Search</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap07_additions_data.html">7b. Additions: How a Computer Stores Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07_additions.html">7c. Additions: File Paths and for Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07_review.html">7d. Review: Iteration and Search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07_more_review.html">7e. Review: Loops with Decisions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap08.html">8. Strings and Regular Expressions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap08_additions.html">8b. Additions: String Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08_review.html">8c. Review: Strings and Regular Expressions</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap09.html">9. Lists</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">9b. Additions: Iterables, and Changing a List in a Loop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_additions.html">9c. Additions: Nested Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_review.html">9d. Review: Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_more_review.html">9e. Review: Sentences, Nested Loops and Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_palindromes.html">9f. Review: Palindromes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09_practice.html">9g. Review: Practice Programs</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap10.html">10. Dictionaries</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap10_additions.html">10b. Additions: More About Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10_review.html">10c. Review: Dictionaries</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap11.html">11. Tuples</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap11_additions.html">11b. Additions: While Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11_additions_debugger.html">11c. Additions: The Thonny Debugger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11_additions_tuples.html">11d. Additions: Tuples Are Immutable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11_review.html">11e. Review: Tuples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11_tictactoe.html">11f. Review: A Tic-Tac-Toe Game</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11_othello.html">11g. Review: An Othello Game</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chap12.html">12. Text Analysis and Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap13.html">13. Files and Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap14.html">14. Classes and Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap15.html">15. Classes and Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap16.html">16. Classes and Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap17.html">17. Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap18.html">18. Python Extras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap19.html">19. Final thoughts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../blank.html">Blank Notebooks</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/y-rosenthal/yrThinkPython" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/yr/chap09_additions_iterables.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>9b. Additions: Iterables, and Changing a List in a Loop</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-what-is-an-iterable">Review: what is an iterable?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lists-are-mutable-y-x-and-a-copy">Lists are mutable: <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x</span></code> and a copy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-a-list-in-a-loop-over-the-list">Changing a list in a loop over the list</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-bug-happens-a-list-is-an-iterable-that-can-change">Why the bug happens: a list is an iterable that can change</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-immutable-iterable-a-string">An immutable iterable: a string</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-questions">Practice questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-easy-which-are-iterables">Question 1 (easy): which are iterables?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-easy-what-is-displayed">Question 2 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-medium-what-is-displayed">Question 3 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-medium-what-is-displayed">Question 4 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4b-medium-what-is-displayed">Question 4b (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-medium-how-many-times">Question 5 (medium): how many times?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-hard-find-the-bug">Question 6 (hard): find the bug</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-7-hard-write-a-function">Question 7 (hard): write a function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#credits">Credits</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="b-additions-iterables-and-changing-a-list-in-a-loop">
+<h1>9b. Additions: Iterables, and Changing a List in a Loop<a class="headerlink" href="#b-additions-iterables-and-changing-a-list-in-a-loop" title="Link to this heading">#</a></h1>
+<p>Additions to <a class="reference external" href="https://y-rosenthal.github.io/yrThinkPython/chap09.html">Chapter 9: Lists</a>: a review of the
+<strong>iterables</strong> that a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop can go through, and a rule that you must never break: <strong>do not change a list
+in the body of a loop that goes through that list</strong>. A list is the first iterable in the book that a program
+can change, and the page shows what goes wrong when a loop changes it. Read this page after the chapter.
+The practice questions at the end have answers: try each question first, then open its <strong>Answer</strong>.</p>
+<p><a class="reference external" href="https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap09_additions_iterables.ipynb">Run this page on Colab</a></p>
+<p>Run the setup cell below first. In Colab, it downloads the file <code class="docutils literal notranslate"><span class="pre">tiny_book.txt</span></code> (a small “book” of 4 lines
+that this page reads), and <code class="docutils literal notranslate"><span class="pre">thinkpython.py</span></code>, which lets this page show the errors of some examples without
+stopping the page.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlretrieve</span>
+
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Downloaded "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">local</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">filename</span>
+
+<span class="n">download</span><span class="p">(</span><span class="s1">'https://github.com/AllenDowney/ThinkPython/raw/v3/thinkpython.py'</span><span class="p">);</span>
+<span class="n">download</span><span class="p">(</span><span class="s1">'https://y-rosenthal.github.io/yrThinkPython/tiny_book.txt'</span><span class="p">);</span>
+<span class="n">download</span><span class="p">(</span><span class="s1">'https://github.com/AllenDowney/ThinkPython/raw/v3/diagram.py'</span><span class="p">);</span>
+<span class="n">download</span><span class="p">(</span><span class="s1">'https://y-rosenthal.github.io/yrThinkPython/yrdiagram.py'</span><span class="p">);</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">thinkpython</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="review-what-is-an-iterable">
+<h2>Review: what is an iterable?<a class="headerlink" href="#review-what-is-an-iterable" title="Link to this heading">#</a></h2>
+<p>An <strong>iterable</strong> is a value that a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop can go through, one item at a time:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">VARIABLE</span> <span class="ow">in</span> <span class="n">ITERABLE</span><span class="p">:</span>
+    <span class="n">BODY</span>
+</pre></div>
+</div>
+<p>These are the iterables of the book up to Chapter 9:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Iterable</p></th>
+<th class="head"><p>What the loop variable gets</p></th>
+<th class="head"><p>Where the book teaches it</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>a range, such as <code class="docutils literal notranslate"><span class="pre">range(3)</span></code></p></td>
+<td><p>the numbers of the range</p></td>
+<td><p>Chapter 3, and “3b. Additions: The Three Forms of range”</p></td>
+</tr>
+<tr class="row-odd"><td><p>a string, such as <code class="docutils literal notranslate"><span class="pre">'cat'</span></code></p></td>
+<td><p>each character of the string</p></td>
+<td><p>Chapter 7</p></td>
+</tr>
+<tr class="row-even"><td><p>a file object, from <code class="docutils literal notranslate"><span class="pre">open(PATH)</span></code></p></td>
+<td><p>each line of the file, as a string with a newline at the end</p></td>
+<td><p>Chapter 7, and “7c. Additions: File Paths and for Loops”</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">reversed(ITERABLE)</span></code></p></td>
+<td><p>the items of another iterable, in the opposite order</p></td>
+<td><p>“7c. Additions: File Paths and for Loops”</p></td>
+</tr>
+<tr class="row-even"><td><p>a list, such as <code class="docutils literal notranslate"><span class="pre">[10,</span> <span class="pre">20,</span> <span class="pre">30]</span></code></p></td>
+<td><p>each item of the list</p></td>
+<td><p>Chapter 9</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Later chapters add more: a dictionary (Chapter 10) gives its keys, and a tuple (Chapter 11) gives its items.
+A number is not an iterable: <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">5:</span></code> raises a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+<p><strong>A range</strong> gives numbers:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+2
+3
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>A string</strong> gives its characters:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s1">'cat'</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c
+a
+t
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>A file object</strong> gives the lines of the file. This page uses the small file <code class="docutils literal notranslate"><span class="pre">tiny_book.txt</span></code>, which has 4
+lines. In Colab, the setup cell downloaded it. To run the code on your own computer, download the file:
+<a class="reference external" href="https://y-rosenthal.github.io/yrThinkPython/tiny_book.txt">tiny_book.txt</a> (right-click the link and choose to save it), and give <code class="docutils literal notranslate"><span class="pre">open</span></code> its path
+(“7c. Additions: File Paths and for Loops”). <code class="docutils literal notranslate"><span class="pre">strip</span></code> removes the newline at the end of each line:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'tiny_book.txt'</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Once upon a time, a little fox lived at the edge of a forest.
+Every morning, the fox ran down to the river to drink.
+One day, the fox met a turtle who could not cross the river.
+The fox carried the turtle across, and they lived happily ever after.
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>A list</strong> gives its items:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'apple'</span><span class="p">,</span> <span class="s1">'banana'</span><span class="p">,</span> <span class="s1">'cherry'</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>apple 5
+banana 6
+cherry 6
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="lists-are-mutable-y-x-and-a-copy">
+<h2>Lists are mutable: <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x</span></code> and a copy<a class="headerlink" href="#lists-are-mutable-y-x-and-a-copy" title="Link to this heading">#</a></h2>
+<p>Chapter 9 says that lists are <strong>mutable</strong> (“Lists are mutable”): a program can change a list after it makes
+it. This matters when two variables refer to the same list (“Aliasing” in Chapter 9). Make a list <code class="docutils literal notranslate"><span class="pre">x</span></code>, a
+second variable <code class="docutils literal notranslate"><span class="pre">y</span></code> with <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x</span></code>, and a third variable <code class="docutils literal notranslate"><span class="pre">z</span></code> with <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span> <span class="pre">list(x)</span></code>. <code class="docutils literal notranslate"><span class="pre">list(x)</span></code> makes a <strong>copy</strong>: a new
+list with the same items (Chapter 9; <code class="docutils literal notranslate"><span class="pre">x[:]</span></code> makes a copy too).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'apple'</span><span class="p">,</span> <span class="s1">'pear'</span><span class="p">,</span> <span class="s1">'plum'</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
+<span class="n">z</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="ow">is</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="ow">is</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span> <span class="o">==</span> <span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True False True
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">is</span> <span class="pre">y</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>: <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x</span></code> does not make a new list, so <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> refer to the <strong>same</strong> list. <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">is</span> <span class="pre">z</span></code> is
+<code class="docutils literal notranslate"><span class="pre">False</span></code>: <code class="docutils literal notranslate"><span class="pre">z</span></code> refers to a different list. <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">==</span> <span class="pre">z</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>: the two lists have the same items. The state
+diagram shows it:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/3ba34e1429d7f95b3df6302b0d5cd032ea4b9539a0f533f4cd3d765777c7d21b.png" src="../_images/3ba34e1429d7f95b3df6302b0d5cd032ea4b9539a0f533f4cd3d765777c7d21b.png" />
+</div>
+</div>
+<p><strong>How to read the diagram.</strong> It uses the notation of the book’s state diagrams and stack diagrams (Chapters 2,
+3 and 9). The gray box on the left is the frame <code class="docutils literal notranslate"><span class="pre">__main__</span></code>: it holds the variables. Each arrow goes from a
+variable to the <strong>object</strong> that it refers to. Two arrows that end at the same object mean that the two
+variables refer to the same object. The diagram is drawn from the real variables: it runs the code above, and
+uses <code class="docutils literal notranslate"><span class="pre">is</span></code> to find which variables refer to the same object.</p>
+<p><strong>Now change the list through <code class="docutils literal notranslate"><span class="pre">y</span></code>.</strong> <code class="docutils literal notranslate"><span class="pre">append</span></code> changes the list that <code class="docutils literal notranslate"><span class="pre">y</span></code> refers to:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'apple'</span><span class="p">,</span> <span class="s1">'pear'</span><span class="p">,</span> <span class="s1">'plum'</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
+<span class="n">z</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'kiwi'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'x:'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'y:'</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'z:'</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x: ['apple', 'pear', 'plum', 'kiwi']
+y: ['apple', 'pear', 'plum', 'kiwi']
+z: ['apple', 'pear', 'plum']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/f4371ccad8f5fb69d839c011094addfa05fc8628f56385e984bcadff2f581491.png" src="../_images/f4371ccad8f5fb69d839c011094addfa05fc8628f56385e984bcadff2f581491.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">x</span></code> shows the change too, though the code never used <code class="docutils literal notranslate"><span class="pre">x</span></code>. There is only one list for <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">append</span></code> changed it. <code class="docutils literal notranslate"><span class="pre">z</span></code> refers to its own list, so it does not change.</p>
+<p>Compare this with a string (“8b. Additions: String Methods”, “Strings are immutable”): a program cannot change
+a string, so <code class="docutils literal notranslate"><span class="pre">str(x)</span></code> does not even make a copy, and a change “through <code class="docutils literal notranslate"><span class="pre">y</span></code>” is always an assignment of a new
+string to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x</span></code></p></th>
+<th class="head"><p>a copy: <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span> <span class="pre">list(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span> <span class="pre">str(x)</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">y</span></code> changes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>mutable</strong> (list, dictionary)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">y</span></code> refers to the same object</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">z</span></code> refers to a new object</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span></code> shows the change, <code class="docutils literal notranslate"><span class="pre">z</span></code> does not</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>immutable</strong> (string, number, tuple, range)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">y</span></code> refers to the same object</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">z</span></code> refers to the same object (no copy is needed)</p></td>
+<td><p>not possible: <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">...</span></code> makes <code class="docutils literal notranslate"><span class="pre">y</span></code> refer to a new object, and <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">z</span></code> do not change</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>When you need a list that does not change when another variable changes, make a copy:</strong> <code class="docutils literal notranslate"><span class="pre">list(x)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">x[:]</span></code>. A function that gets a list from its caller and must not change it can work on a copy, or make a new
+list (see “The right way” below).</p>
+</section>
+<section id="changing-a-list-in-a-loop-over-the-list">
+<h2>Changing a list in a loop over the list<a class="headerlink" href="#changing-a-list-in-a-loop-over-the-list" title="Link to this heading">#</a></h2>
+<p>Chapter 9 shows that lists are <strong>mutable</strong>: a program can change a list after it makes it. The method
+<code class="docutils literal notranslate"><span class="pre">append</span></code> adds an item at the end of a list, and the method <code class="docutils literal notranslate"><span class="pre">remove</span></code> takes an item out. This section shows
+what happens when the body of a loop changes the list that the loop goes through.</p>
+<p><strong>The task:</strong> write a function called <code class="docutils literal notranslate"><span class="pre">remove_evens</span></code> that takes a list of numbers, removes the even numbers,
+and returns the list with the numbers that are left. Here is a first try. <strong>It is wrong:</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">remove_evens</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">numbers</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">numbers</span>
+
+<span class="n">remove_evens</span><span class="p">([</span><span class="mi">11</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">66</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[11, 33, 55]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result is right: the even numbers 2, 4 and 6 are gone. But the function has a bug. Try it with other
+lists:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">remove_evens</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">numbers</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">numbers</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">remove_evens</span><span class="p">([</span><span class="mi">12</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">48</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">remove_evens</span><span class="p">([</span><span class="mi">11</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">35</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[24, 48]
+[11, 24, 35]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The results should be <code class="docutils literal notranslate"><span class="pre">[]</span></code> and <code class="docutils literal notranslate"><span class="pre">[11,</span> <span class="pre">35]</span></code>. The function left <code class="docutils literal notranslate"><span class="pre">24</span></code> and <code class="docutils literal notranslate"><span class="pre">48</span></code> in the first list, and <code class="docutils literal notranslate"><span class="pre">24</span></code> in
+the second. There is no error message: the function just returns a wrong list. A bug like this is hard to find,
+because a test with one list (the first one above) can pass while the code is wrong.</p>
+<p>To see what happens, display each value that the loop gives to <code class="docutils literal notranslate"><span class="pre">n</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">48</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'n is'</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s1">'and the list is'</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">numbers</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'After the loop:'</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n is 12 and the list is [12, 24, 36, 48]
+n is 36 and the list is [24, 36, 48]
+After the loop: [24, 48]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The loop never gives <code class="docutils literal notranslate"><span class="pre">24</span></code> or <code class="docutils literal notranslate"><span class="pre">48</span></code> to <code class="docutils literal notranslate"><span class="pre">n</span></code>. Step by step:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Iteration</p></th>
+<th class="head"><p>Position that the loop reads</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">n</span></code></p></th>
+<th class="head"><p>The list after <code class="docutils literal notranslate"><span class="pre">remove</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">12</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[24,</span> <span class="pre">36,</span> <span class="pre">48]</span></code>: every item moved one position to the left</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">36</span></code> (not <code class="docutils literal notranslate"><span class="pre">24</span></code>: <code class="docutils literal notranslate"><span class="pre">24</span></code> is now at position 0)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[24,</span> <span class="pre">48]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>the list has no position 2, so the loop ends</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[24,</span> <span class="pre">48]</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Each <code class="docutils literal notranslate"><span class="pre">remove</span></code> moves the items after it one position to the left, so the loop skips the item right after
+each item that it removes. With <code class="docutils literal notranslate"><span class="pre">[11,</span> <span class="pre">22,</span> <span class="pre">33,</span> <span class="pre">44,</span> <span class="pre">55,</span> <span class="pre">66]</span></code>, no two even numbers are next to each other, so the
+skipped items were odd numbers, and the result was right by chance.</p>
+<p><strong>Adding items is worse.</strong> In this loop, each iteration adds an item at the end of the list. The loop never
+gets to the end of the list, so <strong>the loop never ends</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+    <span class="n">numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>    <span class="c1"># never do this: an infinite loop</span>
+</pre></div>
+</div>
+<p>This code is text, not a code cell, so it cannot run. If you run such a loop, stop it: in Colab, click
+<strong>Runtime</strong>, then <strong>Interrupt execution</strong>; in Thonny, click the red <strong>Stop</strong> button.</p>
+</section>
+<section id="why-the-bug-happens-a-list-is-an-iterable-that-can-change">
+<h2>Why the bug happens: a list is an iterable that can change<a class="headerlink" href="#why-the-bug-happens-a-list-is-an-iterable-that-can-change" title="Link to this heading">#</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">for</span></code> loop over a list does <strong>not</strong> make a copy of the list when it starts. It goes through the list itself,
+by position:</p>
+<ol class="arabic simple">
+<li><p>The loop starts at position 0.</p></li>
+<li><p>If the position is less than the length that the list has <strong>now</strong>, the loop assigns the item at that
+position to the loop variable and runs the body. Otherwise the loop ends.</p></li>
+<li><p>The loop adds 1 to the position, and goes back to step 2.</p></li>
+</ol>
+<p>So when the body changes the list, the loop goes on through the <strong>changed</strong> list:</p>
+<ul class="simple">
+<li><p>When the body removes an item, the items after it move one position to the left, and the loop skips one
+item.</p></li>
+<li><p>When the body adds an item, the list gets longer, and the loop gets to the new item too. A loop that adds an
+item in each iteration never ends.</p></li>
+<li><p>When the body assigns a new value to an item that the loop has not got to yet (for example,
+<code class="docutils literal notranslate"><span class="pre">numbers[3]</span> <span class="pre">=</span> <span class="pre">0</span></code>), the loop gets the new value, not the old one.</p></li>
+</ul>
+<p><strong>The rule:</strong> in the body of a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop that goes through a list, <strong>never change that list</strong>: do not add,
+remove or replace its items. Code that does this is <strong>very bad code</strong>. It can skip items without an error
+message, or never end, and a reader cannot see what it does without following each step. Never write such
+code.</p>
+<p>The function also has a second problem: it changes the list that the caller gave it, because the parameter
+and the caller’s variable refer to the same list (“List arguments” in Chapter 9).</p>
+<p><strong>The right way:</strong> make a <strong>new</strong> list, and append to it the items to keep. The loop goes through one list,
+and the body changes another list:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">remove_evens</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">remove_evens</span><span class="p">([</span><span class="mi">11</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">66</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">remove_evens</span><span class="p">([</span><span class="mi">12</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">48</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">remove_evens</span><span class="p">([</span><span class="mi">11</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">35</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[11, 33, 55]
+[]
+[11, 35]
+</pre></div>
+</div>
+</div>
+</div>
+<p>All three results are right, and the caller’s lists do not change.</p>
+</section>
+<section id="an-immutable-iterable-a-string">
+<h2>An immutable iterable: a string<a class="headerlink" href="#an-immutable-iterable-a-string" title="Link to this heading">#</a></h2>
+<p>Strings are <strong>immutable</strong> (“Strings are immutable” in Chapter 8): no method or operator can change a string.
+An expression such as <code class="docutils literal notranslate"><span class="pre">word</span> <span class="pre">+</span> <span class="pre">'!'</span></code> or <code class="docutils literal notranslate"><span class="pre">word.upper()</span></code> makes a <strong>new</strong> string. So the body of a loop over a
+string cannot change the string that the loop goes through. Even this loop, which seems to make its string
+longer, runs exactly 3 times:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="s1">'cat'</span>
+<span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">word</span> <span class="o">+</span> <span class="n">letter</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">letter</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'After the loop:'</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c catc
+a catca
+t catcat
+After the loop: catcat
+</pre></div>
+</div>
+</div>
+</div>
+<p>At the start, the loop gets the string <code class="docutils literal notranslate"><span class="pre">'cat'</span></code> that <code class="docutils literal notranslate"><span class="pre">word</span></code> refers to, and it goes through that string. The
+assignment <code class="docutils literal notranslate"><span class="pre">word</span> <span class="pre">=</span> <span class="pre">word</span> <span class="pre">+</span> <span class="pre">letter</span></code> makes a new string and makes the <strong>variable</strong> <code class="docutils literal notranslate"><span class="pre">word</span></code> refer to it. The string
+<code class="docutils literal notranslate"><span class="pre">'cat'</span></code> does not change, so the loop goes through its 3 characters and ends. A variable and the value that it
+refers to are different things (“Objects and values” in Chapter 9).</p>
+<p>The same is true for the other immutable iterables: a range, and a tuple (Chapter 11).</p>
+<p><strong>The difference is between changing a value and assigning a new value to a variable.</strong> A list can show both:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+    <span class="n">numbers</span> <span class="o">=</span> <span class="n">numbers</span> <span class="o">+</span> <span class="p">[</span><span class="n">n</span> <span class="o">*</span> <span class="mi">10</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[100, 200, 300, 1000, 2000, 3000]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This loop runs 3 times and ends. The <code class="docutils literal notranslate"><span class="pre">+</span></code> operator makes a <strong>new</strong> list, and the assignment makes the variable
+<code class="docutils literal notranslate"><span class="pre">numbers</span></code> refer to it. The list that the loop goes through, <code class="docutils literal notranslate"><span class="pre">[100,</span> <span class="pre">200,</span> <span class="pre">300]</span></code>, does not change. <code class="docutils literal notranslate"><span class="pre">numbers.append(n</span> <span class="pre">*</span> <span class="pre">10)</span></code>
+would change that list itself, and the loop would never end.</p>
+<p>So with an immutable iterable, the body cannot change what the loop goes through. Code like the two loops
+above is still bad code: a reader must know the difference between changing a value and assigning a new value
+to a variable, to see how many times the loop runs. Use a different variable for the result (for example,
+<code class="docutils literal notranslate"><span class="pre">longer</span> <span class="pre">=</span> <span class="pre">longer</span> <span class="pre">+</span> <span class="pre">letter</span></code>), and keep the loop’s iterable as it is.</p>
+</section>
+<section id="practice-questions">
+<h2>Practice questions<a class="headerlink" href="#practice-questions" title="Link to this heading">#</a></h2>
+<section id="question-1-easy-which-are-iterables">
+<h3>Question 1 (easy): which are iterables?<a class="headerlink" href="#question-1-easy-which-are-iterables" title="Link to this heading">#</a></h3>
+<p>Which of these values can follow <code class="docutils literal notranslate"><span class="pre">in</span></code> in the header of a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop?</p>
+<p><code class="docutils literal notranslate"><span class="pre">range(5)</span></code>, <code class="docutils literal notranslate"><span class="pre">'hello'</span></code>, <code class="docutils literal notranslate"><span class="pre">42</span></code>, <code class="docutils literal notranslate"><span class="pre">[30,</span> <span class="pre">10,</span> <span class="pre">20]</span></code>, <code class="docutils literal notranslate"><span class="pre">open('tiny_book.txt')</span></code>, <code class="docutils literal notranslate"><span class="pre">3.5</span></code>, <code class="docutils literal notranslate"><span class="pre">reversed('abc')</span></code></p>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><code class="docutils literal notranslate"><span class="pre">range(5)</span></code>, <code class="docutils literal notranslate"><span class="pre">'hello'</span></code>, <code class="docutils literal notranslate"><span class="pre">[30,</span> <span class="pre">10,</span> <span class="pre">20]</span></code>, <code class="docutils literal notranslate"><span class="pre">open('tiny_book.txt')</span></code> and <code class="docutils literal notranslate"><span class="pre">reversed('abc')</span></code> are iterables. <code class="docutils literal notranslate"><span class="pre">42</span></code> and <code class="docutils literal notranslate"><span class="pre">3.5</span></code>
+are numbers, not iterables: <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">42:</span></code> raises <code class="docutils literal notranslate"><span class="pre">TypeError:</span> <span class="pre">'int'</span> <span class="pre">object</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">iterable</span></code>.</p>
+</div>
+</section>
+<section id="question-2-easy-what-is-displayed">
+<h3>Question 2 (easy): what is displayed?<a class="headerlink" href="#question-2-easy-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays. Then run the cell to check (on the website, click <strong>Show code cell output</strong>).</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'tiny_book.txt'</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">'the fox'</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="admonition hide below-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
+</pre></div>
+</div>
+<p>The loop gets the 4 lines of <code class="docutils literal notranslate"><span class="pre">tiny_book.txt</span></code>. Three of them have the text <code class="docutils literal notranslate"><span class="pre">the</span> <span class="pre">fox</span></code>: the second line
+(<code class="docutils literal notranslate"><span class="pre">...</span> <span class="pre">the</span> <span class="pre">fox</span> <span class="pre">ran</span> <span class="pre">...</span></code>), the third line (<code class="docutils literal notranslate"><span class="pre">...</span> <span class="pre">the</span> <span class="pre">fox</span> <span class="pre">met</span> <span class="pre">...</span></code>) and the fourth line, which starts with
+<code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">fox</span></code>: <code class="docutils literal notranslate"><span class="pre">lower</span></code> makes it <code class="docutils literal notranslate"><span class="pre">the</span> <span class="pre">fox</span></code>. The first line has <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">little</span> <span class="pre">fox</span></code>, not <code class="docutils literal notranslate"><span class="pre">the</span> <span class="pre">fox</span></code>.</p>
+</div>
+</section>
+<section id="question-3-medium-what-is-displayed">
+<h3>Question 3 (medium): what is displayed?<a class="headerlink" href="#question-3-medium-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>This is the wrong <code class="docutils literal notranslate"><span class="pre">remove_evens</span></code> from the page. Predict what this code displays. Then run the cell to check
+(on the website, click <strong>Show code cell output</strong>).</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">remove_evens</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">numbers</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">numbers</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">remove_evens</span><span class="p">([</span><span class="mi">13</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">52</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<details class="admonition hide below-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[13, 28, 39, 52]
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">52</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The loop reads position 1 (<code class="docutils literal notranslate"><span class="pre">26</span></code>) and removes it: <code class="docutils literal notranslate"><span class="pre">28</span></code> moves to position 1, and the loop skips it. Then it reads
+position 2 (<code class="docutils literal notranslate"><span class="pre">39</span></code>), and position 3 (<code class="docutils literal notranslate"><span class="pre">40</span></code>), which it removes: <code class="docutils literal notranslate"><span class="pre">52</span></code> moves to position 3, and the loop ends because
+the list has no position 4. <code class="docutils literal notranslate"><span class="pre">28</span></code> and <code class="docutils literal notranslate"><span class="pre">52</span></code> are left in the list.</p>
+</div>
+</section>
+<section id="question-4-medium-what-is-displayed">
+<h3>Question 4 (medium): what is displayed?<a class="headerlink" href="#question-4-medium-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays. Then run the cell to check (on the website, click <strong>Show code cell output</strong>).</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s1">'ab'</span>
+<span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span> <span class="o">+</span> <span class="n">ch</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="admonition hide below-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>abAB
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">abAB</span>
+</pre></div>
+</div>
+<p>The loop goes through the string <code class="docutils literal notranslate"><span class="pre">'ab'</span></code>, which cannot change, so it runs 2 times. Each assignment makes a new
+string and assigns it to <code class="docutils literal notranslate"><span class="pre">text</span></code>: <code class="docutils literal notranslate"><span class="pre">'abA'</span></code>, then <code class="docutils literal notranslate"><span class="pre">'abAB'</span></code>.</p>
+</div>
+</section>
+<section id="question-4b-medium-what-is-displayed">
+<h3>Question 4b (medium): what is displayed?<a class="headerlink" href="#question-4b-medium-what-is-displayed" title="Link to this heading">#</a></h3>
+<p>Predict what this code displays. Then run the cell to check (on the website, click <strong>Show code cell output</strong>).</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'red'</span><span class="p">,</span> <span class="s1">'green'</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:]</span>
+<span class="n">b</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'blue'</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'black'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="admonition hide below-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['red', 'green', 'blue']
+['red', 'green', 'blue']
+['red', 'green', 'black']
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">'red'</span><span class="p">,</span> <span class="s1">'green'</span><span class="p">,</span> <span class="s1">'blue'</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">'red'</span><span class="p">,</span> <span class="s1">'green'</span><span class="p">,</span> <span class="s1">'blue'</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">'red'</span><span class="p">,</span> <span class="s1">'green'</span><span class="p">,</span> <span class="s1">'black'</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> refer to the same list, so <code class="docutils literal notranslate"><span class="pre">b.append('blue')</span></code> changes the list of <code class="docutils literal notranslate"><span class="pre">a</span></code> too. <code class="docutils literal notranslate"><span class="pre">a[:]</span></code> makes a copy, so
+<code class="docutils literal notranslate"><span class="pre">c</span></code> refers to a different list: <code class="docutils literal notranslate"><span class="pre">c.append('black')</span></code> changes only that list.</p>
+</div>
+</section>
+<section id="question-5-medium-how-many-times">
+<h3>Question 5 (medium): how many times?<a class="headerlink" href="#question-5-medium-how-many-times" title="Link to this heading">#</a></h3>
+<p>How many times does each loop run? Explain the difference.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">first</span> <span class="o">=</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">first</span><span class="p">:</span>
+    <span class="n">first</span> <span class="o">=</span> <span class="n">first</span> <span class="o">+</span> <span class="p">[</span><span class="n">item</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">second</span> <span class="o">=</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">second</span><span class="p">:</span>
+    <span class="n">second</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>The first loop runs <strong>2 times</strong>. <code class="docutils literal notranslate"><span class="pre">first</span> <span class="pre">+</span> <span class="pre">[item]</span></code> makes a new list, and the assignment makes <code class="docutils literal notranslate"><span class="pre">first</span></code> refer to
+it. The list that the loop goes through, <code class="docutils literal notranslate"><span class="pre">[50,</span> <span class="pre">60]</span></code>, does not change. After the loop, <code class="docutils literal notranslate"><span class="pre">first</span></code> is
+<code class="docutils literal notranslate"><span class="pre">[50,</span> <span class="pre">60,</span> <span class="pre">50,</span> <span class="pre">60]</span></code>.</p>
+<p>The second loop <strong>never ends</strong>. <code class="docutils literal notranslate"><span class="pre">append</span></code> changes the list that the loop goes through: each iteration adds an
+item, so the loop never gets to the end of the list. Both loops are bad code, and the second one is a bug.</p>
+</div>
+</section>
+<section id="question-6-hard-find-the-bug">
+<h3>Question 6 (hard): find the bug<a class="headerlink" href="#question-6-hard-find-the-bug" title="Link to this heading">#</a></h3>
+<p>This function is supposed to remove the words that are shorter than <code class="docutils literal notranslate"><span class="pre">length</span></code> from a list of words, and to
+return the list with the words that are left. Find the bug, and write a correct version that does not change
+the caller’s list.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">remove_short_words</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">:</span>
+            <span class="n">words</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">words</span>
+</pre></div>
+</div>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">remove_short_words(['a',</span> <span class="pre">'an',</span> <span class="pre">'the',</span> <span class="pre">'apple'],</span> <span class="pre">3)</span></code> should return <code class="docutils literal notranslate"><span class="pre">['the',</span> <span class="pre">'apple']</span></code>.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>The body removes items from the list that the loop goes through. Each <code class="docutils literal notranslate"><span class="pre">remove</span></code> moves the next word one
+position to the left, so the loop skips it. With <code class="docutils literal notranslate"><span class="pre">['a',</span> <span class="pre">'an',</span> <span class="pre">'the',</span> <span class="pre">'apple']</span></code>, the loop removes <code class="docutils literal notranslate"><span class="pre">'a'</span></code>, skips
+<code class="docutils literal notranslate"><span class="pre">'an'</span></code>, and returns <code class="docutils literal notranslate"><span class="pre">['an',</span> <span class="pre">'the',</span> <span class="pre">'apple']</span></code>.</p>
+<p>A correct version makes a new list:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">remove_short_words</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">length</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">remove_short_words(['a',</span> <span class="pre">'an',</span> <span class="pre">'the',</span> <span class="pre">'apple'],</span> <span class="pre">3)</span></code> returns <code class="docutils literal notranslate"><span class="pre">['the',</span> <span class="pre">'apple']</span></code>, and the caller’s list does
+not change.</p>
+</div>
+</section>
+<section id="question-7-hard-write-a-function">
+<h3>Question 7 (hard): write a function<a class="headerlink" href="#question-7-hard-write-a-function" title="Link to this heading">#</a></h3>
+<p>Write a function called <code class="docutils literal notranslate"><span class="pre">remove_all</span></code> that takes a list and a value, and returns a <strong>new</strong> list with all the
+items of the list except the ones equal to the value. The function must not change the list that it gets.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">remove_all(['cat',</span> <span class="pre">'dog',</span> <span class="pre">'cat',</span> <span class="pre">'cat',</span> <span class="pre">'fox'],</span> <span class="pre">'cat')</span></code> returns <code class="docutils literal notranslate"><span class="pre">['dog',</span> <span class="pre">'fox']</span></code>, and <code class="docutils literal notranslate"><span class="pre">remove_all(['a',</span> <span class="pre">'b'],</span> <span class="pre">'c')</span></code> returns
+<code class="docutils literal notranslate"><span class="pre">['a',</span> <span class="pre">'b']</span></code>.</p>
+<p>Start from this header (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the body):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">remove_all</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">remove_all</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="o">!=</span> <span class="n">value</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>The loop goes through <code class="docutils literal notranslate"><span class="pre">items</span></code>, and the body appends to <code class="docutils literal notranslate"><span class="pre">result</span></code>, a different list. So the loop gets every
+item, also the items right after a removed one, and <code class="docutils literal notranslate"><span class="pre">items</span></code> does not change.</p>
+</div>
+</section>
+</section>
+<section id="credits">
+<h2>Credits<a class="headerlink" href="#credits" title="Link to this heading">#</a></h2>
+<p><em>Additions by Prof. Y. Rosenthal, for</em> <a class="reference external" href="https://allendowney.github.io/ThinkPython/index.html">Think Python: 3rd Edition</a> <em>by Allen B. Downey.</em>
+<em>Text license:</em> <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./yr"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../chap09.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Lists</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap09_additions.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">9c. Additions: Nested Loops</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-what-is-an-iterable">Review: what is an iterable?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lists-are-mutable-y-x-and-a-copy">Lists are mutable: <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x</span></code> and a copy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-a-list-in-a-loop-over-the-list">Changing a list in a loop over the list</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-bug-happens-a-list-is-an-iterable-that-can-change">Why the bug happens: a list is an iterable that can change</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-immutable-iterable-a-string">An immutable iterable: a string</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-questions">Practice questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1-easy-which-are-iterables">Question 1 (easy): which are iterables?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2-easy-what-is-displayed">Question 2 (easy): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3-medium-what-is-displayed">Question 3 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4-medium-what-is-displayed">Question 4 (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-4b-medium-what-is-displayed">Question 4b (medium): what is displayed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-5-medium-how-many-times">Question 5 (medium): how many times?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-6-hard-find-the-bug">Question 6 (hard): find the bug</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-7-hard-write-a-function">Question 7 (hard): write a function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#credits">Credits</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Allen B. Downey
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div style="text-align: left;">
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0"
+         src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+  </a>
+  <br />
+  This work is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+  </a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
