@@ -15,7 +15,8 @@ Reads jb/_toc.yml for the pages, then checks on the live site that:
     notebook machinery (@title, run_code, markers);
   - the other yr/ pages of a chapter (additions, more review, other kinds) show Answer boxes (additions: code outputs too), and no %%expect,
     <details> or '# Your code here'; a markdown page yr/NAME.md loads with its title;
-  - words.txt (linked from yr/chap07_additions) can be downloaded from the top of the site.
+  - words.txt (linked from yr/chap07_additions) and tiny_book.txt (linked from yr/chap09_additions_iterables)
+    can be downloaded from the top of the site.
 Retries until --wait seconds have passed (GitHub Pages lags a minute or two behind the deploy).
 Exit status 1 if anything is still wrong.
 """
@@ -102,6 +103,11 @@ def check():
             problems.append('words.txt: the file on the site does not start with "aa"')
     except urllib.error.URLError as e:
         problems.append(f'words.txt: {e}')
+    try:
+        if fetch(f'{BASE}tiny_book.txt').split('\n', 1)[0].strip() != 'The Little Book of Loops':
+            problems.append('tiny_book.txt: the file on the site does not start with "The Little Book of Loops"')
+    except urllib.error.URLError as e:
+        problems.append(f'tiny_book.txt: {e}')
     return problems, summary
 
 

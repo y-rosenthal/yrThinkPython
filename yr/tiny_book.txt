@@ -1,0 +1,4 @@
+The Little Book of Loops
+A for loop goes through an iterable, one item at a time.
+A file object gives the lines of a file, one line at a time.
+This is the last line of the book.
