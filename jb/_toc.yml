@@ -80,6 +80,7 @@ parts:
 - chapters:
     - file: yr/chap11_additions
     - file: yr/chap11_additions_debugger
+    - file: yr/chap11_additions_tuples
     - file: yr/chap11_review
 - numbered: True
   chapters:

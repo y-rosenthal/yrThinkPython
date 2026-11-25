@@ -98,7 +98,8 @@ For the third edition, the biggest changes are:
 * [Click here to run Chapter 11 on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/chapters/chap11.ipynb)
 * [Click here to run 11b. Additions: While Loops on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap11_additions.ipynb)
 * [Click here to run 11c. Additions: The Thonny Debugger on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap11_additions_debugger.ipynb)
-* [Click here to run 11d. Review: Tuples on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap11_review.ipynb)
+* [Click here to run 11d. Additions: Tuples Are Immutable on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap11_additions_tuples.ipynb)
+* [Click here to run 11e. Review: Tuples on Colab](https://colab.research.google.com/github/y-rosenthal/yrThinkPython/blob/v3/yr/chap11_review.ipynb)
 
 **Chapter 12: Text Analysis and Generation**
 

@@ -20,6 +20,7 @@ yr/
   NAME_SOMETHING.md        a page of a hidden part of the book; the website shows the part only with
                            ?show=NAME in the address (none now: "A hidden part of the book")
   tiny_book.txt            a small "book" of 4 lines that 9b reads; the website serves it (html_extra_path)
+  yrdiagram.py             draws state diagrams (variables and the objects they refer to) for 8b, 9b, 10b, 11d
   plans/                   design notes (runall-collapsible-answers.md: the review-page format)
   tools/
     review_cells.py        create a review page skeleton; add, list, number, renumber questions
@@ -267,6 +268,12 @@ Reference examples: `yr/chap07_additions.ipynb` (sections, Diving deeper boxes, 
      the title and the output, and hides the code), and the tag `remove-input` (the website shows only
      the output). A hidden cell can also draw a picture with code that the chapter has not taught (for
      example matplotlib and lists): the pixel grid and the sound samples in `yr/chap07_additions_data.ipynb`.
+   - **A state diagram** (as in 8b, 9b, 10b and 11d: `y = x` and a copy): a hidden code cell, as in
+     "A quick summary with hidden code", titled `# @title State diagram: ...`. It runs the example code again
+     and calls `draw_variables({'x': x, 'y': y, 'z': z})` from `yr/yrdiagram.py`, which draws the variables
+     in the notation of the book's state and stack diagrams. It finds the shared objects with `is`, so the
+     picture always agrees with the code. The setup cell downloads `diagram.py` (Downey's) and `yrdiagram.py`
+     (from the website).
    - **A collapsible section:** a markdown cell that starts with a heading and has
      `<div class="yr-collapse">` with a short text in it. In Colab, the reader can collapse any heading
      with the arrow next to it. On the website, `jb/_static/yr.js` puts the heading and its section in a
@@ -344,6 +351,7 @@ Cell conventions: nbformat 4.5, a unique 8-character `id` on each cell, `executi
    - A file that students must download from the website (as `words.txt` for chapter 7, or
      `yr/tiny_book.txt` for 9b): add it to `html_extra_path` in `jb/_config.yml`, and link to
      `https://y-rosenthal.github.io/yrThinkPython/FILE`. The page's setup cell downloads it from that address.
+     A module that pages import (`yr/yrdiagram.py`) is served and copied in the same way.
      The website does not have the file before the first publish, so the build gives a copy of it to the
      page: add the file to `HELPERS` in `jb/execute_notebooks.py` and to the `cp` line of
      `.claude/skills/check-notebooks/run_notebooks.sh`.

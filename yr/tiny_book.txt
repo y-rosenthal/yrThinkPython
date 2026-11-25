@@ -1,4 +1,4 @@
-The Little Book of Loops
-A for loop goes through an iterable, one item at a time.
-A file object gives the lines of a file, one line at a time.
-This is the last line of the book.
+Once upon a time, a little fox lived at the edge of a forest.
+Every morning, the fox ran down to the river to drink.
+One day, the fox met a turtle who could not cross the river.
+The fox carried the turtle across, and they lived happily ever after.

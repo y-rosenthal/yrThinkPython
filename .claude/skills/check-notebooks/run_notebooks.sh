@@ -30,7 +30,7 @@ if [ "$1" = "all" ]; then set -- chapters/chap[01][0-9].ipynb; for nb in yr/chap
 
 WORK="${THINKPYTHON_RUN_DIR:-${TMPDIR:-/tmp}/yrThinkPython-run}"
 mkdir -p "$WORK"
-cp thinkpython.py diagram.py structshape.py words.txt photos.zip yr/tiny_book.txt "$WORK"/ 2>/dev/null || true
+cp thinkpython.py diagram.py structshape.py words.txt photos.zip yr/tiny_book.txt yr/yrdiagram.py "$WORK"/ 2>/dev/null || true
 if [ -f Turtle.py ]; then cp Turtle.py "$WORK"/; fi
 export IPYTHONDIR="$WORK/ipython"
 mkdir -p "$IPYTHONDIR/profile_default/startup"
